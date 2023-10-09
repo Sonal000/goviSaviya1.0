@@ -582,6 +582,10 @@ input:focus{
   transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
 }
+.H4center{
+  margin-top: 5.5rem;
+  text-align: center;
+  }
 
 .productimg{
     display: flex;

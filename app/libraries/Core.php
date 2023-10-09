@@ -9,8 +9,7 @@ class Core {
  public function __construct(){
   // print_r($this->getUrl()); 
   $url = $this->getUrl();
- 
-  if (isset($url) && is_array($url) && !empty($url) && file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
+ if (isset($url) && is_array($url) && !empty($url) && file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
   $this->currentController = ucwords($url[0]);
 
     unset($url[0]);
