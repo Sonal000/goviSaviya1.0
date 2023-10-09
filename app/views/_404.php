@@ -49,6 +49,47 @@
  </div>
 </div>
 
+
+
+<!-- nav sidebar -->
+
+<div class="navSidebar_cont" id="navSidebar_cont">
+  <div class="navSidebar">
+
+  <!-- <div class="navSidebar_image_container">
+        <img src="<?php echo URLROOT ?>/assets/images/profile.jpg" alt="profile" class="profile_image">
+        <p class="navSidebar_name">sonalinduwara</p>
+
+</div> -->
+
+  <div class="sidelinks_cont">
+  <ul class="sidelinks" id="sidelinks" >
+
+    <li class="sidelink">
+    <i class="fas fa-home"></i>
+      <a href="<?php echo URLROOT ?>/home">
+        Home
+      </a>
+    </li>
+    <li class="sidelink">
+      <i class="fas fa-store nav_icon"></i>
+      <a href="<?php echo URLROOT ?>/marketplace">
+        Marketplace
+      </a>
+    </li>
+    <li class="sidelink">
+    <i class="fas fa-hands-helping"></i>
+        <a href="<?php echo URLROOT ?>/help">
+        Help
+        </a>
+    </li>
+  </ul>
+  </div>
+  </div>
+</div>
+<div class="navSidebar_overlay" id="navSidebar_overlay"></div>
+
+
 <!-- navbar end========================= -->
 
 

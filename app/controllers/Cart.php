@@ -10,7 +10,8 @@ class Cart extends Controller {
  {
 
   $data = [
-   'logged'=>true
+   'logged'=>true,
+   'cart'=>false,
 ];
 
   $this->view('cart',$data);
