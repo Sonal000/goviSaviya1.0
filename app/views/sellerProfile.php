@@ -64,10 +64,7 @@
     </div>
 
   <!-- footer  ======================= -->
-  <?php
- include APPROOT.'/views/layouts/footer.php';  
- ?>
-
+ 
 <!-- footer end ======================= -->
 
 <!-- js === -->
