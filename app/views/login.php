@@ -19,7 +19,7 @@
 
 
 <body>
-    <div class="login">
+   
 
      <!-- navbar================== -->
  <?php
@@ -44,39 +44,38 @@
             </ul>
             </div>
         </div> -->
+    <div class="login">
+        <div class="loginimg_container">
+            <img src="<?php echo URLROOT ?>/assets/images/pngegg.png" alt="" class="loginimg">
+        </div>
 
-            <div class="loginimg_container">
-                <div class="loginimg">
-            <img src="<?php echo URLROOT ?>/assets/images/pngegg.png" alt="">
-                </div>
-            </div>
-
-            <div class="form_container">
-              <div class="formimg">
+        <div class="form_container">
+            <div class="formimg">
                 <img src="<?php echo URLROOT ?>/assets/images/govisaviya2.png" alt="">
-                </div>
-                <div class="formimgtext">
-                    <p>Together, We can cultivate a brighter<br>Future!</p>
-                </div>
-
-                <div class="email">
-                      <p  >Email</p>
-                      <input type="email" class="email_box" placeholder="Enter your Email">
-                    </div>
-                    </br>
-                <div class="email">
-                      <p>Password</p>
-                      <input type="text" class="email_box" placeholder="Enter your Password">
-                    </div>
-                    </br>
-                <p><a href=""class="forgot">Forgot password?</a></p>
-
+            </div>
+            <div class="formimgtext">
+                <p>Together, We can cultivate a brighter<br>Future!</p>
+            </div>
+            <form>
+            <div class="email">
+                <p>Email</p>
+                <input type="email" class="email_box" placeholder="Enter your Email">
+            </div>
+                </br>
+            <div class="email">
+                <p>Password</p>
+                <input type="password" class="email_box" placeholder="Enter your Password">
+            </div>
+                </br>
+            <p><a href=""class="forgot">Forgot password?</a></p>
+            <div class="loginbt">
              <button class="btn lgbtn">Login</button>
+            </div>
             </br>
-
+            </form>
              <p class="forgot">Do not have an account?<a href="SellerRegister.php">&nbspSign up</a></p> 
 
-            </div>
+        </div>
 
         
             

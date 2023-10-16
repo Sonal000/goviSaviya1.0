@@ -2,14 +2,11 @@
 
 
 .login{
- display: grid;
- grid-template-columns:1fr 1fr;
- grid-template-rows: 9% 91%;
- grid-template-areas:
- "navbar2 navbar2"
- "loginimg form_container" 
- ;
- height: 100vh;
+ display: flex;
+ flex-direction: row;
+
+ margin-top: 5rem;
+ justify-content: space-around;
 
 }
 .navbar2{
@@ -82,33 +79,29 @@ display:flex;
 }
 
 .loginimg_container{
- grid-area: loginimg;
+
  display: flex;
- justify-content: center;
- align-items: center;
- }
+}
 
 .loginimg{
    display:flex;
-  align-items: center;
-   height:500px;
-   width:500px;
+
+  height:500px;
+   width:600px;
 }
 .form_container{
-/*background-color: #E0A500;*/
+
 display: flex;
-grid-area: form_container;
+
 flex-direction: column;
-align-items: center;
+
+
 
 }
 
 .formimg{
- /*display:flex;
- flex-direction:column;*/
- margin-top: 3rem;
-/* height: 250px;
- width:250px;*/
+ display:flex;
+ justify-content: center;
 }
 
 .formimg img{
@@ -117,8 +110,10 @@ align-items: center;
 }
 
 .formimgtext{
- /*display: flex;*/
+ display: flex;
  text-align: center;
+ justify-content: center;
+ /*margin-left: 2rem;*/
  font-weight: bold;
  font-size: small;
 }
@@ -138,14 +133,26 @@ align-items: center;
 
 
 .forgot{
- 
+ display: flex;
  color: var(--clr-primary-4);
+ justify-content: center;
  font-weight: bold;
+ text-align: center;
+ }
+
+ .loginbt{
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
  }
 
  .lgbtn{
-   padding: 1rem;
-   width:150px;
+  display: flex;
+   /*padding: 1rem;
+   width:150px;*/
+   width: 100px;
+   justify-content: center;
+
   
  }
 
