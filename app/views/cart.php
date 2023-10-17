@@ -25,7 +25,7 @@
 
 
 <?php
-   if($data){
+   if($data['cart']){
 ?>
   <div class="cart_container">
     <div class="cart_items_container">
