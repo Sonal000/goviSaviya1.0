@@ -51,7 +51,7 @@
  </div>
  <div class="logo_btn_cont">
   <a class="btn logo_btn">Register</a>
-  <a href="<?php echo URLROOT ?>/login" class="btn logo_btn">Login</a>
+  <a href="<?php echo URLROOT ?>/Login" class="btn logo_btn">Login</a>
  </div>
 </div>
 <div class="logo_img_cont">
