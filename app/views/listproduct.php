@@ -115,7 +115,7 @@
                       <input type="text" class="email_box3" placeholder="Add your description">
                 </div>
                 <button type="submit" class="btn">Create Post</button>
-        </div>
+      </div>
         
     </div>
     </form>
