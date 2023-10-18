@@ -53,13 +53,13 @@
         <div class="profile_settings_cont">
             <ul class="profile_links">
                 <li>
-                  <a href="" class="profile_link">View Profile</a>
+                  <a  href="<?php echo URLROOT ?>/myprofile/sonal" target="_blank" class="profile_link">View Profile</a>
                 </li>
                 <li>
                   <a href="" class="profile_link">Wish list</a>
                 </li>
                 <li>
-                  <a href="" class="profile_link">Log out</a>
+                  <a href="#" class="profile_link">Log out</a>
                 </li>
             </ul>
         </div>

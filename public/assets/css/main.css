@@ -172,6 +172,32 @@ p {
     line-height: 1;
   }
 }
+@media screen and (max-width:500px) {
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 0.8rem;
+  }
+  body {
+    font-size: 0.7rem;
+  }
+  p {
+    font-size: 0.7rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1;
+  }
+}
 /*  global classes */
 
 .btn {
@@ -643,6 +669,7 @@ background: var(--clr-primary-5);
 }
 
 /* footer end================================== */
+
 
 
 

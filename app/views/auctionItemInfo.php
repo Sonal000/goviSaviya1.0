@@ -58,7 +58,7 @@
 <div class="item_description">
   <div class="item_title_cont">
     <p class="item_name">Onions</p>
-    <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+    <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
     <p class="item_address">Thalgahawawa</p>
     <div class="item_rating">
          <i class="fas fa-star star_img"></i>

@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Home</title>
+ <title>Bidding</title>
 
  <!-- <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya2.ico" type="image/x-icon"> -->
 
@@ -47,7 +47,7 @@
                <div class="item_title_cont">
                   <div class="item_info">
                      <p class="item_name">Banana</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
                      <!-- <p class="item_address">Thalgahawawa</p> -->
                   </div>
                   <p class="item_time">  24/<span>h left</span>  </p>
@@ -86,7 +86,7 @@
                <div class="item_title_cont">
                   <div class="item_info">
                      <p class="item_name">Onions</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
                      <!-- <p class="item_address">Thalgahawawa</p> -->
                   </div>
                   <p class="item_time">  24/<span>h left</span>  </p>
@@ -125,7 +125,7 @@
                <div class="item_title_cont">
                   <div class="item_info">
                      <p class="item_name">Potato</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
                      <!-- <p class="item_address">Thalgahawawa</p> -->
                   </div>
                   <p class="item_time">  24/<span>h left</span>  </p>
@@ -166,7 +166,7 @@
                <div class="item_title_cont">
                   <div class="item_info">
                      <p class="item_name">Tomato</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
                      <!-- <p class="item_address">Thalgahawawa</p> -->
                   </div>
                   <p class="item_time">  24/<span>h left</span>  </p>
@@ -224,6 +224,130 @@
                <div class="history_title_cont">
                   <div class="item_info">
                      <p class="item_name">Banana</p>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                  </div>
+               </div>
+               <div class="history_action_cont">
+
+                  <div class="history_bid_cont">
+                     <p class="history_bids">10 <span>bids</span></p>
+                     <div class="history_info_cont">
+                        <p class="wining_bid ">Winning Bid : <span> Rs : 30000</span></p>
+                        <p class="your_bid">Your Bid : <span> Rs : 30000</span></p>
+                     </div>
+                  </div>
+                  <div class="history_btns_cont">
+                     <p class="won_msg">You won the Bid</p>
+                  </div>
+               </div>
+</div>
+<div class="more_btn_cont">
+   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
+</div>
+</div>
+<!-- bid item end===== -->
+         <!-- bid item ===========-->
+         <div class="bid_history_cont lost_bid ">
+            <div class="bid_history_img_cont">
+               <img  class="bid_history_img" src="<?php echo URLROOT ?>/assets/images/item-3.png"/>
+            </div>
+            <div class="history_description">
+               <div class="history_title_cont">
+                  <div class="item_info">
+                     <p class="item_name">Carrots</p>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                  </div>
+               </div>
+               <div class="history_action_cont">
+
+                  <div class="history_bid_cont">
+                     <p class="history_bids">20 <span>bids</span></p>
+                     <div class="history_info_cont">
+                        <p class="wining_bid ">Winning Bid : <span> Rs : 40000</span></p>
+                        <p class="your_bid">Your Bid : <span> Rs : 20000</span></p>
+                     </div>
+                  </div>
+                  <div class="history_btns_cont">
+                     <p class="lost_msg">You Lost the Bid</p>
+                  </div>
+               </div>
+</div>
+<div class="more_btn_cont">
+   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
+</div>
+</div>
+<!-- bid item end===== -->
+         <!-- bid item ===========-->
+         <div class="bid_history_cont  ">
+            <div class="bid_history_img_cont">
+               <img  class="bid_history_img" src="<?php echo URLROOT ?>/assets/images/item-5.png"/>
+            </div>
+            <div class="history_description">
+               <div class="history_title_cont">
+                  <div class="item_info">
+                     <p class="item_name">Banana</p>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                  </div>
+               </div>
+               <div class="history_action_cont">
+
+                  <div class="history_bid_cont">
+                     <p class="history_bids">10 <span>bids</span></p>
+                     <div class="history_info_cont">
+                        <p class="wining_bid ">Winning Bid : <span> Rs : 30000</span></p>
+                        <p class="your_bid">Your Bid : <span> Rs : 30000</span></p>
+                     </div>
+                  </div>
+                  <div class="history_btns_cont">
+                     <p class="won_msg">You won the Bid</p>
+                  </div>
+               </div>
+</div>
+<div class="more_btn_cont">
+   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
+</div>
+</div>
+<!-- bid item end===== -->
+         <!-- bid item ===========-->
+         <div class="bid_history_cont  ">
+            <div class="bid_history_img_cont">
+               <img  class="bid_history_img" src="<?php echo URLROOT ?>/assets/images/item-5.png"/>
+            </div>
+            <div class="history_description">
+               <div class="history_title_cont">
+                  <div class="item_info">
+                     <p class="item_name">Banana</p>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                  </div>
+               </div>
+               <div class="history_action_cont">
+
+                  <div class="history_bid_cont">
+                     <p class="history_bids">10 <span>bids</span></p>
+                     <div class="history_info_cont">
+                        <p class="wining_bid ">Winning Bid : <span> Rs : 30000</span></p>
+                        <p class="your_bid">Your Bid : <span> Rs : 30000</span></p>
+                     </div>
+                  </div>
+                  <div class="history_btns_cont">
+                     <p class="won_msg">You won the Bid</p>
+                  </div>
+               </div>
+</div>
+<div class="more_btn_cont">
+   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
+</div>
+</div>
+<!-- bid item end===== -->
+         <!-- bid item ===========-->
+         <div class="bid_history_cont  ">
+            <div class="bid_history_img_cont">
+               <img  class="bid_history_img" src="<?php echo URLROOT ?>/assets/images/item-5.png"/>
+            </div>
+            <div class="history_description">
+               <div class="history_title_cont">
+                  <div class="item_info">
+                     <p class="item_name">Banana</p>
                      <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
                   </div>
                </div>
@@ -255,7 +379,7 @@
                <div class="history_title_cont">
                   <div class="item_info">
                      <p class="item_name">Carrots</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
                   </div>
                </div>
                <div class="history_action_cont">
@@ -286,7 +410,7 @@
                <div class="history_title_cont">
                   <div class="item_info">
                      <p class="item_name">Banana</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
                   </div>
                </div>
                <div class="history_action_cont">
@@ -317,7 +441,7 @@
                <div class="history_title_cont">
                   <div class="item_info">
                      <p class="item_name">Banana</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
                   </div>
                </div>
                <div class="history_action_cont">
@@ -348,131 +472,7 @@
                <div class="history_title_cont">
                   <div class="item_info">
                      <p class="item_name">Banana</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-                  </div>
-               </div>
-               <div class="history_action_cont">
-
-                  <div class="history_bid_cont">
-                     <p class="history_bids">10 <span>bids</span></p>
-                     <div class="history_info_cont">
-                        <p class="wining_bid ">Winning Bid : <span> Rs : 30000</span></p>
-                        <p class="your_bid">Your Bid : <span> Rs : 30000</span></p>
-                     </div>
-                  </div>
-                  <div class="history_btns_cont">
-                     <p class="won_msg">You won the Bid</p>
-                  </div>
-               </div>
-</div>
-<div class="more_btn_cont">
-   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
-</div>
-</div>
-<!-- bid item end===== -->
-         <!-- bid item ===========-->
-         <div class="bid_history_cont lost_bid ">
-            <div class="bid_history_img_cont">
-               <img  class="bid_history_img" src="<?php echo URLROOT ?>/assets/images/item-3.png"/>
-            </div>
-            <div class="history_description">
-               <div class="history_title_cont">
-                  <div class="item_info">
-                     <p class="item_name">Carrots</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-                  </div>
-               </div>
-               <div class="history_action_cont">
-
-                  <div class="history_bid_cont">
-                     <p class="history_bids">20 <span>bids</span></p>
-                     <div class="history_info_cont">
-                        <p class="wining_bid ">Winning Bid : <span> Rs : 40000</span></p>
-                        <p class="your_bid">Your Bid : <span> Rs : 20000</span></p>
-                     </div>
-                  </div>
-                  <div class="history_btns_cont">
-                     <p class="lost_msg">You Lost the Bid</p>
-                  </div>
-               </div>
-</div>
-<div class="more_btn_cont">
-   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
-</div>
-</div>
-<!-- bid item end===== -->
-         <!-- bid item ===========-->
-         <div class="bid_history_cont  ">
-            <div class="bid_history_img_cont">
-               <img  class="bid_history_img" src="<?php echo URLROOT ?>/assets/images/item-5.png"/>
-            </div>
-            <div class="history_description">
-               <div class="history_title_cont">
-                  <div class="item_info">
-                     <p class="item_name">Banana</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-                  </div>
-               </div>
-               <div class="history_action_cont">
-
-                  <div class="history_bid_cont">
-                     <p class="history_bids">10 <span>bids</span></p>
-                     <div class="history_info_cont">
-                        <p class="wining_bid ">Winning Bid : <span> Rs : 30000</span></p>
-                        <p class="your_bid">Your Bid : <span> Rs : 30000</span></p>
-                     </div>
-                  </div>
-                  <div class="history_btns_cont">
-                     <p class="won_msg">You won the Bid</p>
-                  </div>
-               </div>
-</div>
-<div class="more_btn_cont">
-   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
-</div>
-</div>
-<!-- bid item end===== -->
-         <!-- bid item ===========-->
-         <div class="bid_history_cont  ">
-            <div class="bid_history_img_cont">
-               <img  class="bid_history_img" src="<?php echo URLROOT ?>/assets/images/item-5.png"/>
-            </div>
-            <div class="history_description">
-               <div class="history_title_cont">
-                  <div class="item_info">
-                     <p class="item_name">Banana</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-                  </div>
-               </div>
-               <div class="history_action_cont">
-
-                  <div class="history_bid_cont">
-                     <p class="history_bids">10 <span>bids</span></p>
-                     <div class="history_info_cont">
-                        <p class="wining_bid ">Winning Bid : <span> Rs : 30000</span></p>
-                        <p class="your_bid">Your Bid : <span> Rs : 30000</span></p>
-                     </div>
-                  </div>
-                  <div class="history_btns_cont">
-                     <p class="won_msg">You won the Bid</p>
-                  </div>
-               </div>
-</div>
-<div class="more_btn_cont">
-   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
-</div>
-</div>
-<!-- bid item end===== -->
-         <!-- bid item ===========-->
-         <div class="bid_history_cont  ">
-            <div class="bid_history_img_cont">
-               <img  class="bid_history_img" src="<?php echo URLROOT ?>/assets/images/item-5.png"/>
-            </div>
-            <div class="history_description">
-               <div class="history_title_cont">
-                  <div class="item_info">
-                     <p class="item_name">Banana</p>
-                     <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
                   </div>
                </div>
                <div class="history_action_cont">
