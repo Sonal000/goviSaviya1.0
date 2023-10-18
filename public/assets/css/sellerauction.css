@@ -366,21 +366,51 @@ input:focus{
 .update_edit_bt{
     display: flex;
     flex-direction: row;
-    width: 250px;
+    width: 330px;
+    
     margin-left: 3rem;
-    justify-content: space-around;
+    justify-content: space-between;
     
 }
 .aucbt_post{
-  font-weight: bold;
-  border: 2px solid #4BAA4E;
-  border-radius: var(--radius-low);
-  width: 100px;
-  text-align: center;
- 
+color: var(--clr-white);
+width: 150px;
+font-size: small;
+text-align: center;
 }
 
+#blur.active{
 
+filter:blur(20px);
+pointer-events: none;
+user-select: none;
+
+}
+
+#popup{
+  position: fixed;
+  top: 25%;
+  left: 60%;
+  transform: translate(-50%,-50%);
+  width: 500px;
+  padding: 50px;
+  box-shadow: 0 50px 30px rgba(0,0,0,.30);
+  background:var(--clr-primary-7);
+  justify-content: center;
+  border-radius: var(--radius-high);
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+#popup.active{
+  top:38%;
+  visibility: visible;
+  opacity: 1;
+  transition: 0.5s;
+  
+  }
 
 
 

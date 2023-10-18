@@ -26,7 +26,7 @@
         <div class="createbt">
             <button class="btn">Create Auction</button>
         </div>
-        <div class="mycard">
+        <div class="mycard" id="blur">
 
             <div class="productimg">
                 <img src="<?php echo URLROOT; ?>/assets/images/mango.jpeg" class="mango" alt="">
@@ -69,11 +69,11 @@
                     </div>
                 </div>
                 <div class="update_edit_bt">
-                    <botton class="aucbt_post"><a href="">Update Post</a></botton>
-                    <botton class="aucbt_post"><a href="">End Auction</a></botton>
+                    <botton class="aucbt_post btn"><a href="">Update Post</a></botton>
+                    <botton class="aucbt_post btn"><a href="" onclick="toggle()">End Auction </a></botton>
                 </div>
             </div>
-        </div>
+         </div>
         </div>
         <div class="mycard">
             <div class="productimg">
@@ -118,8 +118,8 @@
                     </div>
                 </div>
                 <div class="update_edit_bt">
-                    <botton class="aucbt_post"><a href="">Update Post</a></botton>
-                    <botton class="aucbt_post"><a href="">End Auction</a></botton>
+                    <botton class="aucbt_post btn"><a href="">Update Post</a></botton>
+                    <botton class="aucbt_post btn"><a href="" onclick="toggle()">End Auction</a></botton>
                 </div>
             </div>
         </div>
@@ -167,13 +167,32 @@
                     </div>
                 </div>
                 <div class="update_edit_bt">
-                    <botton class="aucbt_post"><a href="">Update Post</a></botton>
-                    <botton class="aucbt_post"><a href="">End Auction</a></botton>
+                    <botton class="aucbt_post btn"><a href="">Update Post</a></botton>
+                    <botton class="aucbt_post btn"><a href="" onclick="toggle()">End Auction</a></botton>
                 </div>
             </div>
         </div>
         </div>
+        <div id="popup">
+            <p>Are you Sure?</p>
+            <div class="yes_or_no">
+                <botton class="aucbt_post btn"><a href="" onclick="toggle()">Yes</a></botton>
+                <botton class="aucbt_post btn"><a href="" onclick="toggle()">No</a></botton>
+            </div>
+        </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function toggle(){
+        var blur = document.getElementById('blur');
+        blur.classList.toggle('active');
+        var popup = document.getElementById('popup');
+        popup.classList.toggle('active');
+    }
+
+</script>
 </body>
+
+
 </html>
