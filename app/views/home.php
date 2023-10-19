@@ -15,31 +15,28 @@
 </head>
 <body>
 
- <!-- hero section =======================-->
-
- <section class="hero_section"> 
-
-
  <!-- navbar================== -->
- <?php
+ <div class="navbar_selector">
+   <?php
  include APPROOT.'/views/layouts/mainNavbar.php'; 
  ?>
+ </div>
 
 <!-- navbar end ================== -->
 <!-- search bar ==========================-->
 
-<div class="searchbar_cont">
+<!-- <div class="searchbar_cont">
  <div class="searchbar">
   <input class="search" placeholder="Search for Vegitables, Fruits, Etc">
   <i class="fas fa-search search_icon"></i>
  </div>
-</div>
+</div> -->
 
 <!-- search bar end====================== -->
 
 <!-- logo-image cont=============================-->
 
-<div class="logo_cont section-center">
+<!-- <div class="logo_cont section-center">
 
 <div class="logo_text-cont">
  <div class="main_logo_cont">
@@ -60,16 +57,75 @@
 
 
 
-</div>
+</div> -->
 
 
 
 
 <!-- logo-image cont  end=============================-->
 
+<!-- Heros section -->
+
+<section class="landing_section">
+
+  <div class="landing_img_cont" id="landing_img_cont">
+    <img src="<?php echo URLROOT; ?>/assets/images/landing-1.jpg" class="landing_img  "  id="landing1" alt="">
+    <img src="<?php echo URLROOT; ?>/assets/images/landing-2.jpg" class="landing_img" id="landing2" alt="">
+    <img src="<?php echo URLROOT; ?>/assets/images/landing-3.jpg" class="landing_img"  id="landing3" alt="">
+    <img src="<?php echo URLROOT; ?>/assets/images/landing-4.jpg" class="landing_img"  id="landing4" alt="">
+    <img src="<?php echo URLROOT; ?>/assets/images/landing-5.jpg" class="landing_img landing_show"  id="landing5" alt="">
+    <div class="landing_overlay">
+
+      <div class="landing_container ">
+        <div class="logo_text-cont">
+            <div class="main_logo_cont">
+              <h2 class="main_logo_caption cap_1">
+                 " Where Tradition Meets Tomorrow "
+              </h2>
+              <h2 class="main_logo_caption cap_2">Together , we can cultivate a brighter future !
+              </h2>
+            </div>
+ <!-- search bar ==========================-->
+
+            <div class="searchbar_cont">
+              <div class="searchbar">
+                <input class="search" placeholder="Search for Vegitables, Fruits, Etc">
+                <i class="fas fa-search search_icon"></i>
+              </div>
+            </div>
+
+<!-- search bar end====================== -->
+
+        </div>
+
+
+        <?php if(isset($data['logged'])&& !$data['logged']){
+  ?>
+        <div class="landing_icon_cont">
+          <a href="<?php echo URLROOT ?>/login" class="icon_cont">
+            <!-- <i class="fas fa-sign-in-alt landing_icon signin_icon"></i> -->
+            <p class="signin_icon landing_icon">Sign In</p>
+          </a>
+          <a title="Sign Up" href="<?php echo URLROOT ?>/Register" class="icon_cont">
+            <i class="fas fa-user-plus landing_icon signup_icon"></i>
+          </a>   
+        </div>
+
+        <?php }?>
+
+      </div>
+    </div>
+
+</section>
+
+
+<!-- hero section -->
+
+
+
 <!-- Registration cont ================================-->
 
-<div class="registration_cont">
+<!-- <div class="registration_cont">
 
   <div class="reg_title">
     <h3>Registration</h3>
@@ -104,7 +160,7 @@
 
 </div>
 
-
+ -->
 
 
 <!-- Registration cont end ============================-->
@@ -212,17 +268,8 @@
 
 
 
-
-
-
-
- </section>
-<!-- hero section end =======================-->
- 
-
-
-
   <!-- js === -->
   <script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
+  <script src="<?php echo URLROOT ?>/assets/js/home.js"></script>
 </body>
 </html>
