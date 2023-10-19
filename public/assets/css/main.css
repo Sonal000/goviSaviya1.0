@@ -671,6 +671,106 @@ background: var(--clr-primary-5);
 /* footer end================================== */
 
 
+/* =============================== Admin dash css ============================================================================*/
+
+
+.admincard_cont{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.admincard{
+  box-shadow: var(--light-shadow);
+  padding:0.5rem;
+  border-radius: var(--radius-low);
+  margin-top: 3rem;
+  /*width: 500px;*/
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  border: 2px solid var(--clr-primary-7);
+}
+
+.searchbarplace{
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.cardicon{
+  width: 50px;
+  height: 50px;
+}
+.cardicon_cont{
+  display: flex;
+  align-items: center;
+}
+.admincard_det_cont{
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
+
+.newsignups{
+  font-size: larger;
+  color:#4BAA4E;
+  font-weight: bold;
+}
+.signupcount{
+  color: var(--clr-grey-4);
+  font-weight: bold;
+  font-size: large;
+}
+.table_box{
+  /*margin:50px auto;*/
+  margin-top: 3rem;
+}
+
+.table_row{
+  display: table;
+  width:93%;
+  margin: 10px auto;
+  background: transparent;
+  padding:12px 0;
+  color:#71C174;
+  box-shadow: var(--light-shadow);
+  
+}
+
+
+.table_cell{
+  display: table-cell;
+  text-align: center;
+  padding: 4px 0;
+  border-right: 1px var(--clr-primary-1);
+  vertical-align: middle;
+
+}
+.table_hed{
+  box-shadow: none;
+  background:var(--clr-primary-8);
+  font-weight: bold;
+}
+.column1 {
+  width: 10%; /* 1st column width */
+}
+
+.column2 {
+  width: 30%; /* 2nd column width */
+}
+
+.column3 {
+  width: 35%; /* 3rd column width */
+}
+
+.column4 {
+  width: 15%; /* 4th column width */
+}
+
+.column5 {
+  width: 10%; /* 5th column width */
+}
 
 
 
