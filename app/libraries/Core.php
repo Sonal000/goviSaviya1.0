@@ -37,7 +37,8 @@ if(isset($url[1])){
  }else {
     // Require the controller
     require_once '../app/controllers/_404.php';
-    $this->currentController = new _404; 
+    // $this->currentController = new _404; 
+    // $this->currentMethod = 'index';
 }
 }
 
