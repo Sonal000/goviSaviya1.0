@@ -4,6 +4,9 @@ Fonts
 ===============
 */
   @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Nunito&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
 
 
 /*
@@ -17,15 +20,15 @@ Variables
   --clr-primary-1: #38803A;
   --clr-primary-2:#3E8E41;
   --clr-primary-3:#449C47;
-  --clr-primary-4: #4BAA4E;
+  --clr-primary-4: rgb(75, 170, 78);
   /* primary/main color */
   /* --clr-primary-5: #D7FCDB; */
   --clr-primary-5: #4CAF4F;
   /* lighter shades of primary color */
   --clr-primary-6: #71C174;
-  --clr-primary-7: #8ECD90;
+  --clr-primary-7: rgb(142, 205, 144);
   --clr-primary-8: #C6FBCB;
-  --clr-primary-9: #D7FCDB;
+  --clr-primary-9: rgb(215, 252, 219);
   --clr-primary-10: #ECFEEE;
 
 
@@ -61,7 +64,9 @@ Variables
 
 
 
-  --font-primary:  'Nunito', sans-serif;;
+  /* --font-primary:  'Nunito', sans-serif; */
+  --font-primary:  'Lato', sans-serif;
+  --font-secondry:  'Courgette', cursive;;
   --transition: all 0.3s linear;
   --spacing: 0.25rem;
   --spacing-low: 0.15rem;
@@ -336,12 +341,15 @@ input:focus{
   box-shadow: var(--light-shadow);
   z-index: 100;
   width: 100vw;
+  display: flex;
+  align-items: center;
 }
 .navbar{
   display: flex;
   align-items: center;
-  width: 95vw;
+  width: 90vw;
   margin: 0 auto;
+max-width: 1920px;
 }
 .nav_img_cont{
   display: flex;
@@ -357,7 +365,7 @@ width: 95vw;
 margin: auto;
 }
 .nav_img{
-  width: 150px;
+  width: 100px;
 }
 .navlinks_cont{
   flex: 0.5;
@@ -385,7 +393,7 @@ margin: auto;
 }
 
 .navlink>a:hover{
-  color:  var(--clr-secondry-5);
+  color:  var(--clr-secondry-1);
   text-decoration: underline;
 }
 
@@ -629,8 +637,9 @@ background: var(--clr-primary-5);
 .footer{
   background: var(--clr-primary-9);
   padding: 8rem 0;
-  margin-top: 3rem;
+  /* margin-top: 3rem; */
   box-shadow: var(--light-shadow);
+  width: 100vw;
 }
 
 .footer_cont{
@@ -669,11 +678,5 @@ background: var(--clr-primary-5);
 }
 
 /* footer end================================== */
-
-
-
-
-
-
 
 

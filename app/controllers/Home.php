@@ -8,7 +8,7 @@
    }
    public function index()
    {
-    $data =['logged'=>true];
+    $data =['logged'=>false];
 
     $this->view('home',$data);
    }

@@ -8,7 +8,7 @@
   <div class="navbar">
    <div class="nav_img_cont_lg">
     <a href="<?php echo URLROOT ?>/Home">
-      <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya_green.png" alt=""/>
+      <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" alt=""/>
     </a>
       
     <button class="bars_btn" id="bars_btn">
@@ -136,7 +136,7 @@
   <div class="navbar">
    <div class="nav_img_cont">
    <a href="<?php echo URLROOT ?>/Home">
-    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya_green.png" alt=""/>
+    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" alt=""/>
         </a>
     <button class="bars_btn" id="bars_btn">
   <i class="fas fa-bars bars"></i>
