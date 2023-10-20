@@ -25,7 +25,7 @@ Variables
   /* --clr-primary-5: #D7FCDB; */
   --clr-primary-5: #4CAF4F;
   /* lighter shades of primary color */
-  --clr-primary-6: #71C174;
+  --clr-primary-6: rgb(113, 193, 116);
   --clr-primary-7: rgb(142, 205, 144);
   --clr-primary-8: #C6FBCB;
   --clr-primary-9: rgb(215, 252, 219);
@@ -34,7 +34,7 @@ Variables
 
 /* Secondry color */
   --clr-secondry-1: #FFC933;
-  --clr-secondry-2: #FFC31F;
+  --clr-secondry-2: rgb(255, 195, 31);
   --clr-secondry-3: #FFBE0A;
   --clr-secondry-4: #F5B400;
   --clr-secondry-5: #E0A500;

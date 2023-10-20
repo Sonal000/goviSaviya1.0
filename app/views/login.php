@@ -73,7 +73,7 @@
             </div>
             </br>
             </form>
-             <p class="forgot">Do not have an account?<a href="SellerRegister.php">&nbspSign up</a></p> 
+             <p class="forgot">Do not have an account?<a href="<?php echo URLROOT ?>/register">&nbspSign up</a></p> 
 
         </div>
 
