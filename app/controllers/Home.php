@@ -9,7 +9,7 @@
    public function index()
    {
     $data =[
-      'logged'=>true,
+      'logged'=>false,
       'username'=>"Sonal Induwara",
   ];
 
