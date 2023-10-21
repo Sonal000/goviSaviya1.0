@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Home</title>
 
- <!-- <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya2.ico" type="image/x-icon"> -->
+ <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
 
  <link
  rel="stylesheet"
@@ -111,7 +111,21 @@
           </a>   
         </div>
 
-        <?php }?>
+        <?php }else{?>
+
+          <div class="landing_icon_cont">
+          <a href="<?php echo URLROOT ?>/myprofile/sonal" class="logged_icon_cont">
+            <p class="logged_icon">Hello 
+              <?php  
+              $firstName = (count($parts = explode(' ', $data['username'])) > 0) ? $parts[0] : "";
+              echo $firstName;
+            ?> !
+            </p>
+          </a>   
+        </div>
+
+
+          <?php }?>
 
       </div>
     </div>

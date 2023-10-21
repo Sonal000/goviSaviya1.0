@@ -479,10 +479,11 @@ z-index: -1000;
 .icon_cont:hover{
   border :2px solid  var(--clr-white);
   box-shadow: 1px 2px 5px 4px rgba(200,200,200,0.5);
+  background: rgba(0,0,0,0.5);
 }
 .icon_cont:hover .landing_icon{
   border :2px solid  transparent;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0);
 }
 .signin_icon{
   font-size: 1.1rem;
@@ -493,6 +494,41 @@ z-index: -1000;
   width: 6rem;
   height: 4.5rem;
   border-radius: 32px;
+}
+.logged_icon_cont{
+  border :2px solid transparent;
+  /* margin: 0.5rem; */
+  padding: 1rem;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  /* border: 2px solid red; */
+}
+.logged_icon{
+  font-size: 1rem;
+  color: var(--clr-white);
+  text-align: center;
+  padding: 1rem;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 100%;
+  transition: var(--transition);
+  border :2px solid var(--clr-white);
+  background: rgba(0,0,0,0.2);
+}
+
+.logged_icon_cont:hover{
+  border :2px solid  var(--clr-white);
+  box-shadow: 1px 2px 5px 5px rgba(200,200,200,0.5);
+  background: rgba(0,0,0,0.5);
+}
+.logged_icon_cont:hover .logged_icon{
+  border :2px solid  transparent;
+  background: rgba(0,0,0,0);
 }
 
 .cap_1{
