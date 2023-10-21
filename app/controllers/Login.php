@@ -66,6 +66,10 @@
 
   }
 
+  public function adminlogin(){
+    $this ->view('adminlogin');
+  }
+
 
  }
 ?> 
