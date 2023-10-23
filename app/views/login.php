@@ -8,6 +8,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>GoviSaviyaLogin</title>
+        <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
         <link
  rel="stylesheet"
  href="<?php echo URLROOT ?>/assets/fontawesome-free-5.15.4-web/css/all.min.css">
@@ -73,7 +74,7 @@
             </div>
             </br>
             </form>
-             <p class="forgot">Do not have an account?<a href="SellerRegister.php">&nbspSign up</a></p> 
+             <p class="forgot">Do not have an account?<a href="<?php echo URLROOT ?>/register">&nbspSign up</a></p> 
 
         </div>
 
