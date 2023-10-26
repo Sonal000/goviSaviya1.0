@@ -8,7 +8,10 @@
    }
    public function index()
    {
-    $data =['logged'=>true];
+    $data =[
+      'logged'=>false,
+      'username'=>"Sonal Induwara",
+  ];
 
     $this->view('home',$data);
    }

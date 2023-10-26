@@ -8,7 +8,7 @@
   <div class="navbar">
    <div class="nav_img_cont_lg">
     <a href="<?php echo URLROOT ?>/Home">
-      <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya_green.png" alt=""/>
+      <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" alt=""/>
     </a>
       
     <button class="bars_btn" id="bars_btn">
@@ -53,13 +53,13 @@
         <div class="profile_settings_cont">
             <ul class="profile_links">
                 <li>
-                  <a href="" class="profile_link">View Profile</a>
+                  <a  href="<?php echo URLROOT ?>/myprofile/sonal" target="_blank" class="profile_link">View Profile</a>
                 </li>
                 <li>
                   <a href="" class="profile_link">Wish list</a>
                 </li>
                 <li>
-                  <a href="" class="profile_link">Log out</a>
+                  <a href="#" class="profile_link">Log out</a>
                 </li>
             </ul>
         </div>
@@ -136,7 +136,7 @@
   <div class="navbar">
    <div class="nav_img_cont">
    <a href="<?php echo URLROOT ?>/Home">
-    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya_green.png" alt=""/>
+    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" alt=""/>
         </a>
     <button class="bars_btn" id="bars_btn">
   <i class="fas fa-bars bars"></i>
