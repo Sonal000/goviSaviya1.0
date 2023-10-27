@@ -29,6 +29,41 @@
         <button class="showbtn" id="showbtn">test</button>
     </div>
 
+        <div class="table">
+            <table>
+
+                <thead>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                </thead>
+
+                <tbody>
+                <?php
+                
+                
+
+                foreach ($data['items'] as $item) : ?>
+                <tr>
+                    <td><?php echo $item->item_id ?></td>
+                    <td><?php echo $item->name ?></td>
+                    <td><?php echo $item->description?></td>
+                </tr>
+        
+        <?php endforeach;
+            ?>
+
+
+                </tbody>
+    
+
+                
+            </table>
+        </div>
+
+
+
+
   <script>
     const showBtn = document.getElementById('showbtn');
     const test2 = document.querySelector('.test2');

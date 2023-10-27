@@ -45,7 +45,8 @@
             </ul>
             </div>
         </div> -->
-    <div class="login">
+
+    <!-- <div class="login">
         <div class="loginimg_container">
             <img src="<?php echo URLROOT ?>/assets/images/pngegg.png" alt="" class="loginimg">
         </div>
@@ -77,12 +78,110 @@
              <p class="forgot">Do not have an account?<a href="<?php echo URLROOT ?>/register">&nbspSign up</a></p> 
 
         </div>
+    </div> -->
 
-        
-            
-            
+    
+<section class="login_section ">
+
+
+<div class="login_registration">
+  <div class="image_cont">
+    <!-- <img class="login_img" src="<?php echo URLROOT ?>/assets/images/login.jpg" alt=""> -->
+
+    <div class="text_cont">
+      <h3 class="title">
+        login <span>now</span>
+       </h3>
+       <!-- <ul>
+         <li class="list_item"><span><i class="fas fa-check"></i></span>Fresh Produce</li>
+         <li class="list_item"><span><i class="fas fa-check"></i></span>Personalized Experience:</li>
+         <li class="list_item"><span><i class="fas fa-check"></i></span>Exclusive Deals</li>
+       </ul> -->
+       <div class="img_cont">
+                <img src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" class="form_img" alt="">
+                
+                <p class="form_text">Together, We can cultivate a brighter<br>Future!</p>
+            </div>
+    </div>
+
+  </div>
+  <div class="form_cont">
+       <div class="form_title_cont">
+           <h3 class="form_title">login <span>now</span></h3>
+       </div>
+
+   <form class="login_register_form" id="login_reg_form" method="post" action="<?php echo URLROOT; ?>/login">
+
+
+
+    <div class="input_cont">
+     <label for="name" class="input_label">Email</label>
+     <?php 
+     if(isset($data['invalid_email'])){
+       ?>
+             <input type="text" name="email" id="email" class="input_item invalid" value="<?php echo $data['email'];?>">
+             <p class="invalid_msg"><?php echo $data['invalid_email'] ?></p>
+       <?php
+     }else{
+     ?>
+     <input type="text" name="email" id="email" class="input_item" value="<?php echo $data['email'];?>" >
+     <p class="invalid_msg"></p>
+     <?php }?>
 
     </div>
+
+
+    <div class="input_cont">
+
+     <label for="name" class="input_label">Password</label>
+
+     <?php 
+     if(isset($data['incorrect_password'])){
+       ?>
+        <input type="password" name="password" id="password" class="input_item" value="<?php echo $data['password']; ?>">
+        <p class="invalid_msg"><?php echo $data['incorrect_password'] ?></p>
+    <?php
+     }else{
+     ?>
+        <input type="text" name="password" id="password" class="input_item" value="<?php echo $data['password']; ?>">
+        <p class="invalid_msg"></p>
+     <?php }?>
+
+    </div> 
+
+
+
+
+    <div class="input_cont"> 
+        <a href=""class="forgot_password">Forgot password?</a>
+        </div>
+    <div class="btn_cont">
+     <button class="signup_btn btn" id="signup_btn">Sign In</button>
+     <!-- <button class="signup_btn btn">Reset</button> -->
+    </div>
+    <div class="input_cont">
+    <p class="create_acc">Do not have an account ? <a href="<?php echo URLROOT ?>/register">&nbspSign up</a></p> 
+     </div>
+
+   </form>
+
+   </div>
+</div> 
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
 
 
 
@@ -93,6 +192,7 @@
     
 <!-- js === -->
 <script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/login.js"></script>
 </body>
     
 

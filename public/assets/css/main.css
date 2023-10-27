@@ -65,8 +65,9 @@ Variables
 
 
   /* --font-primary:  'Nunito', sans-serif; */
-  --font-primary:  'Lato', sans-serif;
-  --font-secondry:  'Courgette', cursive;;
+  /* --font-primary:  'Lato', sans-serif; */
+  --font-primary:  'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-secondry:  'Courgette', cursive;
   --transition: all 0.3s linear;
   --spacing: 0.25rem;
   --spacing-low: 0.15rem;
@@ -339,7 +340,7 @@ input:focus{
   background-color: var(--clr-primary-9);
   min-height: 4rem;
   box-shadow: var(--light-shadow);
-  z-index: 100;
+  z-index: 2000;
   width: 100vw;
   display: flex;
   align-items: center;
@@ -552,7 +553,7 @@ background: var(--clr-primary-5);
 
 .navSidebar_cont{
   position: fixed;
-  z-index: 1001;
+  z-index: 2002;
   background: var(--clr-primary-10);
   top: 0;
   left: -300px;
@@ -610,7 +611,7 @@ background: var(--clr-primary-5);
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 1000;
+  z-index: 2001;
   visibility: hidden;
   opacity: 0;
 }
@@ -678,3 +679,5 @@ background: var(--clr-primary-5);
 }
 
 /* footer end================================== */
+
+

@@ -4,7 +4,7 @@
 <footer class="footer">
   <div class="footer_cont section-center">
     <div class="footer_intro">
-    <img class="footer_img"  src="/assets/images/govisaviya_green.png" alt=""/>
+    <img class="footer_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya_green.png" alt=""/>
     <p>Together ,we can cultivate a brighter future!</p>
     <div class="social_cont">
       <!-- social media icons -->
