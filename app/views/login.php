@@ -143,7 +143,7 @@
     <?php
      }else{
      ?>
-        <input type="text" name="password" id="password" class="input_item" value="<?php echo $data['password']; ?>">
+        <input type="password" name="password" id="password" class="input_item" value="<?php echo $data['password']; ?>">
         <p class="invalid_msg"></p>
      <?php }?>
 
