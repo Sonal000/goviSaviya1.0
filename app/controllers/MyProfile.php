@@ -78,7 +78,7 @@ if($_SESSION['user_type']=="seller"){
     ];
     if($this ->sellerModel->updateAbout($data)){
       echo '<script>
-      alert("Edited");
+      // alert("Edited");
       </script>';
       // header('city:'.URLROOT.'/Login');
     }
@@ -167,12 +167,12 @@ if($_SESSION['user_type']=="seller"){
         'city'=>trim($_POST['city']),
         'email' => $profileData->email,
         'about' => $profileData->about,
-        "prof_img"=>$profileData->pro_img,
+        "prof_img"=>$profileData->prof_img,
         "cover_img"=>$profileData->cover_img
       ];
       if($this ->buyerModel->updateProfile($data)){
         echo '<script>
-        alert("Edited");
+        // alert("Edited");
         </script>';
         // header('city:'.URLROOT.'/Login');
       }
