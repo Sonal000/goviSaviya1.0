@@ -10,6 +10,11 @@ class AdminOrders extends Controller{
         $this -> view('adminOrders');
     }
 
+    public function details(){
+        $data = ['title'=>'welcome'];
+        $this -> view('adminOrderDetails');
+    }
+
    /* public function about(){
         $this ->view('Pages/about');
     }*/
