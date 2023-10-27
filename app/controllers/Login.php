@@ -81,6 +81,10 @@
     redirect('/home');
   }
 
+  public function adminlogin(){
+    $this ->view('adminlogin');
+  }
+
 
  }
 ?> 

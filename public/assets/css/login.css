@@ -15,11 +15,12 @@
  grid-area:navbar2;
  height: 4rem;
  display: flex;
- width: 100%;
+ width: 100vw;
  position: fixed;
  z-index: 2;
  top: 0;
  left: 0;
+ justify-content: space-between;
  
   
 }
@@ -59,7 +60,8 @@ display:flex;
 .navbuttons2 ul {
  align-items: center;
  display: flex;
- margin-left: 62rem;
+ 
+ /*margin-left: 6rem;*/
 }
 
 .navbuttons2 li{
@@ -282,6 +284,14 @@ flex-direction: column;
  .Sellersidebar ul li:hover a{
   color:var(--clr-white);
  }
+
+ .Sellersidebar ul li.active {
+  background: var(--clr-primary-5);
+}
+
+.Sellersidebar ul li.active a {
+  color: var(--clr-white);
+}
 
 .profile{
    
