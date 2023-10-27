@@ -69,7 +69,7 @@
 <section class="landing_section">
 
   <div class="landing_img_cont" id="landing_img_cont">
-    <img src="<?php echo URLROOT; ?>/assets/images/landing-1.jpg" class="landing_img  "  id="landing1" alt="">
+    <img src="<?php echo URLROOT; ?>/assets/images/landing-1.jpg" class="landing_img"  id="landing1" alt="">
     <img src="<?php echo URLROOT; ?>/assets/images/landing-2.jpg" class="landing_img" id="landing2" alt="">
     <img src="<?php echo URLROOT; ?>/assets/images/landing-3.jpg" class="landing_img"  id="landing3" alt="">
     <img src="<?php echo URLROOT; ?>/assets/images/landing-4.jpg" class="landing_img"  id="landing4" alt="">
@@ -99,29 +99,37 @@
         </div>
 
 
-        <?php if(isset($data['logged'])&& !$data['logged']){
+        <?php if(isset($_SESSION['user_id'])){
   ?>
         <div class="landing_icon_cont">
-          <a href="<?php echo URLROOT ?>/login" class="icon_cont">
-            <!-- <i class="fas fa-sign-in-alt landing_icon signin_icon"></i> -->
-            <p class="signin_icon landing_icon">Sign In</p>
-          </a>
-          <a title="Sign Up" href="<?php echo URLROOT ?>/Register" class="icon_cont">
-            <i class="fas fa-user-plus landing_icon signup_icon"></i>
+          <div class="logged_icon_cont">
+            <a href="<?php echo URLROOT ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" class="logged_icon">
+              <span >Hello 
+                <?php  
+              $firstName = (count($parts = explode(' ', $data['username'])) > 0) ? $parts[0] : "";
+              echo $firstName;
+              ?>
+            </span>
           </a>   
+        </div>
         </div>
 
         <?php }else{?>
 
           <div class="landing_icon_cont">
-          <a href="<?php echo URLROOT ?>/myprofile/sonal" class="logged_icon_cont">
-            <p class="logged_icon">Hello 
-              <?php  
-              $firstName = (count($parts = explode(' ', $data['username'])) > 0) ? $parts[0] : "";
-              echo $firstName;
-            ?> !
-            </p>
-          </a>   
+          <div class="icon_cont">
+          <a href="<?php echo URLROOT ?>/login" class="signin_icon landing_icon ">
+            <span class="">Sign In</span>
+          </a>
+          </div>
+
+          <div class="icon_cont">
+          <a title="Sign Up" href="<?php echo URLROOT ?>/Register" class="signup_icon landing_icon">
+            <i class="fas fa-user-plus"></i>
+          </a>  
+          </div>
+
+ 
         </div>
 
 
