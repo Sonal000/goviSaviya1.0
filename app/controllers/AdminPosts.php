@@ -1,18 +1,20 @@
 <?php
 
-class AdminDash extends Controller{
+class AdminPosts extends Controller{
     public function __construct(){
             
     }
 
     public function index(){
         $data = ['title'=>'welcome'];
-        $this -> view('adminDash');
+        $this -> view('adminPosts');
     }
-   public function addUser(){
-    $data = ['title'=>'welcome'];
-    $this -> view('addUser');
-   }
+
+    public function details(){
+        $data = ['title'=>'welcome'];
+        $this -> view('adminOrderDetails');
+    }
+
    /* public function about(){
         $this ->view('Pages/about');
     }*/
