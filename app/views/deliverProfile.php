@@ -80,42 +80,58 @@
 <section class="profile_section">
   <div class="profile_conts">
    <div class="cover_img_cont">
-    
-    <img src="<?php echo $data['cover_img'] ?>" name="cover_img" id="cover_img" alt="cover" class="cover_img">
-    <!-- <form method="post" action="<?php echo URLROOT; ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" enctype="multipart/form-data"> -->
-        <input type="file" class="cover_input" id="cover_input" >
-        <button  class="cover_icon" id="cover_icon"> edit Cover<i class="fas fa-pen"></i></button>
-    <!-- </form> -->
-    <a href="<?php echo URLROOT ?>/profile/10" class="view_icon"> Profile View<i class="far fa-eye"></i></a>
+
+   <form method="post" action="<?php echo URLROOT; ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" enctype="multipart/form-data"  id="cover_form" name="cover_form" class="cover_form"> 
+
+          <img src="<?php echo URLROOT.'/store/covers/'.$data['cover_img'] ?>" name="cover_img" id="cover_img"  class="cover_img">
+          <input class="cover_icon_upload" type="file" id="cover_img_input" name="cover_img" >
+                  <button type="button" class="cover_icon" id="edit_cover_img_btn">
+                  edit Cover
+                  <i class="fas fa-pen"></i>
+                  </button>
+  <input type="submit" name="cover_image" id="cover_image">
+
+                </form>
+
+
+
+
+
+    <a href="<?php echo URLROOT ?>/profile/<?php echo $_SESSION['user_id'] ?>" class="view_icon">
+     Profile View 
+     <i class="far fa-eye"></i>
+    </a>
    </div>
 
 
     <div class="profile_details">
       <div class="prof_img_cont">
-          <!-- <img src="" alt="profile" class="profile_img"> -->
           <div class="profile_img_cont">
-            <img src="<?php echo $data['prof_img'] ?>" alt="profile" class="profile_img">
 
-            <form method="post" action="<?php echo URLROOT; ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" enctype="multipart/form-data">
+            <form method="post" action="<?php echo URLROOT; ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" enctype="multipart/form-data"  id="profile_form" name="profile_form" class="profile_form"> 
+                  <!-- <img src="<?php echo $data['prof_img'] ?>"  class="profile_img"> -->
+                  <img src="<?php echo URLROOT.'/store/profiles/'.$data['prof_img'] ?>"  class="profile_img">
 
-            <input class="profile_icon_upload" type="file" name="prof_img" id="prof_img_input">
-            <input class="profile_icon_submit" type="submit" name="profile_submit">
-              <button  class="profile_icon" id="edit_prof_img_btn"> edit profile picture<i class="fas fa-pen"></i>
-              </button>
+                  <input class="profile_icon_upload" type="file" id="prof_img_input" name="prof_img" >
+                  <button type="button" class="profile_icon" id="edit_prof_img_btn">
+                    Edit profile picture
+                    <i class="fas fa-pen"></i>
+                  </button>
+  <input type="submit" name="profile_image" id="profile_image">
 
-
-            </form>
-
+                </form>
             <div class="name_cont">
               <p class="user_name"><?php echo $data['name'] ?> 
-                  <span><i class="fas fa-check-circle check_icon"></i>
+                  <span>
+                    <i class="fas fa-check-circle check_icon"></i>
                   </span>
               </p>
             </div>
           </div>
-
- 
-          <!-- <a class="become_seller" href="<?php echo URLROOT ?>/buyerRegister"> Become a Buyer <span><i class="fas fa-user"></i></span></a> -->
+          <a class="become_seller" href="<?php echo URLROOT ?>/buyerRegister"> 
+            Become a Buyer
+            <span><i class="fas fa-user"></i></span>
+          </a>
       </div>
 
         <div class="text_cont">
@@ -142,13 +158,13 @@
       </div>
           </div>
         </div>
-        </div>
+      </div>
 
     </div>
 
 
 
-</section>
+</section> 
 
 <section class="details_section">
 
@@ -246,11 +262,15 @@
 
 
 
-    <!-- new end ==================== -->
 
+  
+  
+  <!-- new end ==================== -->
+  
+  
+  
+</div>
 
-
-    </div>
 
 
 

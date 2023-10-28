@@ -41,4 +41,23 @@ class User{
             return false;
         }
     }
+    public function getProfileImage($user_id,$user_type){
+        if($user_type=='buyer'){
+            $this->db->query('SELECT prof_img FROM buyers WHERE user_id=:id');
+        }else if($user_type=='seller'){
+            $this->db->query('SELECT prof_img FROM sellers WHERE user_id=:id');
+        }else if($user_type=='deliver'){
+            $this->db->query('SELECT prof_img FROM delivers WHERE user_id=:id'); 
+        }
+        $this ->db ->bind(':id',$user_id);
+
+        $row = $this ->db -> single();
+
+        //check row count
+        if($this->db ->rowcount()>0){
+            return $row;
+        } else{
+            return false;
+        }
+    }
 }

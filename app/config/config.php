@@ -9,6 +9,8 @@ define('DB_NAME','govisaviya');
 // app root
 define('APPROOT',dirname(dirname(__FIle__)));
 
+define('STOREROOT',dirname(dirname(dirname(__FIle__)))."\public\store");
+
 // url root
 define('URLROOT','http://localhost/goviSaviya1.0');
 
