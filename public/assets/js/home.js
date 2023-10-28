@@ -16,16 +16,56 @@ setInterval(()=>{
  }
   const currentElement = document.getElementById(`landing${index}`);
   const previousElement = document.getElementById(`landing${((index + 3) % 5) + 1}`);
+  const nextElement = document.getElementById(`landing${((index % 5) +1)}`);
   if (currentElement && previousElement) {
     currentElement.classList.toggle('landing_show');
-    previousElement.classList.toggle('landing_show');
   }
+  // console.log(((index % 5) +1));
+  setTimeout(()=>{
+    previousElement.classList.toggle('landing_show');
+  },2000)
  
  index++;
-
 },7000);
 
 
+
+// ================
+
+// let index = 5;
+
+// setInterval(()=>{
+//  if(index<0){
+//   index=5;
+//  }
+//   const currentElement = document.getElementById(`landing${index}`);
+//   const previousElement = document.getElementById(`landing${((index + 3) % 5) + 1}`);
+//   const nextElement = document.getElementById(`landing${((index % 5) +1)}`);
+//   if (currentElement && previousElement && nextElement) {
+//     previousElement.classList.toggle('landing_show');
+//   }
+//   console.log(((index % 5) +1));
+//   setTimeout(()=>{
+//     currentElement.classList.toggle('landing_show');
+//     console.log("in timeout",index);
+//   },2000)
+ 
+//  index--;
+// },7000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// navbar
 
 const navbar = document.querySelector('.navbar_cont');
 
@@ -44,5 +84,4 @@ window.addEventListener("scroll",()=>{
   navbar.classList.remove('navbar_background');
  }
 
- console.log(pageYOffset);
 })
