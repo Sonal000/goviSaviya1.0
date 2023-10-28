@@ -69,14 +69,19 @@
     $_SESSION['user_name']=$user->name;
     $_SESSION['user_email']=$user->email;
     $_SESSION['user_type']=$user->user_type;
+    $image=$this ->userModel->getProfileImage($user->user_id,$user->user_type);
+    $_SESSION['user_image']=strlen($image->prof_img)>0?$image->prof_img:"green.png";
+
     redirect('/home');
+    var_dump($_SESSION['user_image']);
   }
 
   public function logout(){
     unset($_SESSION['user_id']);
     unset($_SESSION['user_email']);
     unset($_SESSION['user_name']);
-    unset($_SESSION['user_type']);
+    unset($_SESSION['user_type']);         
+    unset($_SESSION['user_image']);         
     session_destroy();
     redirect('/home');
   }

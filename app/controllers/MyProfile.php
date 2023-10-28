@@ -38,8 +38,6 @@ if($_SESSION['user_type']=="seller"){
   if($_SERVER['REQUEST_METHOD']=='POST'){
 
     if(isset($_POST['details_submit'])){
-
- 
     //sanitize POST data
     $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
     $data=[
@@ -50,12 +48,12 @@ if($_SESSION['user_type']=="seller"){
       'city'=>trim($_POST['city']),
       'email' => $profileData->email,
       'about' => $profileData->about,
-      "prof_img"=>$profileData->pro_img,
+      "prof_img"=>$profileData->prof_img,
       "cover_img"=>$profileData->cover_img
     ];
     if($this ->sellerModel->updateProfile($data)){
       echo '<script>
-      alert("Edited");
+      // alert("Edited");
       </script>';
       // header('city:'.URLROOT.'/Login');
     }
@@ -73,7 +71,7 @@ if($_SESSION['user_type']=="seller"){
       'city'=>$profileData->city,
       'email' => $profileData->email,
       'about' => trim($_POST['about']),
-      "prof_img"=>$profileData->pro_img,
+      "prof_img"=>$profileData->prof_img,
       "cover_img"=>$profileData->cover_img
     ];
     if($this ->sellerModel->updateAbout($data)){
@@ -95,21 +93,76 @@ if($_SESSION['user_type']=="seller"){
       'city'=>$profileData->city,
       'email' => $profileData->email,
       'about' => $profileData->about,
-      // "prof_img"=>trim($_POST['prof_img']),
       "prof_img"=>$profileData->prof_img,
       "cover_img"=>$profileData->cover_img
     ];
     
-    // if($this ->sellerModel->updateAbout($data)){
-    //   echo '<script>
-    //   alert("Edited");
-    //   </script>';
-    //   // header('city:'.URLROOT.'/Login');
-    // }
-    // else{
-    //   die('something went wrong');
-    // }
-  }else{
+  }else if(isset($_FILES['prof_img'])){
+      
+
+    $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+    if (isset($_FILES['prof_img'])) {
+      $uploadDirectory = (str_replace("\\", "/",STOREROOT)) . '/profiles/'; 
+      $filename = uniqid() . '_' . $_FILES['prof_img']['name'];
+      $targetPath = $uploadDirectory . $filename;
+    
+      if (move_uploaded_file($_FILES['prof_img']['tmp_name'], $targetPath)){
+    $data=[
+      'name'=>$profileData->name,
+      'mobile' =>$profileData->mobile,
+      'address'=>$profileData->address,
+      'mobile'=>$profileData->mobile,
+      'city'=>$profileData->city,
+      'email' => $profileData->email,
+      'about' => $profileData->about,
+      'prof_img' => $filename,
+      "cover_img"=>$profileData->cover_img
+    ];      
+    if ($this->sellerModel->updateProfileImage($data)) {
+      echo '<script>
+      // alert("profile image uploaded");
+      </script>';
+  } else {
+      die('Something went wrong.');
+  }
+} else {
+  die('Failed to move the uploaded file.');
+}
+}
+}else if(isset($_FILES['cover_img'])){
+    
+
+$_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+if (isset($_FILES['cover_img'])) {
+  $uploadDirectory = (str_replace("\\", "/",STOREROOT)) . '/covers/'; 
+  $filename = uniqid() . '_' . $_FILES['cover_img']['name'];
+  $targetPath = $uploadDirectory . $filename;
+
+  if (move_uploaded_file($_FILES['cover_img']['tmp_name'], $targetPath)){
+
+$data=[
+  'name'=>$profileData->name,
+  'mobile' =>$profileData->mobile,
+  'address'=>$profileData->address,
+  'mobile'=>$profileData->mobile,
+  'city'=>$profileData->city,
+  'email' => $profileData->email,
+  'about' => $profileData->about,
+  'prof_img' => $profileData->prof_img,
+  "cover_img"=>$filename
+];     
+if ($this->sellerModel->updateCoverImage($data)) {
+  echo '<script>
+  // alert("cover image uploaded");
+  </script>';
+} else {
+  die('Something went wrong.');
+}
+} else {
+die('Failed to move the uploaded file.');
+}
+}
+}else{
     $data=[
       "logged"=>(isset($_SESSION['user_id'])),
       "userid"=>$_SESSION['user_id'],
@@ -155,7 +208,6 @@ if($_SESSION['user_type']=="seller"){
     $profileData = $this->buyerModel->getProfileInfo($_SESSION['user_id']);
 
     if($_SERVER['REQUEST_METHOD']=='POST'){
-
       if(isset($_POST['details_submit'])){
       //sanitize POST data
       $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
@@ -189,26 +241,27 @@ if($_SESSION['user_type']=="seller"){
         'city'=>$profileData->city,
         'email' => $profileData->email,
         'about' => trim($_POST['about']),
-        "prof_img"=>$profileData->pro_img,
+        "prof_img"=>$profileData->prof_img,
         "cover_img"=>$profileData->cover_img
       ];
       if($this ->buyerModel->updateAbout($data)){
         echo '<script>
-        alert("Edited");
+        // alert("Edited");
         </script>';
         // header('city:'.URLROOT.'/Login');
       }else{
         die('something went wrong');
       }
-    }else if(isset($_POST['profile_submit'])){
+    }else if(isset($_FILES['prof_img'])){
+      
+
       $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
       if (isset($_FILES['prof_img'])) {
-        $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . '/profile_pics/'; // Set the absolute server path
+        $uploadDirectory = (str_replace("\\", "/",STOREROOT)) . '/profiles/'; 
         $filename = uniqid() . '_' . $_FILES['prof_img']['name'];
         $targetPath = $uploadDirectory . $filename;
       
         if (move_uploaded_file($_FILES['prof_img']['tmp_name'], $targetPath)){
-
       $data=[
         'name'=>$profileData->name,
         'mobile' =>$profileData->mobile,
@@ -217,20 +270,51 @@ if($_SESSION['user_type']=="seller"){
         'city'=>$profileData->city,
         'email' => $profileData->email,
         'about' => $profileData->about,
-        // "prof_img"=>trim($_POST['prof_img']),
-        // "prof_img"=>$profileData->prof_img,
-        'prof_img' => $targetPath,
+        'prof_img' => $filename,
         "cover_img"=>$profileData->cover_img
-      ];
-      
+      ];      
       if ($this->buyerModel->updateProfileImage($data)) {
-        echo '<script>alert("Profile picture uploaded and saved.");</script>';
-        
+        echo '<script>
+        // alert("profile image uploaded");
+        </script>';
     } else {
         die('Something went wrong.');
     }
 } else {
     die('Failed to move the uploaded file.');
+}
+}
+}else if(isset($_FILES['cover_img'])){
+      
+
+  $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+  if (isset($_FILES['cover_img'])) {
+    $uploadDirectory = (str_replace("\\", "/",STOREROOT)) . '/covers/'; 
+    $filename = uniqid() . '_' . $_FILES['cover_img']['name'];
+    $targetPath = $uploadDirectory . $filename;
+
+    if (move_uploaded_file($_FILES['cover_img']['tmp_name'], $targetPath)){
+
+  $data=[
+    'name'=>$profileData->name,
+    'mobile' =>$profileData->mobile,
+    'address'=>$profileData->address,
+    'mobile'=>$profileData->mobile,
+    'city'=>$profileData->city,
+    'email' => $profileData->email,
+    'about' => $profileData->about,
+    'prof_img' => $profileData->prof_img,
+    "cover_img"=>$filename
+  ];     
+  if ($this->buyerModel->updateCoverImage($data)) {
+    echo '<script>
+    // alert("cover image uploaded");
+    </script>';
+} else {
+    die('Something went wrong.');
+}
+} else {
+die('Failed to move the uploaded file.');
 }
 }
 }else{
@@ -262,7 +346,7 @@ if($_SESSION['user_type']=="seller"){
           "cover_img"=>$profileData->cover_img
           ];  
       }
-      // var_dump($data);
+      
    $this->view("buyerProfile",$data); 
   }
 
@@ -275,13 +359,11 @@ if($_SESSION['user_type']=="seller"){
 
 
 
-
 if($_SESSION['user_type']=="deliver"){
   $profileData = $this->deliverModel->getProfileInfo($_SESSION['user_id']);
+
   if($_SERVER['REQUEST_METHOD']=='POST'){
     if(isset($_POST['details_submit'])){
-
- 
     //sanitize POST data
     $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
     $data=[
@@ -292,20 +374,19 @@ if($_SESSION['user_type']=="deliver"){
       'city'=>trim($_POST['city']),
       'email' => $profileData->email,
       'about' => $profileData->about,
-      "prof_img"=>$profileData->pro_img,
+      "prof_img"=>$profileData->prof_img,
       "cover_img"=>$profileData->cover_img
     ];
     if($this ->deliverModel->updateProfile($data)){
       echo '<script>
-      alert("Edited");
+      // alert("Edited");
       </script>';
       // header('city:'.URLROOT.'/Login');
     }
     else{
       die('something went wrong');
     }
-  }
-  if(isset($_POST['about_submit'])){
+  }else if(isset($_POST['about_submit'])){
     $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
     $data=[
       'name'=>$profileData->name,
@@ -315,20 +396,27 @@ if($_SESSION['user_type']=="deliver"){
       'city'=>$profileData->city,
       'email' => $profileData->email,
       'about' => trim($_POST['about']),
-      "prof_img"=>$profileData->pro_img,
+      "prof_img"=>$profileData->prof_img,
       "cover_img"=>$profileData->cover_img
     ];
     if($this ->deliverModel->updateAbout($data)){
       echo '<script>
-      alert("Edited");
+      // alert("Edited");
       </script>';
       // header('city:'.URLROOT.'/Login');
-    }
-    else{
+    }else{
       die('something went wrong');
     }
-  }else if(isset($_POST['profile_submit'])){
+  }else if(isset($_FILES['prof_img'])){
+    
+
     $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+    if (isset($_FILES['prof_img'])) {
+      $uploadDirectory = (str_replace("\\", "/",STOREROOT)) . '/profiles/'; 
+      $filename = uniqid() . '_' . $_FILES['prof_img']['name'];
+      $targetPath = $uploadDirectory . $filename;
+    
+      if (move_uploaded_file($_FILES['prof_img']['tmp_name'], $targetPath)){
     $data=[
       'name'=>$profileData->name,
       'mobile' =>$profileData->mobile,
@@ -337,21 +425,54 @@ if($_SESSION['user_type']=="deliver"){
       'city'=>$profileData->city,
       'email' => $profileData->email,
       'about' => $profileData->about,
-      // "prof_img"=>trim($_POST['prof_img']),
-      "prof_img"=>$profileData->prof_img,
+      'prof_img' => $filename,
       "cover_img"=>$profileData->cover_img
-    ];
+    ];      
+    if ($this->deliverModel->updateProfileImage($data)) {
+      echo '<script>
+      // alert("profile image uploaded");
+      </script>';
+  } else {
+      die('Something went wrong.');
+  }
+} else {
+  die('Failed to move the uploaded file.');
+}
+}
+}else if(isset($_FILES['cover_img'])){
     
-    // if($this ->deliverModel->updateAbout($data)){
-    //   echo '<script>
-    //   alert("Edited");
-    //   </script>';
-    //   // header('city:'.URLROOT.'/Login');
-    // }
-    // else{
-    //   die('something went wrong');
-    // }
-  }else{
+
+$_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+if (isset($_FILES['cover_img'])) {
+  $uploadDirectory = (str_replace("\\", "/",STOREROOT)) . '/covers/'; 
+  $filename = uniqid() . '_' . $_FILES['cover_img']['name'];
+  $targetPath = $uploadDirectory . $filename;
+
+  if (move_uploaded_file($_FILES['cover_img']['tmp_name'], $targetPath)){
+
+$data=[
+  'name'=>$profileData->name,
+  'mobile' =>$profileData->mobile,
+  'address'=>$profileData->address,
+  'mobile'=>$profileData->mobile,
+  'city'=>$profileData->city,
+  'email' => $profileData->email,
+  'about' => $profileData->about,
+  'prof_img' => $profileData->prof_img,
+  "cover_img"=>$filename
+];     
+if ($this->deliverModel->updateCoverImage($data)) {
+  echo '<script>
+  // alert("cover image uploaded");
+  </script>';
+} else {
+  die('Something went wrong.');
+}
+} else {
+die('Failed to move the uploaded file.');
+}
+}
+}else{
     $data=[
       "logged"=>(isset($_SESSION['user_id'])),
       "userid"=>$_SESSION['user_id'],
@@ -366,10 +487,7 @@ if($_SESSION['user_type']=="deliver"){
       ]; 
 
   }
-
-
     }else{
-
     $data=[
         "logged"=>(isset($_SESSION['user_id'])),
         "userid"=>$_SESSION['user_id'],
@@ -381,12 +499,13 @@ if($_SESSION['user_type']=="deliver"){
         "about"=>$profileData->about,
         "prof_img"=>$profileData->prof_img,
         "cover_img"=>$profileData->cover_img
-        ]; 
-        
+        ];  
     }
-    // var_dump($data);
+    
  $this->view("deliverProfile",$data); 
 }
+
+
 
   
 

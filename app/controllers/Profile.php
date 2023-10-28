@@ -21,6 +21,11 @@ if($id===null){
   
   $this->view("profile",$data);
   
+
+
+
+
+  
 }
 }
 
