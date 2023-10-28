@@ -1,22 +1,90 @@
 .profile{
- margin-left: 16rem;
- margin-top: 4rem;
- width: calc(90vw - 16rem);
+  margin-left: 16rem;
+  margin-top: 4rem;
+  width: 100vw;
 }
+
+
 
 
 
 /*profilee =================================== */
 
 
+/* .overlay{
+  position:absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0,0.8);
+  width: 100vw;
+  height: 100vh;
+  z-index: 500;
+} */
 
+/* .pic_cont{
+  width: 60vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.edit_img{
+  width: 400px;
+  height: 400px;
+}
 
 .cover_img{
  background: var(--clr-grey-9);
 }
 
+.pic_form_cont{
+  position:absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 50px;
+  z-index: 501;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+
+} */
+.profile_form{
+  display: flex;
+  flex-direction: column;
+}
+.btn_cont{
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.profile_icon_upload{
+  display: none;
+}
+.cover_icon_upload{
+  display: none;
+}
+#profile_image{
+  display: none;
+}
+#cover_image{
+  display: none;
+}
+/* #profile_img_form {
+  visibility: visible;
+  height: auto;
+} */
+.upload_img_btn{
+  width: 400px;
+  border-radius: var(--radius-low);
+}
+
 
 .profile_section{
+  position: relative;
  width: 100vw;
  margin: 0 auto;
  max-width: 1176px;
@@ -122,10 +190,6 @@
  object-fit: cover;
  object-position: center;
  background: var(--clr-grey-3);
- /* background-image: url(../images/profile.png);
- object-fit: cover;
- object-position: center;
- background-size: 200px; */
 }
 .profile_img_cont{
  margin: 0.5rem;
@@ -139,14 +203,14 @@
  position: absolute;
  top: 0;
  left: 0;
- height: 150px;
- width: 150px;
+right: 0;
+min-height: 150px;
+min-width: 150px;
  border-radius: 50%;
  display: flex;
  justify-content: center;
  align-items: center;
- background-color: rgba(142, 205, 144, 0.5); /* 
- Transparent blue color */
+ background-color: rgba(142, 205, 144, 0.5); 
  opacity: 0;
  transition: opacity 0.3s;
  color: var(--clr-white);
@@ -158,12 +222,7 @@
  border: transparent;
  cursor: pointer;
 }
-.profile_icon_upload{
-  display: none;
-}
-.profile_icon_submit{
-  display: none;
-}
+
 
 .profile_img_cont:hover .profile_icon{
  opacity: 1;
@@ -184,7 +243,7 @@
  color: var(--clr-primary-2);
  cursor: pointer;
  font-weight: 600;
- z-index: 2000;
+ z-index: 100;
 }
 
 .text_cont{

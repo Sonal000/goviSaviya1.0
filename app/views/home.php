@@ -139,9 +139,8 @@
     </div>
 
 </section>
-
-
 <!-- hero section -->
+
 
 
 
@@ -187,7 +186,6 @@
 
 <!-- Registration cont end ============================-->
 <!-- Categgories cont ================================-->
-
 <div class="categories_cont">
 
   <div class="cat_title">
@@ -229,10 +227,6 @@
   </div>
 
 </div>
-
-
-
-
 <!-- Categories cont end ============================-->
 <!-- Cfeatures cont ================================-->
 

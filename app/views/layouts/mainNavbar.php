@@ -8,7 +8,7 @@
   <div class="navbar">
    <div class="nav_img_cont_lg">
     <a href="<?php echo URLROOT ?>/Home">
-      <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" alt=""/>
+      <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
     </a>
       
     <button class="bars_btn" id="bars_btn">
@@ -44,11 +44,13 @@
     </li>
   </ul>
   </div>
+
+ 
  
   <div class="cart_btns_cont_lg">
 
       <div class="profile_image_container">
-        <img src="<?php echo URLROOT ?>/assets/images/profile.jpg" alt="profile" class="profile_image">
+        <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>"  class="profile_image">
 
         <div class="profile_settings_cont">
             <ul class="profile_links">
@@ -84,7 +86,7 @@
   <div class="navSidebar">
 
   <div class="navSidebar_image_container">
-        <img src="<?php echo URLROOT ?>/assets/images/profile.jpg" alt="profile" class="profile_image">
+        <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>"  class="profile_image">
         <p class="navSidebar_name"><?php echo $_SESSION['user_name'] ?></p>
 
 </div>
@@ -138,7 +140,7 @@
   <div class="navbar">
    <div class="nav_img_cont_lg nav_img_cont_seller">
     <a href="<?php echo URLROOT ?>/Home">
-      <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" alt=""/>
+      <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
     </a>
       
     <button class="bars_btn" id="bars_btn">
@@ -175,7 +177,7 @@
       </div>  
 
       <div class="profile_image_container">
-        <img src="<?php echo URLROOT ?>/assets/images/profile.jpg" alt="profile" class="profile_image">
+        <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>" class="profile_image">
 
         <div class="profile_settings_cont">
             <ul class="profile_links">
@@ -210,7 +212,7 @@
   <div class="navSidebar">
 
   <div class="navSidebar_image_container">
-        <img src="<?php echo URLROOT ?>/assets/images/profile.jpg" alt="profile" class="profile_image">
+        <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>"  class="profile_image">
         <p class="navSidebar_name"><?php echo $_SESSION['user_name'] ?></p>
 
 </div>
@@ -267,7 +269,7 @@
           <div class="navbar">
            <div class="nav_img_cont_lg nav_img_cont_seller">
             <a href="<?php echo URLROOT ?>/Home">
-              <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" alt=""/>
+              <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
             </a>
               
             <button class="bars_btn" id="bars_btn">
@@ -304,7 +306,7 @@
               </div>  
         
               <div class="profile_image_container">
-                <img src="<?php echo URLROOT ?>/assets/images/profile.jpg" alt="profile" class="profile_image">
+                <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>"  class="profile_image">
         
                 <div class="profile_settings_cont">
                     <ul class="profile_links">
@@ -339,7 +341,7 @@
           <div class="navSidebar">
         
           <div class="navSidebar_image_container">
-                <img src="<?php echo URLROOT ?>/assets/images/profile.jpg" alt="profile" class="profile_image">
+                <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>"  class="profile_image">
                 <p class="navSidebar_name"><?php echo $_SESSION['user_name'] ?></p>
         
         </div>
@@ -394,7 +396,7 @@
   <div class="navbar">
    <div class="nav_img_cont">
    <a href="<?php echo URLROOT ?>/Home">
-    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" alt=""/>
+    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
         </a>
     <button class="bars_btn" id="bars_btn">
   <i class="fas fa-bars bars"></i>
@@ -434,7 +436,7 @@
   <div class="navSidebar">
 
   <!-- <div class="navSidebar_image_container">
-        <img src="<?php echo URLROOT ?>/assets/images/profile.jpg" alt="profile" class="profile_image">
+        <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>"  class="profile_image">
         <p class="navSidebar_name">sonalinduwara</p>
 
 </div> -->

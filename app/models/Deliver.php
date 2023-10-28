@@ -114,23 +114,39 @@ class Deliver{
                 return false;
             }
     }
+
     public function updateProfileImage($data){
+        $this->db->query(
+            'UPDATE delivers SET 
+            prof_img=:prof_img
+            WHERE user_id =:user_id');
 
+        $this->db->bind(':user_id', $_SESSION['user_id']);
+        $this->db->bind(':prof_img', $data['prof_img']);
 
-            $this->db->query(
-                'UPDATE delivers SET 
-                prof_img=:prof_img
-                WHERE user_id =:user_id');
+        if ($this->db->execute()) { 
+            $_SESSION['user_image'] = $data['prof_img'];  
+            return true;
+        }else{
+            return false;
+        }
+}
 
-            $this->db->bind(':user_id', $_SESSION['user_id']);
-            $this->db->bind(':about', $data['prof_img']);
+public function updateCoverImage($data){
+        $this->db->query(
+            'UPDATE delivers SET 
+            cover_img=:cover_img
+            WHERE user_id =:user_id');
 
-            if ($this->db->execute()) {   
-                return true;
-            }else{
-                return false;
-            }
-    }
+        $this->db->bind(':user_id', $_SESSION['user_id']);
+        $this->db->bind(':cover_img', $data['cover_img']);
+
+        if ($this->db->execute()) {   
+            return true;
+        }else{
+            return false;
+        }
+}
 
     //find user by email
     public function findUserByEmail($email){
