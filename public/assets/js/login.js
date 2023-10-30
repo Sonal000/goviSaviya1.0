@@ -4,6 +4,23 @@
 const form = document.getElementById('login_reg_form');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
+const signInBtn = document.getElementById('signin_btn');
+const loader=document.querySelector('.loader_cont');
+
+let isLoggingIn=false;
+const toggleLogingState=(state)=>{
+  if(state){
+    signInBtn.disable =true;
+    signInBtn.innerHTML="Signing In...";
+    console.log(isLoggingIn);
+    loader.classList.toggle('loader_show');
+  }else{
+    signInBtn.disable =false;
+    signInBtn.innerHTML="Sign In";
+  }
+};
+
+
 
 
 
@@ -12,12 +29,19 @@ const passwordInput = document.getElementById('password');
 
 form.addEventListener('submit',(e)=>{
  e.preventDefault();
+ if(isLoggingIn){
+  return
+ }
+
+
  // nameInput.classList.add('invalid');
  inputValidation();
  if (
   !(emailInput.classList.contains('invalid') ||
   passwordInput.classList.contains('invalid'))
-) {
+){
+  isLoggingIn = true;
+  toggleLogingState(isLoggingIn);
   form.submit();
  }
 

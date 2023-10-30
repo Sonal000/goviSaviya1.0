@@ -35,7 +35,7 @@ class Buyer{
  
          // Execute the buyers insertion query
          if ($this->db->execute()) {
-             return true;
+             return $user_id;
          } else {
              return false;
          }

@@ -1,10 +1,20 @@
 <?php
+        // require_once '../vendor/autoload.php';
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
+        use PHPMailer\PHPMailer\SMTP;
+
+
+
 class User{
     private $db;
+    private $mail;
 
     
     public function __construct(){
         $this -> db = new Database;
+        $this->mail = new PHPMailer(true);
+
     }
 
     //register fucntion
@@ -36,11 +46,116 @@ class User{
 
         //check row count
         if($this->db ->rowcount()>0){
+            return $row;
+        } else{
+            return false;
+        }
+    }
+    public function findVerificationByUser($code,$id){
+        $this->db->query('SELECT verification_code FROM users WHERE user_id=:user_id');
+        $this ->db ->bind(':user_id',$id);
+        $row = $this ->db -> single();
+        if($this->db ->rowcount()>0 && $row->verification_code ==$code){
             return true;
         } else{
             return false;
         }
     }
+
+    public function verifyEmail($email,$name,$id){
+try{
+        $this->mail->SMTPDebug = 0;
+        $this->mail->isSMTP();
+        $this->mail->Host = 'smtp.gmail.com';
+        $this->mail->SMTPAuth = true;
+        $this->mail->Username = 'govisaviyahelp@gmail.com';
+        //SMTP password
+        $this->mail->Password = 'wvlboztsvdvrzxho';
+        //Enable TLS encryption;
+        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+        $this->mail->Port = 587;
+        //Recipients
+        $this->mail->setFrom('govisaviyahelp@gmail.com', 'GoviSaviya');
+        $this->mail->addAddress($email, $name);
+        //Set email format to HTML
+        $this->mail->isHTML(true);
+        $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+        $this->mail->Subject = 'Email verification';
+        $this->mail->Body    = '<div style="font-family: Arial, sans-serif; margin:0 auto; width:90%; ">
+        <h4 style="font-size: 18px; color: #333;">Hello ' . $name . '</h4>
+        <p style="font-size: 14px; color: #333;">Thank you for choosing Govisaviaya, your trusted partner in the world of agriculture. We are excited to have you on board!</p>
+        <p style="font-size: 14px; color: #333;">To complete your account creation, please use the following verification code:</p>
+        <p style="font-size: 24px; color: #333;  cursor: pointer;
+        user-select: all; margin: 15px 10px;">' . $verification_code . '</p>
+        <script>
+document.querySelectorAll(`.copyable`).forEach(element => {
+  element.addEventListener(`click`, () => {
+    navigator.clipboard.writeText(element.textContent);
+  });
+});
+</script>
+        <p style="font-size: 18px; margin-top: 10px; color: #333;">Best regards,</p>
+        <p style="font-size: 18px; color: #008000;"><b>ගොවි</b><span style="color: #FFD700; margin-left: 5px;">සවිය</span></p>
+    </div>';
+                                
+        $this->mail->send();
+
+        $this->db->query(
+            'UPDATE users 
+            SET verification_code = :code 
+            WHERE user_id = :user_id'
+            );
+
+$this ->db ->bind(':code',$verification_code);
+$this ->db ->bind(':user_id',$id);
+
+
+
+        if ($this->db->execute()) {
+            return true;
+        }else{
+            return false;
+        }
+
+        exit();
+    }catch (Exception $e) {
+        
+        // echo "Message could not be sent. Mailer Error: {$this->mail->ErrorInfo}";
+        die("check your connection ! internet connection error");
+    } 
+
+    }
+
+    public function setVerification($id){
+        $this->db->query(
+            'UPDATE users 
+            SET verification_code =\'verified\',verified_at=NOW()
+            WHERE user_id = :user_id'
+            );
+
+        $this ->db ->bind('user_id',$id);
+        if ($this->db->execute()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    // public function getVerification($id){
+    //     $this->db->query(
+    //         'SELECT verification_code FROM users 
+    //         WHERE user_id = :user_id'
+    //         );
+    //     $this ->db ->bind('user_id',$id);
+    //     $row = $this ->db -> single();
+    //     if ($row) {
+    //         return $row;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+
     public function getProfileImage($user_id,$user_type){
         if($user_type=='buyer'){
             $this->db->query('SELECT prof_img FROM buyers WHERE user_id=:id');
