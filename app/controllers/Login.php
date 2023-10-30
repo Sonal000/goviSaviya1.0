@@ -1,12 +1,14 @@
 <?php 
  class Login extends Controller{
-
+  
+    private $userModel;
    public function __construct()
    {
-
+    $this ->userModel = $this->model('User');
    }
 
    public function index(){
+    $data=[];
         //we have to check if we are only load the view page or we submit the data as a registration in here. we check POST is for we have post method in our form
     if($_SERVER['REQUEST_METHOD']=='POST'){
 
@@ -14,37 +16,36 @@
       $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
       //process form
       $data = [
-        
-        'Email' =>trim($_POST['Email']),
+        'email' =>trim($_POST['email']),
         'password'=>trim($_POST['password']),
-        
-        'Email_err'=>'',
-        'password_err'=>'',
-        
       ];
-        //validate data
 
-        if(empty($data['Email'])){
-          $data['Email'] = 'please enter name';
-        }
-        
-        if(empty($data['password'])){
-          $data['password_err'] = 'please enter name';
-        } else if(strlen($data['password'])<6){
-          $data['password_err'] ='password must be atleast 6 characters';
-        }
 
-        //make sure errors are empty
-        if(empty($data['Email'])&& empty($data['passsword'])){
-          echo '<script>
-           alert("User logged in");
-           </script>';
-           $this->view('Login');
-          
+      if($this ->userModel->findUserByEmail($data['email'])){
+         
+        $loggedInUser = $this->userModel->login($data['email'],$data['password']);
+
+        if($loggedInUser){
+            $this->createSession($loggedInUser);
         }else{
-          //load view with errors
-          $this->view('Login',$data);
+
+          $data=[
+            'incorrect_password'=>'Password is incorrect',
+            'email' =>trim($_POST['email']),
+            'password'=>trim($_POST['password']),
+        ];
         }
+
+
+      }else{
+        $data=[
+          'invalid_email'=>'No user found',
+          'email' =>trim($_POST['email']),
+          'password'=>trim($_POST['password']),
+      ];
+      }
+ 
+     
 
 
     
@@ -52,18 +53,37 @@
    else{
     //load the view
     $data = [
-      
-      'Email' =>'',
+      'email' =>'',
       'password'=>'',
-      'email_address_err'=>'',
-      'password_err'=>'',
-      
    ];
-   //load view
-   $this->view('Login',$data);
+  }
+  $this->view('login',$data);
 
   }
 
+
+
+  public function createSession($user){
+
+    $_SESSION['user_id']=$user->user_id;
+    $_SESSION['user_name']=$user->name;
+    $_SESSION['user_email']=$user->email;
+    $_SESSION['user_type']=$user->user_type;
+    $image=$this ->userModel->getProfileImage($user->user_id,$user->user_type);
+    $_SESSION['user_image']=strlen($image->prof_img)>0?$image->prof_img:"green.png";
+
+    redirect('/home');
+    var_dump($_SESSION['user_image']);
+  }
+
+  public function logout(){
+    unset($_SESSION['user_id']);
+    unset($_SESSION['user_email']);
+    unset($_SESSION['user_name']);
+    unset($_SESSION['user_type']);         
+    unset($_SESSION['user_image']);         
+    session_destroy();
+    redirect('/home');
   }
 
   public function adminlogin(){

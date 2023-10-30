@@ -31,6 +31,8 @@ class SellerRegisterM{
         
     }
 
+
+
     //find user by email
     public function findUserByEmail($Email){
         $this->db->query('SELECT * FROM Seller WHERE Email= :Email');

@@ -103,7 +103,6 @@
 
         <div class="sign_in_cont">
         <a href="<?php echo URLROOT ?>/login" class="icon_cont">
-            <!-- <i class="fas fa-sign-in-alt landing_icon signin_icon"></i> -->
             <p class="signin_icon landing_icon">Sign In</p>
           </a>
            </div>

@@ -9,8 +9,8 @@
    public function index()
    {
     $data =[
-      'logged'=>false,
-      'username'=>"Sonal Induwara",
+      'logged'=>isset($_SESSION['user_id']),
+      'username'=>isset($_SESSION['user_id'])?($_SESSION['user_name']):null,
   ];
 
     $this->view('home',$data);

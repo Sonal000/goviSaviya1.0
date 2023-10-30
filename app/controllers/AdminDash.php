@@ -9,7 +9,10 @@ class AdminDash extends Controller{
         $data = ['title'=>'welcome'];
         $this -> view('adminDash');
     }
-
+   public function addUser(){
+    $data = ['title'=>'welcome'];
+    $this -> view('addUser');
+   }
    /* public function about(){
         $this ->view('Pages/about');
     }*/

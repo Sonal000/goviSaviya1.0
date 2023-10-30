@@ -1,214 +1,164 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delivery agent Register</title>
-    <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
-    <link
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Registration || Delivery agent</title>
+
+ <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
+
+ <link
  rel="stylesheet"
  href="<?php echo URLROOT ?>/assets/fontawesome-free-5.15.4-web/css/all.min.css">
  <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/main.css">
-        <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/deliveryRegister.css">
-
+ <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/deliveryRegister.css">
 </head>
 <body>
-    
-    <section class="hero_section"> 
 
-             <!-- navbar================== -->
+
+
+ <!-- navbar================== -->
  <?php
  include APPROOT.'/views/layouts/mainNavbar.php'; 
  ?>
 
 <!-- navbar end ================== -->
 
-        <div id="container">
-
-                <div class="class1">
-                    <h3>Register as a Delivery Agent</h3>
-                    <img src="<?php echo URLROOT ?>/assets/images/delveh.png" alt="">
-                </div>
-
-                <div class="class1">
-
-                    <form>
-                        <label for="fname">Name</label><br>
-                   <input type="text" id="fname" name="fname" placeholder="Enter Your Name"><br><br>
-       
-                        <label for="email">Email Address</label><br>
-                   <input type="email" id="email" name="email" placeholder="Enter Your Email"><br><br>
-       
-                        <label for="password">Password</label><br>
-                   <input type="password" id="password" name="password" placeholder="Enter Your Password"><br><br>
-       
-                        <label for="cpassword">Confirm Password</label><br>
-                   <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password"><br><br>
+<section class="delivery_section ">
 
 
-                </div>
+   <div class="delivery_registration">
+     <div class="image_cont">
+       <!-- <img class="delivery_img" src="<?php echo URLROOT ?>/assets/images/delivery.jpg" alt=""> -->
 
-        
-                <div class="class1">
-                    <label for="fname">Mobile Number</label><br>
-                    <input type="number" id="mobileNo" name="mobileNo" placeholder="Enter Your Mobile No."><br><br>
-       
-                    <label for="fname">Select Your Delivery Vehicle Type</label><br>
-                                                    
-                                <select name="cars" id="delivery_type">
-                                    <option value="trailer_truck">Large Truck with Trailer</option>
-                                    <option value="del_truck">Delivery Truck</option>
-                                    <option value="mini_truck">Mini Truck</option>
-                                    <option value="del_van">Delivery Van</option>
-                                    <option value="mini_van">Mini Van</option>
-                                    <option value="del_cab">Delivery Cab</option>
-                                    <option value="car">Car</option>
-                                    <option value="three_wheel">Three-wheeler</option>
-                                    <option value="bike">Bike</option>
-                                    
-
-                                </select><br><br>
-       
-                        <label for="lname">District You Live</label><br>
-                   <input type="password" id="email" name="email" placeholder="Enter Your District"><br><br>
-       
-                        <label for="lname">Licence Plate No.</label><br>
-                   <input type="email" id="email" name="email" placeholder="Enter the Licence Plate No."><br><br>
-       
-                        
-        
-
-                         
-                </div>
-
-        </div>
-
-        <div class="register_btn">
-        <input type="submit" value="Register" class="submit_btn">
-        </div>
-            </form> 
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       <!-- <div class="columns">
- 
-      <img class="main_logo" src="./images/delveh.png" alt="">
-     
-      </div>
-   
-     
-     <div class="columns">
-        
-        <div class="logo_img_cont">
-            <form action="/action_page.php">
-                     <label for="fname">Name</label>
-                <input type="text" id="fname" name="fname"><br><br>
-    
-                     <label for="lname">Email Address</label>
-                <input type="email" id="email" name="email"><br><br>
-    
-                     <label for="lname">Password</label>
-                <input type="password" id="email" name="email"><br><br>
-    
-                     <label for="lname">Confirm Password</label>
-                <input type="email" id="email" name="email"><br><br>
-    
-                     <label for="lname">Mobile Number</label>
-                <input type="email" id="email" name="email"><br><br>
-    
-    
-    
-    
-    
-    
-    
-    
-                <input type="submit" value="Submit">
-              </form>
-        </div>
-
+       <div class="text_cont">
+         <h3 class="title">
+           delivery <span>Register</span>
+          </h3>
+          <ul>
+            <li class="list_item"><span><i class="fas fa-check"></i></span>Fair Price</li>
+            <li class="list_item"><span><i class="fas fa-check"></i></span>Personalized Experience:</li>
+            <li class="list_item"><span><i class="fas fa-check"></i></span>Exclusive Deals</li>
+          </ul>
+       </div>
 
      </div>
-    
+     <div class="form_cont">
+          <div class="form_title_cont">
+              <h3 class="form_title">Delivery Agent <span>Register</span></h3>
+          </div>
+
+      <form class="delivery_register_form" id="delivery_reg_form" method="post" action="<?php echo URLROOT; ?>/deliveryRegister">
+
+       <div class="input_cont">
+        <label for="name" class="input_label">Name</label>
+        <input type="text" name="name" class="input_item" id="name" value="<?php echo $data['name'];?>" autocomplete="name">
+        <p class="invalid_msg"></p>
+       </div>
+
+       <div class="input_cont">
+        <label for="name" class="input_label">Email</label>
+        <?php 
+        if(isset($data['invalid_email'])){
+          ?>
+                <input type="text" name="email" id="email" class="input_item invalid" value="<?php echo $data['email'];?>" autocomplete="email">
+                <p class="invalid_msg"><?php echo $data['invalid_email'] ?></p>
+          <?php
+        }else{
+        ?>
+        <input type="text" name="email" id="email" class="input_item " autocomplete="email">
+        <p class="invalid_msg"></p>
+        <?php }?>
+
+       </div>
+
+       <div class="input_cont address_cont">
+        <label for="name" class="input_label">Address</label>
+        <input type="text" name="address" id="address" class="input_item" value="<?php echo $data['address'];?>" autocomplete="address-line1">
+        <p class="invalid_msg"></p>
+       </div>
+
+       <div class="input_cont">
+        <label for="name" class="input_label">Mobile No</label>
+        <input type="text" name="mobile" id="mobile" class="input_item" value="<?php echo $data['mobile'];?>">
+        <p class="invalid_msg"></p>
+       </div>
+
+
+        <div class="input_cont">
+          <label for="name" class="input_label">Based City</label>
+          <input type="text" name="city" id="city" class="input_item" value="<?php echo $data['city'];?>">
+          <p class="invalid_msg"></p>
+        </div>
+        <div class="input_cont">
+          <!-- <label for="name" class="input_label"></label> -->
+          <!-- <input type="text"  class="input_item" > -->
+          <!-- <p class="invalid_msg"></p> -->
+        </div>
+     
+       <div class="password_cont">
+
+         <div class="input_cont">
+           <label for="name" class="input_label">Password</label>
+           <input type="password" name="password" id="password" class="input_item" value="<?php echo $data['password'];?>">
+           <p class="invalid_msg"></p>
+          </div>
+          <div class="input_cont">
+            <label for="name"  class="input_label">Re-Enter Password</label>
+            <input type="password" name="password_re" id="password_re" class="input_item" value="<?php echo $data['password'];?>">
+            <p class="invalid_msg"></p>
+          </div>
+        </div>
+       <div class="btn_cont">
+        <button class="signup_btn btn" id="signup_btn">Sign Up</button>
+        <!-- <button class="signup_btn btn">Reset</button> -->
+       </div>
+       <div class="input_cont">
+    <p class="login_acc">Already have an account ? <a href="<?php echo URLROOT ?>/login">&nbspSign in</a></p> 
+     </div>
+
+
+
+      </form>
+
+      </div>
+   </div> 
 
 
 
 
-   
-    
-    
-</div> -->
-    
-    
 
-  </section>
 
-  <!-- footer end ======================= -->
-  <?php
- include APPROOT.'/views/layouts/footer.php';  
- ?>
+</section>
 
 
 
-  <script>
-    /* When the user clicks on the button, 
-    toggle between hiding and showing the dropdown content */
-    function myFunction() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
-    
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
-        }
-      }
-    }
-    </script>
 
 
+<!-- footer================================= -->
+<?php include APPROOT.'/views/layouts/footer.php' ?>
+<!-- footer end================================= -->
 
-<!-- js === -->
-<script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
-
-
+  <!-- js === -->
+  <script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
+  <script src="<?php echo URLROOT ?>/assets/js/deliveryRegister.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
