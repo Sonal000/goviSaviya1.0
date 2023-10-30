@@ -9,14 +9,33 @@ const addressInput = document.getElementById('address');
 const cityInput = document.getElementById('city');
 const passwordInput = document.getElementById('password');
 const password_reInput = document.getElementById('password_re');
+const signUpBtn=document.getElementById('signup_btn');
+const loader=document.querySelector('.loader_cont');
 
-
-
+let isLoggingIn=false;
+const toggleLogingState=(state)=>{
+  if(state){
+    signUpBtn.disable =true;
+    signUpBtn.innerHTML="Signing...";
+    console.log(isLoggingIn);
+    loader.classList.toggle('loader_show');
+  }else{
+    signUpBtn.disable =false;
+    signUpBtn.innerHTML="Sign up";
+  }
+};
 
 
 
 form.addEventListener('submit',(e)=>{
  e.preventDefault();
+
+ if (isLoggingIn) {
+  return;
+}
+
+
+
  // nameInput.classList.add('invalid');
  inputValidation();
 
@@ -30,7 +49,8 @@ form.addEventListener('submit',(e)=>{
   passwordInput.classList.contains('invalid') ||
   password_reInput.classList.contains('invalid'))
 ) {
-  
+  isLoggingIn = true;
+  toggleLogingState(isLoggingIn);
   form.submit();
  }
 

@@ -2,10 +2,12 @@
  class DeliveryRegister extends Controller{
 
   private $deliverModel;
+  private $userModel;
 
    public function __construct()
    {
     $this ->deliverModel = $this->model('Deliver');
+    $this ->userModel = $this->model('Deliver');
    }
 
    public function index()
@@ -37,14 +39,19 @@
       }else{
         
       $data['password'] = password_hash($data['password'],PASSWORD_DEFAULT);
-      if($this ->deliverModel->register($data)){
-        echo '<script>
-        alert("User Added succefully");
-        </script>';
-        header('location:'.URLROOT.'/Login');
+      $user_id =$this ->deliverModel->register($data);
+      if($user_id){
+        if($this ->userModel->verifyEmail($data['email'],$data['name'],$user_id)){
+          redirect('register/verifyEmail/'.$user_id);
+          echo '<script>toggleButtonState(false);</script>';
+        }else{
+          die('something went wrong');
+          echo '<script>toggleButtonState(false);</script>';
+        }
       }
       else{
         die('something went wrong');
+        echo '<script>toggleButtonState(false);</script>';
       }
 
       }

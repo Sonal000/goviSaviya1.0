@@ -2,10 +2,12 @@
  class BuyerRegister extends Controller{
 
   private $buyerModel;
+  private $userModel;
 
    public function __construct()
    {
     $this ->buyerModel = $this->model('Buyer');
+    $this ->userModel = $this->model('User');
    }
 
    public function index()
@@ -37,14 +39,19 @@
       }else{
         
       $data['password'] = password_hash($data['password'],PASSWORD_DEFAULT);
-      if($this ->buyerModel->register($data)){
-        echo '<script>
-        alert("User Added succefully");
-        </script>';
-        header('location:'.URLROOT.'/Login');
+      $user_id =$this ->buyerModel->register($data);
+      if($user_id){
+        if($this ->userModel->verifyEmail($data['email'],$data['name'],$user_id)){
+          redirect('register/verifyEmail/'.$user_id);
+          echo '<script>toggleButtonState(false);</script>';
+        }else{
+          die('something went wrong');
+          echo '<script>toggleButtonState(false);</script>';
+        }
       }
       else{
         die('something went wrong');
+        echo '<script>toggleButtonState(false);</script>';
       }
 
       }

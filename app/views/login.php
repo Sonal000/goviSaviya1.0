@@ -156,7 +156,7 @@
         <a href=""class="forgot_password">Forgot password?</a>
         </div>
     <div class="btn_cont">
-     <button class="signup_btn btn" id="signup_btn">Sign In</button>
+     <button class="signup_btn btn" id="signin_btn">Sign In</button>
      <!-- <button class="signup_btn btn">Reset</button> -->
     </div>
     <div class="input_cont">
@@ -164,6 +164,10 @@
      </div>
 
    </form>
+
+   <div class="loader_cont">
+        <div class="loader"></div>
+    </div>
 
    </div>
 </div> 
