@@ -20,13 +20,19 @@
         'password'=>trim($_POST['password']),
       ];
 
-
-      if($this ->userModel->findUserByEmail($data['email'])){
+      $row=$this ->userModel->findUserByEmail($data['email']);
+      if($row){
          
         $loggedInUser = $this->userModel->login($data['email'],$data['password']);
 
         if($loggedInUser){
-            $this->createSession($loggedInUser);
+            if(trim($loggedInUser->verification_code)==='verified'){
+              $this->createSession($loggedInUser);
+            }else{
+              redirect('register/verifyEmail/'.$loggedInUser->user_id);
+echo '<script>toggleButtonState(false);</script>';
+            }
+            
         }else{
 
           $data=[
@@ -34,6 +40,7 @@
             'email' =>trim($_POST['email']),
             'password'=>trim($_POST['password']),
         ];
+        echo '<script>toggleButtonState(false);</script>';
         }
 
 
@@ -43,6 +50,7 @@
           'email' =>trim($_POST['email']),
           'password'=>trim($_POST['password']),
       ];
+      echo '<script>toggleButtonState(false);</script>';
       }
  
      
@@ -56,6 +64,7 @@
       'email' =>'',
       'password'=>'',
    ];
+   echo '<script>toggleButtonState(false);</script>';
   }
   $this->view('login',$data);
 

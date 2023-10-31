@@ -104,9 +104,9 @@ if($_SESSION['user_type']=="seller"){
     if (isset($_FILES['prof_img'])) {
       $uploadDirectory = (str_replace("\\", "/",STOREROOT)) . '/profiles/'; 
       $filename = uniqid() . '_' . $_FILES['prof_img']['name'];
-      $targetPath = $uploadDirectory . $filename;
-    
+      $targetPath = $uploadDirectory . $filename; 
       if (move_uploaded_file($_FILES['prof_img']['tmp_name'], $targetPath)){
+        
     $data=[
       'name'=>$profileData->name,
       'mobile' =>$profileData->mobile,
@@ -260,6 +260,7 @@ die('Failed to move the uploaded file.');
         $uploadDirectory = (str_replace("\\", "/",STOREROOT)) . '/profiles/'; 
         $filename = uniqid() . '_' . $_FILES['prof_img']['name'];
         $targetPath = $uploadDirectory . $filename;
+        // var_dump($targetPath);z
       
         if (move_uploaded_file($_FILES['prof_img']['tmp_name'], $targetPath)){
       $data=[

@@ -6,13 +6,14 @@
 
    }
 
-   public function index()
+   public function index($error=null)
    {
 
     $error=["message"=>"Not found"];
     http_response_code(404);
       $this->view('_404',$error);
    }
+
 
 
  }

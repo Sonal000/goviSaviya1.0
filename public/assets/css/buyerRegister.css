@@ -3,7 +3,6 @@
 /* buyer Register========================== */
 
 .buyer_section{
- /* position: relative; */
  display: flex;
  justify-content: center;
  align-items: center;
@@ -12,6 +11,7 @@
  /* background: linear-gradient(to left,rgba(0,0,0,1),rgba(255,255,255,1)); */
  backdrop-filter: blur(10px);
 }
+
 
  .buyer_registration{
    /* box-shadow: var(--light-shadow); */
@@ -22,6 +22,7 @@
    width: 70vw;
    min-width: 700px;
    max-height: 90%;
+
  }
  .image_cont{
    flex: 0.4;
@@ -38,6 +39,7 @@
    height: 100%;
  }
  .form_cont{
+  position: relative;
    flex: 0.6;
    margin-left: -1rem;
  display: flex;
@@ -47,6 +49,48 @@
  border-radius: var(--radius-high);
  background: var(--clr-white);
 }
+.loader_cont{
+  position: absolute;
+ background: rgba(40, 53, 41, 0.3);
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  display:none;
+}
+
+
+.loader{
+  /* position: fixed; */
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background:none;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto;
+ }
+ .loader::after{
+  content: '';
+  width: 15px;
+  height: 15px;
+  border: 5px solid white;
+  border-top-color: var(--clr-primary-6);
+  border-radius: 50%;
+  animation:loading 0.8s ease infinite ;
+  transition: all 0.3 ease-in;
+  box-shadow: 1px 2px 10px rgba(5, 112, 234, 0.336) ;
+ }
+ .loader_show{
+  display: flex;
+}
+ 
+ @keyframes loading{
+  from {transform: rotate(0turn);}
+  to {transform: rotate(1turn);}
+ }
 .buyer_register_form{
   display: flex;
   flex-wrap: wrap;
@@ -182,6 +226,9 @@
    font-size: 0.8rem;
    color: var(--clr-grey-3);
  }
+ .loader_cont{
+  height: 170%;
+}
  
 }
 
@@ -229,6 +276,7 @@
  .btn_cont{
   width: 100%;
  }
+
 }
 
 @media screen and (max-width:529px) {
