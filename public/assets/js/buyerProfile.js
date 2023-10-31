@@ -38,9 +38,7 @@ const editCoverImgBtn =document.getElementById('edit_cover_img_btn');
 
 profImgInput.addEventListener('change',()=>{
   const selectedFile = profImgInput.files[0];
-  console.log('changed');
   if (selectedFile) {
-    console.log('Selected file name: ' + selectedFile.name); 
      profForm.submit();
      profImgInput.value = "";
   }
@@ -64,7 +62,6 @@ coverImgInput.addEventListener('change',()=>{
   if (selectedFile) {
     console.log('Selected file name: ' + selectedFile.name); 
      coverForm.submit();
-     coverImgInput.value = "";
   }
 });
 
@@ -75,6 +72,7 @@ editCoverImgBtn.addEventListener('click',()=>{
 
 coverForm.addEventListener('submit',(e)=>{
 e.preventDefault();
-coverImgInput.value = "";
 coverForm.submit();
 });
+
+

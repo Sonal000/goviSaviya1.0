@@ -260,8 +260,6 @@ die('Failed to move the uploaded file.');
         $uploadDirectory = (str_replace("\\", "/",STOREROOT)) . '/profiles/'; 
         $filename = uniqid() . '_' . $_FILES['prof_img']['name'];
         $targetPath = $uploadDirectory . $filename;
-        // var_dump($targetPath);z
-      
         if (move_uploaded_file($_FILES['prof_img']['tmp_name'], $targetPath)){
       $data=[
         'name'=>$profileData->name,
