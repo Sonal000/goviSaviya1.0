@@ -72,7 +72,7 @@
 
     <div class="profile">
 
- 
+  
 
     <!-- new ==================== -->
 
@@ -166,9 +166,9 @@
 
 </section> 
 
-<section class="details_section">
+<section class="details_section" >
 
-     <div class="details">
+     <div class="details" >
 
       <div class="about_title">
        <h3>About</h3>
@@ -259,7 +259,29 @@
     </div>
 </section>
 
+<section class="details_section" >
+  <div class="details">
+    <div class="vehicle_title">
+      <h4>Vehicle info</h4>
+      <button class="edit_about_btn" id="edit_vehicle_btn"><i class="fas fa-pen"></i></button>
+    </div>
+    <div class="vehicle_img_cont" id="vehicle_img_cont">
+      <div class="vehicle_img_name">
 
+        <img class="vehicle_img" src="<?php echo URLROOT.'/store/covers/'.$data['cover_img']?>" alt="">
+        <p class="vehicle_name">Vehicle</p>
+      </div>
+    </div>
+    <div class="vehicle_form_cont" id="vehicle_form_cont">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aperiam iste ad libero atque, earum quod similique saepe. Voluptate, sed?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aperiam iste ad libero atque, earum quod similique saepe. Voluptate, sed?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aperiam iste ad libero atque, earum quod similique saepe. Voluptate, sed?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aperiam iste ad libero atque, earum quod similique saepe. Voluptate, sed?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aperiam iste ad libero atque, earum quod similique saepe. Voluptate, sed?</p>
+    </div>
+
+  </div>
+</section>
 
 
 

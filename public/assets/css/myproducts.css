@@ -555,7 +555,7 @@ input:focus{
   height: 10rem;
 }
 
-
+ 
 /* my products css =================================================================================================== */
 
 .myproducts{
@@ -608,6 +608,7 @@ input:focus{
   border: none;
   cursor: pointer;
  padding: 1rem;
+  text-decoration: none;
 } 
 
 .productimg{

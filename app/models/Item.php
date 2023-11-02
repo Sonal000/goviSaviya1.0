@@ -10,7 +10,20 @@
 
    public function getItems(){
 
-    $this->db->query("SELECT * FROM items_market");
+    $this->db->query("SELECT * FROM items_market ORDER BY created_at DESC LIMIT 9");
+ 
+    $row=$this->db->resultSet();
+    if($row){
+      return $row;
+    }else{
+      return false;
+    }
+
+   } 
+   public function getSellerItems($id){
+
+    $this->db->query("SELECT * FROM items_market WHERE seller_id=:seller_id ORDER BY created_at DESC");
+    $this ->db ->bind(':seller_id',$id);
     $row=$this->db->resultSet();
     if($row){
       return $row;
@@ -46,7 +59,7 @@ return false;
    } 
 
 public function getItemInfo($id){
-  $this->db->query("SELECT * FROM items_market WHERE item_id = :item_id ORDER BY created_at DESC LIMIT 9");
+  $this->db->query("SELECT * FROM items_market WHERE item_id = :item_id");
   $this ->db ->bind(':item_id',$id);
   $row=$this->db->single();
    if($row){

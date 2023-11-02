@@ -9,6 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List Product</title>
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
+    <link
+ rel="stylesheet"
+ href="<?php echo URLROOT ?>/assets/fontawesome-free-5.15.4-web/css/all.min.css">
+    
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/listproduct.css">

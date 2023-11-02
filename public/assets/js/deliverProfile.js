@@ -11,11 +11,15 @@
 
 
 const editAboutBtn = document.getElementById('edit_about_btn');
+
+const editVehicleBtn = document.getElementById('edit_vehicle_btn');
 const editDetailsBtn = document.getElementById('edit_details_btn');
 const updateBtn = document.getElementById('update_btn');
 const cancelBtn = document.getElementById('cancel_btn');
 const aboutDesc =document.getElementById('about_desc');
 const aboutCont =document.getElementById('edit_about_cont');
+const vehicleFormCont =document.getElementById('vehicle_form_cont');
+const vehicleImgCont =document.getElementById('vehicle_img_cont');
 
 const profCont =document.getElementById('prof_details_cont');
 const profEditCont =document.getElementById('prof_details_edit_cont');
@@ -27,6 +31,10 @@ editAboutBtn.addEventListener('click',(e)=>{
 editDetailsBtn.addEventListener('click',(e)=>{
   profCont.classList.toggle('hide');
   profEditCont.classList.toggle('show');  
+});
+editVehicleBtn.addEventListener('click',(e)=>{
+  vehicleImgCont.classList.toggle('hide');
+  vehicleFormCont.classList.toggle('show');  
 });
 
 

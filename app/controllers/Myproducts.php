@@ -7,7 +7,7 @@ class Myproducts extends Controller{
     }
 
     public function index(){
-        $row=$this->itemModel->getItems();
+        $row=$this->itemModel->getSellerItems($_SESSION['seller_id']);
 
         $data=[
             'items'=>$row
