@@ -22,13 +22,15 @@
   justify-content: space-between;
 }
 .vehicle_img_cont{
-  /* border: 2px solid red; */
+   
+   width: 800px;
   padding: 1rem;
   display: flex;
   align-items:center;
   justify-content: flex-start;
 }
 .vehicle_img{
+  margin-top: 2rem;
   width: 100px;
   height: 100px;
   border-radius: var(--radius-low);
@@ -38,11 +40,14 @@
 }
 .vehicle_img_name{
   display: flex;
+  width: 250px;
+  background-color:var(--clr-primary-10);
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-shadow: var(--light-shadow);
   border-radius: var(--radius-low);
+  
 }
 .vehicle_form_cont{
   opacity: 0;

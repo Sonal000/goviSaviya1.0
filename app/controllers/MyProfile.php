@@ -424,7 +424,8 @@ die('Failed to move the uploaded file.');
 
 if($_SESSION['user_type']=="deliver"){
   $profileData = $this->deliverModel->getProfileInfo($_SESSION['user_id']);
-
+  $vehicleData = $this->deliverModel ->getVehicleInfo($_SESSION['user_id']);
+  
   if($_SERVER['REQUEST_METHOD']=='POST'){
 
       if(isset($_POST['delete_account'])){
@@ -440,7 +441,11 @@ if($_SESSION['user_type']=="deliver"){
           'email' => $profileData->email,
           'about' => $profileData->about,
           'prof_img' => $profileData->prof_img,
-          "cover_img"=>$profileData->cover_img
+          "cover_img"=>$profileData->cover_img,
+          'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
+        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
         ];
   
         $row=$this->userModel->passwordCheck($_SESSION['user_id'],$data['passsword']);
@@ -460,7 +465,11 @@ if($_SESSION['user_type']=="deliver"){
               'email' => $profileData->email,
               'about' => $profileData->about,
               'prof_img' => $profileData->prof_img,
-              "cover_img"=>$profileData->cover_img
+              "cover_img"=>$profileData->cover_img,
+              'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
+        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
             ];
             echo "<script>
               alert('delete failed');
@@ -479,6 +488,10 @@ if($_SESSION['user_type']=="deliver"){
             'about' => $profileData->about,
             'prof_img' => $profileData->prof_img,
             "cover_img"=>$profileData->cover_img,
+            'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
+        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
         ];
         }
 
@@ -494,7 +507,11 @@ if($_SESSION['user_type']=="deliver"){
       'email' => $profileData->email,
       'about' => $profileData->about,
       "prof_img"=>$profileData->prof_img,
-      "cover_img"=>$profileData->cover_img
+      "cover_img"=>$profileData->cover_img,
+      'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
+        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
     ];
     if($this ->deliverModel->updateProfile($data)){
       echo '<script>
@@ -516,7 +533,11 @@ if($_SESSION['user_type']=="deliver"){
       'email' => $profileData->email,
       'about' => trim($_POST['about']),
       "prof_img"=>$profileData->prof_img,
-      "cover_img"=>$profileData->cover_img
+      "cover_img"=>$profileData->cover_img,
+      'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
+        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
     ];
     if($this ->deliverModel->updateAbout($data)){
       echo '<script>
@@ -546,7 +567,11 @@ if($_SESSION['user_type']=="deliver"){
       'email' => $profileData->email,
       'about' => $profileData->about,
       'prof_img' => $filename,
-      "cover_img"=>$profileData->cover_img
+      "cover_img"=>$profileData->cover_img,
+      'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
+        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
     ];      
     if ($this->deliverModel->updateProfileImage($data)) {
       echo '<script>
@@ -579,7 +604,12 @@ $data=[
   'email' => $profileData->email,
   'about' => $profileData->about,
   'prof_img' => $profileData->prof_img,
-  "cover_img"=>$filename
+  "cover_img"=>$filename,
+  'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
+        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
+  
 ];     
 if ($this->deliverModel->updateCoverImage($data)) {
   echo '<script>
@@ -592,6 +622,63 @@ if ($this->deliverModel->updateCoverImage($data)) {
 die('Failed to move the uploaded file.');
 }
 }
+}else if(isset($_POST['vehicle_submit'])){
+  $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+  $data=[
+    'deliver_id'=>$_SESSION['user_id'],
+    'vehicle_type'=>trim($_POST['vehicle_type']),
+    'vehicle_number' =>trim($_POST['vehicle_number']),
+    'max_capacity'=>trim($_POST['max_capacity']),
+    'vehicle_brand'=>trim($_POST['vehicle_brand']),
+    'vehicle_model'=>trim($_POST['vehicle_model']),
+    'vehicle_year' => trim($_POST['vehicle_year'])
+    
+  ];
+  
+
+  if($this ->deliverModel->addVehicle($data)){
+    $data=[
+      "logged"=>(isset($_SESSION['user_id'])),
+      "userid"=>$_SESSION['user_id'],
+      "name"=>$profileData->name,
+      "address"=>$profileData->address,
+      "email"=>$profileData->email,
+      "mobile"=>$profileData->mobile,
+      "city"=>$profileData->city,
+      "about"=>$profileData->about,
+      "prof_img"=>$profileData->prof_img,
+      "cover_img"=>$profileData->cover_img,
+      'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
+        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
+
+      ]; 
+     echo '<script>
+     alert("Edited");
+     </script>';
+  
+  }
+  else{
+    $data=[
+      "logged"=>(isset($_SESSION['user_id'])),
+      "userid"=>$_SESSION['user_id'],
+      "name"=>$profileData->name,
+      "address"=>$profileData->address,
+      "email"=>$profileData->email,
+      "mobile"=>$profileData->mobile,
+      "city"=>$profileData->city,
+      "about"=>$profileData->about,
+      "prof_img"=>$profileData->prof_img,
+      "cover_img"=>$profileData->cover_img,
+      'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
+        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
+      ]; 
+    die('something went wrong');
+   }
+
 }else{
     $data=[
       "logged"=>(isset($_SESSION['user_id'])),
@@ -603,7 +690,11 @@ die('Failed to move the uploaded file.');
       "city"=>$profileData->city,
       "about"=>$profileData->about,
       "prof_img"=>$profileData->prof_img,
-      "cover_img"=>$profileData->cover_img
+      "cover_img"=>$profileData->cover_img,
+      'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
+        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
       ]; 
 
   }
@@ -618,9 +709,15 @@ die('Failed to move the uploaded file.');
         "city"=>$profileData->city,
         "about"=>$profileData->about,
         "prof_img"=>$profileData->prof_img,
-        "cover_img"=>$profileData->cover_img
+        "cover_img"=>$profileData->cover_img,
+        'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
+        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
         ];  
     }
+
+
     
  $this->view("deliverProfile",$data); 
 }
@@ -630,6 +727,12 @@ die('Failed to move the uploaded file.');
   
 
 }
+}
+public function delVehicle($id){
+  
+      $this ->deliverModel->delVehicle($id);
+      
+      redirect('Myprofile/'.$_SESSION['user_id']);
 }
 }
 

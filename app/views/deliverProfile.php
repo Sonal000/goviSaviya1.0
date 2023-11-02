@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/main.css">
         <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/login.css">
         <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/deliverProfile.css">
+        <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/vehicleAdd.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -30,12 +31,14 @@
 
 
 <body>
+
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
  <?php
  require APPROOT. '/views/layouts/deliverySidebarWithoutimg.php'; 
  ?>
+ 
 
     <!-- <div class="profile">
     <div class="maincontent">
@@ -192,9 +195,7 @@
            </form>
       </div>
 
-
-
-
+ 
       <div class="profile_details_cont">
       <div class="about_title">
        <h3>Profile Details</h3>
@@ -267,19 +268,84 @@
       <h4>Vehicle info</h4>
       <button class="edit_about_btn" id="edit_vehicle_btn"><i class="fas fa-pen"></i></button>
     </div>
+
+    <?php if($data['vehicle_id']){ ?> 
+     
     <div class="vehicle_img_cont" id="vehicle_img_cont">
+
       <div class="vehicle_img_name">
 
-        <img class="vehicle_img" src="<?php echo URLROOT.'/store/covers/'.$data['cover_img']?>" alt="">
-        <p class="vehicle_name">Vehicle</p>
+        <img class="vehicle_img" src="<?php echo URLROOT.'/store/covers/'.$data['cover_img'];?>" alt="">
+        <p class="vehicle_name">Vehicle Details</p>
+        <br>
+        <div class="detail_cont">
+            <p class="detail_name">Vehicle Brand : <?php echo $data['vehicle_brand'];?></p>
+            
+        </div>
+        <div class="detail_cont">
+            <p class="detail_name">Vehicle Model : <?php echo $data['vehicle_model'];?></p>
+            
+        </div>
+        <div class="detail_cont">
+            <p class="detail_name">Vehicle Number : <?php echo $data['vehicle_number'];?></p>
+          
+        </div>
+        <br>
+        <a href="<?php echo URLROOT; ?>/MyProfile/delVehicle/<?php echo $data['vehicle_id']; ?>"><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
       </div>
+
     </div>
+    <?php }else{ ?>
+
+      <div class="vehicle_img_cont" id="vehicle_img_cont">
+      <p>No Vehicle defined </p>
+    </div>
+    <?php  }       ?>
+
     <div class="vehicle_form_cont" id="vehicle_form_cont">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aperiam iste ad libero atque, earum quod similique saepe. Voluptate, sed?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aperiam iste ad libero atque, earum quod similique saepe. Voluptate, sed?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aperiam iste ad libero atque, earum quod similique saepe. Voluptate, sed?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aperiam iste ad libero atque, earum quod similique saepe. Voluptate, sed?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet aperiam iste ad libero atque, earum quod similique saepe. Voluptate, sed?</p>
+    <form action="<?php echo URLROOT; ?>/Myprofile/<?php echo $_SESSION['user_id']; ?>" method="post">
+        <div class="container">
+            <div class="column">
+                <div class="form-group">
+                    <label for="vehicle_type">Vehicle Type:</label>
+                    <input class="input_field" type="text" name="vehicle_type" id="vehicle_type">
+                </div>
+                <div class="form-group">
+                    <label for="vehicle_number">Vehicle Number:</label>
+                    <input class="input_field" type="text" name="vehicle_number" id="vehicle_number">
+                </div>
+
+                <div class="form-group">
+                    <label for="max_capacity">Maximum Capacity (In kgs): <br></label>
+                    <input class="max_cap" type="t" name="max_capacity" id="max_capacity">
+                </div>
+
+
+               
+            </div>
+            <div class="column">
+
+            <div class="form-group">
+                    <label for="vehicle_brand">Vehicle Brand:</label>
+                    <input class="input_field" type="text" name="vehicle_brand" id="vehicle_brand">
+                </div>
+
+                <div class="form-group">
+                    <label for="vehicle_model">Vehicle Model:</label>
+                    <input class="input_field" type="text" name="vehicle_model" id="vehicle_model">
+                </div>
+
+                <div class="form-group">
+                    <label for="vehicle_model">Vehicle Manufacturing Year:</label>
+                    <input class="input_field" type="text" name="vehicle_year" id="vehicle_year">
+                </div>
+                
+            </div>
+        </div>
+        <div class="submit_button">
+            <input type="submit" value="Submit" name="vehicle_submit">
+        </div>
+    </form>
     </div>
 
   </div>
