@@ -37,7 +37,7 @@
             'password'=>trim($_POST['password']),
           ];
       }else{
-        
+    
       $data['password'] = password_hash($data['password'],PASSWORD_DEFAULT);
       $user_id =$this ->sellerModel->register($data);
       if($user_id){

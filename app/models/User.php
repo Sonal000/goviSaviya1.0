@@ -36,6 +36,17 @@ class User{
         
     }
 
+    public function logout(){
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_email']);
+        unset($_SESSION['user_name']);
+        unset($_SESSION['user_type']);         
+        unset($_SESSION['user_image']);         
+        session_destroy();
+    }
+
+    
+
 
     //find user by email
     public function findUserByEmail($email){
@@ -51,6 +62,70 @@ class User{
             return false;
         }
     }
+    //find check
+    public function passwordCheck($id,$password){
+
+        $this->db->query('SELECT * FROM users WHERE user_id=:user_id');
+        $this ->db ->bind(':user_id',$id);
+
+        $row = $this ->db -> single();
+        if($row){
+
+            //check row count
+            $hashed_password =$row->password;
+
+            if(password_verify($password,$hashed_password)){
+                return $row;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+
+    }
+    public function deleteAccount($id){
+      
+        $this->db->query('SELECT * FROM users WHERE user_id=:user_id');
+        $this ->db ->bind(':user_id',$id);
+        $row = $this ->db -> single();
+        if($row){
+            
+            $this->db->query('INSERT INTO 
+            deletedusers (user_id,name,email,mobile,address,city,user_type) 
+            VALUES(:user_id,:name,:email,:mobile,:address,:city,:user_type)'
+            );
+$this ->db ->bind(':user_id',$row->user_id);
+$this ->db ->bind(':name',$row->name);
+$this ->db ->bind(':mobile',$row->mobile);
+$this ->db ->bind(':email',$row->email);
+$this ->db ->bind(':address',$row->address);
+$this ->db ->bind(':city',$row->city);
+$this ->db ->bind(':user_type',$row->user_type);
+//execute
+if ($this->db->execute()) {
+// Get the ID of the newly inserted user
+$user_id = $this->db->lastInsertId();
+$this->db->query("DELETE FROM users WHERE user_id = :user_id");
+$this ->db ->bind(':user_id',$row->user_id);
+if ($this->db->execute()) {
+    return true;
+}else{
+    return false;
+}
+}else{
+    return false;
+}
+
+        }else{
+            return false;
+        }
+
+
+    }
+
+
+
     public function findVerificationByUser($code,$id){
         $this->db->query('SELECT verification_code FROM users WHERE user_id=:user_id');
         $this ->db ->bind(':user_id',$id);
@@ -156,13 +231,13 @@ $this ->db ->bind(':user_id',$id);
     // }
 
 
-    public function getProfileImage($user_id,$user_type){
+    public function getProfileInfo($user_id,$user_type){
         if($user_type=='buyer'){
-            $this->db->query('SELECT prof_img FROM buyers WHERE user_id=:id');
+            $this->db->query('SELECT * FROM buyers WHERE user_id=:id');
         }else if($user_type=='seller'){
-            $this->db->query('SELECT prof_img FROM sellers WHERE user_id=:id');
+            $this->db->query('SELECT * FROM sellers WHERE user_id=:id');
         }else if($user_type=='deliver'){
-            $this->db->query('SELECT prof_img FROM delivers WHERE user_id=:id'); 
+            $this->db->query('SELECT * FROM delivers WHERE user_id=:id'); 
         }
         $this ->db ->bind(':id',$user_id);
 

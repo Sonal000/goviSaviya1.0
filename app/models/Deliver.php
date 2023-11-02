@@ -35,7 +35,7 @@ class Deliver{
  
          // Execute the delivers insertion query
          if ($this->db->execute()) {
-             return true;
+             return $user_id;
          } else {
              return false;
          }

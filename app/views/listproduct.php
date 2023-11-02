@@ -31,22 +31,18 @@
 
     
 
-    <form>
+    <form method="post" action="<?php echo URLROOT ?>/listProduct" enctype="multipart/form-data">
     <div class="listing">
        
         <div class="fillform">
             <div class="formline1">
             <div class="email">
                       <label for="dropdown"><p class="labelletters">Product Name</p></label>
-                      <select id="dropdown" name="selected_option" class="districtbox">
-                      <option value="Carrot">Carrot</option>
-                      <option value="Mango">Mango</option>
-                      <option value="black pepper">black pepper</option>
-                      </select>
+                      <input type="text" id="dropdown" name="name"  class="districtbox"/>
                 </div>
                 <div class="email">
                       <label for="dropdown"><p class="labelletters">Product category</p></label>
-                      <select id="dropdown" name="selected_option" class="districtbox">
+                      <select id="dropdown" name="category" class="districtbox" >
                       <option value="Vegetables">Vegetables</option>
                       <option value="Fruits">Fruits</option>
                       <option value="spices">Spices</option>
@@ -56,21 +52,21 @@
             <div class="formline2">
                 <div class="email">
                       <label for="dropdown"><p class="labelletters">Unit type</p></label>
-                      <select id="dropdown" name="selected_option" class="districtbox">
-                      <option value="Killogram">Killogram</option>
-                      <option value="gram">gram</option>
-                      <option value="packets">packets</option>
+                      <select id="dropdown" name="unit" class="districtbox">
+                      <option value="kg">kg</option>
+                      <option value="g">g</option>
+                      <option value="pacs">pacs</option>
                       </select>
                 </div>
                 <div class="email">
                       <p>Unit Price</p>
-                      <input type="text" class="email_box" placeholder="unit price">
+                      <input type="text" class="email_box" placeholder="unit price" name="price">
                 </div>
             </div>
             <div class="formline3">
             <div class="email">
                       <p>Stock</p>
-                      <input type="text" class="email_box" placeholder="Available stock">
+                      <input type="text" class="email_box" placeholder="Available stock" name="stock">
                 </div>
                 <!--<div class="email">
                       <label for="dropdown"><p class="labelletters"></p></label>
@@ -82,24 +78,24 @@
                 </div> -->
                 <div class="email">
                       <p>Exp Date</p>
-                      <input type="date" class="email_box" placeholder="Available stock">
+                      <input type="date" class="email_box" placeholder="Available stock" name="exp_date">
                 </div>
             </div>
             <div class="formline4">
             <div class="email">
                       <p>Pick up Address</p>
-                      <input type="text" class="email_box" placeholder="Address">
+                      <input type="text" class="email_box" placeholder="Address" name="address">
                 </div>
                 <div class="email">
                       <label for="dropdown"><p class="labelletters">District</p></label>
-                      <select id="dropdown" name="selected_option" class="districtbox">
+                      <select id="dropdown" name="district" class="districtbox">
                       <option value="Colombo">Colombo</option>
                       <option value="Kaluthara">Kaluthara</option>
                       <option value="Gampaha">Gampaha</option>
                       </select>
                 </div>
             </div>
-            <div class="formline5">
+            <!-- <div class="formline5">
             <div class="email">
                       <p>Account Number</p>
                       <input type="text" class="email_box" placeholder="Enter your account number">
@@ -112,19 +108,19 @@
                       <option value="HNB">HNB</option>
                       </select>
                 </div>
-            </div>
+            </div> -->
         </div>
         
         <div class="addimg">
         <div class="email">
                       <p>Upload image</p>
-                      <input type="file" class="email_box2" placeholder="Enter your account number">
+                      <input type="file" class="email_box2" placeholder="Enter your account number" name="item_img">
                 </div>
                 <div class="email">
                       <p>Description</p>
-                      <input type="text" class="email_box3" placeholder="Add your description">
+                      <input type="text" class="email_box3" placeholder="Add your description" name=description>
                 </div>
-                <button type="submit" class="btn">Create Post</button>
+                <button name="add_item" type="submit" class="btn">Create Post</button>
       </div>
         
     </div>

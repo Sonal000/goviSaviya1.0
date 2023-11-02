@@ -4,7 +4,7 @@
     private $buyerModel;
     private $sellerModel;
     private $deliverModel;
-    
+    private $userModel;
 
    public function __construct(){
 
@@ -15,6 +15,7 @@
     $this->buyerModel =$this->model('Buyer');
     $this->sellerModel =$this->model('Seller');
     $this->deliverModel =$this->model('Deliver');
+    $this->userModel =$this->model('User');
 
    }
 
@@ -209,10 +210,71 @@ die('Failed to move the uploaded file.');
     $profileData = $this->buyerModel->getProfileInfo($_SESSION['user_id']);
 
     if($_SERVER['REQUEST_METHOD']=='POST'){
-      if(isset($_POST['details_submit'])){
+     
+
+            if(isset($_POST['delete_account'])){
+        $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+        //process form
+
+        $data = [
+          'password'=>trim($_POST['current_password']),
+          'name'=>$profileData->name,
+          'mobile' =>$profileData->mobile,
+          'address'=>$profileData->address,
+          'mobile'=>$profileData->mobile,
+          'city'=>$profileData->city,
+          'email' => $profileData->email,
+          'about' => $profileData->about,
+          'prof_img' => $profileData->prof_img,
+          "cover_img"=>$profileData->cover_img
+        ];
+  
+  
+        $row=$this->userModel->passwordCheck($_SESSION['user_id'],$data['password']);
+        if($row){
+
+          $delete=$this->userModel->deleteAccount($_SESSION['user_id']);
+          if($delete){
+            $this->userModel->logout();
+            redirect('/home');
+          }else{
+            $data = [
+              'password'=>trim($_POST['current_password']),
+              'name'=>$profileData->name,
+              'mobile' =>$profileData->mobile,
+              'address'=>$profileData->address,
+              'mobile'=>$profileData->mobile,
+              'city'=>$profileData->city,
+              'email' => $profileData->email,
+              'about' => $profileData->about,
+              'prof_img' => $profileData->prof_img,
+              "cover_img"=>$profileData->cover_img
+            ];
+            echo "<script>
+              alert('delete failed');
+            </script>";
+        }
+      }else{
+          $data=[
+            'invalid_password'=>'No user found',
+            'password'=>trim($_POST['current_password']),
+            'name'=>$profileData->name,
+            'mobile' =>$profileData->mobile,
+            'address'=>$profileData->address,
+            'mobile'=>$profileData->mobile,
+            'city'=>$profileData->city,
+            'email' => $profileData->email,
+            'about' => $profileData->about,
+            'prof_img' => $profileData->prof_img,
+            "cover_img"=>$profileData->cover_img,
+        ];
+        }
+
+      }else if(isset($_POST['details_submit'])){
       //sanitize POST data
       $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
       $data=[
+        'password'=>'',
         'name'=>trim($_POST['name']),
         'mobile' =>trim($_POST['mobile']),
         'address'=>trim($_POST['address']),
@@ -235,6 +297,7 @@ die('Failed to move the uploaded file.');
     }else if(isset($_POST['about_submit'])){
       $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
       $data=[
+        'password'=>'',
         'name'=>$profileData->name,
         'mobile' =>$profileData->mobile,
         'address'=>$profileData->address,
@@ -261,10 +324,9 @@ die('Failed to move the uploaded file.');
         $uploadDirectory = (str_replace("\\", "/",STOREROOT)) . '/profiles/'; 
         $filename = uniqid() . '_' . $_FILES['prof_img']['name'];
         $targetPath = $uploadDirectory . $filename;
-        // var_dump($targetPath);z
-      
         if (move_uploaded_file($_FILES['prof_img']['tmp_name'], $targetPath)){
       $data=[
+        'password'=>'',
         'name'=>$profileData->name,
         'mobile' =>$profileData->mobile,
         'address'=>$profileData->address,
@@ -296,8 +358,8 @@ die('Failed to move the uploaded file.');
     $targetPath = $uploadDirectory . $filename;
 
     if (move_uploaded_file($_FILES['cover_img']['tmp_name'], $targetPath)){
-
   $data=[
+    'password'=>'',
     'name'=>$profileData->name,
     'mobile' =>$profileData->mobile,
     'address'=>$profileData->address,
@@ -321,6 +383,7 @@ die('Failed to move the uploaded file.');
 }
 }else{
       $data=[
+        'password'=>'',
         "logged"=>(isset($_SESSION['user_id'])),
         "userid"=>$_SESSION['user_id'],
         "name"=>$profileData->name,
@@ -336,6 +399,7 @@ die('Failed to move the uploaded file.');
     }
       }else{
       $data=[
+          'password'=>'',
           "logged"=>(isset($_SESSION['user_id'])),
           "userid"=>$_SESSION['user_id'],
           "name"=>$profileData->name,
@@ -358,14 +422,67 @@ die('Failed to move the uploaded file.');
 // ==================for deliver ====================================================
 // ================================================================================
 
-
-
-
 if($_SESSION['user_type']=="deliver"){
   $profileData = $this->deliverModel->getProfileInfo($_SESSION['user_id']);
 
   if($_SERVER['REQUEST_METHOD']=='POST'){
-    if(isset($_POST['details_submit'])){
+
+      if(isset($_POST['delete_account'])){
+        $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+        //process form
+        $data = [
+          'password'=>trim($_POST['current_password']),
+          'name'=>$profileData->name,
+          'mobile' =>$profileData->mobile,
+          'address'=>$profileData->address,
+          'mobile'=>$profileData->mobile,
+          'city'=>$profileData->city,
+          'email' => $profileData->email,
+          'about' => $profileData->about,
+          'prof_img' => $profileData->prof_img,
+          "cover_img"=>$profileData->cover_img
+        ];
+  
+        $row=$this->userModel->passwordCheck($_SESSION['user_id'],$data['passsword']);
+        if($row){
+          $delete=$this->userModel->deleteAccount($_SESSION['user_id']);
+          if($delete){
+            $this->userModel->logout();
+            redirect('/home');
+          }else{
+            $data = [
+              'password'=>trim($_POST['current_password']),
+              'name'=>$profileData->name,
+              'mobile' =>$profileData->mobile,
+              'address'=>$profileData->address,
+              'mobile'=>$profileData->mobile,
+              'city'=>$profileData->city,
+              'email' => $profileData->email,
+              'about' => $profileData->about,
+              'prof_img' => $profileData->prof_img,
+              "cover_img"=>$profileData->cover_img
+            ];
+            echo "<script>
+              alert('delete failed');
+            </script>";
+        }
+      }else{
+          $data=[
+            'invalid_passsword'=>'No user found',
+            'password'=>trim($_POST['current_password']),
+            'name'=>$profileData->name,
+            'mobile' =>$profileData->mobile,
+            'address'=>$profileData->address,
+            'mobile'=>$profileData->mobile,
+            'city'=>$profileData->city,
+            'email' => $profileData->email,
+            'about' => $profileData->about,
+            'prof_img' => $profileData->prof_img,
+            "cover_img"=>$profileData->cover_img,
+        ];
+        }
+
+      }else if(isset($_POST['details_submit'])){
     //sanitize POST data
     $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
     $data=[
@@ -409,6 +526,7 @@ if($_SESSION['user_type']=="deliver"){
     }else{
       die('something went wrong');
     }
+
   }else if(isset($_FILES['prof_img'])){
     
 
