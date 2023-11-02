@@ -26,29 +26,33 @@
 
 
 <?php
-   if($data['cart']){
+      if($data['items']){
+
+       
 ?>
   <div class="cart_container">
     <div class="cart_items_container">
-
+<?php
+   foreach ($data['items'] as $item) {
+?>
     <!-- item -->
        <div class="cart_item_cont">
 
         <div class="item_desc_wrapper">
     <div class="main_img_cont">
-      <img class="main_img" src="<?php echo URLROOT ?>/assets/images/item-1.png"/> 
+      <img class="main_img" src="<?php echo URLROOT ?>/store/items/<?php echo $item->item_img?>"/> 
     </div>
 
 
   <div class="item_description">
    <div class="item_title_cont">
-    <p class="item_name">Fresh Mango</p>
-    <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-    <p class="item_address">Thalgahawawa</p>
+    <p class="item_name"><?php echo $item->name ?></p>
+    <!-- <a href="#" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a> -->
+    <p class="item_address"><?php echo $item->district ?></p>
    </div>
    <div class="item_price_cont">
-    <p class="item_price">2000 /<span>kg</span></p>
-    <p class="item_available">50 /<span>kg available</span>  </p>
+    <p class="item_price"><?php echo $item->price?> /<span>kg</span></p>
+    <p class="item_available"><?php echo $item->stock ?> /<span><?php echo $item->unit ?>
    </div>
   </div>
  </div>
@@ -60,7 +64,7 @@
   </div>
   <div class="qty_btn_cont">
      <button class="btn_remove">-</button>
-       <input class="qty" type="number" value="0">
+       <input class="qty" type="number" value="<?= intval($item->qty); ?>">
      <button class="btn_add">+</button>
    </div>
  </div>
@@ -68,7 +72,7 @@
     <!-- item end  -->
 
 
-
+<?php }?>
 
     
     </div>
