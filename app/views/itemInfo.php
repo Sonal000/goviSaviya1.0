@@ -3,7 +3,9 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title> <?php echo  $data['itemName']?></title>
+ <title> 
+  <?php echo  $data['name'];?>
+</title>
  <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
  <link
  rel="stylesheet"
@@ -29,16 +31,19 @@
  </div>
 
 
-
+ <?php 
+    
+             if($data){
+            ?>
 
  <section class="item_information section-center">
 
 
 <div class="image_container">
     <div class="main_img_cont">
-      <img class="main_img" src="<?php echo URLROOT ?>/assets/images/item-1.png"/> 
+      <img class="main_img" src="<?php echo URLROOT.'/store/items/'.$data['item_img'] ;?>"> 
     </div>
-    <div class="img_slider_cont">
+    <!-- <div class="img_slider_cont">
       <button class="slider_btn">
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-1.png"/> 
       </button>
@@ -52,13 +57,16 @@
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-3.png"/> 
       </button>
 
-    </div>
+    </div> -->
 </div>
+
+
+            
 <div class="item_description">
   <div class="item_title_cont">
-    <p class="item_name">Fresh Mango</p>
-    <a href="<?php echo URLROOT ?>/profile/priyantha" class="item_seller" target="_blank"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-    <p class="item_address">Thalgahawawa</p>
+    <p class="item_name"><?php echo $data['name'] ?></p>
+    <a href="<?php echo URLROOT ?>/profile/priyantha" class="item_seller" target="_blank"> seller: <?php echo $data['seller_name'] ?> <span><i class="fas fa-check-circle"></i></span></a>
+    <p class="item_address"><?php echo $data['seller_city'] ?></p>
     <div class="item_rating">
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
@@ -68,11 +76,11 @@
          </div>
   </div>
   <div class="item_price_cont">
-    <p class="item_price">2000 / <span>kg</span></p>
-    <p class="item_available">50 / <span>kg available</span>  </p>
+    <p class="item_price"><?php echo $data['price'] ?> / <span><?php echo $data['unit'] ?></span></p>
+    <p class="item_available"><?php echo $data['stock'] ?>/ <span><?php echo $data['unit'] ?> available</span>  </p>
   </div>
   <div class="item_desc_cont">
-    <p class="item_desc">Savor the pure, organic goodness of our sun-kissed mangoes, cultivated in pesticide-free orchards. Experience nature's sweetness at its finest.</p>
+    <p class="item_desc"><?php echo $data['description'] ?></p>
   </div>
   <div class="item_btns_cont">
     <div class="qty_btn_cont">
@@ -86,8 +94,13 @@
   </div>
 </div>
 
+
    
  </section>
+ <?php 
+           }
+            ?>
+
  
  <!-- /* item info end ==================================== */ -->
 

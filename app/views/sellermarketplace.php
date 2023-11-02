@@ -49,19 +49,29 @@
 
     <div class="marketcards_1">
             <!-- item container======================== -->
+
  
  <section class="items_section">
    <div class="items_cont">
 
+
+   <?php 
+   if($data['items']){
+
+            foreach ($data['items'] as $item) {
+            ?>
+            
+
+
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
+    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/<?php echo $item->item_id; ?>" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-1.png">
+       <img class="item_img" src="<?php echo URLROOT.'/store/items/'.$item->item_img ;?>">
        </div>
        <div class="item_desc">
-         <p class="item_title">Fresh Mango</p>
+         <p class="item_title"><?php echo $item->name; ?></p>
          <div class="item_rating">
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
@@ -69,7 +79,7 @@
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          </div>
-         <p class="item_price">2000 / <span>kg<span></span></p>
+         <p class="item_price"><?php echo $item->price; ?> / <span><?php echo $item->unit; ?><span></span></p>
        </div>
        
       </div>
@@ -77,8 +87,16 @@
 </a>
     <!-- item end -->
 
+    <?php
+            }
+   }else{
+    echo '<p style="text-align:center;">No items to show</p>';
+   }
+
+            ?>
+            
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/11" class="item_btn">
+    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/11" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
@@ -96,13 +114,13 @@
          <p class="item_price">2000 / <span>kg<span>
        </div>
        
-      </div>
+      </div> -->
       
 </a>
     <!-- item end -->
 
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/12" class="item_btn">
+    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/12" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
@@ -122,11 +140,11 @@
        
       </div>
       
-     </a>
+     </a> -->
     <!-- item end -->
 
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
+    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
@@ -146,11 +164,11 @@
        
       </div>
       
-     </a>
+     </a> -->
     <!-- item end -->
 
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
+    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
@@ -170,11 +188,11 @@
        
       </div>
       
-     </a>
+     </a> -->
     <!-- item end -->
 
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
+    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
@@ -194,11 +212,11 @@
        
       </div>
       
-     </a>
+     </a> -->
     <!-- item end -->
 
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
+    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
@@ -218,11 +236,11 @@
        
       </div>
       
-     </a>
+     </a> -->
     <!-- item end -->
 
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
+    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
@@ -242,11 +260,11 @@
        
       </div>
       
-     </a>
+     </a> -->
     <!-- item end -->
 
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
+    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
@@ -266,7 +284,7 @@
        
       </div>
       
-     </a>
+     </a> -->
     <!-- item end -->
   
 

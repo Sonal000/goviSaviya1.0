@@ -26,18 +26,94 @@
 <div class="profile_section_container">
 
 
-  <section class="settings_section">
+  <section class="settings_section <?php if(isset($data['invalid_password'])) { echo 'settings_show';}else{ echo '';} ?>" id="settings_section">
     <div class="settings_cont">
       <div class="settings_title">
         <h3>Settings</h3>
       </div>
       <div class="settings">
         <h4 class="setting_title">general settings</h4>
-        <div class="setting">
-          
+        <div class="setting_spand">
+          <button class="setting" id="ps_btn">
+            Password and Security
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="setting_info" id="ps_cont">
+            <button class="change_btn" id="change_btn">change password</button>
+            <div class="form_cont" id="change_cont">
+              <form action="<?php echo URLROOT; ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" method="post" id="change_password_form">
+              <div class="input_item">
+              <label for="current password">current password</label>
+                <input type="text" name="current_password">
+                <p class="invalid"></p>
+              </div>  
+                  <div class="input_item">
+                  <label for="current password">New password</label>
+                <input type="text" name="current_password"> 
+                <p class="invalid"></p>
+                  </div>
+                  <div class="input_item">
+                <button type="submit" name="change_password" class="submit_setting_btn btn">Change</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="setting_spand">
+        <button class="setting" id="as_btn">
+            Account settings
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        
+
+        <div class="setting_info  <?php if(isset($data['invalid_password'])) { echo 'show_info';}else{ echo '';} ?>" id="as_cont">
+            <button class="change_btn" id="delete_btn">Delete account</button>
+            <div class="form_cont  <?php if(isset($data['invalid_password'])) { echo 'show_form';}else{ echo '';} ?>" id="delete_cont">
+              <form action="<?php echo URLROOT; ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" method="post" id="delete_account_form">
+              <div class="input_item">
+              <label for="current password">Reasons </label>
+                <textarea type="text" name="reason" class="edit_about"></textarea>
+              </div>  
+                  <div class="input_item">
+                  <label for="current password">password</label>
+
+                  <?php 
+     if(isset($data['invalid_password'])){
+    
+       ?>
+        <input type="password" name="current_password" id="current_password" class="input_item invalid" value="<?php echo $data['password']; ?>">
+        <p class="invalid_msg"><?php echo $data['invalid_password'] ?></p>
+    <?php
+     }else{
+     ?>
+        <input type="password" name="current_password" id="current_password" class="input_item" value="<?php echo $data['password']; ?>">
+        <p class="invalid_msg"></p>
+     <?php }?>
+
+
+                  </div>
+                  <div class="input_item">
+                <button type="submit" id="delete_submit" name="delete_account" class="submit_setting_btn btn delete_btn">Delete</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <div class="settings logout_spand">
+        <div class="setting_spand ">
+          <a href="<?php echo URLROOT ?>/login/logout" class="setting logout" id="ps_btn">
+            log out
+            <i class="fas fa-sign-out-alt"></i>
+          </a>
         </div>
       </div>
     </div>
+    
   </section>
 
 
@@ -67,7 +143,7 @@
      Profile View 
      <i class="far fa-eye"></i>
     </a>
-    <button  class="settings_icon cover_btn">
+    <button  class="settings_icon cover_btn " id="settings_btn">
      Settings 
      <i class="fas fa-cog"></i>
     </button>
@@ -77,7 +153,7 @@
    <div class="profile_details">
       <div class="prof_img_cont">
           <div class="profile_img_cont">
-
+            <div class="profile_img_container">
             <form method="post" action="<?php echo URLROOT; ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" enctype="multipart/form-data"  id="profile_form" name="profile_form" class="profile_form"> 
                   <img src="<?php echo URLROOT.'/store/profiles/'.$data['prof_img'] ?>"  class="profile_img">
 
@@ -89,6 +165,7 @@
   <input type="submit" name="profile_image" id="profile_image">
 
                 </form>
+                </div>
             <div class="name_cont">
               <p class="user_name"><?php echo $data['name'] ?> 
                   <span>
@@ -193,7 +270,7 @@
       </div>
       <div class="prof_details_edit_cont" id="prof_details_edit_cont">
         
-        <form method="post" action="<?php echo URLROOT; ?>/myprofile/<?php echo $_SESSION['user_id'] ?>">
+        <form method="post" action="<?php echo URLROOT; ?>/myprofile/<?php echo $_SESSION['user_id']; ?>">
 
         <div class="detail_edit_cont">
           <p class="detail_name">Name</p>
@@ -228,7 +305,7 @@
 
 
 
-<div class="overlay"></div>
+<button class="overlay <?php if(isset($data['invalid_password'])) { echo 'overlay_show';}else{ echo '';} ?>" id="overlayBtn"></button>
 
 
 

@@ -132,15 +132,22 @@
  <section class="items_section">
    <div class="items_cont">
 
+   
+   <?php 
+            foreach ($data['items'] as $item) {
+            ?>
+            
+
+
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
+    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/<?php echo $item->item_id; ?>" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-1.png">
+       <img class="item_img" src="<?php echo URLROOT.'/store/items/'.$item->item_img ;?>">
        </div>
        <div class="item_desc">
-         <p class="item_title">Fresh Mango</p>
+         <p class="item_title"><?php echo $item->name; ?></p>
          <div class="item_rating">
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
@@ -148,7 +155,7 @@
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          </div>
-         <p class="item_price">2000 / <span>kg<span></span></p>
+         <p class="item_price"><?php echo $item->price; ?> / <span><?php echo $item->unit; ?><span></span></p>
        </div>
        
       </div>
@@ -156,197 +163,9 @@
 </a>
     <!-- item end -->
 
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/11" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-2.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Onions</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-</a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/12" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-3.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Carrots</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-4.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Potato</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-5.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Banana</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-6.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Tomato</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-7.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Onion</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-8.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Potato</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-9.png">
-       </div>
-       <div class="item_desc">
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_title">Coconut</p>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a>
-    <!-- item end -->
+    <?php
+            }
+            ?>
   
 
    </div>

@@ -25,14 +25,21 @@
     <button class="btn"><a href="<?php echo URLROOT;?>/Listproduct">List new Product</a></button>
     </div>
 
+    <?php 
+            if($data['items']){
 
+            foreach ($data['items'] as $item) {
+            ?>
     <div class="mycard">
+        <div class="product_des_cont">
         <div class="productimg">
-            <img src="<?php echo URLROOT; ?>/assets/images/mango.jpeg" class="mango" alt="">
+            <img src="<?php echo URLROOT.'/store/items/'.$item->item_img ;?>"` class="mango" alt="">
         </div>
+
+        
         <div class="productdes">
            <div class="productname">
-                Fresh Mango
+                <?php echo $item->name ?>
            </div>
            <div class="productrating">
                 <div class="stars">
@@ -46,23 +53,40 @@
                 </div>
             </div>
            <div class="productprice">
-                Rs 2000 /Kg
+           <?php echo $item->price ?> /<?php echo $item->unit ?>
            </div>
            <div class="productavailability">
                 <div class="sold">
                     Sold 50Kg
                 </div>
                 <div class="available">
-                    Available 30Kg
+                <?php echo $item->stock ?>
                 </div>
            </div>
            <div class="prodes">
-                Savor the taste of our freshly harvested, pesticide-free mangoes – pure, organic, and irresistibly sweet.
+           <?php echo $item->description; ?>.
            </div>
 
         </div>
-    </div>
+        </div>
 
+        <div class="delete_btn_cont">
+            <!-- <form action="<?php echo URLROOT ?>/myproducts/delete/<?php echo $item->item_id ?>" method="post"> -->
+            <a href="<?php echo URLROOT ?>/myproducts/delete/<?php echo $item->item_id ?>">     <i class="fas fa-trash-alt delete_icon"></i></a>
+        <!-- </form> -->
+
+   </a>
+        </div>
+    </div>
+    <?php 
+        }
+    }else{
+        echo '<p style="text-align:center;"> No items to show </p>';
+    }
+
+    
+    ?>
+<!-- 
     <div class="mycard">
         <div class="productimg">
             <img src="<?php echo URLROOT; ?>/assets/images/banana.webp" class="mango" alt="">
@@ -135,7 +159,7 @@
            </div>
 
         </div>
-    </div>
+    </div> -->
 
 </div>
 
