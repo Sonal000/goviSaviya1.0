@@ -23,7 +23,7 @@
 <div class="profile">
     <div class="auction_page">
         <div class="hed">
-            Reviews & Ratings
+            Delivery Reviews & Ratings
         </div>
         
         
