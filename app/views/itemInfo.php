@@ -65,7 +65,7 @@
 <div class="item_description">
   <div class="item_title_cont">
     <p class="item_name"><?php echo $data['name'] ?></p>
-    <a href="<?php echo URLROOT ?>/profile/priyantha" class="item_seller" target="_blank"> seller: <?php echo $data['seller_name'] ?> <span><i class="fas fa-check-circle"></i></span></a>
+    <a href="<?php echo URLROOT ?>/profile/<?php echo $data['seller_id']; ?>" class="item_seller" target="_blank"> seller: <?php echo $data['seller_name'] ?> <span><i class="fas fa-check-circle"></i></span></a>
     <p class="item_address"><?php echo $data['seller_city'] ?></p>
     <div class="item_rating">
          <i class="fas fa-star star_img"></i>
@@ -76,7 +76,7 @@
          </div>
   </div>
   <div class="item_price_cont">
-    <p class="item_price"><?php echo $data['price'] ?> / <span><?php echo $data['unit'] ?></span></p>
+    <p class="item_price">RS <?php echo $data['price'] ?> / <span><?php echo $data['unit'] ?></span></p>
     <p class="item_available"><?php echo $data['stock'] ?>/ <span><?php echo $data['unit'] ?> available</span>  </p>
   </div>
   <div class="item_desc_cont">

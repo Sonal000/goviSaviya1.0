@@ -57,6 +57,18 @@ class Seller{
         return $this->db->single();
     }
 
+    public function getSellerInfo($seller_id){
+        $this->db->query(
+                'SELECT users.*, sellers.* 
+                FROM users
+                LEFT JOIN sellers ON users.user_id = sellers.user_id
+                WHERE sellers.seller_id = :seller_id');
+
+        $this ->db ->bind(':seller_id',$seller_id);
+
+        return $this->db->single();
+    }
+
 
 
 

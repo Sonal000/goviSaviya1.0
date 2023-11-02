@@ -45,6 +45,7 @@ class Listproduct extends Controller{
                             'description' =>'',
                             'item_img'=>''
                           ];
+                          redirect('myproducts');
                     }else{
                       echo '<script>
                             alert("add item failed");

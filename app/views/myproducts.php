@@ -72,7 +72,7 @@
 
         <div class="delete_btn_cont">
             <!-- <form action="<?php echo URLROOT ?>/myproducts/delete/<?php echo $item->item_id ?>" method="post"> -->
-            <a href="<?php echo URLROOT ?>/myproducts/delete/<?php echo $item->item_id ?>">     <i class="fas fa-trash-alt delete_icon"></i></a>
+            <a class="delete_btn" href="<?php echo URLROOT ?>/myproducts/delete/<?php echo $item->item_id ?>">     <i class="fas fa-trash-alt delete_icon"></i></a>
         <!-- </form> -->
 
    </a>
