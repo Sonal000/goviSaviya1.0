@@ -65,7 +65,7 @@
 
   .mycardd{
     box-shadow: var(--dark-shadow);
-    padding:0.5rem;
+    padding:4rem;
     border-radius: var(--radius-low);
     display: flex;
     flex-direction: row;
@@ -204,12 +204,13 @@
 }
 
   .onion{
-    margin-left: 2rem;
+    /* margin-left: 2rem;
     margin-right: 2rem;
     margin-top: 4rem;
-    margin-bottom: 4rem;
-    height: 250px;
-    width:250px;
+    margin-bottom: 4rem; */
+    margin-bottom: 2rem;
+    height: 200px;
+    width:200px;
     border-radius: var(--radius-low);
 
 }
@@ -246,13 +247,13 @@
 
    display: flex;
    flex-direction: column;
-
+   font-size: medium;
    justify-content: center;
    margin: 1.5rem;
 }
 
 .more_info{
-  font-size: x-large;
+  font-size: medium;
   margin: 1rem;
 }
 

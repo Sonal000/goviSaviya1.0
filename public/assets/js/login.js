@@ -78,17 +78,25 @@ const inputValidation =()=>{
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
-if(!isValidEmail(emailValue)){
- setError(emailInput,"Email is not valid.");
-}else{
- setValid(emailInput);
-}
 
-if(emailValue===''){
- setError(emailInput,"Email is required.");
-}else{
-setValid(emailInput);
-;}
+
+
+if(!isValidEmail(emailValue)){
+  setError(emailInput,"Email is not valid.");
+ }else{
+  setValid(emailInput);
+ }
+ if(emailValue===''){
+
+  setError(emailInput,"Email is required.");
+
+ }else{
+  if(!isValidEmail(emailValue)){
+    setError(emailInput,"Email is not valid.");
+   }else{
+    setValid(emailInput);
+   }
+ ;}
 
 
 if(passwordValue===''){

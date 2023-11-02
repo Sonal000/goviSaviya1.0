@@ -12,7 +12,6 @@ navBtn.addEventListener('click',()=>{
  navSidebar.classList.add('show_navSidebar');
  overlay.classList.add('show_overlay');
  navBtn.classList.toggle('rotate_btn');
-
 });
 
 overlay.addEventListener('click',()=>{

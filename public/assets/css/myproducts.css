@@ -555,7 +555,7 @@ input:focus{
   height: 10rem;
 }
 
-
+ 
 /* my products css =================================================================================================== */
 
 .myproducts{
@@ -571,6 +571,18 @@ input:focus{
     display: flex;
     /*margin-left: 3rem;*/
 }
+.product_des_cont{
+  flex: 0.2;
+  display: flex;
+  justify-content: flex-start;
+}
+.delete_btn_cont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 3rem;
+  
+}
 
 .mycard{
   box-shadow: var(--dark-shadow);
@@ -578,6 +590,8 @@ input:focus{
   border-radius: var(--radius-low);
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 1rem;
   transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
@@ -586,6 +600,16 @@ input:focus{
   margin-top: 5.5rem;
   text-align: center;
   }
+  
+.delete_btn{
+  color: var(--clr-red-2);
+  background: var(--clr-white);
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+ padding: 1rem;
+  text-decoration: none;
+} 
 
 .productimg{
     display: flex;
@@ -600,9 +624,6 @@ input:focus{
     display: flex;
     flex-direction: column;
     margin-left:3.5rem ;
-   /* border: 2px solid red;*/
-    
-    
 }
 .mango{
     height: 200px;

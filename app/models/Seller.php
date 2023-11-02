@@ -35,7 +35,7 @@ class Seller{
  
          // Execute the sellers insertion query
          if ($this->db->execute()) {
-             return true;
+             return $user_id;
          } else {
              return false;
          }
@@ -53,6 +53,18 @@ class Seller{
                 WHERE users.user_id = :user_id');
 
         $this ->db ->bind(':user_id',$user_id);
+
+        return $this->db->single();
+    }
+
+    public function getSellerInfo($seller_id){
+        $this->db->query(
+                'SELECT users.*, sellers.* 
+                FROM users
+                LEFT JOIN sellers ON users.user_id = sellers.user_id
+                WHERE sellers.seller_id = :seller_id');
+
+        $this ->db ->bind(':seller_id',$seller_id);
 
         return $this->db->single();
     }

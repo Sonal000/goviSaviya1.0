@@ -4,7 +4,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title><?php echo $_SESSION['userid'] ?></title>
+ <title><?php echo $data['name']; ?></title>
 
  <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
  <link
@@ -26,22 +26,22 @@
 
 <section class="profile_section">
   <div class="profile_conts">
-    <img src="<?php echo URLROOT ?>/assets/images/sell.jpg" alt="cover" class="cover_img">
+    <img src="<?php echo URLROOT ?>/store/covers/<?php echo $data['cover_img']; ?>" alt="cover" class="cover_img">
 
     <div class="profile_details">
       <div class="prof_img_cont">
-          <img src="<?php echo URLROOT ?>/assets/images/priya.jpg" alt="profile" class="profile_img">
-          <p class="user_type">seller <span><i class="fas fa-user"></i></span></p>
+          <img src="<?php echo URLROOT ?>/store/profiles/<?php echo $data['prof_img']; ?>" alt="profile" class="profile_img">
+          <p class="user_type"><?php echo $data['user_type']; ?> <span><i class="fas fa-user"></i></span></p>
       </div>
 
         <div class="text_cont">
 
             <div class="name_cont">
-                <p class="user_name">Priyantha Mahaulpathagama 
+                <p class="user_name"><?php echo $data['name']; ?> 
                   <span><i class="fas fa-check-circle check_icon"></i>
                   </span>
                 </p>
-                <p class="user_address">Horaupathana  
+                <p class="user_address"><?php echo $data['city']; ?>  
                     <span>
                       <i class="fas fa-map-marker-alt loc_icon"></i>
                     </span>
@@ -74,7 +74,7 @@
 <section class="about_section">
       <div class="about_title">
         <h3>About</h3>
-        <p class="descp"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea, magnam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem vero saepe nesciunt.</p>
+        <p class="descp"> <?php echo $data['about']; ?></p>
       </div>
       <div class="stat_cont">
         <div class="stat">
@@ -119,15 +119,24 @@
 <div class="interest_item_cont">
 
   
+<?php if($data['items']){
+
+    foreach($data['items'] as $item){
+      ?>
+      
+
+
+
+
 <!-- item -->
-<a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
+<a href="<?php echo URLROOT ?>/marketplace/itemInfo/<?php echo $item->name ?>" class="item_id">
 
 <div class="item">
 <div class="item_img_cont">
-<img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-1.png">
+<img class="item_img" src="<?php echo URLROOT ?>/store/items/<?php echo $item->item_img ?>">
 </div>
 <div class="item_desc">
-<p class="item_title">Fresh Mango</p>
+<p class="item_title"><?php echo $item->name ?></p>
 <div class="item_rating">
 <i class="fas fa-star star_img"></i>
 <i class="fas fa-star star_img"></i>
@@ -135,7 +144,7 @@
 <i class="fas fa-star star_img"></i>
 <i class="fas fa-star star_img"></i>
 </div>
-<p class="item_price">2000 / <span>kg<span></span></p>
+<p class="item_price"><?php echo $item->price ?> / <span><?php echo $item->unit ?><span></span></p>
 </div>
 
 </div>
@@ -143,104 +152,11 @@
 </a>
 <!-- item end -->
 
-<!-- item -->
-<a class="item_btn">
-
-<div class="item">
-<div class="item_img_cont">
-<img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-2.png">
-</div>
-<div class="item_desc">
-<p class="item_title">Onions</p>
-<div class="item_rating">
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-</div>
-<p class="item_price">2000 / <span>kg<span>
-</div>
-
-</div>
-
-</a>
-<!-- item end -->
-
-<!-- item -->
-<a class="item_btn">
-
-<div class="item">
-<div class="item_img_cont">
-<img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-3.png">
-</div>
-<div class="item_desc">
-<p class="item_title">Carrots</p>
-<div class="item_rating">
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-</div>
-<p class="item_price">2000 / <span>kg<span>
-</div>
-
-</div>
-
-</a>
-<!-- item end -->
-
-<!-- item -->
-<a class="item_btn">
-
-<div class="item">
-<div class="item_img_cont">
-<img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-4.png">
-</div>
-<div class="item_desc">
-<p class="item_title">Potato</p>
-<div class="item_rating">
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-</div>
-<p class="item_price">2000 / <span>kg<span>
-</div>
-
-</div>
-
-</a>
-<!-- item end -->
-
-
-<!-- item -->
-<a class="item_btn">
-
-<div class="item">
-<div class="item_img_cont">
-<img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-4.png">
-</div>
-<div class="item_desc">
-<p class="item_title">Potato</p>
-<div class="item_rating">
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-<i class="fas fa-star star_img"></i>
-</div>
-<p class="item_price">2000 / <span>kg<span>
-</div>
-
-</div>
-
-</a>
-<!-- item end -->
-
-
+<?php 
+    };
+} else{
+  echo '<p>No listed items</p>';
+}?>
 
 
 

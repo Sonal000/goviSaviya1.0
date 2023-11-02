@@ -63,7 +63,7 @@ Variables
   --radius-high: 1rem;
   --radius-low: 0.5rem;
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --dark-shadow: 0 5px 15px rgba(0,img 0, 0, 0.2);
 }
 /*
 =============== 
@@ -328,7 +328,6 @@ text-align: center;
     margin-top: 0.7rem;
     display: flex;
     flex-direction: column;
-    /*border: 2px solid blue;*/
     width: 500px;
     align-items: center;
     justify-content: space-between;
