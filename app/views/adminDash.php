@@ -39,7 +39,7 @@
                     New Registrations
                 </div>
                 <div class="signupcount">
-                    100
+                    <?php echo $data['usercount'] ?>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
                     Buyers
                 </div>
                 <div class="signupcount">
-                    70
+                    <?php echo $data['buyercount'] ?>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                     Sellers
                 </div>
                 <div class="signupcount">
-                    15
+                    <?php echo $data['sellercount'] ?>
                 </div>
             </div>
         </div>
@@ -78,11 +78,14 @@
                     Delivery Agents
                 </div>
                 <div class="signupcount">
-                    15
+                    <?php echo $data['agentcount'] ?>
                 </div>
             </div>
         </div>
 
+    </div>
+    <div class="adduserbtn">
+        <a href="<?php echo URLROOT; ?>/AdminC/addUser"><button class="btn">Add new user</button></a>
     </div>
     <div class="table_box">
         <div class="table_row table_hed">
@@ -102,75 +105,33 @@
                 <p></p>
             </div>
         </div>
+        
+        <?php if (!empty($data['row'])): ?>
+        <?php foreach ($data['row'] as $user_det):?>
         <div class="table_row">
             <div class="table_cell column1">
-                <p>01</p>
+                <p><?php echo $user_det->user_id?></p>
             </div>
             <div class="table_cell column2">
-                <p>santhush Fernando</p>
+                <p><?php echo $user_det->name?></p>
             </div>
             <div class="table_cell column3">
-                <p>santhushfernando@gmail.com</p>
+                <p><?php echo $user_det->email?></p>
             </div>
             <div class="table_cell column4">
-                <a href="">view</a>
+                <a href="<?php echo URLROOT; ?>/AdminC/editUser/<?php echo $user_det->user_id?>">view</a>
             </div>
             <div class="table_cell column5">
-                <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
+                <a href="<?php echo URLROOT; ?>/AdminC/delUser/<?php echo $user_det->user_id?>"><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
             </div>
         </div>
-        <div class="table_row">
-            <div class="table_cell column1">
-                <p>02</p>
-            </div>
-            <div class="table_cell column2">
-                <p>sonal Induwara</p>
-            </div>
-            <div class="table_cell column3">
-                <p>sonalinduwara@gmail.com</p>
-            </div>
-            <div class="table_cell column4">
-                <a href="">view</a>
-            </div>
-            <div class="table_cell column5">
-                <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
-            </div>
-        </div>
-        <div class="table_row">
-            <div class="table_cell column1">
-                <p>03</p>
-            </div>
-            <div class="table_cell column2">
-                <p>Nipul Yansith</p>
-            </div>
-            <div class="table_cell column3">
-                <p>nipulyansith@gmail.com</p>
-            </div>
-            <div class="table_cell column4">
-                <a href="">view</a>
-            </div>
-            <div class="table_cell column5">
-                <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
-            </div>
-        </div>
-        <div class="table_row">
-            <div class="table_cell column1">
-                <p>04</p>
-            </div>
-            <div class="table_cell column2">
-                <p>Yunal mallawarachchi</p>
-            </div>
-            <div class="table_cell column3">
-                <p>yunalmallawarachchi@gmail.com</p>
-            </div>
-            <div class="table_cell column4">
-                <a href="">view</a>
-            </div>
-            <div class="table_cell column5">
-                <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
-            </div>
-        </div>
-       
+        <?php endforeach; ?>
+        <?php else: ?>
+        <p>No data available</p>
+        <?php endif; ?>
+        
+        
+        
         
     </div>
     

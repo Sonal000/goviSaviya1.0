@@ -374,3 +374,20 @@ body{
   
 }
 
+.invalid{
+  border: 1px solid var(--clr-red-1);
+  background: rgba(255, 198, 190, 0.474);
+}
+.invalid:focus{
+  border: 1px solid var(--clr-red-3);
+  background: rgba(255, 231, 191, 0.474);
+}
+.invalid_msg{
+  color: var(--clr-red-3);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  margin-left: 5px;
+  display:flex;
+  flex-direction: column;
+  height: 15px;
+}

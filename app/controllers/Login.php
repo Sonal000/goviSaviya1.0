@@ -91,9 +91,7 @@ echo '<script>toggleButtonState(false);</script>';
     redirect('/home');
   }
 
-  public function adminlogin(){
-    $this ->view('adminlogin');
-  }
+  
 
 
  }
