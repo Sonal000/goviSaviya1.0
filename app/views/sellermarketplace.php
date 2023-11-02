@@ -36,8 +36,8 @@
             </form>
        </div>
        <div class="marketbt">
-                <button class="btn"><a href="<?php echo URLROOT;?>/Listproduct">List new Product</a></button>
-                <button class="btn"><a href="<?php echo URLROOT;?>/Myproducts">My Products</a></button>
+                <a href="<?php echo URLROOT;?>/Listproduct"><button class="btn">List new Product</button></a>
+                <a href="<?php echo URLROOT;?>/Myproducts"><button class="btn">My Products</button></a>
        </div>
        
     </div>

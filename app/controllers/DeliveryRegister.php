@@ -7,7 +7,7 @@
    public function __construct()
    {
     $this ->deliverModel = $this->model('Deliver');
-    $this ->userModel = $this->model('Deliver');
+    $this ->userModel = $this->model('User');
    }
 
    public function index()
