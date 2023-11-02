@@ -71,7 +71,7 @@
         <i class="fas fa-cart-plus nav_icon"></i>
         <div class="cart_text">
             <!-- <p>Your Cart is empty !</p> -->
-            <p>No items in your cart !</p>
+            <p>view items in your cart !</p>
             <a href="<?php echo URLROOT ?>/cart" class="btn cart_btn">View Cart</a>
         </div>
       </a>

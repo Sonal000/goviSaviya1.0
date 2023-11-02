@@ -118,7 +118,7 @@
         <div class="addimg">
         <div class="email">
                       <p>Upload image</p>
-                      <input type="file" class="email_box2" placeholder="Enter your account number" name="item_img">
+                      <input type="file" class="email_box2"  name="item_img">
                 </div>
                 <div class="email">
                       <p>Description</p>

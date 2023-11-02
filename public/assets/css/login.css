@@ -257,7 +257,7 @@ flex-direction: column;
   top:0;
   width: 15rem;
   height: 100vh;
-  background: var(--clr-primary-9);
+  background: var(--clr-primary-10);
   box-shadow: var(--dark-shadow);
   z-index: 1;
 }
@@ -266,17 +266,30 @@ flex-direction: column;
   margin-top: 4rem;
 }
 
+.Sellersidebar ul a{
+  display: flex;
+  align-items: center;
+  color: var(--clr-grey-2);
+  font-size: 1rem;
+  padding: 1rem;
+
+  width: 100%;
+  border-radius: var(--radius-high);
+}
+
  
 
  .Sellersidebar ul li{
-   padding: 18px;
+   padding: 1px;
+   display: flex;
+   align-items: center;
    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-   border-top: 1px solid rgba(0, 0, 0, 0.2);
+   /* border-top: 1px solid rgba(0, 0, 0, 0.2); */
    
  }
 
  .Sellersidebar ul li:hover{
-   background:var(--clr-primary-5);
+   background:var(--clr-primary-6);
  
    }
 

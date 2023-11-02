@@ -82,16 +82,18 @@
   <div class="item_desc_cont">
     <p class="item_desc"><?php echo $data['description'] ?></p>
   </div>
+  <form action="" method="post">
   <div class="item_btns_cont">
     <div class="qty_btn_cont">
       <button class="btn_remove">-</button>
       <!-- <p class="qty">0</p> -->
-        <input class="qty" type="number" value="0">
+        <input class="qty" type="number" value="1" name="qty">
       
       <button class="btn_add">+</button>
     </div>
-    <buttton class="addtocart_btn btn">Add to Cart</buttton>
+    <button type="submit" name="  " class="addtocart_btn btn">Add to Cart</button>
   </div>
+  </form>
 </div>
 
 
