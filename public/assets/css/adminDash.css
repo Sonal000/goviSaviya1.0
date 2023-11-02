@@ -51,7 +51,7 @@
 }
 .table_box{
   /*margin:50px auto;*/
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .table_row{
@@ -100,3 +100,8 @@
 }
 
 
+.adduserbtn{
+  display:flex;
+  margin-left: 3rem;
+  margin-top: 2rem;
+}

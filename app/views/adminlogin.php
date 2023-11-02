@@ -25,15 +25,38 @@
                     <div class="formimgtext">
                         <p>Together, We can cultivate a brighter<br>Future!</p>
                     </div>
-                    <form>
+
+                    
+                    <form method="post" id="login_reg_form" action="<?php echo URLROOT; ?>/AdminC">
                     <div class="email">
                         <p>Email</p>
-                        <input type="email" class="email_box">
-                     </div>
+                        <?php 
+                            if(isset($data['invalid_email'])){
+                        ?>
+                        <input type="text" class="email_box invalid" name="email" id="email" value="<?php echo $data['email'];?>">
+                        <p class="invalid_msg"><?php echo $data['invalid_email'] ?></p>
+                        <?php
+                        }else{
+                        ?>
+                        <input type="text" class="email_box" name="email" id="email" value="<?php echo $data['email'];?>">
+                        <p class="invalid_msg"></p>
+                         <?php }?>
+                    </div>
                     </br>
                     <div class="email">
                         <p>Password</p>
-                        <input type="password" class="email_box">
+                        <?php 
+                        if(isset($data['incorrect_password'])){
+                        ?>
+                        <input type="text" class="email_box invalid" name="password" id="password" value="<?php echo $data['password']; ?>">
+                        <p class="invalid_msg"><?php echo $data['incorrect_password'] ?></p>
+                        <?php
+                        }else{
+                        ?>
+                        <input type="text" class="email_box" name="password" id="password" value="<?php echo $data['password']; ?>">
+                        <p class="invalid_msg"></p>
+                        <?php }?>
+
                      </div>
                     </br>
                     <p><a href=""class="forgot">Forgot password?</a></p>
@@ -48,7 +71,9 @@
             </div>
         </div>
 <!--</div>-->
-        <!--<img src="<?php echo URLROOT; ?>/assets/images/adminback.jpeg" alt="" class="adminpageimg">-->
-</div>      
+        <!-- <img src="<?php echo URLROOT; ?>/assets/images/adminback.jpeg" alt="" class="adminpageimg"> -->
+</div>   
+
+<script src="<?php echo URLROOT ?>/assets/js/adminlogin.js"></script>
 </body>
 </html>

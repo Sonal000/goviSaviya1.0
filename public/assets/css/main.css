@@ -682,3 +682,13 @@ background: var(--clr-primary-5);
 
 /* footer end================================== */
 
+.back_btn_cont{
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+ }
+ .back_btn{
+  margin-right: 0.8rem;
+  border-radius: 50%;
+ }
