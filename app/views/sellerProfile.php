@@ -32,7 +32,7 @@
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
  <?php
- require APPROOT. '/views/layouts/sellerSidebar.php'; 
+ require APPROOT. '/views/layouts/sellerSidebar_withoutimg.php'; 
  ?>
 
     <!-- <div class="profile">

@@ -467,9 +467,9 @@ if($_SESSION['user_type']=="deliver"){
               'prof_img' => $profileData->prof_img,
               "cover_img"=>$profileData->cover_img,
               'vehicle_brand'=>$vehicleData?$vehicleData->vehicle_brand:false,
-        'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
-        'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
-        'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
+            'vehicle_model'=>$vehicleData?$vehicleData->vehicle_model:false,
+            'vehicle_number'=>$vehicleData?$vehicleData->vehicle_number:false,
+            'vehicle_id'=>$vehicleData?$vehicleData ->vehicle_id:false
             ];
             echo "<script>
               alert('delete failed');

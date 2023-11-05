@@ -68,17 +68,28 @@ public function getItemInfo($id){
   return false;
    };
 }
-public function getSellerInfo($id){
-  $this->db->query("SELECT sellers.*, users.* FROM sellers RIGHT JOIN users ON sellers.user_id = users.user_id WHERE seller_id = :seller_id");
+public function getSellerInfo($id) {
 
-  $this ->db ->bind(':seller_id',$id);
-  $row=$this->db->single();
-   if($row){
-    return $row;
-   }else{
-  return false;
-   };
+  
+  // Corrected SQL query and parameter binding
+  $this->db->query("SELECT sellers.*, users.* 
+                   FROM sellers 
+                   RIGHT JOIN users ON sellers.user_id = users.user_id 
+                   WHERE sellers.seller_id = :seller_id");
+  
+  $this->db->bind(':seller_id', $id);
+  
+  $this->db->execute(); // Execute the query
+  $row = $this->db->single();
+  
+  
+  if ($row) {
+      return $row;
+  } else {
+      return false;
+  }
 }
+
 
 
 public function deleteItem($id){
@@ -90,6 +101,37 @@ public function deleteItem($id){
     return false;
 }
 
+}
+
+
+
+public function addtoCart($data){
+  $this->db->query('INSERT INTO 
+  cart (item_id,buyer_id,qty) 
+  VALUES(:item_id,:buyer_id,:qty)'
+  );
+
+
+$this ->db ->bind(':item_id',$data['item_id']);
+$this ->db ->bind(':buyer_id',$data['buyer_id']);
+$this ->db ->bind(':qty',$data['qty']);
+if ($this->db->execute()) {
+  return true;
+  } else {
+  return false;
+  }
+}
+
+
+public function getCartItems($buyer_id){
+  $this->db->query("SELECT items_market.*, cart.* FROM items_market RIGHT JOIN cart ON cart.item_id = items_market.item_id WHERE cart.buyer_id = :buyer_id");
+  $this ->db ->bind(':buyer_id',$buyer_id);
+  $row=$this->db->resultSet();
+   if($row){
+    return $row;
+   }else{
+  return false;
+   };
 }
 
 

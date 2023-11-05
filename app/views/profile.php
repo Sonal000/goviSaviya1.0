@@ -10,8 +10,10 @@
  <link
  rel="stylesheet"
  href="<?php echo URLROOT ?>/assets/fontawesome-free-5.15.4-web/css/all.min.css">
+ <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/login.css">
  <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/main.css">
  <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/profile.css">
+ 
 </head>
 <body>
 
@@ -19,8 +21,14 @@
 
  <!-- navbar================== -->
  <?php
- include APPROOT.'/views/layouts/mainNavbar.php'; 
- ?>
+if($_SESSION['user_type']=='buyer'){
+  include APPROOT.'/views/layouts/mainNavbar.php';
+}
+else{
+  include APPROOT.'/views/layouts/navbar2.php';
+}
+   
+?>
 
 <!-- navbar end ================== -->
 

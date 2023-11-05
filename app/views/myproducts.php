@@ -23,7 +23,9 @@
 
     <div class="listproductbt">
     <button class="btn"><a href="<?php echo URLROOT;?>/Listproduct">List new Product</a></button>
+    <button class="btn"><a href="<?php echo URLROOT;?>/Marketplace">Back to Marketplace</a></button>
     </div>
+    
 
     <?php 
             if($data['items']){

@@ -76,8 +76,8 @@
             <div class="right_side">
              
             <div class="update_edit_btnn">
-                    <botton class="accept_order_btnnn"><a href=""><i class="fa-solid fa-circle-check"></i>  Picked-up</a></botton>
-                    <botton class="ignore_order_btnnn"><a href="<?php echo URLROOT; ?>/DeliveryConfirmQualityPickup"><i class="fa-solid fa-ban"></i>  Confirm Quality</a></botton>
+                    <botton class="accept_order_btnnn"><a href="<?php echo URLROOT; ?>/DeliveryConfirmQualityPickup"><i class="fa-solid fa-circle-check"></i>  Picked-up</a></botton>
+                    <!-- <botton class="ignore_order_btnnn"><a href="<?php echo URLROOT; ?>/DeliveryConfirmQualityPickup"><i class="fa-solid fa-ban"></i>  Confirm Quality</a></botton> -->
              
             </div>
              <div class="progress_bar">

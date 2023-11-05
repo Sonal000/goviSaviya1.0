@@ -48,12 +48,12 @@
                         <?php 
                         if(isset($data['incorrect_password'])){
                         ?>
-                        <input type="text" class="email_box invalid" name="password" id="password" value="<?php echo $data['password']; ?>">
+                        <input type="password" class="email_box invalid" name="password" id="password" value="<?php echo $data['password']; ?>">
                         <p class="invalid_msg"><?php echo $data['incorrect_password'] ?></p>
                         <?php
                         }else{
                         ?>
-                        <input type="text" class="email_box" name="password" id="password" value="<?php echo $data['password']; ?>">
+                        <input type="password" class="email_box" name="password" id="password" value="<?php echo $data['password']; ?>">
                         <p class="invalid_msg"></p>
                         <?php }?>
 

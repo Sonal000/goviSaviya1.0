@@ -275,7 +275,7 @@
 
       <div class="vehicle_img_name">
 
-        <img class="vehicle_img" src="<?php echo URLROOT.'/store/covers/'.$data['cover_img'];?>" alt="">
+        
         <p class="vehicle_name">Vehicle Details</p>
         <br>
         <div class="detail_cont">

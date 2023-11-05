@@ -134,6 +134,7 @@
 
    
    <?php 
+      if($data['items']){
             foreach ($data['items'] as $item) {
             ?>
             
@@ -163,7 +164,7 @@
 </a>
     <!-- item end -->
 
-    <?php
+    <?php    }
             }
             ?>
   

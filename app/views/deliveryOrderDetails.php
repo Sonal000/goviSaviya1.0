@@ -76,7 +76,7 @@
             <div class="right_side">
              
             <div class="update_edit_btnn">
-                    <botton class="accept_order_btnnn"><a href=""><i class="fa-solid fa-circle-check"></i>  Accept Order</a></botton>
+                    <botton class="accept_order_btnnn"><a href="<?php echo URLROOT ?>/OngoingOrder"><i class="fa-solid fa-circle-check"></i>  Accept Order</a></botton>
                     <botton class="ignore_order_btnnn"><a href=""><i class="fa-solid fa-ban"></i>  Ignore Order</a></botton>
                 
             </div>
