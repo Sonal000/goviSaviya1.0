@@ -99,7 +99,7 @@
         </div>
 
 
-        <?php if(isset($_SESSION['user_id'])){
+        <!-- <?php if(isset($_SESSION['user_id'])){
   ?>
         <div class="landing_icon_cont">
           <div class="logged_icon_cont">
@@ -133,7 +133,7 @@
         </div>
 
 
-          <?php }?>
+          <?php }?> -->
 
       </div>
     </div>

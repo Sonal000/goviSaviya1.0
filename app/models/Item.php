@@ -8,9 +8,12 @@
      $this->db = new Database;
    }
 
-   public function getItems(){
+   public function getItems($page=1,$perPage=10){
+    $offset = ($page - 1) * $perPage;
 
-    $this->db->query("SELECT * FROM items_market ORDER BY created_at DESC LIMIT 9");
+    $this->db->query("SELECT * FROM items_market ORDER BY created_at DESC LIMIT :offset , :perPage");
+    $this ->db ->bind(':offset',$offset);
+    $this ->db ->bind(':perPage',$perPage);
  
     $row=$this->db->resultSet();
     if($row){
@@ -20,6 +23,20 @@
     }
 
    } 
+   public function getTotalItemsCount(){
+    $this->db->query("SELECT COUNT(*) AS total FROM items_market");
+    $row = $this->db->single();
+
+    if ($row) {
+        return $row->total;
+    } else {
+        return 0; 
+    }
+   }
+
+
+
+
    public function getSellerItems($id){
 
     $this->db->query("SELECT * FROM items_market WHERE seller_id=:seller_id ORDER BY created_at DESC");

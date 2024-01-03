@@ -3,21 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advertistements_requests</title>
+    <title>Orders</title>
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
+    <link
+ rel="stylesheet"
+ href="<?php echo URLROOT ?>/assets/fontawesome-free-5.15.4-web/css/all.min.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/sellerAdrequest.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/sellerOrder.css">
 </head>
 <body>
+
+
+
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
- <?php
- require APPROOT. '/views/layouts/sellerSidebar_withoutimg.php'; 
- ?>
-<div class="profile">
+
+<div class="main_container">
+  
+  <?php 
+   require APPROOT. '/views/layouts/sellerSidebar.php';  ?>
+
+  <div class="container_content">
+
+  <!-- =========content ============================== -->
+  
+  
+  <div class="profile">
     <div class="hed">
         Orders
     </div>
@@ -230,3 +244,25 @@
         </div>
     </div>
 </div>
+  
+  
+  
+  
+  <!-- =========content end============================== -->
+  </div>
+ </div>
+
+
+
+
+
+
+<!-- js === -->
+<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
+
+
+
+</body>
+
+</html>

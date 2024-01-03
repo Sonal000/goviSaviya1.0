@@ -1,24 +1,228 @@
-<div class="Sellersidebar">
-    <div class="profile-logo">
-        <label for="image-upload" class="image-label">
-            <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="Default Icon" id="profile-image">
-            <div class="overlay">
-                <span>Change Photo</span>
-            </div>
-        </label>
-        <input type="file" id="image-upload" accept="image/*">
-        <button id="delete-image">Delete Image</button>
-    </div>
-        <ul>
-            <a href="<?php echo URLROOT; ?>/Sellermarketplace"><li><img src="<?php echo URLROOT ;?>/assets/images/store.png"  alt="" class="auction"> Marketplace</li></a>
-            <a href="<?php echo URLROOT; ?>/Sellerauction"><li><img src="<?php echo URLROOT ;?>/assets/images/auction.png"  alt="" class="auction"> Auction</li></a>
-            <a href="<?php echo URLROOT; ?>/SellerAdrequest"><li><img src="<?php echo URLROOT ;?>/assets/images/ads.png"  alt="" class="auction"> Advertistements</li></a>
-            <a href="<?php echo URLROOT; ?>/SellerOrder"><li><img src="<?php echo URLROOT ;?>/assets/images/orders.png"  alt="" class="auction"> Orders</li></a>
-            <a href="<?php echo URLROOT; ?>/SellerReviews"><li><img src="<?php echo URLROOT ;?>/assets/images/review.png"  alt="" class="auction"> Reviews and Ratings</li></a>
+<div class="main_sidebar_container">
+        <div class="sidebar_conatainer">
+          <div class="sidebar_toggle">
+            <button class="sidebar_toggle_btn" id="sidebar_toggle_btn" >
+            <i class="fas fa-arrow-left"></i>
+            </button>
+          </div>
+          <div class="sidebar_items">
+            <ul>
+              <li>
+                <a href="<?php echo URLROOT ?>/marketplace">
+                  <button class="sidebar_item link" id="marketplace_link" >
+                    <i class="fas fa-store sidebar_icon"></i>
+                    <p>Marketplace</p>
+                  </button>
+                </a>
+              </li>
+              <li>
 
-        
-        
+                <button class="expand_btn exp_bt_op" id="auction_expand">
+                <i class="fas fa-gavel sidebar_icon"></i>
+                  <p>Auction</p>
+                  <i class="fas fa-sort-down expand_icon"></i>
+                </button>
+                <div class="expand hide_expand">
+                <a href=" <?php echo URLROOT ?>/auction/add">
+                    <button class="sidebar_item expand_item link" id="add_item_auction">
+                    <i class="fas fa-plus sidebar_icon" ></i>
+                      <p>List new</p>
+                    </button>
+                </a>
+                <a href="<?php echo URLROOT ?>/auction">
+                    <button class="sidebar_item expand_item link" id="view_item_auction">
+                    <i class="fas fa-poll-h sidebar_icon"></i>
+                      <p>Current items</p>
+                    </button>
+                    </a>
+                  </div>
+              </li>
+              <li>
+                <button class="expand_btn exp_bt_op" id="products_expand">
+                <i class="fas fa-book-reader sidebar_icon"></i>
+                  <p>Products</p>
+                  <i class="fas fa-sort-down expand_icon"></i>
+                </button>
+                  <div class="expand hide_expand ">
+                    <a href="<?php echo URLROOT ?>/listproduct">
+                    <button class="sidebar_item expand_item link" id="add_item">
+                    <i class="fas fa-plus sidebar_icon" ></i>
+                      <p>List new</p>
+                    </button>
+                    </a>
+                    <a href="<?php echo URLROOT ?>/myproducts">
+                    <button class="sidebar_item expand_item link" id="view_item">
+                    <i class="fas fa-poll-h sidebar_icon"></i>
+                      <p>Current items</p>
+                    </button>
+                    </a>
+                  </div>
+              </li>
+              <li>
+                <button class="expand_btn exp_bt_op" id="requests_expand">
+                <i class="fas fa-book-reader sidebar_icon"></i>
+                  <p>Requests</p>
+                  <i class="fas fa-sort-down expand_icon"></i>
+                </button>
+                  <div class="expand hide_expand ">
+                    <a href="<?php echo URLROOT ?>/requests/available">
+                    <button class="sidebar_item expand_item link" id="available_requests">
+                    <i class="fas fa-plus sidebar_icon" ></i>
+                      <p>Available Requests</p>
+                    </button>
+                    </a>
+                    <a href="<?php echo URLROOT ?>/requests/accepted">
+                    <button class="sidebar_item expand_item link" id="accepted_requests">
+                    <i class="fas fa-poll-h sidebar_icon"></i>
+                      <p>Accepted Requests</p>
+                    </button>
+                    </a>
+                  </div>
+              </li>
+              <li>
+                <button class="expand_btn exp_bt_op" id="orders_expand">
+                <i class="fas fa-book-reader sidebar_icon"></i>
+                  <p>Orders</p>
+                  <i class="fas fa-sort-down expand_icon"></i>
+                </button>
+                  <div class="expand hide_expand ">
+                    <a href="<?php echo URLROOT ?>/orders">
+                    <button class="sidebar_item expand_item link" id="orders_current">
+                    <i class="fas fa-plus sidebar_icon" ></i>
+                      <p>Current Orders</p>
+                    </button>
+                    </a>
+                    <a href="<?php echo URLROOT ?>/orders/complete">
+                    <button class="sidebar_item expand_item link" id="orders_complete">
+                    <i class="fas fa-poll-h sidebar_icon"></i>
+                      <p>Complete Orders</p>
+                    </button>
+                    </a>
+                  </div>
+              </li>
+              <li>
+                <a href="<?php echo URLROOT ?>/reviews">
+                  <button class="sidebar_item link"  id="reviews_link">
+                    <i class="far fa-star  sidebar_icon" ></i>
+                    <p>Reviews</p>
+                  </button>
+                </a>
+              </li>
+
             </ul>
+          </div>
+
+
+          <!-- sidebar mini -->
+
+          <div class="sidebar_icons_container">
+          <ul>
+              <li>
+                <a href="<?php echo URLROOT ?>/marketplace">
+                  <button class="sidebar_icon_btn link" id="marketplace_link_m">
+                    <i class="fas fa-store sidebar_icon"></i>
+                    <p class="icon_text">Marketplace</p>
+                  </button>
+                </a>
+              </li>
+              <li>
+                <button class="expand_btn expand_btn_m" id="auction_expand">
+                <!-- <i class="fas fa-gavel sidebar_icon"></i> -->
+                  <p>Auction</p>
+                  <i class="fas fa-sort-down "></i>
+                </button>
+                <div class="expand_m hide_expand">
+                  <a href="<?php echo URLROOT ?>/auction/add">
+                    <button class="sidebar_icon_btn link" id="add_item_auction_m">
+                      <i class="fas fa-plus sidebar_icon" ></i>
+                      <p>List new</p>
+                    </button>
+                  </a>
+                  <a href="<?php echo URLROOT ?>/auction">
+                    <button class="sidebar_icon_btn link" id="view_item_auction_m">
+                      <i class="fas fa-poll-h sidebar_icon"></i>
+                      <p>Current items</p>
+                    </button>
+                  </a>
+                  </div>
+              </li>
+              <li>
+                <button class="expand_btn expand_btn_m " id="products_expand">
+                <!-- <i class="fas fa-book-reader sidebar_icon"></i> -->
+                  <p>Products</p>
+                  <i class="fas fa-sort-down "></i>
+                </button>
+                  <div class="expand_m hide_expand ">
+                    <a href="<?php echo URLROOT ?>/listproduct">
+                      <button class="sidebar_icon_btn  link" id="add_item_m">
+                        <i class="fas fa-plus sidebar_icon" ></i>
+                        <p>List new</p>
+                      </button>
+                    </a>
+                    <a href="<?php echo URLROOT ?>/myproducts">
+                      <button class="sidebar_icon_btn link" id="view_item_m">
+                        <i class="fas fa-poll-h sidebar_icon"></i>
+                        <p>Current items</p>
+                      </button>
+                    </a>
+                  </div>
+              </li>
+              <li>
+                <button class="expand_btn expand_btn_m " id="requests_expand">
+                <!-- <i class="fas fa-book-reader sidebar_icon"></i> -->
+                  <p>Requests</p>
+                  <i class="fas fa-sort-down "></i>
+                </button>
+                  <div class="expand_m hide_expand ">
+                    <a href="<?php echo URLROOT ?>/listproduct">
+                      <button class="sidebar_icon_btn  link" id="available_requests_m">
+                        <i class="fas fa-plus sidebar_icon" ></i>
+                        <p>Available Requests</p>
+                      </button>
+                    </a>
+                    <a href="<?php echo URLROOT ?>/myproducts">
+                      <button class="sidebar_icon_btn link" id="accepted_requests_m">
+                        <i class="fas fa-poll-h sidebar_icon"></i>
+                        <p>Accepted Requests</p>
+                      </button>
+                    </a>
+                  </div>
+              </li>
+              <li>
+                <button class="expand_btn expand_btn_m " id="orders_expand">
+                <!-- <i class="fas fa-book-reader sidebar_icon"></i> -->
+                  <p>Orders</p>
+                  <i class="fas fa-sort-down "></i>
+                </button>
+                  <div class="expand_m hide_expand ">
+                    <a href="<?php echo URLROOT ?>/orders">
+                      <button class="sidebar_icon_btn  link" id="orders_current_m">
+                        <i class="fas fa-plus sidebar_icon" ></i>
+                        <p>Current Orders</p>
+                      </button>
+                    </a>
+                    <a href="<?php echo URLROOT ?>/orders/commplete">
+                      <button class="sidebar_icon_btn link" id="orders_complete_m">
+                        <i class="fas fa-poll-h sidebar_icon"></i>
+                        <p>Complete Orders</p>
+                      </button>
+                    </a>
+                  </div>
+              </li>
+              <li>
+                <a href="<?php echo URLROOT ?>/reviews" id="reviews_link_m">
+                  <button class="sidebar_icon_btn link" >
+                    <i class="far fa-star  sidebar_icon" ></i>
+                    <p>Reviews</p>
+                  </button>
+                </a>
+              </li>
+          </ul>
+
+          </div>
         </div>
+
+      </div>
+
 
         

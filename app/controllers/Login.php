@@ -30,7 +30,7 @@
               $this->createSession($loggedInUser);
             }else{
               redirect('register/verifyEmail/'.$loggedInUser->user_id);
-echo '<script>toggleButtonState(false);</script>';
+echo '<script>toggleLoginState(false);</script>';
             }
             
         }else{
@@ -40,7 +40,7 @@ echo '<script>toggleButtonState(false);</script>';
             'email' =>trim($_POST['email']),
             'password'=>trim($_POST['password']),
         ];
-        echo '<script>toggleButtonState(false);</script>';
+        echo '<script>toggleLoginState(false);</script>';
         }
 
 
@@ -50,7 +50,7 @@ echo '<script>toggleButtonState(false);</script>';
           'email' =>trim($_POST['email']),
           'password'=>trim($_POST['password']),
       ];
-      echo '<script>toggleButtonState(false);</script>';
+      echo '<script>toggleLoginState(false);</script>';
       }
  
       
@@ -64,7 +64,7 @@ echo '<script>toggleButtonState(false);</script>';
       'email' =>'',
       'password'=>'',
    ];
-   echo '<script>toggleButtonState(false);</script>';
+   echo '<script>toggleLoginState(false);</script>';
   }
   $this->view('login',$data);
 
@@ -79,7 +79,7 @@ echo '<script>toggleButtonState(false);</script>';
     $_SESSION['user_email']=$user->email;
     $_SESSION['user_type']=$user->user_type;
     $data=$this ->userModel->getProfileInfo($user->user_id,$user->user_type);
-    $_SESSION['user_image']=strlen($data->prof_img)>0?$data->prof_img:"green.png";
+    $_SESSION['user_image']=strlen($data->prof_img)>0?$data->prof_img:false;
     $id=$user->user_type.'_id';
     $_SESSION[$id]=$data->$id;
 
