@@ -57,6 +57,34 @@ class Deliver{
         return $this->db->single();
     }
 
+    public function getVehicleInfo($user_id){
+        $this->db->query(
+                'SELECT vehicle_brand,vehicle_model,vehicle_number,vehicle_id
+                FROM vehicle
+                WHERE user_id = :user_id');
+
+        $this ->db ->bind(':user_id',$user_id);
+
+        return $this->db->single();
+        
+    }
+
+    public function delVehicle($id){
+        $this->db->query(
+            'DELETE FROM vehicle WHERE 
+             vehicle_id =:vehicle_id');
+
+        $this->db->bind(':vehicle_id',$id);
+        
+
+        if ($this->db->execute()) {   
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
 
 
 
@@ -159,6 +187,42 @@ public function updateCoverImage($data){
         if($this->db ->rowcount()>0){
             return true;
         } else{
+            return false;
+        }
+    }
+
+    public function findvehicle($id){
+        $this->db->query('SELECT vehicle_brand,vehicle_model,vehicle_number FROM vehicle WHERE user_id=:user_id');
+        $this ->db ->query(':user_id',$id);
+
+        $row =$this ->db ->single();
+
+        if($this->db ->rowcount()>0){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+
+    public function addVehicle($data){
+       
+        $this->db->query('INSERT INTO 
+        vehicle (user_id,vehicle_type,vehicle_number,max_capacity,vehicle_brand,vehicle_model,vehicle_year) 
+        VALUES(:user_id,:vehicle_type,:vehicle_number,:max_capacity,:vehicle_brand,:vehicle_model,:vehicle_year)'
+        );
+
+        $this ->db ->bind(':user_id',$data['deliver_id']);
+        $this ->db ->bind(':vehicle_type',$data['vehicle_type']);
+        $this ->db ->bind(':vehicle_number',$data['vehicle_number']);
+        $this ->db ->bind(':max_capacity',$data['max_capacity']);
+        $this ->db ->bind(':vehicle_brand',$data['vehicle_brand']);
+        $this ->db ->bind(':vehicle_model',$data['vehicle_model']);
+        $this ->db ->bind(':vehicle_year',$data['vehicle_year']);
+
+        if ($this->db->execute()) {   
+            return true;
+        }else{
             return false;
         }
     }

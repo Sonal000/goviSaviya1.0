@@ -12,11 +12,18 @@
  href="<?php echo URLROOT ?>/assets/fontawesome-free-5.15.4-web/css/all.min.css">
  <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/main.css">
  <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/itemInfo.css">
+ <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/login.css">
 </head>
 <body>
  <!-- navbar ======================= -->
 <?php
- include APPROOT.'/views/layouts/mainNavbar.php';  
+if($_SESSION['user_type']=='buyer'){
+  include APPROOT.'/views/layouts/mainNavbar.php';
+}
+else{
+  include APPROOT.'/views/layouts/navbar2.php';
+}
+   
 ?>
  <!-- navbar end ======================= -->
 
@@ -82,6 +89,7 @@
   <div class="item_desc_cont">
     <p class="item_desc"><?php echo $data['description'] ?></p>
   </div>
+
   <form action="" method="post">
   <div class="item_btns_cont">
     <div class="qty_btn_cont">
@@ -94,6 +102,7 @@
     <button type="submit" name="  " class="addtocart_btn btn">Add to Cart</button>
   </div>
   </form>
+
 </div>
 
 

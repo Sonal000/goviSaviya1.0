@@ -46,7 +46,7 @@
                         Date Posted: 12 Sep 2023
                     </div>
                     <div class="details_view">
-                    <botton class="details_view_btn"><a href="">View Order Details</a></botton>
+                    <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/DeliveryOrderDetails">View Order Details</a></botton>
                     </div>
                 </div>
                 
@@ -84,7 +84,7 @@
             Date Posted: 12 Sep 2023
         </div>
         <div class="details_view">
-        <botton class="details_view_btn"><a href="">View Order Details</a></botton>
+        <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/DeliveryOrderDetails">View Order Details</a></botton>
         </div>
     </div>
     
@@ -121,7 +121,7 @@
                         Date Posted: 12 Sep 2023
                     </div>
                     <div class="details_view">
-                    <botton class="details_view_btn"><a href="">View Order Details</a></botton>
+                    <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/DeliveryOrderDetails">View Order Details</a></botton>
                     </div>
                 </div>
                 
@@ -158,7 +158,7 @@
                         Date Posted: 11 Sep 2023
                     </div>
                     <div class="details_view">
-                    <botton class="details_view_btn"><a href="">View Order Details</a></botton>
+                    <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/DeliveryOrderDetails">View Order Details</a></botton>
                     </div>
                 </div>
                 
@@ -195,7 +195,7 @@
             Date Posted: 12 Sep 2023
         </div>
         <div class="details_view">
-        <botton class="details_view_btn"><a href="">View Order Details</a></botton>
+        <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/DeliveryOrderDetails">View Order Details</a></botton>
         </div>
     </div>
     

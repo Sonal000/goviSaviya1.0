@@ -20,7 +20,9 @@
           'page'=>$page
       ];
 
+
       if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
+
          $this->view('sellermarketplace',$data);
       }else{
 
@@ -31,8 +33,10 @@
    {
 
       $row=$this->itemModel->getItemInfo($id);
+     
       if($row){
          $seller=$this->itemModel->getSellerInfo($row->seller_id);
+        
          $data=[
             'name'=>$row->name,
             'seller_name'=>$seller->name,

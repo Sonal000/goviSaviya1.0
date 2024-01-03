@@ -35,7 +35,7 @@
             Auction
         </div>
         <div class="createbt">
-            <button class="btn">Create Auction</button>
+            <a href="<?php echo URLROOT; ?>/CreateAuction"><button class="btn">Create Auction</button></a>
         </div>
         <div class="mycard" id="blur">
 

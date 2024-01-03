@@ -155,7 +155,7 @@ class AdminC extends Controller{
           
         $data['password'] = password_hash($data['password'],PASSWORD_DEFAULT);
         $user_id =$this ->adminModel->register($data);
-        
+        redirect('/AdminC/adminDash');
         }
        
   
@@ -173,6 +173,7 @@ class AdminC extends Controller{
       }
     
         $this->view('addUser',$data);
+
 
      }
 

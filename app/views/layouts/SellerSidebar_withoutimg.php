@@ -12,7 +12,7 @@
 <li><a href="<?php echo URLROOT; ?>/Sellerauction"><img src="<?php echo URLROOT ;?>/assets/images/auction.png"  alt="" class="auction"> Auction </a></li>
             <a href="<?php echo URLROOT; ?>/SellerAdrequest"><li><img src="<?php echo URLROOT ;?>/assets/images/ads.png"  alt="" class="auction"> Advertistements</li></a>
             <a href="<?php echo URLROOT; ?>/SellerOrder"><li><img src="<?php echo URLROOT ;?>/assets/images/orders.png"  alt="" class="auction"> Orders</li></a>
-            <a href="<?php echo URLROOT; ?>/SellerReviews"><li><img src="<?php echo URLROOT ;?>/assets/images/review.png"  alt="" class="auction"> Reviews and Ratings</li></a>
+            <a href="<?php echo URLROOT; ?>/SellerRatings"><li><img src="<?php echo URLROOT ;?>/assets/images/review.png"  alt="" class="auction"> Reviews and Ratings</li></a>
 
         
             </ul>

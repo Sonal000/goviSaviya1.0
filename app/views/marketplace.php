@@ -149,7 +149,9 @@
    
    <?php 
 
+
    if($data['items']){
+
 
             foreach ($data['items'] as $item) {
             ?>
@@ -180,12 +182,15 @@
 </a>
     <!-- item end -->
 
+
     <?php
 
 }
   }else{
             echo "<p class='items_text'>No items to show</p> ";
           }
+
+  
             ?>
   
 
