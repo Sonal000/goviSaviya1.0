@@ -28,54 +28,24 @@
 
 
 <body>
-<?php
+
+
+
+    <!-- ========================================================= -->
+
+    <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
- <?php
- require APPROOT. '/views/layouts/sellerSidebar_withoutimg.php'; 
- ?>
+<div class="main_container">
+  
+  <?php 
+   require APPROOT. '/views/layouts/sellerSidebar.php';  ?>
 
-    <!-- <div class="profile">
-    <div class="maincontent">
-        <h4>Profile</h4>
-    </div>
-    <div class="profilecont">
-        <img src="<?php echo URLROOT ?>/assets/images/profile.png" alt="" class="profile-logo-medium">
-        <button class="newbt">change profile photo</button>
-        <button class="newbt">Remove profile photo</button>
-    </div></br>
-
-   <div class="personaldetails">
-        <div class="infor">
-        <p>Name</p>
-        <input type="text" class="det" placeholder="Santhush Fernando">
-        </div></br>
-        <div class="infor">
-        <p>Email Adress</p>
-        <input type="text" class="det" placeholder="santhushfernando2000@gmail.com">
-        </div></br>
-        <div class="infor">
-        <p>Pick up address</p>
-        <input type="text" class="det" placeholder="187,Koskanaththa Road,Mampe,Piliyandala">
-        </div></br>
-        <div class="infor">
-        <p>Contact Number</p>
-        <input type="text" class="det" placeholder="+94 776678909">
-        </div>
-</br>
-        <div><button class="btn editprofile">Edit Details</button></div>
-    </div>
-
-    </div> -->
-
-
-
-    <div class="profile">
-
+<div class="container_content">
+        <!-- =============== Container ====================== -->
+        
  
-
-    <!-- new ==================== -->
-
+    
  
 <section class="profile_section">
   <div class="profile_conts">
@@ -83,11 +53,17 @@
 
    <form method="post" action="<?php echo URLROOT; ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" enctype="multipart/form-data"  id="cover_form" name="cover_form" class="cover_form"> 
 
-          <img src="<?php echo URLROOT.'/store/covers/'.$data['cover_img'] ?>" name="cover_img" id="cover_img"  class="cover_img">
+    <?php if($data['cover_img']){ ?>
+                <img src="<?php echo URLROOT.'/store/covers/'.$data['cover_img'] ?>" name="cover_img" id="cover_img"  class="cover_img">
+                <?php
+    }else{ ?>
+      <img src="<?php echo URLROOT.'/assets/images/default_cover.png' ?>" name="cover_img" id="cover_img"  class="cover_img">
+      <?php
+    }   ?>
           <input class="cover_icon_upload" type="file" id="cover_img_input" name="cover_img" >
                   <button type="button" class="cover_icon" id="edit_cover_img_btn">
                   edit Cover
-                  <i class="fas fa-pen"></i>
+                  <i class="fas fa-pen" ></i>
                   </button>
   <input type="submit" name="cover_image" id="cover_image">
 
@@ -109,8 +85,17 @@
           <div class="profile_img_cont">
 
             <form method="post" action="<?php echo URLROOT; ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" enctype="multipart/form-data"  id="profile_form" name="profile_form" class="profile_form"> 
-                  <!-- <img src="<?php echo $data['prof_img'] ?>"  class="profile_img"> -->
-                  <img src="<?php echo URLROOT.'/store/profiles/'.$data['prof_img'] ?>"  class="profile_img">
+                  
+            <?php if($data['prof_img']){ ?>
+              <img src="<?php echo URLROOT.'/store/profiles/'.$data['prof_img'] ?>"  class="profile_img">
+                <?php }else{ ?> 
+                  <div class="user_icon_container">
+                    <i class="fas fa-user user_icon"></i>
+                  </div> 
+                  <?php } ?>
+
+
+
 
                   <input class="profile_icon_upload" type="file" id="prof_img_input" name="prof_img" >
                   <button type="button" class="profile_icon" id="edit_prof_img_btn">
@@ -260,32 +245,22 @@
 </section>
 
 
+   
 
 
 
-  
-  
-  <!-- new end ==================== -->
-  
-  
-  
-</div>
-
-
-
-
-
-
-
-
-
-  <!-- footer  ======================= -->
- 
-<!-- footer end ======================= -->
-
+    <!-- =============== Container end ====================== -->
+  </div>
 
 </div>
+
+
 <!-- js === -->
-<script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/sellerProfile.js"></script>
+
+
+
+
+    <!-- ========================================================= -->
 </body>

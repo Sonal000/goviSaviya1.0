@@ -8,9 +8,12 @@
      $this->db = new Database;
    }
 
-   public function getItems(){
+   public function getItems($page=1,$perPage=10){
+    $offset = ($page - 1) * $perPage;
 
-    $this->db->query("SELECT * FROM items_market ORDER BY created_at DESC LIMIT 9");
+    $this->db->query("SELECT * FROM items_market ORDER BY created_at DESC LIMIT :offset , :perPage");
+    $this ->db ->bind(':offset',$offset);
+    $this ->db ->bind(':perPage',$perPage);
  
     $row=$this->db->resultSet();
     if($row){
@@ -20,6 +23,20 @@
     }
 
    } 
+   public function getTotalItemsCount(){
+    $this->db->query("SELECT COUNT(*) AS total FROM items_market");
+    $row = $this->db->single();
+
+    if ($row) {
+        return $row->total;
+    } else {
+        return 0; 
+    }
+   }
+
+
+
+
    public function getSellerItems($id){
 
     $this->db->query("SELECT * FROM items_market WHERE seller_id=:seller_id ORDER BY created_at DESC");
@@ -103,6 +120,23 @@ public function deleteItem($id){
 
 }
 
+public function addtoCart($data){
+  $this->db->query('INSERT INTO 
+  cart (item_id,buyer_id,qty) 
+  VALUES(:item_id,:buyer_id,:qty)'
+  );
+
+
+$this ->db ->bind(':item_id',$data['item_id']);
+$this ->db ->bind(':buyer_id',$data['buyer_id']);
+$this ->db ->bind(':qty',$data['qty']);
+if ($this->db->execute()) {
+  return true;
+  } else {
+  return false;
+  }
+}
+
 
 
 public function addtoCart($data){
@@ -123,6 +157,7 @@ if ($this->db->execute()) {
 }
 
 
+
 public function getCartItems($buyer_id){
   $this->db->query("SELECT items_market.*, cart.* FROM items_market RIGHT JOIN cart ON cart.item_id = items_market.item_id WHERE cart.buyer_id = :buyer_id");
   $this ->db ->bind(':buyer_id',$buyer_id);
@@ -135,6 +170,3 @@ public function getCartItems($buyer_id){
 }
 
 
-
-   
-  }

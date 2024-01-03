@@ -50,12 +50,28 @@
   <div class="cart_btns_cont_lg">
 
       <div class="profile_image_container">
-        <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>"  class="profile_image">
+        
+      <?php if($_SESSION['user_image']){ ?>
+          <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>"  class="profile_image">
+
+          <?php
+        }else{
+          ?>
+          <div class="profile_icon_container">
+          <a href="<?php echo URLROOT ?>/profile">
+           <i class="fas fa-user profile_icon_nav"></i>
+           </a>
+          </div>
+
+          <?php
+      }
+        ?>
+       
 
         <div class="profile_settings_cont">
             <ul class="profile_links">
                 <li>
-                  <a  href="<?php echo URLROOT ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" target="_blank" class="profile_link">View Profile</a>
+                  <a  href="<?php echo URLROOT ?>/myprofile/<?php echo $_SESSION['user_id'] ?>"  class="profile_link">View Profile</a>
                 </li>
                 <li>
                   <a href="" class="profile_link">Wish list</a>
@@ -71,7 +87,7 @@
         <i class="fas fa-cart-plus nav_icon"></i>
         <div class="cart_text">
             <!-- <p>Your Cart is empty !</p> -->
-            <p>No items in your cart !</p>
+            <p>view items in your cart !</p>
             <a href="<?php echo URLROOT ?>/cart" class="btn cart_btn">View Cart</a>
         </div>
       </a>
@@ -147,7 +163,7 @@
   <i class="fas fa-bars bars"></i>
   </button>
 </div>
-<div class="navlinks_cont navlinks_cont_seller">
+<div class="navlinks_cont navlinks_cont">
   <ul class="navlinks" id="navlinks" >
 
     <li class="navlink">
@@ -157,7 +173,7 @@
       </a>
     </li>
     <li class="navlink">
-      <a href="<?php echo URLROOT ?>/viewAuction">
+      <a href="<?php echo URLROOT ?>/profile">
       Explore 
         <!-- <i class="fas fa-coins nav_icon"></i> -->
       </a>
@@ -168,7 +184,7 @@
   <div class="seller_btns_cont">
     <div class="seller_btns">
       <a href="<?php echo URLROOT ?>/#">
-      <i class="fas fa-bell seller_icon"></i>
+      <i class="fas fa-bell nav_icon"></i>
         <!-- <div class="cart_text">
             <p>No items in your cart !</p>
             <a href="<?php echo URLROOT ?>/cart" class="btn cart_btn">View Cart</a>
@@ -182,7 +198,7 @@
         <div class="profile_settings_cont">
             <ul class="profile_links">
                 <li>
-                  <a  href="<?php echo URLROOT ?>/myprofile/<?php echo $_SESSION['user_id'] ?>" target="_blank" class="profile_link">View Profile</a>
+                  <a  href="<?php echo URLROOT ?>/myprofile/<?php echo $_SESSION['user_id'] ?>"  class="profile_link">View Profile</a>
                 </li>
                 <li>
                   <a href="" class="profile_link">Wish list</a>
@@ -195,7 +211,7 @@
       </div>
   <div class="seller_btns">
       <a href="<?php echo URLROOT ?>/#">
-      <i class="fas fa-comment-dots seller_icon"></i>
+      <i class="fas fa-comment-dots nav_icon"></i>
         <!-- <div class="cart_text">
             <p>No items in your cart !</p>
             <a href="<?php echo URLROOT ?>/cart" class="btn cart_btn">View Cart</a>
@@ -414,11 +430,17 @@
      <a href="<?php echo URLROOT ?>/marketplace">Marketplace</a>
      </li>
      <li class="navlink">
-      <a href="<?php echo URLROOT ?>/auction">Auction</a>
+      <a href="<?php echo URLROOT ?>/auc">Auction</a>
      </li>
      <li class="navlink">
      <a href="<?php echo URLROOT ?>/help">Help</a>
      </li>
+     <button class="navlink signin_link " id="signin_btn">
+     Sign in
+    </button>
+     <button class="join_link" id="join_btn">
+     Join
+     </button>
      <!-- <button class="btn nav_btn">
       Log in
      </button> -->
@@ -428,7 +450,7 @@
  </div>
 </div>
 
-
+   
 
 <!-- nav sidebar -->
 
@@ -442,7 +464,17 @@
 </div> -->
 
   <div class="sidelinks_cont">
+
+
+
+
   <ul class="sidelinks" id="sidelinks" >
+    <button class="join_link" id="join_btn">
+    Join
+    </button>
+  <button class="navlink signin_link " id="signin_btn">
+     Sign in
+    </button>
 
     <li class="sidelink">
     <i class="fas fa-carrot"></i>

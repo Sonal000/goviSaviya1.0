@@ -1,10 +1,15 @@
+
+/* .profile{
+  margin-left: 16rem;
+
 .profile{
   margin-left: 4rem;
+
   margin-top: 4rem;
   width: 100vw;
-}
+} */
 
-
+-
 
 
 
@@ -85,7 +90,7 @@
 
 .profile_section{
   position: relative;
- width: 100vw;
+ width: 90%;
  margin: 0 auto;
  max-width: 1176px;
  box-shadow: var(--light-shadow);
@@ -108,7 +113,7 @@
 .cover_icon {
  position: absolute;
  top: 10%;
- left: 85%;
+ right: 5%;
  /* z-index: 2000; */
  border-radius: var(--radius-low);
  display: flex;
@@ -125,7 +130,7 @@
  padding: 0.3rem;
  width: 100px;
  border: transparent;
-
+  cursor: pointer;
 }
 .cover_icon:hover{
   background-color: rgba(76, 175, 79, 0.7);
@@ -139,7 +144,7 @@
 .view_icon {
  position: absolute;
  top: 30%;
- left: 85%;
+ right: 5%;
  /* z-index: 2000; */
  border-radius: var(--radius-low);
  display: flex;
@@ -199,6 +204,30 @@
  justify-content: center;
  position: relative;
 }
+.user_icon_container{
+
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--light-shadow);
+  
+  border: 5px solid var(--clr-white);
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  min-height: 150px;
+  min-width: 150px;
+  background: var(--clr-grey-8);
+}
+.user_icon{
+  /* margin-left: 2px; */
+  color: var(--clr-grey-4);
+  font-size: 5rem;
+}
+
+
+
 .profile_icon {
  position: absolute;
  top: 0;
@@ -328,7 +357,7 @@ min-width: 150px;
 
 
 .details_section{
- width: 100vw;
+ width: 90%;
  margin: 1rem auto;
  max-width: 1176px;
  box-shadow: var(--light-shadow);
@@ -476,19 +505,6 @@ min-width: 150px;
  transition: var(--transition);
 }
 
-.hide{
- opacity: 0;
- visibility: hidden;
- transform: translateY(-40px);
- height: 0;
-}
-
-.show{
- opacity: 1;
- visibility: visible;
- transform: translateY(0);
- height: auto;
-} 
 
 
 
@@ -541,43 +557,78 @@ min-width: 150px;
  .status_cont{
    width: 100%;
   }
- .stat{
-   display: flex;
-   align-items: center;
-   justify-content: space-evenly;
-   /* border: 2px solid red; */
-   padding: 0.3rem;
-   font-size: 0.6rem;
- }
- .stat>p{
-   font-size: 0.6rem;
-   font-weight: 600;
- }
- .stat>span{
-   font-weight: 600;
- }
- .profile_img{
-   height: 100px;
-   width: 100px;
- }
- .profile_icon{
-   height: 100px;
-   width: 100px;
-   font-size: 0.8rem;
- }
- .profile_details{
+  .stat{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    /* border: 2px solid red; */
+    padding: 0.2rem;
+    font-size: 0.5rem;
+  }
+  .stat>p{
+    font-size: 0.4rem;
+    font-weight: 500;
+  }
+  .stat>span{
+    font-weight: 600;
+  }
+  .prof_img_cont{
+    height: 150px;
+  }
+  .profile_img{
+    height: 100px !important;
+    width: 100px !important;
+    min-height: 100px !important;
+    min-width: 100px !important;
+  }
+  .profile_icon{
+    height: 100px;
+    width: 100px;
+    min-height: 100px !important;
+    min-width: 100px !important;
+    font-size: 0.6rem;
+  }
+  .profile_details{
    margin-top: -60px;
   }
 
   .cover_img{
    width: 100%;
-   height: 150px;
+   height: 100px;
+   min-height: 100px !important;
+  }
+  .cover_img_cont{
+    min-height: 100px !important;
+    
+  }
+  .become_seller{
+   padding: 0.3rem;
+   font-size: 0.5rem;
   }
 
-  .become_seller{
-   padding: 0.5rem;
-   font-size: 0.7rem;
-  }
+.about_title>h3{
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+}
+.descp{
+  font-size: 0.6rem;
+}
+   
+   .detail_name{
+    font-size: 0.6rem;
+    font-weight: 600;
+   }
+   .detail_desc{
+    font-size: 0.6rem;
+    font-weight: 500;
+   }
+   .cover_icon{
+    font-size: 0.6rem;
+   }
+   .view_icon{
+    font-size: 0.6rem;
+   }
+
 }
 
 
@@ -723,3 +774,18 @@ min-width: 150px;
 
 
 /*profilee end=================================== */
+
+.hide{
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-40px);
+  height: 0;
+ }
+ 
+ .show{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  height: auto;
+ } 
+ 

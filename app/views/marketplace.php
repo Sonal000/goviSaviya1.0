@@ -19,7 +19,50 @@
  <!-- navbar end ======================= -->
 
 
- <!-- sidebar section===================== -->
+ 
+ <div class="marketplace_container_main">
+     <!-- search bar ========================= -->
+     <section class="searchbar_section">
+
+
+     <div class="searchbar_cont ">
+      <div class="searchbar_title_cont">
+        <h3 class="searchbar_title">Marketplace</h3>
+      </div>
+      <div class="search_cont">
+      <div class="searchbar">
+     <input class="search" placeholder="Search for Products">
+     <button class="search_btn">
+      <i class="fas fa-search search_icon"></i>
+     </button>
+    </div>
+    <div class="searchbar_btn_cont">
+  <button class="listing_btn active" id="listing_btn">Listings</button>
+  <button class="auction_btn" id="auction_btn">Auction</button>
+ </div>
+      </div>
+
+  </div>
+
+  <div class="filter_cont ">
+   <button class="filter_btn" id="filter_btn_all">
+   <i class="fas fa-sliders-h img_filters"></i>
+   <p>filter</p>
+  </button>
+   <button class="filter_btn">
+    <p>Price</p>
+    <i class="fas fa-angle-right fa-rotate-90"></i>
+  </button>
+   <button class="filter_btn">
+    <p>Quantity</p>
+    <i class="fas fa-angle-right fa-rotate-90"></i>
+  </button>
+ </div>
+
+ </section>
+ <!-- search bar ========================== -->
+  <div class="marketplace_container_sidebar">
+    <!--  sidebar section===================== -->
 
  <section>
    <div class="sidebar" id="sidebar_filter">
@@ -90,51 +133,26 @@
    </div>
  </section>
 
- <section class="section-center">
-  <section class="section-mid">
+
 
    
    <!-- sidebar section end===================== -->
-   
-   <!-- search bar ========================= -->
-   <div class="searchbar_cont ">
-    <h3 class="searchbar_title">Marketplace</h3>
-    <div class="searchbar">
-     <input class="search" placeholder="Search for Products">
-     <button class="search_btn">
-      <i class="fas fa-search search_icon"></i>
-     </button>
-    </div>
-    <div class="searchbar_btn_cont">
-  <button class="listing_btn active" id="listing_btn">Listings</button>
-  <button class="auction_btn" id="auction_btn">Auction</button>
- </div>
   </div>
+  <div class="marketplace_container_content">
 
-  <div class="filter_cont ">
-   <button class="filter_btn" id="filter_btn_all">
-   <i class="fas fa-sliders-h img_filters"></i>
-   <p>filter</p>
-  </button>
-   <button class="filter_btn">
-    <p>Price</p>
-    <i class="fas fa-angle-right fa-rotate-90"></i>
-  </button>
-   <button class="filter_btn">
-    <p>Quantity</p>
-    <i class="fas fa-angle-right fa-rotate-90"></i>
-  </button>
- </div>
- <!-- search bar ========================== -->
- 
- <!-- item container======================== -->
+
+     <!-- item container======================== -->
  
  <section class="items_section">
    <div class="items_cont">
 
    
    <?php 
-      if($data['items']){
+
+
+   if($data['items']){
+
+
             foreach ($data['items'] as $item) {
             ?>
             
@@ -164,19 +182,55 @@
 </a>
     <!-- item end -->
 
-    <?php    }
-            }
+
+    <?php
+
+}
+  }else{
+            echo "<p class='items_text'>No items to show</p> ";
+          }
+
+  
             ?>
   
 
    </div>
+   <div class="pg_cont">
+  <?php 
+// for ($i = 1; $i <= $data['totPages']; $i++) {
+
+  $min =$data['page']-4;
+  $max =$data['page']+4;
+  for($j = $min>0 ?$min:1 ; $j<=($max<$data['totPages']? $max:$data['totPages']);$j++ ){
+    if($j==$data['page']){
+      echo "<a href='?page=$j' class='current_pg'>$j</a> ";
+    }else{
+      echo "<a href='?page=$j'>$j</a> ";
+
+    }
+  }
+
+
+// }
+?>     
+    </div>
    
   </section>
   
   <!-- item container end======================== -->
-  
- </section>
-</section>
+
+  </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
 
   <!-- footer  ======================= -->
   <?php

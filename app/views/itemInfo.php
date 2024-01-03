@@ -89,7 +89,6 @@ else{
   <div class="item_desc_cont">
     <p class="item_desc"><?php echo $data['description'] ?></p>
   </div>
-  <?php if($_SESSION['user_type']=="buyer"){ ?>
 
   <form action="" method="post">
   <div class="item_btns_cont">
@@ -103,11 +102,7 @@ else{
     <button type="submit" name="  " class="addtocart_btn btn">Add to Cart</button>
   </div>
   </form>
-  <?php
-}else{
-  echo '<p> </p>';
-}
-?>
+
 </div>
 
 

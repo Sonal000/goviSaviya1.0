@@ -1,5 +1,11 @@
 
-
+.navlinks {
+  transition: var(--transition);
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  display: flex;
+}
 
 
 /*Registe page ======================================== */

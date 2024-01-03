@@ -1,28 +1,25 @@
-<?php 
- class Auction extends Controller{
+<?php
 
-   public function __construct()
-   {
+class Auction extends Controller{
+    public function __construct(){
+            
+    }
 
-   }
+    public function index(){
+        $data = ['title'=>'welcome'];
 
-   public function index()
-   {
-      $data = [
-         'logged'=>true
-      ];
-    $this->view('auction',$data);
-   }
-   public function itemInfo($id)
-   {
-      $data = [
-         'itemName'=>'Onions',
-         'itemPrice'=> 2000 ,
-         'logged'=>false
-      ];
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
+            $this->view('sellerauction',$data);
+         }else{
+            $this->view('viewAuction',$data);
+         }
+    }
+    public function add() {
+        $data = ['title'=>'welcome'];
+        $this->view('_404',$data);
+    }
 
-
-      $this->view('auctionItemInfo',$data);
-   }
- }
-?>
+   /* public function about(){
+        $this ->view('Pages/about');
+    }*/
+}

@@ -9,13 +9,20 @@
 
    public function index()
    { 
-       
-      $row=$this->itemModel->getItems();
+      $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+      $perPage = 20;
+      $row=$this->itemModel->getItems($page,$perPage);
+      $totalItems = $this->itemModel->getTotalItemsCount(); 
       $data=[
-          'items'=>$row
+          'items'=>$row,
+          'totItems'=>$totalItems,
+          'totPages'=>$totalItems/$perPage,
+          'page'=>$page
       ];
 
-      if((isset($_SESSION['user_type']))&&$_SESSION['user_type']=='seller'){
+
+      if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
+
          $this->view('sellermarketplace',$data);
       }else{
 
