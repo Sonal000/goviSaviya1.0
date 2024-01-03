@@ -137,27 +137,6 @@ if ($this->db->execute()) {
   }
 }
 
-
-
-public function addtoCart($data){
-  $this->db->query('INSERT INTO 
-  cart (item_id,buyer_id,qty) 
-  VALUES(:item_id,:buyer_id,:qty)'
-  );
-
-
-$this ->db ->bind(':item_id',$data['item_id']);
-$this ->db ->bind(':buyer_id',$data['buyer_id']);
-$this ->db ->bind(':qty',$data['qty']);
-if ($this->db->execute()) {
-  return true;
-  } else {
-  return false;
-  }
-}
-
-
-
 public function getCartItems($buyer_id){
   $this->db->query("SELECT items_market.*, cart.* FROM items_market RIGHT JOIN cart ON cart.item_id = items_market.item_id WHERE cart.buyer_id = :buyer_id");
   $this ->db ->bind(':buyer_id',$buyer_id);
@@ -168,5 +147,4 @@ public function getCartItems($buyer_id){
   return false;
    };
 }
-
-
+  }
