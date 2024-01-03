@@ -190,14 +190,19 @@
   
 
    </div>
-   <div class="pag_cont">
+   <div class="pg_cont">
   <?php 
 // for ($i = 1; $i <= $data['totPages']; $i++) {
 
   $min =$data['page']-4;
   $max =$data['page']+4;
   for($j = $min>0 ?$min:1 ; $j<=($max<$data['totPages']? $max:$data['totPages']);$j++ ){
-    echo "<a href='?page=$j'>$j</a> ";
+    if($j==$data['page']){
+      echo "<a href='?page=$j' class='current_pg'>$j</a> ";
+    }else{
+      echo "<a href='?page=$j'>$j</a> ";
+
+    }
   }
 
 

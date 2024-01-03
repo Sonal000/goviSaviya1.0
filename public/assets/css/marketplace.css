@@ -568,16 +568,19 @@ color: var(--clr-primary-3);
   text-align: center;
 }
 
-.pag_cont{
+.pg_cont{
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
   margin: 1rem 0;
 }
-.pag_cont>a{
+.pg_cont>a{
 padding: 0.5rem;
 margin: 0.2rem;
 box-shadow: var(--light-shadow);
 border:1px solid blue;
+}
+.current_pg{
+  background: var(--clr-primary-7);
 }
