@@ -1,9 +1,19 @@
 
+/* .navlinks_cont {
+  flex: 0.5;
+  display: block;
+} */
+.navlinks {
+  transition: var(--transition);
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  display: flex;
+}
 
 .login{
  display: flex;
  flex-direction: row;
-
  margin-top: 5rem;
  justify-content: space-around;
 
@@ -20,8 +30,6 @@
  top: 0;
  left: 0;
  justify-content: space-between;
- 
-  
 }
 .navimg{
  margin-left: 2rem;
@@ -252,9 +260,9 @@ flex-direction: column;
 }
 
  .Sellersidebar{
-  position:fixed;
+  /* position:fixed;
   left: 0;
-  top:0;
+  top:0; */
   width: 15rem;
   height: 100vh;
   background: var(--clr-primary-10);
@@ -308,10 +316,11 @@ flex-direction: column;
 .profile{
    
    display:flex;
-   margin-left: 18rem;
-   margin-top: 5.5rem;
+   /* margin-left: 18rem;
+   margin-top: 5.5rem; */
    flex-direction: column;
-   margin-bottom: 3rem;
+   /* margin-bottom: 3rem; */
+   padding: 1rem;
  }
 .maincontent{
  display: flex;
@@ -490,7 +499,9 @@ width: 100%;
   height: calc( 100vh - 5rem);
   background: linear-gradient(to left,rgba(62, 151, 65, 0.659),#5ccc2c86,rgba(98, 243, 14, 0.262),rgba(109, 176, 112, 0.455)),url(../images/login.jpg) center/cover;
   /* background: linear-gradient(to left,rgba(0,0,0,1),rgba(255,255,255,1)); */
+  width:100vw;
   backdrop-filter: blur(10px);
+  min-height:600px;
  }
  
   .login_registration{

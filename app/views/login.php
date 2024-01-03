@@ -24,10 +24,84 @@
    
 
      <!-- navbar================== -->
- <?php
- include APPROOT.'/views/layouts/mainNavbar.php'; 
- ?>
+ <!-- navbar========================== -->
+ <div class="navbar_cont">
+  <div class="navbar">
+   <div class="nav_img_cont">
+   <a href="<?php echo URLROOT ?>/Home">
+    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
+        </a>
+    <button class="bars_btn" id="bars_btn">
+  <i class="fas fa-bars bars"></i>
+  </button>
+   </div>
+   <div class="navlinks_cont">
+    <ul class="navlinks" id="navlinks" >
+     <!-- <li class="navlink">
+      <a href="<?php echo URLROOT ?>/Home">Home</a>
+     </li> -->
+     <button class="join_link" id="join_btn">
+     Join
+     </button>
 
+    </ul>
+  </div>
+
+ </div>
+</div>
+
+
+
+<!-- nav sidebar -->
+
+<div class="navSidebar_cont" id="navSidebar_cont">
+  <div class="navSidebar">
+
+  <!-- <div class="navSidebar_image_container">
+        <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>"  class="profile_image">
+        <p class="navSidebar_name">sonalinduwara</p>
+    </div> -->
+
+  <div class="sidelinks_cont">
+  <ul class="sidelinks" id="sidelinks" >
+  <button class="join_link" id="join_btn">
+    Join
+    </button>
+  <button class="navlink signin_link " id="signin_btn">
+     Sign in
+    </button>
+
+    <li class="sidelink">
+    <i class="fas fa-carrot"></i>
+      <a href="<?php echo URLROOT ?>/Categories">
+        Categories
+      </a>
+    </li>
+    <li class="sidelink">
+      <i class="fas fa-store nav_icon"></i>
+      <a href="<?php echo URLROOT ?>/marketplace">
+        Marketplace
+      </a>
+    </li>
+    <li class="sidelink">
+      <i class="fas fa-coins nav_icon"></i>
+      <a href="<?php echo URLROOT ?>/auction">
+      Auction
+      </a>
+    </li>
+    <li class="sidelink">
+    <i class="fas fa-hands-helping"></i>
+        <a href="<?php echo URLROOT ?>/help">
+        Help
+        </a>
+    </li>
+  </ul>
+  </div>
+  </div>
+</div>
+<div class="navSidebar_overlay" id="navSidebar_overlay"></div>
+
+<!-- navbar end========================= -->
 <!-- navbar end ================== -->
     
         <!-- <div class="navbar2">

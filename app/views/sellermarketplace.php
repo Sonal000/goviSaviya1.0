@@ -1,7 +1,7 @@
 
 <?php
 ?>
-
+  
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,47 +18,75 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="<?php echo URLROOT ;?>/assets/css/login.css">
     <link rel="stylesheet" href="<?php echo URLROOT ;?>/assets/css/sellermarketplace.css">
-    <link rel="stylesheet" href="<?php echo URLROOT ;?>/assets/css/marketplace.css">
 </head>
 <body>
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
- <?php
- require APPROOT. '/views/layouts/sellerSidebar_withoutimg.php'; 
- ?>
-    
-<div class="profile">
-      
-    <div class="markettop">
-       <h4>Marketplace</h4>
-       <div class="searchbar2_cont">
-            <form action="http://www.google/search" class="searchbar2" method="get">
-            <input type="text" placeholder="Search Anything">
-            <button type="submit"><i class="fas fa-search search_icon"></i></button>
-            </form>
-       </div>
-       <div class="marketbt">
-                <a href="<?php echo URLROOT;?>/Listproduct"><button class="btn">List new Product</button></a>
-                <a href="<?php echo URLROOT;?>/Myproducts"><button class="btn">My Products</button></a>
-       </div>
-       
+
+<div class="main_container">
+  
+  <?php 
+   require APPROOT. '/views/layouts/sellerSidebar.php';  ?>
+
+    <!-- items -->
+  <div class="container_content">
+
+
+ 
+  <div class="marketplace_container_main">
+     <!-- search bar ========================= -->
+     <section class="searchbar_section">
+
+
+     <div class="searchbar_cont ">
+      <div class="searchbar_title_cont">
+        <h3 class="searchbar_title">Marketplace</h3>
+      </div>
+      <div class="search_cont">
+      <div class="searchbar">
+     <input class="search" placeholder="Search for Products">
+     <button class="search_btn">
+      <i class="fas fa-search search_icon"></i>
+     </button>
     </div>
+    <div class="searchbar_btn_cont">
+  <button class="listing_btn active" id="listing_btn">Listings</button>
+  <button class="auction_btn" id="auction_btn">Auction</button>
+ </div>
+      </div>
 
-    <div class="marketsortbar">
+  </div>
+
+  <div class="filter_cont ">
+   <button class="filter_btn" id="filter_btn_all">
+   <i class="fas fa-sliders-h img_filters"></i>
+   <p>filter</p>
+  </button>
+   <button class="filter_btn">
+    <p>Price</p>
+    <i class="fas fa-angle-right fa-rotate-90"></i>
+  </button>
+   <button class="filter_btn">
+    <p>Quantity</p>
+    <i class="fas fa-angle-right fa-rotate-90"></i>
+  </button>
+ </div>
+
+ </section>
+ <!-- search bar ========================== -->
+
+  <div class="marketplace_container_content">
 
 
-    </div>
-
-    <div class="marketcards_1">
-            <!-- item container======================== -->
-
+     <!-- item container======================== -->
  
  <section class="items_section">
    <div class="items_cont">
 
-
+   
    <?php 
+
    if($data['items']){
 
             foreach ($data['items'] as $item) {
@@ -92,203 +120,10 @@
 
     <?php
             }
-   }else{
-    echo '<p style="text-align:center;">No items to show</p>';
-   }
-
+          }else{
+            echo "<p class='items_text'>No items to show</p> ";
+          }
             ?>
-            
-    <!-- item -->
-    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/11" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-2.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Onions</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div> -->
-      
-</a>
-    <!-- item end -->
-
-    <!-- item -->
-    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/12" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-3.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Carrots</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a> -->
-    <!-- item end -->
-
-    <!-- item -->
-    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-4.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Potato</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a> -->
-    <!-- item end -->
-
-    <!-- item -->
-    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-5.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Banana</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a> -->
-    <!-- item end -->
-
-    <!-- item -->
-    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-6.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Tomato</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a> -->
-    <!-- item end -->
-
-    <!-- item -->
-    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-7.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Onion</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a> -->
-    <!-- item end -->
-
-    <!-- item -->
-    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-8.png">
-       </div>
-       <div class="item_desc">
-         <p class="item_title">Potato</p>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a> -->
-    <!-- item end -->
-
-    <!-- item -->
-    <!-- <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-9.png">
-       </div>
-       <div class="item_desc">
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <p class="item_title">Coconut</p>
-         <p class="item_price">2000 / <span>kg<span>
-       </div>
-       
-      </div>
-      
-     </a> -->
-    <!-- item end -->
   
 
    </div>
@@ -296,15 +131,20 @@
   </section>
   
   <!-- item container end======================== -->
-  
-    </div>
 
-    <div class="marketcards_2">
+  </div>
+ </div>
 
-    </div>
+
+
+  </div>
 
 </div>
 
+
+<!-- js === -->
+<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
 
 </body>
 </html>

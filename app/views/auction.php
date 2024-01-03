@@ -12,14 +12,58 @@
  <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/marketplace.css">
 </head>
 <body>
- <!-- navbar ======================= -->
+
+<!-- navbar ======================= -->
 <?php
  include APPROOT.'/views/layouts/mainNavbar.php';  
 ?>
  <!-- navbar end ======================= -->
 
 
- <!-- sidebar section===================== -->
+ 
+ <div class="marketplace_container_main">
+     <!-- search bar ========================= -->
+     <section class="searchbar_section">
+
+
+     <div class="searchbar_cont ">
+      <div class="searchbar_title_cont">
+        <h3 class="searchbar_title">Marketplace</h3>
+      </div>
+      <div class="search_cont">
+      <div class="searchbar">
+     <input class="search" placeholder="Search for Products">
+     <button class="search_btn">
+      <i class="fas fa-search search_icon"></i>
+     </button>
+    </div>
+    <div class="searchbar_btn_cont">
+  <button class="listing_btn " id="listing_btn">Listings</button>
+  <button class="auction_btn active" id="auction_btn">Auction</button>
+ </div>
+      </div>
+
+  </div>
+
+  <div class="filter_cont ">
+   <button class="filter_btn" id="filter_btn_all">
+   <i class="fas fa-sliders-h img_filters"></i>
+   <p>filter</p>
+  </button>
+   <button class="filter_btn">
+    <p>Price</p>
+    <i class="fas fa-angle-right fa-rotate-90"></i>
+  </button>
+   <button class="filter_btn">
+    <p>Quantity</p>
+    <i class="fas fa-angle-right fa-rotate-90"></i>
+  </button>
+ </div>
+
+ </section>
+ <!-- search bar ========================== -->
+  <div class="marketplace_container_sidebar">
+    <!--  sidebar section===================== -->
 
  <section>
    <div class="sidebar" id="sidebar_filter">
@@ -90,46 +134,17 @@
    </div>
  </section>
 
- <section class="section-center">
-  <section class="section-mid">
+
 
    
    <!-- sidebar section end===================== -->
-   
-   <!-- search bar ========================= -->
-   <div class="searchbar_cont ">
-    <h3 class="searchbar_title">Auction</h3>
-    <div class="searchbar">
-     <input class="search" placeholder="Search for Products">
-     <button class="search_btn">
-      <i class="fas fa-search search_icon"></i>
-     </button>
-    </div>
-    <div class="searchbar_btn_cont">
-  <button class="listing_btn" id="listing_btn">Listings</button>
-  <button class="auction_btn active" id="auction_btn">Auction</button>
- </div>
   </div>
+  <div class="marketplace_container_content">
 
-  <div class="filter_cont ">
-   <button class="filter_btn" id="filter_btn_all">
-   <i class="fas fa-sliders-h img_filters"></i>
-   <p>filter</p>
-  </button>
-   <button class="filter_btn">
-    <p>Price</p>
-    <i class="fas fa-angle-right fa-rotate-90"></i>
-  </button>
-   <button class="filter_btn">
-    <p>Quantity</p>
-    <i class="fas fa-angle-right fa-rotate-90"></i>
-  </button>
- </div>
- <!-- search bar ========================== -->
+
+<!-- item container======================== -->
  
- <!-- item container======================== -->
- 
- <section class="items_section">
+<section class="items_section">
    <div class="items_cont">
 
     <!-- item -->
@@ -407,9 +422,19 @@
   </section>
   
   <!-- item container end======================== -->
-  
- </section>
-</section>
+
+  </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
 
   <!-- footer  ======================= -->
   <?php
@@ -421,5 +446,8 @@
 <!-- js === -->
 <script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
+
+
+
 </body>
 </html>

@@ -1,4 +1,14 @@
 
+const joinBtn = document.getElementById("join_btn");
+
+
+joinBtn.addEventListener("click", () => {
+  window.location.href = `${URLROOT}/register`;
+});
+
+
+
+
 
 
 const form = document.getElementById('login_reg_form');
