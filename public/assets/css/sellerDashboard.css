@@ -1,0 +1,37 @@
+
+
+
+
+
+
+
+
+
+
+
+/* Dahsboard */
+
+.H4center{
+    margin-top: 5.5rem;
+    margin-left: 2rem;
+    text-align: center;
+}
+
+.pcl{
+    margin-left: 5rem;
+    font-weight: bold;
+}
+
+.main_container {
+    height: calc(100vh - 4rem);
+    width: 100vw;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .container_content {
+    width: calc(100vw - 15rem);
+    height: 100%;
+    overflow: scroll;
+    border: 2px solid yellow;
+  }

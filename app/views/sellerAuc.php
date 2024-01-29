@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketplace</title>
+    <title>Auction</title>
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link
  rel="stylesheet"
@@ -30,7 +30,7 @@
    require APPROOT. '/views/layouts/sellerSidebar.php';  ?>
 
     <!-- items -->
-  <div class="container_content">
+  <diiv class="container_content">
 
 
  
@@ -41,7 +41,7 @@
 
      <div class="searchbar_cont ">
       <div class="searchbar_title_cont">
-        <h3 class="searchbar_title">Marketplace</h3>
+        <h3 class="searchbar_title">Auction</h3>
       </div>
       <div class="search_cont">
       <div class="searchbar">
@@ -86,16 +86,22 @@
    <div class="items_cont">
 
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
+    <?php 
+    if($data['items']){
+
+      foreach ($data['items'] as $item) {
+        ?>
+
+      <a href="<?php echo URLROOT; ?>/AuctionC/auctionInfo/<?php echo $item->auction_ID ?>" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-1.png">
+       <img class="item_img" src="<?php echo URLROOT.'/store/items/'.$item->item_img ;?>">
        </div>
        <div class="item_desc">
         <div class="item_title_cont">
-         <p class="item_title">Fresh Mango</p>
-         <p class="item_bids"> 10 bids</p>
+         <p class="item_title"><?php echo $item->name; ?></p>
+         <p class="item_bids"><?php echo $item->bid_Count; ?> Bids</p>
         </div>
         <div class="item_rating">
         <i class="fas fa-star star_img"></i>
@@ -105,7 +111,7 @@
         <i class="fas fa-star star_img"></i>
         </div>
          <div class="item_price_cont">
-           <p class="item_price">1300 / <span>kg<span></span></p>
+           <p class="item_price"><?php echo $item->price; ?> / <span><?php echo $item->unit; ?><span></span></p>
            <p class="item_time">24h / <span>left<span></span></p>
          </div>
        </div>
@@ -113,9 +119,23 @@
       </div>
       
 </a>
+    
+<?php
+
+}
+  }else{
+            echo "<p class='items_text'>No items to show</p> ";
+          }
+
+  
+            ?>
+
+    
+    
     <!-- item end -->
 
     <!-- item -->
+    <!--
     <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
 
      <div class="item">
@@ -142,9 +162,7 @@
       </div>
       
 </a>
-    <!-- item end -->
-
-    <!-- item -->
+    
     <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
 
      <div class="item">
@@ -172,9 +190,8 @@
       </div>
       
 </a>
-    <!-- item end -->
+    
 
-    <!-- item -->
     <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
 
      <div class="item">
@@ -202,9 +219,8 @@
       </div>
       
 </a>
-    <!-- item end -->
+    
 
-    <!-- item -->
     <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
 
      <div class="item">
@@ -232,9 +248,8 @@
       </div>
       
 </a>
-    <!-- item end -->
+   
 
-    <!-- item -->
     <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
 
      <div class="item">
@@ -262,9 +277,8 @@
       </div>
       
 </a>
-    <!-- item end -->
+    
 
-    <!-- item -->
     <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
 
      <div class="item">
@@ -292,9 +306,8 @@
       </div>
       
 </a>
-    <!-- item end -->
+  
 
-    <!-- item -->
     <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
 
      <div class="item">
@@ -322,9 +335,8 @@
       </div>
       
 </a>
-    <!-- item end -->
+    
 
-    <!-- item -->
     <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
 
      <div class="item">
@@ -351,8 +363,8 @@
        
       </div>
       
-</a>
-    <!-- item end -->
+</a> -->
+    
   
 
    </div>
