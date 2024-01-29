@@ -17,9 +17,14 @@
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
- <?php
- require APPROOT. '/views/layouts/deliverySidebarWithoutImg.php'; 
- ?>
+
+<div class="main_container">
+
+<?php 
+   require APPROOT. '/views/layouts/deliverySidebar.php';  ?>
+
+<div class="container_content">
+
 <div class="profile">
     <div class="auction_page">
         <div class="hed">
@@ -31,7 +36,7 @@
 
         <div class="mycardd">
 
-            <div class="productimg">
+            <div class="left_side">
                 
                 <div class=square_card>
 
@@ -45,8 +50,6 @@
                     <div class="button_more_details">
                     <botton class="more_details_button"><a href=""> View More</a></botton>
                     </div>
-
-
 
                 </div>
 
@@ -132,6 +135,6 @@
         </div>
         </div>
     </div>
-</div>
+    <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 </body>
 </html>
