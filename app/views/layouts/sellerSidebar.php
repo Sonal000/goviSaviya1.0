@@ -23,13 +23,13 @@
                   <i class="fas fa-sort-down expand_icon"></i>
                 </button>
                 <div class="expand hide_expand">
-                <a href=" <?php echo URLROOT ?>/auction/add">
+                <a href=" <?php echo URLROOT ?>/auctionC/add">
                     <button class="sidebar_item expand_item link" id="add_item_auction">
                     <i class="fas fa-plus sidebar_icon" ></i>
                       <p>List new</p>
                     </button>
                 </a>
-                <a href="<?php echo URLROOT ?>/auction">
+                <a href="<?php echo URLROOT ?>/auctionC/myAuctions/<?php echo $_SESSION['seller_id'] ?>">
                     <button class="sidebar_item expand_item link" id="view_item_auction">
                     <i class="fas fa-poll-h sidebar_icon"></i>
                       <p>Current items</p>
@@ -101,7 +101,7 @@
                   </div>
               </li>
               <li>
-                <a href="<?php echo URLROOT ?>/reviews">
+                <a href="<?php echo URLROOT ?>/Dashboard">
                   <button class="sidebar_item link"  id="reviews_link">
                     <i class="far fa-star  sidebar_icon" ></i>
                     <p>Reviews</p>

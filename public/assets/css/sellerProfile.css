@@ -9,7 +9,7 @@
   width: 100vw;
 } */
 
--
+
 
 
 
@@ -140,7 +140,7 @@
 }
 .view_icon:hover{
   background-color: rgba(76, 175, 79, 0.7);
-}
+}                             
 .view_icon {
  position: absolute;
  top: 30%;

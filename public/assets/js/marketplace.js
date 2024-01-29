@@ -21,7 +21,7 @@ if (auctionBtn) {
   auctionBtn.addEventListener("click", () => {
     auctionBtn.classList.add("active");
     listingBtn.classList.remove("active");
-    window.location.href = `${URLROOT}/auc `;
+    window.location.href = `${URLROOT}/auctionC `;
   });
 }
 if (filterBtnAll) {
