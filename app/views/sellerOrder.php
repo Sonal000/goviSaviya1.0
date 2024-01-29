@@ -46,202 +46,79 @@
 
     </div>
     <div class="order_card_cont">
+
+    <?php 
+        if($data['orders']){
+            foreach($data['orders'] as $order){
+                ?>
+
+
         <div class="order_card">
             <div class="order_id">
                 <div class="idnum">
-                    Order Id : 1012
+                    Order Id : <?php echo $order->order_item_id ."/".$order->order_id; ?>
                 </div>
             </div>
             <div class="order_det2">
                 <div class="ordim">
-                    <img src="<?php echo URLROOT; ?>/assets/images/carrot.jpg" alt="" class="ord_img">
+                    <img src="<?php echo URLROOT."/store/items/".$order->item_img; ?>" alt="" class="ord_img">
                 </div>
                 <div class="ordDes">
                     <div class="ord_topic">
                         Order Details
                     </div>
                     <div class="ord_item">
-                        Order item - Carrot
+                        Order item - <?php echo $order->item_name ?>
                     </div>
                     <div class="ord_quan">
-                        Quantity - 10Kg
+                        Quantity - <?php echo $order->quantity ?>
                     </div>
                     <div class="ord_loc">
-                        Location - Colombo
+                        Location - <?php echo $order->buyer_city ?>
                     </div>
                     <div class="ord_price">
-                        Price - Rs 2000
+                        Price - Rs <?php echo $order->total_price ?>
                     </div>
                     <div class="ord_status">
-                        Order Status - Placed
+                        Order Status - <?php echo $order->order_status ?>
                     </div>
+                    <div class="viewmore">
+                    <div class="viewmorebt">
+                        <a href="<?php echo URLROOT; ?>/SellerAdaccept" class="viewmore_btn">View more</a>
+                     </div>
+
+                </div>
                 </div>
             </div>
             <div class="order_more">
                 <div class="buy_pro">
-                    <div class="cont_buy">
-                        Contact buyer
-                    </div>
-                    <div class="cont_buy_img">
-                        <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="" class="another_one">
-                    </div>
-                </div>
-                <div class="viewmore">
-                    <div class="viewmorebt">
-                        <a href="<?php echo URLROOT; ?>/SellerAdaccept" class="btn">View more</a>
-                     </div>
 
+                    <div class="cont_buy_img">
+                        <?php if($order->buyer_img){   ?> 
+                            <img src="<?php echo URLROOT."/store/profiles/".$order->buyer_img; ?>" alt="" class="another_one prof_pic">
+                        <?php }else{ ?>
+                            <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="" class="another_one">
+                        <?php 
+                        }
+                         ?>
+                    </div>
+                    <div class="cont_buy">
+                        <p><?php echo $order->buyer_name ?></p>
+                        <p class="cont_buy_mobile"><?php echo $order->buyer_mobile ?></p>
+                        <p class="cont_buy_buyer">buyer<span><i class="fas fa-check-circle"></i></span></p>
+                    </div>
                 </div>
+
+
             </div>
         </div>
 
-        <div class="order_card">
-            <div class="order_id">
-                <div class="idnum">
-                    Order Id : 1012
-                </div>
-            </div>
-            <div class="order_det2">
-                <div class="ordim">
-                    <img src="<?php echo URLROOT; ?>/assets/images/Tomatoes.jpg" alt="" class="ord_img">
-                </div>
-                <div class="ordDes">
-                    <div class="ord_topic">
-                        Order Details
-                    </div>
-                    <div class="ord_item">
-                        Order item - Tomatoes
-                    </div>
-                    <div class="ord_quan">
-                        Quantity - 10Kg
-                    </div>
-                    <div class="ord_loc">
-                        Location - Colombo
-                    </div>
-                    <div class="ord_price">
-                        Price - Rs 2000
-                    </div>
-                    <div class="ord_status">
-                        Order Status - Placed
-                    </div>
-                </div>
-            </div>
-            <div class="order_more">
-                <div class="buy_pro">
-                    <div class="cont_buy">
-                        Contact buyer
-                    </div>
-                    <div class="cont_buy_img">
-                        <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="" class="another_one">
-                    </div>
-                </div>
-                <div class="viewmore">
-                    <div class="viewmorebt">
-                        <a href="<?php echo URLROOT; ?>/SellerAdaccept" class="btn">View more</a>
-                     </div>
+        <?php
+            }
+        }
+    ?>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="order_card_cont">
-        <div class="order_card">
-            <div class="order_id">
-                <div class="idnum">
-                    Order Id : 1012
-                </div>
-            </div>
-            <div class="order_det2">
-                <div class="ordim">
-                    <img src="<?php echo URLROOT; ?>/assets/images/carrot.jpg" alt="" class="ord_img">
-                </div>
-                <div class="ordDes">
-                    <div class="ord_topic">
-                        Order Details
-                    </div>
-                    <div class="ord_item">
-                        Order item - Carrot
-                    </div>
-                    <div class="ord_quan">
-                        Quantity - 10Kg
-                    </div>
-                    <div class="ord_loc">
-                        Location - Colombo
-                    </div>
-                    <div class="ord_price">
-                        Price - Rs 2000
-                    </div>
-                    <div class="ord_status">
-                        Order Status - Placed
-                    </div>
-                </div>
-            </div>
-            <div class="order_more">
-                <div class="buy_pro">
-                    <div class="cont_buy">
-                        Contact buyer
-                    </div>
-                    <div class="cont_buy_img">
-                        <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="" class="another_one">
-                    </div>
-                </div>
-                <div class="viewmore">
-                    <div class="viewmorebt">
-                        <a href="<?php echo URLROOT; ?>/SellerAdaccept" class="btn">View more</a>
-                     </div>
 
-                </div>
-            </div>
-        </div>
-
-        <div class="order_card">
-            <div class="order_id">
-                <div class="idnum">
-                    Order Id : 1012
-                </div>
-            </div>
-            <div class="order_det2">
-                <div class="ordim">
-                    <img src="<?php echo URLROOT; ?>/assets/images/Tomatoes.jpg" alt="" class="ord_img">
-                </div>
-                <div class="ordDes">
-                    <div class="ord_topic">
-                        Order Details
-                    </div>
-                    <div class="ord_item">
-                        Order item - Tomatoes
-                    </div>
-                    <div class="ord_quan">
-                        Quantity - 10Kg
-                    </div>
-                    <div class="ord_loc">
-                        Location - Colombo
-                    </div>
-                    <div class="ord_price">
-                        Price - Rs 2000
-                    </div>
-                    <div class="ord_status">
-                        Order Status - Placed
-                    </div>
-                </div>
-            </div>
-            <div class="order_more">
-                <div class="buy_pro">
-                    <div class="cont_buy">
-                        Contact buyer
-                    </div>
-                    <div class="cont_buy_img">
-                        <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="" class="another_one">
-                    </div>
-                </div>
-                <div class="viewmore">
-                    <div class="viewmorebt">
-                        <a href="<?php echo URLROOT; ?>/SellerAdaccept" class="btn">View more</a>
-                     </div>
-
-                </div>
-            </div>
-        </div>
     </div>
 </div>
   

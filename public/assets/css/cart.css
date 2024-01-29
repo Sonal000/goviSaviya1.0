@@ -30,8 +30,8 @@
  }
  
  .main_img{
-   height: 120px;
-   width: 120px;
+   height: 70px;
+   width: 70px;
    border-radius: var(--radius-high);
  }
  
@@ -55,7 +55,7 @@
  }
  
 .item_name{
- font-size: 1rem;
+ font-size: 0.9rem;
  color: var(--clr-grey-1);
  
 }
@@ -69,7 +69,7 @@
 }
 .item_address{
  color: var(--clr-primary-2);
- font-size: 0.7rem;
+ font-size: 0.6rem;
 }
 
 
@@ -83,11 +83,11 @@
  }
  .item_price_cont>p{
    color: var(--clr-grey-1);
-   font-size: 1rem;
+   font-size: 0.9rem;
  }
  .item_price_cont p>span{
    color: var(--clr-grey-1);
-   font-size: 0.8rem;
+   font-size: 0.6rem;
  }
 
 
@@ -96,7 +96,7 @@
  background: var(--clr-white);
  font-size: 0.8rem;
  border: none;
-
+cursor: pointer;
 }
 .qty_btn_cont{
  flex: 0.3;
@@ -108,6 +108,9 @@
  width: 5rem;
  max-width: 10rem;
  box-shadow: var(--light-shadow);
+}
+.qty_btn_cont>input{
+  font-size: 0.6rem;
 }
 .qty_btn_cont>button{
  background: none;
@@ -218,18 +221,18 @@
 }
 @media screen and (min-width :592px) {
   .item_name{
-   font-size: 1.3rem;
+   font-size: 1rem;
   }
   .item_seller{
    font-size: 0.8rem;
    letter-spacing: 1px;
   }
   .item_address{
-   font-size: 0.8rem;
+   font-size: 0.7rem;
   }
   .main_img{
-   height: 130px;
-   width: 130px;
+   height: 100px;
+   width: 100px;
  }
   
   .item_price_cont{
