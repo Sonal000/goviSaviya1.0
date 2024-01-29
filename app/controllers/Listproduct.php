@@ -64,6 +64,8 @@ class Listproduct extends Controller{
         // $data = ['title'=>'welcome'];
    
     }
+
+    
     
    
 

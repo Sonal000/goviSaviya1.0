@@ -120,6 +120,33 @@ public function deleteItem($id){
 
 }
 
+
+public function updateItem($data){
+  $this->db->query(
+    'UPDATE items_market SET
+    name=:name,
+    price=:price,
+    unit =:unit,
+    stock=:stock,
+    description=:description
+    WHERE item_id =:item_id');
+
+$this->db->bind(':item_id',$data['item_id']);
+$this->db->bind(':name', $data['name']);
+$this->db->bind(':price', $data['price']);
+$this->db->bind(':unit', $data['unit']);
+$this->db->bind(':stock', $data['stock']);
+$this->db->bind(':description', $data['description']);
+
+if($this->db->execute()){
+  return true;
+}
+else{
+  return false;
+}
+
+}
+
 public function addtoCart($data){
   $this->db->query('INSERT INTO 
   cart (item_id,buyer_id,qty) 

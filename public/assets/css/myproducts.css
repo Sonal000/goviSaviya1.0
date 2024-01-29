@@ -562,8 +562,9 @@ input:focus{
     display: flex;
     flex-direction: column;
     margin-left: 3rem;
-    justify-content:space-between;
-    margin-bottom: 3rem;
+    margin-right: 3rem;
+    /*margin-bottom: 3rem;*/
+   
 
 }
 
@@ -572,17 +573,14 @@ input:focus{
     /*margin-left: 3rem;*/
 }
 .product_des_cont{
-  flex: 0.2;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
 }
-.delete_btn_cont{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 3rem;
-  
-}
+
+
+
 
 .mycard{
   box-shadow: var(--dark-shadow);
@@ -602,14 +600,41 @@ input:focus{
   }
   
 .delete_btn{
-  color: var(--clr-red-2);
-  background: var(--clr-white);
-  font-size: 1.5rem;
-  border: none;
+  color: var(--clr-primary-10);
+  background: var(--clr-red-1);
+  font-size:medium;
+  border-radius: var(--radius-low);
   cursor: pointer;
- padding: 1rem;
+ padding: 0.5rem;
   text-decoration: none;
+  width: 6rem;
+  border: var(--clr-primary-10);
+  color: var(--clr-primary-10);
 } 
+
+.edit_details_btn{
+  color: var(--clr-primary-10);
+  background: var(--clr-primary-4);
+  font-size:medium;
+  border-radius: var(--radius-low);
+  cursor: pointer;
+ padding: 0.5rem;
+  text-decoration: none;
+  width: 6rem;
+  border: var(--clr-primary-10);
+}
+
+.form_cl{
+  display: flex;
+  flex-direction: row;
+ 
+  width: 100%;
+  height: 100%;
+}
+
+a{
+  color: var(--clr-primary-10);
+}
 
 .productimg{
     display: flex;
@@ -623,8 +648,71 @@ input:focus{
 .productdes{
     display: flex;
     flex-direction: column;
-    margin-left:3.5rem ;
+    /*margin-right: 1.5rem;*/
+    width: 100%;
+    
+    
+    
 }
+
+.des_cont{
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.5rem;
+  justify-content: space-evenly;
+  width: 80%;
+  
+  
+}
+
+.des_cont_edit{
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.5rem;
+  justify-content: space-evenly;
+  width: 80%;
+  
+}
+.product_des_view_cont{
+  display: flex;
+  flex-direction: row;
+  
+  height: 100%;
+  
+ }
+
+.product_des_edit_cont{
+  opacity: 0;
+   visibility: hidden;
+   transform: translateY(-40px);
+   height: 0;
+   transition: var(--transition);
+   /*justify-content: space-evenly;*/
+   display: flex;
+   flex-direction: row;
+   
+  
+   }
+
+   .btn_cont{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 20%;
+    
+   }
+
+   .btn_cont_edit{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 20%;
+    
+   }
+
 .mango{
     height: 200px;
     width:200px;
@@ -634,8 +722,14 @@ input:focus{
     display: flex;
     font-weight: bold;
     color: var(--clr-grey-1);
-    font-size: large;
-    margin-top: 2rem;
+    font-size: medium;
+}
+
+
+.p_det{
+  font-size: medium;
+  margin-left: 0.5rem;
+
 }
 .productrating{
     display: flex;
@@ -657,31 +751,69 @@ input:focus{
 }
 .productprice{
     display: flex;
-    font-size: larger;
+    font-size: medium;
     font-weight: bold;
     color:var(--clr-grey-1) ;
     margin-top: 0.2rem;
+   
 }
 .productavailability{
     display: flex;
     flex-direction: row;
-    width: 170px;
-    justify-content: space-between;
-    margin-top: 0.5rem;
+    
+    
 }
 .sold{
     display: flex;
     font-weight: bold;
     color: var(--clr-grey-1);
-    font-size: small;
+    font-size: medium;
 }
 .available{
     display: flex;
     font-weight: bold;
     color: var(--clr-red-1);
-    font-size: small;
+    font-size: medium;
+    margin-left: 7rem;
 }
 .prodes{
     display: flex;
-    margin-top: 0.5rem;
+    font-weight: bold;
 }
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-40px);
+  height: 0;
+ }
+ 
+ .show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  height: auto;
+ } 
+ 
+ .field_size_small{
+  width: 6rem;
+  margin-left: 0.5rem;
+ }
+
+ .field_size_large{
+  width: 25rem;
+  margin-left: 0.5rem;
+ }
+
+ .edit_one{
+  margin-top: 0.5rem;
+ }
+
+ .edit_two{
+  margin-top: 1rem;
+ }
+
+ .field_margin{
+  margin-left: 0.5rem;
+ }
+
