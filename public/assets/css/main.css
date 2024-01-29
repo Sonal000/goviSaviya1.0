@@ -62,8 +62,8 @@ Variables
   --font-primary: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-secondry: "Courgette", cursive;
   --transition: all 0.3s linear;
-  --spacing: 0.25rem;
-  --spacing-low: 0.15rem;
+  --spacing: 0.18rem;
+  --spacing-low: 0.1rem;
   --radius-high: 1rem;
   --radius-low: 0.5rem;
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -184,6 +184,32 @@ p {
   }
   p {
     font-size: 0.7rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1;
+  }
+}
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  h3 {
+    font-size: 0.75rem;
+  }
+  h4 {
+    font-size: 0.6rem;
+  }
+  body {
+    font-size: 0.5rem;
+  }
+  p {
+    font-size: 0.5rem;
   }
   h1,
   h2,

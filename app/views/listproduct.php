@@ -67,8 +67,8 @@
             <div class="input_cont">
                   <label for="dropdown" class="input_label">Product category</label>
                       <select id="dropdown" name="category" class="dropdown_item " >
-                      <option value="Vegetables">Vegetables</option>
-                      <option value="Fruits">Fruits</option>
+                      <option value="vegetables">Vegetables</option>
+                      <option value="fruits">Fruits</option>
                       <option value="spices">Spices</option>
                       </select>
             </div>
