@@ -296,14 +296,17 @@ input:focus{
     flex-direction: row;
     justify-content: space-between;
     width: 1000px;
+   
 }
 
 .post_left{
     display: flex;
     flex-direction: column;
-    margin-left: 2rem;
     margin-top: 0.5rem;
+    margin-left: 1rem;
     justify-content: space-between;
+    
+    
     
 }
 .pro_name{
@@ -331,6 +334,8 @@ input:focus{
     flex-direction: column;
     justify-content: space-between;
     margin-right: 1rem;
+    
+   
 }
 .pro_detail{
     display: flex;
@@ -365,11 +370,9 @@ input:focus{
 }
 .update_edit_bt{
     display: flex;
-    flex-direction: row;
+   margin-top: 1rem;
     width: 330px;
-    
-    margin-left: 3rem;
-    justify-content: space-between;
+    justify-content: right;
     
 }
 .aucbt_post{
@@ -379,38 +382,49 @@ font-size: small;
 text-align: center;
 }
 
-#blur.active{
-
-filter:blur(20px);
-pointer-events: none;
-user-select: none;
-
-}
-
-#popup{
-  position: fixed;
-  top: 25%;
-  left: 60%;
-  transform: translate(-50%,-50%);
-  width: 500px;
-  padding: 50px;
-  box-shadow: 0 50px 30px rgba(0,0,0,.30);
+.pop_up{
   background:var(--clr-primary-7);
+  width: 30%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   border-radius: var(--radius-high);
-  text-align: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.5s;
+  /*opacity: 0;
+  visibility: hidden;*/
+   transform: translateY(0px);
+   margin-left: 35%;
+   
+   transition: var(--transition);
+  
+  
+}
+ 
+.window{
+  display: flex;
+  flex-direction: column;
+  
 }
 
-#popup.active{
-  top:38%;
-  visibility: visible;
-  opacity: 1;
-  transition: 0.5s;
-  
-  }
+.sure{
+  text-align: center;
+  font-weight: bold;
+  color: white;
 
+}
 
+.button_hold{
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
 
+.no_btn{
+  background-color:#E42535;
+}
+
+.no_btn:hover{
+  background-color: #fb8e97;
+  color: whitesmoke;
+}

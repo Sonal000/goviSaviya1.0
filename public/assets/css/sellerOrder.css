@@ -278,19 +278,23 @@ input:focus{
 /* ================================================== Seller Order =================================================================*/
 
 .order_card_cont{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(2,30rem);
+    gap: 2rem;
+    /* display: flex;
+    flex-direction: row; */
+    justify-content: center;
 }
 .order_card{
   box-shadow: var(--light-shadow);
   padding:0.5rem;
   border-radius: var(--radius-low);
-  margin-top: 3rem;
-  width: 500px;
+  margin-top: 1rem;
+  width: 30rem;
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  /* border: 2px solid blue; */
 }
 .order_id{
     display: flex;
@@ -352,14 +356,24 @@ input:focus{
 }
 .buy_pro{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 3.3rem;
-    margin-top: 0.5rem;
+    /* flex-direction: column; */
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0.5rem 0.5rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: var(--radius-low);
+    border: 1px solid var(--clr-grey-8);
+    width: 200px;
+    overflow-x: hidden;
 }
 .another_one{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+}
+.prof_pic{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
 .cont_buy_img{
     display: flex;
@@ -368,11 +382,35 @@ input:focus{
 .cont_buy{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    padding: 0.3rem;
+    font-size: 0.7rem;
+}
+
+.cont_buy_mobile{
+  font-size: 0.6rem;
+}
+.cont_buy_buyer{
+  font-size: 0.6rem;
+  color: var(--clr-primary-6);
+}
+.cont_buy_buyer>span{
+  margin-left: 0.2rem;
 }
 .viewmore{
     display: flex;
     align-items: center;
-    margin-top: 1.5rem;
+}
+.viewmore_btn{
+  color: var(--clr-primary-6);
+  font-size: 0.9rem;
+  /* text-decoration: underlinei; */
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+}
+.viewmore_btn:hover{
+  color: var(--clr-primary-4);
+  border-bottom: 2px solid var(--clr-primary-8);
 }
 .order_comp{
     display: flex;
@@ -392,3 +430,4 @@ input:focus{
     margin-left: 0.3rem;
 
 }
+

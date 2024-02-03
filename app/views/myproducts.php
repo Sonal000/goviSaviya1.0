@@ -57,10 +57,126 @@
         </div>
 
         
+    <div class="productdes">
+        <div class="product_des_view_cont" id="product_des_view_cont">
+            <div class="des_cont">
+           <div class="productname">
+                <p class="product_name">Product Name : </p>
+                <p class="p_det"> <?php echo $item->name ?></p>
+           </div>
+           <!--<div class="productrating">
+                <div class="stars">
+                    <i class="fas fa-star star_img"></i>
+                    <i class="fas fa-star star_img"></i>
+                    <i class="fas fa-star star_img"></i>
+                    <i class="fas fa-star star_img"></i>
+                 </div>
+                 <div class="rate">
+                    3.5/5
+                </div>
+            </div>-->
+           <div class="productprice">
+           <p class="product_price">Product price :</p>
+           <p class="p_det"><?php echo $item->price ?> /<?php echo $item->unit ?></p>
+           
+           </div>
+           <div class="productavailability">
+                <div class="sold">
+                <p class="amount_sold">Amount Sold :</p>
+                <p class="p_det">50Kg</p>   
+                </div>
+                <div class="available">
+                <p class="available_stock">Available Stock :</p>
+                <p class="p_det"><?php echo $item->stock ?> <?php echo $item->unit ?></p>
+                
+                </div>
+           </div>
+           <div class="prodes">
+           <p class="product_des">Product Description :</p>
+           <p class="p_det"><?php echo $item->description; ?></p>
+           </div>
+           </div>
+           <div class="btn_cont">
+           
+            <div class="edit_but">
+                <button class="edit_details_btn" id="edit_details_btn">Update</button>
+            </div>
+            <div class="del_btn">
+            <button class="delete_btn" ><a href="<?php echo URLROOT ?>/myproducts/delete/<?php echo $item->item_id ?>">Delete</a></button>
+            </div>
+        
+        </div>
+        
+        </div>
+            <!-- edit part -->
+        <div class="product_des_edit_cont" id="product_des_edit_cont">
+            <form class="form_cl" method="post" action="<?php echo URLROOT; ?>/myproducts/update/<?php echo $item->item_id ?>">
+        <div class="des_cont_edit">
+           <div class="productname">
+                <p class="product_name edit_one">Product Name : </p>
+                <input class="field_margin" type="text" name="name" value="<?php echo $item ->name?>">
+            </div>
+           <!--<div class="productrating">
+                <div class="stars">
+                    <i class="fas fa-star star_img"></i>
+                    <i class="fas fa-star star_img"></i>
+                    <i class="fas fa-star star_img"></i>
+                    <i class="fas fa-star star_img"></i>
+                 </div>
+                 <div class="rate">
+                    3.5/5
+                </div>
+            </div>-->
+           <div class="productprice">
+           <p class="product_price edit_one">Product price :</p>
+           <input class="field_size_small" type="text" name="price" value="<?php echo $item ->price ?>">
+           <input class="field_size_small" type="text" name="unit" value="<?php echo $item ->unit ?>">
+           
+           </div>
+           <div class="productavailability">
+                <div class="sold">
+                <p class="amount_sold edit_one">Amount Sold :</p>
+                <p class="p_det edit_one">50Kg</p>   
+                </div>
+                <div class="available">
+                <p class="available_stock edit_one">Available Stock :</p>
+                <input class="field_size_small" type="text" name="stock" value="<?php echo $item ->stock?>">
+                <input class="field_size_small" type="text" name="unit" value="<?php echo $item ->unit ?>">
+                </div>
+           </div>
+           <div class="prodes">
+           <p class="product_des edit_two">Product Description :</p>
+           <input class="field_size_large edit_one" type="text" name="description" value="<?php echo $item ->description ?>">
+           
+           </div>
+            </div>
+           <div class="btn_cont_edit">
+           
+           <div class="edit_but">
+               <button class="edit_details_btn" id="edit_details_btn" type="submit">Save</button>
+           </div>
+           <div class="del_btn">
+           <button class="delete_btn">Cancel</button>
+           </div>
+       
+       </div>
+       </form>
+        </div>
+        
+            </div>
+
+       
+
+       
+        
+        </div>
+         <!--
+        <div class="product_des_edit_cont" id="product_des_edit_cont">
         <div class="productdes">
            <div class="productname">
-                <?php echo $item->name ?>
-           </div>
+                <p class="product_name">Product Name : </p>
+                <input type="text" name="name" value="<?php echo $item ->name?>">
+            </div>
            <div class="productrating">
                 <div class="stars">
                     <i class="fas fa-star star_img"></i>
@@ -73,30 +189,35 @@
                 </div>
             </div>
            <div class="productprice">
-           <?php echo $item->price ?> /<?php echo $item->unit ?>
+           <p class="product_price">Product price :</p>
+           <input type="text" name="price" value="<?php echo $item ->price ?>">
+           <input type="text" name="unit" value="<?php echo $item ->unit ?>">
+           
            </div>
            <div class="productavailability">
                 <div class="sold">
-                    Sold 50Kg
+                <p class="amount_sold">Amount Sold :</p>
+                <p class="p_det">50Kg</p>   
                 </div>
                 <div class="available">
-                <?php echo $item->stock ?>
+                <p class="available_stock">Available Stock :</p>
+                <input type="text" name="stock" value="<?php echo $item ->stock?>">
+                <input type="text" name="unit" value="<?php echo $item ->unit ?>">
                 </div>
            </div>
            <div class="prodes">
-           <?php echo $item->description; ?>.
+           <p class="product_des">Product Description :</p>
+           <input type="text" name="description" value="<?php echo $item ->description ?>">
+           
            </div>
 
         </div>
-        </div>
+        </div> -->
+            
 
-        <div class="delete_btn_cont">
-            <!-- <form action="<?php echo URLROOT ?>/myproducts/delete/<?php echo $item->item_id ?>" method="post"> -->
-            <a class="delete_btn" href="<?php echo URLROOT ?>/myproducts/delete/<?php echo $item->item_id ?>">     <i class="fas fa-trash-alt delete_icon"></i></a>
-        <!-- </form> -->
+            
 
-   </a>
-        </div>
+       
     </div>
     <?php 
         }
@@ -194,6 +315,7 @@
 <!-- js === -->
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/myproduct.js"></script>
 
 </body>
 </html>

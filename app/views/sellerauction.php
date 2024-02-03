@@ -37,6 +37,12 @@
         <div class="createbt">
             <a href="<?php echo URLROOT; ?>/CreateAuction"><button class="btn">Create Auction</button></a>
         </div>
+
+        <?php 
+        if($data['items']){
+            foreach($data['items'] as $items){
+
+           ?>
         <div class="mycard" id="blur">
 
             <div class="productimg">
@@ -46,11 +52,11 @@
             <div class="post_left">
                 <div class="pro_detail">
                     <div class="pro_name">
-                        Mango - 5Kg
+                        <?php echo $items->name; ?> -  <?php echo $items->stock; ?><?php echo $items->unit; ?>
                     </div>
                     <div class="pro_location">
                         <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                        Walimada
+                        <?php echo $items->district; ?>
                     </div>
                     <div class="pro_exp">
                         Exp : 12 sep 2023
@@ -61,7 +67,7 @@
                         <p><a href="" class="highest_bidder">Santhush Fernando</a> is leading</p>
                     </div>
                     <div class="bidcount">
-                        Bid count : 4
+                        Bid count : <?php echo $items->bid_Count ;?>
                     </div>
                     
                 </div>
@@ -70,7 +76,7 @@
             <div class="post_right">
                 <div class="high_bid">
                     <div class="base_price">
-                        Rs 2000
+                        Rs <?php echo $items->price ;?>
                     </div>
                     <div class="current_highest">
                         Highest Bid - Rs 2050
@@ -80,124 +86,44 @@
                     </div>
                 </div>
                 <div class="update_edit_bt">
-                    <botton class="aucbt_post btn"><a href="">Update Post</a></botton>
-                    <botton class="aucbt_post btn"><a href="" onclick="toggle()">End Auction </a></botton>
+                   <a href="<?php echo URLROOT;?>/auctionC/endAuction/<?php echo $items->auction_ID ?>"><botton class="aucbt_post btn" type="submit" id="end_auc_btn">End Auction</botton></a>
                 </div>
             </div>
          </div>
-        </div>
-        <div class="mycard">
-            <div class="productimg">
-                <img src="<?php echo URLROOT; ?>/assets/images/guava.png" class="mango" alt="">
-            </div>
-            
-            <div class="left_right_container">
-            <div class="post_left">
-                <div class="pro_detail">
-                    <div class="pro_name">
-                        Guava - 10Kg
-                    </div>
-                    <div class="pro_location">
-                        <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                        NuwaraEliya
-                    </div>
-                    <div class="pro_exp">
-                        Exp : 12 sep 2023
-                    </div>
-                </div>
-                <div class="bid_detail">
-                    <div class="bidder_name">
-                        <p><a href="" class="highest_bidder">Sonal Induwara</a> is leading</p>
-                    </div>
-                    <div class="bidcount">
-                        Bid count : 7
-                    </div>
-                    
-                </div>
-            </div>
 
-            <div class="post_right">
-                <div class="high_bid">
-                    <div class="base_price">
-                        Rs 1500
-                    </div>
-                    <div class="current_highest">
-                        Highest Bid - Rs 3000
-                    </div>
-                    <div class="remaining_time">
-                        15 hours remaining
-                    </div>
-                </div>
-                <div class="update_edit_bt">
-                    <botton class="aucbt_post btn"><a href="">Update Post</a></botton>
-                    <botton class="aucbt_post btn"><a href="" onclick="toggle()">End Auction</a></botton>
-                </div>
-            </div>
         </div>
-        </div>
-        <div class="mycard">
-            <div class="productimg">
-                <img src="<?php echo URLROOT; ?>/assets/images/banana.webp" class="mango" alt="">
-            </div>
-           
-            <div class="left_right_container">
-            <div class="post_left">
-                <div class="pro_detail">
-                    <div class="pro_name">
-                        Banana - 15Kg
-                    </div>
-                    <div class="pro_location">
-                        <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                        Colombo
-                    </div>
-                    <div class="pro_exp">
-                        Exp : 12 sep 2023
-                    </div>
-                </div>
-                <div class="bid_detail">
-                    <div class="bidder_name">
-                        <p><a href="" class="highest_bidder">Nipul Yansith</a> is leading</p>
-                    </div>
-                    <div class="bidcount">
-                        Bid count : 5
-                    </div>
-                    
-                </div>
-            </div>
 
-            <div class="post_right">
-                <div class="high_bid">
-                    <div class="base_price">
-                        Rs 2400
+        <!---
+        <div class="pop_up" id="window_up">
+                <div class="window">
+                    <div class="sure">
+                        <p>Are you Sure ?</p>
                     </div>
-                    <div class="current_highest">
-                        Highest Bid - Rs 3500
-                    </div>
-                    <div class="remaining_time">
-                        12 hours remaining
+                    <div class="button_hold">
+                        <button type="submit" class="yes_btn btn">Yes</button>
+                        <button type="submit" class="no_btn btn">No</button>
                     </div>
                 </div>
-                <div class="update_edit_bt">
-                    <botton class="aucbt_post btn"><a href="">Update Post</a></botton>
-                    <botton class="aucbt_post btn"><a href="" onclick="toggle()">End Auction</a></botton>
-                </div>
-            </div>
         </div>
-        </div>
-        <div id="popup">
-            <p>Are you Sure?</p>
-            <div class="yes_or_no">
-                <botton class="aucbt_post btn"><a href="" onclick="toggle()">Yes</a></botton>
-                <botton class="aucbt_post btn"><a href="" onclick="toggle()">No</a></botton>
-            </div>
-        </div>
+            -->
+
+        <?php
+    }
+    }
+
+    ?>
+
+        <!-- Confirmation pop-up -->
+       
+
+        
     </div>
 </div>
 
 
 
 
-<!-- content end============================ -->
+
   </div>
 
 </div>
@@ -206,15 +132,7 @@
 <!-- js === -->
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
-<script type="text/javascript">
-    function toggle(){
-        var blur = document.getElementById('blur');
-        blur.classList.toggle('active');
-        var popup = document.getElementById('popup');
-        popup.classList.toggle('active');
-    }
-
-</script>
+<script src="<?php echo URLROOT ?>/assets/js/sellerauction.js"></script>
 
 
 </body>

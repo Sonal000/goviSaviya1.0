@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title> <?php echo  $data['itemName']?></title>
+ <title> <?php echo  $data['items']->name;?></title>
  <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
  <link
  rel="stylesheet"
@@ -58,9 +58,9 @@
 </div>
 <div class="item_description">
   <div class="item_title_cont">
-    <p class="item_name">Onions</p>
+    <p class="item_name"><?php echo $data['items']->name;?></p>
     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-    <p class="item_address">Thalgahawawa</p>
+    <p class="item_address"><?php echo $data['items']->address;?></p>
     <div class="item_rating">
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
@@ -70,15 +70,15 @@
          </div>
   </div>
   <div class="item_price_cont">
-    <p class="item_price">2000 / <span>kg</span></p>
-    <p class="item_available">50 / <span>kg available</span>  </p>
+    <p class="item_price"><?php echo $data['items']->price;?> / <span><?php echo $data['items']->unit;?></span></p>
+    <p class="item_available"><?php echo $data['items']->stock;?> / <span><?php echo $data['items']->unit;?> available</span>  </p>
   </div>
   <div class="item_bid_cont">
-    <p class="item_bids">10 <span>bids</span></p>
+    <p class="item_bids"><?php echo $data['items']->bid_Count;?> <span>bids</span></p>
     <p class="item_time">  24/<span>h left</span>  </p>
   </div>
   <div class="item_desc_cont">
-    <p class="item_desc">Savor the pure, organic goodness of our sun-kissed mangoes, cultivated in pesticide-free orchards. Experience nature's sweetness at its finest.</p>
+    <p class="item_desc"><?php echo $data['items']->description;?></p>
   </div>
   <div class="item_btns_cont">
     <div class="qty_btn_cont">
