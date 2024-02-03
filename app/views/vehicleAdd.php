@@ -6,59 +6,270 @@
     <title>Seller_Auction</title>
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/myproducts.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/sellerauction.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css"> 
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/vehicleAdd.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 
- 
-<h2>Vehicle Information Form</h2>
-    <form action="process_form.php" method="post">
-        <div class="container">
+<?php
+ require APPROOT. '/views/layouts/navbar2.php'; 
+ ?>
+
+<div class="main_container">
+
+<?php 
+   require APPROOT. '/views/layouts/deliverySidebar.php';  ?>
+
+<div class="container_content">
+
+<div class="profile">
+<h2>Add New Vehicle</h2>
+
+    <form action="<?php echo URLROOT; ?>/deliveryVehicles/add" method="post" enctype="multipart/form-data">
+
+    <!--------------------------------------------This is Card 1------------------------------------------>
+<div class="card">
+    <h4>Section 1: Vehicle Infomation</h4>  
+    <div class="container">
             <div class="column">
                 <div class="form-group">
-                    <label for="vehicle_type">Vehicle Type:</label>
-                    <input class="input_field" type="text" name="vehicle_type" id="vehicle_type" required>
-                </div>
-                <div class="form-group">
-                    <label for="vehicle_number">Vehicle Number:</label>
-                    <input class="input_field" type="text" name="vehicle_number" id="vehicle_number" required>
-                </div>
+                    <label for="brand">Vehicle Type: <sup>*</sup></label>
+                    <select name="type" class="form_details_dropdown <?php echo (!empty($data['type_error'])) ? 'is-invalid' : ''; ?>">
+                        <option value="">Select Vehicle Type</option>
+                        <option value="Container Truck" <?php echo ($data['type'] === 'Container Truck') ? 'selected' : ''; ?>>Container Truck</option>
+                        <option value="Delivery Truck" <?php echo ($data['type'] === 'Delivery Truck') ? 'selected' : ''; ?>>Delivery Truck</option>
+                        <option value="Van" <?php echo ($data['type'] === 'Van') ? 'selected' : ''; ?>>Delivery Van</option>
+                        <option value="Pickup Truck" <?php echo ($data['type'] === 'PickupTruck') ? 'selected' : ''; ?>>Pick-up Truck</option>
+                        <option value="Car" <?php echo ($data['type'] === 'Car') ? 'selected' : ''; ?>>Car</option>
+                        <option value="Three Wheeler" <?php echo ($data['type'] === 'Three-Wheeler') ? 'selected' : ''; ?>>Three-Wheeler</option>  
+                        <option value="Bike" <?php echo ($data['type'] === 'Bike') ? 'selected' : ''; ?>>Delivery Bike</option>      
+                    </select>
 
+                      <!-- <span class="invalid-feedback"><?php echo $data['type_error']; ?></span> -->
+                </div>  
                 <div class="form-group">
-                    <label for="max_capacity">Maximum Capacity (In kgs): <br></label>
-                    <input class="max_cap" type="number" name="max_capacity" id="max_capacity" required>
+                    <label for="brand">Vehicle Brand:</label>
+                    <input class="form_details <?php echo (!empty($data['brand_error'])) ? 'is-invalid' : ''; ?>" type="text" name="brand" id="brand" required>
+                    <!-- <span class="invalid-feedback"><?php echo $data['brand_error']; ?></span> -->
                 </div>
-
+                
+            <div class="form-group">
+                    <label for="model">Vehicle Model: <br></label>
+                    <input class="form_details <?php echo (!empty($data['model_error'])) ? 'is-invalid' : ''; ?>" type="text" name="model" id="model" required>
+                    <!-- <span class="invalid-feedback"><?php echo $data['model_error']; ?></span> -->
+                    
+                </div>
 
                
+
+            
+            <div class="form-group">
+                    <label for="vehicle_img">Image of the Vehicle: <br></label>
+                    <input class="form_details <?php echo (!empty($data['vehicle_img_error'])) ? 'is-invalid' : ''; ?>" type="file" name="vehicle_img" id="vehicle_img" accept="image/*" required>
+                    <br><small class="form-text text-muted">Upload a picture of the vehicle. Accepted formats: JPG, JPEG, PNG, GIF.</small>
+                    <!-- <span class="invalid-feedback"><?php echo $data['vehicle_img_error']; ?></span> -->
+                </div>
+             
             </div>
             <div class="column">
 
             <div class="form-group">
-                    <label for="vehicle_brand">Vehicle Brand:</label>
-                    <input class="input_field" type="text" name="vehicle_brand" id="vehicle_brand" required>
+                <label for="fuel_type">Vehicle Fuel Type: <br></label>
+                <select class="form_details <?php echo (!empty($data['fuel_type_error'])) ? 'is-invalid' : ''; ?>" name="fuel_type" id="fuel_type" required>
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Electric">Fully - Electric</option>
+                </select>
+                <!-- <span class="invalid-feedback"><?php echo $data['fuel_type_error']; ?></span> -->
+            </div>
+
+
+                <div class="form-group">
+                    <label for="year">Year of Manufacture:</label>
+                    <input class="form_details <?php echo (!empty($data['year_error'])) ? 'is-invalid' : ''; ?>" type="text" name="year" id="year" required>
+                    <!-- <span class="invalid-feedback"><?php echo $data['year_error']; ?></span> -->
                 </div>
 
                 <div class="form-group">
-                    <label for="vehicle_model">Vehicle Model:</label>
-                    <input class="input_field" type="text" name="vehicle_model" id="vehicle_model" required>
+                    <label for="milage">Current mileage: (In Kms)</label>
+                    <input class="form_details <?php echo (!empty($data['milage_error'])) ? 'is-invalid' : ''; ?>" type="text" name="milage" id="milage" required>
+                    <!-- <span class="invalid-feedback"><?php echo $data['milage_error']; ?></span> -->
                 </div>
 
-                <div class="form-group">
-                    <label for="vehicle_model">Vehicle Manufacturing Year:</label>
-                    <input class="input_field" type="text" name="vehicle_year" id="vehicle_year" required>
-                </div>
                 
             </div>
         </div>
+</div>
+
+        <!--------------------------------------------This is Card 2------------------------------------------>
+
+        <!-- <div class="card">
+    <h4>Section 2: Driving Licence Details</h4>  
+    <div class="container">
+            <div class="column">
+                <div class="form-group">
+                    <label for="licenseNo">Driving Licence Number:</label>
+                    <input class="form_details <?php echo (!empty($data['licenseNo_error'])) ? 'is-invalid' : ''; ?>" type="text" name="licenceNo" id="licenceNo" required>
+                    <span class="invalid-feedback"><?php echo $data['licenseNo_error']; ?></span>
+                </div>
+                <div class="form-group">
+                    <label for="doi">Driving License Date of Issue: <br></label>
+                    <input class="form_details <?php echo (!empty($data['doi_error'])) ? 'is-invalid' : ''; ?>" type="date" name="doi" id="doi" required>
+                    <span class="invalid-feedback"><?php echo $data['doi_error']; ?></span>
+                </div>
+             
+            </div>
+            <div class="column">
+
+                <div class="form-group">
+                    <label for="doe">Driving License Date of Expiry: <br></label>
+                    <input class="form_details <?php echo (!empty($data['doe_error'])) ? 'is-invalid' : ''; ?>" type="date" name="doe" id="doe" required>
+                    <span class="invalid-feedback"><?php echo $data['doe_error']; ?></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="license_imgs">Driving License Images: <br></label>
+                    <input class="form_details <?php echo (!empty($data['license_imgs_error'])) ? 'is-invalid' : ''; ?>" type="file" name="license_imgs" id="license_imgs" accept="image/*" required>
+                    <br><small class="form-text text-muted">Upload images of your driving license. Accepted formats: JPG, JPEG, PNG, GIF.</small>
+                    <span class="invalid-feedback"><?php echo $data['license_imgs_error']; ?></span>
+                </div>
+
+                
+            </div>
+        </div>
+</div> -->
+        
+        <!--------------------------------------------This is Card 3------------------------------------------>
+
+        <div class="card">
+    <h4>Section 2: Registration and Insurance</h4>  
+    <div class="container">
+            <div class="column">
+                <div class="form-group">
+                    <label for="vehicleNo">Vehicle License plate number: (ex- WP AAA-0000)</label>
+                    <input class="form_details <?php echo (!empty($data['vehicleNo_error'])) ? 'is-invalid' : ''; ?>" type="text" name="vehicleNo" id="vehicleNo" required>
+                    <!-- <span class="invalid-feedback"><?php echo $data['vehicleNo_error']; ?></span> -->
+                </div>
+
+                <div class="form-group">
+                    <label for="front_img">Front Image: <br></label>
+                    <input class="form_details <?php echo (!empty($data['front_img_error'])) ? 'is-invalid' : ''; ?>" type="file" name="front_img" id="front_img" accept="image/*" required>
+                    <br><small class="form-text text-muted">Picture showing the frontal perspective of the vehicle, with the license plate clearly visible. Accepted formats: JPG, JPEG, PNG, GIF.</small>
+                    <!-- <span class="invalid-feedback"><?php echo $data['front_img_error']; ?></span> -->
+                </div>
+
+                <div class="form-group">
+                    <label for="back_img">Back Image: <br></label>
+                    <input class="form_details <?php echo (!empty($data['back_img_error'])) ? 'is-invalid' : ''; ?>" type="file" name="back_img" id="back_img" accept="image/*" required>
+                    <br><small class="form-text text-muted">"Picture showing the rear perspective of the vehicle, with the license plate clearly visible. Accepted formats: JPG, JPEG, PNG, GIF.</small>
+                    <!-- <span class="invalid-feedback"><?php echo $data['back_img_error']; ?></span> -->
+                </div>
+
+                <div class="form-group">
+                <label for="insurance_status">Vehicle Insurance status: <br></label>
+                <select class="form_details <?php echo (!empty($data['doe_error'])) ? 'is-invalid' : ''; ?>" name="insurance_status" id="insurance_status" required>
+                    <option value="Full Insurance">Full Insurance</option>
+                    <option value="Third Party">Third-party</option>
+                    <option value="No Insurance">No Insurance</option>
+                </select>
+                <!-- <span class="invalid-feedback"><?php echo $data['doe_error']; ?></span> -->
+            </div>
+
+                
+             
+            </div>
+            <div class="column">
+
+           
+               
+               
+
+                <div class="form-group">
+                    <label for="ins_expiry">Current vehicle insurance expires on: <br></label>
+                    <input class="form_details <?php echo (!empty($data['rev_expiry_error'])) ? 'is-invalid' : ''; ?>" type="month" name="rev_expiry" id="rev_expiry" required>
+                    <!-- <span class="invalid-feedback"><?php echo $data['rev_expiry_error']; ?></span> -->
+                </div>
+
+
+            
+
+                <div class="form-group">
+                    <label for="insurance_imgs">Vehicle Insurance images: <br></label>
+                    <input class="form_details <?php echo (!empty($data['insurance_imgs_error'])) ? 'is-invalid' : ''; ?>" type="file" name="insurance_imgs" id="insurance_imgs" accept="image/*" required>
+                    <br><small class="form-text text-muted">Upload images of your vehicle insurance. <br>Accepted formats: JPG, JPEG, PNG, GIF.</small>
+                    <!-- <span class="invalid-feedback"><?php echo $data['insurance_imgs_error']; ?></span> -->
+                </div>
+
+                <div class="form-group">
+                    <label for="rev_expiry">Current revenue license expires on: <br></label>
+                    <input class="form_details <?php echo (!empty($data['rev_expiry_error'])) ? 'is-invalid' : ''; ?>" type="month" name="ins_expiry" id="ins_expiry" >
+                    <!-- <span class="invalid-feedback"><?php echo $data['rev_expiry_error']; ?></span> -->
+                </div>
+
+
+                <div class="form-group">
+                    <label for="rev_license_imgs">Revenue License images: <br></label>
+                    <input class="form_details <?php echo (!empty($data['rev_license_imgs_error'])) ? 'is-invalid' : ''; ?>" type="file" name="rev_license_imgs" id="rev_license_imgs" accept="image/*" required>
+                    <br><small class="form-text text-muted">Upload images of your revenue license.<br>Accepted formats: JPG, JPEG, PNG, GIF.</small>
+                    <!-- <span class="invalid-feedback"><?php echo $data['rev_license_imgs_error']; ?></span> -->
+                </div>
+
+                
+            </div>
+        </div>
+</div>
+
+        <!--------------------------------------------This is Card 4------------------------------------------>
+
+        <div class="card">
+    <h4>Section 3: Capacity and Refrigeration:</h4>  
+    <div class="container">
+            <div class="column">
+            <div class="form-group">
+                    <label for="max_vol">Vehicle Max-volume in liters: (Cubic meters) <br></label>
+                    <input class="form_details <?php echo (!empty($data['max_vol_error'])) ? 'is-invalid' : ''; ?>" type="number" name="max_vol" id="max_vol" required>
+                    
+                    <!-- <span class="invalid-feedback"><?php echo $data['max_vol_error']; ?></span> -->
+                </div>
+                <div class="form-group">
+                    <label for="capacity">Vehicle Max-weight capacity in kilograms: <br></label>
+                    <input class="form_details <?php echo (!empty($data['capacity_error'])) ? 'is-invalid' : ''; ?>" type="number" name="capacity" id="capacity" required>
+                    
+                    <!-- <span class="invalid-feedback"><?php echo $data['capacity_error']; ?></span> -->
+                </div>
+             
+            </div>
+            <div class="column">
+
+            <div class="form-group">
+                <label for="ref_cap">Refrigeration Capability:<br></label>
+                <select class="form_details <?php echo (!empty($data['ref_cap_error'])) ? 'is-invalid' : ''; ?>" name="ref_cap" id="ref_cap" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    
+                </select>
+                <!-- <span class="invalid-feedback"><?php echo $data['doe_error']; ?></span> -->
+            </div>
+
+               
+                
+            </div>
+        </div>
+</div>
+        
+
+        <!--------------------------------------------This is Card 5------------------------------------------>
+
         <div class="submit_button">
             <input type="submit" value="Submit">
         </div>
+
+</div>
+</div>
+</div>
+
     </form>
 </body>
 </html>

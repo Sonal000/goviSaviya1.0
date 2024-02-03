@@ -17,9 +17,14 @@
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
- <?php
- require APPROOT. '/views/layouts/deliverySidebarWithoutImg.php'; 
- ?>
+
+<div class="main_container">
+
+<?php 
+   require APPROOT. '/views/layouts/deliverySidebar.php';  ?>
+
+<div class="container_content">
+
 <div class="profile">
     <div class="auction_page">
         <div class="hed">
@@ -56,7 +61,7 @@
             </div>
             <div class="order_details_head">
                     Delivered the Product? </div>
-                <botton class="addphoto_button"><a href="<?php echo URLROOT; ?>/DeliveryConfirmQualityDropoff"> Arrived to the Destination</a></botton>
+                <botton class="addphoto_button"><a href="<?php echo URLROOT; ?>/Orders/delivered"> Arrived to the Destination</a></botton>
             </div>  
              
                 </div>
@@ -89,6 +94,8 @@
         </div>
         </div>
     </div>
-</div>
+
+    <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+
 </body>
 </html>

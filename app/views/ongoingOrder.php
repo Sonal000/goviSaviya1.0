@@ -14,13 +14,23 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
- <?php
- require APPROOT. '/views/layouts/deliverySidebarWithoutImg.php'; 
- ?>
-<div class="profile">
+
+
+
+<div class="main_container">
+  
+  <?php 
+   require APPROOT. '/views/layouts/deliverySidebar.php';  ?>
+
+    <!-- items -->
+  <div class="container_content">
+    
+
+  <div class="profile">
     <div class="auction_page">
         <div class="hed">
             Order Details
@@ -76,7 +86,7 @@
             <div class="right_side">
              
             <div class="update_edit_btnn">
-                    <botton class="accept_order_btnnn"><a href="<?php echo URLROOT; ?>/DeliveryConfirmQualityPickup"><i class="fa-solid fa-circle-check"></i>  Picked-up</a></botton>
+                    <botton class="accept_order_btnnn"><a href="<?php echo URLROOT; ?>/Orders/pickedup"><i class="fa-solid fa-circle-check"></i>  Picked-up</a></botton>
                     <!-- <botton class="ignore_order_btnnn"><a href="<?php echo URLROOT; ?>/DeliveryConfirmQualityPickup"><i class="fa-solid fa-ban"></i>  Confirm Quality</a></botton> -->
              
             </div>
@@ -99,6 +109,36 @@
             
         </div>
         </div>
+
+
+  </div>
+
+</div>
+
+
+<!-- js === -->
+<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
     </div>
 </div>

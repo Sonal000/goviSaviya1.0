@@ -17,13 +17,17 @@
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
- <?php
- require APPROOT. '/views/layouts/deliverySidebarWithoutImg.php'; 
- ?>
+
+<div class="main_container">
+
+<?php 
+   require APPROOT. '/views/layouts/deliverySidebar.php';  ?>
+
+<div class="container_content">
 <div class="profile">
     <div class="auction_page">
         <div class="hed">
-            Confirming the quality of the delivery
+            
         </div>
         
         
@@ -45,7 +49,7 @@
               
 
                 
-                <botton class="addphoto_button"><a href="<?php echo URLROOT; ?>/DeliveryCompletedOrder">  View Completed Orders</a></botton>
+                <botton class="addphoto_button"><a href="<?php echo URLROOT; ?>/Orders/complete">  View Completed Orders</a></botton>
             </div>  
              
                 </div>
@@ -78,6 +82,6 @@
         </div>
         </div>
     </div>
-</div>
+    <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 </body>
 </html>

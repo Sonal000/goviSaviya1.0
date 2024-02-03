@@ -478,6 +478,15 @@ min-width: 150px;
 .profile_details_cont{
  margin:2rem 0;
 }
+
+.detail_cont{
+  margin: 1rem 0;
+}
+
+.vehicle_detail_cont{
+  margin: 0.5rem 0;
+}
+
 .edit_details_btn_cont{
  margin: 0.5rem 0;
  display: flex;
@@ -497,7 +506,7 @@ min-width: 150px;
 }
 
 .detail_name{
- font-size: 0.8rem;
+ font-size: 1.0rem;
  color: var(--clr-grey-4);
  font-weight: 600;
  letter-spacing: 2px;
