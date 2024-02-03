@@ -1,85 +1,36 @@
-:root {
-    /* dark shades of primary color*/
-    --clr-primary-1: #38803A;
-    --clr-primary-2:#3E8E41;
-    --clr-primary-3:#449C47;
-    --clr-primary-4: #4BAA4E;
-    /* primary/main color */
-    /* --clr-primary-5: #D7FCDB; */
-    --clr-primary-5: #4CAF4F;
-    /* lighter shades of primary color */
-    --clr-primary-6: #71C174;
-    --clr-primary-7: #8ECD90;
-    --clr-primary-8: #C6FBCB;
-    --clr-primary-9: #D7FCDB;
-    --clr-primary-10: #ECFEEE;
-  
-  
-  /* Secondry color */
-    --clr-secondry-1: #FFC933;
-    --clr-secondry-2: #FFC31F;
-    --clr-secondry-3: #FFBE0A;
-    --clr-secondry-4: #F5B400;
-    --clr-secondry-5: #E0A500;
-  
-  /* red color */
-    --clr-red-1: #E42535;
-    --clr-red-2: #E63946;
-    --clr-red-3: #E94957;
-    
-    /* white color */
-    --clr-white: #fff;
-  
-  
-  
-    /* darkest grey - used for headings */
-    --clr-grey-1: hsl(209, 31%, 19%);
-    --clr-grey-2: hsl(211, 28%, 26%);
-    --clr-grey-3: hsl(209, 34%, 30%);
-    --clr-grey-4: hsl(209, 28%, 39%);
-    /* grey used for paragraphs */
-    --clr-grey-5: hsl(210, 22%, 49%);
-    --clr-grey-6: hsl(209, 23%, 60%);
-    --clr-grey-7: hsl(211, 27%, 70%);
-    --clr-grey-8: hsl(210, 31%, 80%);
-    --clr-grey-9: hsl(212, 33%, 89%);
-    --clr-grey-10: hsl(210, 36%, 96%);
-  
-  
-  
-    --font-primary:  'Nunito', sans-serif;;
-    --transition: all 0.3s linear;
-    --spacing: 0.25rem;
-    --spacing-low: 0.15rem;
-    --radius-high: 1rem;
-    --radius-low: 0.5rem;
-    --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-  /*
-  =============== 
-  Global Styles
-  ===============
-  */
-  
+
+
   .card-title{
     font-size: 32px;
     font-weight: 500;
   }
 
   .card-body{
-    margin: 2rem 2rem;
+    /* margin: 2rem 2rem; */
     padding: 2rem;
     align-items: center;
     text-align: center;
+    width: 30%;
+    min-width: 230px;
   }
 
   .main-container{
     display: flex;
-    flex-direction: row;
-   
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    gap: 1rem;
+  
   }
 
+  .profile{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+
+  }
   .more_details_btn{
     margin-top:1rem ;
     background: var(--clr-primary-8);
@@ -93,9 +44,64 @@
   .more_details_btn:hover{
     background-color: var(--clr-primary-5);
     color: white;
-    font-size: 15px;
+    
   }
 
+  .add_logo{
+    margin-top: 0.3rem;
+    font-size: 40px;
+    color: var(--clr-primary-7);
+    cursor: pointer;
+    
+  }
+.add_logo>a{
+  color: var(--clr-primary-7);
+  transition: 0.5s;
+}
+
+.add_logo>a:hover{
+  color: var(--clr-primary-4);
+}
+  .add_logo:hover{
+    color: var(--clr-primary-4);
+
+  }
+
+  .card-subtitle_plus{
+    font-size: 24px;
+  }
+  
+  .vehicle_img{
+    width: 250px; /* Set the desired width */
+    height: 150px; /* Set the desired height */
+    object-fit: cover;
+    margin: 1rem;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px var(--clr-primary-7);
+  }
+
+  .subtitle_card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  /* add_logo{
+    box-shadow: 4px 4px 8px var(--clr-primary-7);
+  } */
+
+  .info_heading{
+    font-weight: 500;
+  }
+
+  .hed{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    font-size: 24px;
+  }
   
 
 
