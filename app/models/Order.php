@@ -94,6 +94,7 @@ if (!$this->db->execute()) {
                     items_market i ON o_items.item_id = i.item_id
                 WHERE
                     o_items.seller_id = :seller_id
+                ORDER BY o_items.order_date DESC
                 ";
             
             $this->db->query($query);
@@ -109,6 +110,52 @@ if (!$this->db->execute()) {
 
 
 
+    public function getBuyerOrders($buyer_id){
+        $query ="SELECT  
+        o_items.*,
+        u_seller.name AS seller_name,
+        u_seller.address AS seller_address,
+        u_seller.mobile AS seller_mobile,
+        u_seller.city AS seller_city,
+        s.prof_img AS seller_img,
+        COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
+            COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+        i.item_img,
+        i.name AS item_name,
+        i.unit AS item_unit
+    FROM
+        -- order_items
+        order_items o_items
+    JOIN
+        orders od ON o_items.order_id = od.order_id    
+    JOIN 
+        sellers s ON o_items.seller_id = s.seller_id
+    JOIN 
+        users u_seller ON s.user_id = u_seller.user_id
+    JOIN 
+        buyers b ON o_items.buyer_id = b.buyer_id
+    JOIN 
+        users u_buyer ON b.user_id = u_buyer.user_id
+    LEFT JOIN 
+        delivers d ON o_items.deliver_id = d.deliver_id
+    LEFT JOIN 
+        users u_deliver ON d.user_id = u_deliver.user_id
+    JOIN
+        items_market i ON o_items.item_id = i.item_id
+    WHERE
+        o_items.buyer_id = :buyer_id
+    ORDER BY o_items.order_date DESC
+    ";
+
+$this->db->query($query);
+$this ->db ->bind(':buyer_id',$buyer_id);
+$row=$this->db->resultSet();
+if($row){
+    return $row;
+}else{
+    return false;
+}
+}
 
 
 

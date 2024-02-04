@@ -34,9 +34,9 @@
         <div class="hed">
             Auction
         </div>
-        <div class="createbt">
+        <!-- <div class="createbt">
             <a href="<?php echo URLROOT; ?>/CreateAuction"><button class="btn">Create Auction</button></a>
-        </div>
+        </div> -->
 
         <?php 
         if($data['items']){
@@ -46,7 +46,7 @@
         <div class="mycard" id="blur">
 
             <div class="productimg">
-                <img src="<?php echo URLROOT; ?>/assets/images/mango.jpeg" class="mango" alt="">
+                <img src="<?php echo URLROOT."/store/items/".$items->item_img; ?>" class="mango" alt="">
             </div>
          <div class="left_right_container">
             <div class="post_left">

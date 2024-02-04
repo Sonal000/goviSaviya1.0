@@ -29,7 +29,7 @@
                       <p>List new</p>
                     </button>
                 </a>
-                <a href="<?php echo URLROOT ?>/auctionC/myAuctions/<?php echo $_SESSION['seller_id'] ?>">
+                <a href="<?php echo URLROOT ?>/auctionC/items">
                     <button class="sidebar_item expand_item link" id="view_item_auction">
                     <i class="fas fa-poll-h sidebar_icon"></i>
                       <p>Current items</p>
