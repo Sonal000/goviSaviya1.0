@@ -7,8 +7,6 @@
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/myproducts.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/sellerauction.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/deliveryVehicleEdit.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -27,10 +25,15 @@
 
 <div class="profile">
    
-        <div class="hed">
-            Vehicle Edit Details
-        </div>
-
+                <div class="hed">
+                    Vehicle Edit Details
+                </div>
+                
+                <div class="vehicle_details">
+                        <div class="card-subtitle"><span class="info_heading">Brand:</span> <?php echo $data['brand']?> </div>
+                        <div class="card-subtitle"><span class="info_heading">Model:</span> <?php echo $data['model']?> </div>
+                        <div class="card-subtitle"><span class="info_heading">Vehicle Number:</span> <?php echo $data['vehicleNo']?> </div>
+                    </div>
         <div class="main-container">
             
            
@@ -65,7 +68,7 @@
                     
                     
 
-            <div class="form-group">
+            <div class="form-group ref-cap">
                 <label for="ref_cap">Refrigeration Capability:<br></label>
                 <select class="form_details <?php echo (!empty($data['ref_cap_error'])) ? 'is-invalid' : ''; ?>" name="ref_cap" id="ref_cap" required>
                     <option value="Yes">Yes</option>
@@ -77,13 +80,13 @@
 
              
             <div class="form-group">
-                    <label for="vehicle_img">Image of the Vehicle: <br></label>
+                    <label for="vehicle_img">Change the Image of the Vehicle: <br></label>
                     <input class="form_details <?php echo (!empty($data['vehicle_img_error'])) ? 'is-invalid' : ''; ?>" type="file" name="vehicle_img" id="vehicle_img" accept="image/*">
                     <br><small class="form-text text-muted">Upload a picture of the vehicle. Accepted formats: JPG, JPEG, PNG, GIF.</small>
                     <!-- <span class="invalid-feedback"><?php echo $data['vehicle_img_error']; ?></span> -->
                 </div>
              
-
+                <div class="submit_button"><input type="submit" class="submit_btnn" value="Submit"></div>
                     
                         
                     </div>
@@ -92,7 +95,7 @@
 
 
  
-                    <input type="submit" class="submit_btn" value="Submit">
+                   
 
                     </div>
                     </form>

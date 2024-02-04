@@ -105,6 +105,29 @@
             }
         }
 
+        
+        public function updateVehicleCom($data){
+            $this->db->query('UPDATE vehicle SET insurance_status = :insurance_status, ins_expiry = :ins_expiry, 
+                              insurance_imgs =:insurance_imgs, rev_expiry = :rev_expiry, rev_license_imgs = :rev_license_imgs 
+                              WHERE vehicle_id = :id');
+             
+              //bind Values
+                      $this->db->bind(':id',$data['id']);
+                      $this->db->bind(':insurance_status',$data['insurance_status']);
+                      $this->db->bind(':ins_expiry',$data['ins_expiry']);
+                      $this->db->bind(':insurance_imgs',$data['insurance_imgs']);
+                      $this->db->bind(':rev_expiry',$data['rev_expiry']);
+                      $this->db->bind(':rev_license_imgs',$data['rev_license_imgs']);
+                      
+                     
+               if($this->db->execute()){   
+                  return true;
+               }else{
+                  return false;
+                  }
+               
+          }
+
     }
 
 ?>
