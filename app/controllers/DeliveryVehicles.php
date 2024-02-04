@@ -44,7 +44,7 @@ class DeliveryVehicles extends Controller{
             // Check if a new image file is uploaded
             $vehicleImg = isset($_FILES['vehicle_img']['tmp_name']) && $_FILES['vehicle_img']['error'] == UPLOAD_ERR_OK
                 ? $this->uploadFile('vehicle_img', $uploadDirectory)
-                : ''; // If no new file is uploaded, set to empty string
+                : $this->VehicleModel->getVehicleById($id)->vehicle_img; // Use existing image filename if no new file is uploaded
     
             $data = [
                 'user_id' => $_SESSION['user_id'],
@@ -55,11 +55,13 @@ class DeliveryVehicles extends Controller{
                 'max_vol' => trim($_POST['max_vol']),
                 'ref_cap' => trim($_POST['ref_cap']),
                 
+                
                 'capacity_error' => '',
                 'milage_error' => '',
                 'vehicle_img_error' => '',
                 'max_vol_error' => '',
                 'ref_cap_error' => '',
+                
             ];
     
             // Validation
@@ -107,9 +109,13 @@ class DeliveryVehicles extends Controller{
     
             $data = [
                 'id' => $id,
+
+                'brand' => $vehicle->vehicle_brand,
+                'model' => $vehicle->vehicle_model,
+                'vehicleNo' => $vehicle->vehicle_number,
                 'capacity' => $vehicle->max_capacity,
                 'milage' => $vehicle->milage,
-                // 'vehicle_img' =>  $vehicleImg,
+                'vehicle_img' => $vehicle->vehicle_img,
                 'rev_expiry' => $vehicle->rev_expiry,
                 // 'rev_license_imgs'=>$revLicenseImgs,
                 'insurance_status' => $vehicle->insurance_status,
@@ -348,6 +354,133 @@ class DeliveryVehicles extends Controller{
             $this->view('vehicleAdd',$data);
         }
     }
+
+    public function editCom($id){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST Array
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+            // Image Upload
+            $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/vehicles/';
+
+            $revLicenseImgs = isset($_FILES['rev_license_imgs']['tmp_name']) && $_FILES['rev_license_imgs']['error'] == UPLOAD_ERR_OK
+            ? $this->uploadFile('rev_license_imgs', $uploadDirectory)
+            : $this->VehicleModel->getVehicleById($id)->rev_license_imgs; // Use existing image filename if no new file is uploaded
+
+            $insuranceImgs = isset($_FILES['insurance_imgs']['tmp_name']) && $_FILES['insurance_imgs']['error'] == UPLOAD_ERR_OK
+            ? $this->uploadFile('insurance_imgs', $uploadDirectory)
+            : $this->VehicleModel->getVehicleById($id)->insurance_imgs; // Use existing image filename if no new file is uploaded
+            $data = [
+                'id' => $id,
+                'user_id' =>$_SESSION['user_id'],
+                'rev_expiry'=>trim($_POST['rev_expiry']),
+                'rev_license_imgs'=>$revLicenseImgs,
+                'insurance_status'=>trim($_POST['insurance_status']),
+                'insurance_imgs'=> $insuranceImgs,
+                'ins_expiry'=>trim($_POST['ins_expiry']),
+    
+                //'user_id' => $_SESSION['user_id'],
+                
+                'rev_expiry_error'=>'',
+                'rev_license_imgs_error'=>'',
+                'insurance_status_error'=>'',
+                'insurance_imgs_error'=>'',
+                'ins_expiry_error'=>'',
+            ];
+    
+            // Validation
+            if(empty($data['rev_expiry'])){
+                $data['rev_expiry_error'] = 'Please enter the maximum weight';
+            }
+    
+            if(empty($data['rev_license_imgs'])){
+                $data['rev_license_imgs_error'] = 'Please enter the milage of the vehicle';
+            }
+    
+            if(empty($data['insurance_status'])){
+                $data['insurance_status_error'] = 'Please enter the maximum volume';
+            }
+    
+            if(empty($data['insurance_imgs'])){
+                $data['insurance_imgs_error'] = 'Please select the refregiration capability';
+            }
+
+            if(empty($data['ins_expiry'])){
+                $data['ins_expiry_error'] = 'Please select the refregiration capability';
+            }
+        
+            // Make sure there are no errors
+            if(empty($data['rev_expiry_error']) 
+                && empty($data['rev_license_imgs_error']) && empty($data['insurance_status_error'])
+                && empty($data['insurance_imgs_error'])
+                && empty($data['ins_expiry_error'])){
+    
+                // Validated
+                if($this->VehicleModel->updateVehicleCom($data)){
+                    // Successfully Updated!
+                    redirect('deliveryVehicles/show/' . $data['id']);
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load the view with errors
+                $this->view('deliveryVehiclesComEdit', $data);
+            }
+        } else {
+            // Get existing post from model
+            $vehicle = $this->VehicleModel->getVehicleById($id);
+
+            
+    
+            // Check for owner
+            if($vehicle->user_id != $_SESSION['user_id']){
+                redirect('deliveryVehicles');
+            }
+    
+            $data = [
+
+                'id' => $id,
+                'rev_expiry'=>$vehicle->ins_expiry,
+                'rev_license_imgs'=>$vehicle->rev_license_imgs,
+                'insurance_status'=>$vehicle->insurance_status,
+                'insurance_imgs' => $vehicle->insurance_imgs,
+                'ins_expiry'=>$vehicle->ins_expiry,
+    
+                //'user_id' => $_SESSION['user_id'],
+                
+                'rev_expiry_error'=>'',
+                'rev_license_imgs_error'=>'',
+                'insurance_status_error'=>'',
+                'insurance_imgs_error'=>'',
+                'ins_expiry_error'=>'',
+
+                // 'id' => $id,
+                // 'capacity' => $vehicle->max_capacity,
+                // 'milage' => $vehicle->milage,
+                // // 'vehicle_img' =>  $vehicleImg,
+                // 'rev_expiry' => $vehicle->rev_expiry,
+                // // 'rev_license_imgs'=>$revLicenseImgs,
+                // 'insurance_status' => $vehicle->insurance_status,
+                // // 'insurance_imgs'=> $insuranceImgs,
+                // 'max_vol' => $vehicle->max_vol,
+                // 'ref_cap' => $vehicle->ref_cap,
+    
+                // 'capacity_error' => '',
+                // 'milage_error' => '',
+                // 'vehicle_img_error' => '',
+                // 'rev_expiry_error' => '',
+                // 'rev_license_imgs_error' => '',
+                // 'insurance_status_error' => '',
+                // 'insurance_imgs_error' => '',
+                // 'max_vol_error' => '',
+                // 'ref_cap_error' => '',
+            ];   
+            $this->view('deliveryVehiclesComEdit', $data);
+        }
+    }
+
+
 
    
 
