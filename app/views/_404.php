@@ -3,7 +3,8 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Oops! |  <?php echo $data['message'] ?> </title>
+ <title>Oops!   <?php echo isset($data['message'])? "| ".$data['message']:null ?> </title>
+ <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
  <link
  rel="stylesheet"
  href="<?php echo URLROOT ?>/assets/fontawesome-free-5.15.4-web/css/all.min.css">
@@ -105,6 +106,7 @@
      We’re sorry. We can’t find the page you’re looking for.
      </h2>
      <h3>Please try again..!</h3>
+     <h5><?php echo isset($data['description'])?$data['description']:null ?></h5>
     
     </div>
    </div>

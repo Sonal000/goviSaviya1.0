@@ -121,6 +121,9 @@ document.addEventListener("DOMContentLoaded", function () {
     sidebarItem.forEach(function (otherItem) {
       otherItem.classList.remove("sidebar_active");
     });
+
+
+    
     if (currentLocation.includes("marketplace")) {
       marketplaceLink.classList.add("sidebar_active");
       marketplaceLink_m.classList.add("sidebar_active");

@@ -85,4 +85,21 @@
     public function rowCount(){
       return $this->stmt->rowCount();
     }
+
+        // Begin a transaction
+        public function beginTransaction(){
+          return $this->dbh->beginTransaction();
+      }
+  
+      // Commit the current transaction
+      public function commit(){
+          return $this->dbh->commit();
+      }
+  
+      // Roll back the current transaction
+      public function rollBack(){
+          return $this->dbh->rollBack();
+      } 
+
+
   }

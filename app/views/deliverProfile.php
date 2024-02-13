@@ -35,9 +35,13 @@
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
- <?php
- require APPROOT. '/views/layouts/deliverySidebarWithoutimg.php'; 
- ?>
+
+<div class="main_container">
+
+<?php 
+   require APPROOT. '/views/layouts/deliverySidebar.php';  ?>
+
+<div class="container_content">
  
 
     <!-- <div class="profile">
@@ -381,4 +385,5 @@
 <!-- js === -->
 <script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/deliverProfile.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 </body>

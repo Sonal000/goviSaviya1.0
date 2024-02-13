@@ -176,7 +176,7 @@
       </div>
 
 
-
+      
 
       <div class="profile_details_cont">
       <div class="about_title">

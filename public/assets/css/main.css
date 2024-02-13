@@ -6,6 +6,7 @@ Fonts
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Courgette&family=Nunito&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /*
 =============== 
@@ -59,11 +60,15 @@ Variables
 
   /* --font-primary:  'Nunito', sans-serif; */
   /* --font-primary:  'Lato', sans-serif; */
-  --font-primary: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-secondry: "Courgette", cursive;
+  --font-primary: "Poppins", sans-serif;
+  --font-secondry: "Poppins", sans-serif;
   --transition: all 0.3s linear;
-  --spacing: 0.25rem;
-  --spacing-low: 0.15rem;
+
+  --spacing: 0.12rem;
+  --spacing-low: 0.10rem;
+
+  
+
   --radius-high: 1rem;
   --radius-low: 0.5rem;
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -184,6 +189,32 @@ p {
   }
   p {
     font-size: 0.7rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1;
+  }
+}
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  h3 {
+    font-size: 0.75rem;
+  }
+  h4 {
+    font-size: 0.6rem;
+  }
+  body {
+    font-size: 0.5rem;
+  }
+  p {
+    font-size: 0.5rem;
   }
   h1,
   h2,
@@ -751,7 +782,6 @@ input:focus {
   width: calc(100vw - 15rem);
   height: 100%;
   overflow: scroll;
-  border: 2px solid red;
 }
 
 .main_sidebar_container {

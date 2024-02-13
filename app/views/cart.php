@@ -34,7 +34,7 @@
    foreach ($data['items'] as $item) {
 ?>
     <!-- item -->
-       <div class="cart_item_cont">
+       <div class="cart_item_cont" data-price="<?php echo $item->price; ?>" data-qty="<?php echo $item->qty; ?>">
 
         <div class="item_desc_wrapper">
     <div class="main_img_cont">
@@ -50,20 +50,23 @@
    </div>
    <div class="item_price_cont">
     <p class="item_price"><?php echo $item->price?> /<span>kg</span></p>
-    <p class="item_available"><?php echo $item->stock ?> /<span><?php echo $item->unit ?>
+    <!-- <p class="item_available"><?php echo $item->stock ?> /<span><?php echo $item->unit ?> -->
    </div>
   </div>
  </div>
   <div class="item_btns_cont">
+  </button>
+      <form action="<?php echo URLROOT; ?>/cart/delete" method="POST">
    <div class="delete_btn_cont">
-    <button class="delete_btn">
-     <i class="fas fa-trash-alt delete_icon"></i>
-   </button>
+   <input type="hidden" name="cart_id" value="<?php echo $item->cart_id; ?>">
+     <button class="delete_btn" name="delete_item" id="delete_item">
+       <i class="fas fa-trash-alt delete_icon"></i>
+   </form>
   </div>
   <div class="qty_btn_cont">
-     <button class="btn_remove">-</button>
-       <input class="qty" type="number" value="<?= intval($item->qty); ?>">
-     <button class="btn_add">+</button>
+      <!-- <button type="" class="btn_remove">-</button> -->
+    <input class="qty" type="number" value="<?= intval($item->qty); ?>">
+     <!-- <button class="btn_add">+</button> -->
    </div>
  </div>
 </div>
@@ -79,24 +82,24 @@
         <h4>Order Summery</h4>
         <div class="subtotal">
          <p>Subtotal</p>
-         <p class="value">50000</p>
+         <p class="subvalue">0</p>
         </div>
-        <div class="delivery">
+        <!-- <div class="delivery">
          <p>Delivery Fee</p>
          <p class="value">5000</p>
-        </div>
+        </div> -->
        </div>
        <div class="total_cont">
         <div class="total">
          <p>Total</p>
-         <p>55000</p>
+         <p class="totvalue">0</p>
         </div>
        </div>
        <div class="checkout_btn_cont">
-        <button class="checkout_btn btn">
+        <a href="<?php echo URLROOT."/cart/checkout"; ?>"  class="checkout_btn btn">
          Check Out 
          <i class="fas fa-arrow-right"></i>
-        </button>
+   </a>
        </div>
     </div>
   </div>

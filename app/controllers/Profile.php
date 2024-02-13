@@ -18,25 +18,34 @@ if($id===null){
 }else{
 
     $row=$this->sellerModel->getSellerInfo($id);
-    $items=$this->itemModel->getSellerItems($id);
+    if(!$row){
+      $data=[
+        "message"=>"No user Found!",
+        "description"=>"No user Found!"
+      ];
+      $this->view("_404",$data);  
+    }else{
 
-  
-  $data=[
-    "name"=>$row->name,
-    "address"=>$row->address,
-    "user_type"=>$row->user_type,
-    "city"=>$row->city,
-    "prof_img"=>$row->prof_img,
-    "cover_img"=>$row->cover_img,
-    "about"=>$row->about,
-    "items"=>$items,
-  ];
-  
-
-
-
-  $this->view("profile",$data);
-  
+      $items=$this->itemModel->getSellerItems($id);
+      
+      
+      $data=[
+        "name"=>$row->name,
+        "address"=>$row->address,
+        "user_type"=>$row->user_type,
+        "city"=>$row->city,
+        "prof_img"=>$row->prof_img,
+        "cover_img"=>$row->cover_img,
+        "about"=>$row->about,
+        "items"=>$items,
+      ];
+      
+      
+      
+      
+      $this->view("profile",$data);
+      
+    }
 }
 }
 

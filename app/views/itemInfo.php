@@ -17,11 +17,13 @@
 <body>
  <!-- navbar ======================= -->
 <?php
-if($_SESSION['user_type']=='buyer'){
+if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='buyer')){
   include APPROOT.'/views/layouts/mainNavbar.php';
 }
-else{
+else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
   include APPROOT.'/views/layouts/navbar2.php';
+}else{
+  include APPROOT.'/views/layouts/mainNavbar.php';
 }
    
 ?>
@@ -50,7 +52,7 @@ else{
     <div class="main_img_cont">
       <img class="main_img" src="<?php echo URLROOT.'/store/items/'.$data['item_img'] ;?>"> 
     </div>
-    <!-- <div class="img_slider_cont">
+    <div class="img_slider_cont">
       <button class="slider_btn">
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-1.png"/> 
       </button>
@@ -64,7 +66,7 @@ else{
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-3.png"/> 
       </button>
 
-    </div> -->
+    </div>
 </div>
 
 
@@ -90,12 +92,13 @@ else{
     <p class="item_desc"><?php echo $data['description'] ?></p>
   </div>
 
-  <form action="" method="post">
+
+  <form action="<?php echo URLROOT.'/marketplace/iteminfo/'.$data['item_id']; ?>" method="post">
   <div class="item_btns_cont">
     <div class="qty_btn_cont">
       <button class="btn_remove">-</button>
       <!-- <p class="qty">0</p> -->
-        <input class="qty" type="number" value="1" name="qty">
+        <input class="qty" type="number" value="1" name="qty" id="quantity">
       
       <button class="btn_add">+</button>
     </div>
