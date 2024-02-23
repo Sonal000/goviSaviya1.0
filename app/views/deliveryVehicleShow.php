@@ -63,7 +63,7 @@
                         <div class="more_details"><a href="<?php echo URLROOT;?>/deliveryVehicles/editCom/<?php echo $data['vehicle']->vehicle_id; ?>"><button class="more_details_btn edit_btn"><i class="fa-solid fa-truck"></i> Compliance Update</button></a></div>
                     </div>
                         <form action="<?php echo URLROOT; ?>/deliveryVehicles/delete/<?php echo $data['vehicle']->vehicle_id;?>;" class="pull-right" method="post">
-                         <div class="more_details"><input type="submit" value="Delete This Vehicle" class="more_details_btn dlt_btn"></div>
+                         <div class="more_details"><input type="submit" value="Delete This Vehicle " class="more_details_btn dlt_btn"></div>
                     </form>
                            
 

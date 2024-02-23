@@ -26,7 +26,7 @@
 <div class="profile">
    
         <div class="hed">
-            Delivery Vehicles
+            <h3>Delivery Vehicles</h3>
         </div>
 
         <div class="main-container">

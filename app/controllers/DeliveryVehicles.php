@@ -12,10 +12,12 @@ class DeliveryVehicles extends Controller{
     public function index(){
         //Get Vehicles
 
-        $vehicles = $this->VehicleModel->getVehicles();
+        $userId = $_SESSION['user_id'];
+        $vehicles = $this->VehicleModel->getVehicles($userId);
 
         $data = [
             'title'=>'welcome',
+            'id' => $userId,
             'vehicles' => $vehicles
         ];
         $this -> view('deliveryVehicles',$data);

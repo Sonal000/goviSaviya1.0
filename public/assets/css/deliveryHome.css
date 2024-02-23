@@ -1,0 +1,271 @@
+
+  /*
+  ===============
+  Global Styles
+  ===============
+  */
+  
+  
+  .mycardd{
+    box-shadow: var(--dark-shadow);
+    padding:4rem;
+    border-radius: var(--radius-low);
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+    justify-content: space-around;
+  
+  }
+
+
+  .left_side{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  
+  }
+  
+  .image_product{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  }
+  
+  .delivery_details{
+  
+   display: flex;
+   flex-direction: column;
+   font-size: medium;
+   justify-content: center;
+   margin: 1.5rem;
+  }
+    
+  /* This is right side buttons--------------------------------- */
+  
+  .right_side{
+    text-align: center;
+  }
+
+      .card_h{
+        font-size: medium;
+        font-weight: bold;
+      }
+
+      .num_complete{
+        font-size: x-large;
+        margin: 0.6rem;
+        font-weight: bold;
+      }
+
+      .number_of_growth{
+        color: var(--clr-primary-4);
+        font-weight: bold;
+        margin-bottom: 1rem ;
+      }
+
+      .square_card{
+        box-shadow: var(--dark-shadow);
+    padding:2rem 4rem;
+    
+    border-radius: var(--radius-low);
+    display: flex;
+    flex-direction: column;
+    margin: 0rem 3rem;
+    margin-bottom: 3rem;
+    
+      }
+
+      .more_details_button{
+        margin-top: 4rem;
+        font-weight: bold;
+          border: 2px solid #4BAA4E;
+          border-radius: var(--radius-low);
+          padding: 5px 18px;
+          transition: 0.5s;
+          
+        
+        
+        }
+
+        .more_details_button:hover{
+  
+          background-color: var(--clr-primary-7);
+          border: none;
+
+          
+          }
+
+.number_of_growth_red{
+  color: var(--clr-red-2);
+  font-weight: bold;
+        margin-bottom: 1rem ;
+}
+
+.hed h3{
+    font-size: 34px;
+    margin-bottom: 3rem;
+    letter-spacing: 0cm;
+}
+
+.subHed h3{
+    font-size: 20px;
+    margin-bottom: 1rem;
+}
+
+.card-ongoingOrder{
+    
+    max-width: 60%;
+    min-width: 60%;
+    padding: 2rem 5rem;
+}
+
+.card_heading{
+    font-size: 34px;
+}
+
+
+
+.image img{
+    margin-top: 1rem;
+    width: 90%;
+    border-radius: 8px;
+}
+
+.image{
+    flex: 0.8;
+}
+
+.image_details{
+    display: flex;
+    justify-content: space-between;
+    
+    align-items: center;
+}
+
+.order_details{
+    font-size: 18px; 
+}
+
+.details{
+    margin: 0.5rem;
+}
+.rate_details{
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    
+}
+
+.card_details{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.view_btn{
+    display: flex;
+    margin-top: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.first_col{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+    border-radius: 10px;
+}
+
+.card-orderStatus{
+    
+    padding: 2rem 5rem;
+}
+
+.card_heading_oos{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+
+
+.greeting-card {
+    background-color: #3e8e41;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(19, 139, 4, 0.1);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.greeting {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.date {
+    font-size: 16px;
+    color: white;
+}
+
+.weather {
+    font-size: 16px;
+    color: white;
+    margin-top: 10px;
+}
+
+.recomended_orders{
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.recomended_order_1 .recomended_order_2 .recomended_order_3{
+    max-width: 30%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.rec_odr_img img{
+    margin-top: 1rem;
+   
+    border-radius: 8px;
+    width: 350px; /* Adjust the width as per your requirement */
+    height: 200px; /* Adjust the height as per your requirement */
+    object-fit: cover;
+}
+
+.rec_odr_details_withBtn{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+}
+
+.rec_odr_h{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.rec_odr_img{
+    
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+}
+
+.see_all_btn{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display:flex ;
+    justify-content: center;
+}

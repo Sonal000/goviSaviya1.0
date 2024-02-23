@@ -889,6 +889,17 @@ input:focus {
   color: var(--clr-grey-3);
   letter-spacing: 0.1rem;
 }
+
+.sidebar_item p {
+  font-weight: 700;
+  
+}
+
+.expand_btn p{
+  font-weight: 700;
+  
+}
+
 .expand_btn > p {
   color: var(--clr-grey-3);
   letter-spacing: 0.1rem;
