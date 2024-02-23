@@ -6,9 +6,9 @@
             $this->db = new Database;
         }
 
-        public function getVehicles(){
-            $this->db->query('SELECT * FROM vehicle');
-
+        public function getVehicles($userId){
+            $this->db->query('SELECT * FROM vehicle WHERE user_id = :id');
+            $this->db->bind(':id',$userId);
             $results = $this->db->resultSet();
 
             return $results;

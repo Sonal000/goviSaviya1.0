@@ -7,7 +7,7 @@
  }
 
  input[type=text], select {
-    width: 100%;
+    width: 85%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -18,19 +18,25 @@
 
 
   input[type=submit] {
-    width: 30%;
-    background-color: #4CAF50;
-    color: white;
+    font-weight: 600;
+    width: 10%;
+    border: var(--clr-primary-5) 2.5px solid;
     padding: 14px 20px;
     margin: 20px 0;
-    border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.4s;
+    background-color: white;
   }
+
+  input[type=month] {
+    width: 85%;
+  }
+
 
   input[type=submit]:hover {
     background-color: #45a049;
+    color: white;
   }
 
   .admin_form {
@@ -167,7 +173,30 @@ color: var(--clr-primary-4);
 }
 #rev_expiry{
   margin-top: 0.55rem;
+  width: 85%;
+}
+#ins_expiry{
+  margin-top: 0.55rem;
+  width: 85%;
+  margin-bottom: 0.5rem;
+  width: auto;
+}
+
+#insurance_imgs{
+  margin-top: 0.9rem;
   width: 100%;
+}
+#rev_expiry{
+  margin-top: 1.2rem;
+  margin-bottom: 2.5rem;
+  width: auto;
+}
+#rev_license_imgs{
+  margin-top:0.55rem ;
+}
+
+#back_img{
+  margin-top: 0.7rem;
 }
 
 

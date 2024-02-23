@@ -143,6 +143,9 @@
     margin-top: 1rem;
     margin-left: 1rem;
     font-size: 30px;
+    font-weight: bold;
+   
+    
   }
 
   .dlt_btn{
@@ -254,7 +257,9 @@ label {
   border: var(--clr-primary-3) solid 2px;
   transition: 0.5s;
   font-size: 16px;
-  
+  position: relative;
+  width: 20%;
+ 
 }
 
 .submit_btn:hover{
@@ -299,6 +304,11 @@ small{
     align-items: center;
     justify-content: center;
     margin: 2rem 0;
+}
+
+.submit_btn_class{
+    display: flex;
+    justify-content: center;
 }
 
 
