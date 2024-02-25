@@ -22,6 +22,8 @@ class Orders extends Controller{
         ];
         $this -> view('buyerOrders',$data);
     }
+    
+
 }
     public function complete(){
         $data = ['title'=>'welcome'];

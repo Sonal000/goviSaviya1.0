@@ -40,6 +40,9 @@
                     // Fetching weather forecast (You need to implement this part)
                     $weather_forecast = "Sunny"; // Example weather forecast
 
+                    // Set the time zone to Sri Lanka
+                    date_default_timezone_set('Asia/Colombo');
+
                     // Getting current date
                     $current_date = date("l, F j, Y");
 
@@ -49,8 +52,10 @@
                         $greeting_message = "Good morning, Respected Driver!";
                     } elseif ($current_hour >= 12 && $current_hour < 18) {
                         $greeting_message = "Good afternoon, Respected Driver!";
-                    } else {
+                    } elseif ($current_hour >= 18 && $current_hour < 21) {
                         $greeting_message = "Good evening, Respected Driver!";
+                    }else{
+                        $greeting_message = "Greetings, Respected Driver!";
                     }
                     ?>
 
