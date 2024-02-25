@@ -28,6 +28,7 @@
         if($loggedInUser){
             if(trim($loggedInUser->verification_code)==='verified'){
               $this->createSession($loggedInUser);
+              redirect('home');
             }else{
               redirect('register/verifyEmail/'.$loggedInUser->user_id);
 echo '<script>toggleLoginState(false);</script>';
@@ -83,12 +84,15 @@ echo '<script>toggleLoginState(false);</script>';
     $id=$user->user_type.'_id';
     $_SESSION[$id]=$data->$id;
 
-    redirect('/home');
+    if ($user->user_type == "buyer"){
+    }else{
+      redirect('orders');
+    }
   }
 
   public function logout(){
     $this->userModel->logout();
-    redirect('/home');
+    redirect('home');
   }
 
   

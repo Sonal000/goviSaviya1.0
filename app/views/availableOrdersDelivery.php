@@ -31,27 +31,38 @@
             Available Orders
         </div>
         
-        
+   
+        <?php 
+        if($data['orders']){
+            foreach($data['orders'] as $order){
+                ?>
 <!-- 1st Card------------------------------------------------------------------------------------- -->
 
         <div class="mycardd">
 
             <div class="productimg">
-                <img src="<?php echo URLROOT; ?>/assets/images/mango.jpeg" class="onion" alt="">
+                <img src="<?php echo URLROOT; ?>/store/items/<?php echo $order->item_img ?>" class="onion" alt="">
                 <div class="post_left">
                 <div class="pro_detail">
                     <div class="pro_name">
-                        Mango - 45kg
+                        
+                        <?php echo $order->item_name."-".$order->quantity." ".$order->item_unit; ?>
                     </div>
-                    <div class="pro_location">
+                    <div class="pro_location" style="text-transform:capitalize" >
                         <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                        Ella to Matara
+                       <?php echo $order->seller_city." to ".$order->order_city ?>
                     </div>
-                    <div class="addDate">
-                        Date Posted: 12 Sep 2023
+                    <div class="addDate"  style="display:flex; flex-direction:column; color:var('--clr-primary-5')">
+     <?php
+                                // Extracting date
+        $date = date("M-d", strtotime($order->order_date));
+        echo "<p style='color:var(--clr-primary-5)'>Ordered Date : " . $date."</p>";
+        $time = date("g:i A", strtotime($order->order_date));
+        echo "<p style='color:var(--clr-primary-5)'>Ordered At : " . $time."</p>";
+     ?>
                     </div>
                     <div class="details_view">
-                    <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/DeliveryOrderDetails">View Order Details</a></botton>
+                    <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/orders/<?php echo $order->order_item_id ?>">View Order Details</a></botton>
                     </div>
                 </div>
                 
@@ -69,153 +80,16 @@
         </div>
         
    <!-- 2nd Card------------------------------------------------------------------------------------- -->
-
-
-  
-   <div class="mycardd">
-
-<div class="productimg">
-    <img src="<?php echo URLROOT; ?>/assets/images/item-2.png" class="onion" alt="">
-    <div class="post_left">
-    <div class="pro_detail">
-        <div class="pro_name">
-            Onion - 5kg
-        </div>
-        <div class="pro_location">
-            <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-            Kandy to Colombo
-        </div>
-        <div class="addDate">
-            Date Posted: 12 Sep 2023
-        </div>
-        <div class="details_view">
-        <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/DeliveryOrderDetails">View Order Details</a></botton>
-        </div>
-    </div>
-    
-</div>
-</div>
-
-      
-    <div class="update_edit_bt">
-        <botton class="accept_order_btn"><a href="">Accept Order</a></botton>
-        <botton class="ignore_order_btn"><a href="">Don't Show</a></botton>
-    
-</div>
-
-
-</div>
-
-        <!-- 3rd Card------------------------------------------------------------------------------------- -->
-
+   <?php
+            }
+        }else{ ?>
         
-        <div class="mycardd">
+        <div> <p> no available orders </p></div>        
+        <?php
 
-            <div class="productimg">
-                <img src="<?php echo URLROOT; ?>/assets/images/guava.png" class="onion" alt="">
-                <div class="post_left">
-                <div class="pro_detail">
-                    <div class="pro_name">
-                        Guava - 50kg
-                    </div>
-                    <div class="pro_location">
-                        <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                        Rathnapura to Galle
-                    </div>
-                    <div class="addDate">
-                        Date Posted: 12 Sep 2023
-                    </div>
-                    <div class="details_view">
-                    <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/DeliveryOrderDetails">View Order Details</a></botton>
-                    </div>
-                </div>
-                
-            </div>
-            </div>
-         
-                  
-                <div class="update_edit_bt">
-                    <botton class="accept_order_btn"><a href="">Accept Order</a></botton>
-                    <botton class="ignore_order_btn"><a href="">Don't Show</a></botton>
-                
-            </div>
-            
-        
-        </div>
-
-        <!-- 4th Card-------------------------------------------->
-
-        
-        <div class="mycardd">
-
-            <div class="productimg">
-                <img src="<?php echo URLROOT; ?>/assets/images/item-9.png" class="onion" alt="">
-                <div class="post_left">
-                <div class="pro_detail">
-                    <div class="pro_name">
-                        Coconut - 25kg
-                    </div>
-                    <div class="pro_location">
-                        <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                        Kurunegala to Colombo
-                    </div>
-                    <div class="addDate">
-                        Date Posted: 11 Sep 2023
-                    </div>
-                    <div class="details_view">
-                    <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/DeliveryOrderDetails">View Order Details</a></botton>
-                    </div>
-                </div>
-                
-            </div>
-            </div>
-         
-                  
-                <div class="update_edit_bt">
-                    <botton class="accept_order_btn"><a href="">Accept Order</a></botton>
-                    <botton class="ignore_order_btn"><a href="">Don't Show</a></botton>
-                
-            </div>
-            
-        
-        </div>
-
-         <!-- 5th Card------------------------------------------------------------------ -->
-
-        
-         <div class="mycardd">
-
-<div class="productimg">
-    <img src="<?php echo URLROOT; ?>/assets/images/tomatoes.jpg" class="onion" alt="">
-    <div class="post_left">
-    <div class="pro_detail">
-        <div class="pro_name">
-            Tomatoes - 70kg
-        </div>
-        <div class="pro_location">
-            <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-            Nuwara Eliya to Kalutara
-        </div>
-        <div class="addDate">
-            Date Posted: 12 Sep 2023
-        </div>
-        <div class="details_view">
-        <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/DeliveryOrderDetails">View Order Details</a></botton>
-        </div>
-    </div>
-    
-</div>
-</div>
-
-      
-    <div class="update_edit_bt">
-        <botton class="accept_order_btn"><a href="">Accept Order</a></botton>
-        <botton class="ignore_order_btn"><a href="">Don't Show</a></botton>
-    
-</div>
+        } ?>
 
 
-</div>
             
         </div>
         </div>
