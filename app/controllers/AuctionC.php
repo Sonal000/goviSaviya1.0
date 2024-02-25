@@ -48,8 +48,8 @@ class AuctionC extends Controller{
 
     }
 
-    public function myAuctions($id){
-        $row=$this->auctionModel->myAuctionInfo($id);
+    public function items(){
+        $row=$this->auctionModel->myAuctionInfo($_SESSION['seller_id']);
         $data=[
             'items'=>$row
         ];
@@ -137,7 +137,8 @@ class AuctionC extends Controller{
                     'description' =>'',
                     'item_img'=>''
                   ];
-                  redirect('sellerauction',$data);
+                  redirect('AuctionC/items');
+                //   header()
             }else{
               echo '<script>
                     alert("add item failed");

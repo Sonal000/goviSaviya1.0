@@ -16,9 +16,9 @@ class Orders extends Controller{
         $this -> view('sellerOrder',$data);
     }
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='buyer'){
-        //     $orders = $this->orderModel->getSellerOrders($_SESSION['seller_id']);
+            $orders = $this->orderModel->getBuyerOrders($_SESSION['buyer_id']);
         $data=[
-            "orders"=>0,
+            "orders"=>$orders,
         ];
         $this -> view('buyerOrders',$data);
     }
