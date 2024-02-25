@@ -37,6 +37,9 @@
             <div class="greeting_card">
 
             <?php
+                    // Set your timezone
+                    date_default_timezone_set('Asia/Colombo');
+
                     // Fetching weather forecast (You need to implement this part)
                     $weather_forecast = "Sunny"; // Example weather forecast
 
@@ -49,8 +52,10 @@
                         $greeting_message = "Good morning, Respected Driver!";
                     } elseif ($current_hour >= 12 && $current_hour < 18) {
                         $greeting_message = "Good afternoon, Respected Driver!";
-                    } else {
+                    } elseif($current_hour >= 18 && $current_hour < 22) {
                         $greeting_message = "Good evening, Respected Driver!";
+                    }else{
+                        $greeting_message = "Greetings, Respected Driver!";
                     }
                     ?>
 
