@@ -242,7 +242,6 @@ $this ->db ->bind(':user_id',$id);
         $this ->db ->bind(':id',$user_id);
 
         $row = $this ->db -> single();
-
         //check row count
         if($this->db ->rowcount()>0){
             return $row;
