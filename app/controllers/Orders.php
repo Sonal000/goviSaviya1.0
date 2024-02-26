@@ -46,7 +46,6 @@ class Orders extends Controller{
 public function orderDetails($id){
     $order= $this->orderModel->getOrderDetails($id);
     $available = $this->orderModel->deliverAvailability($_SESSION['deliver_id']);
-    var_dump($available);
     $data=[
      "order"=>$order,
      "available"=>$available,
