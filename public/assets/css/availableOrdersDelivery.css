@@ -61,7 +61,9 @@
   Global Styles
   ===============
   */
-  
+  a {
+    color: var(--clr-gray-5) !important;
+  }
 
   .mycardd{
     box-shadow: var(--dark-shadow);

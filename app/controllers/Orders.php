@@ -3,10 +3,20 @@
 class Orders extends Controller{
     private $orderModel;
     public function __construct(){
-        $this->orderModel=$this->model("Order");     
+        $this->orderModel=$this->model("Order"); 
+        if(!isset($_SESSION['user_id'])){
+            $this -> view('_404');
+            exit;
+        }    
     }
 
-    public function index(){
+    public function index($id = null){
+        if(!$id==null){
+            $this->orderDetails($id);
+            exit;
+        }
+        
+
         $data = ['title'=>'welcome'];
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
             $orders = $this->orderModel->getSellerOrders($_SESSION['seller_id']);
@@ -22,7 +32,40 @@ class Orders extends Controller{
         ];
         $this -> view('buyerOrders',$data);
     }
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+            $orders = $this->orderModel->getDeliverOrders($_SESSION['deliver_id']);
+        $data=[
+            "orders"=>$orders,
+        ];
+        $this -> view('availableOrdersDelivery',$data);
+
+
+    }
 }
+
+public function orderDetails($id){
+    $order= $this->orderModel->getOrderDetails($id);
+    $available = $this->orderModel->deliverAvailability($_SESSION['deliver_id']);
+    var_dump($available);
+    $data=[
+     "order"=>$order,
+     "available"=>$available,
+ ];
+     $this->view('deliveryOrderDetails',$data);
+
+}
+
+public function acceptOrder($order_item_id){
+    $deliver_id= $_SESSION['deliver_id'];
+    $assign=$this->orderModel->assignDeliver($order_item_id,$deliver_id);
+    if($assign){
+        redirect('orders/ongoing');
+    }else{
+        redirect('orders');
+    }
+}
+
+
     public function complete(){
         $data = ['title'=>'welcome'];
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
@@ -33,8 +76,29 @@ class Orders extends Controller{
     }
     }
     public function ongoing(){
-        $data = ['title'=>'welcome'];
+    //     $file = fopen("LK.txt", "r");
 
+    // // Initialize an empty array to store postal codes
+    // $postalCodes = array();
+
+    // // Read each line from the file
+    // while (($line = fgets($file)) !== false) {
+    //     // Split the line by tabs
+    //     $fields = explode("\t", $line);
+    //     // Extract postal code and add it to the array
+    //     $postalCodes[] = $fields[1];
+    // }
+
+    // // Close the file
+    // fclose($file);
+
+    // Create data array to pass to the view
+    $data = [
+        'title' => 'welcome',
+        // 'postalCodes' => $postalCodes
+];
+
+    // var_dump($data);
     if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
         $this -> view('OngoingOrder',$data);
     }

@@ -33,7 +33,7 @@
                   <i class="fas fa-sort-down expand_icon"></i>
                 </button>
                 <div class="expand hide_expand">
-                <a href=" <?php echo URLROOT ?>/availableOrdersDelivery">
+                <a href=" <?php echo URLROOT ?>/orders">
                     <button class="sidebar_item expand_item link" id="add_item_auction">
                     <i class="fas fa-plus sidebar_icon" ></i>
                       <p>Available Orders</p>
