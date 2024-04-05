@@ -5,7 +5,7 @@
 const backBtn = document.querySelector('.back_btn');
 
 backBtn.addEventListener('click',()=>{
-  window.location.href =`${URLROOT}/auction`
+  window.location.href =`${URLROOT}/auctionC`
 })
 
 

@@ -13,8 +13,28 @@
 </head>
 <body>
 
-<!-- navbar ======================= -->
 <?php
+
+// valid params
+$validParamsPag =['category','sort','order','minPrice','maxPrice','city','minQty','maxQty','search'];
+$validParamsSort =['category','minPrice','maxPrice','city','minQty','maxQty','search'];
+
+
+// paramsFunction
+function paramString($validParams){
+  $queryParams = $_GET;
+  foreach ($queryParams as $param => $value) {
+     if (!in_array($param, $validParams)) {
+        unset($queryParams[$param]);
+      }
+  }
+
+
+  $paramString = http_build_query($queryParams);
+  return $paramString;
+}
+
+
  include APPROOT.'/views/layouts/mainNavbar.php';  
 ?>
  <!-- navbar end ======================= -->
@@ -28,14 +48,16 @@
 
      <div class="searchbar_cont ">
       <div class="searchbar_title_cont">
-        <h3 class="searchbar_title">Marketplace</h3>
+        <h3 class="searchbar_title">Auction</h3>
       </div>
       <div class="search_cont">
       <div class="searchbar">
-     <input class="search" placeholder="Search for Products">
-     <button class="search_btn">
+        <form id="searchForm">
+     <input class="search" placeholder="Search for Bidding"  name="search" value="<?php echo $data['search_term'] ?>" />
+     <button class="search_btn" type="submit" id="search_btn">
       <i class="fas fa-search search_icon"></i>
      </button>
+     </form>
     </div>
     <div class="searchbar_btn_cont">
   <button class="listing_btn " id="listing_btn">Listings</button>
@@ -45,94 +67,303 @@
 
   </div>
 
-  <div class="filter_cont ">
-   <button class="filter_btn" id="filter_btn_all">
-   <i class="fas fa-sliders-h img_filters"></i>
-   <p>filter</p>
-  </button>
-   <button class="filter_btn">
-    <p>Price</p>
-    <i class="fas fa-angle-right fa-rotate-90"></i>
-  </button>
-   <button class="filter_btn">
-    <p>Quantity</p>
-    <i class="fas fa-angle-right fa-rotate-90"></i>
-  </button>
- </div>
-
  </section>
+ <!-- search bar ========================== -->
+ 
+ <div class="path_container">
+     <!-- search words=========== -->
+ <?php if($data['search_term']){
+   ?>
+  <div class="search_terms_cont">
+    <p class="search_title">Results for </p>
+    <p class="search_term"> <?php echo $data['search_term']; ?></p>
+  </div>
+  <?php
+ } ?>
+ <!-- search words end=========== -->
+  <div class="path_section">
+    <div class="path_cont">
+     
+    <!-- <p>marketplace > </p> -->
+    <?php 
+   
+      if($data['category']){
+        foreach($data['category'] as $cat){
+          echo "<p class='path_item'>$cat</p>";
+        }
+      }
+      if($data['city']){
+        foreach($data['city'] as $city){
+          echo "<p class='path_item'>$city</p>";
+        }
+      }
+      if($data['priceRange']){
+        echo "<p class='path_item'>{$data['priceRange']}</p>";
+      }
+      if($data['qtyRange']){
+        echo "<p class='path_item'>{$data['qtyRange']}</p>";
+      }
+      ?>
+    </div>
+    <div class="sort_cont">
+      <p>Sort by: </p>
+      <?php  $params =paramString($validParamsSort); ?>
+      <button class="sorting_btn" id="sorting_btn"><span class="sorting_btn_txt" id="sorting_btn_txt">sorting</span><i class="fas fa-chevron-down"></i></button>
+      <div class="expand_sorting hide_expand_sorting" id="expand_sorting">
+      <ul>
+      <li>
+        <a href="?sort=created_at&order=desc<?php echo '&'.$params ?>" class="sorting_item">
+          Newest
+          <i class="fas fa-check sorting_check"></i>
+        </a>
+      </li>
+      <li>
+        <a href="?sort=price&order=desc<?php echo '&'.$params ?>" class="sorting_item">
+          Highest Price
+          <i class="fas fa-check sorting_check"></i>
+        </a>
+      </li>
+      <li>
+        <a href="?sort=price&order=asc<?php echo '&'.$params ?>" class="sorting_item">
+          Lowest Price
+          <i class="fas fa-check sorting_check"></i>
+        </a>
+      </li>
+      <li>
+        <a href="?sort=stock&order=desc<?php echo '&'.$params ?>" class="sorting_item">
+          Highest Stock
+          <i class="fas fa-check sorting_check"></i>
+        </a>
+      </li>
+      <li>
+        <a href="?sort=stock&order=asc<?php echo '&'.$params ?>" class="sorting_item">
+          Lowest Stock
+          <i class="fas fa-check sorting_check"></i>
+        </a>
+      </li>
+    </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
  <!-- search bar ========================== -->
   <div class="marketplace_container_sidebar">
     <!--  sidebar section===================== -->
 
- <section>
+    <section>
    <div class="sidebar" id="sidebar_filter">
-    <div class="close_btn_cont">
-     <button class="sidebar_close_btn" id="sidebar_close_btn">
-     <i class="fas fa-times"></i>
-     </button>
+    <!-- ======================== -->
+    <article class="card-group-item">
+      <form id="categoryForm" class="filter_form">
+      <div class="filter_title">
+     <h5>Categories</h5>
+     <i class="fas fa-angle-right fa-rotate-90 img_filters"></i>
     </div>
+    <button class="filter_btn_expand">
+    <h5>Categories</h5>
+      <i class="fas fa-angle-right fa-rotate-90 img_filters"></i>
+    </button>
+		<div class="filter_content ">
+			<div class="card_body">
+				<!-- <label class="form_check">
+				  <input class="form-check-input" type="checkbox" name="category" value="all">
+				  <span class="form-check-label">
+				   All
+				  </span>
+				</label>  -->
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="vegetables" name="category">
+				  <span class="form-check-label">
+				    Vegetables
+				  </span>
+				</label> <!-- form-check.// -->
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="fruits" name="category">
+				  <span class="form-check-label">
+				    Fruits
+				  </span>
+				</label>  <!-- form-check.// -->
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="spices" name="category">
+				  <span class="form-check-label">
+				    Spices
+				  </span>
+				</label>  <!-- form-check.// -->
+        
+			</div> <!-- card-body.// -->
+      <div class="filter_btn_cont">
+        <input type="submit" class="btn apply_btn" value="Apply" id="apply_category">
+      </div>
+    </div>
+  </form>
+  <form id="cityForm" class="filter_form">
+      <div class="filter_title">
+     <h5>Close by</h5>
+     <i class="fas fa-angle-right fa-rotate-90 img_filters"></i>
+    </div>
+    <button class="filter_btn_expand">
+    <h5>Close by</h5>
+      <i class="fas fa-angle-right fa-rotate-90 img_filters"></i>
+    </button>
+		<div class="filter_content ">
+			<div class="card_body">
+				<!-- <label class="form_check">
+				  <input class="form-check-input" type="checkbox" value="all" name="city">
+				  <span class="form-check-label">
+				   All
+				  </span>
+				</label>  -->
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="gampaha" name="city">
+				  <span class="form-check-label">
+				   Gampaha
+				  </span>
+				</label> <!-- form-check.// -->
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="colombo" name="city">
+				  <span class="form-check-label">
+				    Colombo
+				  </span>
+				</label> <!-- form-check.// -->
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="kaluthara" name="city">
+				  <span class="form-check-label">
+				    Kaluthara
+				  </span>
+				</label>  <!-- form-check.// --> 
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="matara" name="city">
+				  <span class="form-check-label">
+				    Matara
+				  </span>
+				</label>  <!-- form-check.// --> 
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="hambanthota" name="city">
+				  <span class="form-check-label">
+				    Hambanthota
+				  </span>
+				</label>  <!-- form-check.// --> 
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="polonnaruwa" name="city">
+				  <span class="form-check-label">
+				    Polonnaruwa
+				  </span>
+				</label>  <!-- form-check.// --> 
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="anuradhapura" name="city">
+				  <span class="form-check-label">
+				    Anuradhapura
+				  </span>
+				</label>  <!-- form-check.// --> 
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="rathnapura" name="city">
+				  <span class="form-check-label">
+				    Rathnapura
+				  </span>
+				</label>  <!-- form-check.// --> 
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="badulla" name="city">
+				  <span class="form-check-label">
+				    Badulla
+				  </span>
+				</label>  <!-- form-check.// --> 
+				<label class="form-check">
+				  <input class="form-check-input" type="checkbox" value="nuwaraeliya" name="city">
+				  <span class="form-check-label">
+				    Nuwara-Eliya
+				  </span>
+				</label>  <!-- form-check.// --> 
+			</div> <!-- card-body.// -->
+      <div class="filter_btn_cont">
+        <input type="submit" class="btn apply_btn" value="Apply" id="apply_city">
+      </div>
+    </div>
+  </form>
+
+  <form id="priceForm" class="filter_form">
     <div class="filter_title">
-     <p>Filters</p>
-     <i class="fas fa-sliders-h img_filters"></i>
+     <h5>Price</h5>
+     <i class="fas fa-angle-right fa-rotate-90 img_filters"></i>
     </div>
-    <div class="categories_cont">
-      <ul class="categories">
-        <li>
-           <button class="cat_btn">
-            <p>Vegitables</p>
-            <i class="fas fa-angle-right "></i>
-           </button>
-        </li>
-        <li>
-           <button class="cat_btn">
-            <p>Fruits</p>
-            <i class="fas fa-angle-right "></i>
-           </button>
-        </li>
-        <li>
-           <button class="cat_btn">
-            <p>Spices</p>
-            <i class="fas fa-angle-right "></i>
-           </button>
-        </li>
-        <li>
-           <button class="cat_btn">
-            <p>Coconut</p>
-            <i class="fas fa-angle-right"></i>
-           </button>
-        </li>
-        <li>
-           <button class="cat_btn">
-            <p>Floriculture</p>
-            <i class="fas fa-angle-right "></i>
-           </button>
-        </li>
-      </ul>
-    </div>
-    <div class="price_cont">
-      <div class="price_title">
-       <p>Price</p>
-       <i class="fas fa-angle-right fa-rotate-90"></i>
+    <button class="filter_btn_expand">
+    <h5>Price</h5>
+      <i class="fas fa-angle-right fa-rotate-90 img_filters"></i>
+    </button>
+    <div class="filter_content ">
+    <div class="price-input">
+        <div class="field">
+          <span>Min</span>
+          <input type="number" class="input-min" name="minPrice" value="0">
+        </div>
+        <div class="separator">:</div>
+        <div class="field">
+          <span>Max</span>
+          <input type="number" class="input-max" name="maxPrice" value="10000">
+        </div>
+      </div>
+
+      <div class="range-input">
+      <div class="slider_cont">
+        <div class="slider">
+          <div class="progress"></div>
+        </div>
+      </div>
+        <input type="range" class="range-min" min="0" max="10000" value="0" step="100">
+        <input type="range" class="range-max" min="0" max="10000" value="10000" step="100">
+      </div>
+
+      <div class="filter_btn_cont">
+        <input type="submit" class="btn apply_btn" value="Apply" id="apply_price">
       </div>
     </div>
-    <div class="quantity_cont">
-      <div class="quantity_title">
-       <p>Quantity</p>
-       <i class="fas fa-angle-right fa-rotate-90"></i>
+  </form>
+
+  <form id="quantityForm" class="filter_form">
+    <div class="filter_title">
+      <h5>Quantity</h5>
+    </div>
+    <button class="filter_btn_expand">
+    <h5>Quantity</h5>
+      <i class="fas fa-angle-right fa-rotate-90 img_filters"></i>
+    </button>
+<div class="filter_content">
+  <div class="quantity-input">
+    <div class="field">
+      <span>Min</span>
+      <input type="number" class="input-min-quantity" name="minQty" value="0">
+    </div>
+    <div class="separator">:</div>
+    <div class="field">
+      <span>Max</span>
+      <input type="number" class="input-max-quantity" name="maxQty" value="1000">
+    </div>
+  </div>
+
+  <div class="range-input-quantity">
+    <div class="slider_cont">
+      <div class="slider">
+        <div class="progress-quantity"></div>
       </div>
     </div>
-    <div class="closeby_cont">
-      <div class="closeby_title">
-       <p>Closeby</p>
-       <i class="fas fa-angle-right fa-rotate-90"></i>
-      </div>
-    </div>
-    <div class="filter_btn_cont">
-     <button class="btn apply_btn">Apply Filter</button>
-    </div>
+    <input type="range" class="range-min-quantity" min="0" max="1000" value="0" step="1">
+    <input type="range" class="range-max-quantity" min="0" max="1000" value="1000" step="1">
+  </div>
+  
+  <div class="filter_btn_cont">
+    <input type="submit" class="btn apply_btn" value="Apply" id="apply_quantity">
+  </div>
+</div>
+  </form>
+
+
+
+	</article>
+    <!-- ======================== -->
    </div>
  </section>
+
 
 
 
@@ -147,17 +378,30 @@
 <section class="items_section">
    <div class="items_cont">
 
+   
+   <?php 
+
+
+   if($data['items']){
+
+
+            foreach ($data['items'] as $item) {
+            ?>
+            
+
+
+
     <!-- item -->
-    <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
+    <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_ID ?>" class="item_btn">
 
      <div class="item">
       <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-1.png">
+       <img class="item_img" src="<?php echo URLROOT.'/store/items/'.$item->item_img ;?>">
        </div>
        <div class="item_desc">
         <div class="item_title_cont">
-         <p class="item_title">Fresh Mango</p>
-         <p class="item_bids"> 10 bids</p>
+         <p class="item_title"><?php echo $item->name; ?></p>
+         <p class="item_bids"> <?php echo $item->bid_Count; ?> bids</p>
         </div>
         <div class="item_rating">
         <i class="fas fa-star star_img"></i>
@@ -167,7 +411,7 @@
         <i class="fas fa-star star_img"></i>
         </div>
          <div class="item_price_cont">
-           <p class="item_price">1300 / <span>kg<span></span></p>
+           <p class="item_price">Rs <?php echo $item->price; ?>/<span>kg<span></span></p>
            <p class="item_time">24h / <span>left<span></span></p>
          </div>
        </div>
@@ -177,248 +421,39 @@
 </a>
     <!-- item end -->
 
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
 
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-2.png">
-       </div>
-       <div class="item_desc">
-       <div class="item_title_cont">
-         <p class="item_title">Onions</p>
-         <p class="item_bids"> 10 bids</p>
-        </div>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <div class="item_price_cont">
-           <p class="item_price">1300 / <span>kg<span></span></p>
-           <p class="item_time">24h / <span>left<span></span></p>
-         </div>
-       </div>
-      </div>
-      
-</a>
-    <!-- item end -->
+    <?php
 
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-3.png">
-       </div>
-       <div class="item_desc">
-       <div class="item_title_cont">
-         <p class="item_title">Carrots</p>
-         <p class="item_bids"> 10 bids</p>
-        </div>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <div class="item_price_cont">
-           <p class="item_price">1300 / <span>kg<span></span></p>
-           <p class="item_time">24h / <span>left<span></span></p>
-         </div>
-       </div>
-       
-      </div>
-      
-</a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-4.png">
-       </div>
-       <div class="item_desc">
-         <div class="item_title_cont">
-         <p class="item_title">Potato</p>
-         <p class="item_bids"> 10 bids</p>
-        </div>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <div class="item_price_cont">
-           <p class="item_price">1300 / <span>kg<span></span></p>
-           <p class="item_time">24h / <span>left<span></span></p>
-         </div>
-       </div>
-       
-      </div>
-      
-</a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-5.png">
-       </div>
-       <div class="item_desc">
-       <div class="item_title_cont">
-         <p class="item_title">Banana</p>
-         <p class="item_bids"> 10 bids</p>
-        </div>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <div class="item_price_cont">
-           <p class="item_price">1300 / <span>kg<span></span></p>
-           <p class="item_time">24h / <span>left<span></span></p>
-         </div>
-       </div>
-       
-      </div>
-      
-</a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-6.png">
-       </div>
-       <div class="item_desc">
-       <div class="item_title_cont">
-         <p class="item_title">Tomato</p>
-         <p class="item_bids"> 10 bids</p>
-        </div>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <div class="item_price_cont">
-           <p class="item_price">1300 / <span>kg<span></span></p>
-           <p class="item_time">24h / <span>left<span></span></p>
-         </div>
-       </div>
-       
-      </div>
-      
-</a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-7.png">
-       </div>
-       <div class="item_desc">
-       <div class="item_title_cont">
-         <p class="item_title">Onion</p>
-         <p class="item_bids"> 10 bids</p>
-        </div>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <div class="item_price_cont">
-           <p class="item_price">1300 / <span>kg<span></span></p>
-           <p class="item_time">24h / <span>left<span></span></p>
-         </div>
-       </div>
-       
-      </div>
-      
-</a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-8.png">
-       </div>
-       <div class="item_desc">
-       <div class="item_title_cont">
-         <p class="item_title">Potato</p>
-         <p class="item_bids"> 10 bids</p>
-        </div>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <div class="item_price_cont">
-           <p class="item_price">1300 / <span>kg<span></span></p>
-           <p class="item_time">24h / <span>left<span></span></p>
-         </div>
-       </div>
-       
-      </div>
-      
-</a>
-    <!-- item end -->
-
-    <!-- item -->
-    <a href="<?php echo URLROOT ?>/auction/itemInfo/10" class="item_btn">
-
-     <div class="item">
-      <div class="item_img_cont">
-       <img class="item_img" src="<?php echo URLROOT ?>/assets/images/item-9.png">
-       </div>
-       <div class="item_desc">
-       <div class="item_title_cont">
-         <p class="item_title">Coconut</p>
-         <p class="item_bids"> 10 bids</p>
-        </div>
-         <div class="item_rating">
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         <i class="fas fa-star star_img"></i>
-         </div>
-         <div class="item_price_cont">
-           <p class="item_price">1300 / <span>kg<span></span></p>
-           <p class="item_time">24h / <span>left<span></span></p>
-         </div>
-       </div>
-       
-      </div>
-      
-</a>
-    <!-- item end -->
+}
+  }else{
+            echo "<p class='items_text'>No items to show</p> ";
+          }
+            ?>
   
 
    </div>
-   
+   <?php if($data['totPages']>1){?>
+   <div class="pg_cont">
+  <?php 
+    $paramString=paramString($validParamsPag);
+  // $min =$data['page']-5;
+  $min =(($data['page']-5)>($data['totPages']-9))&&($data['totPages']>10)? ($data['totPages']-9):($data['page']-5);
+  $max =(($data['page']+4)<10)&&($data['totPages']>10)?10:($data['page']+4);
+  $prev=($data['page']-1)>0?($data['page']-1):1;
+  $next=($data['page']+1)<$data['totPages']?($data['page']+1):$data['totPages'];
+  echo "<a href='?page=$prev&$paramString'><i class='fas fa-arrow-left pg_prev'></i></a>";
+  for($j = $min>0 ?$min:1 ; $j<=($max<$data['totPages']? $max:$data['totPages']);$j++ ){
+    if($j==$data['page']){
+      echo "<a href='?page=$j&$paramString' class='current_pg pg_no'>$j</a> ";
+    }else{
+      echo "<a href='?page=$j&$paramString' class='pg_no'>$j</a> ";
+      
+    }
+  }
+  echo "<a href='?page=$next&$paramString'><i class='fas fa-arrow-right pg_next'></i></a>";
+?>     
+    </div>
+   <?php }?>
   </section>
   
   <!-- item container end======================== -->
@@ -451,3 +486,29 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

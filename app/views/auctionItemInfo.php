@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title> <?php echo  $data['items']->name;?></title>
+ <title> <?php echo  $data['name'];?></title>
  <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
  <link
  rel="stylesheet"
@@ -38,9 +38,9 @@
 
 <div class="image_container">
     <div class="main_img_cont">
-      <img class="main_img" src="<?php echo URLROOT ?>/assets/images/item-7.png"/> 
+      <img class="main_img" src="<?php echo URLROOT ?>/store/items/<?php echo $data['item_img'] ?>"/> 
     </div>
-    <div class="img_slider_cont">
+    <!-- <div class="img_slider_cont">
       <button class="slider_btn">
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-7.png"/> 
       </button>
@@ -54,13 +54,13 @@
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-3.png"/> 
       </button>
 
-    </div>
+    </div> -->
 </div>
 <div class="item_description">
   <div class="item_title_cont">
-    <p class="item_name"><?php echo $data['items']->name;?></p>
-    <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-    <p class="item_address"><?php echo $data['items']->address;?></p>
+    <p class="item_name"><?php echo $data['name'];?></p>
+    <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller:<?php echo $data['seller_name'];?> <span><i class="fas fa-check-circle"></i></span></a>
+    <p class="item_address"><?php echo $data['seller_city'];?></p>
     <div class="item_rating">
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
@@ -70,15 +70,19 @@
          </div>
   </div>
   <div class="item_price_cont">
-    <p class="item_price"><?php echo $data['items']->price;?> / <span><?php echo $data['items']->unit;?></span></p>
-    <p class="item_available"><?php echo $data['items']->stock;?> / <span><?php echo $data['items']->unit;?> available</span>  </p>
+    <p class="item_price">Rs <?php echo $data['price'];?>/<span><?php echo $data['unit'];?></span></p>
+    <p class="item_available"><?php echo $data['stock'];?> <span><?php echo $data['unit'];?> available</span>  </p>
   </div>
   <div class="item_bid_cont">
-    <p class="item_bids"><?php echo $data['items']->bid_Count;?> <span>bids</span></p>
+    <p class="item_time">  24/<span>h left</span>  </p>
+    <p class="item_bids"><?php echo $data['bid_Count'];?> <span>bids</span></p>
+  </div>
+  <div class="item_bid_cont">
+    <p class="item_bids"><?php echo $data['bid_Count'];?> <span>bids</span></p>
     <p class="item_time">  24/<span>h left</span>  </p>
   </div>
   <div class="item_desc_cont">
-    <p class="item_desc"><?php echo $data['items']->description;?></p>
+    <p class="item_desc"><?php echo $data['description'];?></p>
   </div>
   <div class="item_btns_cont">
     <div class="qty_btn_cont">

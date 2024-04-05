@@ -909,11 +909,11 @@ input[type="range"]::-moz-range-thumb {
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: capitalize;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   margin: 0.2rem 0;
 }
 .item_price > span {
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 .item_title_cont {
   display: flex;
@@ -1036,11 +1036,11 @@ input[type="range"]::-moz-range-thumb {
     margin: 0.2rem 0;
   }
   .item_price {
-    font-size: 1rem;
+    font-size: 0.8rem;
     margin: 0.2rem 0;
   }
   .item_price > span {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }
 @media screen and (max-width: 480px) {

@@ -2,24 +2,73 @@
 
 class AuctionC extends Controller{
     private $auctionModel;
+    private $sellerModel;
     public function __construct(){
         $this->auctionModel =$this->model('Auction');
+        $this->sellerModel =$this->model('Seller');
             
     }
 
     public function index(){
+
+
+                  // pagination
+      $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+      $perPage = 20;
+
+      // sortings
+      $sort =isset($_GET['sort']) ? $_GET['sort'] : null;
+      $order =isset($_GET['order']) ? $_GET['order'] : "ASC";
+
+
+      // filterings
+      // Filtering by Category
+      $category = isset($_GET['category']) ? (array)explode('%a%', $_GET['category']) : [];
+      $city = isset($_GET['city']) ? (array)explode('%a%',$_GET['city'] ): [];
+      $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : null;
+      $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : null;
+      $minQty = isset($_GET['minQty']) ? $_GET['minQty'] : null;
+      $maxQty = isset($_GET['maxQty']) ? $_GET['maxQty'] : null;
+      $search = isset($_GET['search']) ? (array)explode('%a%',$_GET['search'] ): [];
+
+
+      // var_dump($search);
+   
+      $filter=[
+       'category'=>  $category,
+         'city'=>$city,
+         'minPrice'=>$minPrice,
+         'maxPrice'=>$maxPrice,
+         'minQty'=>$minQty,
+         'maxQty'=>$maxQty,
+         'search'=>$search
+         ];
+
+      $row=$this->auctionModel->getItems($page,$perPage,$sort,$order,$filter);
+      $totalCount=$row['totalCount'];
+      $data=[
+          'items'=>$row['items'],
+          'totItems'=>$totalCount,
+          'totPages'=>ceil($totalCount/$perPage),
+          'page'=>$page,
+          'category'=>$category,
+          'city'=>$city,
+          'priceRange'=>$maxPrice? ('price: '.$minPrice.' - '.$maxPrice) :false,
+          'qtyRange'=>$maxQty?('quantity: '.$minQty.' - '.$maxQty):false,
+          'search_term'=>isset($_GET['search']) ?join(" ",(array)explode('%a%',$_GET['search'] )):''
+      ];
         
             
-            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-            $perPage = 20;
-            $row=$this->auctionModel->getItems($page,$perPage);
-            $totalItems = $this->auctionModel->getTotalItemsCount(); 
-            $data=[
-                'items'=>$row,
-                'totItems'=>$totalItems,
-                'totPages'=>$totalItems/$perPage,
-                'page'=>$page
-            ];
+            // $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            // $perPage = 20;
+            // $row=$this->auctionModel->getItems($page,$perPage);
+            // $totalItems = $this->auctionModel->getTotalItemsCount(); 
+            // $data=[
+            //     'items'=>$row,
+            //     'totItems'=>$totalItems,
+            //     'totPages'=>$totalItems/$perPage,
+            //     'page'=>$page
+            // ];
 
           if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
             $this->view('sellerAuc',$data);
@@ -31,22 +80,62 @@ class AuctionC extends Controller{
       
          }
 
-    public function auctionInfo($id){
-        $row =$this->auctionModel->getAuctionInfo($id);
+
+
+         public function itemInfo($id){
+            
+
+                $row=$this->auctionModel->getAuctionInfo($id);
+               
+                if($row){
+                   $seller=$this->sellerModel->getSellerInfo($row->seller_ID);
+                  if($seller){
+
+                      $data=[
+                          'name'=>$row->name,
+                          'item_id'=>$id,
+                          'seller_name'=>$seller->name,
+                          'seller_id'=>$seller->seller_id,
+                          'seller_city'=>$seller->city,
+                          'category'=>$row->category,
+                          'description'=>$row->description,
+                          'price'=>$row->price,
+                          'unit'=>$row->unit,
+                          'district'=>$row->district,
+                          'exp_date'=>$row->exp_date,
+                          'bid_Count'=>$row->bid_Count,
+                          'created_at'=>$row->created_at,
+                          'item_img'=>$row->item_img,
+                          'stock'=>$row->stock,
+                        ];
+            
+                    }
+                }else{
+                    $this->view('_404');
+                 }
+           
+
+                $this->view('auctionItemInfo',$data);
+        }
+
+
+
+    // public function auctionInfo($id){
+    //     $row =$this->auctionModel->getAuctionInfo($id);
         
-        $data=[
+    //     $data=[
 
-            'items'=>$row
-        ];
-        if($row){
-            $this->view('auctionItemInfo',$data);
-        }
-        else{
-            echo 'nothing to show';
-        }
+    //         'items'=>$row
+    //     ];
+    //     if($row){
+    //         $this->view('auctionItemInfo',$data);
+    //     }
+    //     else{
+    //         echo 'nothing to show';
+    //     }
 
 
-    }
+    // }
 
     public function items(){
         $row=$this->auctionModel->myAuctionInfo($_SESSION['seller_id']);

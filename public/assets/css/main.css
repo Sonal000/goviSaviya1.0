@@ -6,7 +6,7 @@ Fonts
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Courgette&family=Nunito&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 /*
 =============== 
@@ -65,9 +65,7 @@ Variables
   --transition: all 0.3s linear;
 
   --spacing: 0.12rem;
-  --spacing-low: 0.10rem;
-
-  
+  --spacing-low: 0.1rem;
 
   --radius-high: 1rem;
   --radius-low: 0.5rem;
@@ -801,16 +799,16 @@ input:focus {
   transition: var(--transition);
   overflow: scroll;
   scrollbar-width: thin;
-  scrollbar-color: transparent transparent; 
-  -ms-overflow-style: none; 
+  scrollbar-color: transparent transparent;
+  -ms-overflow-style: none;
 }
 
 .main_sidebar_container::-webkit-scrollbar {
-  width: 12px; 
+  width: 12px;
 }
 
 .main_sidebar_container::-webkit-scrollbar-thumb {
-  background-color: transparent; 
+  background-color: transparent;
 }
 .sidebar_conatainer {
   width: 90%;
@@ -892,12 +890,10 @@ input:focus {
 
 .sidebar_item p {
   font-weight: 700;
-  
 }
 
-.expand_btn p{
+.expand_btn p {
   font-weight: 700;
-  
 }
 
 .expand_btn > p {
@@ -1115,4 +1111,10 @@ input:focus {
   transform: rotateZ(180deg);
 }
 
+.maps_container {
+  height: 100%;
+  width: 100%;
+  min-width:10rem;
+  min-height:10rem;
+}
 

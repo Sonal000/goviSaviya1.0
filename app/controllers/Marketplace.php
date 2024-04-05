@@ -2,9 +2,11 @@
  class Marketplace extends Controller{
 
    private $itemModel;
+   private $userModel;
    public function __construct()
    {
       $this->itemModel= $this->model('Item');
+      $this->userModel= $this->model('User');
    }
 
    public function index()

@@ -58,6 +58,28 @@ class Buyer{
     }
 
 
+    public function getBuyerInfo($id) {
+        // Corrected SQL query and parameter binding
+        $this->db->query("SELECT buyers.*, users.* 
+                         FROM buyers 
+                         RIGHT JOIN users ON buyers.user_id = users.user_id 
+                         WHERE buyers.seller_id = :buyer_id");
+        
+        $this->db->bind(':buyer_id', $id);
+        
+        $this->db->execute(); // Execute the query
+        $row = $this->db->single();
+        
+        
+        if ($row) {
+            return $row;
+        } else {
+            return false;
+        }
+      }
+      
+
+
 
 
     public function updateProfile($data){

@@ -92,74 +92,19 @@
 
 </section>
 
-<section class="section_cont">
+    <section class="section_cont">
         <div class="sec_title">
-            <h4>Payment</h4>
+            <h4>Address on Map</h4>
         </div>
         <div class="sec_content">
-            <label class="payment_label" for="cardpay">
-            <div class="pay_type">
-
-                <input type="radio" id="cardpay" name="payment_method" value="cardpay" checked>
-                    <div class="label_title">
-                        <div class="label_title_cont">
-                        <p>Credit / Debit Card<p> 
-                        <img class="card_image" src="<?php echo URLROOT ?>/assets/images/mastercard.png">
-                        <img class="card_image" src="<?php echo URLROOT ?>/assets/images/visa.jpg">
-                        </div>
-
-                    </div>
-
-                    <div class="label_content">
-                    <div class="input_content">
-   
-                            <div class="input_cont input_cont_long">
-                                <label for="cardno" class="input_label">Card Holder's Name</label>
-                                <input type="text" name="cardHolder" id="cardHolder" class="input_item ">
-                                <p class="invalid_msg"></p>
-                            </div>
-                            <div class="input_cont input_cont_long">
-                                <label for="cardNo" class="input_label">Card Number</label>
-                                <input type="text" name="cardNo" id="cardNo" class="input_item ">
-                                <p class="invalid_msg"></p>
-                            </div>
-                            
-                            <div class="input_cont">
-                                <label for="cardExpDate" class="input_label">Expiration Date</label>
-                                <input type="text" name="cardExpDate" id="cardExpDate" class="input_item">
-                                <p class="invalid_msg"></p>
-                            </div>
-                            <div class="input_cont">
-                                <label for="cvv" class="input_label">CVV</label>
-                                <input type="text" name="cvv" id="cvv" class="input_item">
-                                <p class="invalid_msg"></p>
-                            </div>
-                            
-                            
-                    </div>
-                        
-                    </div>
-                </div>
-            </label>
-            <!-- <label class="payment_label" for="cash">
-                <div class="pay_type">
-                    <input type="radio" id="cash" name="payment_method" value="cash">
-                    <div class="label_title">
-                        <div class="label_title_cont">
-                        <p>Cash<p> 
-                        <img class="card_image" src="<?php echo URLROOT ?>/assets/images/cash.png">
-                        </div>
-
-                    </div>
-
-            </div>
-           </label> -->
-
-    
-
-
-</div>
-</section>
+ 
+       <?php  
+       
+       maps($data["buyerAddress"]);
+       
+       ?>
+        </div>
+    </section>
 
         </div>
         <div class="order_details">
@@ -188,7 +133,17 @@
                                 </div>
                             </div>
                             <div class="item_price">
-                                <p><span>Rs</span> <?php echo $item->price; ?></p>
+                                <p><span>Rs</span> <?php echo $item->price * $item->qty; ?></p>
+                            </div>
+                        </div>
+                        <div class="item_details">
+                            <div class="item_name_cont">
+
+                                <p class="delivery_name">
+                                    delivery</p>
+                            </div>
+                            <div class="delivery_price">
+                                <p><span>Rs</span> <?php echo (getDistancefee($item->address,$data['buyerAddress'])); ?></p>
                             </div>
                         </div>
                     </li>
@@ -206,12 +161,25 @@
                 </div>
                 <div class="tot_cont">
                     <p>Delivery Fee</p>
-                    <p class="price">Rs<span>0</span></p>
+                    <?php 
+                    if($data['totalDeliveryfee']){
+                        ?>
+                            <p class="price">Rs<span><?php echo $data['totalDeliveryfee']; ?></span></p>
+                        <?php
+                    }else{
+                        ?>
+                        <p class="desc_policy">not available</p>
+                    <?php }
+                    ?>
+                    
                 </div>
                 <div class="tot_container">
                 <div class="tot_cont">
                     <p>Total</p>
-                    <p class="price">Rs<span class="totvalue">0</span></p>
+
+                            <p class="price">Rs<span data-delivery=<?php echo $data['totalDeliveryfee']; ?> class="totvalue">0</span></p>
+
+                    
                 </div>
                 <p class="desc_policy">By continuing, you agree to Govisaviyas's Terms of Service and Privacy Policy. We'll send this Summary to Govisaviya adminstration.</p>
 

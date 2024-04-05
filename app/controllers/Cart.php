@@ -32,6 +32,13 @@ class Cart extends Controller {
  public  function checkout(){
   $items = $this->itemModel->getCartItems($_SESSION["buyer_id"]);
   $buyerInfo = $this->buyerModel->getProfileInfo($_SESSION["user_id"]);
+
+  $totalDeliveryfee = 0;
+  foreach ($items as $item) {
+      $totalDeliveryfee +=( getDistancefee($item->address,$buyerInfo->address));
+  }
+
+
   $data=[
     "items"=>$items,
     "buyerName"=>$buyerInfo->name,
@@ -39,6 +46,7 @@ class Cart extends Controller {
     "buyerAddress"=>$buyerInfo->address,
     "buyerCity"=>$buyerInfo->city,
     "buyerMobile"=>$buyerInfo->mobile,
+    "totalDeliveryfee"=>$totalDeliveryfee
   ];
   $this->view('checkout',$data);
  }
@@ -48,6 +56,44 @@ class Cart extends Controller {
  public function placeOrder(){
   $items = $this->itemModel->getCartItems($_SESSION["buyer_id"]);
   $details=[];
+
+  var_dump($items);
+
+  $lineItems = [];
+  foreach ($items as $item) {
+      $lineItems[] = [
+          "quantity" => $item->qty, // Assuming quantity is always 1 for each item
+          "price_data" => [
+              "currency" => "lkr", // Change currency according to your needs
+              "unit_amount" => $item->price * 100, // Stripe requires amount in cents
+              "product_data" => [
+                  "name" => $item->name, // Use item name from your database
+              ],
+          ],
+      ];
+  }
+
+  \Stripe\Stripe::setApiKey(STRIPESECRETKEY);
+
+  $checkout_session = \Stripe\Checkout\Session::create([
+    "mode" => "payment",
+    "success_url" => "http://localhost/goviSaviya1.0/orders", // Change this URL to your success page
+    "cancel_url" => "http://localhost/goviSaviya1.0/cart/checkout", // Change this URL to your cancel page
+    "locale" => "auto",
+    "line_items" => $lineItems,
+]);
+
+// Redirect the user to the Stripe Checkout page
+http_response_code(303);
+header("Location: " . $checkout_session->url);
+exit;
+
+
+
+
+
+
+
   
   if($_SERVER['REQUEST_METHOD']=='POST'){
 
@@ -64,19 +110,24 @@ class Cart extends Controller {
         "order_postal_code"=>trim($_POST['postalCode'])
       ];
 
-      if($this->orderModel->placeOrder($items,$details,$_SESSION["buyer_id"])){
 
-        if($this->itemModel->clearCartitems($_SESSION["buyer_id"])){
-          header("Location: " . URLROOT . "/marketplace"); 
-          exit();  
-        }else{
-          header("Location: " . URLROOT . "/cart"); 
-          exit();
-        };
-      }else{
-        header("Location: " . URLROOT . "/cart"); 
-        exit();
-      }
+
+
+
+
+      // if($this->orderModel->placeOrder($items,$details,$_SESSION["buyer_id"])){
+
+      //   if($this->itemModel->clearCartitems($_SESSION["buyer_id"])){
+      //     header("Location: " . URLROOT . "/marketplace"); 
+      //     exit();  
+      //   }else{
+      //     header("Location: " . URLROOT . "/cart"); 
+      //     exit();
+      //   };
+      // }else{
+      //   header("Location: " . URLROOT . "/cart"); 
+      //   exit();
+      // }
 
     
 }
