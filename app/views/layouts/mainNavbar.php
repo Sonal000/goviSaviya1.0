@@ -31,7 +31,7 @@
       </a>
     </li>
     <li class="navlink">
-      <a href="<?php echo URLROOT ?>/posts">
+      <a href="<?php echo URLROOT ?>/OrderRequests">
       Posts
         <!-- <i class="fas fa-plus-square nav_icon"></i> -->
       </a>
@@ -173,24 +173,36 @@
       </a>
     </li>
     <li class="navlink">
-      <a href="<?php echo URLROOT ?>/profile">
-      Explore 
+      <a href="<?php echo URLROOT ?>/AuctionC/items">
+      Auction  
         <!-- <i class="fas fa-coins nav_icon"></i> -->
+      </a>
+    </li>
+    <li class="navlink">
+      <a href="<?php echo URLROOT ?>/Orders">
+        Orders
+        <!-- <i class="fas fa-store nav_icon"></i> -->
+      </a>
+    </li>
+    <li class="navlink">
+      <a href="<?php echo URLROOT ?>/OrderRequests">
+        Requests
+        <!-- <i class="fas fa-store nav_icon"></i> -->
       </a>
     </li>
   </ul>
   </div>
  
   <div class="seller_btns_cont">
-    <div class="seller_btns">
+    <!-- <div class="seller_btns">
       <a href="<?php echo URLROOT ?>/#">
       <i class="fas fa-bell nav_icon"></i>
-        <!-- <div class="cart_text">
+         <div class="cart_text">
             <p>No items in your cart !</p>
             <a href="<?php echo URLROOT ?>/cart" class="btn cart_btn">View Cart</a>
-        </div> -->
+        </div> 
       </a>
-      </div>  
+      </div>   -->
 
       <div class="profile_image_container">
         <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>" class="profile_image">
@@ -200,24 +212,24 @@
                 <li>
                   <a  href="<?php echo URLROOT ?>/myprofile/<?php echo $_SESSION['user_id'] ?>"  class="profile_link">View Profile</a>
                 </li>
-                <li>
+                <!-- <li>
                   <a href="" class="profile_link">Wish list</a>
-                </li>
+                </li> -->
                 <li>
                   <a href="<?php echo URLROOT ?>/login/logout" class="profile_link">Log out</a>
                 </li>
             </ul>
         </div>
       </div>
-  <div class="seller_btns">
+  <!-- <div class="seller_btns">
       <a href="<?php echo URLROOT ?>/#">
       <i class="fas fa-comment-dots nav_icon"></i>
-        <!-- <div class="cart_text">
+        <div class="cart_text">
             <p>No items in your cart !</p>
             <a href="<?php echo URLROOT ?>/cart" class="btn cart_btn">View Cart</a>
-        </div> -->
+        </div>
       </a>
-    </div>
+    </div> -->
   </div>
 
  </div>
