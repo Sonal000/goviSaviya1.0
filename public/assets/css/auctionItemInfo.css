@@ -126,18 +126,19 @@
 .item_price_cont{
  display: flex;
  justify-content: space-between;
- max-width: 15rem;
+ /* max-width: 15rem; */
  color: var(--clr-grey-1);
  font-size: 1.1rem;
-   padding-top: 0.5rem; 
+   /* padding-top: 0.5rem;  */
+   /* border: 2px solid red; */
  }
 .item_bid_cont{
  display: flex;
  justify-content: space-between;
- max-width: 15rem;
+ /* max-width: 15rem; */
  color: var(--clr-grey-1);
  font-size: 1.1rem;
- padding-top: 0.5rem; 
+ /* padding-top: 0.5rem;  */
  }
  .item_bids{
    color: var(--clr-grey-1);

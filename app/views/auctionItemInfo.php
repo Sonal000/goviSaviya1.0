@@ -68,15 +68,17 @@
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          </div>
-  </div>
-  <div class="item_price_cont">
-    <p class="item_price">Rs <?php echo $data['price'];?>/<span><?php echo $data['unit'];?></span></p>
-    <p class="item_available"><?php echo $data['stock'];?> <span><?php echo $data['unit'];?> available</span>  </p>
-  </div>
-  <div class="item_bid_cont">
-    <p class="item_time">  24/<span>h left</span>  </p>
-    <p class="item_bids"><?php echo $data['bid_Count'];?> <span>bids</span></p>
-  </div>
+        </div>
+        <div class="item_price_cont">
+          <p class="item_price"><span>Starting bid :</span></p> <p>   Rs <?php echo $data['price'];?>/<span><?php echo $data['unit'];?></span></p>
+        </div>
+        <div class="item_price_cont">          
+          <p class="item_price"><span>available :</span></p> <p> <?php echo $data['stock'];?> <span><?php echo $data['unit'];?>   </p>
+        </div>
+        <div class="item_price_cont">
+          <p class="item_price"><span>Current bid :</span></p> <p>   Rs <?php echo $data['price'];?>/<span><?php echo $data['unit'];?></span></p>
+        </div>
+
   <div class="item_bid_cont">
     <p class="item_bids"><?php echo $data['bid_Count'];?> <span>bids</span></p>
     <p class="item_time">  24/<span>h left</span>  </p>
