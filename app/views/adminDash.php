@@ -43,7 +43,7 @@
                     New Registrations
                 </div>
                 <div class="signupcount">
-                    <?php echo $data['usercount'] ?>
+                    <!-- <?php echo $data['usercount'] ?> -->
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
                     Buyers
                 </div>
                 <div class="signupcount">
-                    <?php echo $data['buyercount'] ?>
+                    <!-- <?php echo $data['buyercount'] ?> -->
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                     Sellers
                 </div>
                 <div class="signupcount">
-                    <?php echo $data['sellercount'] ?>
+                    <!-- <?php echo $data['sellercount'] ?> -->
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
                     Delivery Agents
                 </div>
                 <div class="signupcount">
-                    <?php echo $data['agentcount'] ?>
+                    <!-- <?php echo $data['agentcount'] ?> -->
                 </div>
             </div>
         </div>
@@ -110,8 +110,8 @@
             </div>
         </div>
         
-        <?php if (!empty($data['row'])): ?>
-        <?php foreach ($data['row'] as $user_det):?>
+        <?php if (!empty($data['details'])): ?>
+        <?php foreach ($data['details'] as $user_det):?>
         <div class="table_row">
             <div class="table_cell column1">
                 <p><?php echo $user_det->user_id?></p>
