@@ -1,9 +1,13 @@
 <?php 
  class Home extends Controller{
+
+  
     private $userModel;
+    private $deliverModel;
    public function __construct()
    {
     $this->userModel =$this->model('User');
+     $this->deliverModel =$this->model('Deliver');
 
    }
    public function index(){
@@ -15,6 +19,12 @@
   ];
   $this -> view('adminDash',$data);
   }
+   if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'deliver') {
+           // Assuming getOngoingOrdersdetails is a method in the Deliver model
+           $orders = $this->deliverModel->getOngoingOrdersDetails($_SESSION['user_id']);
+           $data['orders'] = $orders; // pass orders data to view
+           $this->view('deliveryHome', $data);
+       } 
   else{
     
     $data =[
@@ -26,7 +36,33 @@
   }
 
 
+
    }
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   
    public function about($id)
    {
     echo "about loaded".$id;

@@ -15,6 +15,16 @@
                   </button>
                 </a>
               </li> -->
+
+              <li>
+                <a href="<?php echo URLROOT ?>/deliveryHome">
+                  <button class="sidebar_item link"  id="reviews_link">
+                  <i class="fa-solid fa-house sidebar_icon"></i>
+                    <p>Home</p>
+                  </button>
+                </a>
+              </li>
+
               <li>
 
                 <button class="expand_btn exp_bt_op" id="auction_expand">
@@ -23,7 +33,7 @@
                   <i class="fas fa-sort-down expand_icon"></i>
                 </button>
                 <div class="expand hide_expand">
-                <a href=" <?php echo URLROOT ?>/availableOrdersDelivery">
+                <a href=" <?php echo URLROOT ?>/orders">
                     <button class="sidebar_item expand_item link" id="add_item_auction">
                     <i class="fas fa-plus sidebar_icon" ></i>
                       <p>Available Orders</p>

@@ -112,9 +112,10 @@
 
 
         </div>
-
+            <div class="submit_btn_class">   
                 <input type="submit" class="submit_btn" value="Done">
                 </form>
+            </div>
                 
            
         </div>
