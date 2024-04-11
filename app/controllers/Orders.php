@@ -49,6 +49,8 @@ class Orders extends Controller{
 
     }
 
+}
+
 public function orderDetails($id){
     $order= $this->orderModel->getOrderDetails($id);
     $available = $this->orderModel->deliverAvailability($_SESSION['deliver_id']);
@@ -69,7 +71,7 @@ public function acceptOrder($order_item_id){
         redirect('orders');
     }
 
-
+}
     public function complete(){
         $data = ['title'=>'welcome'];
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
@@ -147,5 +149,6 @@ public function acceptOrder($order_item_id){
         $this ->view('Pages/about');
     }*/
 }
+
 
 
