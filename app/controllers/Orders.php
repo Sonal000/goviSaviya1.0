@@ -48,6 +48,7 @@ class Orders extends Controller{
 
 
     }
+}
 
 public function orderDetails($id){
     $order= $this->orderModel->getOrderDetails($id);
@@ -68,7 +69,7 @@ public function acceptOrder($order_item_id){
     }else{
         redirect('orders');
     }
-
+}
 
     public function complete(){
         $data = ['title'=>'welcome'];
