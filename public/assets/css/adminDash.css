@@ -40,7 +40,16 @@
   flex-direction: column;
   margin-left: 2rem;
 }
-
+.adminprofile{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+ 
+  align-content: center;
+  justify-content: center;
+  margin-top: 4rem;
+ 
+}
 .newsignups{
   font-size: larger;
   color:#4BAA4E;

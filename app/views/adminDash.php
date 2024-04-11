@@ -18,10 +18,12 @@
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
+ <div class="main_container">
  <?php
- require APPROOT. '/views/layouts/adminsidebar.php'; 
- ?>
-<div class="profile">
+ require APPROOT. '/views/layouts/adminsidebar.php'; ?>
+ <div class="container_content">
+
+<div class="adminprofile">
     <h4>Manage Users</h4>
     <div class="searchbarplace">
         <div class="searchbar2_cont">
@@ -138,6 +140,9 @@
     </div>
     
 </div>
+
+        </div>
+        </div>
 
 
 </body>
