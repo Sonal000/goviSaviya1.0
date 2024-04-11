@@ -17,10 +17,12 @@
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
+ <div class="main_container">
  <?php
  require APPROOT. '/views/layouts/deliverySidebarWithoutImg.php'; 
  ?>
-<div class="profile">
+ <div class="container_content">
+<div class="adminprofile">
     <div class="auction_page">
         <div class="heading">
             Edit Details of the User

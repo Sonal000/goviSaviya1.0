@@ -25,14 +25,21 @@ class Orders extends Controller{
         ];
         $this -> view('sellerOrder',$data);
     }
-        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='buyer'){
-            $orders = $this->orderModel->getBuyerOrders($_SESSION['buyer_id']);
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
+            $orders = $this->orderModel->getALLOrders();
         $data=[
             "orders"=>$orders,
         ];
-        $this -> view('buyerOrders',$data);
-    }
-        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+            $this -> view('adminOrders',$data);
+        }
+       if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
+        $orders = $this->orderModel->getSellerOrders($_SESSION['seller_id']);
+    $data=[
+        "orders"=>$orders,
+    ];
+    $this -> view('sellerOrder',$data);
+}
+       if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
             $orders = $this->orderModel->getDeliverOrders($_SESSION['deliver_id']);
         $data=[
             "orders"=>$orders,
@@ -41,7 +48,6 @@ class Orders extends Controller{
 
 
     }
-}
 
 public function orderDetails($id){
     $order= $this->orderModel->getOrderDetails($id);
@@ -62,7 +68,6 @@ public function acceptOrder($order_item_id){
     }else{
         redirect('orders');
     }
-}
 
 
     public function complete(){

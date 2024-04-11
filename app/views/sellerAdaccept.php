@@ -37,7 +37,7 @@
     <div class="hed">
         Advertistements
     </div>
-    <div class="req_approve_btn">
+    <!-- <div class="req_approve_btn">
         
         <div class="reqbt">
             <a href="<?php echo URLROOT; ?>/SellerAdrequest" class="btn acreq">Requests</a>
@@ -46,37 +46,45 @@
             <a href="<?php echo URLROOT; ?>/SellerAdaccept" class="btn acapprove">Approved</a>
         </div>
 
-    </div>
-    <div class="adcard">
+    </div> -->
+
+<?php if($data['requests']){
+    foreach($data['requests'] as $requests){
+
+        $post_date = date('Y-m-d', strtotime($requests->posted_date)); // use to get only the date from the column. column contains both time and date
+        $req_date = date('Y-m-d', strtotime($requests->req_date));
+
+        ?>
+        <div class="adcard">
         <div class="reqbuyerdetails">
             <div class="buyproimg">
                 <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="" class="buypro">
             </div>
             <div class="name_date">
                 <div class="bna">
-                    Santhush Fernando
+                    <?php echo $requests->buyer_name; ?>
                 </div>
                 <div class="reqdate">
-                    9th September 2023
+                    <?php echo $post_date;?>
                 </div>
             </div>
         </div>
         <div class="requestdet">
             <div class="stockdet">
                 <div class="req_des">
-                    Santhush Fernando requests 5Kg of Mango
+                    <?php echo $requests->buyer_name; ?> requests <?php echo $requests->req_stock;?> <?php echo $requests->unit;?> of <?php echo $requests->name;?>
                 </div>
                 <div class="req_item">
-                    Item : Mango
+                    Item : <?php echo $requests->name;?>
                 </div>
                 <div class="req_quantity">
-                    Amount : 5Kg
+                    Amount : <?php echo $requests->req_stock ;?> <?php echo $requests->unit;?>
                 </div>
                 <div class="req_deadline">
-                    Request before : 12th September 2023
+                    Request before : <?php echo $req_date;?>
                 </div>
                 <div class="req_location">
-                    Location : Colombo
+                    Location : <?php echo $requests->req_address;?>
                 </div>
 
             </div>
@@ -85,100 +93,29 @@
                     <button class="btn acapprove">Accepted</button>
                 </div>
                 <div class="discardbt">
-                    <button class="btn">Discard</button>
+                    <button class="discardbtn">Discard</button>
                 </div>
 
             </div>
         </div>
     </div>
-    <div class="adcard">
-        <div class="reqbuyerdetails">
-            <div class="buyproimg">
-                <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="" class="buypro">
-            </div>
-            <div class="name_date">
-                <div class="bna">
-                    Santhush Fernando
-                </div>
-                <div class="reqdate">
-                    9th September 2023
-                </div>
-            </div>
-        </div>
-        <div class="requestdet">
-            <div class="stockdet">
-                <div class="req_des">
-                    Santhush Fernando requests 5Kg of Mango
-                </div>
-                <div class="req_item">
-                    Item : Mango
-                </div>
-                <div class="req_quantity">
-                    Amount : 5Kg
-                </div>
-                <div class="req_deadline">
-                    Request before : 12th September 2023
-                </div>
-                <div class="req_location">
-                    Location : Colombo
-                </div>
+    <?php
+    }
+}
+else{
+    ?>
+    <h3>No Accepted Order Requests</h3>
+    <?php
+}
+?>
 
-            </div>
-            <div class="accept_discard_bt">
-                <div class="acceptbt">
-                    <button class="btn acapprove">Accepted</button>
-                </div>
-                <div class="discardbt">
-                    <button class="btn">Discard</button>
-                </div>
 
-            </div>
-        </div>
-    </div>
-    <div class="adcard">
-        <div class="reqbuyerdetails">
-            <div class="buyproimg">
-                <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="" class="buypro">
-            </div>
-            <div class="name_date">
-                <div class="bna">
-                    Santhush Fernando
-                </div>
-                <div class="reqdate">
-                    9th September 2023
-                </div>
-            </div>
-        </div>
-        <div class="requestdet">
-            <div class="stockdet">
-                <div class="req_des">
-                    Santhush Fernando requests 5Kg of Mango
-                </div>
-                <div class="req_item">
-                    Item : Mango
-                </div>
-                <div class="req_quantity">
-                    Amount : 5Kg
-                </div>
-                <div class="req_deadline">
-                    Request before : 12th September 2023
-                </div>
-                <div class="req_location">
-                    Location : Colombo
-                </div>
 
-            </div>
-            <div class="accept_discard_bt">
-                <div class="acceptbt">
-                    <button class="btn acapprove">Accepted</button>
-                </div>
-                <div class="discardbt">
-                    <button class="btn">Discard</button>
-                </div>
 
-            </div>
-        </div>       
-    </div>
+
+
+    
+    
 </div>
   
   <!-- =========content end============================== -->

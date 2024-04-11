@@ -63,7 +63,15 @@ if (!$this->db->execute()) {
     }
     }
 
-
+    public function getALLOrders(){
+        $this->db->query("SELECT * FROM orders");
+        $row=$this->db->resultSet();
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
     // get seller orders
     public function getSellerOrders($seller_id){
         $query ="SELECT  
