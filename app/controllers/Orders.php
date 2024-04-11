@@ -50,6 +50,8 @@ class Orders extends Controller{
     }
 }
 
+
+
 public function orderDetails($id){
     $order= $this->orderModel->getOrderDetails($id);
     $available = $this->orderModel->deliverAvailability($_SESSION['deliver_id']);
@@ -69,6 +71,7 @@ public function acceptOrder($order_item_id){
     }else{
         redirect('orders');
     }
+
 }
 
     public function complete(){
@@ -148,5 +151,6 @@ public function acceptOrder($order_item_id){
         $this ->view('Pages/about');
     }*/
 }
+
 
 
