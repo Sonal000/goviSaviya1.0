@@ -1,24 +1,30 @@
 .column1 {
-    width: 10%; /* 1st column width */
+    width: 7%; /* 1st column width */
+    
   }
   
   .column2 {
-    width: 25%; /* 2nd column width */
+    width: 13%; /* 2nd column width */
+    
   }
   
   .column3 {
-    width: 30%; /* 3rd column width */
+    width: 15%; /* 3rd column width */
+    
   }
   
   .column4 {
-    width: 15%; /* 4th column width */
+    width: 45%; /* 4th column width */
+   
   }
   
   .column5 {
     width: 10%; /* 5th column width */
+    
   }
   .column6 {
     width: 10%; /* 6th column width */
+    
   }
 
   .vieweye{

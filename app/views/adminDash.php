@@ -16,7 +16,7 @@
 </head>
 <body>
 <?php
- require APPROOT. '/views/layouts/navbar2.php'; 
+ require APPROOT. '/views/layouts/mainNavbar.php'; 
  ?>
  <div class="main_container">
  <?php
@@ -24,7 +24,8 @@
  <div class="container_content">
 
 <div class="adminprofile">
-    <h4>Manage Users</h4>
+    <h4 class="getdown">Manage Users</h4>
+    
     <div class="searchbarplace">
         <div class="searchbar2_cont">
             <form action="http://www.google/search" class="searchbar2" method="get">
@@ -40,10 +41,10 @@
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
-                    New Registrations
+                    Total Users
                 </div>
                 <div class="signupcount">
-                    <!-- <?php echo $data['usercount'] ?> -->
+                    <?php echo $data['usercount'] ?> 
                 </div>
             </div>
         </div>
@@ -56,7 +57,7 @@
                     Buyers
                 </div>
                 <div class="signupcount">
-                    <!-- <?php echo $data['buyercount'] ?> -->
+                    <?php echo $data['buyercount'] ?> 
                 </div>
             </div>
         </div>
@@ -69,7 +70,7 @@
                     Sellers
                 </div>
                 <div class="signupcount">
-                    <!-- <?php echo $data['sellercount'] ?> -->
+                    <?php echo $data['sellercount'] ?>
                 </div>
             </div>
         </div>
@@ -82,7 +83,7 @@
                     Delivery Agents
                 </div>
                 <div class="signupcount">
-                    <!-- <?php echo $data['agentcount'] ?> -->
+                    <?php echo $data['deliverycount'] ?>
                 </div>
             </div>
         </div>
@@ -94,18 +95,21 @@
     <div class="table_box">
         <div class="table_row table_hed">
             <div class="table_cell column1">
-                <p>User ID</p>
+                <p>ID</p>
             </div>
             <div class="table_cell column2">
                 <p>Username</p>
             </div>
             <div class="table_cell column3">
-                <p>Email</p>
+                <p>User Type</p>
             </div>
             <div class="table_cell column4">
-                <p></p>
+                <p>Email</p>
             </div>
             <div class="table_cell column5">
+                <p></p>
+            </div>
+            <div class="table_cell column6">
                 <p></p>
             </div>
         </div>
@@ -120,12 +124,15 @@
                 <p><?php echo $user_det->name?></p>
             </div>
             <div class="table_cell column3">
-                <p><?php echo $user_det->email?></p>
+                <p><?php echo $user_det->user_type?></p>
             </div>
             <div class="table_cell column4">
-                <a href="<?php echo URLROOT; ?>/AdminC/editUser/<?php echo $user_det->user_id?>">view</a>
+                <p><?php echo $user_det->email?></p>
             </div>
             <div class="table_cell column5">
+                <a href="<?php echo URLROOT; ?>/AdminC/editUser/<?php echo $user_det->user_id?>">view</a>
+            </div>
+            <div class="table_cell column6">
                 <a href="<?php echo URLROOT; ?>/AdminC/delUser/<?php echo $user_det->user_id?>"><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
             </div>
         </div>
@@ -146,4 +153,6 @@
 
 
 </body>
+<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
 </html>

@@ -128,6 +128,75 @@
                
           }
 
+    public function getPickuptrucks(){
+        $query = 'SELECT
+                  vehicle.*,
+                users.name AS owner_name
+                FROM
+                vehicle
+                JOIN
+                users ON vehicle.user_id=users.user_id
+                WHERE 
+                vehicle_type= "PickupTruck"';
+        $this->db->query($query);
+        
+        $row = $this->db->resultSet();
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    public function getContainertrucks(){
+        $this->db->query(
+            'SELECT
+             vehicle.*,
+             users.name AS owner_name
+             FROM
+             vehicle
+             JOIN
+             users ON vehicle.user_id=users.user_id
+             WHERE 
+             vehicle_type= "Container Truck" ');
+        
+        $row = $this->db->resultSet();
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    public function getCars(){
+        $this->db->query(
+            'SELECT
+             vehicle.*,
+             users.name AS owner_name
+             FROM
+             vehicle
+             JOIN
+             users ON vehicle.user_id=users.user_id
+             WHERE 
+             vehicle_type= "Car" ');
+        
+        $row = $this->db->resultSet();
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    
+
+
     }
 
 ?>

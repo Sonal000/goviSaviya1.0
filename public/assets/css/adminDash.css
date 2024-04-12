@@ -45,9 +45,9 @@
   flex-direction: column;
   padding: 1rem;
  
-  align-content: center;
-  justify-content: center;
-  margin-top: 5rem;
+  /* align-content: center;
+  justify-content: center; */
+  /* margin-top: 5rem; */
  
 }
 .newsignups{
@@ -92,24 +92,34 @@
   font-weight: bold;
 }
 .column1 {
-  width: 10%; /* 1st column width */
+  width: 5%; /* 1st column width */
+  
 }
 
 .column2 {
-  width: 30%; /* 2nd column width */
+  width: 15%; /* 2nd column width */
+  
 }
-
-.column3 {
-  width: 35%; /* 3rd column width */
+.column3{
+  width: 15%;
+  
 }
 
 .column4 {
-  width: 15%; /* 4th column width */
+  width: 40%; /* 3rd column width */
+  
 }
 
 .column5 {
-  width: 10%; /* 5th column width */
+  width: 15%; /* 4th column width */
+  
 }
+
+.column6 {
+  width: 10%; /* 5th column width */
+  
+}
+
 
 
 .adduserbtn{

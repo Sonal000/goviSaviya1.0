@@ -64,8 +64,20 @@ if (!$this->db->execute()) {
     }
 
     public function getALLOrders(){
-        $this->db->query("SELECT * FROM orders");
+        $query = "SELECT 
+                    orders.*,
+                    users.name AS buyer_name
+                    FROM orders
+                    JOIN
+                    buyers ON orders.buyer_id=buyers.buyer_id
+                    JOIN
+                    users ON buyers.user_id=users.user_id ";
+        
+        
+        
+        $this->db->query($query);
         $row=$this->db->resultSet();
+        
         if($row){
             return $row;
         }else{

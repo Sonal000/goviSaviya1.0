@@ -16,7 +16,7 @@
 </head>
 <body>
 <?php
- require APPROOT. '/views/layouts/navbar2.php'; 
+ require APPROOT. '/views/layouts/mainNavbar.php'; 
  ?>
  <div class="main_container">
  <?php

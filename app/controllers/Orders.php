@@ -27,6 +27,7 @@ class Orders extends Controller{
     }
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
             $orders = $this->orderModel->getALLOrders();
+           
         $data=[
             "orders"=>$orders,
         ];
