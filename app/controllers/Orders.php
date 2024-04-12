@@ -49,8 +49,9 @@ class Orders extends Controller{
 
 
     }
-
 }
+
+
 
 public function orderDetails($id){
     $order= $this->orderModel->getOrderDetails($id);
@@ -73,6 +74,7 @@ public function acceptOrder($order_item_id){
     }
 
 }
+
     public function complete(){
         $data = ['title'=>'welcome'];
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
