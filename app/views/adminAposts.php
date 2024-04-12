@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
     <link rel="stylesheet" href="<?php echo URLROOT ;?>/assets/css/sellermarketplace.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminDash.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminPosts.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminAPosts.css">
 </head>
 <body>
 <?php
@@ -33,20 +33,20 @@
        </div>
     </div>
     <div class="admincard_cont">
-        <div class="admincard">
+    <div class="admincard">
             <div class="cardicon_cont">
-                <img src="<?php echo URLROOT; ?>/assets/images/store.png" alt="" class="cardicon">
+                <img src="<?php echo URLROOT; ?>/assets/images/auction.png" alt="" class="cardicon">
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
-                    Marketplace Posts
+                    Auction Posts
                 </div>
                 <div class="signupcount">
-                    23
+                    11
                 </div>
             </div>
         </div>
-        <div class="admincard">
+        <!-- <div class="admincard">
             <div class="cardicon_cont">
                 <img src="<?php echo URLROOT; ?>/assets/images/auction.png" alt="" class="cardicon">
             </div>
@@ -61,7 +61,7 @@
         </div>
         <div class="admincard">
             <div class="cardicon_cont">
-                <img src="<?php echo URLROOT; ?>/assets/images/ads.png" alt="" class="cardicon">
+                <img src="<?php echo URLROOT;?>/assets/images/ads.png" alt="" class="cardicon">
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
@@ -71,7 +71,7 @@
                     15
                 </div>
             </div>
-        </div>
+        </div> -->
        
 
     </div>
@@ -84,41 +84,53 @@
                 <p>Posted by</p>
             </div>
             <div class="table_cell column3">
-                <p>Posted Date</p>
+                <p>Started Date</p>
+            </div>
+            <div class="table_cell column4">
+                <p>End Date</p>
             </div>
             <div class="table_cell column4">
                 <p></p>
             </div>
-            <div class="table_cell column5">
+            <div class="table_cell column6">
                 <p></p>
             </div>
         </div>
+        <?php if(!empty($data['Aposts'])):?>
+        <?php foreach($data['Aposts'] as $postA): ?>
         <div class="table_row">
             <div class="table_cell column1">
-                <p>01</p>
+                <p><?php echo $postA->auction_ID?></p>
             </div>
             <div class="table_cell column2">
-                <p>santhush Fernando</p>
+                <p><?php echo $postA->seller_name?></p>
             </div>
             <div class="table_cell column3">
-                <p>Sun,Oct 7, 2023</p>
+                <p><?php echo $postA->start_date?></p>
             </div>
             <div class="table_cell column4">
+                <p><?php echo $postA->end_date?></p>
+            </div>
+            <div class="table_cell column5">
                 <div class="ordersta">
                     <a href=""><button class="orderpost_view">View</button></a>
                 </div>
             </div>
-            <div class="table_cell column5">
+            <div class="table_cell column6">
                 <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
             </div>
         </div>
-        <div class="table_row">
+        <?php endforeach; ?>
+        <?php else: ?>
+        <p>No data available</p>
+        <?php endif; ?>
+        <!-- <div class="table_row">
             <div class="table_cell column1">
                 <p>01</p>
             </div>
             <div class="table_cell column2">
                 <p>Sonal Induwara</p>
-            </div>
+            </div> 
             <div class="table_cell column3">
                 <p>Sat,Oct 12, 2023</p>
             </div>
@@ -139,7 +151,7 @@
                 <p>Yunal Mallawarachchi</p>
             </div>
             <div class="table_cell column3">
-                <p>Tue,Oct 14, 2023</p>
+                <p>Tue,Oct 14, 2023</p>                  
             </div>
             <div class="table_cell column4">
                 <div class="ordersta">
@@ -168,7 +180,7 @@
             <div class="table_cell column5">
                 <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
             </div>
-        </div>
+        </div> -->
        
         
         

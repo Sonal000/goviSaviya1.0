@@ -57,6 +57,18 @@ class User{
         }
     }
 
+    public function countUsers(){
+        $query=$this->db->query("SELECT * FROM users");
+        $row = $this->db->rowCount($query);
+        var_dump($row);
+        if($row){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     
 
 

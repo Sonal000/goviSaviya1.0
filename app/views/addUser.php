@@ -6,16 +6,19 @@
     <title>Add User</title>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminDash.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/addUser.css">
 </head>
 <body>
 <?php
- require APPROOT. '/views/layouts/navbar2.php'; 
+ require APPROOT. '/views/layouts/mainNavbar.php'; 
  ?>
+ <div class="main_container">
  <?php
  require APPROOT. '/views/layouts/adminsidebar.php'; 
  ?>
- <div class="profile">
+  <div class="container_content">
+ <div class="adminprofile">
     <div class="container">
         <div class="formimg">
             <img src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" alt="">
