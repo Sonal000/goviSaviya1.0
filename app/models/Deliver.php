@@ -226,4 +226,8 @@ public function updateCoverImage($data){
             return false;
         }
     }
+    public function getOngoingOrdersDetails($id){
+
+       $this->db->query('SELECT * from orders'); 
+    }
 }
