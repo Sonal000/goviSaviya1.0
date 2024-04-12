@@ -52,12 +52,11 @@ class Cart extends Controller {
  }
 
 
-//  placeorder
- public function placeOrder(){
-  $items = $this->itemModel->getCartItems($_SESSION["buyer_id"]);
-  $details=[];
+ public function payments(){
 
-  var_dump($items);
+
+  $items = $this->itemModel->getCartItems($_SESSION["buyer_id"]);
+
 
   $lineItems = [];
   foreach ($items as $item) {
@@ -77,7 +76,7 @@ class Cart extends Controller {
 
   $checkout_session = \Stripe\Checkout\Session::create([
     "mode" => "payment",
-    "success_url" => "http://localhost/goviSaviya1.0/orders", // Change this URL to your success page
+    "success_url" => "http://localhost/goviSaviya1.0/placeorder", // Change this URL to your success page
     "cancel_url" => "http://localhost/goviSaviya1.0/cart/checkout", // Change this URL to your cancel page
     "locale" => "auto",
     "line_items" => $lineItems,
@@ -88,12 +87,12 @@ http_response_code(303);
 header("Location: " . $checkout_session->url);
 exit;
 
+ }
 
 
-
-
-
-
+//  placeorder
+ public function placeOrder(){
+  $items = $this->itemModel->getCartItems($_SESSION["buyer_id"]);
   
   if($_SERVER['REQUEST_METHOD']=='POST'){
 
@@ -115,19 +114,19 @@ exit;
 
 
 
-      // if($this->orderModel->placeOrder($items,$details,$_SESSION["buyer_id"])){
+      if($this->orderModel->placeOrder($items,$details,$_SESSION["buyer_id"])){
 
-      //   if($this->itemModel->clearCartitems($_SESSION["buyer_id"])){
-      //     header("Location: " . URLROOT . "/marketplace"); 
-      //     exit();  
-      //   }else{
-      //     header("Location: " . URLROOT . "/cart"); 
-      //     exit();
-      //   };
-      // }else{
-      //   header("Location: " . URLROOT . "/cart"); 
-      //   exit();
-      // }
+        if($this->itemModel->clearCartitems($_SESSION["buyer_id"])){
+          header("Location: " . URLROOT . "/orders"); 
+          exit();  
+        }else{
+          header("Location: " . URLROOT . "/cart"); 
+          exit();
+        };
+      }else{
+        header("Location: " . URLROOT . "/cart"); 
+        exit();
+      }
 
     
 }

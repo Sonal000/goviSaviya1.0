@@ -185,7 +185,7 @@
 
                 <p class="order_req"></p>
                 <div class="order_btn_cont">
-                    <!-- <a href="<?php echo URLROOT."/cart/placeOrder" ?>" class="btn place_order_btn">Place Order</a> -->
+                    <!-- <a href="<?php echo URLROOT."/cart/payments" ?>" class="btn place_order_btn">Place Order</a> -->
                     <input type="submit" class="btn place_order_btn" name="place_order" value="Place Order">
                 </div>
                 </div>
