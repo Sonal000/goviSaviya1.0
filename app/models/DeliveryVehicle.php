@@ -7,7 +7,7 @@
         }
 
         public function getVehicles($userId){
-            $this->db->query('SELECT * FROM vehicle WHERE user_id = :id');
+            $this->db->query('SELECT * FROM vehicle WHERE user_id = :id AND is_deleted = FALSE');
             $this->db->bind(':id',$userId);
             $results = $this->db->resultSet();
 
@@ -91,7 +91,7 @@
         }
 
         public function deleteVehicle($id){
-            $this->db->query('DELETE FROM vehicle WHERE vehicle_id=:id');
+            $this->db->query('UPDATE vehicle SET is_deleted = 1 WHERE vehicle_id=:id');
 
             //Bind Values
 

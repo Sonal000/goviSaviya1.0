@@ -157,55 +157,58 @@
     border-radius: var(--radius-low);
     width: 100px;
     text-align: center;
+    letter-spacing: 1px;
    
   }
   
   .accept_order_btn{
-    font-weight: bold;
-    border: 2px solid #4BAA4E;
-    border-radius: var(--radius-low);
+    background-color: var(--clr-primary-5);
+    color: white;
+    font-weight: 550;
+    border: none;
+    border-radius: var(--radius-high);
     padding: 10px 25px;
-    transition: 0.5s;
+    transition: 0.3s;
+    
+
+   
   }
   
   .accept_order_btn:hover{  
     
-    background-color: var(--clr-primary-7);
-    border: none;
+    background-color: var(--clr-primary-8);
+    color: var(--clr-primary-2);
+    font-weight: 600;
+    
   
   }
 
   .ignore_order_btn{
+    border: none;
+    background-color: var(--clr-red-1);
     font-weight: bold;
-    border: 2px solid #4BAA4E;
-    border-radius: var(--radius-low);
+    /* border: 2px solid var(--clr-red-1); */
+    border-radius: var(--radius-high);
     padding: 10px 25px; 
-    transition: 0.5s;
+    transition: 0.3s;
+    color: white;
+   
   }
 
   .ignore_order_btn:hover{
-    color: white;
-    background-color: var(--clr-red-3);
-    border: none;
+    color: var(--clr-red-1);
+    background-color: rgb(252, 224, 224);
+    
     
   }
 
 
-  .update_edit_bt{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex: 0.2;
-    margin-right: 2rem;
-    width: 100%;
-    
-    
-}
+  
 
   .onion{
-    height: 120px;
-    width:120px;
+    object-fit: cover;
+    height: 160px;
+    width:240px;
     border-radius: var(--radius-low);
 }
 
@@ -214,6 +217,46 @@
     display: flex;
     flex: 0.8;
     
+}
+
+.details_view_btn{
+  padding: 0.5rem;
+}
+
+.details_view{
+  margin-top: 1rem;
+}
+
+.price_details{
+  margin-top: 1rem;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+}
+
+.right-side{
+  /* border: #38803A 2px solid; */
+  flex: 0.3;
+}
+
+.left_side{
+
+  /* border: #38803A solid 2px; */
+  display: flex;
+  flex: 0.7;
+}
+
+.update_edit_bt{
+  /* border: #38803A solid 3px; */
+  gap: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+  align-items: center;
+  margin-top: 3rem;
+  /* margin-right: 1rem; */
+  /* width: 100%;  */
 }
 
 
