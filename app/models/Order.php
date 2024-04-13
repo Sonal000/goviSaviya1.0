@@ -128,6 +128,7 @@ if (!$this->db->execute()) {
             
     }
 
+
     public function getDeliverOrders($deliver_id){
         $query ="SELECT  
         o_items.*,
@@ -143,7 +144,9 @@ if (!$this->db->execute()) {
         od.order_mobile AS order_mobile,
         od.order_address AS order_address,
         od.order_city AS order_city,
+        od.total_delivery_fee AS total_delivery_fee,
         b.prof_img AS buyer_img,
+        
         COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
             COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
         i.item_img,
