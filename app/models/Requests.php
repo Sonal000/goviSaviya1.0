@@ -64,7 +64,7 @@ class Requests{
 
         $this->db->bind(':buyer_id',$id);
 
-        $row = $this->db->resultset();
+        $row = $this->db->resultSet();
 
         if($row){
             return $row;
@@ -84,7 +84,7 @@ class Requests{
                   ORDER BY posted_date DESC');
 
     $this->db->bind(':seller_ID', $_SESSION['seller_id']);
-    $row = $this->db->resultset();
+    $row = $this->db->resultSet();
 
     if ($row) {
     return $row;
@@ -130,9 +130,9 @@ class Requests{
 
     public function getAcceptRequests(){
 
-        $this->db->query('SELECT * FROM requests WHERE status="accepted" AND seller_ID=:seller_ID ORDER BY posted_date DESC');
+        $this->db->query('SELECT * FROM requests WHERE status="accepted" AND acp_seller_ID=:seller_ID ORDER BY posted_date DESC');
         $this->db->bind(':seller_ID',$_SESSION['seller_id']);
-        $row = $this->db->resultset();
+        $row = $this->db->resultSet();
 
         if($row){
             return $row;
