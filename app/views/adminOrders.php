@@ -115,7 +115,7 @@
                 <p><?php echo $Orders->order_address?></p>
             </div>
             <div class="table_cell column6">
-                <a href="<?php echo URLROOT; ?>/AdminOrders/details"><img src="<?php echo URLROOT; ?>/assets/images/view.png" alt="" class="vieweye" alt=""></a>
+                <a href="<?php echo URLROOT; ?>/Orders/details/<?php echo $Orders->order_id?>"><img src="<?php echo URLROOT; ?>/assets/images/view.png" alt="" class="vieweye" alt=""></a>
             </div>
             <div class="table_cell column6">
                 <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>

@@ -347,6 +347,106 @@ public function assignDeliver($order_item_id ,$deliver_id){
     }
 }
 
+public function OrdersAdminView($id){
+    $this->db->query('SELECT * FROM orders WHERE order_id=:order_id');
+    $this->db->bind(':order_id',$id);
+
+    $row= $this->db->single();
+    if($row){
+        return $row;
+    }
+    else{
+        return true;
+    }
+}
+
+public function OrderItemsView($id){
+    $this->db->query('SELECT 
+                      order_items.*,
+                      items_market.*,
+                      users.*,
+                      users.name As seller_name,
+                      users.address As seller_address
+                      FROM
+                      order_items
+                      JOIN 
+                      items_market ON 
+                      order_items.item_id = items_market.item_id
+                      JOIN
+                      sellers ON
+                      items_market.seller_id = sellers.seller_id
+                      JOIN
+                      users ON
+                      sellers.user_id=users.user_id
+                      WHERE order_id=:order_id');
+
+    $this->db->bind(':order_id',$id);
+
+    $row= $this->db->resultSet();
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+
+}
+
+public function sellersInOrder($id){
+    $query = 'SELECT 
+            order_items.seller_id,
+            users.*
+            FROM
+            order_items
+            JOIN
+            sellers ON
+            order_items.seller_id=sellers.seller_id
+            JOIN 
+            users ON
+            sellers.user_id = users.user_id
+            WHERE order_items.order_id = :order_id';
+    
+    $this->db->query($query);
+    $this->db->bind(':order_id',$id);
+    
+    $row = $this->db->resultSet();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+
+public function OrderBuyer($id){
+    $query = 'SELECT 
+            order_items.buyer_id,
+            users.*
+            FROM
+            order_items
+            JOIN
+            buyers ON
+            order_items.buyer_id=buyers.buyer_id
+            JOIN 
+            users ON
+            buyers.user_id = users.user_id
+            WHERE order_items.order_id =:order_id';
+     
+     $this->db->query($query);
+    $this->db->bind(':order_id',$id);
+   
+    $row = $this->db->resultSet();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
 
 
 

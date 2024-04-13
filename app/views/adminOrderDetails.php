@@ -17,39 +17,60 @@
 </head>
 <body>
 <?php
- require APPROOT. '/views/layouts/navbar2.php'; 
+ require APPROOT. '/views/layouts/mainNavbar.php'; 
  ?>
+ <div class="main_container">
  <?php
  require APPROOT. '/views/layouts/adminsidebar.php'; 
  ?>
- <div class="profile">
+ <div class="container_content">
+ <div class="adminprofile">
     <h4>Order Details</h4>
     <div class="first_card_set">
-    <div class="mycard_ad">
-        <div class="productimg">
-            <img src="<?php echo URLROOT; ?>/assets/images/mango.jpeg" class="mango" alt="">
-        </div>
-        <div class="productdes_ad">
-            <div class="order_num">
-                Order Number: 003
+    <div class="order_summary_card2">
+            <div class="head_card2">
+                <h4>Customer Details</h4>
             </div>
-            <div class="ord_date">
-                Date : Sun,Oct 17,2023
+            <div class="upperbody_card">
+                <div class="upperbody_img_cont">
+                    <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="customers-profile-img" class="upperbody_img">
+                </div>
+                <div class="upperbody_btn">
+                    <button class="btn">View profile</button>
+                </div>
             </div>
-           <div class="productname_ad">
-                Product : Mango
-           </div>
-           
-           <div class="productprice_ad">
-               Quantity 40kg | Rs 2000 /Kg
-           </div>
-           
-           <!--<div class="prodes">
-                Savor the taste of our freshly harvested, pesticide-free mangoes – pure, organic, and irresistibly sweet.
-           </div>-->
-
+            <div class="body_card">
+                
+                <div class="orderNumber_cont">
+                    <div class="orderNumber">
+                        Customer ID
+                    </div>
+                    <div class="orderNumber_v">
+                        <?php echo $data['details']->buyer_id ?>
+                    </div>
+                </div>
+                <div class="orderNumber_cont">
+                    <div class="orderNumber">
+                        Customer Name
+                    </div>
+                    <div class="orderNumber_v">
+                    <?php echo $data['buyerdet'][0]->name; ?>
+                    </div>
+                </div>
+                <div class="orderNumber_cont">
+                    <div class="orderNumber">
+                        Location
+                    </div>
+                    <div class="orderNumber_v">
+                    <?php echo $data['details']->order_address ?>
+                    </div>
+                </div>
+                
+            </div>
+            
         </div>
-    </div>
+   
+    
         <div class="order_summary_card">
             <div class="head_card">
                 <h4>Order summmary</h4>
@@ -72,7 +93,7 @@
                         Item total
                     </div>
                     <div class="orderNumber_v">
-                        Rs.2500
+                    <?php echo $data['details']->total_price ?>
                     </div>
                 </div>
                 <div class="orderNumber_cont">
@@ -80,15 +101,18 @@
                         Delivery fee
                     </div>
                     <div class="orderNumber_v">
-                        Rs.500
+                    <?php echo $data['details']->total_delivery_fee ?>
                     </div>
                 </div>
                 <div class="orderNumber_cont">
                     <div class="orderNumber">
                         Sub Total
                     </div>
+                    <?php 
+                        $sub_total = ($data['details']->total_price + $data['details']->total_delivery_fee );
+                    ?>
                     <div class="orderNumber_v">
-                        Rs.3000
+                    <?php echo $sub_total ?>
                     </div>
                 </div>
                     
@@ -98,49 +122,106 @@
   
         
     </div>
-    <div class="second_card_set">
-    <div class="order_summary_card2">
-            <div class="head_card2">
-                <h4>Customer Details</h4>
-            </div>
-            <div class="upperbody_card">
-                <div class="upperbody_img_cont">
-                    <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="customers-profile-img" class="upperbody_img">
-                </div>
-                <div class="upperbody_btn">
-                    <button class="btn">View profile</button>
-                </div>
-            </div>
-            <div class="body_card">
-                
-                <div class="orderNumber_cont">
-                    <div class="orderNumber">
-                        Customer ID
-                    </div>
-                    <div class="orderNumber_v">
-                        003
-                    </div>
-                </div>
-                <div class="orderNumber_cont">
-                    <div class="orderNumber">
-                        Customer Name
-                    </div>
-                    <div class="orderNumber_v">
-                        Yunal Mallawarachchi
-                    </div>
-                </div>
-                <div class="orderNumber_cont">
-                    <div class="orderNumber">
-                        Location
-                    </div>
-                    <div class="orderNumber_v">
-                        Piliyandala
-                    </div>
-                </div>
-                
-            </div>
-            
+   
+     <div class="second_card_set">
+        
+        <div class="history_container">
+            <h4>Ordered Items</h4>
+
+        <?php foreach($data['items'] as $items):?>
+           <!-- <?php var_dump($data['items']); ?> -->
+        <div class="mycard_ad">
+        <div class="productimg">
+            <img src="<?php echo URLROOT.'/store/items/'.$items->item_img ;?>" class="mango" alt="">
         </div>
+        <div class="productdes_ad">
+            <div class="order_num">
+                Order Number: <?php echo $items->order_id?>
+            </div>
+            <div class="ord_date">
+                Date : Sun,Oct 17,2023
+            </div>
+           <div class="productname_ad">
+                Product : <?php echo $items->name?>
+           </div>
+           
+           <div class="productprice_ad">
+               Quantity <?php echo $items->stock?><?php echo 'KG'?> | Rs <?php echo $items->price?> /Kg
+           </div>
+        </div>
+        <div class="seller_det">
+            <div class="img_and_Plink">
+                <div class="seller_img">
+                <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="customers-profile-img" class="upperbody_img leftee">
+                </div>
+                <div class="profile_link">
+                    <button class="btn">Seller profile</button>
+                </div>
+            </div>
+            <div class="ord_info">
+            <div class="orderNumber_cont">
+                    <div class="orderNumber">
+                        Seller ID :
+                    </div>
+                    <div class="orderNumber_v">
+                    <?php echo $items->seller_id?>
+                    </div>
+                </div>
+                <div class="orderNumber_cont">
+                    <div class="orderNumber">
+                        Name :
+                    </div>
+                    <div class="orderNumber_v">
+                    <?php echo $items->seller_name?>
+                    </div>
+                </div>
+                <div class="orderNumber_cont">
+                    <div class="orderNumber">
+                        Location :
+                    </div>
+                    <div class="orderNumber_v">
+                    <?php echo $items->seller_address?>
+                    </div>
+                </div>
+                <div class="orderNumber_cont">
+                    <div class="orderNumber">
+                        Seller Rating :
+                    </div>
+                    <div class="orderNumber_v">
+                        <i class="fa-solid fa-star" style="color: #dfd811;"></i>
+                        <i class="fa-solid fa-star" style="color: #dfd811;"></i>
+                        <span>3.5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endforeach; ?>
+    
+        </div>
+    <!--<div class="mycard_ad">
+        <div class="productimg">
+            <img src="<?php echo URLROOT; ?>/assets/images/mango.jpeg" class="mango" alt="">
+        </div>
+        <div class="productdes_ad">
+            <div class="order_num">
+                Order Number: 003
+            </div>
+            <div class="ord_date">
+                Date : Sun,Oct 17,2023
+            </div>
+           <div class="productname_ad">
+                Product : Mango
+           </div>
+           
+           <div class="productprice_ad">
+               Quantity 40kg | Rs 2000 /Kg
+           </div>
+           
+           
+
+        </div>
+    </div>
         <div class="order_summary_card2">
             <div class="head_card2">
                 <h4>Seller Details</h4>
@@ -192,7 +273,7 @@
                 
             </div>
             
-        </div>
+        </div>-->
         
     </div>
     <div class="third_card_set">

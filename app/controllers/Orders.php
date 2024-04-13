@@ -146,11 +146,25 @@ public function acceptOrder($order_item_id){
     }
     }
 
+    //admin functions
+
+    public function details($id){
+        $OrderDet = $this->orderModel->OrdersAdminView($id);
+        $OrderItems = $this->orderModel->OrderItemsView($id);
+        $sellerDet=$this->orderModel ->sellersInOrder($id);
+        $buyerDet = $this->orderModel ->OrderBuyer($id);
+
+        $data = [
+            'details'=>$OrderDet,
+            'items'=>$OrderItems,
+            'sellerdet'=>$sellerDet,
+            'buyerdet'=>$buyerDet,
+        ];
+        $this->view('adminOrderDetails',$data);
+    }
     
 
-   /* public function about(){
-        $this ->view('Pages/about');
-    }*/
+   
 }
 
 
