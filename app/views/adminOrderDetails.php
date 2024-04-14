@@ -277,6 +277,7 @@
         
     </div>
     <div class="third_card_set">
+    <div class="history_container">
         <div class="delivery_stage">
             <div class="delivery_agent_det">
                 <div class="head_card2">
@@ -320,6 +321,7 @@
                 </div>
             </div>
             <div class="delivery_sta">
+            <div class="stages_show_content">
             <div class="track">
                 <ul id="progress" class="txt-center">
                     <li class="active"></li>
@@ -363,9 +365,15 @@
                 </div>
             </div>
             </div>
+            <div class="check_btn">
+                <button class="btn placement">Check Order Images</button>
+            </div>
+            </div>
             
         </div>
+        </div>
     </div>
+
  </div>
 </body>
 </html>

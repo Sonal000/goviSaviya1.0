@@ -162,6 +162,10 @@ public function acceptOrder($order_item_id){
         ];
         $this->view('adminOrderDetails',$data);
     }
+
+    public function ImageChecking($id){
+        
+    }
     
 
    

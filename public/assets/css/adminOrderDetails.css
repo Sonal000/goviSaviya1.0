@@ -15,6 +15,7 @@
 .third_card_set{
     display: flex;
     justify-content: center;
+    
     /* margin-top: 3rem;  */
 }
 
@@ -101,17 +102,26 @@
     border-radius: var(--radius-low);
     cursor: pointer;
     border: 2px solid var(--clr-primary-7);
-    width: 1000px;
+    width: 1100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     
+}
+.delivery_sta{
+    margin-top: 2rem;
 }
 .track{
     width: 400px;
    justify-content: center;
    margin-left: 1rem;
    
+}
+
+.placement{
+    
+    margin-top: 2rem;
+    margin-left: 7.5rem;
 }
 #progress {
     list-style: none;
