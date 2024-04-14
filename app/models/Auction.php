@@ -262,6 +262,39 @@ public function getItems($page=1,$perPage=10,$sort=null,$order='ASC',$filter){
      };
   }
 
+  public function getAuctionBidInfo($id){
+    $this->db->query(
+      "SELECT 
+      bd.*,
+      au.name AS item_name, 
+      au.unit AS item_unit, 
+      au.stock AS stock, 
+      au.name AS item_name, 
+      au.start_date AS starting_date,
+      au.end_date AS ending_date,
+      bd.buyer_id AS buyer_id,
+      bd.bid_time AS bid_date,
+      bd.bid_price AS bid_price,
+      u.name AS buyer_name,
+      u.city AS buyer_city,
+      u.user_id AS buyer_user_id 
+      FROM bids bd 
+      JOIN auction au ON bd.auction_id = au.auction_ID
+      JOIN buyers b ON bd.buyer_id = b.buyer_id
+      JOIN users u ON b.user_id = u.user_id
+      WHERE bd.auction_id = :auction_id
+      ORDER BY bd.bid_price DESC "
+    
+    );
+    $this ->db ->bind(':auction_id',$id);
+    $row=$this->db->resultSet();
+     if($row){
+      return $row;
+     }else{
+    return false;
+     };
+  }
+
 
   public function myAuctionInfo($id){
     $this->db->query("SELECT * FROM auction WHERE seller_ID=:seller_ID AND status='active'");
@@ -290,5 +323,109 @@ public function getItems($page=1,$perPage=10,$sort=null,$order='ASC',$filter){
     }
 
   }
+
+  public function addbid($data){
+    $this->db->query('INSERT INTO bids(auction_id,buyer_id,bid_price) VALUES(:auction_id,:buyer_id,:bid_price)');
+
+    $this->db->bind(':auction_id',$data['auction_id']);
+    $this->db->bind(':buyer_id',$data['buyer_id']);
+    $this->db->bind(':bid_price',$data['bid_price']);
+
+    if($this->db->execute()){
+
+      $this->db->query('UPDATE auction SET bid_Count = bid_Count + 1 WHERE auction_ID = :auction_id');
+      $this->db->bind(':auction_id',$data['auction_id']);
+      if($this->db->execute()){
+        
+        return true;
+      }else{
+        return false;}
+      
+    }
+    else{
+        return false;
+    }
+
+  }
+
+
+public function getCurrentBid($id){
+  
+  $this->db->query("SELECT * FROM bids WHERE auction_id = :auction_id AND bid_price = (SELECT MAX(bid_price) AS current_bid FROM bids WHERE auction_id = :auction_id) ");
+  $this->db->bind(':auction_id',$id);
+  $row=$this->db->single();
+  if($row){
+    return $row;
+  }else{
+    return false;
+  }
+
+}
+
+public function getBidCount($id){
+  $this->db->query("SELECT COUNT(*) AS bid_count FROM bids WHERE auction_id = :auction_id ");
+  $this->db->bind(':auction_id',$id);
+  $row=$this->db->single();
+  if($row){
+    return $row;
+  }else{
+    return false;
+  }
+}
+
+public function getYourBid($auction_id,$buyer_id){
+  $this->db->query("SELECT MAX(bid_price) AS your_bid FROM bids WHERE auction_id = :auction_id AND buyer_id = :buyer_id");
+  $this->db->bind(':auction_id',$auction_id);
+  $this->db->bind(':buyer_id',$buyer_id);
+  $row=$this->db->single();
+  if($row){
+    return $row;
+  }else{
+    return false;
+  }
+
+}
+
+public function isActiveBidder($auction_id,$buyer_id){
+  $this->db->query("SELECT * FROM bids WHERE auction_id = :auction_id AND buyer_id = :buyer_id");
+  $this->db->bind(':auction_id',$auction_id);
+  $this->db->bind(':buyer_id',$buyer_id);
+  $row=$this->db->single();
+  if($row){
+    return true;
+  }else{
+    return false;
+  }
+
+}
+
+public function getBuyerBids($buyer_id){
+  $this->db->query(
+  " SELECT 
+    DISTINCT bd.auction_id,
+    sl.seller_id,
+    au.name,
+    us.name AS seller_name,
+    au.bid_Count,
+    au.item_img,
+    au.exp_date,
+    bd.auction_id  
+    FROM bids bd
+    JOIN auction au ON bd.auction_id = au.auction_ID
+    JOIN sellers sl ON au.seller_ID = sl.seller_id  JOIN users us ON sl.user_id = us.user_id
+    WHERE buyer_id = :buyer_id
+    ORDER BY bd.bid_time DESC
+    
+    ");
+    $this->db->bind(':buyer_id',$buyer_id);
+  $row=$this->db->resultSet();
+  if($row){
+    return $row;
+  }else{
+    return false;
+  }
+}
+
+
 
  }

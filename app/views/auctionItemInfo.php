@@ -76,26 +76,37 @@
           <p class="item_price"><span>available :</span></p> <p> <?php echo $data['stock'];?> <span><?php echo $data['unit'];?>   </p>
         </div>
         <div class="item_price_cont">
-          <p class="item_price"><span>Current bid :</span></p> <p>   Rs <?php echo $data['price'];?>/<span><?php echo $data['unit'];?></span></p>
+          <p class="item_price"><span>Current bid :</span></p> <p>   Rs <?php echo $data['current_bid'];?>/<span><?php echo $data['unit'];?></span></p>
         </div>
 
   <div class="item_bid_cont">
     <p class="item_bids"><?php echo $data['bid_Count'];?> <span>bids</span></p>
-    <p class="item_time">  24/<span>h left</span>  </p>
+    <p class="item_time"> <?php echo $data['exp_date'];?><span> left</span>  </p>
   </div>
   <div class="item_desc_cont">
     <p class="item_desc"><?php echo $data['description'];?></p>
   </div>
+  <div>
+    <?php 
+      if($data['leading_bidder']){
+        echo '<p class="leading_bid">You are the leading bidder in this auction</p>';
+      }else if($data['active_bidder']){
+        echo '<p class="active_bid">You have been outbid in this auction ( your bid : Rs '.$data['yourBid'].' )</p>';
+      }
+    ?>
+  </div>
+
+  <form action="<?php echo URLROOT.'/auctionC/bid/'.$data['item_id']; ?>" method="post">
   <div class="item_btns_cont">
     <div class="qty_btn_cont">
-      <button class="btn_remove">-</button>
-      <!-- <p class="qty">0</p> -->
-        <input class="qty" type="number" value="0">
-      
-      <button class="btn_add">+</button>
+      <!-- <button class="btn_remove">-  Rs</button> -->
+        <p>Rs</p>
+        <input class="qty" type="number" value="<?php echo $data['current_bid'] + 10;?>" class="qty"  name="bid_price" id="quantity" data-currentprice="<?php echo $data['current_bid'] + 10;?>">
+      <!-- <button class="btn_add">+</button> -->
     </div>
-    <buttton class="addtocart_btn btn">Place Bid</buttton>
+    <button type="submit" class="addtocart_btn btn">Place Bid</button>
   </div>
+</form>
 </div>
 
    

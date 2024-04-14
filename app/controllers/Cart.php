@@ -53,11 +53,7 @@ class Cart extends Controller {
 
 
  public function payments(){
-
-
   $items = $this->itemModel->getCartItems($_SESSION["buyer_id"]);
-
-
   $lineItems = [];
   foreach ($items as $item) {
       $lineItems[] = [
@@ -71,36 +67,31 @@ class Cart extends Controller {
           ],
       ];
   }
-
   \Stripe\Stripe::setApiKey(STRIPESECRETKEY);
-
   $checkout_session = \Stripe\Checkout\Session::create([
     "mode" => "payment",
-    "success_url" => "http://localhost/goviSaviya1.0/placeorder", // Change this URL to your success page
-    "cancel_url" => "http://localhost/goviSaviya1.0/cart/checkout", // Change this URL to your cancel page
+    "success_url" => "http://localhost/goviSaviya1.0/orders", // success page
+    "cancel_url" => "http://localhost/goviSaviya1.0/cart/checkout", // cancel page
     "locale" => "auto",
     "line_items" => $lineItems,
 ]);
-
 // Redirect the user to the Stripe Checkout page
 http_response_code(303);
 header("Location: " . $checkout_session->url);
-exit;
-
- }
+     if($this->itemModel->clearCartitems($_SESSION["buyer_id"])){
+        }else{
+          header("Location: " . URLROOT . "/cart"); 
+          exit();
+        };
+exit();
+}
 
 
 //  placeorder
- public function placeOrder(){
-  $items = $this->itemModel->getCartItems($_SESSION["buyer_id"]);
-  
+public function placeOrder(){
+  $items = $this->itemModel->getCartItems($_SESSION["buyer_id"]);  
   if($_SERVER['REQUEST_METHOD']=='POST'){
-
-      
-      $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
-   
-
-
+    $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
       $details=[
         "order_mobile"=>trim($_POST['mobile']),
         "order_address"=>trim($_POST['address']),
@@ -108,34 +99,19 @@ exit;
         "order_city"=>trim($_POST['city']),
         "order_postal_code"=>trim($_POST['postalCode'])
       ];
-
-
-
-
-
-
       if($this->orderModel->placeOrder($items,$details,$_SESSION["buyer_id"])){
-
-        if($this->itemModel->clearCartitems($_SESSION["buyer_id"])){
-          header("Location: " . URLROOT . "/orders"); 
-          exit();  
-        }else{
-          header("Location: " . URLROOT . "/cart"); 
-          exit();
-        };
+                  header("Location: " . URLROOT . "/cart/payments"); 
+                  exit();  
+        // if($this->itemModel->clearCartitems($_SESSION["buyer_id"])){
+        // }else{
+        //   header("Location: " . URLROOT . "/cart"); 
+        //   exit();
+        // };
       }else{
         header("Location: " . URLROOT . "/cart"); 
         exit();
       }
-
-    
-}
-
-
-
-
-
-
+    }
  }
 
 

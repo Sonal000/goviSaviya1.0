@@ -27,11 +27,13 @@
   flex: 0.6;
   /* max-height: calc(100vh);
   overflow: scroll; */
+  order: 1;
 }
 .order_details {
   flex: 0.4;
   /* max-height: 100vh;
   overflow: scroll; */
+  order: 2;
   position: sticky;
   top: 0;
 }

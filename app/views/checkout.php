@@ -27,6 +27,95 @@
     </div>
     <form action="<?php echo URLROOT ?>/cart/placeOrder" method="POST" id="placeOrderForm">
     <div class="details_cont">
+    <div class="order_details">
+
+
+<section class="section_cont">
+<div class="sec_title order_title">
+    <h4>Your Order</h4>
+    <a href="<?php echo URLROOT; ?>/cart" class="return_to_cart">return to cart</a>
+</div>
+<div class="sec_content">
+    <div class="items_cont">
+        <ul>
+            <!-- items======== -->
+            <?php if($data['items']){
+                    foreach($data["items"] as $item){
+                ?>
+            <li class="item" data-price="<?php echo $item->price; ?>" data-qty="<?php echo $item->qty; ?>">
+                <div class="item_details">
+                    <div class="item_name_cont">
+
+                        <p class="item_name">
+                            <?php echo $item->name; ?></p>
+                        <div class="item_qty">
+                            <p><?php echo $item->qty; ?> <span><?php echo $item->unit; ?></span></p>
+                        </div>
+                    </div>
+                    <div class="item_price">
+                        <p><span>Rs</span> <?php echo $item->price * $item->qty; ?></p>
+                    </div>
+                </div>
+                <div class="item_details">
+                    <div class="item_name_cont">
+
+                        <p class="delivery_name">
+                            delivery</p>
+                    </div>
+                    <div class="delivery_price">
+                        <p><span>Rs</span> <?php echo (getDistancefee($item->address,$data['buyerAddress'])); ?></p>
+                    </div>
+                </div>
+            </li>
+                        <?php }
+            }
+                        ?>
+            <!-- ============================ -->
+        </ul>
+    </div>
+
+    <div class="total_container">
+        <div class="tot_cont">
+            <p>Sub Total</p>
+            <p class="price">Rs<span class="subvalue">0</span></p>
+        </div>
+        <div class="tot_cont">
+            <p>Delivery Fee</p>
+            <?php 
+            if($data['totalDeliveryfee']){
+                ?>
+                    <p class="price">Rs<span><?php echo $data['totalDeliveryfee']; ?></span></p>
+                <?php
+            }else{
+                ?>
+                <p class="desc_policy">not available</p>
+            <?php }
+            ?>
+            
+        </div>
+        <div class="tot_container">
+        <div class="tot_cont">
+            <p>Total</p>
+
+                    <p class="price">Rs<span data-delivery=<?php echo $data['totalDeliveryfee']; ?> class="totvalue">0</span></p>
+
+            
+        </div>
+        <p class="desc_policy">By continuing, you agree to Govisaviyas's Terms of Service and Privacy Policy. We'll send this Summary to Govisaviya adminstration.</p>
+
+        <p class="order_req"></p>
+        <div class="order_btn_cont">
+            <!-- <a href="<?php echo URLROOT."/cart/payments" ?>" class="btn place_order_btn">Place Order</a> -->
+            <input type="submit" class="btn place_order_btn" name="place_order" value="Go to Payments">
+        </div>
+        </div>
+    </div>
+
+</div>
+</section>
+
+</div>
+
         <div class="delivery_details">
 
         <section class="section_cont">
@@ -107,94 +196,7 @@
     </section>
 
         </div>
-        <div class="order_details">
 
-
-        <section class="section_cont">
-        <div class="sec_title order_title">
-            <h4>Your Order</h4>
-            <a href="<?php echo URLROOT; ?>/cart" class="return_to_cart">return to cart</a>
-        </div>
-        <div class="sec_content">
-            <div class="items_cont">
-                <ul>
-                    <!-- items======== -->
-                    <?php if($data['items']){
-                            foreach($data["items"] as $item){
-                        ?>
-                    <li class="item" data-price="<?php echo $item->price; ?>" data-qty="<?php echo $item->qty; ?>">
-                        <div class="item_details">
-                            <div class="item_name_cont">
-
-                                <p class="item_name">
-                                    <?php echo $item->name; ?></p>
-                                <div class="item_qty">
-                                    <p><?php echo $item->qty; ?> <span><?php echo $item->unit; ?></span></p>
-                                </div>
-                            </div>
-                            <div class="item_price">
-                                <p><span>Rs</span> <?php echo $item->price * $item->qty; ?></p>
-                            </div>
-                        </div>
-                        <div class="item_details">
-                            <div class="item_name_cont">
-
-                                <p class="delivery_name">
-                                    delivery</p>
-                            </div>
-                            <div class="delivery_price">
-                                <p><span>Rs</span> <?php echo (getDistancefee($item->address,$data['buyerAddress'])); ?></p>
-                            </div>
-                        </div>
-                    </li>
-                                <?php }
-                    }
-                                ?>
-                    <!-- ============================ -->
-                </ul>
-            </div>
-
-            <div class="total_container">
-                <div class="tot_cont">
-                    <p>Sub Total</p>
-                    <p class="price">Rs<span class="subvalue">0</span></p>
-                </div>
-                <div class="tot_cont">
-                    <p>Delivery Fee</p>
-                    <?php 
-                    if($data['totalDeliveryfee']){
-                        ?>
-                            <p class="price">Rs<span><?php echo $data['totalDeliveryfee']; ?></span></p>
-                        <?php
-                    }else{
-                        ?>
-                        <p class="desc_policy">not available</p>
-                    <?php }
-                    ?>
-                    
-                </div>
-                <div class="tot_container">
-                <div class="tot_cont">
-                    <p>Total</p>
-
-                            <p class="price">Rs<span data-delivery=<?php echo $data['totalDeliveryfee']; ?> class="totvalue">0</span></p>
-
-                    
-                </div>
-                <p class="desc_policy">By continuing, you agree to Govisaviyas's Terms of Service and Privacy Policy. We'll send this Summary to Govisaviya adminstration.</p>
-
-                <p class="order_req"></p>
-                <div class="order_btn_cont">
-                    <!-- <a href="<?php echo URLROOT."/cart/payments" ?>" class="btn place_order_btn">Place Order</a> -->
-                    <input type="submit" class="btn place_order_btn" name="place_order" value="Place Order">
-                </div>
-                </div>
-            </div>
-
-</div>
-</section>
-
-        </div>
     </div>
 </form>
 

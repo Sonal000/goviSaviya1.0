@@ -83,6 +83,7 @@
             'item_id'=>$id,
             'seller_name'=>$seller->name,
             'seller_id'=>$seller->seller_id,
+            'seller_user_id'=>$seller->user_id,
             'seller_city'=>$seller->city,
             'category'=>$row->category,
             'description'=>$row->description,

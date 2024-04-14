@@ -393,6 +393,26 @@ function paramString($validParams){
 
     <!-- item -->
     <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_ID ?>" class="item_btn">
+    <?php if(isset($_SESSION['buyer_id'])){
+      if($item->active_bidder){
+        if($item->leading_bidder){
+          ?>
+          <div class="bid_icon_cont ">
+          <i class="fas fa-gavel bid_icon"></i>
+        </div>
+
+        <?php
+        }else{
+          ?>
+          <div class="bid_icon_cont inactive_bid_icon">
+          <i class="fas fa-gavel bid_icon"></i>
+        </div>
+
+<?php
+        }
+      }
+    }  ?>
+
 
      <div class="item">
       <div class="item_img_cont">

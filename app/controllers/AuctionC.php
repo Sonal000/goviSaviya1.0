@@ -3,9 +3,11 @@
 class AuctionC extends Controller{
     private $auctionModel;
     private $sellerModel;
+    private $buyerModel;
     public function __construct(){
         $this->auctionModel =$this->model('Auction');
         $this->sellerModel =$this->model('Seller');
+        $this->buyerModel =$this->model('Buyer');
             
     }
 
@@ -46,20 +48,41 @@ class AuctionC extends Controller{
 
       $row=$this->auctionModel->getItems($page,$perPage,$sort,$order,$filter);
       $totalCount=$row['totalCount'];
-      $data=[
-          'items'=>$row['items'],
-          'totItems'=>$totalCount,
-          'totPages'=>ceil($totalCount/$perPage),
-          'page'=>$page,
-          'category'=>$category,
-          'city'=>$city,
-          'priceRange'=>$maxPrice? ('price: '.$minPrice.' - '.$maxPrice) :false,
-          'qtyRange'=>$maxQty?('quantity: '.$minQty.' - '.$maxQty):false,
-          'search_term'=>isset($_GET['search']) ?join(" ",(array)explode('%a%',$_GET['search'] )):''
-      ];
-        
-            
-            // $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+      
+    if(isset($_SESSION['buyer_id'])){
+        foreach ($row['items'] as $item) {
+            $activebidder=$this->auctionModel->isActiveBidder($item->auction_ID,$_SESSION['buyer_id']);
+            $currentBid = $this->auctionModel->getCurrentBid($item->auction_ID);
+            // var_dump($currentBid);
+            $item->active_bidder=$activebidder;
+            $item->leading_bidder=(($currentBid?$currentBid->buyer_id:0) == $_SESSION['buyer_id'])?true:false;
+        }
+        $data=[
+            'items'=>$row['items'],
+            'totItems'=>$totalCount,
+            'totPages'=>ceil($totalCount/$perPage),
+            'page'=>$page,
+            'category'=>$category,
+            'city'=>$city,
+            'priceRange'=>$maxPrice? ('price: '.$minPrice.' - '.$maxPrice) :false,
+            'qtyRange'=>$maxQty?('quantity: '.$minQty.' - '.$maxQty):false,
+            'search_term'=>isset($_GET['search']) ?join(" ",(array)explode('%a%',$_GET['search'] )):''
+        ];
+    }else{
+
+        $data=[
+            'items'=>$row['items'],
+            'totItems'=>$totalCount,
+            'totPages'=>ceil($totalCount/$perPage),
+            'page'=>$page,
+            'category'=>$category,
+            'city'=>$city,
+            'priceRange'=>$maxPrice? ('price: '.$minPrice.' - '.$maxPrice) :false,
+            'qtyRange'=>$maxQty?('quantity: '.$minQty.' - '.$maxQty):false,
+            'search_term'=>isset($_GET['search']) ?join(" ",(array)explode('%a%',$_GET['search'] )):''
+        ];
+    } 
+        // $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             // $perPage = 20;
             // $row=$this->auctionModel->getItems($page,$perPage);
             // $totalItems = $this->auctionModel->getTotalItemsCount(); 
@@ -91,6 +114,27 @@ class AuctionC extends Controller{
                    $seller=$this->sellerModel->getSellerInfo($row->seller_ID);
                   if($seller){
 
+                    $bid = $this->auctionModel->getCurrentBid($id);
+
+                    $activebidder = $this->auctionModel->isActiveBidder($id ,$_SESSION['buyer_id']);
+
+                    $bidCount = $this->auctionModel->getBidCount($id);
+                    $yourBid = $this->auctionModel->getYourBid($id,$_SESSION['buyer_id']);
+
+
+                    $currentDateTime = new DateTime();
+                    $expDateTime = new DateTime($row->exp_date);
+                    $timeDifference = $currentDateTime->diff($expDateTime);
+                    $remains = $timeDifference->format('%a days %H hours');
+               
+
+
+
+// echo "Remaining days: " . $timeDifference->d . " days<br>";
+// echo "Remaining hours: " . $timeDifference->h . " hours";           
+                    
+                  
+
                       $data=[
                           'name'=>$row->name,
                           'item_id'=>$id,
@@ -100,14 +144,19 @@ class AuctionC extends Controller{
                           'category'=>$row->category,
                           'description'=>$row->description,
                           'price'=>$row->price,
+                          'current_bid'=>$bid?$bid->bid_price:$row->price,
                           'unit'=>$row->unit,
                           'district'=>$row->district,
-                          'exp_date'=>$row->exp_date,
-                          'bid_Count'=>$row->bid_Count,
+                          'exp_date'=>$remains,
+                          'bid_Count'=>$bidCount->bid_count,
                           'created_at'=>$row->created_at,
                           'item_img'=>$row->item_img,
                           'stock'=>$row->stock,
-                        ];
+                          'active_bidder'=>$activebidder,
+                          'leading_bidder'=>(($bid?$bid->buyer_id:0)==$_SESSION['buyer_id']?true:false),
+                          'yourBid'=>$yourBid?$yourBid->your_bid:0,
+                      ]
+                          ;
             
                     }
                 }else{
@@ -119,6 +168,24 @@ class AuctionC extends Controller{
         }
 
 
+        public function bid($id){
+
+            if($_SERVER['REQUEST_METHOD']=='POST'){
+                var_dump($id);
+                $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+                $data=[
+                    'bid_price'=>trim($_POST['bid_price']),
+                    'buyer_id'=>$_SESSION['buyer_id'],
+                    'auction_id'=>$id
+                ];
+          
+                if($this->auctionModel->addBid($data)){
+                    redirect('AuctionC/itemInfo/'.$id);
+                }else{
+                    echo 'bid failed';
+                }
+            }
+        }
 
     // public function auctionInfo($id){
     //     $row =$this->auctionModel->getAuctionInfo($id);
@@ -139,38 +206,44 @@ class AuctionC extends Controller{
 
     public function items(){
         $row=$this->auctionModel->myAuctionInfo($_SESSION['seller_id']);
+        if($row){
+
+            foreach ($row as $item) {
+                $currentDateTime = new DateTime();
+                $expDateTime = new DateTime($item->exp_date);
+                $timeDifference = $currentDateTime->diff($expDateTime);
+                $remains = $timeDifference->format('%a days %H hours');
+                $currentBid = $this->auctionModel->getCurrentBid($item->auction_ID);
+                $bidInfo=$this->auctionModel->getAuctionBidInfo($item->auction_ID);
+                $buyerinfo = $this->buyerModel->getBuyerInfo($currentBid?$currentBid->buyer_id:null);
+                
+                $bidCount = $this->auctionModel->getBidCount($item->auction_ID);
+                
+                
+                $item->time_remain =$remains;
+                $item->bid_Count =$bidCount->bid_count;
+                $item->current_bid =$currentBid?$currentBid->bid_price:$item->price;
+                $item->current_buyer_name =$buyerinfo?$buyerinfo->name:null;
+                $item->bidlist=$bidInfo;
+                
+            
+            
+        }
+    }
         $data=[
             'items'=>$row
         ];
-        if($row){
-            $this->view('sellerauction',$data);
-
-        }
-        else{
-            echo 'nothing to show';
-        }
+        
+        $this->view('sellerauction',$data);
+        
+        
 
     }
 
     public function endAuction($id){
-
-        $this->auctionModel->endAuction($id);
-
-        $seller_id = $_SESSION['seller_id'];
-        $row=$this->auctionModel->myAuctionInfo($seller_id);
-        $data=[
-            'items'=>$row
-        ];
-
-       
-
-        if($row){
-            $this->view('sellerauction',$data);
-        }
-        else{
-            echo"nothig to show";
-        }
         
+        $this->auctionModel->endAuction($id);
+        redirect('AuctionC/items');
 
 
     }

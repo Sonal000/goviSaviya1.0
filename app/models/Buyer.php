@@ -63,7 +63,7 @@ class Buyer{
         $this->db->query("SELECT buyers.*, users.* 
                          FROM buyers 
                          RIGHT JOIN users ON buyers.user_id = users.user_id 
-                         WHERE buyers.seller_id = :buyer_id");
+                         WHERE buyers.buyer_id = :buyer_id");
         
         $this->db->bind(':buyer_id', $id);
         

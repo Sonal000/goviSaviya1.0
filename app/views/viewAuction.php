@@ -35,26 +35,78 @@
          
          <div class="bid_items_cont">
       
+<?php if($data['items']){ foreach($data['items'] as $item){
+
+   if($item->leading_bid){
+      ?>
 
 
-         <!-- bid item ===========-->
-         <div class="bid_item_cont  inactive_bid">
+    <!-- bid item ===========-->
+    
+    <div class="bid_item_cont  ">
             <div class="bid_item_img_cont">
-               <img  class="bid_item_img" src="<?php echo URLROOT ?>/assets/images/item-5.png"/>
+               <img  class="bid_item_img" src="<?php echo URLROOT ?>/store/items/<?php echo $item->item_img ?>"/>
             </div>
             <div class="item_description">
                <div class="item_title_cont">
                   <div class="item_info">
-                     <p class="item_name">Banana</p>
-                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
+                     <p class="item_name"><?php echo $item->name ?></p>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: <?php echo $item->seller_name ?> <span><i class="fas fa-check-circle"></i></span></a>
                      <!-- <p class="item_address">Thalgahawawa</p> -->
                   </div>
-                  <p class="item_time">  24/<span>h left</span>  </p>
+                  <p class="item_time">  <?php echo $item->exp_date ?><span> left</span>  </p>
                </div>
                <div class="bid_action_cont">
 
                   <div class="item_bid_cont">
-                     <p class="item_bids">10 <span>bids</span></p>
+                     <p class="item_bids"><?php echo $item->bid_Count ?> <span>bids</span></p>
+                     <div class="bid_info_cont">
+                        <p class="current_bid">Current highest Bid : <span> Rs :  <?php echo $item->current_bid ?></span></p>
+                        <p class="your_bid">Your Bid : <span> Rs :  <?php echo $item->your_bid ?></span></p>
+                     </div>
+                  </div>
+                  <div class="item_btns_cont">
+                     <!-- <div class="qty_btn_cont">
+                        <button class="btn_remove">-</button>
+                        <input class="qty" type="number" value="0">
+                        <button class="btn_add">+</button>
+                     </div> -->
+                     <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>" class="bid_btn btn">Place Higher Bid</a>
+                     <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>" class="buy_btn btn">Buy this item</a>
+                  </div>
+               </div>
+</div>
+<div class="more_btn_cont">
+   <a target="blank" href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>"><i class="fas fa-angle-right"></i></a>
+</div>
+</div>
+<!-- bid item end===== -->
+
+
+      <?php
+      }else{
+         ?>
+
+
+    <!-- bid item ===========-->
+    
+    <div class="bid_item_cont  inactive_bid">
+            <div class="bid_item_img_cont">
+               <img  class="bid_item_img" src="<?php echo URLROOT ?>/store/items/<?php echo $item->item_img ?>"/>
+            </div>
+            <div class="item_description">
+               <div class="item_title_cont">
+                  <div class="item_info">
+                     <p class="item_name"><?php echo $item->name ?></p>
+                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: <?php echo $item->seller_name ?> <span><i class="fas fa-check-circle"></i></span></a>
+                     <!-- <p class="item_address">Thalgahawawa</p> -->
+                  </div>
+                  <p class="item_time"><?php echo $item->exp_date ?>  <span> left</span>  </p>
+               </div>
+               <div class="bid_action_cont">
+
+                  <div class="item_bid_cont">
+                     <p class="item_bids"><?php echo $item->bid_Count ?> <span>bids</span></p>
                      <div class="bid_info_cont">
                         <p class="current_bid inactive">Current highest Bid : <span> Rs : 30000</span></p>
                         <p class="your_bid">Your Bid : <span> Rs : 25000</span></p>
@@ -66,135 +118,30 @@
                         <input class="qty" type="number" value="0">
                         <button class="btn_add">+</button>
                      </div> -->
-                     <buttton class="bid_btn btn">Place Higher Bid</buttton>
-                     <buttton class="buy_btn btn">Buy this item</buttton>
+                     <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>" class="bid_btn btn">Place Higher Bid</a>
+                     <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>" class="buy_btn btn">Buy this item</a>
                   </div>
                </div>
 </div>
 <div class="more_btn_cont">
-   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
-</div>
-</div>
-<!-- bid item end===== -->
-         <!-- bid item ===========-->
-         <div class="bid_item_cont  ">
-            <div class="bid_item_img_cont">
-               <img  class="bid_item_img" src="<?php echo URLROOT ?>/assets/images/item-2.png"/>
-            </div>
-            <div class="item_description">
-               <div class="item_title_cont">
-                  <div class="item_info">
-                     <p class="item_name">Onions</p>
-                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-                     <!-- <p class="item_address">Thalgahawawa</p> -->
-                  </div>
-                  <p class="item_time">  24/<span>h left</span>  </p>
-               </div>
-               <div class="bid_action_cont">
-
-                  <div class="item_bid_cont">
-                     <p class="item_bids">10 <span>bids</span></p>
-                     <div class="bid_info_cont">
-                        <p class="current_bid">Current highest Bid : <span> Rs : 30000</span></p>
-                        <p class="your_bid">Your Bid : <span> Rs : 30000</span></p>
-                     </div>
-                  </div>
-                  <div class="item_btns_cont">
-                     <!-- <div class="qty_btn_cont">
-                        <button class="btn_remove">-</button>
-                        <input class="qty" type="number" value="0">
-                        <button class="btn_add">+</button>
-                     </div> -->
-                     <buttton class="bid_btn btn">Place Higher Bid</buttton>
-                     <buttton class="buy_btn btn">Buy this item</buttton>
-                  </div>
-               </div>
-</div>
-<div class="more_btn_cont">
-   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
-</div>
-</div>
-<!-- bid item end===== -->
-         <!-- bid item ===========-->
-         <div class="bid_item_cont  ">
-            <div class="bid_item_img_cont">
-               <img  class="bid_item_img" src="<?php echo URLROOT ?>/assets/images/item-4.png"/>
-            </div>
-            <div class="item_description">
-               <div class="item_title_cont">
-                  <div class="item_info">
-                     <p class="item_name">Potato</p>
-                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-                     <!-- <p class="item_address">Thalgahawawa</p> -->
-                  </div>
-                  <p class="item_time">  24/<span>h left</span>  </p>
-               </div>
-               <div class="bid_action_cont">
-
-                  <div class="item_bid_cont">
-                     <p class="item_bids">10 <span>bids</span></p>
-                     <div class="bid_info_cont">
-                        <p class="current_bid">Current highest Bid : <span> Rs : 30000</span></p>
-                        <p class="your_bid">Your Bid : <span> Rs : 30000</span></p>
-                     </div>
-                  </div>
-                  <div class="item_btns_cont">
-                     <!-- <div class="qty_btn_cont">
-                        <button class="btn_remove">-</button>
-                        <input class="qty" type="number" value="0">
-                        <button class="btn_add">+</button>
-                     </div> -->
-                     <buttton class="bid_btn btn">Place Higher Bid</buttton>
-                     <buttton class="buy_btn btn">Buy this item</buttton>
-                  </div>
-               </div>
-</div>
-<div class="more_btn_cont">
-   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
+   <a target="blank" href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>"><i class="fas fa-angle-right"></i></a>
 </div>
 </div>
 <!-- bid item end===== -->
 
 
-         <!-- bid item ===========-->
-         <div class="bid_item_cont  inactive_bid">
-            <div class="bid_item_img_cont">
-               <img  class="bid_item_img" src="<?php echo URLROOT ?>/assets/images/item-6.png"/>
-            </div>
-            <div class="item_description">
-               <div class="item_title_cont">
-                  <div class="item_info">
-                     <p class="item_name">Tomato</p>
-                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-                     <!-- <p class="item_address">Thalgahawawa</p> -->
-                  </div>
-                  <p class="item_time">  24/<span>h left</span>  </p>
-               </div>
-               <div class="bid_action_cont">
 
-                  <div class="item_bid_cont">
-                     <p class="item_bids">10 <span>bids</span></p>
-                     <div class="bid_info_cont">
-                        <p class="current_bid inactive">Current highest Bid : <span> Rs : 40000</span></p>
-                        <p class="your_bid">Your Bid : <span> Rs : 31000</span></p>
-                     </div>
-                  </div>
-                  <div class="item_btns_cont">
-                     <!-- <div class="qty_btn_cont">
-                        <button class="btn_remove">-</button>
-                        <input class="qty" type="number" value="0">
-                        <button class="btn_add">+</button>
-                     </div> -->
-                     <buttton class="bid_btn btn">Place Higher Bid</buttton>
-                     <buttton class="buy_btn btn">Buy this item</buttton>
-                  </div>
-               </div>
-</div>
-<div class="more_btn_cont">
-   <a target="blank" href="<?php echo URLROOT ?>/auction/itemInfo/10"><i class="fas fa-angle-right"></i></a>
-</div>
-</div>
-<!-- bid item end===== -->
+<?php
+      }
+   ?>
+
+   <?php
+}}else{
+   echo '<p>No active biddings</p>';
+
+} ?>
+
+        
 
 
 

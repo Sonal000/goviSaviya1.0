@@ -189,7 +189,7 @@
 
 <!-- js === -->
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
-<script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
+<!-- <script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script> -->
 
 
 

@@ -864,7 +864,25 @@ input[type="range"]::-moz-range-thumb {
   display: flex;
   justify-content: center;
   height: 350px;
+  position: relative;
 }
+
+.bid_icon_cont{
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 5000;
+  color: var(--clr-primary-5);
+  /* border: 2px solid red; */
+  border-radius: var(--radius-low);
+  background: var(--clr-white);
+  padding: 0.2rem 0.5rem;
+  font-size: 1rem;
+}
+.inactive_bid_icon{
+  color: var(--clr-red-1);
+}
+
 .item_btn:hover {
   box-shadow: var(--light-shadow);
 }
@@ -944,6 +962,7 @@ input[type="range"]::-moz-range-thumb {
   }
   .item_btn {
     height: 290px;
+    position: relative;
   }
 }
 
