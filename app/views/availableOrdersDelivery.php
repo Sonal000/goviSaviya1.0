@@ -40,7 +40,7 @@
 
         <div class="mycardd">
 
-            <div class="productimg">
+            <div class="left_side">
                 <img src="<?php echo URLROOT; ?>/store/items/<?php echo $order->item_img ?>" class="onion" alt="">
                 <div class="post_left">
                 <div class="pro_detail">
@@ -50,16 +50,16 @@
                     </div>
                     <div class="pro_location" style="text-transform:capitalize" >
                         <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                       <?php echo $order->seller_city." to ".$order->order_city ?>
+                        <?php echo $order->seller_city." to ".$order->order_city ?>
                     </div>
                     <div class="addDate"  style="display:flex; flex-direction:column; color:var('--clr-primary-5')">
-     <?php
-                                // Extracting date
-        $date = date("M-d", strtotime($order->order_date));
-        echo "<p style='color:var(--clr-primary-5)'>Ordered Date : " . $date."</p>";
-        $time = date("g:i A", strtotime($order->order_date));
-        echo "<p style='color:var(--clr-primary-5)'>Ordered At : " . $time."</p>";
-     ?>
+                            <?php
+                                                        // Extracting date
+                                $date = date("M-d", strtotime($order->order_date));
+                                echo "<p style='color:var(--clr-primary-5)'>Ordered Date : " . $date."</p>";
+                                $time = date("g:i A", strtotime($order->order_date));
+                                echo "<p style='color:var(--clr-primary-5)'>Ordered At : " . $time."</p>";
+                            ?>
                     </div>
                     <div class="details_view">
                     <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/orders/<?php echo $order->order_item_id ?>">View Order Details</a></botton>
@@ -68,13 +68,18 @@
                 
             </div>
             </div>
-         
-                  
-                <div class="update_edit_bt">
-                    <botton class="accept_order_btn"><a href="">Accept Order</a></botton>
-                    <botton class="ignore_order_btn"><a href="">Don't Show</a></botton>
-                
-            </div>
+            
+            <div class="right-side"> 
+                    
+                    <div class="price_details">
+                        <?php echo "Delivery Fee: Rs." .  $order->total_delivery_fee ."/="?>
+                    </div>
+            
+                    <div class="update_edit_bt">
+                            <button class="accept_order_btn"><a href="">Accept Order</a></button>
+                            <button class="ignore_order_btn"><a href="">Don't Show</a></button>           
+                    </div>
+            </div> 
             
         
         </div>

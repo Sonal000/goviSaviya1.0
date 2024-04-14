@@ -584,4 +584,20 @@ public function delete($id){
     }
 }
 
+// admin part functions
+
+public function pickuptrucks(){
+
+    $vehicleDet = $this->VehicleModel->getPickuptrucks();
+    var_dump($vehicleDet);
+        $data =[
+            'Vdetails'=>$vehicleDet,
+        ]; 
+        
+    $this->view('adminPicktrucks',$data);
+    
+}
+
+
+
 }

@@ -320,7 +320,8 @@ flex-direction: column;
    margin-top: 5.5rem; */
    flex-direction: column;
    /* margin-bottom: 3rem; */
-   padding: 1rem;
+   padding: 1rem; 
+   
  }
 .maincontent{
  display: flex;

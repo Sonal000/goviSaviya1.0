@@ -1,18 +1,13 @@
 <?php
 
-class AdminPosts extends Controller{
+class AdminVehicleDetails extends Controller{
     public function __construct(){
             
     }
 
     public function index(){
         $data = ['title'=>'welcome'];
-        $this -> view('adminPosts');
-    }
-
-    public function details(){
-        $data = ['title'=>'welcome'];
-        $this -> view('adminOrderDetails');
+        $this -> view('adminVehicleDetails');
     }
 
    /* public function about(){

@@ -266,6 +266,7 @@ class AuctionC extends Controller{
         $filename = uniqid() . '_' . $_FILES['item_img']['name'];
         $targetPath = $uploadDirectory . $filename;         
         if (move_uploaded_file($_FILES['item_img']['tmp_name'], $targetPath)){
+            
             $data=[
                 'name'=>trim($_POST['name']),
                 'category' =>trim($_POST['category']),

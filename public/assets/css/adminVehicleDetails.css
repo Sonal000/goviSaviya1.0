@@ -1,0 +1,305 @@
+
+  
+ .heading{
+    align-items: center;
+    text-align: center;
+    font-size: x-large;
+ }
+
+ input[type=text], select {
+    width: 85%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+  }
+
+
+  input[type=submit] {
+    font-weight: 600;
+    width: 10%;
+    border: var(--clr-primary-5) 2.5px solid;
+    padding: 14px 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.4s;
+    background-color: white;
+  }
+
+  input[type=month] {
+    width: 85%;
+  }
+
+
+  input[type=submit]:hover {
+    background-color: #45a049;
+    color: white;
+  }
+
+  .admin_form {
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+.column {
+    flex: 1;
+    padding: 10px;
+}
+.form-group {
+    margin-bottom: 15px;
+    
+}
+
+h2{
+    font-size: 20px;
+    margin-top: 3.5rem;
+    
+}
+
+.submit_button{
+    
+    text-align: center;
+}
+
+.max_cap{
+    width: 100%;
+    margin-top:0.55rem ;
+    border: grey 1px solid;
+}
+
+
+
+.card-title{
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.card-body{
+  /* margin: 2rem 2rem; */
+  padding: 2rem;
+  align-items: center;
+  text-align: center;
+  width: 30%;
+  min-width: 230px;
+  margin-top: 2rem;
+}
+
+.card{
+  margin-top: 2rem;
+}
+
+.main-container{
+  display: flex;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  gap: 1rem;
+
+}
+
+.profile{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+
+}
+.more_details_btn{
+  margin-top:1rem ;
+  background: var(--clr-primary-8);
+border: 1px solid transparent;
+padding: 0.7rem 1.5rem;
+border-radius: 6px;
+cursor: pointer;
+transition: 0.5s;
+}
+
+.more_details_btn:hover{
+  background-color: var(--clr-primary-5);
+  color: white;
+  font-size: 15px;
+}
+
+.add_logo{
+  margin-top: 0.3rem;
+  font-size: 40px;
+  color: var(--clr-primary-7);
+  cursor: pointer;
+  transition: 0.5s;
+}
+.add_logo>a{
+color: var(--clr-primary-7);
+transition: 0.5s;
+}
+
+.add_logo>a:hover{
+color: var(--clr-primary-4);
+}
+.add_logo:hover{
+  color: var(--clr-primary-4);
+
+}
+
+.card-subtitle_plus{
+  font-size: 24px;
+}
+
+#front_img{
+  margin-top: 1rem;
+}
+
+#vehicle_img{
+  width: 100%;
+}
+
+ input{
+  border: rgb(218, 209, 209) 1px solid;
+} 
+
+#fuel_type{
+  margin-top: 0.6rem;
+}
+
+#year{
+  margin-top: 0.55rem;
+}
+#rev_expiry{
+  margin-top: 0.55rem;
+  width: 85%;
+}
+#ins_expiry{
+  margin-top: 0.55rem;
+  width: 85%;
+  margin-bottom: 0.5rem;
+  width: auto;
+}
+
+#insurance_imgs{
+  margin-top: 0.9rem;
+  width: 100%;
+}
+#rev_expiry{
+  margin-top: 1.2rem;
+  margin-bottom: 2.5rem;
+  width: auto;
+}
+#rev_license_imgs{
+  margin-top:0.55rem ;
+}
+
+#back_img{
+  margin-top: 0.7rem;
+}
+
+.displayField{
+    padding: 0.7rem;
+    padding-left: 2rem;
+    border-radius: 20px;
+    margin-top: 1rem;
+    border: 1px solid var(--clr-primary-7);
+}
+
+.image{
+    width: 100%;
+    object-fit: cover;
+   
+}
+
+.img{
+    border-radius: 10px;
+    width: 30%;
+    object-fit: cover;
+}
+
+.vehicle_name{
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+
+.vehicle_header{
+    margin-top: 2rem;
+    text-align: center;
+}
+.front_image{
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+.f_img{
+    width: 70%;
+}
+
+.details{
+    margin-top: 1.5rem;
+    font-size: 20px;
+}
+
+.ins_image{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1.5rem;
+    width: 100%;
+    gap: 1rem;
+}
+
+.i_img{
+    
+    width: 45%;
+}
+
+.rev_image_section{
+    margin-bottom: 2rem;
+}
+
+.buttons{
+    display: flex;
+    margin-top: 1.5rem;
+    text-align: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.btn_ok{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 10%;
+    transition: 0.4s;
+}
+
+
+.btn_no{
+    background-color: #f44336;
+    color: white;
+    padding: 14px 20px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 10%;
+    transition: 0.4s;
+}
+
+.btn_no:hover{
+    background-color: #ffa3a3;
+    color: rgb(255, 9, 9);
+}
+
+h4{
+    margin-top: 1.5rem;
+    font-size: 24px;
+}

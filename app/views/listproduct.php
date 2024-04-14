@@ -106,7 +106,7 @@
        
                 <div class="input_cont">
                 <label for="exp_date" class="input_label">Expiary Date</label>
-                      <input type="date" class="input_item"  name="exp_date">
+                      <input type="date" class="input_item"  name="exp_date" id="expiration_date">
                 </div>
 
             
@@ -155,7 +155,7 @@
 
                 <div class="submit_container">
 
-                      <button name="add_item" type="submit" class="btn">Create Post</button>
+                      <button name="add_item" type="submit" class="btn">List Item</button>
                   </div>
                       
       </div>
@@ -185,3 +185,13 @@
     <!-- ========================================================= -->
 </body>
 </html>
+
+<script>
+      const expireDateinput = document.getElementById('expiration_date');
+
+      const minExpireDateinput = new Date();
+      const formatDate = minExpireDateinput.toISOString().split('T')[0];
+
+      document.getElementById('expiration_date').setAttribute("min",formatDate);
+
+</script>

@@ -7,7 +7,7 @@
         }
 
         public function getVehicles($userId){
-            $this->db->query('SELECT * FROM vehicle WHERE user_id = :id');
+            $this->db->query('SELECT * FROM vehicle WHERE user_id = :id AND is_deleted = FALSE');
             $this->db->bind(':id',$userId);
             $results = $this->db->resultSet();
 
@@ -91,7 +91,7 @@
         }
 
         public function deleteVehicle($id){
-            $this->db->query('DELETE FROM vehicle WHERE vehicle_id=:id');
+            $this->db->query('UPDATE vehicle SET is_deleted = 1 WHERE vehicle_id=:id');
 
             //Bind Values
 
@@ -127,6 +127,75 @@
                   }
                
           }
+
+    public function getPickuptrucks(){
+        $query = 'SELECT
+                  vehicle.*,
+                users.name AS owner_name
+                FROM
+                vehicle
+                JOIN
+                users ON vehicle.user_id=users.user_id
+                WHERE 
+                vehicle_type= "PickupTruck"';
+        $this->db->query($query);
+        
+        $row = $this->db->resultSet();
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    public function getContainertrucks(){
+        $this->db->query(
+            'SELECT
+             vehicle.*,
+             users.name AS owner_name
+             FROM
+             vehicle
+             JOIN
+             users ON vehicle.user_id=users.user_id
+             WHERE 
+             vehicle_type= "Container Truck" ');
+        
+        $row = $this->db->resultSet();
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    public function getCars(){
+        $this->db->query(
+            'SELECT
+             vehicle.*,
+             users.name AS owner_name
+             FROM
+             vehicle
+             JOIN
+             users ON vehicle.user_id=users.user_id
+             WHERE 
+             vehicle_type= "Car" ');
+        
+        $row = $this->db->resultSet();
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    
+
 
     }
 
