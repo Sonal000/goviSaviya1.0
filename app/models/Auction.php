@@ -368,6 +368,7 @@ public function getItems($page=1,$perPage=10,$sort=null,$order='ASC',$filter){
         $this->db->commit();
         return true;
     } catch (Exception $e) {
+      die($e->getMessage());
         $this->db->rollBack();
         return false;
     }

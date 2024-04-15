@@ -45,9 +45,17 @@
       <a href="<?php echo URLROOT ?>/Home">Home</a>
      </li> -->
      <li class="navlink">
-        <a href=#>
-        <i class="far fa-bell nav_icon"></i>
-        </a>
+     <div class="notification">
+    <div class="notification_count hide">0</div>
+      <i class="fas fa-bell nav_icon" id="notification_btn"></i>
+        <div class="notification_panel hide">
+          <p class="notify_title">Notifications</p>
+          <div class="notify_content" id="notify_content">
+         
+          </div>
+            <!-- <a href="<?php echo URLROOT ?>/cart" class="btn cart_btn">View all</a> -->
+        </div>
+    </div>
      </li>
      <li class="navlink">
         <a href="#">
@@ -201,9 +209,17 @@
       <a href="<?php echo URLROOT ?>/Home">Home</a>
      </li> -->
      <li class="navlink">
-        <a href=#>
-        <i class="far fa-bell nav_icon"></i>
-        </a>
+     <div class="notification">
+    <div class="notification_count hide">0</div>
+      <i class="fas fa-bell nav_icon" id="notification_btn"></i>
+        <div class="notification_panel hide">
+          <p class="notify_title">Notifications</p>
+          <div class="notify_content" id="notify_content">
+         
+          </div>
+            <!-- <a href="<?php echo URLROOT ?>/cart" class="btn cart_btn">View all</a> -->
+        </div>
+    </div>
      </li>
      <li class="navlink">
         <a href="#">

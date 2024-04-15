@@ -11,11 +11,17 @@
    public function index()
    {
 
-    $items = $this->testModel->getItems();
+    $this->view('test');
+   }
+
+   public function show(){
+    $items = $this->testModel->getSellerItems(19);
     $data=[
+      'status'=>'success',
       'items'=>$items
     ];
-      $this->view('test',$data);
+    echo json_encode($data);
+      
    }
 
 

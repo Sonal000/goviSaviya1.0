@@ -172,7 +172,7 @@ try{
         $this->mail->SMTPAuth = true;
         $this->mail->Username = 'govisaviyahelp@gmail.com';
         //SMTP password
-        $this->mail->Password = 'wvlboztsvdvrzxho';
+        $this->mail->Password = 'wxxs rerw knpk mnme';
         //Enable TLS encryption;
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
@@ -224,6 +224,7 @@ $this ->db ->bind(':user_id',$id);
     }catch (Exception $e) {
         
         // echo "Message could not be sent. Mailer Error: {$this->mail->ErrorInfo}";
+        // die($e);
         die("check your connection ! internet connection error");
     } 
 
@@ -277,6 +278,19 @@ $this ->db ->bind(':user_id',$id);
         }
     }
 
+    public function getUserInfo($id){
+        $this->db->query('SELECT * FROM users WHERE user_id=:id');
+        $this ->db ->bind(':id',$id);
+
+        $row = $this ->db -> single();
+        //check row count
+        if($row){
+            return $row;
+        } else{
+            return false;
+        }
+    }
+
     public function getUserType($user_id){
         $this->db->query('SELECT user_type FROM users WHERE user_id=:id');
         $this ->db ->bind(':id',$user_id);
@@ -289,6 +303,9 @@ $this ->db ->bind(':user_id',$id);
             return false;
         }
     }
+
+
+ 
 
 
 

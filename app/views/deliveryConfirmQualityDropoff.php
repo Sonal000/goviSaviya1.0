@@ -95,6 +95,7 @@ any issues or defects reguarding to the qualtiy <br> after the delivery</div>
         </div>
         </div>
     </div>
+    <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
     <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 </body>
 </html>

@@ -19,60 +19,22 @@
     </style>
 </head>
 <body>
-    <h1>Test test</h1>
+    <h1 class="testtest">Test test</h1>
 
-    <div class="text1">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, voluptate?</p>
-        <div class="test2">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim modi repudiandae nam unde sapiente sunt alias veritatis vero animi reprehenderit.
-  </div>
-        <button class="showbtn" id="showbtn">test</button>
-    </div>
-
-        <div class="table">
-            <table>
-
-                <thead>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                </thead>
-
-                <tbody>
-                <?php
-                
-                
-
-                foreach ($data['items'] as $item) : ?>
-                <tr>
-                    <td><?php echo $item->item_id ?></td>
-                    <td><?php echo $item->name ?></td>
-                    <td><?php echo $item->description?></td>
-                </tr>
-        
-        <?php endforeach;
-            ?>
-
-
-                </tbody>
+    <div>
+        <p>contents are below</p>
+        <div class="cont" id="cont">
+            
+            </div>
+        </div>
+            
     
 
-                
-            </table>
-        </div>
+    
 
 
 
-
-  <script>
-    const showBtn = document.getElementById('showbtn');
-    const test2 = document.querySelector('.test2');
-    showbtn.addEventListener('click',()=>{
- test2.classList.toggle('show');
-
-});
-
-  </script>
-
+        <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
+        <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/test.js"></script>
 </body>
 </html>

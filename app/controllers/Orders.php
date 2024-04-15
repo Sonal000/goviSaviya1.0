@@ -15,9 +15,19 @@ class Orders extends Controller{
             $this->orderDetails($id);
             exit;
         }
-        
 
-        $data = ['title'=>'welcome'];
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='buyer'){
+            $orders = $this->orderModel->getBuyerOrders($_SESSION['buyer_id']);
+        $data=[
+            "orders"=>$orders,
+        ];
+        $this -> view('buyerOrders',$data);
+    }
+    if(!isset($_SESSION['user_type'])){
+    $this -> view('_404');
+}
+
+        
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
             $orders = $this->orderModel->getSellerOrders($_SESSION['seller_id']);
         $data=[
@@ -33,13 +43,7 @@ class Orders extends Controller{
         ];
             $this -> view('adminOrders',$data);
         }
-       if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
-        $orders = $this->orderModel->getSellerOrders($_SESSION['seller_id']);
-    $data=[
-        "orders"=>$orders,
-    ];
-    $this -> view('sellerOrder',$data);
-}
+
        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
             $orders = $this->orderModel->getDeliverOrders($_SESSION['deliver_id']);
         $data=[

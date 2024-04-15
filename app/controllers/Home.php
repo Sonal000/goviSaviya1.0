@@ -4,10 +4,12 @@
   
     private $adminModel;
     private $deliverModel;
+    private $userModel;
    public function __construct()
    {
     $this->adminModel =$this->model('Admin');
      $this->deliverModel =$this->model('Deliver');
+     $this->userModel =$this->model('User');
 
    }
    public function index(){
@@ -73,13 +75,15 @@
 
 
 
-
    
    
    public function about($id)
    {
     echo "about loaded".$id;
    }
+
+   
+
 
 
  }

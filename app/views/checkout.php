@@ -105,7 +105,7 @@
 
         <p class="order_req"></p>
         <div class="order_btn_cont">
-            <!-- <a href="<?php echo URLROOT."/cart/payments" ?>" class="btn place_order_btn">Place Order</a> -->
+            <!-- <a href="<?php echo URLROOT."/cart/placeorder" ?>" class="btn place_order_btn">Place Order</a> -->
             <input type="submit" class="btn place_order_btn" name="place_order" value="Go to Payments">
         </div>
         </div>
@@ -212,6 +212,7 @@
 <!-- footer end ======================= -->
 
 <!-- js === -->
+<script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/checkout.js"></script>
 </body>

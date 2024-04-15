@@ -8,8 +8,6 @@ class Order{
     }
 
     public function placeOrder($items,$details ,$buyer_id){
-        var_dump("cart model");
-        var_dump($details);
         try{
 
             $this->db->beginTransaction();
@@ -18,11 +16,12 @@ class Order{
                 $total =$total + ($item->price * $item->qty);
             }
             
-            $this->db->query("INSERT INTO orders (buyer_id, total_price,order_mobile,order_address,order_city,order_postal_code,order_company)
-        VALUES (:buyer_id, :total_price,:order_mobile,:order_address,:order_city,:order_postal_code,:order_company);
+            $this->db->query("INSERT INTO orders (buyer_id,buyer_name, total_price,order_mobile,order_address,order_city,order_postal_code,order_company)
+        VALUES (:buyer_id,:buyer_name, :total_price,:order_mobile,:order_address,:order_city,:order_postal_code,:order_company);
         ");
 
 $this ->db ->bind(':buyer_id',$buyer_id);
+$this ->db ->bind(':buyer_name',$details['buyer_name']);
 $this ->db ->bind(':total_price',$total);
 $this ->db ->bind(':order_mobile',$details['order_mobile']);
 $this ->db ->bind(':order_address',$details['order_address']);
@@ -35,6 +34,7 @@ if (!$this->db->execute()) {
 }
     
     $order_id = $this->db->lastInsertId();
+
     
     
     foreach($items as $item){
@@ -55,12 +55,24 @@ if (!$this->db->execute()) {
                         }
                     }
                     $this->db->commit();
-                    return true;
+                
+                    return $order_id;
 
     }catch(Exception $e){
         $this->db->rollBack();
         return false;
+       
     }
+    }
+
+    public function updateOrderPaymentStatus($id){
+        $this->db->query('UPDATE orders SET payment_status=1 WHERE order_id=:order_id');
+        $this->db->bind(':order_id',$id);
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function getALLOrders(){
@@ -113,7 +125,7 @@ if (!$this->db->execute()) {
                 JOIN
                     items_market i ON o_items.item_id = i.item_id
                 WHERE
-                    o_items.seller_id = :seller_id
+                    o_items.seller_id = :seller_id AND Od.payment_status=1
                 ORDER BY o_items.order_date DESC
                 ";
             
@@ -221,7 +233,7 @@ if($row){
     JOIN
         items_market i ON o_items.item_id = i.item_id
     WHERE
-        o_items.buyer_id = :buyer_id
+        o_items.buyer_id = :buyer_id AND od.payment_status=1
     ORDER BY o_items.order_date DESC
     ";
 
@@ -235,6 +247,17 @@ if($row){
 }
 }
 
+public function getNewOrderDetails($order_id){
+    $this->db->query('SELECT o.*,oi.* FROM orders o JOIN order_items oi ON o.order_id = oi.order_id WHERE o.order_id=:order_id');
+    $this ->db ->bind(':order_id',$order_id);
+    $row=$this->db->resultSet();
+if($row){
+    return $row;
+}else{
+    return false;
+}
+
+}
 
 
 public function getOrderDetails($id){

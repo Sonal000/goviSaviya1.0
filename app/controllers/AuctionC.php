@@ -241,7 +241,6 @@ class AuctionC extends Controller{
     }
 
     public function endAuction($id){
-        
         $this->auctionModel->endAuction($id);
         redirect('AuctionC/items');
 
