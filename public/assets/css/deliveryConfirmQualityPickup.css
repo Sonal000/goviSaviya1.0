@@ -65,7 +65,8 @@
   
   .mycardd{
     box-shadow: var(--dark-shadow);
-    padding:4rem;
+    padding:2rem;
+    padding-bottom: 0.7rem;
     border-radius: var(--radius-low);
     display: flex;
     flex-direction: row;
@@ -452,4 +453,9 @@
 
   .done_btnn:hover{
     background-color: var(--clr-primary-2);
+  }
+
+  .hed{
+    font-size: 1.6rem;
+    font-weight: bold;
   }

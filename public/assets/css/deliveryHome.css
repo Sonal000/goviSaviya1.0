@@ -134,13 +134,13 @@
 }
 
 .image{
+    min-width: 55%;
     flex: 0.8;
 }
 
 .image_details{
     display: flex;
     justify-content: space-between;
-    
     align-items: center;
 }
 
@@ -150,6 +150,7 @@
 
 .details{
     margin: 0.5rem;
+    font-size: 1rem;
 }
 .rate_details{
     font-size: 20px;
@@ -159,6 +160,7 @@
 }
 
 .card_details{
+    
     display: flex;
     justify-content: space-between;
     
@@ -227,7 +229,7 @@
     justify-content: center;
 }
 
-.recomended_order_1 .recomended_order_2 .recomended_order_3{
+.recomended_order{
     max-width: 30%;
     
     display: flex;
@@ -268,4 +270,9 @@
     margin-bottom: 1rem;
     display:flex ;
     justify-content: center;
+}
+
+.item_img{
+    object-fit: cover;
+    
 }

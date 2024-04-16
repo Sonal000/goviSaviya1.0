@@ -65,7 +65,8 @@
   
   .mycardd{
     box-shadow: var(--dark-shadow);
-    padding:4rem;
+    padding:2rem;
+    padding-bottom: 1rem;
     border-radius: var(--radius-low);
     display: flex;
     flex-direction: row;
@@ -405,4 +406,9 @@
     .price_of_order{
       font-weight: bold;
       font-size: large;
+    }
+
+    .hed{
+      font-size: 1.6rem;
+      font-weight: bold;
     }
