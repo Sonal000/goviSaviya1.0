@@ -805,6 +805,8 @@ input:focus {
   -ms-overflow-style: none; 
 }
 
+
+
 .main_sidebar_container::-webkit-scrollbar {
   width: 12px; 
 }

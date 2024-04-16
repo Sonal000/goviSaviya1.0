@@ -45,6 +45,30 @@ class User{
         session_destroy();
     }
 
+    public function getUserDet(){
+        $this->db->query("SELECT * FROM users");
+        $row= $this->db->resultset();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function countUsers(){
+        $query=$this->db->query("SELECT * FROM users");
+        $row = $this->db->rowCount($query);
+        var_dump($row);
+        if($row){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     
 
 

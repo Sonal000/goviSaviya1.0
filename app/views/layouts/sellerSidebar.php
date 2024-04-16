@@ -65,13 +65,13 @@
                   <i class="fas fa-sort-down expand_icon"></i>
                 </button>
                   <div class="expand hide_expand ">
-                    <a href="<?php echo URLROOT ?>/requests/available">
+                    <a href="<?php echo URLROOT ?>/OrderRequests">
                     <button class="sidebar_item expand_item link" id="available_requests">
                     <i class="fas fa-plus sidebar_icon" ></i>
                       <p>Available Requests</p>
                     </button>
                     </a>
-                    <a href="<?php echo URLROOT ?>/requests/accepted">
+                    <a href="<?php echo URLROOT ?>/OrderRequests/accepted">
                     <button class="sidebar_item expand_item link" id="accepted_requests">
                     <i class="fas fa-poll-h sidebar_icon"></i>
                       <p>Accepted Requests</p>

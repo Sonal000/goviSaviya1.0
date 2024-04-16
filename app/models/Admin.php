@@ -77,7 +77,7 @@ class Admin{
 
     public function findUsers(){
 
-        $this->db->query('SELECT name,user_id,email FROM users');
+        $this->db->query('SELECT * FROM users');
         $data = $this ->db -> resultSet();
        
         if($this->db->rowcount()>0){
@@ -112,7 +112,7 @@ class Admin{
        
     }
     public function countBuyers(){
-        $this->db->query('SELECT COUNT(*) AS count FROM buyers');
+        $this->db->query('SELECT COUNT(*) AS count FROM users WHERE user_type="buyer"');
         $row = $this->db->single();
          if($this->db->rowcount()>0){
             return $row->count;
@@ -123,7 +123,7 @@ class Admin{
        
     }
     public function countSellers(){
-        $this->db->query('SELECT COUNT(*) AS count FROM sellers');
+        $this->db->query('SELECT COUNT(*) AS count FROM users WHERE user_type="seller"');
         $row = $this->db->single();
          if($this->db->rowcount()>0){
             return $row->count;
@@ -134,7 +134,7 @@ class Admin{
        
     }
     public function countAgents(){
-        $this->db->query('SELECT COUNT(*) AS count FROM delivers');
+        $this->db->query('SELECT COUNT(*) AS count FROM users WHERE user_type="deliver"');
         $row = $this->db->single();
          if($this->db->rowcount()>0){
             return $row->count;

@@ -106,7 +106,7 @@
        
                 <div class="input_cont">
                 <label for="exp_date" class="input_label">Expiary Date</label>
-                      <input type="date" class="input_item"  name="exp_date">
+                      <input type="date" class="input_item"  name="exp_date" id="expiration_date">
                 </div>
 
             
@@ -129,12 +129,12 @@
 
                   <div class="input_cont">
                 <label for="start_date" class="input_label">Starting Date</label>
-                      <input type="date" class="input_item"  name="start_date">
+                      <input type="date" class="input_item"  name="start_date" id="auction_start_date">
                 </div>
 
                 <div class="input_cont">
                 <label for="end_date" class="input_label">Ending Date</label>
-                      <input type="date" class="input_item"  name="end_date">
+                      <input type="date" class="input_item"  name="end_date" id="auction_end_date">
                 </div>
         
             <!-- <div class="formline5">
@@ -196,3 +196,60 @@
     <!-- ========================================================= -->
 </body>
 </html>
+
+
+<script>
+      // Get references to the input fields
+    const expirationDateInput = document.getElementById('expiration_date');
+    const auctionEndDateInput = document.getElementById('auction_end_date');
+    const auctionStartDateInput = document.getElementById('auction_start_date');
+
+
+    //when we slipt them into a array there are two elements in that array 1) date 2) time. we only need date so we access [0] index.
+
+    //set the min attribute of expire date input tag to current day.since we cant enter a previous day from today as a expire date.
+     const currentDate = new Date();
+
+      // Calculate the minimum date (3 days from today)
+      const minExpirationDate = new Date(currentDate);
+      minExpirationDate.setDate(currentDate.getDate() + 3);
+
+      // Format the minimum date to 'YYYY-MM-DD'
+      const formattedMinExpirationDate = minExpirationDate.toISOString().split('T')[0];
+
+      // Set the minimum value for the expiration date input field
+      expirationDateInput.min = formattedMinExpirationDate;
+
+      // Set the minimum value attribute directly to the HTML element as well
+      document.getElementById("expiration_date").setAttribute("min", formattedMinExpirationDate);
+   
+ //set the min attribute of  input tag auction start date to current day.since we cant enter a previous day from today as a auction start date.
+    auctionStartDateInput.min= new Date().toISOString().split("T")[0]; 
+    document.getElementById("auction_start_date").setAttribute("min", auctionStartDateInput.min);
+    //set the min attribute of auction end date input tag to current day.since we cant enter a previous day from today as a auction end date.
+    auctionEndDateInput.min= new Date().toISOString().split("T")[0];
+    document.getElementById("auction_end_date").setAttribute("min", auctionEndDateInput.min);
+
+    // Add event listener to expiration date input
+    expirationDateInput.addEventListener('change', function() {
+        // Get the value of expiration date
+        const expirationDate = new Date(expirationDateInput.value);
+
+        const maxAuctionEndDate = new Date(expirationDate);
+        maxAuctionEndDate.setDate(expirationDate.getDate() - 1);
+
+      // Set the maximum allowed date for the auction end date input
+      auctionEndDateInput.max = maxAuctionEndDate.toISOString().split('T')[0];
+
+      const maxAuctionStartDate = new Date(expirationDate);
+      maxAuctionStartDate.setDate(expirationDate.getDate() - 1);
+
+      auctionStartDateInput.max = maxAuctionStartDate.toISOString().split('T')[0];
+        
+        
+    });
+
+
+
+
+</script>

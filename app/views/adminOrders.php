@@ -15,12 +15,16 @@
 </head>
 <body>
 <?php
- require APPROOT. '/views/layouts/navbar2.php'; 
+ require APPROOT. '/views/layouts/mainNavbar.php'; 
  ?>
+ <div class="main_container">
+  
  <?php
  require APPROOT. '/views/layouts/adminsidebar.php'; 
  ?>
-<div class="profile">
+ <div class="container_content">
+  
+<div class="adminprofile">
     <h4>Manage Orders</h4>
     <div class="searchbarplace">
         <div class="searchbar2_cont">
@@ -94,86 +98,35 @@
                 <p></p>
             </div>
         </div>
+       
+        <?php if(!empty($data['orders'])): ?>
+        <?php foreach($data['orders'] as $Orders): ?>
         <div class="table_row">
             <div class="table_cell column1">
-                <p>01</p>
+                <p><?php echo $Orders->order_id ?></p>
             </div>
             <div class="table_cell column2">
-                <p>santhush Fernando</p>
+                <p><?php echo $Orders->buyer_name ?></p>
             </div>
             <div class="table_cell column3">
-                <div class="ordersta"><p class="orderstatus_complete">Completed</p></div>
+                <div class="ordersta"><p class="orderstatus_complete"><?php echo $Orders->order_status?></p></div>
             </div>
             <div class="table_cell column4">
-                <p>Piliyandala</p>
+                <p><?php echo $Orders->order_address?></p>
             </div>
-            <div class="table_cell column5">
-                <a href="<?php echo URLROOT; ?>/AdminOrders/details"><img src="<?php echo URLROOT; ?>/assets/images/view.png" alt="" class="vieweye" alt=""></a>
+            <div class="table_cell column6">
+                <a href="<?php echo URLROOT; ?>/Orders/details/<?php echo $Orders->order_id?>"><img src="<?php echo URLROOT; ?>/assets/images/view.png" alt="" class="vieweye" alt=""></a>
             </div>
             <div class="table_cell column6">
                 <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
             </div>
         </div>
-        <div class="table_row">
-            <div class="table_cell column1">
-                <p>01</p>
-            </div>
-            <div class="table_cell column2">
-                <p>santhush Fernando</p>
-            </div>
-            <div class="table_cell column3">
-                <div class="ordersta"><p class="orderstatus_complete">Completed</p></div>
-            </div>
-            <div class="table_cell column4">
-                <p>Piliyandala</p>
-            </div>
-            <div class="table_cell column6">
-                <a href="<?php echo URLROOT; ?>/AdminOrders/details"><img src="<?php echo URLROOT; ?>/assets/images/view.png" alt="" class="vieweye" alt=""></a>
-            </div>
-            <div class="table_cell column6">
-                <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
-            </div>
-        </div>
-        <div class="table_row">
-            <div class="table_cell column1">
-                <p>01</p>
-            </div>
-            <div class="table_cell column2">
-                <p>santhush Fernando</p>
-            </div>
-            <div class="table_cell column3">
-                <div class="ordersta"><p class="orderstatus_ongoing">On Going</p></div>
-            </div>
-            <div class="table_cell column4">
-                <p>Piliyandala</p>
-            </div>
-            <div class="table_cell column6">
-                <a href="<?php echo URLROOT; ?>/AdminOrders/details"><img src="<?php echo URLROOT; ?>/assets/images/view.png" alt="" class="vieweye" alt=""></a>
-            </div>
-            <div class="table_cell column6">
-                <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
-            </div>
-        </div>
-        <div class="table_row">
-            <div class="table_cell column1">
-                <p>01</p>
-            </div>
-            <div class="table_cell column2">
-                <p>santhush Fernando</p>
-            </div>
-            <div class="table_cell column3">
-                <div class="ordersta"><p class="orderstatus_return">Returned</p></div>
-            </div>
-            <div class="table_cell column4">
-                <p>Piliyandala</p>
-            </div>
-            <div class="table_cell column6">
-                <a href="<?php echo URLROOT; ?>/AdminOrders/details"><img src="<?php echo URLROOT; ?>/assets/images/view.png" alt="" class="vieweye" alt=""></a>
-            </div>
-            <div class="table_cell column6">
-                <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
-            </div>
-        </div>
+        <?php endforeach; ?>
+        <?php else: ?>
+        <p>No data available</p>
+        <?php endif; ?>
+      
+        
        
         
         
@@ -182,7 +135,10 @@
     </div>
     
 </div>
-
+            </div>
+            </div>
 
 </body>
+<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
 </html>

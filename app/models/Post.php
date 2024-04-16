@@ -1,33 +1,66 @@
 <?php
-/*testing model to get know */
 class Post{
     private $db;
 
+    
     public function __construct(){
         $this -> db = new Database;
     }
 
-    public function getPosts(){
-        $this->db->query("SELECT * FROM Users"); // insert our query
+    public function selectMposts(){
+        $query = 'SELECT 
+                items_market.*,
+                users.name AS seller_name
+                FROM
+                items_market
+                JOIN
+                sellers ON items_market.seller_id=sellers.seller_id
+                JOIN
+                users ON sellers.user_id=users.user_id';
 
-        return $this->db->resultSet(); //result set gives us array single method gives us single value. those methods are in the database class
+                $this->db->query($query);
+                $row=$this->db->resultset();
+        if($row){
+            return $row;
+        }
+        else{
+            return true;
+        }
     }
 
+    public function selectAposts(){
+        $query = 'SELECT 
+                auction.*,
+                users.name AS seller_name
+                FROM
+                auction
+                JOIN
+                sellers ON auction.seller_id=sellers.seller_id
+                JOIN
+                users ON sellers.user_id=users.user_id';
+
+                $this->db->query($query);
+                $row=$this->db->resultset();
+        if($row){
+            return $row;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public function selectRposts(){
+        
+                $this->db->query('SELECT * FROM requests');
+                $row=$this->db->resultset();
+        if($row){
+            return $row;
+        }
+        else{
+            return true;
+        }
+    }
+
+
+
 }
-
-/*in controller we write this code 
-
-public function __construct(){
-    $this ->postModel = $this->model('Post');
-}
-
-then inside index or other method
-
-$posts = $this ->postModel ->getPosts();
-
-$data = [
-    'title' => 'welcome',
-    'posts' => $posts
-];
-
-*/
