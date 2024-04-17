@@ -60,7 +60,7 @@
 
 h2{
     font-size: 20px;
-    margin-top: 3.5rem;
+    /* margin-top: 3.5rem; */
     
 }
 
@@ -94,6 +94,7 @@ h2{
 
 .card{
   margin-top: 2rem;
+  border:2px solid var(--clr-primary-7);
 }
 
 .main-container{
@@ -221,7 +222,7 @@ color: var(--clr-primary-4);
 }
 
 .vehicle_name{
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 500;
     margin-top: 1rem;
 }
@@ -299,7 +300,6 @@ color: var(--clr-primary-4);
     color: rgb(255, 9, 9);
 }
 
-h4{
-    margin-top: 1.5rem;
-    font-size: 24px;
-}
+
+
+

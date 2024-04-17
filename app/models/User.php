@@ -169,7 +169,7 @@ try{
         $this->mail->SMTPAuth = true;
         $this->mail->Username = 'govisaviyahelp@gmail.com';
         //SMTP password
-        $this->mail->Password = 'wvlboztsvdvrzxho';
+        $this->mail->Password = 'wxxs rerw knpk mnme';
         //Enable TLS encryption;
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above

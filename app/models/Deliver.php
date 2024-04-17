@@ -230,4 +230,6 @@ public function updateCoverImage($data){
 
        $this->db->query('SELECT * from orders'); 
     }
+
+    
 }

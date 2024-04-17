@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller_Auction</title>
+    <title>Vehicle Full Details</title>
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css"> 
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminDash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminOrder.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminOrderDetails.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminVehicleDetails.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -14,7 +17,7 @@
 <body>
 
 <?php
- require APPROOT. '/views/layouts/navbar2.php'; 
+ require APPROOT. '/views/layouts/mainNavbar.php'; 
  ?>
 
 <div class="main_container">
@@ -25,15 +28,15 @@
 
 <div class="container_content">
 
-<div class="profile">
+<div class="adminprofile">
     
-<h2>View Vehicle Details</h2>
+<h4 class="goup">View Vehicle Details</h4>
 
                 
 
                 <div class="vehicle_header">
-                        <div class="image"><img src="<?php echo URLROOT; ?>/store/vehicles/car.jpg" alt="" class="img"></div>  
-                        <div class="vehicle_name">Mitsubishi L300</div>        
+                        <div class="image"><img src="<?php echo URLROOT.'/store/vehicles/'.$data['details']->vehicle_img ;?>" alt="" class="img"></div>  
+                        <div class="vehicle_name"><?php echo $data['details']->vehicle_brand;?></div>        
                 </div>
 
     
@@ -45,16 +48,16 @@
             <div class="column">
 
                 <div class="form-group">
-                        <div>Vehicle Type:<div class="displayField">Truck</div></div>     
+                        <div>Vehicle Type:<div class="displayField"><?php echo $data['details']->vehicle_type;?></div></div>     
                 </div>  
 
                 <div class="form-group">
-                        <div>Vehicle Brand:<div class="displayField">Mitsubishi</div></div>      
+                        <div>Vehicle Brand:<div class="displayField"><?php echo $data['details']->vehicle_brand;?></div></div>      
                     
                 </div>
                 
                 <div class="form-group">
-                        <div>Vehicle Model:<div class="displayField">L300</div></div>      
+                        <div>Vehicle Model:<div class="displayField"><?php echo $data['details']->vehicle_model;?></div></div>      
                     
                 </div>
 
@@ -66,18 +69,18 @@
             <div class="column">
 
             <div class="form-group">
-                        <div>Vehicle Fuel Type:<div class="displayField">Petrol</div></div>      
+                        <div>Vehicle Fuel Type:<div class="displayField"><?php echo $data['details']->fuel_type;?></div></div>      
                     
                 </div>
 
 
                 <div class="form-group">
-                        <div>Year of Manufacture :<div class="displayField">1998</div></div>      
+                        <div>Year of Manufacture :<div class="displayField"><?php echo $data['details']->vehicle_year;?></div></div>      
                     
                 </div>
 
                 <div class="form-group">
-                        <div>Current Mileage:<div class="displayField">65900</div></div>      
+                        <div>Current Mileage:<div class="displayField"><?php echo $data['details']->milage;?></div></div>      
                     
                 </div>
 
@@ -133,24 +136,24 @@
 
 
                 <div class="form-group">
-                        <div>Vehicle Licenese Plate No:<div class="displayField">WP NC-1390</div></div>               
+                        <div>Vehicle Licenese Plate No:<div class="displayField"><?php echo $data['details']->vehicle_number;?></div></div>               
                 </div>
 
                 <div class="front_image_section">
                         <div class="details">Front Image</div>
                         <div class="front_image">
-                            <img src="<?php echo URLROOT; ?>/store/vehicles/car.jpg" alt="" class="f_img">
+                            <img src="<?php echo URLROOT.'/store/vehicles/'.$data['details']->front_img ;?>" alt="" class="f_img">
                         </div>                   
                 </div>
 
 
                 <div class="back_image_section">
                         <div class="details">Back Image</div>
-                        <div class="front_image"><img src="<?php echo URLROOT; ?>/store/vehicles/car.jpg" alt="" class="f_img"></div>                   
+                        <div class="front_image"><img src="<?php echo URLROOT.'/store/vehicles/'.$data['details']->back_img ;?>" alt="" class="f_img"></div>                   
                 </div>
 
                 <div class="form-group">
-                        <div>Vehicle Insurance Status:<div class="displayField">Full Insurance</div></div>               
+                        <div>Vehicle Insurance Status:<div class="displayField"><?php echo $data['details']->insurance_status;?></div></div>               
                 </div>
 
                 
@@ -163,7 +166,7 @@
                
 
             <div class="form-group">
-                        <div>Current Vehicle Insurance Expires on:<div class="displayField">2025-05-11</div></div>      
+                        <div>Current Vehicle Insurance Expires on:<div class="displayField"><?php echo $data['details']->ins_expiry;?></div></div>      
                     
                 </div>
 
@@ -172,8 +175,8 @@
                 <div class="insurance_image_section">
                         <div class="details">Vehicle Insurance Images</div>
                         <div class="ins_image">
-                            <img src="<?php echo URLROOT; ?>/store/vehicles/ins.jpg" alt="" class="i_img">
-                            <img src="<?php echo URLROOT; ?>/store/vehicles/ins.jpg" alt="" class="i_img">
+                            <img src="<?php echo URLROOT.'/store/vehicles/'.$data['details']->insurance_imgs ;?>" alt="" class="i_img">
+                            <img src="<?php echo URLROOT.'/store/vehicles/'.$data['details']->insurance_imgs ;?>" alt="" class="i_img">
                         </div>                   
                 </div>
 
@@ -182,8 +185,8 @@
                 <div class="rev_image_section">
                         <div class="details">Revenue Images</div>
                         <div class="ins_image">
-                            <img src="<?php echo URLROOT; ?>/store/vehicles/rev.jpg" alt="" class="i_img">
-                            <img src="<?php echo URLROOT; ?>/store/vehicles/rev.jpg" alt="" class="i_img">
+                            <img src="<?php echo URLROOT.'/store/vehicles/'.$data['details']->rev_license_imgs;?>" alt="" class="i_img">
+                            <img src="<?php echo URLROOT.'/store/vehicles/'.$data['details']->rev_license_imgs;?>" alt="" class="i_img">
                         </div>                   
                 </div>
 
@@ -207,11 +210,11 @@
             <div class="column">
 
             <div class="form-group">            
-                <div>Max Volume:<div class="displayField">650L</div></div>               
+                <div>Max Volume:<div class="displayField"><?php echo $data['details']->max_vol;?></div></div>               
             </div>
 
             <div class="form-group">            
-                <div>Max Weight:<div class="displayField">480Kg</div></div>               
+                <div>Max Weight:<div class="displayField"><?php echo $data['details']->max_capacity;?></div></div>               
             </div>
              
             </div>
@@ -219,7 +222,7 @@
             <div class="column">
 
              <div class="form-group">            
-                <div>Refregiration Capability:<div class="displayField">Yes</div></div>               
+                <div>Refregiration Capability:<div class="displayField"><?php echo $data['details']->ref_cap;?></div></div>               
             </div>
 
                
@@ -242,4 +245,5 @@
 
     
 </body>
+<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 </html>

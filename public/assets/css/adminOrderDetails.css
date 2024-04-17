@@ -273,3 +273,52 @@
   .leftee{
     margin-left: 2.3rem;
   }
+
+  .image_card{
+    border: 2px solid var(--clr-primary-7);
+    margin-top: 2rem;
+    display: flex;
+    flex-direction:column;
+  }
+
+  .img_check_size{
+    height: 300px;
+    width: 400px;
+    border-radius:5px;
+  }
+
+  .deliver_img_cont{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  
+  .deliver_pickup_img_container{
+    margin-top: 1rem;
+  }
+
+  .deliver_handover_img_container{
+    margin-top: 1rem;
+  }
+
+  .Quality_approve_btn_container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+    align-self: center;
+    justify-content: space-between;
+    
+    width: 500px;
+  }
+
+  .btn_no{
+    background-color: #f44336;
+    color: white;
+    
+}
+
+.btn_no:hover{
+    background-color: #ffa3a3;
+    color: rgb(255, 9, 9);
+}

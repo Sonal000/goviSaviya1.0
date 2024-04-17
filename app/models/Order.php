@@ -447,6 +447,34 @@ public function OrderBuyer($id){
     }
 }
 
+public function OrderDeliverers($id){
+    $query = 'SELECT 
+            order_items.*,
+            users.*
+            FROM 
+            order_items
+            JOIN
+            delivers ON
+            order_items.deliver_id = delivers.deliver_id
+            JOIN
+            users ON
+            delivers.user_id = users.user_id
+            WHERE
+            order_items.order_id = :order_id';
+    
+    $this->db->query($query);
+    $this->db->bind(':order_id',$id);
+    $row =$this->db->resultSet();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+
+}
+
 
 
 
