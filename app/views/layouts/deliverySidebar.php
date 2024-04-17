@@ -17,7 +17,7 @@
               </li> -->
 
               <li>
-                <a href="<?php echo URLROOT ?>/deliveryHome">
+                <a href="<?php echo URLROOT ?>/home">
                   <button class="sidebar_item link"  id="reviews_link">
                   <i class="fa-solid fa-house sidebar_icon"></i>
                     <p>Home</p>

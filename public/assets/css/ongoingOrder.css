@@ -65,7 +65,8 @@ Global Styles
 
 .mycardd{
   box-shadow: var(--dark-shadow);
-  padding:4rem;
+  padding:2rem;
+  padding-bottom: 0.4rem;
   border-radius: var(--radius-low);
   display: flex;
   flex-direction: row;
@@ -366,4 +367,9 @@ border: none;
   box-shadow: var(--dark-shadow);
   padding:4rem;
   border-radius: var(--radius-low);
+}
+
+.hed{
+  font-size: 1.6rem;
+  font-weight: bold;
 }
