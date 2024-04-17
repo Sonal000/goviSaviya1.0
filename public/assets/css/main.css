@@ -1296,7 +1296,6 @@ input:focus {
 }
 .notify_type {
   background: var(--clr-primary-10);
-  padding: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;

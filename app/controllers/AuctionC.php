@@ -4,10 +4,14 @@ class AuctionC extends Controller{
     private $auctionModel;
     private $sellerModel;
     private $buyerModel;
+    private $notifiModel;
+    private $orderModel;
     public function __construct(){
         $this->auctionModel =$this->model('Auction');
         $this->sellerModel =$this->model('Seller');
         $this->buyerModel =$this->model('Buyer');
+        $this->notifiModel =$this->model('Notifi');
+        $this->orderModel =$this->model('Order');
             
     }
 
@@ -109,18 +113,34 @@ class AuctionC extends Controller{
             
 
                 $row=$this->auctionModel->getAuctionInfo($id);
-               
+                
                 if($row){
+                    
+
+
                    $seller=$this->sellerModel->getSellerInfo($row->seller_ID);
                   if($seller){
 
+                      $bidCount = $this->auctionModel->getBidCount($id);
                     $bid = $this->auctionModel->getCurrentBid($id);
-
+                    if(isset($_SESSION['buyer_id'])){
                     $activebidder = $this->auctionModel->isActiveBidder($id ,$_SESSION['buyer_id']);
 
-                    $bidCount = $this->auctionModel->getBidCount($id);
                     $yourBid = $this->auctionModel->getYourBid($id,$_SESSION['buyer_id']);
+                    
+                    $leading_bidder = (($bid?$bid->buyer_id:0)==$_SESSION['buyer_id']?true:false);
 
+                    if($row->highest_buyer_id && $row->highest_buyer_id==$_SESSION['buyer_id']){
+                        $winning_bidder=true;    
+                    }else{
+                        $winning_bidder=false;
+                    }
+                    }else{
+                        $activebidder=false;
+                        $yourBid=false;
+                        $winning_bidder=false;
+                        $leading_bidder=false;
+                    }
 
                     $currentDateTime = new DateTime();
                     $expDateTime = new DateTime($row->exp_date);
@@ -131,8 +151,20 @@ class AuctionC extends Controller{
 
 
 // echo "Remaining days: " . $timeDifference->d . " days<br>";
-// echo "Remaining hours: " . $timeDifference->h . " hours";           
-                    
+// echo "Remaining hours: " . $timeDifference->h . " hours";    
+$userIds = $this->auctionModel->getAuctionBidUserIds($id);
+
+    
+if(($row->highest_buyer_id) && (!isset($_SESSION['user_id'])) && (!$activebidder)){
+
+    $this->view('_404');
+    exit();
+
+}
+
+
+    
+
                   
 
                       $data=[
@@ -153,33 +185,152 @@ class AuctionC extends Controller{
                           'item_img'=>$row->item_img,
                           'stock'=>$row->stock,
                           'active_bidder'=>$activebidder,
-                          'leading_bidder'=>(($bid?$bid->buyer_id:0)==$_SESSION['buyer_id']?true:false),
+                          'leading_bidder'=>$leading_bidder,
                           'yourBid'=>$yourBid?$yourBid->your_bid:0,
+                          'highest_bidder_id'=>$row->highest_buyer_id,
+                          'auction_id'=>$id,
+                          'winning_bidder'=>$winning_bidder,
                       ]
                           ;
             
+                          $this->view('auctionItemInfo',$data);
                     }
                 }else{
                     $this->view('_404');
                  }
            
 
-                $this->view('auctionItemInfo',$data);
+        }
+
+// =================ceckout==========================================
+public  function checkout($id){
+    $items = $this->auctionModel->getAuctionInfo($id);
+    
+    if($items->highest_buyer_id){
+        if((!isset($_SESSION['buyer_id']))|| ($_SESSION['buyer_id']!=$items->highest_buyer_id)){
+            $this->view('_404');
+            exit();
+        }
+    }
+    $buyerInfo = $this->buyerModel->getProfileInfo($_SESSION["user_id"]);
+    var_dump($buyerInfo);
+    
+    $totalDeliveryfee = 0;
+    foreach ($items as $item) {
+        $totalDeliveryfee +=( getDistancefee($item->address,$buyerInfo->address));
+    }
+    
+    
+    $data=[
+            "auction_id"=>$id,
+              "items"=>$items,
+              "buyerName"=>$buyerInfo->name,
+              "buyerEmail"=>$buyerInfo->email,
+              "buyerAddress"=>$buyerInfo->address,
+              "buyerCity"=>$buyerInfo->city,
+              "buyerMobile"=>$buyerInfo->mobile,
+              "totalDeliveryfee"=>$totalDeliveryfee
+            ];
+            $this->view('checkoutac',$data);
         }
 
 
+        public function payments($id){
+            $items = $this->auctionModel->getAuctionInfo($id);
+            $lineItems = [];
+            foreach ($items as $item) {
+                $lineItems[] = [
+                    "quantity" => $item->qty, // Assuming quantity is always 1 for each item
+                    "price_data" => [
+                        "currency" => "lkr", // Change currency according to your needs
+                        "unit_amount" => $item->price * 100, // Stripe requires amount in cents
+                        "product_data" => [
+                            "name" => $item->name, // Use item name from your database
+                        ],
+                    ],
+                ];
+            }
+            \Stripe\Stripe::setApiKey(STRIPESECRETKEY);
+            $checkout_session = \Stripe\Checkout\Session::create([
+              "mode" => "payment",
+              "success_url" => "http://localhost/goviSaviya1.0/auctionC/verifiedOrder/".$id, // success page
+              "cancel_url" => "http://localhost/goviSaviya1.0/auctionC/checkout/".$id, // cancel page
+              "locale" => "auto",
+              "line_items" => $lineItems,
+          ]);
+          // Redirect the user to the Stripe Checkout page
+          http_response_code(303);
+          header("Location: " . $checkout_session->url);
+              
+          exit();
+          }
+          
+          public function verifiedOrder($id){
+          
+            if($this->orderModel->updateOrderPaymentStatus($id)){
+              $row=$this->orderModel->getNewOrderDetails($id);
+              foreach($row as $item) {
+                $seller=$this->sellerModel->getSellerInfo($item->seller_id);
+                $this->notifiModel->notifyuser(0,$seller->user_id,"New order received from <span class='bg'>".$item->buyer_name."</span>",'orders');
+              }
+                header("Location: " . URLROOT . "/orders"); 
+            }else{
+                redirect('AuctionC/checkout/'.$id);
+            };
+          
+          
+          
+          }
+          
+          
+          //  placeorder
+          public function placeOrder($id){
+            
+            $items = $this->auctionModel->getAuctionInfo($id);  
+            if($_SERVER['REQUEST_METHOD']=='POST'){
+              $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+                $details=[
+                  "buyer_name"=>trim($_SESSION['user_name']),
+                  "order_mobile"=>trim($_POST['mobile']),
+                  "order_address"=>trim($_POST['address']),
+                  "order_company"=>trim($_POST['company']),
+                  "order_city"=>trim($_POST['city']),
+                  "order_postal_code"=>trim($_POST['postalCode'])
+                ];
+                $order_id= $this->orderModel->placeOrder($items,$details,$_SESSION["buyer_id"]);
+                if($order_id){
+                            header("Location: " . URLROOT . "/auctionC/payments/".$order_id); 
+                            exit();  
+                }else{
+                 redirect('AuctionC/checkout/'.$id);
+                  exit();
+                }
+              }
+           }
+        
+        
+        // =================checkout==========================================
+        
         public function bid($id){
 
             if($_SERVER['REQUEST_METHOD']=='POST'){
-                var_dump($id);
                 $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
                 $data=[
                     'bid_price'=>trim($_POST['bid_price']),
                     'buyer_id'=>$_SESSION['buyer_id'],
                     'auction_id'=>$id
                 ];
-          
-                if($this->auctionModel->addBid($data)){
+                $bid_id=$this->auctionModel->addBid($data);
+                if($bid_id){
+                   
+                    $users=$this->auctionModel->getBidUsersInfo($bid_id);
+                    $this->notifiModel->notifyUser(0,$users->seller_user_id,"<span class='bg'>".$users->buyer_name."</span> has bid on your item.",'AuctionC/items',"AUCTION");
+                    $bids = $this->auctionModel->getAuctionBidUserIds($id);
+                    foreach ($bids as $bid) {
+                        if($bid->buyer_id != $users->buyer_id){
+                            $this->notifiModel->notifyUser(0,$bid->buyer_user_id,"Someone has outbid  the item you have bid on.",'AuctionC/itemInfo/'.$id,"AUCTION");
+                        }
+                    }
                     redirect('AuctionC/itemInfo/'.$id);
                 }else{
                     echo 'bid failed';
@@ -241,10 +392,32 @@ class AuctionC extends Controller{
     }
 
     public function endAuction($id){
-        $this->auctionModel->endAuction($id);
+        $highestBid=$this->auctionModel->getCurrentBid($id);
+        
+        if($highestBid){
+            $bids = $this->auctionModel->getAuctionBidUserIds($id);
+            $item=$this->auctionModel->getAuctionInfo($highestBid->auction_id);
+            if($bids&& $item){
+            if($this->auctionModel->endAuction($id,$highestBid->buyer_id)){
+
+                $bidUsers=$this->auctionModel->getBidUsersInfo($highestBid->bid_id);
+                
+                if($bidUsers){
+                    $this->notifiModel->notifyUser(0,$bidUsers->buyer_user_id,"You have won the auction for <span class='bg'>".$item->name."</span>",'AuctionC/itemInfo/'.$id,"AUCTION");
+    
+                        foreach ($bids as $bid) {
+                        if($bid->buyer_id != $bidUsers->buyer_id){
+                            $this->notifiModel->notifyUser(0,$bid->buyer_user_id,"You have lost the auction for the item <span class='bg'>".$item->name."</span> you have bid on.",'viewAuction'.$id,"AUCTION");
+                        }
+                    }   
+                }
+            }
+        }else{
+            redirect('AuctionC/items');
+                    
+        }
+        }
         redirect('AuctionC/items');
-
-
     }
 
 

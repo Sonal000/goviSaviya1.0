@@ -109,7 +109,7 @@
             ];
 
             if($this->itemModel->addtoCart($data)){
-               $this->notifiModel->notifyuser(0,$_SESSION['user_id'],'New items added to the cart','cart');
+               $this->notifiModel->notifyuser(0,$_SESSION['user_id'],'New items added to the cart','cart','OTHER');
                header("Location: " . URLROOT . "/marketplace/iteminfo/".$id); 
                exit();
             }else{

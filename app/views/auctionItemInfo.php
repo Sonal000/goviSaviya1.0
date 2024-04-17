@@ -88,14 +88,30 @@
   </div>
   <div>
     <?php 
-      if($data['leading_bidder']){
+      if($data['winning_bidder']){
+        echo '<p class="leading_bid">You won this auction</p>';
+      }elseif($data['leading_bidder']){
         echo '<p class="leading_bid">You are the leading bidder in this auction</p>';
-      }else if($data['active_bidder']){
+      }elseif($data['active_bidder']){
         echo '<p class="active_bid">You have been outbid in this auction ( your bid : Rs '.$data['yourBid'].' )</p>';
       }
     ?>
   </div>
 
+  <?php if($data['highest_bidder_id'] && $data['winning_bidder']){
+      ?>
+
+<div class="item_btns_cont">
+    <a class="addtocart_btn btn" href="<?php echo URLROOT ?>/auctionC/checkout/<?php echo $data['item_id'] ?>">Go to Payments</a>
+  </div>
+
+<?php
+  }elseif($data['highest_bidder_id'] && !$data['winning_bidder']){
+?>
+
+<p class="active_bid">You lost this Auction</p>
+<?php
+  }else{ ?>
   <form action="<?php echo URLROOT.'/auctionC/bid/'.$data['item_id']; ?>" method="post">
   <div class="item_btns_cont">
     <div class="qty_btn_cont">
@@ -107,6 +123,9 @@
     <button type="submit" class="addtocart_btn btn">Place Bid</button>
   </div>
 </form>
+<?php 
+  }
+?>
 </div>
 
    

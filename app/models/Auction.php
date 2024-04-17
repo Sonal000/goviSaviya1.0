@@ -259,7 +259,7 @@ public function getItems($page=1,$perPage=10,$sort=null,$order='ASC',$filter){
 
 
    public function getAuctionInfo($id){
-    $this->db->query("SELECT * FROM auction WHERE auction_ID = :auction_ID AND status='active'");
+    $this->db->query("SELECT * FROM auction WHERE auction_ID = :auction_ID");
     $this ->db ->bind(':auction_ID',$id);
     $row=$this->db->single();
      if($row){
@@ -268,6 +268,34 @@ public function getItems($page=1,$perPage=10,$sort=null,$order='ASC',$filter){
     return false;
      };
   }
+
+public function getBidUsersInfo($id){
+  $this->db->query(
+    "SELECT 
+    us.user_id AS buyer_user_id,
+    us.name AS buyer_name,
+    usr.user_id AS seller_user_id,
+    bd.buyer_id AS buyer_id
+    FROM bids bd
+    JOIN auction au ON bd.auction_id = au.auction_ID
+    JOIN buyers b ON bd.buyer_id  = b.buyer_id
+    JOIN users us ON b.user_id = us.user_id
+    JOIN sellers s ON au.seller_ID = s.seller_id
+    JOIN users usr ON s.user_id = usr.user_id
+    WHERE bd.bid_id = :bid_id 
+  ");
+  $this->db->bind(':bid_id',$id);
+  $row=$this->db->single();
+  if($row){
+    return $row;
+  }else{
+    return false;
+  }
+
+
+
+}
+
 
   public function getAuctionBidInfo($id){
     $this->db->query(
@@ -283,15 +311,38 @@ public function getItems($page=1,$perPage=10,$sort=null,$order='ASC',$filter){
       bd.bid_time AS bid_date,
       bd.bid_price AS bid_price,
       u.name AS buyer_name,
+      usr.user_id AS seller_user_id,
       u.city AS buyer_city,
+      u.user_id AS buyer_user_id 
+      FROM bids bd 
+      JOIN auction au ON bd.auction_id = au.auction_ID
+      JOIN sellers sl ON au.seller_ID = sl.seller_id
+      JOIN users usr ON sl.user_id = usr.user_id
+      JOIN buyers b ON bd.buyer_id = b.buyer_id
+      JOIN users u ON b.user_id = u.user_id
+      WHERE bd.auction_id = :auction_id
+      ORDER BY bd.bid_price DESC "
+    
+    );
+    $this ->db ->bind(':auction_id',$id);
+    $row=$this->db->resultSet();
+     if($row){
+      return $row;
+     }else{
+    return false;
+     };
+  }
+  public function getAuctionBidUserIds($id){
+    $this->db->query(
+        "SELECT DISTINCT
+      bd.buyer_id AS buyer_id,
       u.user_id AS buyer_user_id 
       FROM bids bd 
       JOIN auction au ON bd.auction_id = au.auction_ID
       JOIN buyers b ON bd.buyer_id = b.buyer_id
       JOIN users u ON b.user_id = u.user_id
       WHERE bd.auction_id = :auction_id
-      ORDER BY bd.bid_price DESC "
-    
+      "
     );
     $this ->db ->bind(':auction_id',$id);
     $row=$this->db->resultSet();
@@ -317,61 +368,67 @@ public function getItems($page=1,$perPage=10,$sort=null,$order='ASC',$filter){
   }
 
 
-  public function endAuction($id) {
-    $this->db->beginTransaction();
+  public function endAuction($id,$buyer_id) {
+    // $this->db->beginTransaction();
 
-    try {
+    // try {
         // Update auction status to 'inactive'
-        $this->db->query("UPDATE auction SET status='inactive' WHERE auction_ID=:auction_ID");
+
+        $this->db->query("UPDATE auction SET status='inactive',highest_buyer_id=:buyer_id  WHERE auction_ID=:auction_ID");
+        $this->db->bind(':buyer_id', $buyer_id);
         $this->db->bind(':auction_ID', $id);
-        $this->db->execute();
-
-        // Fetch auction details
-        $this->db->query('SELECT * FROM auction WHERE auction_ID=:auction_ID');
-        $this->db->bind(':auction_ID', $id);
-        $row = $this->db->single();
-        $buyer_id=$row->buyer_id;
-
-        // Fetch buyer details
-        $this->db->query('SELECT * FROM buyers WHERE buyer_id=:buyer_id');
-        $this->db->bind(':buyer_id',$buyer_id);
-        $row3 = $this->db->single();
-        $user_id = $row3->user_id;
-
-        // Fetch user details
-        $this->db->query('SELECT * FROM users WHERE user_id=:user_id');
-        $this->db->bind(':user_id', $user_id);
-        $row2 = $this->db->single();
-
-        // Insert into orders table
-        if ($row->bid_Count > 0) {
-            $this->db->query('INSERT INTO orders(buyer_id,total_price,order_mobile,order_address,order_city)VALUES(:buyer_id,:total_price,:order_mobile,:order_address,:order_city)');
-            $this->db->bind(':buyer_id', $buyer_id);
-            $this->db->bind(':total_price', $row->total_amount);
-            $this->db->bind(':order_mobile', $row2->mobile);
-            $this->db->bind(':order_address', $row2->address);
-            $this->db->bind(':order_city', $row2->city);
-            $this->db->execute();
-            $order_id = $this->db->lastInsertId();
-
-            // Insert into order_items table
-            $this->db->query('INSERT INTO order_items(order_id,item_id,quantity,total_price,seller_id,buyer_id)VALUES(:order_id,:item_id,:quantity,:total_price,:seller_id,:buyer_id)');
-            $this->db->bind(':order_id', $order_id);
-            $this->db->bind(':item_id', $id);
-            $this->db->bind(':quantity', $row->stock);
-            $this->db->bind(':total_price', $row->total_amount);
-            $this->db->bind(':buyer_id', $buyer_id);
-            $this->db->bind(':seller_id', $_SESSION['seller_id']);
-            $this->db->execute();
+        if($this->db->execute()){
+          return true;
+        }else{
+          return false;
         }
 
-        $this->db->commit();
-        return true;
-    } catch (Exception $e) {
-      die($e->getMessage());
-        $this->db->rollBack();
-        return false;
-    }
+        // // Fetch auction details
+        // $this->db->query('SELECT * FROM auction WHERE auction_ID=:auction_ID');
+        // $this->db->bind(':auction_ID', $id);
+        // $row = $this->db->single();
+        // $buyer_id=$row->buyer_id;
+
+        // // Fetch buyer details
+        // $this->db->query('SELECT * FROM buyers WHERE buyer_id=:buyer_id');
+        // $this->db->bind(':buyer_id',$buyer_id);
+        // $row3 = $this->db->single();
+        // $user_id = $row3->user_id;
+
+        // // Fetch user details
+        // $this->db->query('SELECT * FROM users WHERE user_id=:user_id');
+        // $this->db->bind(':user_id', $user_id);
+        // $row2 = $this->db->single();
+
+        // // Insert into orders table
+        // if ($row->bid_Count > 0) {
+        //     $this->db->query('INSERT INTO orders(buyer_id,total_price,order_mobile,order_address,order_city)VALUES(:buyer_id,:total_price,:order_mobile,:order_address,:order_city)');
+        //     $this->db->bind(':buyer_id', $buyer_id);
+        //     $this->db->bind(':total_price', $row->total_amount);
+        //     $this->db->bind(':order_mobile', $row2->mobile);
+        //     $this->db->bind(':order_address', $row2->address);
+        //     $this->db->bind(':order_city', $row2->city);
+        //     $this->db->execute();
+        //     $order_id = $this->db->lastInsertId();
+
+        //     // Insert into order_items table
+        //     $this->db->query('INSERT INTO order_items(order_id,item_id,quantity,total_price,seller_id,buyer_id)VALUES(:order_id,:item_id,:quantity,:total_price,:seller_id,:buyer_id)');
+        //     $this->db->bind(':order_id', $order_id);
+        //     $this->db->bind(':item_id', $id);
+        //     $this->db->bind(':quantity', $row->stock);
+        //     $this->db->bind(':total_price', $row->total_amount);
+        //     $this->db->bind(':buyer_id', $buyer_id);
+        //     $this->db->bind(':seller_id', $_SESSION['seller_id']);
+        //     $this->db->execute();
+    //     }
+
+    //     $this->db->commit();
+    //     return true;
+    // } catch (Exception $e) {
+    //   die($e->getMessage());
+    //     $this->db->rollBack();
+    //     return false;
+    // }
 }
 
 
@@ -385,12 +442,13 @@ public function getItems($page=1,$perPage=10,$sort=null,$order='ASC',$filter){
     $this->db->bind(':bid_price',$data['bid_price']);
 
     if($this->db->execute()){
+      $bid_id = $this->db->lastInsertId();
 
       $this->db->query('UPDATE auction SET bid_Count = bid_Count + 1 WHERE auction_ID = :auction_id');
       $this->db->bind(':auction_id',$data['auction_id']);
       if($this->db->execute()){
         
-        return true;
+        return $bid_id;
       }else{
         return false;}
       
@@ -403,8 +461,7 @@ public function getItems($page=1,$perPage=10,$sort=null,$order='ASC',$filter){
 
 
 public function getCurrentBid($id){
-  
-  $this->db->query("SELECT * FROM bids WHERE auction_id = :auction_id AND bid_price = (SELECT MAX(bid_price) AS current_bid FROM bids WHERE auction_id = :auction_id) ");
+  $this->db->query("SELECT * FROM bids WHERE auction_id = :auction_id AND bid_price = (SELECT MAX(bid_price) AS current_bid FROM bids WHERE auction_id = :auction_id)");
   $this->db->bind(':auction_id',$id);
   $row=$this->db->single();
   if($row){
@@ -412,7 +469,6 @@ public function getCurrentBid($id){
   }else{
     return false;
   }
-
 }
 
 public function getBidCount($id){

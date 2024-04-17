@@ -126,11 +126,11 @@ $(document).ready(function () {
               <div class="notify_type_cont">
               <div class='notify_type ${el.seen ? "" : "seen_icon"}'>
               ${
-                el.type === "ORDER"
+                el.type == "ORDER"
                   ? "<i class='fas fa-cube'></i>"
-                  : el.type === "DELIVERY"
+                  : el.type == "DELIVERY"
                   ? "<i class='fas fa-shipping-fast'></i>"
-                  : "<i class='fas fa-bell'></i>"
+                  : el.type == "AUCTION"?"<i class='fas fa-gavel'></i>":"<i class='fas fa-bell'></i>"
               }
               </div>
               </div>
@@ -218,6 +218,6 @@ $(document).ready(function () {
     setInterval(function () {
       fetchData();
       getCount();
-    }, 105000);
+    },5000);
   }
 });

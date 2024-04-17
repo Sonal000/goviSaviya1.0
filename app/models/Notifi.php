@@ -59,13 +59,13 @@ class Notifi{
     }
 
 
-    public function notifyuser($sender_id,$reciever_id,$message,$link,$type="OTHER"){
-        $this->db->query('INSERT INTO notifications (sender_id,reciever_id,message,link,type) VALUES (:sender_id,:reciever_id,:message,:link ,:type)');
+    public function notifyuser($sender_id,$reciever_id,$message,$link,$type){
+        $this->db->query('INSERT INTO notifications (sender_id,reciever_id,message,link,type) VALUES (:sender_id,:reciever_id,:message_m,:link ,:type_n)');
         $this ->db ->bind(':sender_id',$sender_id);
         $this ->db ->bind(':reciever_id',$reciever_id);
-        $this ->db ->bind(':message',$message);
+        $this ->db ->bind(':message_m',$message);
         $this ->db ->bind(':link',$link);
-        $this ->db ->bind(':type',$type);
+        $this ->db ->bind(':type_n',$type);
 
         if($this ->db -> execute()){
             return true;
