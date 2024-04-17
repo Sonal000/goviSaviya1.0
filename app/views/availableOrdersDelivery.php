@@ -62,7 +62,7 @@
                             ?>
                     </div>
                     <div class="details_view">
-                    <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/orders/<?php echo $order->order_item_id ?>">View Order Details</a></botton>
+                    <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/orders/details/<?php echo $order->order_item_id ?>">View Order Details</a></botton>
                     </div>
                 </div>
                 
@@ -76,7 +76,7 @@
                     </div>
             
                     <div class="update_edit_bt">
-                            <button class="accept_order_btn"><a href="">Accept Order</a></button>
+                            <button class="accept_order_btn"><a href="<?php echo URLROOT ?>/orders/acceptOrder/<?php echo $order->order_item_id ?>">Accept Order</a></button>
                             <button class="ignore_order_btn"><a href="">Don't Show</a></button>           
                     </div>
             </div> 
@@ -101,7 +101,7 @@
         </div>
     </div>
 
-
+    <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 
 </body>

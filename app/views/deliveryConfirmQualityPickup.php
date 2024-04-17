@@ -7,8 +7,7 @@
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/myproducts.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/sellerauction.css">
+  
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/deliveryConfirmQualityPickup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -58,8 +57,9 @@
                     Confirm The Quality </div>
 
                 <div class="instructions_two">Provide some of the photos of the product to confirm <br>the quality of the product. </div>
-                    <label class="custom-file-upload" for="photo">Add Photos to delivery</label>
-                     <input type="file" id="photo" name="photo">
+<form action="<?php echo URLROOT; ?>/Orders/delivering" method="post" enctype="multipart/form-data">
+                    <label class="custom-file-upload" for="photo">Add Photos to Delivery</label>
+                     <input type="file" id="photo" name="pickup_img">
             </div>  
              
                 </div>
@@ -80,10 +80,10 @@
                 
              </div>
 
-             <div class=done_button> <botton class="done_btnn"><a href="<?php echo URLROOT; ?>/Orders/delivering"> Done</a></botton></div>
+             <div class=done_button> <button type = "submit" class="done_btnn"> Done</button></div>
             </div>
 
-
+            </form>
 
         </div>
         
@@ -94,7 +94,7 @@
         </div>
         </div>
     </div>
-
+    <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
     <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
              
 

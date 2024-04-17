@@ -139,6 +139,6 @@
         
     </div>
     </form>
-
+    <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 </body>
 </html>

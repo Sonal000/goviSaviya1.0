@@ -204,6 +204,7 @@ public function updateCoverImage($data){
         }
     }
 
+    
 
     public function addVehicle($data){
        

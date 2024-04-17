@@ -7,8 +7,8 @@
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/myproducts.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/sellerauction.css">
+    
+    
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/ongoingOrder.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -43,16 +43,17 @@
 
             <div class="productimg">
                 <div class="order_details_head">
-                    Fresh Mango 
+                    <?php echo $data['details']->name;?>
                 </div>
                 
 
                 <div class="order_weight">
-                    20kg
+                     <?php echo $data['details']->quantity;?>
+                     <?php echo $data['details']->unit;?>
                 </div>
 
                 <div class="order_details_sub">
-                    Seller: <a href="#" class="link_to_seller">thevindu_r </a>
+                    Seller: <a href="#" class="link_to_seller"><?php echo $data['rowS']->name?></a>
                 </div>
                 
                 <div class="order_seller_rating">
@@ -61,16 +62,15 @@
 
 
 
-
                 <div class="image_product">
-                <img src="<?php echo URLROOT; ?>/assets/images/mango.jpeg" class="onion" alt="">
+                <img src="<?php echo URLROOT . '/store/items/'.$data['details']->item_img ?>" class="onion" alt="">
 
                 <div class="delivery_details">
                     
-               <div class="more_info"><i class="fa-solid fa-location-dot"></i></i> Pickup Location: Battaramulla</div>
-               <div class="more_info"><i class="fa-solid fa-thumbtack"></i> End Location: Kandy</div>
-               <div class="more_info"><i class="fa-solid fa-user"></i> Seller: Yunal Mallawarachchi</div>
-               <div class="more_info"><i class="fa-solid fa-truck"></i> Required Vehicle: Mini Truck</div>
+               <div class="more_info"><i class="fa-solid fa-location-dot"></i></i> Pickup Location:  <?php echo $data['rowS']->address?></div>
+               <div class="more_info"><i class="fa-solid fa-thumbtack"></i> End Location: <?php echo $data['rowB']->address?></div>
+               <div class="more_info"><i class="fa-solid fa-user"></i> Seller: <?php echo $data['rowS']->name?></div>
+               <div class="more_info"><i class="fa-solid fa-truck"></i> Buyer: <?php echo $data['rowB']->name?></div>
                <div class="update_edit_btn">
                     <botton class="accept_order_btnn"><a href=""><i class="fa-solid fa-phone"></i>  Contact Seller</a></botton>
                     <botton class="ignore_order_btnn"><a href=""><i class="fa-solid fa-map-pin"></i>  Get Location</a></botton>
@@ -118,6 +118,7 @@
 
 
 <!-- js === -->
+<script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 
 

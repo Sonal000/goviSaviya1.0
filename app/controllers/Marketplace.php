@@ -2,9 +2,13 @@
  class Marketplace extends Controller{
 
    private $itemModel;
+   private $userModel;
+   private $notifiModel;
    public function __construct()
    {
       $this->itemModel= $this->model('Item');
+      $this->userModel= $this->model('User');
+      $this->notifiModel= $this->model('Notifi');
    }
 
    public function index()
@@ -81,6 +85,7 @@
             'item_id'=>$id,
             'seller_name'=>$seller->name,
             'seller_id'=>$seller->seller_id,
+            'seller_user_id'=>$seller->user_id,
             'seller_city'=>$seller->city,
             'category'=>$row->category,
             'description'=>$row->description,
@@ -104,6 +109,7 @@
             ];
 
             if($this->itemModel->addtoCart($data)){
+               $this->notifiModel->notifyuser(0,$_SESSION['user_id'],'New items added to the cart','cart','OTHER');
                header("Location: " . URLROOT . "/marketplace/iteminfo/".$id); 
                exit();
             }else{

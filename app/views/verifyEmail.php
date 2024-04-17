@@ -194,6 +194,7 @@
 
     
 <!-- js === -->
+<script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/verifyEmail.js"></script>
 </body>

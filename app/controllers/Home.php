@@ -4,12 +4,18 @@
   
     private $adminModel;
     private $deliverModel;
+    private $userModel;
+    private $orderModel;
    public function __construct()
    {
-    $this->adminModel =$this->model('Admin');
-     $this->deliverModel =$this->model('Deliver');
 
+    $this->orderModel=$this->model("Order");
+    $this->deliverModel =$this->model('Deliver');
+    $this->adminModel =$this->model('Admin');
+    $this->deliverModel =$this->model('Deliver');
+    $this->userModel =$this->model('User');
    }
+  
    public function index(){
 
     if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
@@ -30,9 +36,17 @@
   $this -> view('adminDash',$data);
   }
    elseif(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'deliver') {
-           // Assuming getOngoingOrdersdetails is a method in the Deliver model
-           $orders = $this->deliverModel->getOngoingOrdersDetails($_SESSION['user_id']);
-           $data['orders'] = $orders; // pass orders data to view
+    $deliver_id = $_SESSION['deliver_id'];
+    $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
+    $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
+    $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);
+    $view;
+
+$data = [
+    'details' => $details,
+    'rowB' => $rowB,
+    'rowS' => $rowS
+];
            $this->view('deliveryHome', $data);
        } 
        else{
@@ -43,6 +57,7 @@
   ];
 
     $this->view('home',$data);
+
        }
   
     
@@ -73,13 +88,15 @@
 
 
 
-
    
    
    public function about($id)
    {
     echo "about loaded".$id;
    }
+
+   
+
 
 
  }

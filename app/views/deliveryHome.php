@@ -72,30 +72,39 @@
         </div>
 
 
-
+                    
             <div class="first_col">
 
                 <div class="card card-ongoingOrder">
 
+                <?php if($data['details']){
+?>
+
+
+
                     <div class="card_details">
                         <div class="left_details">
-                            <div class="card_heading">Carrot</div>
-                            <div class="card_detailss">Seller: Thevindu_r</div>
-                            <div class="card_detailss">20Kg</div>
+                            <div class="card_heading"><?php echo $data['details']->name; ?></div>
+                            <div class="card_detailss">Seller: <?php echo $data['rowS']->name; ?></div>
+                            <div class="card_detailss"> <?php echo $data['details']->quantity;?>
+                                                        <?php echo $data['details']->unit;?>
+                            </div>
                         </div>
                         
                         <div class="right_details">
-                            <div class="rate_details">Rate: Rs. 6300.00/=</div>
+                            <div class="rate_details">Rate: <?php echo $data['details']->deliver_fee;?>/=</div>
                         </div>
                     </div>
 
                     <div class="image_details">
-                        <div class="image"><img class="item_img" src="<?php echo URLROOT.'/store/items/carrot.jpg';?>"></div>
+                        <div class="image">
+                            <img class="item_img" src="<?php echo URLROOT.'/store/items/carrot.jpg';?>">
+                        </div>
 
                         <div class="order_details">
-                            <div class="details"><i class="fa-solid fa-location-dot"></i>  From: Galle</div>
-                            <div class="details"><i class="fa-solid fa-truck-fast"></i>  To: Colombo</div>
-                            <div class="details"><i class="fa-solid fa-user"></i>  Buyer: nipul_y</div>
+                            <div class="details"><i class="fa-solid fa-location-dot"></i>  From:  <?php echo $data['rowS']->address;?></div>
+                            <div class="details"><i class="fa-solid fa-truck-fast"></i>  To: <?php echo $data['rowB']->address;?>  </div>
+                            <div class="details"><i class="fa-solid fa-user"></i>  Buyer:<?php echo $data['rowB']->name;?></div>
                         
                             <div class="view_btn">
                                 <a href="#"> <button class="btn">View More</button></a>
@@ -105,8 +114,17 @@
                         </div>
                     </div>
 
+                    <?php
+                }else{?>
+                  
+                    <div class="no_order">
+                        No ongoing orders currently
+                    </div>
 
 
+
+
+                    <?php }?>
                 </div>
 
 
@@ -142,7 +160,7 @@
             <div class="card card-recomendedOrder">
                     
                     <div class="recomended_orders">
-                        <div class="recomended_order_1">
+                        <!-- <div class="recomended_order_1">
 
                             <div class="rec_odr_img">
                                 <img class="item_img" src="<?php echo URLROOT.'/store/items/guava.png';?>">
@@ -158,10 +176,10 @@
                                 <div class="view_more_btn"><a href="#"> <button class="btn">View More</button></a></div>    
                                
                             </div>
-                        </div>
+                        </div> -->
 
 
-                        <div class="recomended_order_2">
+                        <!-- <div class="recomended_order_2">
 
                         <div class="rec_odr_img">
                                 <img class="item_img" src="<?php echo URLROOT.'/store/items/coc.jpg';?>">
@@ -178,8 +196,11 @@
                                
                             </div>
 
-                        </div>
-                        <div class="recomended_order_3">
+                        </div> -->
+
+                    
+                    <?php for ($i = 1; $i <= 3; $i++):?> 
+                        <div class="recomended_order">
 
                         <div class="rec_odr_img">
                                 <img class="item_img" src="<?php echo URLROOT.'/store/items/pine.jpg';?>">
@@ -198,11 +219,13 @@
 
 
                         </div>
+                            <?php endfor ?>
+
                     </div>
 
                     <div class="see_all_btn">
 
-                            <div class="view_more_btn"><a href="#"> <button class="btn">View All Available Orders</button></a></div>  
+                            <div class="view_more_btn"><a href="<?php echo URLROOT.'/orders'?>"> <button class="btn">View All Available Orders</button></a></div>  
                   
                     </div>
 
@@ -229,7 +252,7 @@
         </div>
         </div>
     </div>
-    
+    <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
     <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 
 </body>

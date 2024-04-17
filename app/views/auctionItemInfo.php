@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title> <?php echo  $data['items']->name;?></title>
+ <title> <?php echo  $data['name'];?></title>
  <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
  <link
  rel="stylesheet"
@@ -38,9 +38,9 @@
 
 <div class="image_container">
     <div class="main_img_cont">
-      <img class="main_img" src="<?php echo URLROOT ?>/assets/images/item-7.png"/> 
+      <img class="main_img" src="<?php echo URLROOT ?>/store/items/<?php echo $data['item_img'] ?>"/> 
     </div>
-    <div class="img_slider_cont">
+    <!-- <div class="img_slider_cont">
       <button class="slider_btn">
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-7.png"/> 
       </button>
@@ -54,13 +54,13 @@
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-3.png"/> 
       </button>
 
-    </div>
+    </div> -->
 </div>
 <div class="item_description">
   <div class="item_title_cont">
-    <p class="item_name"><?php echo $data['items']->name;?></p>
-    <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller: Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-    <p class="item_address"><?php echo $data['items']->address;?></p>
+    <p class="item_name"><?php echo $data['name'];?></p>
+    <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller:<?php echo $data['seller_name'];?> <span><i class="fas fa-check-circle"></i></span></a>
+    <p class="item_address"><?php echo $data['seller_city'];?></p>
     <div class="item_rating">
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
@@ -68,28 +68,64 @@
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          </div>
-  </div>
-  <div class="item_price_cont">
-    <p class="item_price"><?php echo $data['items']->price;?> / <span><?php echo $data['items']->unit;?></span></p>
-    <p class="item_available"><?php echo $data['items']->stock;?> / <span><?php echo $data['items']->unit;?> available</span>  </p>
-  </div>
+        </div>
+        <div class="item_price_cont">
+          <p class="item_price"><span>Starting bid :</span></p> <p>   Rs <?php echo $data['price'];?>/<span><?php echo $data['unit'];?></span></p>
+        </div>
+        <div class="item_price_cont">          
+          <p class="item_price"><span>available :</span></p> <p> <?php echo $data['stock'];?> <span><?php echo $data['unit'];?>   </p>
+        </div>
+        <div class="item_price_cont">
+          <p class="item_price"><span>Current bid :</span></p> <p>   Rs <?php echo $data['current_bid'];?>/<span><?php echo $data['unit'];?></span></p>
+        </div>
+
   <div class="item_bid_cont">
-    <p class="item_bids"><?php echo $data['items']->bid_Count;?> <span>bids</span></p>
-    <p class="item_time">  24/<span>h left</span>  </p>
+    <p class="item_bids"><?php echo $data['bid_Count'];?> <span>bids</span></p>
+    <p class="item_time"> <?php echo $data['exp_date'];?><span> left</span>  </p>
   </div>
   <div class="item_desc_cont">
-    <p class="item_desc"><?php echo $data['items']->description;?></p>
+    <p class="item_desc"><?php echo $data['description'];?></p>
   </div>
+  <div>
+    <?php 
+      if($data['winning_bidder']){
+        echo '<p class="leading_bid">You won this auction</p>';
+      }elseif($data['leading_bidder']){
+        echo '<p class="leading_bid">You are the leading bidder in this auction</p>';
+      }elseif($data['active_bidder']){
+        echo '<p class="active_bid">You have been outbid in this auction ( your bid : Rs '.$data['yourBid'].' )</p>';
+      }
+    ?>
+  </div>
+
+  <?php if($data['highest_bidder_id'] && $data['winning_bidder']){
+      ?>
+
+<div class="item_btns_cont">
+    <a class="addtocart_btn btn" href="<?php echo URLROOT ?>/auctionC/checkout/<?php echo $data['item_id'] ?>">Go to Payments</a>
+  </div>
+
+<?php
+  }elseif($data['highest_bidder_id'] && !$data['winning_bidder']){
+?>
+
+<p class="active_bid">You lost this Auction</p>
+<?php
+  }else{ ?>
+  <form action="<?php echo URLROOT.'/auctionC/bid/'.$data['item_id']; ?>" method="post">
   <div class="item_btns_cont">
     <div class="qty_btn_cont">
-      <button class="btn_remove">-</button>
-      <!-- <p class="qty">0</p> -->
-        <input class="qty" type="number" value="0">
-      
-      <button class="btn_add">+</button>
+      <!-- <button class="btn_remove">-  Rs</button> -->
+        <p>Rs</p>
+        <input class="qty" type="number" value="<?php echo $data['current_bid'] + 10;?>" class="qty"  name="bid_price" id="quantity" data-currentprice="<?php echo $data['current_bid'] + 10;?>">
+      <!-- <button class="btn_add">+</button> -->
     </div>
-    <buttton class="addtocart_btn btn">Place Bid</buttton>
+    <button type="submit" class="addtocart_btn btn">Place Bid</button>
   </div>
+</form>
+<?php 
+  }
+?>
 </div>
 
    
@@ -420,6 +456,7 @@
 <!-- footer end ======================= -->
 
 <!-- js === -->
+<script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/auctionitemInfo.js"></script>
 </body>

@@ -7,8 +7,6 @@
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/myproducts.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/sellerauction.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/deliveryOrderDetails.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -59,24 +57,27 @@
 
 
                 <div class="image_product">
-                <img src="<?php echo URLROOT; ?>/store/items/<?php echo $data['order']->item_img  ?> " class="onion" alt="">
+                        <div class="image_p">
+                                <img src="<?php echo URLROOT; ?>/store/items/<?php echo $data['order']->item_img  ?> " class="picture" alt="">
+                        </div>
 
-                <div class="delivery_details">
-                    
-               <div class="more_info" style="display:flex; align-items:center; " ><i class="fa-solid fa-location-dot"></i> Pickup Location: <p style="text-transform:capitalize">  <?php echo $data['order']->seller_address ?> </p> </div>
+                        <div class="delivery_details">
+                                    
+                            <div class="more_info" style="display:flex; align-items:center; " ><i class="fa-solid fa-location-dot"></i>  Pickup Location: <?php echo $data['order']->seller_address ?> </p> </div>
 
-               <div style="display:flex; align-items:center; " class="more_info"><i class="fa-solid fa-thumbtack"></i> End Location: <p style="text-transform:capitalize">  <?php echo $data['order']->order_address ?> </p> </div>
+                            <div style="display:flex; align-items:center; " class="more_info"><i class="fa-solid fa-thumbtack"></i> End Location:  <?php echo $data['order']->order_address ?> </p> </div>
 
-               <div style="display:flex; align-items:center; " class="more_info"><i class="fa-solid fa-user"></i> Seller: <p style="text-transform:capitalize"> <?php echo $data['order']->seller_name ?> </p></div>
+                            <div style="display:flex; align-items:center; " class="more_info"><i class="fa-solid fa-user"></i> Seller:  <?php echo $data['order']->seller_name ?> </p></div>
 
-               <div style="display:flex; align-items:center; " class="more_info"><i class="fa-solid fa-truck"></i> Required Vehicle: <p style="text-transform:capitalize"> Mini Truck </p></div>
+                            <div style="display:flex; align-items:center; " class="more_info"><i class="fa-solid fa-truck"></i> Buyer:   <?php echo $data['order']->buyer_name ?> </p></div>
 
-               <div class="update_edit_btn">
-                    <botton class="accept_order_btnn"><a href=""><i class="fa-solid fa-phone"></i>  Contact Seller</a></botton>
-                    <botton class="ignore_order_btnn"><a href=""><i class="fa-solid fa-map-pin"></i>  Get Location</a></botton>
-                
-            </div>
-            </div>   
+                            <div class="update_edit_btn">
+                                    <botton class="accept_order_btnn"><a href=""><i class="fa-solid fa-phone"></i>  Contact Seller</a></botton>
+                                    <botton class="ignore_order_btnn"><a href=""><i class="fa-solid fa-map-pin"></i>  Get Location</a></botton>
+                                
+                            </div>
+
+                        </div>   
                 </div>
 
 
@@ -85,20 +86,24 @@
 
             <div class="right_side">
 
+            <div class="error_msg">
+
             <?php if(!$data['available']){?>
-            <p style="color:red;"> You cannot accept more than one orders at a time </p>
+            You cannot accept more than one orders at a time
            <?php  } ?>
            
+           </div>
+
             <div class="update_edit_btnn">
             <?php if(!$data['available']){?>
-              <a class="accept_order_btnnn"  href="#"><i class="fa-solid fa-circle-check"></i>  Accept Order</a>
 
-                    <a class="ignore_order_btnnn" href=""><i class="fa-solid fa-ban"></i>  Ignore Order</a>
+                    <a class="ignore_order_btnnn" href=""><!<i class="fa-solid fa-ban"></i> Don't Show</a>
+
                     <?php  }else{ ?>
 
                         <a class="accept_order_btnnn"  href="<?php echo URLROOT ?>/orders/acceptOrder/<?php echo $data['order']->order_item_id  ?>"><i class="fa-solid fa-circle-check"></i>  Accept Order</a>
 
-<a class="ignore_order_btnnn" href=""><i class="fa-solid fa-ban"></i>  Ignore Order</a>
+                         <a class="ignore_order_btnnn" href=""><i class="fa-solid fa-ban"></i>  Ignore Order</a>
 
 
                   <?php  } ?>
@@ -123,6 +128,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 </body>
 </html>
