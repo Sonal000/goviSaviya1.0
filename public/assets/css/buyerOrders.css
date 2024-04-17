@@ -425,6 +425,7 @@
   }
   .bid_action_cont {
     flex-direction: column;
+    
   }
 
   .current_bid {
@@ -735,4 +736,10 @@
 
 .more_space{
   width: 800px;
+}
+
+.track_order{
+ 
+  display: flex;
+margin-top: 2.5rem;
 }

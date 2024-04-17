@@ -199,7 +199,7 @@
 <!-- bid item ===========-->
 <div class="bid_item_cont  ">
    <div class="bid_item_img_cont">
-     <img  class="bid_item_img" src="<?php echo URLROOT."/store/items/".$quotations->seller_img; ?>">
+     <img  class="bid_item_img" src="<?php echo URLROOT."/store/profiles/".$quotations->seller_img; ?>">
   </div> 
   <div class="item_description">
      <div class="item_title_cont">
@@ -235,7 +235,7 @@
 }else{
 ?>
   <div class="bid_item_cont  ">
-      <p>There are no ongoing orders.</p>
+      <p>There are no quotations for order Requests.</p>
   </div>
 
 <?php   } ?>

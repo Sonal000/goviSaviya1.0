@@ -154,6 +154,22 @@
 
    }
 
+   public function viewQuotations($id){
+
+    $requests =$this->RequestsModel->getrequestDetails($id);
+    $quotations = $this->RequestsModel->viewQuotations($id);
+
+    $data=[
+      'details'=>$requests,
+      'Q2'=>$quotations,
+    ];
+
+    $this->view('viewQuotations',$data);
+
+
+
+   }
+
  
 
 

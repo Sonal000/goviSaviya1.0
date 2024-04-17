@@ -225,18 +225,36 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
 
     public function conclude(){
-     if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){  
-        
-        
 
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            //Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+        $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/items/';
+        $dropoffImg = $this->uploadFile('dropoff_img', $uploadDirectory);
         $deliver_id = $_SESSION['deliver_id'];
+        $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
+        $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
+        $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);
         $completed = $this->orderModel->editToCompleted($deliver_id);
-        $data = ['title'=>'welcome'];
+        $delivered = $this->orderModel->editToDelivering($deliver_id);
 
         
-        $this -> view('deliveryComplete',$data);
-    
-    }
+        $this->orderModel->uploadDropOffImages($deliver_id,$dropoffImg);
+        
+
+                $data =[
+
+                    'id' => $deliver_id,
+                    'dropoff_img' =>  $dropoffImg,
+                    'details' => $details,
+                    'rowB' => $rowB,
+                    'rowS' => $rowS 
+                ];
+            
+                $this->view('deliveryComplete',$data);
+        }
+      
+        
 }
 
 

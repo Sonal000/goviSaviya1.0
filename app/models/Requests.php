@@ -236,6 +236,55 @@ class Requests{
             return false; 
         }
     }
+
+    public function viewQuotations($id){
+
+        $query = 'SELECT 
+                  requests.*,
+                  req_quotation.*,
+                  sellers.prof_img AS sellers_img,
+                  users.name  AS seller_name,
+                  users.*
+                  FROM 
+                  requests
+                  JOIN
+                  req_quotation ON
+                  requests.request_ID= req_quotation.request_ID
+                  JOIN
+                  sellers ON
+                  req_quotation.seller_ID = sellers.seller_id
+                  JOIN
+                  users ON
+                  sellers.user_id = users.user_id
+                  WHERE requests.request_ID = :id ';
+            
+        $this->db->query($query);
+        $this->db->bind(':id',$id);
+        $row = $this->db->resultSet();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+                  
+
+    }
+
+    public function getrequestDetails($id){
+        $this->db->query('SELECT * FROM requests WHERE request_ID =:id');
+        $this->db->bind(':id',$id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+
+    }
     
 
     
