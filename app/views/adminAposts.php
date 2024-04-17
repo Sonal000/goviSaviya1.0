@@ -42,7 +42,7 @@
                     Auction Posts
                 </div>
                 <div class="signupcount">
-                    11
+                    <?php echo $data['count']->post_count ;?>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
             </div>
             <div class="table_cell column5">
                 <div class="ordersta">
-                    <a href=""><button class="orderpost_view">View</button></a>
+                    <a href="<?php echo URLROOT; ?>/Posts/AuctionView/<?php echo $postA->auction_ID?>"><button class="orderpost_view">View</button></a>
                 </div>
             </div>
             <div class="table_cell column6">

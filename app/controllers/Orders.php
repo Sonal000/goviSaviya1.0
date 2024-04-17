@@ -249,17 +249,30 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         $OrderItems = $this->orderModel->OrderItemsView($id);
         $sellerDet=$this->orderModel ->sellersInOrder($id);
         $buyerDet = $this->orderModel ->OrderBuyer($id);
+        $deliverDet = $this->orderModel->OrderDeliverers($id);
 
         $data = [
             'details'=>$OrderDet,
             'items'=>$OrderItems,
             'sellerdet'=>$sellerDet,
             'buyerdet'=>$buyerDet,
+            'deliverdet'=>$deliverDet,
         ];
         $this->view('adminOrderDetails',$data);
     }
 
+
     
+
+    public function ImageChecking($id){
+        
+    }
+   
+    public function CheckItemsImages($id){
+        $data = ['title'=>'welcome'];
+        $this -> view('adminImageCheck',$data);
+    }
+
 
    
 }
