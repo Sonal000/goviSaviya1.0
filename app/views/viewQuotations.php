@@ -95,10 +95,11 @@
         <?php if(!empty($data['Q2'])):?>
         <?php foreach($data['Q2'] as $items):?>
         
-        <div class="mycard_ad">
-        <!-- <div class="productimg">
-            <img src="<?php echo URLROOT.'/store/items/'.$items->item_img ;?>" class="mango" alt="">
-        </div> -->
+        <div class="mycard_ad2">
+            <div class="details_cont">
+        <div class="productimg">
+            <img src="<?php echo URLROOT.'/store/profiles/'.$items->sellers_img ;?>" class="mango_img" alt="">
+        </div>
         <div class="productdes_ad">
             <div class="order_num">
                 Quoatation Number: <?php echo $items->quotation_ID?>
@@ -111,55 +112,14 @@
            </div>
            
            <div class="productprice_ad">
-                
+                Seller Profile :  <a href="<?php echo URLROOT; ?>/Profile/<?php echo $items->user_id ?>"><span>profile Link</span></a>
            </div>
         </div>
-        <!--  <div class="seller_det">
-            <div class="img_and_Plink">
-                <div class="seller_img">
-                <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="customers-profile-img" class="upperbody_img leftee">
-                </div>
-                <div class="profile_link">
-                    <button class="btn">Seller profile</button>
-                </div>
-            </div>
-            <div class="ord_info">
-            <div class="orderNumber_cont">
-                    <div class="orderNumber">
-                        Seller ID :
-                    </div>
-                    <div class="orderNumber_v">
-                    <?php echo $items->seller_id?> 
-                    </div>
-                </div>
-                <div class="orderNumber_cont">
-                    <div class="orderNumber">
-                        Name :
-                    </div>
-                    <div class="orderNumber_v">
-                    <?php echo $items->seller_name?> 
-                    </div>
-                </div>
-                <div class="orderNumber_cont">
-                    <div class="orderNumber">
-                        Location :
-                    </div>
-                    <div class="orderNumber_v">
-                    <?php echo $items->seller_address?>
-                    </div>
-                </div>
-                 <div class="orderNumber_cont">
-                    <div class="orderNumber">
-                        Seller Rating :
-                    </div>
-                    <div class="orderNumber_v">
-                        <i class="fa-solid fa-star" style="color: #dfd811;"></i>
-                        <i class="fa-solid fa-star" style="color: #dfd811;"></i>
-                        <span>3.5</span>
-                    </div>
-                </div> 
-            </div>
-        </div> -->
+        </div>
+        <div class="accept">
+            <a href="<?php echo URLROOT; ?>/OrderRequests/acceptQuotation/<?php echo $items->quotation_ID ?>"><button class="btn acc_button">Accept</button></a>
+        </div>
+        
     </div>
     <?php endforeach; ?>
     <?php else: ?>

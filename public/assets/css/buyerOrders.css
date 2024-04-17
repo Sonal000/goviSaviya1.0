@@ -694,6 +694,7 @@
 
 .remove{
   background: var(--clr-red-1);
+  margin-right: 1rem;
 }
 
 .remove:hover{

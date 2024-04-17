@@ -51,13 +51,13 @@
          <!-- bid item ===========-->
          <div class="bid_item_cont  ">
              <div class="bid_item_img_cont">
-               <img  class="bid_item_img" src="<?php echo URLROOT."/store/items/".$requests->seller_img; ?>">
+               <img  class="bid_item_img" src="<?php echo URLROOT."/store/profiles/".$requests->seller_img; ?>">
             </div> 
             <div class="item_description">
                <div class="item_title_cont">
                   <div class="item_info">
                      <p class="item_name"><?php echo $requests->name; ?></p>
-                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> Accepted seller: <?php echo $requests->seller_name; ?> <span><i class="fas fa-check-circle"></i></span></a>
+                     <a href="<?php echo URLROOT ?>/profile/<?php echo $requests->user_id?>" target="_blank" class="item_seller"> Accepted seller: <?php echo $requests->seller_name; ?> <span><i class="fas fa-check-circle"></i></span></a>
                      <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_location"> location: <?php echo $requests->district; ?> </a>
                      <!-- <p class="item_address">Thalgahawawa</p> -->
                      <div class="item_bid_cont">
@@ -220,7 +220,7 @@
      
      <div class="bid_action_cont">
         <div class="item_btns_cont">
-           <a href="<?php echo URLROOT?>/OrderRequests/viewQuotations/<?php echo $requests->request_ID ?>"><buttton id="track_order_btn" class="buy_btn btn track_order">View Quotations</buttton></a>
+           <a href="<?php echo URLROOT?>/OrderRequests/viewQuotations/<?php echo $quotations->request_ID ?>"><buttton id="track_order_btn" class="buy_btn btn track_order">View Quotations</buttton></a>
         </div>
      </div>
 </div>
@@ -263,14 +263,14 @@
                   ?>
             <div class="bid_item_cont">
              <div class="bid_item_img_cont">
-               <img  class="bid_item_img" src="<?php echo URLROOT."/store/items/".$requests->seller_img; ?>">
+               <img  class="bid_item_img" src="<?php echo URLROOT."/store/profiles/".$requests->buyer_img; ?>">
             </div> 
             <div class="pending_req_cont">
             <div class="item_description" id="requests_cont_view">
                <div class="item_title_cont">
                   <div class="item_info">
                      <p class="item_name"><?php echo $pendreq->name; ?></p>
-                     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> Requested By: <?php echo $pendreq->buyer_name; ?> <span><i class="fas fa-check-circle"></i></span></a>
+                     <a href="<?php echo URLROOT ?>/profile/<?php echo $pendreq->user_id;?>" target="_blank" class="item_seller"> Requested By: <?php echo $pendreq->buyer_name; ?> <span><i class="fas fa-check-circle"></i></span></a>
                      <p  class="item_location" id>Requested Before: <?php echo date('Y-m-d', strtotime($pendreq->req_date)); ?> </p>
                      <!-- <p class="item_address">Thalgahawawa</p> -->
                      <div class="item_bid_cont">
@@ -285,7 +285,7 @@
                
                <div class="bid_action_cont">
                   <div class="item_btns_cont">
-                     <buttton id="req_update_btn" class="buy_btn btn">Update</buttton>
+                     
                      <a href="<?php echo URLROOT?>/OrderRequests/remove/<?php echo $pendreq->request_ID ?>"><buttton id="req_remove_btn" class="buy_btn btn track_order remove">Remove</buttton></a>
                   </div>
                </div>

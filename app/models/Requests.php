@@ -43,7 +43,21 @@ class Requests{
 
     public function BuyerAcceptRequests($id){
 
-        $this->db->query("SELECT * FROM requests WHERE buyer_id=:buyer_id AND status='accepted' ORDER BY posted_date DESC");
+        $query = "SELECT 
+                  requests.*,
+                  users.user_id AS user_id
+                  FROM
+                  requests
+                  JOIN
+                  sellers ON
+                  requests.acp_seller_ID= sellers.seller_id
+                  JOIN 
+                  users ON
+                  sellers.user_id = users.user_id
+                  WHERE buyer_id=:buyer_id 
+                  AND status='accepted' ORDER BY posted_date DESC";
+
+        $this->db->query($query);
 
         $this->db->bind(':buyer_id',$id);
 
@@ -60,7 +74,23 @@ class Requests{
 
     public function BuyerPendingRequests($id){
 
-        $this->db->query("SELECT * FROM requests WHERE buyer_id=:buyer_id AND status='pending' ORDER BY posted_date DESC");
+        $query = 'SELECT 
+                    requests.*,
+                    buyers.prof_img AS buyer_img,
+                    users.user_id AS user_id
+                    FROM 
+                    requests
+                    JOIN
+                    buyers ON
+                    requests.buyer_id=buyers.buyer_id
+                    JOIN 
+                    users ON
+                    buyers.user_id = users.user_id
+                    WHERE requests.buyer_id=:buyer_id 
+                    AND status="pending" 
+                    ORDER BY posted_date DESC';
+
+        $this->db->query($query);
 
         $this->db->bind(':buyer_id',$id);
 
@@ -142,7 +172,7 @@ class Requests{
         }
     }
 
-    public function declineRequest($id){
+    public function declineRequest($id){    
 
         $this->db->query('UPDATE requests SET decline_seller_ID=:seller_ID WHERE request_ID=:request_ID');
         $this->db->bind(':seller_ID',$_SESSION['seller_id']);
@@ -188,7 +218,7 @@ class Requests{
     }
 
     public function BuyerQuotations($id){
-        $this->db->query('SELECT * FROM requests WHERE quotation_count >0 AND buyer_id=:buyer_id');
+        $this->db->query('SELECT * FROM requests WHERE quotation_count >0 AND buyer_id=:buyer_id AND status !="accepted"');
         $this->db->bind(':buyer_id',$id);
         $row = $this->db->resultset();
 
@@ -283,6 +313,53 @@ class Requests{
         else{
             return false;
         }
+
+    }
+
+    public function acceptquotation($id){
+
+        $query1 = 'SELECT 
+                    req_quotation.*,
+                    users.name AS seller_name,
+                    sellers.prof_img AS seller_img
+                    FROM
+                    req_quotation
+                    JOIN 
+                    sellers ON
+                    req_quotation.seller_ID = sellers.seller_id
+                    JOIN 
+                    users ON
+                    sellers.user_id = users.user_id
+                    WHERE 
+                    req_quotation.quotation_ID = :id ';
+                     
+        $this->db->query($query1);
+        $this->db->bind(':id',$id);
+        $row = $this->db->Single();
+
+       
+        $query = 'UPDATE requests
+                    SET
+                    acp_amount=:acp_amount,
+                    acp_seller_ID=:seller_id,
+                    seller_name=:seller_name,
+                    seller_img=:seller_img,
+                    status = "accepted"
+                    WHERE request_ID=:id';
+
+     $this->db->query($query);
+     $this->db->bind(':acp_amount',$row->amount);
+     $this->db->bind(':seller_id',$row->seller_ID);
+     $this->db->bind(':seller_name',$row->seller_name);
+     $this->db->bind(':seller_img',$row->seller_img);
+     $this->db->bind(':id',$row->request_ID);
+
+     if($this->db->execute()){
+        return true;
+     }
+     else{
+        return false;
+     }
 
     }
     

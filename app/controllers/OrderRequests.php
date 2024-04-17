@@ -170,9 +170,16 @@
 
    }
 
- 
+   public function acceptQuotation($id){
+        $this->RequestsModel->acceptquotation($id);
 
+      
+        redirect('OrderRequests');
+    
 
+        
+
+   }
 
  }
 ?>
