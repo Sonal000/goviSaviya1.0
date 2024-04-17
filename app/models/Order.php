@@ -759,7 +759,7 @@ public function uploadPickupImages($deliver_id,$pickupImg){
 
     $itemID = $this->getItemID($deliver_id)->item_id;
     $order_id = $this->getItemID($deliver_id)->order_id;
-    $s = "hello";
+   
     $query = 'UPDATE quality_check 
             SET
             order_id = :order_id,
@@ -782,6 +782,32 @@ public function uploadPickupImages($deliver_id,$pickupImg){
 
 
               
+}
+
+public function uploadDropOffImages($deliver_id,$dropoffImg){
+    
+    $itemID = $this->getItemID($deliver_id)->item_id;
+    $order_id = $this->getItemID($deliver_id)->order_id;
+    
+    $query = 'UPDATE quality_check 
+            SET
+            order_id = :order_id,
+            deliver_id= :deliver_id,
+            deliver_dropoff_img= :deliver_dropoff_img
+            WHERE item_id = :item_id';
+    
+    $this->db->query($query);
+    $this->db->bind(':order_id',$order_id);
+     $this->db->bind(':item_id',$itemID);
+     $this->db->bind(':deliver_id',$deliver_id);
+    $this->db->bind(':deliver_dropoff_img',$dropoffImg);
+
+    if($this->db->execute()){
+        return true;
+    }else{
+        return false;
+    }
+
 }
 
 

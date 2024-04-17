@@ -267,6 +267,8 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
       </div>
         <!-- review end==== -->
 
+        
+
 
 
 
@@ -275,8 +277,22 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
       
     </div>
 
-
-
+    <div class="add_review_container">
+      <div class="add_review_hed">
+          <h4>Add Review</h4>
+        </div>
+        <form action="<?php echo URLROOT.'/marketplace/Addreview/'.$data['item_id']; ?>" method="POST">
+           <div class="review_Filed">
+            <input type="text" name="review" placeholder="Enter your Review">
+            <button type="submit">
+            <svg viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#9e2e2e" transform="rotate(0)matrix(1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"><rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="14.4" fill="#4caf4f" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.192"></g><g id="SVGRepo_iconCarrier"> 
+              <path d="M20 4L3 11L10 14L13 21L20 4Z" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"></path> </g></svg>
+        </button>
+           </div>
+        </form>
+    </div>
+    
+  
 
   </section>
 
