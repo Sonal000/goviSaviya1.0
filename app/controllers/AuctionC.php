@@ -213,12 +213,12 @@ public  function checkout($id){
         }
     }
     $buyerInfo = $this->buyerModel->getProfileInfo($_SESSION["user_id"]);
-    var_dump($buyerInfo);
+   
     
     $totalDeliveryfee = 0;
-    foreach ($items as $item) {
-        $totalDeliveryfee +=( getDistancefee($item->address,$buyerInfo->address));
-    }
+
+        $totalDeliveryfee +=( getDistancefee($items->address,$buyerInfo->address));
+  
     
     
     $data=[
@@ -236,11 +236,15 @@ public  function checkout($id){
 
 
         public function payments($id){
-            $items = $this->auctionModel->getAuctionInfo($id);
+
+            $auction_id=$this->orderModel->getOrderAuctionId($id);
+        
+            $item = $this->auctionModel->getAuctionInfo($auction_id);
+            
             $lineItems = [];
-            foreach ($items as $item) {
+            // foreach ($items as $item) {
                 $lineItems[] = [
-                    "quantity" => $item->qty, // Assuming quantity is always 1 for each item
+                    "quantity" => $item->stock, // Assuming quantity is always 1 for each item
                     "price_data" => [
                         "currency" => "lkr", // Change currency according to your needs
                         "unit_amount" => $item->price * 100, // Stripe requires amount in cents
@@ -249,7 +253,7 @@ public  function checkout($id){
                         ],
                     ],
                 ];
-            }
+            // }
             \Stripe\Stripe::setApiKey(STRIPESECRETKEY);
             $checkout_session = \Stripe\Checkout\Session::create([
               "mode" => "payment",
@@ -271,7 +275,7 @@ public  function checkout($id){
               $row=$this->orderModel->getNewOrderDetails($id);
               foreach($row as $item) {
                 $seller=$this->sellerModel->getSellerInfo($item->seller_id);
-                $this->notifiModel->notifyuser(0,$seller->user_id,"New order received from <span class='bg'>".$item->buyer_name."</span>",'orders');
+                $this->notifiModel->notifyuser(0,$seller->user_id,"New order received from <span class='bg'>".$item->buyer_name."</span>",'orders',"ORDER");
               }
                 header("Location: " . URLROOT . "/orders"); 
             }else{
@@ -286,7 +290,8 @@ public  function checkout($id){
           //  placeorder
           public function placeOrder($id){
             
-            $items = $this->auctionModel->getAuctionInfo($id);  
+          
+            $items = $this->auctionModel->getAuctionInfo($id);
             if($_SERVER['REQUEST_METHOD']=='POST'){
               $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
                 $details=[
@@ -297,7 +302,8 @@ public  function checkout($id){
                   "order_city"=>trim($_POST['city']),
                   "order_postal_code"=>trim($_POST['postalCode'])
                 ];
-                $order_id= $this->orderModel->placeOrder($items,$details,$_SESSION["buyer_id"]);
+               
+                $order_id= $this->orderModel->placeAuctionOrder($items,$details,$_SESSION["buyer_id"]);
                 if($order_id){
                             header("Location: " . URLROOT . "/auctionC/payments/".$order_id); 
                             exit();  

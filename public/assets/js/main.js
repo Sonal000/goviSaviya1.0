@@ -212,6 +212,29 @@ $(document).ready(function () {
       });
     }
 
+
+    function markAllNotificationsAsRead() {
+      $.ajax({
+        url: "http://localhost/goviSaviya1.0/notification/markAllNotificationAsRead",
+        type: "POST", 
+        dataType: "json",
+        data: {}, 
+        success: function(response) {
+          if (response.status === "success") {
+            
+            $(".notification_count").text("0"); 
+            $(".notification_count").fadeOut(); 
+          } else {
+            // Display error message
+            $("#cont").html("<p>" + response.message + "</p>");
+          }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("AJAX Error:", textStatus, errorThrown);
+        },
+      });
+    }
+
     // Call the fetchData function when the page loads
     getCount();
     fetchData();
@@ -219,5 +242,11 @@ $(document).ready(function () {
       fetchData();
       getCount();
     },5000);
+
+
+    $(document).on("click", "#markAllReadBtn", function() {
+      markAllNotificationsAsRead();
+    });
+
   }
 });

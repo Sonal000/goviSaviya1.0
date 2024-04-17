@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="item_price">
-                        <p><span>Rs</span> <?php echo $item->price * $item->qty; ?></p>
+                        <p><span>Rs</span> <?php echo $item->price ; ?></p>
                     </div>
                 </div>
                 <div class="item_details">
@@ -222,9 +222,3 @@
 
 
 
-<body>
-    <div class="d1">
-        <div class="d2"></div>
-        <div class="d3"></div>
-    </div>
-</body>

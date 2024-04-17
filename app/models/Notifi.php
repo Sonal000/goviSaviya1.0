@@ -74,6 +74,17 @@ class Notifi{
         }
     }
 
+    public function markAllNotificationAsRead($id){
+        $this->db->query('UPDATE notifications SET seen = 1 WHERE reciever_id=:id');
+        $this ->db ->bind(':id',$id);
+
+        if($this ->db -> execute()){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
 
 
 

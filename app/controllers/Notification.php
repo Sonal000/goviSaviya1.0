@@ -66,6 +66,24 @@ public function getNotification(){
     }
   }
   }  
+
+  public function markAllNotificationAsRead(){
+    if(isset($_SESSION['user_id'])){
+      if($this->notifiModel->markAllNotificationAsRead($_SESSION['user_id'])){
+        $data = [
+          'status' => 'success',
+          'message' => 'All notifications marked as read'
+        ];
+        echo json_encode($data);
+      }else{
+        $data = [
+          'status' => 'error',
+          'message' => 'Notifications not marked as read'
+        ];
+        echo json_encode($data);
+      }
+    }
+  }
   
   
   public function getNotificationCount(){

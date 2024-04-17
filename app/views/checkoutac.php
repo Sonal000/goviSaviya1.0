@@ -4,7 +4,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Checkout</title>
+ <title>Auction Checkout</title>
  <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
  <link
  rel="stylesheet"
@@ -23,9 +23,11 @@
 <div class="checkout_page section-center">
 
     <div class="checkout_title">
-        <h4>checkout</h4>
+        <h4>Auction Checkout</h4>
+
+      
     </div>
-    <form action="<?php echo URLROOT ?>/auctionC/placeOrder" method="POST" id="placeOrderForm">
+    <form action="<?php echo URLROOT ?>/auctionC/placeOrder/<?php  echo $data['auction_id'];?>" method="POST" id="placeOrderForm">
     <div class="details_cont">
     <div class="order_details">
 
@@ -40,20 +42,20 @@
         <ul>
             <!-- items======== -->
             <?php if($data['items']){
-                    foreach($data["items"] as $item){
+                    
                 ?>
-            <li class="item" data-price="<?php echo $item->price; ?>" data-qty="<?php echo $item->qty; ?>">
+            <li class="item" data-price="<?php echo $data['items']->price; ?>" data-qty="<?php echo $data['items']->stock; ?>">
                 <div class="item_details">
                     <div class="item_name_cont">
 
                         <p class="item_name">
-                            <?php echo $item->name; ?></p>
+                            <?php echo $data['items']->name; ?></p>
                         <div class="item_qty">
-                            <p><?php echo $item->qty; ?> <span><?php echo $item->unit; ?></span></p>
+                            <p><?php echo $data['items']->stock; ?> <span><?php echo $data['items']->unit; ?></span></p>
                         </div>
                     </div>
                     <div class="item_price">
-                        <p><span>Rs</span> <?php echo $item->price * $item->qty; ?></p>
+                        <p><span>Rs</span> <?php echo $data['items']->price ; ?></p>
                     </div>
                 </div>
                 <div class="item_details">
@@ -63,11 +65,11 @@
                             delivery</p>
                     </div>
                     <div class="delivery_price">
-                        <p><span>Rs</span> <?php echo (getDistancefee($item->address,$data['buyerAddress'])); ?></p>
+                        <p><span>Rs</span> <?php echo (getDistancefee($data['items']->address,$data['buyerAddress'])); ?></p>
                     </div>
                 </div>
             </li>
-                        <?php }
+                        <?php 
             }
                         ?>
             <!-- ============================ -->
@@ -181,7 +183,7 @@
 
 </section>
 
-    <!-- <section class="section_cont">
+    <section class="section_cont">
         <div class="sec_title">
             <h4>Address on Map</h4>
         </div>
@@ -193,7 +195,7 @@
        
        ?>
         </div>
-    </section> -->
+    </section>
 
         </div>
 
@@ -222,9 +224,3 @@
 
 
 
-<body>
-    <div class="d1">
-        <div class="d2"></div>
-        <div class="d3"></div>
-    </div>
-</body>

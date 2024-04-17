@@ -65,6 +65,75 @@ if (!$this->db->execute()) {
     }
     }
 
+    public function getOrderAuctionId($order_id){
+        $this->db->query('SELECT item_id FROM order_items WHERE order_id=:order_id');
+        $this->db->bind(':order_id',$order_id);
+        $row=$this->db->single();
+        if($row){
+            return $row->item_id;
+        }else{
+            return false;
+        }
+    }
+
+
+    public function placeAuctionOrder($items,$details ,$buyer_id){
+        try{
+
+            $this->db->beginTransaction();
+            $total=0;
+            
+                $total =$total + ($items->price * $items->stock);
+      
+            
+            $this->db->query("INSERT INTO orders (order_type,buyer_id,buyer_name, total_price,order_mobile,order_address,order_city,order_postal_code,order_company)
+        VALUES ('AUCTION',:buyer_id,:buyer_name, :total_price,:order_mobile,:order_address,:order_city,:order_postal_code,:order_company);
+        ");
+
+$this ->db ->bind(':buyer_id',$buyer_id);
+$this ->db ->bind(':buyer_name',$details['buyer_name']);
+$this ->db ->bind(':total_price',$total);
+$this ->db ->bind(':order_mobile',$details['order_mobile']);
+$this ->db ->bind(':order_address',$details['order_address']);
+$this ->db ->bind(':order_city',$details['order_city']);
+$this ->db ->bind(':order_postal_code',$details['order_postal_code']);
+$this ->db ->bind(':order_company',$details['order_company']);
+
+if (!$this->db->execute()) {
+    throw new Exception('Failed to insert into orders table');
+}
+    
+    $order_id = $this->db->lastInsertId();
+
+    
+    
+
+        // $total = ($item->price * $item->qty);
+        $this->db->query("INSERT INTO order_items (order_id,item_id,quantity, total_price,buyer_id,seller_id)
+                VALUES (:order_id,:item_id,:quantity,:total_price,:buyer_id,:seller_id);
+                ");
+                        $this ->db ->bind(':order_id',$order_id);
+                        $this ->db ->bind(':item_id',$items->auction_ID);
+                        $this ->db ->bind(':quantity',$items->stock);
+                        $this ->db ->bind(':total_price',$total);
+                        $this ->db ->bind(':buyer_id',$buyer_id);
+                        $this ->db ->bind(':seller_id',$items->seller_ID);
+                        if(!$this->db->execute()){
+                                throw new Exception('Failed to insert into order_items table');
+                        }
+                    
+                    $this->db->commit();
+                
+                    return $order_id;
+
+    }catch(Exception $e){
+        die($e->getMessage());
+        $this->db->rollBack();
+        return false;
+       
+    }
+    }
+
     public function updateOrderPaymentStatus($id){
         $this->db->query('UPDATE orders SET payment_status=1 WHERE order_id=:order_id');
         $this->db->bind(':order_id',$id);

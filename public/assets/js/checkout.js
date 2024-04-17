@@ -28,9 +28,8 @@ if (totvalue) {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log("submit");
   inputValidation();
-  console.log("submit test");
+
 
   if (
     !(
@@ -40,7 +39,9 @@ form.addEventListener("submit", (e) => {
       postalInput.classList.contains("invalid")
     )
   ) {
+
     form.submit();
+
   }
 });
 
