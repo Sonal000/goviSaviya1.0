@@ -73,6 +73,19 @@ public function acceptOrder($order_item_id){
         $this -> view('sellerOrderComplete',$data);
     }
     if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+        
+        $deliver_id = $_SESSION['deliver_id'];
+        $result = $this->orderModel->getDeliveryCompletedOrder($deliver_id);
+        $details = $this->orderModel->getCompletedOrderDetails($deliver_id);
+        $rowB = $this->orderModel->getBuyerDetailsCompletedOrder($deliver_id);
+        $rowS = $this->orderModel->getSellerDetailsCompletedOrder($deliver_id);
+        $data = [
+             "result" => $result,
+            "details" => $details,
+            'rowB' => $rowB,
+            'rowS' => $rowS
+        ];
+
         $this -> view('deliveryCompletedOrder',$data);
     }
     }

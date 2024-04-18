@@ -480,22 +480,41 @@ public function editToDelivered($deliver_id){
 }
 
 public function editToCompleted($deliver_id){
-    $query = "UPDATE 
-                    order_items 
-              SET 
-                    order_status = 'completed' 
-              WHERE 
-                    deliver_id = :deliver_id AND order_status='delivered'";
 
+            $query = "UPDATE 
+            order_items 
+        SET 
+            order_status = 'completed',
+            completed_date = NOW()
+        WHERE 
+            deliver_id = :deliver_id AND order_status='delivered'";
+
+
+    // $action = "UPDATE
+    //                 order_items
+    //            SET  
+    //                 completed_date = NOW()
+    //            WHERE
+    //                 deliver_id = :deliver_id AND order_status='delivered'";                
+
+    // First query
     $this->db->query($query);
     $this->db->bind(':deliver_id',$deliver_id);
-
     if($this->db->execute()){
         return true;      
     }else{
         return false;
     }
+
+    // // Second query
+    // $this->db->query($action);
+    // $this->db->bind(':deliver_id',$deliver_id);
+    // $this->db->execute();
+    // // Execute the second query
+    
 }
+
+
 
 
 
@@ -537,11 +556,125 @@ public function uploadPickupImages($deliver_id,$pickupImg){
     }else{
         return false;
     }
-
-
-
               
 }
+
+
+public function getDeliveryCompletedOrder($deliver_id){
+    $query = "SELECT * FROM order_items 
+                WHERE order_status = 'completed' 
+                AND deliver_id = :deliver_id";
+    $this->db->query($query);
+    $this->db->bind(':deliver_id',$deliver_id);
+    $row = $this->db->resultSet();
+
+    if($row){
+        return $row;
+    }else{
+        return false;
+    }
+
+}
+
+public function getCompletedOrderDetails($deliver_id){
+
+    $query = "SELECT
+        order_items.*,
+        items_market.*
+    FROM
+        order_items
+    JOIN
+        items_market ON
+        order_items.item_id = items_market.item_id
+    WHERE
+        order_items.deliver_id = :delivery_id
+    AND 
+        order_items.order_status ='completed' ";
+
+    $this->db->query($query);
+    $this->db->bind(':delivery_id', $deliver_id);
+
+    $row = $this->db->single();
+
+    if(!empty($row)){
+        return $row;
+    } else {
+        return false;
+    }
+}
+
+public function getBuyerDetailsCompletedOrder($deliver_id){
+
+    $row1 = $this->getCompletedOrderDetails($deliver_id);
+    if($row1){
+    $buyer_id = $row1->buyer_id;
+    }else{
+        return false;
+    }
+    $query = "SELECT 
+                users.* 
+              FROM 
+                users
+              JOIN 
+                buyers ON users.user_id = buyers.user_id
+              WHERE
+                buyers.buyer_id = :buyer_id";
+
+
+$this->db->query($query);
+$this->db->bind(':buyer_id', $buyer_id);
+
+$row = $this->db->single();
+
+if($row){
+    return $row;
+}else{
+    return false;
+}
+
+}
+
+
+public function getSellerDetailsCompletedOrder($deliver_id){
+
+    $row1 = $this->getCompletedOrderDetails($deliver_id);
+    if($row1){
+    $seller_id = $row1->seller_id;
+    }else{
+        return NULL;
+    }
+    $query = "SELECT 
+                users.* 
+              FROM 
+                users
+              JOIN 
+                sellers ON users.user_id = sellers.user_id
+              WHERE
+                sellers.seller_id = :seller_id";
+
+
+$this->db->query($query);
+$this->db->bind(':seller_id', $seller_id);
+
+$row = $this->db->single();
+
+if($row){
+    return $row;
+}else{
+    return false;
+}
+
+}
+
+
+public function getReviews($deliver_id){
+    $query = "SELECT 
+                delivery_reviews.*,
+                users.* 
+              FROM order_items ";
+}
+
+   
 
 
 
