@@ -1300,10 +1300,12 @@ input:focus {
 .notify_message {
   font-size: 0.8rem;
   width: 100%;
+  color: var(--clr-grey-5);
+  letter-spacing: 1px;
   /* z-index: 1; */
 }
 .bg {
-  color: var(--clr-primary-5);
+  color: var(--clr-grey-4);
   text-transform: capitalize;
   font-weight: bold;
 }

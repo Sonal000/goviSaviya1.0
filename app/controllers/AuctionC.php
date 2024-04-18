@@ -205,6 +205,7 @@ if(($row->highest_buyer_id) && (!isset($_SESSION['user_id'])) && (!$activebidder
 // =================ceckout==========================================
 public  function checkout($id){
     $items = $this->auctionModel->getAuctionInfo($id);
+    $highest_bid=$this->auctionModel->getCurrentBid($id);
     
     if($items->highest_buyer_id){
         if((!isset($_SESSION['buyer_id']))|| ($_SESSION['buyer_id']!=$items->highest_buyer_id)){
@@ -229,31 +230,31 @@ public  function checkout($id){
               "buyerAddress"=>$buyerInfo->address,
               "buyerCity"=>$buyerInfo->city,
               "buyerMobile"=>$buyerInfo->mobile,
-              "totalDeliveryfee"=>$totalDeliveryfee
+              "totalDeliveryfee"=>$totalDeliveryfee,
+              "highest_price"=>$highest_bid?$highest_bid->bid_price:$items->price,
             ];
             $this->view('checkoutac',$data);
         }
 
 
         public function payments($id){
-
+          
             $auction_id=$this->orderModel->getOrderAuctionId($id);
-        
             $item = $this->auctionModel->getAuctionInfo($auction_id);
+            // var_dump($item);
             
-            $lineItems = [];
-            // foreach ($items as $item) {
+
                 $lineItems[] = [
                     "quantity" => $item->stock, // Assuming quantity is always 1 for each item
                     "price_data" => [
                         "currency" => "lkr", // Change currency according to your needs
-                        "unit_amount" => $item->price * 100, // Stripe requires amount in cents
+                        "unit_amount" => $item->highest_bid * 100, // Stripe requires amount in cents
                         "product_data" => [
                             "name" => $item->name, // Use item name from your database
                         ],
                     ],
                 ];
-            // }
+
             \Stripe\Stripe::setApiKey(STRIPESECRETKEY);
             $checkout_session = \Stripe\Checkout\Session::create([
               "mode" => "payment",
@@ -272,11 +273,13 @@ public  function checkout($id){
           public function verifiedOrder($id){
           
             if($this->orderModel->updateOrderPaymentStatus($id)){
-              $row=$this->orderModel->getNewOrderDetails($id);
-              foreach($row as $item) {
-                $seller=$this->sellerModel->getSellerInfo($item->seller_id);
-                $this->notifiModel->notifyuser(0,$seller->user_id,"New order received from <span class='bg'>".$item->buyer_name."</span>",'orders',"ORDER");
+              $rows=$this->orderModel->getOrderDetailsByOrderId($id,"AUCTION");
+              foreach ($rows as $row) {
+                  $this->notifiModel->notifyuser(0,$row->seller_user_id,"New order received from <span class='bg'>".$row->buyer_name."</span>",'orders',"ORDER");
+               
               }
+
+           
                 header("Location: " . URLROOT . "/orders"); 
             }else{
                 redirect('AuctionC/checkout/'.$id);
@@ -404,12 +407,12 @@ public  function checkout($id){
             $bids = $this->auctionModel->getAuctionBidUserIds($id);
             $item=$this->auctionModel->getAuctionInfo($highestBid->auction_id);
             if($bids&& $item){
-            if($this->auctionModel->endAuction($id,$highestBid->buyer_id)){
+            if($this->auctionModel->endAuction($id,$highestBid->buyer_id,$highestBid->bid_price)){
 
                 $bidUsers=$this->auctionModel->getBidUsersInfo($highestBid->bid_id);
                 
                 if($bidUsers){
-                    $this->notifiModel->notifyUser(0,$bidUsers->buyer_user_id,"You have won the auction for <span class='bg'>".$item->name."</span>",'AuctionC/itemInfo/'.$id,"AUCTION");
+                    $this->notifiModel->notifyUser(0,$bidUsers->buyer_user_id,"You have won the auction for <span class='bg'>".$item->name."</span> . Please proceeed with the payment .  ",'AuctionC/itemInfo/'.$id,"AUCTION");
     
                         foreach ($bids as $bid) {
                         if($bid->buyer_id != $bidUsers->buyer_id){

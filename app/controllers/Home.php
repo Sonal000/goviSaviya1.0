@@ -40,7 +40,7 @@
     $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
     $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
     $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);
-    $view;
+    // $view;
 
 $data = [
     'details' => $details,
