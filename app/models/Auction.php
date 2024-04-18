@@ -368,14 +368,16 @@ public function getBidUsersInfo($id){
   }
 
 
-  public function endAuction($id,$buyer_id) {
+  public function endAuction($id,$buyer_id,$highest_bid) {
     // $this->db->beginTransaction();
 
     // try {
         // Update auction status to 'inactive'
+        var_dump($id, $buyer_id, $highest_bid);
 
-        $this->db->query("UPDATE auction SET status='inactive',highest_buyer_id=:buyer_id  WHERE auction_ID=:auction_ID");
+        $this->db->query("UPDATE auction SET status='inactive',highest_buyer_id=:buyer_id,highest_bid=:highest_bid  WHERE auction_ID=:auction_ID");
         $this->db->bind(':buyer_id', $buyer_id);
+        $this->db->bind(':highest_bid', $highest_bid);
         $this->db->bind(':auction_ID', $id);
         if($this->db->execute()){
           return true;
