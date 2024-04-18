@@ -94,6 +94,7 @@ public function verifiedOrder($id){
       $seller=$this->sellerModel->getSellerInfo($item->seller_id);
       $this->notifiModel->notifyuser(0,$seller->user_id,"New order received from <span class='bg'>".$item->buyer_name."</span>",'orders',"ORDER");
     }
+    
     if($this->itemModel->clearCartitems($_SESSION["buyer_id"])){
 
       header("Location: " . URLROOT . "/orders"); 

@@ -392,6 +392,36 @@ else{
 
 }
 
+public function getReviews($id){
+ 
+  $query = 'SELECT 
+            reviews.*,
+            users.*,
+            buyers.prof_img AS buyer_img
+            FROM
+            reviews
+            JOIN
+            buyers ON
+            reviews.buyer_id = buyers.buyer_id
+            JOIN 
+            users ON 
+            buyers.user_id = users.user_id
+            WHERE
+            reviews.item_id = :id';
+
+        $this->db->query($query);
+        $this->db->bind(':id',$id);
+
+        $row = $this->db->Resultset();
+
+        if($row){
+          return $row;
+        }
+        else{
+          return false;
+        }
+}
+
 
 
 
