@@ -42,7 +42,7 @@
                     Registered Cars
                 </div>
                 <div class="signupcount">
-                    15
+                <?php echo $data['count']->vehicle_count ;?>
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@
             </div>
             <div class="table_cell column5">
                 <div class="ordersta">
-                    <a href=""><button class="orderpost_view">View</button></a>
+                    <a href="<?php echo URLROOT ?>/Vehicle/details/<?php echo $Det->vehicle_id ?>"><button class="orderpost_view">View</button></a>
                 </div>
             </div>
             <div class="table_cell column6">
@@ -140,6 +140,7 @@
 
 
 </body>
+<script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
 </html>

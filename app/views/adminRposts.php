@@ -42,7 +42,7 @@
                     Advertistment Posts
                 </div>
                 <div class="signupcount">
-                    15
+                <?php echo $data['count']->post_count ;?>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
             </div>
             <div class="table_cell column5">
                 <div class="ordersta">
-                    <a href=""><button class="orderpost_view">View</button></a>
+                    <a href="<?php echo URLROOT; ?>/Posts/RequestsView/<?php echo $postR->request_ID?>"><button class="orderpost_view">View</button></a>
                 </div>
             </div>
             <div class="table_cell column6">
@@ -195,6 +195,7 @@
 
 
 </body>
+<script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
 </html>

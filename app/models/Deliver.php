@@ -85,6 +85,20 @@ class Deliver{
 
     }
 
+    public function deliverAvailability($deliver_id){
+        $query="SELECT availability 
+                FROM delivers 
+                WHERE deliver_id=:deliver_id";
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row=$this->db->single();
+        if(($row->count)>0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 
 
 
@@ -231,4 +245,6 @@ public function updateCoverImage($data){
 
        $this->db->query('SELECT * from orders'); 
     }
+
+    
 }

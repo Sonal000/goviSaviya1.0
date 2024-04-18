@@ -2,9 +2,13 @@
  class Marketplace extends Controller{
 
    private $itemModel;
+   private $userModel;
+   private $notifiModel;
    public function __construct()
    {
       $this->itemModel= $this->model('Item');
+      $this->userModel= $this->model('User');
+      $this->notifiModel= $this->model('Notifi');
    }
 
    public function index()
@@ -81,6 +85,7 @@
             'item_id'=>$id,
             'seller_name'=>$seller->name,
             'seller_id'=>$seller->seller_id,
+            'seller_user_id'=>$seller->user_id,
             'seller_city'=>$seller->city,
             'category'=>$row->category,
             'description'=>$row->description,
@@ -104,6 +109,7 @@
             ];
 
             if($this->itemModel->addtoCart($data)){
+               $this->notifiModel->notifyuser(0,$_SESSION['user_id'],'New items added to the cart','cart','OTHER');
                header("Location: " . URLROOT . "/marketplace/iteminfo/".$id); 
                exit();
             }else{
@@ -148,6 +154,29 @@
    }
 
 
+   public function Addreview($id){
+
+      $result = $this->itemModel->getSellerID($id);
+      $seller_id = $result->seller_id;
+     
+      if($_SERVER['REQUEST_METHOD']=='POST'){
+         $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+
+         $data=[
+            'review' =>trim($_POST['review']),
+            'buyer_id' =>$_SESSION['buyer_id'],
+            'item_id' =>$id,
+            'seller_id'=>$seller_id,
+         ];
+
+         $this->itemModel->Addreview($data);
+
+        
+   }
+
+   header("Location: " . URLROOT . "/marketplace/iteminfo/".$id); 
+
+   }
 
  }
 ?>

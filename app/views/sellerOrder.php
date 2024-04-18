@@ -49,7 +49,8 @@
 
     <?php 
         if($data['orders']){
-            foreach($data['orders'] as $order){
+            foreach($data['orders'] as $orders){
+                foreach($orders as $order){
                 ?>
 
 
@@ -69,6 +70,9 @@
                     </div>
                     <div class="ord_item">
                         Order item - <?php echo $order->item_name ?>
+                    </div>
+                    <div class="ord_quan">
+                        Order type - <?php echo $order->order_type ?>
                     </div>
                     <div class="ord_quan">
                         Quantity - <?php echo $order->quantity ?>
@@ -114,7 +118,7 @@
         </div>
 
         <?php
-            }
+                }}
         }
     ?>
 
@@ -135,6 +139,7 @@
 
 
 <!-- js === -->
+<script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
 

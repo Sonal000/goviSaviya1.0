@@ -196,6 +196,10 @@
     VALUES(:name,:seller_id,:category,:description,:price,:stock,:address,:unit,:district,:item_img)'
     );
 
+    $this->db->query('INSERT INTO
+    quality_check(seller_id,seller_img)
+    VALUES(:seller_id,:item_img)');
+
 
 $this ->db ->bind(':name',$data['name']);
 $this ->db ->bind(':seller_id',$data['seller_id']);
@@ -350,6 +354,42 @@ public function deleteCartItem($id){
 }else{
     return false;
 }
+}
+
+//for Review Function 
+
+public function getSellerID($id){
+  $this->db->query("SELECT * FROM items_market WHERE item_id=:id");
+  $this->db->bind(':id',$id);
+  $row =$this->db->Single();
+
+  if($row){
+    return $row;
+  }
+  else{
+    return false;
+  }
+}
+
+public function Addreview($data){
+
+  var_dump($data);
+
+$this->db->query('INSERT INTO reviews(item_id,buyer_id,seller_id,review) VALUES(:item_id,:buyer_id,:seller_id,:review)');
+
+$this->db->bind(':item_id',$data['item_id']);
+$this->db->bind(':buyer_id',$data['buyer_id']);
+$this->db->bind(':seller_id',$data['seller_id']);
+$this->db->bind(':review',$data['review']);
+
+if($this->db->execute()){
+  return true;
+}
+else{
+  return true;
+}
+
+
 }
 
 

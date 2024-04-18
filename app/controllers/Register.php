@@ -2,10 +2,12 @@
 
 class Register extends Controller{
    private $userModel;
+   private $notifiModel;
 
  public function __construct()
  {
    $this ->userModel = $this->model('User');
+   $this ->notifiModel = $this->model('Notifi');
  }
 
  public function index()
@@ -32,6 +34,9 @@ class Register extends Controller{
       'user_id' =>$id
    ];
    if($this ->userModel->findVerificationByUser($data['code'],$id)){
+      $details=$this->userModel->getUserInfo($id);
+      $message = "Hi <span class='bg'>".$details->name."!!!</span>  Welcome to Govisaviya!  You can now login to your account and start using Govisaviya services. Thank you for joining with us.";
+      $this->notifiModel->notifyuser(0,$id,$message,'');
       if( $this->userModel->setVerification($id)){  
          redirect('login');
          echo '<script>toggleButtonState(false);</script>';

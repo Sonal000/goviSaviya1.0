@@ -47,8 +47,15 @@
 }
 .item_title_cont{
  display: flex;
- justify-content: space-between;
+ flex-direction: column;
 }
+@media screen and ( min-width :592px ){
+ .item_title_cont{
+   flex-direction: row;
+   justify-content: space-between;
+ }
+}
+
 
 .item_name{
  font-size: 1rem;

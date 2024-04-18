@@ -177,4 +177,10 @@ public function updateCoverImage($data){
             return false;
         }
     }
+    
+    
+    
+    
+
+
 }

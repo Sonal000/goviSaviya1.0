@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller_Auction</title>
+    <title>Delivery Vehicles</title>
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
@@ -83,7 +83,7 @@
         </div>
         </div>
     </div>
-    
+    <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
     <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 
 </body>

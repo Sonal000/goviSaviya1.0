@@ -13,13 +13,25 @@
 
     
     $vehicleDet = $this->vehicleModel->getPickuptrucks();
-    
+    $count = $this->vehicleModel->countPickupTruck();
         $data =[
             'Vdetails'=>$vehicleDet,
+            'count'=>$count,
         ]; 
         
     $this->view('adminPicktrucks',$data);
     
+   }
+
+   public function details($id){
+    $details = $this->vehicleModel->getVehicleinfo($id);
+   
+    $data=[
+        'details'=>$details,
+       
+    ];
+
+    $this->view('adminVehicleDetails',$data);
    }
 
 
@@ -39,24 +51,33 @@
 public function containertrucks(){
 
     $vehicleDet = $this->vehicleModel->getContainertrucks();
+    $count = $this->vehicleModel->countContainerTruck();
+
         $data =[
             'Vdetails'=>$vehicleDet,
+            'count'=>$count,
         ]; 
         
     $this->view('adminContainertrucks',$data);
     
 }
 
+
 public function Cars(){
 
     $vehicleDet = $this->vehicleModel->getCars();
+    $count = $this->vehicleModel->countCars();
+
         $data =[
             'Vdetails'=>$vehicleDet,
+            'count'=>$count,
         ]; 
         
     $this->view('adminCars',$data);
     
 }
+
+
 
 
 

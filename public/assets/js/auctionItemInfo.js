@@ -5,7 +5,7 @@
 const backBtn = document.querySelector('.back_btn');
 
 backBtn.addEventListener('click',()=>{
-  window.location.href =`${URLROOT}/auction`
+  window.location.href =`${URLROOT}/auctionC`
 })
 
 
@@ -26,15 +26,19 @@ sliderButtons.forEach((button, index) => {
 
 
 // qunatity adjust
-const btnAdd = document.querySelector('.btn_add');
-const btnRemove = document.querySelector('.btn_remove');
-const  qty = document.querySelector('.qty');
+const btnAdd = document.querySelector(".btn_add");
+const btnRemove = document.querySelector(".btn_remove");
+const qty = document.getElementById("quantity");
 
-btnAdd.addEventListener('click',(e)=>{
-  qty.value=parseInt(qty.value)+1;
+let currentbid =qty.dataset.currentprice;
+
+btnAdd.addEventListener("click", (e) => {
+  e.preventDefault();
+  qty.value = parseInt(qty.value) + 1;
 });
-btnRemove.addEventListener('click',(e)=>{
-  if(qty.value>0){
-    qty.value=parseInt(qty.value)-1;
+btnRemove.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (qty.value >currentbid) {
+    qty.value = parseInt(qty.value) - 1;
   }
 });
