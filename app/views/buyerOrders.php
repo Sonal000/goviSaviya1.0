@@ -41,6 +41,7 @@
 
          <?php if($data['orders']){
             foreach($data['orders'] as $orders){
+               if($orders){
                foreach($orders as $order){
            ?>
 
@@ -192,7 +193,7 @@
         
 
 <?php     
-                 }  }
+                 }}  }
          }else{
 ?>
             <div class="bid_item_cont  ">
