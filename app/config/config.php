@@ -21,6 +21,7 @@ define('STRIPESECRETKEY','sk_test_51OqAXDBJ9bTL2t7HMxMTczhZeUhiE1ne2OIlM8aJW9G1z
 
 
 
-define('GOOGLEAPI','AIzaSyAKfaSvmvBUk8JUYx104koRKdh7fueb6pA');
+define('GOOGLEAPI3','AIzaSyAKfaSvmvBUk8JUYx104koRKdh7fueb6pA');
 define('GOOGLEAPI1','AIzaSyBCwpU1PTXuk_KMIDsXvXDjqiXUYCQZt2c');
 define('GOOGLEAPI2','AIzaSyCufMZBYD9Tn-oEWdxwVKSn4OVqAeVRA-k');
+define('GOOGLEAPI','AIzaSyCTDElEffBAws-JYjYaUELqmkOCpa6C5R8');

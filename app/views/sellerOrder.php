@@ -49,7 +49,8 @@
 
     <?php 
         if($data['orders']){
-            foreach($data['orders'] as $order){
+            foreach($data['orders'] as $orders){
+                foreach($orders as $order){
                 ?>
 
 
@@ -69,6 +70,9 @@
                     </div>
                     <div class="ord_item">
                         Order item - <?php echo $order->item_name ?>
+                    </div>
+                    <div class="ord_quan">
+                        Order type - <?php echo $order->order_type ?>
                     </div>
                     <div class="ord_quan">
                         Quantity - <?php echo $order->quantity ?>
@@ -114,7 +118,7 @@
         </div>
 
         <?php
-            }
+                }}
         }
     ?>
 

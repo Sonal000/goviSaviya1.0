@@ -34,7 +34,8 @@
    
         <?php 
         if($data['orders']){
-            foreach($data['orders'] as $order){
+            foreach($data['orders'] as $orders){
+                foreach($orders as $order){
                 ?>
 <!-- 1st Card------------------------------------------------------------------------------------- -->
 
@@ -76,7 +77,16 @@
                     </div>
             
                     <div class="update_edit_bt">
-                            <button class="accept_order_btn"><a href="<?php echo URLROOT ?>/orders/acceptOrder/<?php echo $order->order_item_id ?>">Accept Order</a></button>
+                            <button class="accept_order_btn"><a href="<?php
+                            if($order->order_type == "AUCTION"){
+                                echo URLROOT."/orders/acceptOrder_AC/".$order->order_item_id ;
+                            }elseif($order->order_type == "REQUEST"){
+                                echo URLROOT."/orders/acceptOrder_PR/".$order->order_item_id ;
+                            }elseif($order->order_type == "PURCHASE"){
+                                echo URLROOT."/orders/acceptOrder/".$order->order_item_id ;
+                            }
+
+                                ?>">Accept Order</a></button>
                             <button class="ignore_order_btn"><a href="">Don't Show</a></button>           
                     </div>
             </div> 
@@ -86,7 +96,7 @@
         
    <!-- 2nd Card------------------------------------------------------------------------------------- -->
    <?php
-            }
+                 } }
         }else{ ?>
         
         <div> <p> no available orders </p></div>        

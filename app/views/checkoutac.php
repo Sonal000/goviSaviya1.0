@@ -44,7 +44,7 @@
             <?php if($data['items']){
                     
                 ?>
-            <li class="item" data-price="<?php echo $data['items']->price; ?>" data-qty="<?php echo $data['items']->stock; ?>">
+            <li class="item" data-price="<?php echo $data['highest_price']; ?>" data-qty="<?php echo $data['items']->stock; ?>">
                 <div class="item_details">
                     <div class="item_name_cont">
 
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="item_price">
-                        <p><span>Rs</span> <?php echo $data['items']->price ; ?></p>
+                        <p><span>Rs</span> <?php echo $data['highest_price'] ; ?></p>
                     </div>
                 </div>
                 <div class="item_details">

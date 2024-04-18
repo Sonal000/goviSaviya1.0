@@ -40,7 +40,8 @@
          <div class="bid_items_cont">
 
          <?php if($data['orders']){
-            foreach($data['orders'] as $order){
+            foreach($data['orders'] as $orders){
+               foreach($orders as $order){
            ?>
 
       
@@ -131,6 +132,10 @@
                     <a href="<?php echo URLROOT."/marketplace/iteminfo/".$order->item_id; ?>" class="infor_title item_title"><?php echo $order->item_name; ?></a>
                 </div>
                 <div class="info">
+                    <p class="infor_title">Order type</p>
+                    <p class="infor_title"><?php echo $order->order_type ?></p>
+                </div>
+                <div class="info">
                     <p class="infor_title">Price</p>
                     <p class="infor_title"><?php echo $order->total_price ?></p>
                 </div>
@@ -187,7 +192,7 @@
         
 
 <?php     
-            }
+                 }  }
          }else{
 ?>
             <div class="bid_item_cont  ">
