@@ -29,7 +29,7 @@ class AdminC extends Controller{
         if($loggedInUser){
           
               $this->createSession($loggedInUser);
-              redirect('AdminC/adminDash/'.$loggedInUser->admin_ID);
+              redirect('Home');
         }else{
 
           $data=[

@@ -76,10 +76,10 @@
             <div class="post_right">
                 <div class="high_bid">
                     <div class="base_price">
-                        Rs <?php echo $items->price ;?>
+                        Rs <?php echo $items->total_amount ;?>
                     </div>
                     <div class="current_highest">
-                        Highest Bid - Rs 2050
+                        Highest Bid - Rs <?php echo $items->highest_bid;?>
                     </div>
                     <div class="remaining_time">
                         24 hours remaining

@@ -99,7 +99,7 @@
            <div class="btn_cont">
            
             <div class="edit_but">
-                <button class="edit_details_btn" id="edit_details_btn">Update</button>
+                <button class="edit_details_btn">Update</button>
             </div>
             <div class="del_btn">
             <button class="delete_btn" ><a href="<?php echo URLROOT ?>/myproducts/delete/<?php echo $item->item_id ?>">Delete</a></button>

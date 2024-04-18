@@ -9,9 +9,15 @@
     }
 
     public function addItem($data){
+
+        $stock = $data['stock'];
+        $unit_price=$data['price'];
+
+        $total_amount = $stock*$unit_price;
         $this->db->query
-        ('INSERT INTO auction(name,seller_ID,category,description,price,stock,exp_date,start_date,end_date,address,unit,district,item_img,status)
-        VALUES(:name,:seller_ID,:category,:description,:price,:stock,:exp_date,:start_date,:end_date,:address,:unit,:district,:item_img,:status)');
+        ('INSERT INTO auction(name,seller_ID,category,description,price,stock,total_amount,exp_date,start_date,end_date,address,unit,district,item_img,status)
+        VALUES(:name,:seller_ID,:category,:description,:price,:stock,:total_amount,:exp_date,:start_date,:end_date,:address,:unit,:district,:item_img,:status)');
+        
 
         $this->db->bind(':name',$data['name']);
         $this->db->bind(':seller_ID',$data['seller_ID']);
@@ -19,6 +25,7 @@
         $this->db->bind(':description',$data['description']);
         $this->db->bind(':price',$data['price']);
         $this->db->bind(':stock',$data['stock']);
+        $this->db->bind(':total_amount',$total_amount);
         $this->db->bind(':exp_date',$data['exp_date']);
         $this->db->bind(':start_date',$data['start_date']);
         $this->db->bind(':end_date',$data['end_date']);
@@ -96,18 +103,63 @@
   }
 
 
-  public function endAuction($id){
-    $this->db->query("UPDATE auction 
-    SET status='inactive' WHERE auction_ID=:auction_ID");
-    $this->db->bind(':auction_ID',$id);
+  public function endAuction($id) {
+    $this->db->beginTransaction();
 
-    if($this->db->execute()){
+    try {
+        // Update auction status to 'inactive'
+        $this->db->query("UPDATE auction SET status='inactive' WHERE auction_ID=:auction_ID");
+        $this->db->bind(':auction_ID', $id);
+        $this->db->execute();
+
+        // Fetch auction details
+        $this->db->query('SELECT * FROM auction WHERE auction_ID=:auction_ID');
+        $this->db->bind(':auction_ID', $id);
+        $row = $this->db->single();
+        $buyer_id=$row->buyer_id;
+
+        // Fetch buyer details
+        $this->db->query('SELECT * FROM buyers WHERE buyer_id=:buyer_id');
+        $this->db->bind(':buyer_id',$buyer_id);
+        $row3 = $this->db->single();
+        $user_id = $row3->user_id;
+
+        // Fetch user details
+        $this->db->query('SELECT * FROM users WHERE user_id=:user_id');
+        $this->db->bind(':user_id', $user_id);
+        $row2 = $this->db->single();
+
+        // Insert into orders table
+        if ($row->bid_Count > 0) {
+            $this->db->query('INSERT INTO orders(buyer_id,total_price,order_mobile,order_address,order_city)VALUES(:buyer_id,:total_price,:order_mobile,:order_address,:order_city)');
+            $this->db->bind(':buyer_id', $buyer_id);
+            $this->db->bind(':total_price', $row->total_amount);
+            $this->db->bind(':order_mobile', $row2->mobile);
+            $this->db->bind(':order_address', $row2->address);
+            $this->db->bind(':order_city', $row2->city);
+            $this->db->execute();
+            $order_id = $this->db->lastInsertId();
+
+            // Insert into order_items table
+            $this->db->query('INSERT INTO order_items(order_id,item_id,quantity,total_price,seller_id,buyer_id)VALUES(:order_id,:item_id,:quantity,:total_price,:seller_id,:buyer_id)');
+            $this->db->bind(':order_id', $order_id);
+            $this->db->bind(':item_id', $id);
+            $this->db->bind(':quantity', $row->stock);
+            $this->db->bind(':total_price', $row->total_amount);
+            $this->db->bind(':buyer_id', $buyer_id);
+            $this->db->bind(':seller_id', $_SESSION['seller_id']);
+            $this->db->execute();
+        }
+
+        $this->db->commit();
         return true;
-    }
-    else{
+    } catch (Exception $e) {
+        $this->db->rollBack();
         return false;
     }
+}
 
-  }
+
+
 
  }

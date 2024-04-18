@@ -63,12 +63,13 @@ class AuctionC extends Controller{
 
     }
 
-    public function endAuction($id){
+    public function endAuction($id,$buyer_id){
+        //$buyer_id=24;//have to change when the bidding system has implemented
+        $this->auctionModel->endAuction($id,$buyer_id);
+        
 
-        $this->auctionModel->endAuction($id);
-
-        $seller_id = $_SESSION['seller_id'];
-        $row=$this->auctionModel->myAuctionInfo($seller_id);
+       // $seller_id = $_SESSION['seller_id'];
+        $row=$this->auctionModel->myAuctionInfo($_SESSION['seller_id']);
         $data=[
             'items'=>$row
         ];
@@ -104,6 +105,7 @@ class AuctionC extends Controller{
         $filename = uniqid() . '_' . $_FILES['item_img']['name'];
         $targetPath = $uploadDirectory . $filename;         
         if (move_uploaded_file($_FILES['item_img']['tmp_name'], $targetPath)){
+            
             $data=[
                 'name'=>trim($_POST['name']),
                 'category' =>trim($_POST['category']),

@@ -676,10 +676,8 @@ a{
 .product_des_view_cont{
   display: flex;
   flex-direction: row;
-  
   height: 100%;
-  
- }
+}
 
 .product_des_edit_cont{
   opacity: 0;
