@@ -55,4 +55,5 @@
     </div>
 </div>
 </body>
+<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 </html>

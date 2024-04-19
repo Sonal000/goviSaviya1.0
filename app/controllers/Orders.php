@@ -119,6 +119,19 @@ public function acceptOrder_PR($order_item_id){
         $this -> view('sellerOrderComplete',$data);
     }
     if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+        
+        $deliver_id = $_SESSION['deliver_id'];
+        $result = $this->orderModel->getDeliveryCompletedOrder($deliver_id);
+        $details = $this->orderModel->getCompletedOrderDetails($deliver_id);
+        $rowB = $this->orderModel->getBuyerDetailsCompletedOrder($deliver_id);
+        $rowS = $this->orderModel->getSellerDetailsCompletedOrder($deliver_id);
+        $data = [
+             "result" => $result,
+            "details" => $details,
+            'rowB' => $rowB,
+            'rowS' => $rowS
+        ];
+
         $this -> view('deliveryCompletedOrder',$data);
     }
     }
@@ -305,10 +318,12 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
 
     public function conclude(){
-     if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){  
-        
-        
 
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            //Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+        $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/items/';
+        $dropoffImg = $this->uploadFile('dropoff_img', $uploadDirectory);
         $deliver_id = $_SESSION['deliver_id'];
         $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
         $completed = $this->orderModel->editToCompleted($deliver_id);
@@ -343,17 +358,30 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         $OrderItems = $this->orderModel->OrderItemsView($id);
         $sellerDet=$this->orderModel ->sellersInOrder($id);
         $buyerDet = $this->orderModel ->OrderBuyer($id);
+        $deliverDet = $this->orderModel->OrderDeliverers($id);
 
         $data = [
             'details'=>$OrderDet,
             'items'=>$OrderItems,
             'sellerdet'=>$sellerDet,
             'buyerdet'=>$buyerDet,
+            'deliverdet'=>$deliverDet,
         ];
         $this->view('adminOrderDetails',$data);
     }
 
+
     
+
+    public function ImageChecking($id){
+        
+    }
+   
+    public function CheckItemsImages($id){
+        $data = ['title'=>'welcome'];
+        $this -> view('adminImageCheck',$data);
+    }
+
 
    
 }

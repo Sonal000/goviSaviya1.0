@@ -277,6 +277,8 @@
         
     </div>
     <div class="third_card_set">
+    <div class="history_container">
+        <?php foreach($data['deliverdet'] as $deliveryDet):?>
         <div class="delivery_stage">
             <div class="delivery_agent_det">
                 <div class="head_card2">
@@ -294,32 +296,34 @@
                 
                     <div class="orderNumber_cont">
                         <div class="orderNumber">
-                        Customer ID
+                        Deliver ID
                         </div>
                         <div class="orderNumber_v">
-                        003
+                        <?php echo $deliveryDet->deliver_id?>
                         </div>
                     </div>
                     <div class="orderNumber_cont">
                         <div class="orderNumber">
-                        Customer Name
+                        Deliverer Name
                         </div>
                         <div class="orderNumber_v">
-                        Yunal Mallawarachchi
+                        <?php echo $deliveryDet->name?>
                         </div>
                     </div>
                     <div class="orderNumber_cont">
                         <div class="orderNumber">
-                        Location
+                        Deliverer Address
                         </div>
                         <div class="orderNumber_v">
-                        Piliyandala
+                        <?php echo $deliveryDet->address?>
                         </div>
                     </div>
                 
                 </div>
             </div>
+
             <div class="delivery_sta">
+            <div class="stages_show_content">
             <div class="track">
                 <ul id="progress" class="txt-center">
                     <li class="active"></li>
@@ -363,9 +367,17 @@
                 </div>
             </div>
             </div>
+            <div class="check_btn">
+                <a href="<?php echo URLROOT; ?>/Orders/CheckItemsImages/<?php echo $deliveryDet->item_id?>"><button class="btn placement">Check Order Images</button></a>
+            </div>
+            </div>
+           <?php endforeach; ?>
             
         </div>
+        </div>
     </div>
+
  </div>
 </body>
+<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 </html>

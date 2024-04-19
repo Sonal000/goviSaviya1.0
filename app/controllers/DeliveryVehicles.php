@@ -18,7 +18,7 @@ class DeliveryVehicles extends Controller{
         $data = [
             'title'=>'welcome',
             'id' => $userId,
-            'vehicles' => $vehicles
+            'vehicles' => $vehicles,
         ];
         $this -> view('deliveryVehicles',$data);
     }

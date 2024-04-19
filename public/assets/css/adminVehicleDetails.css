@@ -60,7 +60,7 @@
 
 h2{
     font-size: 20px;
-    margin-top: 3.5rem;
+    /* margin-top: 3.5rem; */
     
 }
 
@@ -94,6 +94,7 @@ h2{
 
 .card{
   margin-top: 2rem;
+  border:2px solid var(--clr-primary-7);
 }
 
 .main-container{
@@ -221,7 +222,7 @@ color: var(--clr-primary-4);
 }
 
 .vehicle_name{
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 500;
     margin-top: 1rem;
 }
@@ -298,8 +299,37 @@ color: var(--clr-primary-4);
     background-color: #ffa3a3;
     color: rgb(255, 9, 9);
 }
-
-h4{
-    margin-top: 1.5rem;
-    font-size: 24px;
+.details_cont{
+  display: flex;
+  flex-direction: row;
 }
+
+.mycard_ad2{
+  box-shadow: var(--dark-shadow);
+    padding:0.5rem;
+    border-radius: var(--radius-low);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    width:1100px;
+    height: 200px;
+    border: 2px solid var(--clr-primary-7);
+}
+
+.acc_button{
+  margin-right: 1rem;
+  margin-top: 4.3rem;
+}
+
+.productdes_ad2{
+  display: flex;
+    flex-direction: column;
+    margin-left:2rem ;
+    
+}
+
+
+

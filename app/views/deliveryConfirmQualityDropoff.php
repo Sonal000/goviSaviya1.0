@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller_Auction</title>
+    <title>Confirm_Quality-Dropoff</title>
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
@@ -57,8 +57,11 @@ any issues or defects reguarding to the qualtiy <br> after the delivery</div>
                     Confirm The Quality </div>
 
                 <div class="instructions_two">Provide some of the photos of the product to confirm <br>the quality of the delivery. </div>
+
+                <form action="<?php echo URLROOT; ?>/Orders/conclude" method="post" enctype="multipart/form-data">
+
                 <label class="custom-file-upload" for="photo">Add Photos to delivery</label>
-                     <input type="file" id="photo" name="photo">
+                     <input type="file" id="photo" name="dropoff_img">
             </div>  
              
                 </div>
@@ -79,10 +82,10 @@ any issues or defects reguarding to the qualtiy <br> after the delivery</div>
                 
              </div>
 
-             <div class=done_button> <botton class="done_btnn"><a href="<?php echo URLROOT; ?>/Orders/conclude"> Done</a></botton></div>
+             <div class=done_button> <button type = "submit" class="done_btnn">Done</button></div>
             </div>
 
-
+            </form>
 
         </div>
         

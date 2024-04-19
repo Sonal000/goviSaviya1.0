@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller_Auction</title>
+    <title>Completed Order Details</title>
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/deliveryCompletedOrders.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -31,7 +33,8 @@
         
         
 <!-- 1st Card------------------------------------------------------------------------------------- -->
-
+<?php foreach($data['result'] as $result):?>
+    
         <div class="mycardd">
 
             <div class="productimg">
@@ -39,14 +42,16 @@
                 <div class="post_left">
                 <div class="pro_detail">
                     <div class="pro_name">
-                        Mango - 45kg
+                        <?php echo $data['details']->name?> -  
+                        <?php echo $data['details']->quantity?>
+                        <?php echo $data['details']->unit?>
                     </div>
                     <div class="pro_location">
                         <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                        Ella to Matara
+                        <?php echo $data['rowS']->address?> to  <?php echo $data['rowB']->address?>
                     </div>
                     <div class="addDate">
-                        Date Delivered: 19 Sep 2023
+                        Date Delivered:  <?php echo date('Y-m-d H:i:s', strtotime($data['details']->completed_date)); ?>
                     </div>
                     <div class="details_view">
                     
@@ -55,8 +60,7 @@
                 
             </div>
             </div>
-         
-                  
+           
                 <div class="update_edit_bt">
                     <botton class="accept_order_btn"><a href="">View Details</a></botton>
                     
@@ -66,154 +70,9 @@
         
         </div>
         
-   <!-- 2nd Card------------------------------------------------------------------------------------- -->
-
-
-  
-   <div class="mycardd">
-
-<div class="productimg">
-    
-    <div class="post_left">
-    <div class="pro_detail">
-        <div class="pro_name">
-            Onion - 5kg
-        </div>
-        <div class="pro_location">
-            <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-            Kandy to Colombo
-        </div>
-        <div class="addDate">
-            Date Delivered: 15 Sep 2023
-        </div>
-        <div class="details_view">
+        <?php endforeach; ?>
+        
        
-        </div>
-    </div>
-    
-</div>
-</div>
-
-      
-    <div class="update_edit_bt">
-        <botton class="accept_order_btn"><a href="">View Details</a></botton>
-       
-    
-</div>
-
-
-</div>
-
-        <!-- 3rd Card------------------------------------------------------------------------------------- -->
-
-        
-        <div class="mycardd">
-
-            <div class="productimg">
-               
-                <div class="post_left">
-                <div class="pro_detail">
-                    <div class="pro_name">
-                        Guava - 50kg
-                    </div>
-                    <div class="pro_location">
-                        <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                        Rathnapura to Galle
-                    </div>
-                    <div class="addDate">
-                        Date Delivered: 13 Sep 2023
-                    </div>
-                    <div class="details_view">
-                   
-                    </div>
-                </div>
-                
-            </div>
-            </div>
-         
-                  
-                <div class="update_edit_bt">
-                    <botton class="accept_order_btn"><a href="">View Details</a></botton>
-                   
-                
-            </div>
-            
-        
-        </div>
-
-        <!-- 4th Card-------------------------------------------->
-
-        
-        <div class="mycardd">
-
-            <div class="productimg">
-                
-                <div class="post_left">
-                <div class="pro_detail">
-                    <div class="pro_name">
-                        Coconut - 25kg
-                    </div>
-                    <div class="pro_location">
-                        <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                        Kurunegala to Colombo
-                    </div>
-                    <div class="addDate">
-                        Date Delivered: 11 Sep 2023
-                    </div>
-                    <div class="details_view">
-                    
-                    </div>
-                </div>
-                
-            </div>
-            </div>
-         
-                  
-                <div class="update_edit_bt">
-                    <botton class="accept_order_btn"><a href="">View Details</a></botton>
-                  
-                
-            </div>
-            
-        
-        </div>
-
-         <!-- 5th Card------------------------------------------------------------------ -->
-
-        
-         <div class="mycardd">
-
-<div class="productimg">
-    
-    <div class="post_left">
-    <div class="pro_detail">
-        <div class="pro_name">
-            Tomatoes - 70kg
-        </div>
-        <div class="pro_location">
-            <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-            Nuwara Eliya to Kalutara
-        </div>
-        <div class="addDate">
-            Date Delivered: 09 Sep 2023
-        </div>
-        <div class="details_view">
-       
-        </div>
-    </div>
-    
-</div>
-</div>
-
-      
-    <div class="update_edit_bt">
-        <botton class="accept_order_btn"><a href="">View Details</a></botton>
-        
-    
-</div>
-
-
-</div>
             
         </div>
         </div>

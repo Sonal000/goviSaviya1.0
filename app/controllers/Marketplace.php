@@ -154,6 +154,29 @@
    }
 
 
+   public function Addreview($id){
+
+      $result = $this->itemModel->getSellerID($id);
+      $seller_id = $result->seller_id;
+     
+      if($_SERVER['REQUEST_METHOD']=='POST'){
+         $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+
+         $data=[
+            'review' =>trim($_POST['review']),
+            'buyer_id' =>$_SESSION['buyer_id'],
+            'item_id' =>$id,
+            'seller_id'=>$seller_id,
+         ];
+
+         $this->itemModel->Addreview($data);
+
+        
+   }
+
+   header("Location: " . URLROOT . "/marketplace/iteminfo/".$id); 
+
+   }
 
  }
 ?>

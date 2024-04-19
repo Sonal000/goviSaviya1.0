@@ -137,7 +137,7 @@
                 JOIN
                 users ON vehicle.user_id=users.user_id
                 WHERE 
-                vehicle_type= "PickupTruck"';
+                vehicle.vehicle_type= "Pickup Truck"';
         $this->db->query($query);
         
         $row = $this->db->resultSet();
@@ -192,6 +192,56 @@
             return false;
         }
 
+    }
+
+    public function getVehicleinfo($id){
+        $this->db->query('SELECT * FROM vehicle WHERE vehicle_id=:vehicle_id');
+        $this->db->bind(':vehicle_id',$id);
+
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function countPickupTruck(){
+        $this->db->query('SELECT COUNT(*) AS vehicle_count FROM vehicle WHERE vehicle_type="Pickup Truck"');
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function countContainerTruck(){
+        $this->db->query('SELECT COUNT(*) AS vehicle_count FROM vehicle WHERE vehicle_type="Container Truck"');
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function countCars(){
+        $this->db->query('SELECT COUNT(*) AS vehicle_count FROM vehicle WHERE vehicle_type="Car"');
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
     }
 
     
