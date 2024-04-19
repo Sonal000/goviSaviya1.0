@@ -50,6 +50,7 @@
     <?php 
         if($data['orders']){
             foreach($data['orders'] as $orders){
+                if($orders){
                 foreach($orders as $order){
                 ?>
 
@@ -118,7 +119,7 @@
         </div>
 
         <?php
-                }}
+                }}}
         }
     ?>
 
