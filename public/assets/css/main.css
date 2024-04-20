@@ -1207,6 +1207,7 @@ input:focus {
   font-size: 0.9rem;
   padding: 0.5rem 0.8rem;
   height: 100%;
+  max-height: 5rem;
   min-height: 4.5rem;
 
   width: 100%;
@@ -1306,6 +1307,7 @@ input:focus {
   color: var(--clr-grey-5);
   letter-spacing: 1px;
   /* z-index: 1; */
+  height: 100%;
 }
 .bg {
   color: var(--clr-grey-4);
