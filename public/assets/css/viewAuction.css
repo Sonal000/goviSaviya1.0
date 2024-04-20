@@ -106,7 +106,7 @@
 .item_btns_cont{
  flex: 0.4;
  display: flex;
- justify-content: space-between;
+ justify-content: flex-end;
 }
 .bid_btn{
  flex: 0.5;

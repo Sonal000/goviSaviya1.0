@@ -31,38 +31,53 @@
             Completed Orders
         </div>
         
-        
+        <div class="full_container">        
 <!-- 1st Card------------------------------------------------------------------------------------- -->
-<?php foreach($data['result'] as $result):?>
-    
-        <div class="mycardd">
+<?php 
+        if($data['orders']){
+            foreach($data['orders'] as $orders){
+                foreach($orders as $order){
 
-            <div class="productimg">
-               
-                <div class="post_left">
-                <div class="pro_detail">
-                    <div class="pro_name">
-                        <?php echo $data['details']->name?> -  
-                        <?php echo $data['details']->quantity?>
-                        <?php echo $data['details']->unit?>
-                    </div>
-                    <div class="pro_location">
-                        <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                        <?php echo $data['rowS']->address?> to  <?php echo $data['rowB']->address?>
-                    </div>
-                    <div class="addDate">
-                        Date Delivered:  <?php echo date('Y-m-d H:i:s', strtotime($data['details']->completed_date)); ?>
-                    </div>
-                    <div class="details_view">
-                    
-                    </div>
-                </div>
+                   
+                ?>
+
+
+        <div class="mycard">
+    
+                     <div class="pro_detail">
+                                                 
+                                <div class="image">
+                                     <img src="<?php echo URLROOT; ?>/store/items/<?php echo $order->item_img ?>" class="picture" alt="">
+                                </div>
+                                <div class="item_name">
+                                <?php echo $order->item_name?> -   <?php echo $order->quantity?>Kg   
+                                <div class="price">Rs: <?php echo $order->deliver_fee?>/=</div>
+                                
+                                </div>
+                            <div class="pro_location">
+                            <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
+                                From:
+                                <?php echo $order->seller_address?>
+                                <div class="pro_location">
+                                <i class="fa-solid fa-truck" style="color: #0f0f0f;"></i>
+                                
+                                To:  <?php echo  $order->buyer_address?>
+                                </div> 
+                            </div>
+                            <div class="addDate">
+                            <i class="fa-solid fa-calendar-days"></i>
+                                Date Delivered:  <?php echo date('Y-m-d H:i:s', strtotime($order->completed_date)); ?>
+                            </div>
+                            <div class="details_view">
+                            
+                            </div>
+                     </div>
                 
-            </div>
-            </div>
+                
+            
            
                 <div class="update_edit_bt">
-                    <botton class="accept_order_btn"><a href="">View Details</a></botton>
+                    <button class="accept_order_btn"><a href="<?php echo URLROOT ?>/orders/completed/<?php echo $order->order_id ?>/<?php echo $order->order_item_id ?>/<?php echo $order->order_type ?>"">View Details</a></button>
                     
                 
             </div>
@@ -70,9 +85,18 @@
         
         </div>
         
-        <?php endforeach; ?>
+
+    
+        <?php
+                 } }
+        }else{ ?>
         
-       
+        <div> <p> There are no Completed Orders </p></div>        
+        <?php
+
+        } ?>
+        
+    </div>   
             
         </div>
         </div>

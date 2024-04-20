@@ -130,11 +130,13 @@ $(document).ready(function () {
                   ? "<i class='fas fa-cube'></i>"
                   : el.type == "DELIVERY"
                   ? "<i class='fas fa-shipping-fast'></i>"
-                  : el.type == "AUCTION"?"<i class='fas fa-gavel'></i>":"<i class='fas fa-bell'></i>"
+                  : el.type == "AUCTION"?"<i class='fas fa-gavel'></i>"
+                  :el.type == "REQUEST"?  "<i class='fas fa-tasks'></i>" :"<i class='fas fa-bell'></i>"
               }
               </div>
               </div>
 
+            
               
               <div class="notify_message">${el.message}
               <div class="time">${getTimeAgo(el.date_time)}</div>

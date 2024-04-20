@@ -37,17 +37,32 @@
   }
    elseif(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'deliver') {
     $deliver_id = $_SESSION['deliver_id'];
-    $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
-    $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
-    $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);
-    // $view;
+    $availability = $this->orderModel->getDeliverAvailability($deliver_id);
 
-$data = [
-    'details' => $details,
-    'rowB' => $rowB,
-    'rowS' => $rowS
-];
-           $this->view('deliveryHome', $data);
+
+    // $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
+    // $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
+    // $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);
+if(!$availability){
+    $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
+    if($current->current_order_type=="AUCTION"){
+      $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
+      }elseif($current->current_order_type=="PURCHASE"){
+      $order=$this->orderModel->getOrderDetails($current->current_order_item_id);
+      }elseif($current->current_order_type=="REQUEST"){
+      $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
+      }
+      
+      $data = [
+        'details' => $order  
+      ];
+    }else{
+      $data = [
+        'details' =>false 
+      ];
+    }
+    // $view;
+    $this->view('deliveryHome', $data);
        } 
        else{
         
