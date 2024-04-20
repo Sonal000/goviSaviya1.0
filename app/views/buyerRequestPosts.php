@@ -44,7 +44,7 @@
          <div class="bid_items_cont">
 
           <?php if($data['requests']){
-            foreach($data['requests'] as $requests){
+             foreach($data['requests'] as $requests){
            ?> 
 
       
@@ -72,7 +72,7 @@
                
                <div class="bid_action_cont">
                   <div class="item_btns_cont">
-                     <buttton id="track_order_btn" class="buy_btn btn track_order">View Order Request</buttton>
+                     <a href="<?php echo URLROOT; ?>/orderRequests/checkout/<?php echo $requests->request_ID; ?>  />"  class="buy_btn btn track_order">Go to Payments</a>
                   </div>
                </div>
         </div>
@@ -259,11 +259,10 @@
 
             <?php if($data['pendreq']){
                foreach($data['pendreq'] as $pendreq){
-
                   ?>
             <div class="bid_item_cont">
              <div class="bid_item_img_cont">
-               <img  class="bid_item_img" src="<?php echo URLROOT."/store/profiles/".$requests->buyer_img; ?>">
+               <img  class="bid_item_img" src="<?php echo URLROOT."/store/profiles/".$pendreq->buyer_img; ?>">
             </div> 
             <div class="pending_req_cont">
             <div class="item_description" id="requests_cont_view">

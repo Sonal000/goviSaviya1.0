@@ -321,7 +321,8 @@ class Requests{
         $query1 = 'SELECT 
                     req_quotation.*,
                     users.name AS seller_name,
-                    sellers.prof_img AS seller_img
+                    sellers.prof_img AS seller_img,
+                    sellers.user_id AS seller_user_id
                     FROM
                     req_quotation
                     JOIN 
@@ -355,7 +356,7 @@ class Requests{
      $this->db->bind(':id',$row->request_ID);
 
      if($this->db->execute()){
-        return true;
+        return $row->seller_user_id;
      }
      else{
         return false;
