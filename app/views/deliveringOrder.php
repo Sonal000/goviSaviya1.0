@@ -41,10 +41,10 @@
                     Order is being delivered 
                 </div>
                 
-              <div class="instructions">From: <?php echo $data['rowB']->address; ?><br>
-                                        To: <?php echo $data['rowS']->address;?> <br>
+              <div class="instructions">From: <?php echo $data['order']->seller_address; ?><br>
+                                        To: <?php echo $data['order']->buyer_address;?> <br>
                                         Distance: 119Km<br>
-                                        <div class="price_of_order">Delivery Fee: Rs. <?php echo $data['details']->deliver_fee; ?>/=  </div></div>
+                                        <div class="price_of_order">Delivery Fee: Rs. <?php echo $data['order']->deliver_fee; ?>/=  </div></div>
                 
                 <div class="image_product">
              

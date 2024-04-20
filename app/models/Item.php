@@ -196,9 +196,9 @@
     VALUES(:name,:seller_id,:category,:description,:price,:stock,:address,:unit,:district,:item_img)'
     );
 
-    $this->db->query('INSERT INTO
-    quality_check(seller_id,seller_img)
-    VALUES(:seller_id,:item_img)');
+    // $this->db->query('INSERT INTO
+    // quality_check(seller_id,seller_img)
+    // VALUES(:seller_id,:item_img)');
 
 
 $this ->db ->bind(':name',$data['name']);

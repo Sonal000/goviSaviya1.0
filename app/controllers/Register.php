@@ -36,7 +36,7 @@ class Register extends Controller{
    if($this ->userModel->findVerificationByUser($data['code'],$id)){
       $details=$this->userModel->getUserInfo($id);
       $message = "Hi <span class='bg'>".$details->name."!!!</span>  Welcome to Govisaviya!  You can now login to your account and start using Govisaviya services. Thank you for joining with us.";
-      $this->notifiModel->notifyuser(0,$id,$message,'');
+      $this->notifiModel->notifyuser(0,$id,$message,'',"OTHER");
       if( $this->userModel->setVerification($id)){  
          redirect('login');
          echo '<script>toggleButtonState(false);</script>';

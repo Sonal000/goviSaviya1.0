@@ -84,10 +84,10 @@
 
                     <div class="card_details">
                         <div class="left_details">
-                            <div class="card_heading"><?php echo $data['details']->name; ?></div>
-                            <div class="card_detailss">Seller: <?php echo $data['rowS']->name; ?></div>
-                            <div class="card_detailss"> <?php echo $data['details']->quantity;?>
-                                                        <?php echo $data['details']->unit;?>
+                            <div class="card_heading"><?php echo $data['details']->item_name; ?></div>
+                            <div class="card_detailss">Seller: <?php echo $data['details']->seller_name; ?></div>
+                            <div class="card_detailss"> <?php echo $data['details']->quantity;?>Kg
+                                                        
                             </div>
                         </div>
                         
@@ -98,13 +98,13 @@
 
                     <div class="image_details">
                         <div class="image">
-                            <img class="item_img" src="<?php echo URLROOT.'/store/items/carrot.jpg';?>">
+                            <img class="item_img" src="<?php echo URLROOT . '/store/items/'.$data['details']->item_img ?>">
                         </div>
 
                         <div class="order_details">
-                            <div class="details"><i class="fa-solid fa-location-dot"></i>  From:  <?php echo $data['rowS']->address;?></div>
-                            <div class="details"><i class="fa-solid fa-truck-fast"></i>  To: <?php echo $data['rowB']->address;?>  </div>
-                            <div class="details"><i class="fa-solid fa-user"></i>  Buyer:<?php echo $data['rowB']->name;?></div>
+                            <div class="details"><i class="fa-solid fa-location-dot"></i>  From:  <?php echo $data['details']->seller_address;?></div>
+                            <div class="details"><i class="fa-solid fa-truck-fast"></i>  To: <?php echo $data['details']->buyer_address;?>  </div>
+                            <div class="details"><i class="fa-solid fa-user"></i>  Buyer:<?php echo $data['details']->buyer_name;?></div>
                         
                             <div class="view_btn">
                                 <a href="#"> <button class="btn">View More</button></a>
