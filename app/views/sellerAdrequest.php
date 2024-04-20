@@ -54,7 +54,7 @@
             $req_date = date('Y-m-d', strtotime($requests->req_date));
 
             ?>
-            <div class="bid_items_cont">
+            
         <div class="adcard_cont">
             <div class="adcard">
             <div class="reqbuyerdetails">
@@ -117,7 +117,7 @@
             
 
         </div>
-        </div>
+        
 
         <?php
         
@@ -130,7 +130,7 @@
         <?php
         }
     ?> 
-    </br>
+    <!-- </br>
     <h4>
         Quoted Order Requests
     </h4>
@@ -186,9 +186,9 @@
                    <div class="acceptbt">
                         <button class="btn acceptbtn">Change Quotation</button>
                     </div> 
-                    <!-- <div class="discardbt">
+                    <div class="discardbt">
                         <a href="<?php echo URLROOT ;?>/OrderRequests/decline/<?php echo $requests->request_ID ?>"><button class="discardbtn">Dicline</button></a>
-                    </div> -->
+                    </div> 
     
                 </div>
             </div>
@@ -220,7 +220,7 @@
         </div>
         <?php
      }
-     ?>
+     ?> -->
 </div>
   
   

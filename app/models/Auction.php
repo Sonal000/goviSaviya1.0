@@ -538,5 +538,138 @@ public function getBuyerBids($buyer_id){
 }
 
 
+public function changeStatus($id){
+
+  $query = 'UPDATE
+            auction
+            SET status ="inactive"
+            WHERE auction_ID=:id';
+
+  $this->db->query($query);
+  $this->db->bind(':id',$id);
+
+  if($this->db->execute()){
+    return true;
+  }
+  else{
+    return false;
+  }
+
+}
+
+
+
+public function getpaymentsuccessAuctions(){
+
+  $query = 'SELECT
+            order_id
+            FROM
+            orders
+            WHERE 
+            order_type = "AUCTION" AND payment_status = 1';
+
+    $this->db->query($query);
+    $row = $this->db->resultSet();
+
+    if($row){
+      return $row;
+    }
+    else{
+      return false;
+    }
+}
+
+public function getpaymentunsuccessAuctions(){
+
+      $query = 'SELECT
+                order_id
+                FROM
+                orders
+                WHERE 
+                order_type ="AUCTION" AND payment_status= 0';
+
+$this->db->query($query);
+$row = $this->db->resultSet();
+
+if($row){
+  return $row;
+}
+else{
+  return false;
+}
+
+}
+
+public function getNobidAuctions($id){
+  $query = 'SELECT * FROM auction WHERE status="inactive" AND bid_Count= 0 AND seller_ID=:id';
+
+  $this->db->query($query);
+  $this->db->bind(':id',$id);
+
+  $row= $this->db->resultSet();
+
+  if($row){
+    return $row;
+  }
+  else{
+    return false;
+  }
+}
+
+
+public function getAuctionIDS($id,$seller_id){
+
+  $query ='SELECT 
+          auction_id
+          FROM
+          order_items_ac
+          WHERE
+          order_id=:id AND seller_id =:seller_id';
+
+  $this->db->query($query);
+  $this->db->bind(':id',$id);
+  $this->db->bind(':seller_id',$seller_id);
+
+  $row = $this->db->single();
+
+  if($row){
+    return $row->auction_id;
+  }
+  else{
+    return false;
+  }
+}
+
+public function getdetails($id){
+  
+  $query = 'SELECT
+            auction.*,
+            auction.name AS product_name,
+            users.name AS buyer_name,
+            buyers.prof_img AS buyer_img,
+            users.*
+            FROM
+            auction
+            JOIN
+            buyers ON
+            auction.highest_buyer_id = buyers.buyer_id 
+            JOIN 
+            users ON
+            buyers.user_id = users.user_id
+            WHERE auction_ID=:auction_id';
+
+  $this->db->query($query);
+  $this->db->bind(':auction_id',$id);
+  $row = $this->db->Single();
+
+  if($row){
+    return $row;
+  }
+  else{
+    return false;
+  }
+}
+
+
 
  }
