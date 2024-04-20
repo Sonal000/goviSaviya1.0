@@ -35,7 +35,10 @@
         <?php 
         if($data['orders']){
             foreach($data['orders'] as $orders){
+                if($orders){
                 foreach($orders as $order){
+
+                    
                 ?>
 <!-- 1st Card------------------------------------------------------------------------------------- -->
 
@@ -63,7 +66,7 @@
                             ?>
                     </div>
                     <div class="details_view">
-                    <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/orders/details/<?php echo $order->order_item_id ?>">View Order Details</a></botton>
+                    <botton class="details_view_btn"><a href="<?php echo URLROOT ?>/orders/info/<?php echo $order->order_id ?>/<?php echo $order->order_item_id ?>/<?php echo $order->order_type ?>">View Order Details</a></botton>
                     </div>
                 </div>
                 
@@ -73,7 +76,7 @@
             <div class="right-side"> 
                     
                     <div class="price_details">
-                        <?php echo "Delivery Fee: Rs." .  $order->total_delivery_fee ."/="?>
+                        <?php echo "Delivery Fee: Rs." .  $order->deliver_fee ."/="?>
                     </div>
             
                     <div class="update_edit_bt">
@@ -96,7 +99,7 @@
         
    <!-- 2nd Card------------------------------------------------------------------------------------- -->
    <?php
-                 } }
+                 }} }
         }else{ ?>
         
         <div> <p> no available orders </p></div>        

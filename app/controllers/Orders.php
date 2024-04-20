@@ -47,7 +47,9 @@ class Orders extends Controller{
         }
 
        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+            $deliver_id = $_SESSION['deliver_id'];
             $orders = $this->orderModel->getDeliverOrders($_SESSION['deliver_id']);
+            
         $data=[
             "orders"=>$orders,
         ];
@@ -87,11 +89,11 @@ public function acceptOrder($order_item_id){
 }
 public function acceptOrder_AC($order_item_id){
     $deliver_id= $_SESSION['deliver_id'];
-    $assign=$this->orderModel->assignDeliver($order_item_id,$deliver_id,"AUCTION");
-    if($assign){
+     $assign=$this->orderModel->assignDeliver($order_item_id,$deliver_id,"AUCTION");
+    if(true){
         $order=$this->orderModel->getAuctionOrderDetails($order_item_id);
-        $$this->notifiModel->notifYUser(0,$order->seller_user_id,"Delivery agent assigned to your order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
-        $this->notifiModel->notifYUser(0,$order->buyer_user_id,"Delivery agent assigned to your order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","orders","DELIVERY");
+        $this->notifiModel->notifYUser(0,$order->seller_user_id,"Delivery agent assigned to your order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
+        $this->notifiModel->notifYUser(0,$order->buyer_user_id,"Delivery agent assigned to your order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
         redirect('orders/ongoing');
     }else{
         redirect('orders');
@@ -121,51 +123,67 @@ public function acceptOrder_PR($order_item_id){
     if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
         
         $deliver_id = $_SESSION['deliver_id'];
-        $result = $this->orderModel->getDeliveryCompletedOrder($deliver_id);
-        $details = $this->orderModel->getCompletedOrderDetails($deliver_id);
-        $rowB = $this->orderModel->getBuyerDetailsCompletedOrder($deliver_id);
-        $rowS = $this->orderModel->getSellerDetailsCompletedOrder($deliver_id);
-        $data = [
-             "result" => $result,
-            "details" => $details,
-            'rowB' => $rowB,
-            'rowS' => $rowS
+            $orders = $this->orderModel->getCompletedOrders($_SESSION['deliver_id']);
+            $order_id = $this->orderModel->getCompletedOrderIDs($deliver_id);
+        $data=[
+            "orders"=>$orders,
         ];
-
+        
         $this -> view('deliveryCompletedOrder',$data);
-    }
-    }
-    public function ongoing(){
-    
-        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
-    $deliver_id = $_SESSION['deliver_id'];
 
-    $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
-    if($current->current_order_type=="AUCTION"){
-        $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
-        }elseif($current->current_order_type=="PURCHASE"){
-        $order=$this->orderModel->getOrderDetails($current->current_order_item_id);
-        }elseif($current->current_order_type=="REQUEST"){
-        $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
+    }
+    }
+    public function ongoing() {
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'deliver') {
+            $deliver_id = $_SESSION['deliver_id'];
+    
+            $current = $this->orderModel->getDeliverCurrentOrder($deliver_id);
+    
+            if ($current) {
+                if($current->current_order_type == "AUCTION") {
+                    $order = $this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
+                } elseif($current->current_order_type == "PURCHASE") {
+                    $order = $this->orderModel->getOrderDetails($current->current_order_item_id);
+                } elseif($current->current_order_type == "REQUEST") {
+                    $order = $this->orderModel->getRequestOrderDetails($current->current_order_item_id);
+                }
+    
+                if ($order) {
+                    // Define $data only if $order is valid
+                    $data = [
+                        'details' => $order
+                        // 'rowB' => $rowB,
+                        // 'rowS' => $rowS       
+                    ];
+    
+                    // Handle order status
+                    if($order->order_status == 'deliver_assigned') {
+                        $this->view('OngoingOrder', $data);
+                    } elseif($order->order_status == 'pickedup') {
+                        redirect('orders/pickedup');
+                    } elseif($order->order_status == 'delivering') {
+                        redirect('orders/delivering');
+                    } elseif($order->order_status == 'delivered') {
+                        redirect('orders/delivered');
+                    } elseif($order->order_status == 'completed') {
+                        redirect('orders/complete');
+                    }
+                } else {
+                    // Handle case where $order is null
+                    echo "Order details not found";
+                }
+            } else {
+                $data = [
+                    'details' => false
+                    // 'rowB' => $rowB,
+                    // 'rowS' => $rowS       
+                ];
+                // Handle case where $current is null
+                $this->view('OngoingOrder',$data);
+            }
         }
-    // $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
-    // $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
-    // $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);
-
-
-        var_dump($order);
-    $data = [
-        'details' => $order
-        // 'rowB' => $rowB,
-        // 'rowS' => $rowS       
-];
-
-        $this -> view('OngoingOrder',$data);
-
-    
-    
     }
-}
+    
 
     public function pickedup(){
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
@@ -216,36 +234,73 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
     public function delivering(){
         
-
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            //Sanitize POST array
-        $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
-        $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/items/';
-        $pickupImg = $this->uploadFile('pickup_img', $uploadDirectory);
         $deliver_id = $_SESSION['deliver_id'];
         $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
         $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
         $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);
-        $delivered = $this->orderModel->editToDelivering($deliver_id);
-
-        
-        $this->orderModel->uploadPickupImages($deliver_id,$pickupImg);
             
+        $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
+        if($current->current_order_type=="AUCTION"){
+            $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
+            }elseif($current->current_order_type=="PURCHASE"){
+            $order=$this->orderModel->getOrderDetails($current->current_order_item_id);
+            }elseif($current->current_order_type=="REQUEST"){
+            $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
+            }
 
-
+        var_dump($order);
+        $data =[
+            'order' => $order,
+            'id' => $deliver_id,
+            // 'pickup_img' =>  $pickupImg,
+            'details' => $details,
+            'rowB' => $rowB,
+            'rowS' => $rowS 
+        ];
         
-
-                $data =[
-                    'id' => $deliver_id,
-                    'pickup_img' =>  $pickupImg,
-                    'details' => $details,
-                    'rowB' => $rowB,
-                    'rowS' => $rowS 
-                ];
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            //Sanitize POST array
+            $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+            $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/items/';
+            $pickupImg = $this->uploadFile('pickup_img', $uploadDirectory);
+           
             
-                $this->view('deliveringOrder',$data);
+          if ( $this->orderModel->uploadPickupImages($deliver_id,$pickupImg)){
+              $delivered = $this->orderModel->editToDelivering($deliver_id);
+              if($delivered){
+
+                $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
+                if($current->current_order_type=="AUCTION"){
+                    $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
+                    }elseif($current->current_order_type=="PURCHASE"){
+                    $order=$this->orderModel->getOrderDetails($current->current_order_item_id);
+                    }elseif($current->current_order_type=="REQUEST"){
+                    $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
+                    }
+                $this->notifiModel->notifYUser(0,$order->seller_user_id,"Delivery agent has picked up your order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
+                $this->notifiModel->notifYUser(0,$order->buyer_user_id,"Delivery agent has picked up order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
+
+            $this -> view('deliveringOrder',$data);
+            }else{
+                $this -> view('_404');
+            }
+        }else{
+            redirect('orders/pickedup');
         }
 
+          }else{
+            
+
+            $this -> view('deliveringOrder',$data);
+
+          };
+            
+            
+            
+            
+            
+            
+          
        
         // $deliver_id = $_SESSION['deliver_id'];
         // $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
@@ -263,23 +318,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
     
 
 
-        if($delivered){
 
-            $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
-            if($current->current_order_type=="AUCTION"){
-                $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
-                }elseif($current->current_order_type=="PURCHASE"){
-                $order=$this->orderModel->getOrderDetails($current->current_order_item_id);
-                }elseif($current->current_order_type=="REQUEST"){
-                $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
-                }
-            $this->notifiModel->notifYUser(0,$order->seller_user_id,"Delivery agent has picked up your order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
-            $this->notifiModel->notifYUser(0,$order->buyer_user_id,"Delivery agent has picked up order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
-
-        $this -> view('deliveringOrder',$data);
-        }else{
-            $this -> view('_404');
-        }
     }
 
     public function delivered(){
@@ -354,6 +393,9 @@ private function uploadFile($fileInputName, $uploadDirectory) {
     //admin functions
 
     public function details($id){
+
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
+
         $OrderDet = $this->orderModel->OrdersAdminView($id);
         $OrderItems = $this->orderModel->OrderItemsView($id);
         $sellerDet=$this->orderModel ->sellersInOrder($id);
@@ -370,6 +412,54 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         $this->view('adminOrderDetails',$data);
     }
 
+    if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+
+        $deliver_id = $_SESSION['deliver_id'];
+        $order_type = 
+
+
+        $data = [
+            'title' => 'welcome'
+        ];
+
+    }
+
+    }
+
+
+    public function info($order_id,$order_item_id,$order_type){
+        
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+
+            $deliver_id = $_SESSION['deliver_id'];
+            $id = $order_id;
+            $type = $order_type;
+            
+
+            
+
+            if($type=="AUCTION"){
+                $order=$this->orderModel->getAuctionOrderDetails($order_item_id);
+                }elseif($type == "PURCHASE"){
+                $order=$this->orderModel->getOrderDetails($order_item_id);
+                }elseif($type == "REQUEST"){
+                $order=$this->orderModel->getRequestOrderDetails($order_item_id);
+                }
+
+            $available = $this->orderModel->getDeliverAvailability($deliver_id);
+
+                
+            $data = [
+                'title' => 'welcome',
+                'order' => $order,
+                'available' =>  $available
+            ];
+    
+            $this->view('deliveryOrderDetails',$data);
+        }
+    }
+
+
 
     
 
@@ -380,6 +470,33 @@ private function uploadFile($fileInputName, $uploadDirectory) {
     public function CheckItemsImages($id){
         $data = ['title'=>'welcome'];
         $this -> view('adminImageCheck',$data);
+    }
+
+
+    public function completed($order_id,$order_item_id,$order_type){
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'deliver'){
+            $deliver_id = $_SESSION['deliver_id'];
+            $id = $order_id;
+            $type = $order_type;
+
+        if($type=="AUCTION"){
+                $order=$this->orderModel->getAuctionOrderDetails($order_item_id);
+                }elseif($type == "PURCHASE"){
+                $order=$this->orderModel->getOrderDetails($order_item_id);
+                }elseif($type == "REQUEST"){
+                $order=$this->orderModel->getRequestOrderDetails($order_item_id);
+                }
+
+                $data = [
+                    'title' => 'welcome',
+                    'order' => $order,
+                    
+                ];
+        
+                $this->view('deliveryCompletedOrderDetails',$data);
+
+
+        }
     }
 
 

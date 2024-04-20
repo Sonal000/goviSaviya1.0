@@ -373,3 +373,47 @@ border: none;
   font-size: 1.6rem;
   font-weight: bold;
 }
+
+
+/* 2024 ---- 04 -------20 --------------------------------- */
+
+
+.no_title{
+  font-size: 1.6rem;
+}
+
+.nocard{
+  box-shadow: var(--dark-shadow);
+  padding:2rem;
+  
+  border-radius: var(--radius-low);
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  transition: box-shadow 0.3s ease-in-out;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.button button {
+  margin: 2rem;
+  margin-bottom: 1rem;
+  background-color: #4BAA4E;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button button a {
+  text-decoration: none;
+  color: white;
+}
+
+.button button:hover {
+  background-color: #3b8c3f; /* Darker shade when hovered */
+}
