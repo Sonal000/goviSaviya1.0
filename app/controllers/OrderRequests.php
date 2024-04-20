@@ -200,17 +200,11 @@
    // =================checkout==========================================
 public  function checkout($id){
   $items = $this->RequestsModel->getrequestDetails($id);
-  var_dump($items);
   $buyerInfo = $this->buyerModel->getProfileInfo($_SESSION["user_id"]);
   $sellerInfo = $this->sellerModel->getsellerInfo($items->acp_seller_ID);
- 
-  
   $totalDeliveryfee = 0;
 
       $totalDeliveryfee +=( getDistancefee($sellerInfo->address,$items->req_address));
-var_dump($totalDeliveryfee,$sellerInfo->address,$items->req_address);
-  
-  
   $data=[
           "request_id"=>$id,
             "items"=>$items,
