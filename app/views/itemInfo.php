@@ -4,7 +4,7 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title> 
-  <?php echo  $data['name'];?>
+  <?php echo  $data['row']->name;?>
 </title>
  <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
  <link
@@ -50,7 +50,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
 
 <div class="image_container">
     <div class="main_img_cont">
-      <img class="main_img" src="<?php echo URLROOT.'/store/items/'.$data['item_img'] ;?>"> 
+      <img class="main_img" src="<?php echo URLROOT.'/store/items/'.$data['row']->item_img ;?>"> 
     </div>
     <div class="img_slider_cont">
       <button class="slider_btn">
@@ -73,9 +73,9 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
             
 <div class="item_description">
   <div class="item_title_cont">
-    <p class="item_name"><?php echo $data['name'] ?></p>
-    <a href="<?php echo URLROOT ?>/profile/<?php echo $data['seller_user_id']; ?>" class="item_seller" target="_blank"> seller: <?php echo $data['seller_name'] ?> <span><i class="fas fa-check-circle"></i></span></a>
-    <p class="item_address"><?php echo $data['seller_city'] ?></p>
+    <p class="item_name"><?php echo $data['row']->name; ?></p>
+    <a href="<?php echo URLROOT ?>/profile/<?php echo $data['seller']->user_id; ?>" class="item_seller" target="_blank"> seller: <?php echo $data['seller']->name ?> <span><i class="fas fa-check-circle"></i></span></a>
+    <p class="item_address"><?php echo $data['seller']->city; ?></p>
     <div class="item_rating">
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
@@ -85,15 +85,15 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
          </div>
   </div>
   <div class="item_price_cont">
-    <p class="item_price">RS <?php echo $data['price'] ?> / <span><?php echo $data['unit'] ?></span></p>
-    <p class="item_available"><?php echo $data['stock'] ?>/ <span><?php echo $data['unit'] ?> available</span>  </p>
+    <p class="item_price">RS <?php echo $data['row']->price; ?> / <span><?php echo $data['row']->unit; ?></span></p>
+    <p class="item_available"><?php echo $data['row']->stock; ?>/ <span><?php echo $data['row']->unit; ?> available</span>  </p>
   </div>
   <div class="item_desc_cont">
-    <p class="item_desc"><?php echo $data['description'] ?></p>
+    <p class="item_desc"><?php echo $data['row']->description; ?></p>
   </div>
 
 
-  <form action="<?php echo URLROOT.'/marketplace/iteminfo/'.$data['item_id']; ?>" method="post">
+  <form action="<?php echo URLROOT.'/marketplace/iteminfo/'.$data['row']->item_id; ?>" method="post">
   <div class="item_btns_cont">
     <div class="qty_btn_cont">
       <button class="btn_remove">-</button>
@@ -134,6 +134,11 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
       <div class="reviews_cont">
 
         <!-- review==== -->
+        <?php if(!empty($data['reviews'])) : ?>
+
+          
+          
+        <?php foreach( $data['reviews']as $reviews): ?>
         <div>
 
           <div class="review_cont">
@@ -147,17 +152,25 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
             </div>
             <!-- <button class="review_option_btn"></button> -->
           </div>
-          <a href="#" class="reviewer_name"> Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-          <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi? 
+          <a href="#" class="reviewer_name"> <?php echo $reviews->name; ?> <span><i class="fas fa-check-circle"></i></span></a>
+          <p class="review"><?php echo $reviews->review; ?>
           </p>
-          <p class="review_date" >Posted on August 18,2023</p>
+          <p class="review_date" >Posted on <?php echo $reviews->posted_date; ?></p>
           
         </div>
         
       </div>
+        
+
+
+      <?php endforeach; ?>
+<?php else : ?>
+    No reviews yet
+<?php endif; ?>
+
         <!-- review end==== -->
         <!-- review==== -->
-        <div>
+        <!-- <div>
 
           <div class="review_cont">
             <div class="review_options_cont">
@@ -168,29 +181,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
-          </div>
-          <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
-          <p class="review">Lorem ipsum dolor sit Lorem ipsum dolor sit, amet consectetur adipisicing elit. At, error?</p>
-          <p class="review_date">Posted on August 18,2023</p>
-          
-        </div>
-        
-      </div>
-        <!-- review end==== -->
-        <!-- review==== -->
-        <div>
-
-          <div class="review_cont">
-            <div class="review_options_cont">
-              <div class="item_rating">
-              <i class="fas fa-star star_img"></i>
-              <i class="fas fa-star star_img"></i>
-              <i class="fas fa-star star_img"></i>
-              <i class="fas fa-star star_img"></i>
-              <i class="fas fa-star star_img"></i>
-            </div>
-            <!-- <button class="review_option_btn"></button> -->
+            
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
@@ -199,9 +190,9 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
         </div>
         
       </div>
-        <!-- review end==== -->
+        
         <!-- review==== -->
-        <div>
+        <!-- <div>
 
           <div class="review_cont">
             <div class="review_options_cont">
@@ -212,7 +203,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+            
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
@@ -223,7 +214,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
       </div>
         <!-- review end==== -->
         <!-- review==== -->
-        <div>
+        <!-- <div>
 
           <div class="review_cont">
             <div class="review_options_cont">
@@ -234,18 +225,18 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+           
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
           <p class="review_date">Posted on August 18,2023</p>
           
-        </div>
+        </div> -->
         
-      </div>
+      <!-- </div> -->
         <!-- review end==== -->
         <!-- review==== -->
-        <div>
+        <!-- <div>
 
           <div class="review_cont">
             <div class="review_options_cont">
@@ -256,7 +247,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+           
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
@@ -264,7 +255,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
           
         </div>
         
-      </div>
+      </div>  -->
         <!-- review end==== -->
 
         
@@ -281,7 +272,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
       <div class="add_review_hed">
           <h4>Add Review</h4>
         </div>
-        <form action="<?php echo URLROOT.'/marketplace/Addreview/'.$data['item_id']; ?>" method="POST">
+        <form action="<?php echo URLROOT.'/marketplace/Addreview/'.$data['row']->item_id; ?>" method="POST">
            <div class="review_Filed">
             <input type="text" name="review" placeholder="Enter your Review">
             <button type="submit">

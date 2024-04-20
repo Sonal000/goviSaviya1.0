@@ -32,7 +32,13 @@
                 <a href="<?php echo URLROOT ?>/auctionC/items">
                     <button class="sidebar_item expand_item link" id="view_item_auction">
                     <i class="fas fa-poll-h sidebar_icon"></i>
-                      <p>Current items</p>
+                      <p>My Auctions</p>
+                    </button>
+                    </a>
+                    <a href="<?php echo URLROOT ?>/auctionC/history">
+                    <button class="sidebar_item expand_item link" id="view_item_auction">
+                    <i class="fas fa-poll-h sidebar_icon"></i>
+                      <p>Auction History</p>
                     </button>
                     </a>
                   </div>
@@ -77,6 +83,12 @@
                       <p>Accepted Requests</p>
                     </button>
                     </a>
+                    <!-- <a href="<?php echo URLROOT ?>/OrderRequests/quoted">
+                    <button class="sidebar_item expand_item link" id="accepted_requests">
+                    <i class="fas fa-poll-h sidebar_icon"></i>
+                      <p>Accepted Requests</p>
+                    </button>
+                    </a> -->
                   </div>
               </li>
               <li>
@@ -101,7 +113,7 @@
                   </div>
               </li>
               <li>
-                <a href="<?php echo URLROOT ?>/Dashboard">
+                <a href="<?php echo URLROOT ?>/Reviews">
                   <button class="sidebar_item link"  id="reviews_link">
                     <i class="far fa-star  sidebar_icon" ></i>
                     <p>Reviews</p>
@@ -132,16 +144,22 @@
                   <i class="fas fa-sort-down "></i>
                 </button>
                 <div class="expand_m hide_expand">
-                  <a href="<?php echo URLROOT ?>/auction/add">
+                  <a href="<?php echo URLROOT ?>/auctionc/add">
                     <button class="sidebar_icon_btn link" id="add_item_auction_m">
                       <i class="fas fa-plus sidebar_icon" ></i>
                       <p>List new</p>
                     </button>
                   </a>
-                  <a href="<?php echo URLROOT ?>/auction">
+                  <a href="<?php echo URLROOT ?>/auctionc">
                     <button class="sidebar_icon_btn link" id="view_item_auction_m">
                       <i class="fas fa-poll-h sidebar_icon"></i>
-                      <p>Current items</p>
+                      <p>My Auctions</p>
+                    </button>
+                  </a>
+                  <a href="<?php echo URLROOT ?>/auctionc/history">
+                    <button class="sidebar_icon_btn link" id="view_item_auction_m">
+                      <i class="fas fa-poll-h sidebar_icon"></i>
+                      <p>Auction History</p>
                     </button>
                   </a>
                   </div>
@@ -186,6 +204,12 @@
                         <p>Accepted Requests</p>
                       </button>
                     </a>
+                    <!-- <a href="<?php echo URLROOT ?>/OrderRequests/quoted">
+                    <button class="sidebar_item expand_item link" id="accepted_requests">
+                    <i class="fas fa-poll-h sidebar_icon"></i>
+                      <p>Quoted Requests</p>
+                    </button>
+                    </a> -->
                   </div>
               </li>
               <li>
@@ -210,7 +234,7 @@
                   </div>
               </li>
               <li>
-                <a href="<?php echo URLROOT ?>/reviews" id="reviews_link_m">
+                <a href="<?php echo URLROOT ?>/Reviews" id="reviews_link_m">
                   <button class="sidebar_icon_btn link" >
                     <i class="far fa-star  sidebar_icon" ></i>
                     <p>Reviews</p>

@@ -33,9 +33,9 @@
   
   <div class="profile">
     <div class="hed">
-        Orders
+        <h4>Orders</h4>
     </div>
-    <div class="req_approve_btn">
+    <!-- <div class="req_approve_btn">
         
         <div class="reqbt">
             <a href="" class="btn req">Current Orders</a>
@@ -44,7 +44,7 @@
             <a href="<?php echo URLROOT; ?>/SellerOrderComplete" class="btn approve">Complete Orders</a>
         </div>
 
-    </div>
+    </div> -->
     <div class="order_card_cont">
 
     <?php 
