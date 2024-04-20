@@ -163,6 +163,7 @@
     
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     
 }
 
@@ -275,4 +276,16 @@
 .item_img{
     object-fit: cover;
     
+}
+
+.big_circle{
+    background-color: white;
+    border-radius: 100%;
+    border: #4BAA4E solid 9px;
+    height: 10rem;
+    width: 10rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }

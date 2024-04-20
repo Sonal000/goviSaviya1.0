@@ -131,10 +131,13 @@
                 <div class="card card-orderStatus">
 
                     <div class="card_details">
-                        <div class="left_details">
+                        
                             <div class="card_heading_oos">Ongoing Order Status</div>
                 
-                        </div>
+                            <div class="big_circle">
+                                
+                            </div>
+                        
                         
                     
                     </div>
