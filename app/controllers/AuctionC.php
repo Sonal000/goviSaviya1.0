@@ -238,7 +238,6 @@ public  function checkout($id){
 
 
         public function payments($id){
-          
             $auction_id=$this->orderModel->getOrderAuctionId($id);
             $item = $this->auctionModel->getAuctionInfo($auction_id);
             // var_dump($item);

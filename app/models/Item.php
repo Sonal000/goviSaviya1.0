@@ -170,7 +170,40 @@
         return ['items' => false, 'totalCount' => 0];
   
       }
-   } 
+   }
+   
+   
+
+
+   public function ReduceStock($id,$quantity){
+  
+  $this->db->query("SELECT stock FROM items_market WHERE item_id =:id");
+    $this->db->bind(':id',$id);
+    $current= $this->db->single();
+  
+    if($current){
+      $new_stock = $current->stock - $quantity ;
+      
+      $query =    "UPDATE
+                items_market
+                SET
+                stock =:stock
+                WHERE 
+                item_id =:id";
+    
+    $this->db->query($query);
+    $this->db->bind(':stock',$new_stock);
+    $this->db->bind(':id',$id);
+    
+    if($this->db->execute()){
+      return true;
+    }else{
+      return false;
+    }
+  }else{
+    return false;
+  }
+  }
 
 
 
