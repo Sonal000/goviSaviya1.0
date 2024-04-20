@@ -10,10 +10,10 @@
 
     public function addItem($data){
 
-        $stock = $data['stock'];
-        $unit_price=$data['price'];
-
-        $total_amount = $stock*$unit_price;
+      $stock = intval($data['stock']); 
+      $unit_price = floatval($data['price']); 
+      
+      $total_amount = $stock * $unit_price;
         $this->db->query
         ('INSERT INTO auction(name,seller_ID,category,description,price,stock,total_amount,exp_date,start_date,end_date,address,unit,district,item_img,status)
         VALUES(:name,:seller_ID,:category,:description,:price,:stock,:total_amount,:exp_date,:start_date,:end_date,:address,:unit,:district,:item_img,:status)');
@@ -373,7 +373,7 @@ public function getBidUsersInfo($id){
 
     // try {
         // Update auction status to 'inactive'
-        var_dump($id, $buyer_id, $highest_bid);
+     
 
         $this->db->query("UPDATE auction SET status='inactive',highest_buyer_id=:buyer_id,highest_bid=:highest_bid  WHERE auction_ID=:auction_ID");
         $this->db->bind(':buyer_id', $buyer_id);

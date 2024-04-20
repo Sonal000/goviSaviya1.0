@@ -72,7 +72,7 @@
                         <button class="btn_add">+</button>
                      </div> -->
                      <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>" class="bid_btn btn">Place Higher Bid</a>
-                     <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>" class="buy_btn btn">Buy this item</a>
+                     <!-- <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>" class="buy_btn btn">Buy this item</a> -->
                   </div>
                </div>
 </div>
@@ -119,7 +119,7 @@
                         <button class="btn_add">+</button>
                      </div> -->
                      <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>" class="bid_btn btn">Place Higher Bid</a>
-                     <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>" class="buy_btn btn">Buy this item</a>
+                     <!-- <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_id ?>" class="buy_btn btn">Buy this item</a> -->
                   </div>
                </div>
 </div>
@@ -151,11 +151,11 @@
 
 
 
-<div class="biddings_history__cont">
+<div class="biddings_history__cont" id="bidding_history">
          
-         <div class="auc_title">
+         <a class="auc_title" href="#bidding_history" >
             <h3>Bidding History</h3>
-         </div>
+</a>
          
          <div class="bid_history_container">
       

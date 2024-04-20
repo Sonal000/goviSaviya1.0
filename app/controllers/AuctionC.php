@@ -328,15 +328,23 @@ public  function checkout($id){
                     'buyer_id'=>$_SESSION['buyer_id'],
                     'auction_id'=>$id
                 ];
+                $currentBid  = $this->auctionModel->getCurrentBid($id);
+                $bidUser = $this->buyerModel->getBuyerInfo($currentBid->buyer_id);
+
                 $bid_id=$this->auctionModel->addBid($data);
                 if($bid_id){
+                    if($bidUser && ($bidUser->user_id != $_SESSION['user_id'])){
+                        $this->notifiModel->notifyUser(0,$bidUser->user_id,"Someone has outbid the item you have bid on.",'AuctionC/itemInfo/'.$id,"AUCTION");
+                    }
                    
                     $users=$this->auctionModel->getBidUsersInfo($bid_id);
                     $this->notifiModel->notifyUser(0,$users->seller_user_id,"<span class='bg'>".$users->buyer_name."</span> has bid on your item.",'AuctionC/items',"AUCTION");
                     $bids = $this->auctionModel->getAuctionBidUserIds($id);
+               
+
                     foreach ($bids as $bid) {
                         if($bid->buyer_id != $users->buyer_id){
-                            $this->notifiModel->notifyUser(0,$bid->buyer_user_id,"Someone has outbid  the item you have bid on.",'AuctionC/itemInfo/'.$id,"AUCTION");
+                            $this->notifiModel->notifyUser(0,$bid->buyer_user_id,"Someone has bid on the item you have bid on.",'AuctionC/itemInfo/'.$id,"AUCTION");
                         }
                     }
                     redirect('AuctionC/itemInfo/'.$id);
@@ -425,6 +433,8 @@ public  function checkout($id){
                     
         }
         }
+
+
         redirect('AuctionC/items');
     }
 
