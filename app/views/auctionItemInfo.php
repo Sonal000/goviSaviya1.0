@@ -81,7 +81,25 @@
 
   <div class="item_bid_cont">
     <p class="item_bids"><?php echo $data['bid_Count'];?> <span>bids</span></p>
-    <p class="item_time"> <?php echo $data['exp_date'];?><span> left</span>  </p>
+
+<!-- ========================= -->
+<?php if($data['highest_bidder_id']){
+      ?>
+
+<p class="item_time">Aucton ended  </p>
+
+<?php
+  }else{
+    ?>
+
+<p class="item_time"> <?php echo $data['exp_date'];?><span> left</span>  </p>
+
+<?php
+  }
+?>
+
+<!-- ========================== -->
+
   </div>
   <div class="item_desc_cont">
     <p class="item_desc"><?php echo $data['description'];?></p>

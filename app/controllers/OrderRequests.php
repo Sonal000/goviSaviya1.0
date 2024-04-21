@@ -245,6 +245,7 @@ var_dump($totalDeliveryfee,$sellerInfo->address,$items->req_address);
                   ],
               ];
 
+              
           \Stripe\Stripe::setApiKey(STRIPESECRETKEY);
           $checkout_session = \Stripe\Checkout\Session::create([
             "mode" => "payment",

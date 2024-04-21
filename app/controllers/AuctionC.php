@@ -54,6 +54,9 @@ class AuctionC extends Controller{
       $totalCount=$row['totalCount'];
       
     if(isset($_SESSION['buyer_id'])){
+        if($row['items']){
+
+      
         foreach ($row['items'] as $item) {
             $activebidder=$this->auctionModel->isActiveBidder($item->auction_ID,$_SESSION['buyer_id']);
             $currentBid = $this->auctionModel->getCurrentBid($item->auction_ID);
@@ -61,6 +64,7 @@ class AuctionC extends Controller{
             $item->active_bidder=$activebidder;
             $item->leading_bidder=(($currentBid?$currentBid->buyer_id:0) == $_SESSION['buyer_id'])?true:false;
         }
+    }
         $data=[
             'items'=>$row['items'],
             'totItems'=>$totalCount,
@@ -121,7 +125,7 @@ class AuctionC extends Controller{
                    $seller=$this->sellerModel->getSellerInfo($row->seller_ID);
                   if($seller){
 
-                      $bidCount = $this->auctionModel->getBidCount($id);
+                    $bidCount = $this->auctionModel->getBidCount($id);
                     $bid = $this->auctionModel->getCurrentBid($id);
                     if(isset($_SESSION['buyer_id'])){
                     $activebidder = $this->auctionModel->isActiveBidder($id ,$_SESSION['buyer_id']);
@@ -131,7 +135,7 @@ class AuctionC extends Controller{
                     $leading_bidder = (($bid?$bid->buyer_id:0)==$_SESSION['buyer_id']?true:false);
 
                     if($row->highest_buyer_id && $row->highest_buyer_id==$_SESSION['buyer_id']){
-                        $winning_bidder=true;    
+                        $winning_bidder=true;
                     }else{
                         $winning_bidder=false;
                     }
@@ -343,7 +347,7 @@ public  function checkout($id){
                
 
                     foreach ($bids as $bid) {
-                        if($bid->buyer_id != $users->buyer_id){
+                        if(($bid->buyer_id != $users->buyer_id) && $bidUser->user_id !=$bid->buyer_user_id ){
                             $this->notifiModel->notifyUser(0,$bid->buyer_user_id,"Someone has bid on the item you have bid on.",'AuctionC/itemInfo/'.$id,"AUCTION");
                         }
                     }
@@ -423,7 +427,7 @@ public  function checkout($id){
     
                         foreach ($bids as $bid) {
                         if($bid->buyer_id != $bidUsers->buyer_id){
-                            $this->notifiModel->notifyUser(0,$bid->buyer_user_id,"You have lost the auction for the item <span class='bg'>".$item->name."</span> you have bid on.",'viewAuction'.$id,"AUCTION");
+                            $this->notifiModel->notifyUser(0,$bid->buyer_user_id,"You have lost the auction for the item <span class='bg'>".$item->name."</span> you have bid on.",'AuctionC/itemInfo/'.$id,"AUCTION");
                         }
                     }   
                 }
