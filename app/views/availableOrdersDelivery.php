@@ -90,7 +90,7 @@
                             }
 
                                 ?>">Accept Order</a></button>
-                            <button class="ignore_order_btn"><a href="">Don't Show</a></button>           
+                                     
                     </div>
             </div> 
             
@@ -115,7 +115,7 @@
     </div>
 
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
-<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
 
 </body>
 </html>

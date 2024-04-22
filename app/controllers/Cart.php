@@ -95,9 +95,15 @@ public function verifiedOrder($id){
       $this->notifiModel->notifyuser(0,$seller->user_id,"New order received from <span class='bg'>".$item->buyer_name."</span>",'orders',"ORDER");
     }
 
+   
+    
+    
+
+
    foreach($row as $item){
     $this->itemModel->ReduceStock($item->item_id,$item->quantity);
    }
+
 
     if($this->itemModel->clearCartitems($_SESSION["buyer_id"])){
 

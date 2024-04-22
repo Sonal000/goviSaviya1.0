@@ -439,6 +439,13 @@ public  function checkout($id){
         }
         }
 
+        else{
+
+            $this->auctionModel->changeStatus($id);
+            redirect('AuctionC/items');
+        }
+
+
 
         redirect('AuctionC/items');
     }
@@ -519,4 +526,92 @@ public  function checkout($id){
    /* public function about(){
         $this ->view('Pages/about');
     }*/
+
+
+public function history(){
+
+    $row = $this->auctionModel->getpaymentsuccessAuctions();
+    $row2 = $this->auctionModel->getpaymentunsuccessAuctions();
+    $row3 = $this->auctionModel->getNobidAuctions($_SESSION['seller_id']);
+    
+    // if($row3){
+    //     $row->nobidlist = $row3;
+    // }
+    // else{
+    //     $row->nobidlist = false;
+    // }
+    
+        
+    if($row){
+        
+
+        foreach($row as $auc){
+            
+            
+            $aucIds = $this->auctionModel ->getAuctionIDS($auc->order_id,$_SESSION['seller_id']);
+            // var_dump($aucIds);
+            $aucdetails = $this->auctionModel->getdetails($aucIds);
+
+            
+            if($aucdetails){
+                $auc->auctionDetails=$aucdetails;
+                
+            }
+
+            
+        }
+    }
+
+    if($row2){
+
+        foreach($row2 as $auc2){
+
+            $aucIds = $this->auctionModel ->getAuctionIDS($auc2->order_id,$_SESSION['seller_id']);
+            
+            $aucdetails = $this->auctionModel->getdetails($aucIds);
+            if($aucdetails){
+
+                $auc2->auctionDetails =$aucdetails;
+            } 
+            
+        }
+    }
+
+    if($row){
+
+        
+        foreach($row as $auc3){
+            
+            $auc3->nobidlist = $row3;
+     
+            
+        }
+        
+        
+    }
+
+ 
+
+    // var_dump($row);
+   
+        
+        
+    
+
+        $data=[
+            'items'=>$row,
+            'items2'=>$row2,
+        ];
+
+        
+        
+
+
+    $this->view('auctionhistory',$data);
+
 }
+
+
+}
+
+

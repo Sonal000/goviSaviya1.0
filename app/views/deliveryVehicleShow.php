@@ -65,6 +65,8 @@
                         <form action="<?php echo URLROOT; ?>/deliveryVehicles/delete/<?php echo $data['vehicle']->vehicle_id;?>;" class="pull-right" method="post">
                          <div class="more_details"><input type="submit" value="Delete This Vehicle " class="more_details_btn dlt_btn"></div>
                     </form>
+
+                    
                            
 
                     
@@ -84,7 +86,7 @@
         </div>
     </div>
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
-    <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+    <script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
 
 </body>
 </html>

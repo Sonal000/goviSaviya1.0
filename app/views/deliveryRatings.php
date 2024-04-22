@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller_Auction</title>
+    <title>Reviews</title>
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
@@ -31,7 +31,9 @@
         
         
 <!-- 1st Card------------------------------------------------------------------------------------- -->
-<?php foreach($data['result'] as $result):?>
+<?php if (!empty($data['reviews'])) : ?>
+    <?php foreach ($data['reviews'] as $review) : ?>
+
         <div class="mycardd">
 
             <div class="productimg">
@@ -63,20 +65,20 @@
                 
             </div>
             </div>
-         
-                  
-                <div class="update_edit_bt">
-                    <botton class="accept_order_btn"><a href="">View Details</a></botton>
-                    
-                
-            </div>
+             
+    </div>
+    <?php endforeach; ?>
+    <?php else : ?>
+    <p>No reviews found.</p>
+<?php endif; ?>
             
         
         </div>
-        <?php endforeach; ?>
+        
    <!-- 2nd Card------------------------------------------------------------------------------------- -->
 
-
+   <!-- <?php foreach($data['result'] as $result):?>
+    <?php endforeach; ?> -->
   
  
         <!-- 3rd Card------------------------------------------------------------------------------------- -->
@@ -98,7 +100,7 @@
 
 
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
-<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
 
 </body>
 </html>

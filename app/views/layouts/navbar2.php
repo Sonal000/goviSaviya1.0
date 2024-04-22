@@ -29,16 +29,9 @@
         ?>
 
             <!-- navbar========================== -->
- <div class="navbar_cont">
-  <div class="navbar">
-   <div class="nav_img_cont">
-   <a href="<?php echo URLROOT ?>/Home">
-    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
-        </a>
-    <button class="bars_btn" id="bars_btn">
-  <i class="fas fa-bars bars"></i>
-  </button>
-   </div>
+ <div class="navbar_cont_d">
+  <div class="navbar_d">
+
    <div class="navlinks_cont">
     <ul class="navlinks" id="navlinks" >
      <!-- <li class="navlink">
@@ -59,11 +52,11 @@
         </div>
     </div>
      </li>
-     <li class="navlink">
+     <!-- <li class="navlink">
         <a href="#">
         <i class="fas fa-comment nav_icon"></i>
         </a>
-     </li>
+     </li> -->
      <li class="navlink">
       
 
@@ -195,16 +188,9 @@
   ?>
 
             <!-- navbar========================== -->
-            <div class="navbar_cont">
-  <div class="navbar">
-   <div class="nav_img_cont">
-   <a href="<?php echo URLROOT ?>/Home">
-    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
-        </a>
-    <button class="bars_btn" id="bars_btn">
-  <i class="fas fa-bars bars"></i>
-  </button>
-   </div>
+            <div class="navbar_cont_d">
+  <div class="navbar_d">
+
    <div class="navlinks_cont">
     <ul class="navlinks" id="navlinks" >
      <!-- <li class="navlink">
@@ -226,11 +212,11 @@
         </div>
     </div>
      </li>
-     <li class="navlink">
+     <!-- <li class="navlink">
         <a href="#">
         <i class="fas fa-comment nav_icon"></i>
         </a>
-     </li>
+     </li> -->
      <li class="navlink">
       
 

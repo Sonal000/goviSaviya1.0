@@ -563,6 +563,7 @@ input:focus{
     flex-direction: column;
     margin-left: 3rem;
     margin-right: 3rem;
+    
     /*margin-bottom: 3rem;*/
    
 
@@ -595,8 +596,8 @@ input:focus{
   cursor: pointer;
 }
 .H4center{
-  margin-top: 5.5rem;
-  text-align: center;
+  margin-top: 2rem;
+  margin-left: 1rem;
   }
   
 .delete_btn{
