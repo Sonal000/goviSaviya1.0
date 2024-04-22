@@ -161,27 +161,7 @@
    
   }
   
-  .accept_order_btn{
-    background-color: var(--clr-primary-5);
-    color: white;
-    font-weight: 550;
-    border: none;
-    border-radius: var(--radius-high);
-    padding: 10px 25px;
-    transition: 0.3s;
-    
-
-   
-  }
   
-  .accept_order_btn:hover{  
-    
-    background-color: var(--clr-primary-8);
-    color: var(--clr-primary-2);
-    font-weight: 600;
-    
-  
-  }
 
   .ignore_order_btn{
     border: none;
@@ -248,15 +228,40 @@
 }
 
 .update_edit_bt{
-  /* border: #38803A solid 3px; */
   gap: 1.5rem;
   display: flex;
+
   flex-direction: row;
-  /* justify-content: space-around; */
-  align-items: center;
+  justify-content: center;
+  
+  
   margin-top: 3rem;
   /* margin-right: 1rem; */
   /* width: 100%;  */
+
+}
+
+.accept_order_btn{
+  letter-spacing: var(--spacing-low);
+  background-color: var(--clr-primary-3);
+  color: white;
+  font-weight: 550;
+  border: none;
+  border-radius: var(--radius-high);
+  padding: 10px 25px;
+  transition: 0.3s;
+  
+
+ 
+}
+
+.accept_order_btn:hover{  
+  
+  background-color: var(--clr-primary-8);
+  color: var(--clr-primary-2);
+  font-weight: 600;
+  
+
 }
 
 

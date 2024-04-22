@@ -31,7 +31,9 @@
         
         
 <!-- 1st Card------------------------------------------------------------------------------------- -->
-<?php foreach($data['result'] as $result):?>
+<?php if (!empty($data['reviews'])) : ?>
+    <?php foreach ($data['reviews'] as $review) : ?>
+
         <div class="mycardd">
 
             <div class="productimg">
@@ -63,20 +65,20 @@
                 
             </div>
             </div>
-         
-                  
-                <div class="update_edit_bt">
-                    <botton class="accept_order_btn"><a href="">View Details</a></botton>
-                    
-                
-            </div>
+             
+    </div>
+    <?php endforeach; ?>
+    <?php else : ?>
+    <p>No reviews found.</p>
+<?php endif; ?>
             
         
         </div>
-        <?php endforeach; ?>
+        
    <!-- 2nd Card------------------------------------------------------------------------------------- -->
 
-
+   <!-- <?php foreach($data['result'] as $result):?>
+    <?php endforeach; ?> -->
   
  
         <!-- 3rd Card------------------------------------------------------------------------------------- -->

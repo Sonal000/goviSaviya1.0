@@ -208,6 +208,32 @@
         }
     }
 
+    public function countVehicles($id){
+    
+        $query = "SELECT COUNT(*) as vehicle_count FROM vehicle WHERE user_id = :user_id AND is_deleted=0";
+        $this->db->query($query);
+        $this->db->bind(':user_id',$id);
+        $row = $this->db->single();
+        return $row;
+
+    }
+
+    public function checkVehicleAdd($id){
+
+        $count = $this->countVehicles($id);
+        if($count && $count->vehicle_count > 0){
+            $available = 0;
+            return $available;
+        }else{
+            $available = 1;
+            return $available;
+        }
+
+    }
+
+
+
+
     public function countPickupTruck(){
         $this->db->query('SELECT COUNT(*) AS vehicle_count FROM vehicle WHERE vehicle_type="Pickup Truck"');
         $row = $this->db->Single();

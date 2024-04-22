@@ -15,13 +15,10 @@ class DeliveryHome extends Controller{
 
     $deliver_id = $_SESSION['deliver_id'];    
     $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
-    $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
-    $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);
 
         $data = [
             'details' => $details,
-            'rowB' => $rowB,
-            'rowS' => $rowS
+            
         ];
 
 

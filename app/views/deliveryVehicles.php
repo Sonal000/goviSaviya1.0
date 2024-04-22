@@ -47,12 +47,15 @@
 
 
                 </div>
-            <?php endforeach; ?>   
+            <?php endforeach; ?>  
+            
+            <?php if(isset($data['available']) && $data['available']) { ?>
             <div class="card card-body subtitle_card">
             <div class="card-subtitle_plus">Add New Vehicle </div>
             <div class="add_logo"><a href="<?php echo URLROOT;?>/deliveryVehicles/add"><i class="fa-solid fa-circle-plus"></a></i></div>
-            
             </div>
+
+            <?php } ?>
         </div>
 
         <!-- Content -->
