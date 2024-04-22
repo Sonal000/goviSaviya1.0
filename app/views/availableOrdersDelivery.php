@@ -90,7 +90,7 @@
                             }
 
                                 ?>">Accept Order</a></button>
-                            <button class="ignore_order_btn"><a href="">Don't Show</a></button>           
+                                     
                     </div>
             </div> 
             
