@@ -176,8 +176,8 @@ if($item->leading_bid){
                   <div class="item_bid_cont">
                      <p class="item_bids"><?php echo $item->bid_Count ?> <span>bids</span></p>
                      <div class="bid_info_cont">
-                        <p class="current_bid inactive">Current highest Bid : <span> Rs : 30000</span></p>
-                        <p class="your_bid">Your Bid : <span> Rs : 25000</span></p>
+                        <p class="current_bid inactive">Current highest Bid : <span> Rs : <?php echo $item->current_bid ?></span></p>
+                        <p class="your_bid">Your Bid : <span> Rs : <?php echo $item->your_bid ?></span></p>
                      </div>
                   </div>
                   <div class="item_btns_cont">
@@ -282,7 +282,7 @@ if($item->leading_bid){
             <div class="history_description">
                <div class="history_title_cont">
                   <div class="item_info">
-                     <p class="item_name">Carrots</p>
+                     <p class="item_name"><?php echo $bids->name ; ?></p>
                      <a href="<?php echo URLROOT ?>/profile/<?php echo $bids->seller_user_id ; ?>" target="_blank" class="item_seller"> seller: <?php echo $bids->seller_name ; ?> <span><i class="fas fa-check-circle"></i></span></a>
                   </div>
                </div>

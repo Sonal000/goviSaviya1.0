@@ -64,21 +64,24 @@ if($activeBids){
   }
 }
 $bidHistory = $this->auctionModel->getBuyerBidhistory($_SESSION['buyer_id']);
-foreach($bidHistory as $hsBid){
-  if($hsBid->highest_buyer_id == $_SESSION['buyer_id']){
-    $hsBid->won_bid =true;
-    if($hsBid->payment_status){
-      $hsBid->closed_bid =true;
-    }else{
-      $hsBid->closed_bid =false;
-    }
-  }else{
-    $hsBid->won_bid =false;
-    $hsBid->closed_bid =true;
-  }
+if($bidHistory){
 
-  $mybid = $this->auctionModel->getYourBid($hsBid->auction_id,$_SESSION['buyer_id']);
-  $hsBid->your_bid =$mybid->your_bid;
+  foreach($bidHistory as $hsBid){
+    if($hsBid->highest_buyer_id == $_SESSION['buyer_id']){
+      $hsBid->won_bid =true;
+      if($hsBid->payment_status){
+        $hsBid->closed_bid =true;
+      }else{
+        $hsBid->closed_bid =false;
+      }
+    }else{
+      $hsBid->won_bid =false;
+      $hsBid->closed_bid =true;
+    }
+    
+    $mybid = $this->auctionModel->getYourBid($hsBid->auction_id,$_SESSION['buyer_id']);
+    $hsBid->your_bid =$mybid->your_bid;
+  }
 }
 // var_dump($bidHistory);
     $data =['items'=>$bidItems,

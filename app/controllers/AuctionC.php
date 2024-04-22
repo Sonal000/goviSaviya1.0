@@ -124,7 +124,7 @@ class AuctionC extends Controller{
 
                    $seller=$this->sellerModel->getSellerInfo($row->seller_ID);
                   if($seller){
-
+                    $payment_status = $this->auctionModel->getAuctionPaymentStatus($id);
                     $bidCount = $this->auctionModel->getBidCount($id);
                     $bid = $this->auctionModel->getCurrentBid($id);
                     if(isset($_SESSION['buyer_id'])){
@@ -194,6 +194,7 @@ if(($row->highest_buyer_id) && (!isset($_SESSION['user_id'])) && (!$activebidder
                           'highest_bidder_id'=>$row->highest_buyer_id,
                           'auction_id'=>$id,
                           'winning_bidder'=>$winning_bidder,
+                          'payment_status'=>$payment_status?$payment_status->payment_status:false,
                       ]
                           ;
             

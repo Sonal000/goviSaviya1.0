@@ -106,17 +106,17 @@
   </div>
   <div>
     <?php 
-      if($data['winning_bidder']){
-        echo '<p class="leading_bid">You won this auction</p>';
-      }elseif($data['leading_bidder']){
+      if($data['winning_bidder'] && !$data['payment_status']){
+        echo '<p class="leading_bid">You won this auction , please proceed with the payments</p>';
+      }elseif($data['leading_bidder'] && !$data['payment_status']){
         echo '<p class="leading_bid">You are the leading bidder in this auction</p>';
-      }elseif($data['active_bidder']){
+      }elseif($data['active_bidder'] && !$data['payment_status']){
         echo '<p class="active_bid">You have been outbid in this auction ( your bid : Rs '.$data['yourBid'].' )</p>';
       }
     ?>
   </div>
 
-  <?php if($data['highest_bidder_id'] && $data['winning_bidder']){
+  <?php if($data['highest_bidder_id'] && $data['winning_bidder'] && !$data['payment_status']){
       ?>
 
 <div class="item_btns_cont">
@@ -124,21 +124,24 @@
   </div>
 
 <?php
+  }elseif($data['highest_bidder_id'] && $data['winning_bidder'] && $data['payment_status']){
+    echo '<p class="leading_bid">You won this auction </p>';
   }elseif($data['highest_bidder_id'] && !$data['winning_bidder']){
 ?>
 
 <p class="active_bid">You lost this Auction</p>
 <?php
   }else{ ?>
-  <form action="<?php echo URLROOT.'/auctionC/bid/'.$data['item_id']; ?>" method="post">
+  <p class="active_bid" id="message_bid"></p>
+  <form action="<?php echo URLROOT.'/auctionC/bid/'.$data['item_id']; ?>" method="post" id="bid_submit"  >
   <div class="item_btns_cont">
     <div class="qty_btn_cont">
       <!-- <button class="btn_remove">-  Rs</button> -->
         <p>Rs</p>
-        <input class="qty" type="number" value="<?php echo $data['current_bid'] + 10;?>" class="qty"  name="bid_price" id="quantity" data-currentprice="<?php echo $data['current_bid'] + 10;?>">
+        <input class="qty" type="number" value="<?php echo $data['current_bid'] + 10;?>" class="qty"  name="bid_price" id="quantity" data-currentprice="<?php echo $data['current_bid'];?>">
       <!-- <button class="btn_add">+</button> -->
     </div>
-    <button type="submit" class="addtocart_btn btn">Place Bid</button>
+    <button id="bid_btn" type="submit" class="addtocart_btn btn">Place Bid</button>
   </div>
 </form>
 <?php 
