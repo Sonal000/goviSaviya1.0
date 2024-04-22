@@ -37,10 +37,15 @@
     <!-- items -->
   <div class="container_content">
 
-       
+  <div class="container_title_cont">
+  <p class="container_title">My products</p>
+  </div>
+
+
+<!--        
   <div class="H4center">
     <h4>My products</h4>
-</div>
+</div> -->
 <div class="myproducts">
 
 

@@ -51,9 +51,13 @@ function paramString($validParams){
   <?php 
    require APPROOT. '/views/layouts/sellerSidebar.php';  ?>
 
-    <!-- items -->
-  <div class="container_content">
-
+<!-- items -->
+<div class="container_content">
+  
+  <div class="container_title_cont">
+  <p class="container_title">Marketplace</p>
+  </div>
+  
 
  
   <div class="marketplace_container_main">
@@ -62,9 +66,7 @@ function paramString($validParams){
 
 
      <div class="searchbar_cont ">
-      <div class="searchbar_title_cont">
-        <h3 class="searchbar_title">Marketplace</h3>
-      </div>
+
       <div class="search_cont">
       <div class="searchbar">
         <form id="searchForm">

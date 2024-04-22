@@ -12,10 +12,10 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-<?php
- require APPROOT. '/views/layouts/navbar2.php'; 
- ?>
 
+    <?php
+     require APPROOT. '/views/layouts/navbar2.php'; 
+     ?>
 <div class="main_container">
 
 <?php 
@@ -23,13 +23,17 @@
 
 <div class="container_content">
 
+<div class="container_title_cont">
+  <p class="container_title">Home</p>
+  </div>
+
 <div class="profile">
    
-        <div class="hed">
+        <!-- <div class="hed">
             <h3>Home</h3>
-        </div>
+        </div> -->
 
-        <div class="main-container">
+        <!-- <div class="main-container"> -->
            
         
 
@@ -250,10 +254,10 @@
         <!-- Content -->
     
         </div>
-        </div>
-    </div>
+        <!-- </div> -->
+    <!-- </div> -->
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
-    <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+    <script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
 
 </body>
 </html>

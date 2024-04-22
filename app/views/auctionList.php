@@ -41,13 +41,17 @@
 
 <div class="container_content">
         <!-- =============== Container ====================== -->
+
+        <div class="container_title_cont">
+  <p class="container_title">Auction Listing</p>
+  </div>
         
    
   <!-- <h4 class="H4center">List Product</h4> -->
   <div class="listing_container">
-  <div class="title_container">
+  <!-- <div class="title_container">
       <h4>Auction Listing</h1>
-  </div>
+  </div> -->
 
   <div class="form_container">
 

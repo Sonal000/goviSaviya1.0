@@ -115,7 +115,7 @@
     </div>
 
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
-<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
 
 </body>
 </html>
