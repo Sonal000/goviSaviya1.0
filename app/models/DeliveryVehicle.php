@@ -270,6 +270,21 @@
         }
     }
 
+    public function hasVehicle($id){
+    
+        $query = "SELECT COUNT(*) as vehicle_count FROM vehicle WHERE user_id = :user_id AND is_deleted=0";
+        $this->db->query($query);
+        $this->db->bind(':user_id',$id);
+        $row = $this->db->single();
+        if($row->vehicle_count==0){
+        return 0;
+        }else{
+            return 1;
+        }
+
+    }
+
+    
     
 
 

@@ -30,8 +30,53 @@
         </div>
 
         <div class="main-container">
+
+        <?php if($data['hasVehicle']==0){ ?>
+
+
+<!-- This is the card if the Delivery agent has no vehicles added -->
+<div class="cardNo">
+        <div class="noVehicleCard">
+             
+            <div class="heading">
+            Welcome to <span class="govi">Govisaviya</span> Delivering! 
+            </div>
+            <div class="details ">
+            We're thrilled to have you here. To get started with deliveries, 
+            ensure you've added a vehicle to your account.
+            </div><div class="details details_two">
+            Let's begin!
+            </div>
+
+            <div class="addVehicleCard">
+                <div class="image">
+                   <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                </div>
+                <div class="helo">
+                    <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles/add'?>">Add Vehicle</a></button>
+                </div>
+
+            </div>
+
+        </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
            
-        
+        <?php }else{ ?>
 
 
             <div class="greeting_card">
@@ -137,10 +182,17 @@
                     <div class="card_details">
                         
                             <div class="card_heading_oos">Ongoing Order Status</div>
+                            
+             <div class="progress_bar">
+             <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Order Confirmed</div>
+             <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Picked from Seller</div>
+             <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Quality confirmed: Pickup</div>
+             <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Order Delivered</div>
+             <div class="more_info"><i class="fa-regular fa-circle-check"></i> </i> Quality Confirmed: Drop-off</div>
                 
-                            <div class="big_circle">
-                                
-                            </div>
+             </div>
+                
+                            
                         
                         
                     
@@ -260,8 +312,8 @@
             </div>
 
 
-
-
+<?php }?>
+<!-- --------------------------------------------- -->
 
 
             </div>

@@ -3,8 +3,10 @@
 class Orders extends Controller{
     private $orderModel;
     private $notifiModel;
+    private $VehicleModel;
     public function __construct(){
-        $this->orderModel=$this->model("Order"); 
+        $this->orderModel=$this->model("Order");
+        $this->VehicleModel =$this->model('DeliveryVehicle'); 
         $this->notifiModel=$this->model("Notifi"); 
         if(!isset($_SESSION['user_id'])){
             $this -> view('_404');
@@ -49,9 +51,11 @@ class Orders extends Controller{
        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
             $deliver_id = $_SESSION['deliver_id'];
             $orders = $this->orderModel->getDeliverOrders($_SESSION['deliver_id']);
+            $hasVehicle = $this->VehicleModel->hasVehicle($_SESSION['user_id']);
             
         $data=[
             "orders"=>$orders,
+            "hasVehicle"=>$hasVehicle
         ];
         $this -> view('availableOrdersDelivery',$data);
 

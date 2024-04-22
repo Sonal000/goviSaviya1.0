@@ -742,6 +742,7 @@ public function getRequestOrderDetails($id){
     u_seller.mobile AS seller_mobile,
     u_seller.city AS seller_city,
     u_buyer.name AS buyer_name,
+    u_buyer.address AS buyer_address,
     u_buyer.user_id AS buyer_user_id,
     od.order_id AS order_id,
     od.order_city AS order_city,
@@ -1811,7 +1812,7 @@ public function getRecommendedOrders($deliver_id){
 }
 
 
-public function getDeliverReviews($deliver_id){
+public function getDeliverReviewsById($deliver_id){
 
    
 
@@ -1899,6 +1900,43 @@ public function getDeliverReviews($deliver_id){
     }
 
 }
+
+public function getDeliverReviews($deliver_id){
+    $query = "SELECT
+                dr.review,
+                dr.posted_date AS p_date,
+                u.name AS buyer_name,
+                order_item_id AS item_id,
+                order_type
+
+                
+                FROM 
+                    delivery_review dr
+                JOIN
+                    buyers b ON b.buyer_id = dr.buyer_id
+                JOIN
+                    users u ON u.user_id = b.user_id
+                WHERE 
+                    deliver_id = :deliver_id
+                ORDER BY 
+                    p_date"
+                    
+                    ;
+                
+                $this->db->query($query);
+                $this->db->bind(':deliver_id',$deliver_id);
+                $row = $this->db->resultSet();
+
+                if($row){
+                    return $row;
+                }else{
+                    return false;
+                }
+
+                
+}
+
+
 
 
 

@@ -65,14 +65,13 @@
   
   .mycardd{
     box-shadow: var(--dark-shadow);
-    padding:4rem;
+    padding: 2rem 1rem;
     border-radius: var(--radius-low);
     display: flex;
     flex-direction: row;
-    margin-top: 1rem;
     transition: box-shadow 0.3s ease-in-out;
     justify-content: space-around;
-  
+
   }
 
 
@@ -123,14 +122,12 @@
       }
 
       .square_card{
-        box-shadow: var(--dark-shadow);
-    padding:2rem 4rem;
-    
+    box-shadow: var(--dark-shadow);
+    padding:2rem 8rem;
     border-radius: var(--radius-low);
     display: flex;
     flex-direction: column;
-    margin: 0rem 3rem;
-    margin-bottom: 3rem;
+  
     
       }
 

@@ -26,12 +26,48 @@
 <div class="container_content">
 
 <div class="profile">
+
+
     <div class="auction_page">
         <div class="hed">
             Available Orders
         </div>
         
-   
+  
+ <?php if($data['hasVehicle']==0){ ?> 
+
+
+<div class="cardNo">
+
+    <div class="noVehicleCard">
+             
+             <div class="heading">
+             Welcome to <span class="govi">Govisaviya</span> Delivering! 
+             </div>
+             <div class="details ">
+             To view <span class="govi">Available Orders</span> and start delivering, please ensure you've added a vehicle to your account.
+             </div><div class="details details_two">
+             Let's begin!
+             </div>
+ 
+             <div class="addVehicleCard">
+                 <div class="image">
+                    <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                 </div>
+                 <div class="helo">
+                     <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles/add'?>">Add Vehicle</a></button>
+                 </div>
+ 
+             </div>
+ 
+         </div>
+         </div>
+
+
+
+
+
+    <?php }else{ ?>
         <?php 
         if($data['orders']){
             foreach($data['orders'] as $orders){
@@ -107,7 +143,7 @@
 
         } ?>
 
-
+<?php }?>
             
         </div>
         </div>
