@@ -8,7 +8,9 @@
   
   .mycardd{
     box-shadow: var(--dark-shadow);
-    padding:4rem;
+    padding:2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     border-radius: var(--radius-low);
     display: flex;
     flex-direction: row;
@@ -118,7 +120,7 @@
     
     max-width: 60%;
     min-width: 60%;
-    padding: 2rem 5rem;
+    padding: 0.7rem 5rem;
 }
 
 .card_heading{
@@ -164,7 +166,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-
+   
     align-items: center;
     text-align: center;
     justify-content: center;
@@ -193,8 +195,8 @@
 }
 
 .card_heading_oos{
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 
@@ -285,12 +287,46 @@
 .big_circle{
     background-color: white;
     border-radius: 100%;
-    border: #4BAA4E solid 9px;
-    height: 10rem;
-    width: 10rem;
+    border: #4BAA4E solid 5px;
+    height: 6rem;
+    width: 6rem;
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: center;
     margin: 3rem;
+}
+
+.no_order{
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.button {
+    margin: 1rem;
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+/* Hover effect */
+.button:hover {
+    background-color: #45a049;
+}
+
+.button a{
+    color: white;
 }

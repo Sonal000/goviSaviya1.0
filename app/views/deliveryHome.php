@@ -107,7 +107,7 @@
                             <div class="details"><i class="fa-solid fa-user"></i>  Buyer:<?php echo $data['details']->buyer_name;?></div>
                         
                             <div class="view_btn">
-                                <a href="#"> <button class="btn">View More</button></a>
+                                <a href="<?php echo URLROOT ?>/orders/ongoing/"> <button class="btn">View More</button></a>
                             </div>    
                             
 
@@ -119,7 +119,11 @@
                   
                     <div class="no_order">
                         No ongoing orders currently
+                        <div class="buttons">
+                        <button class="button"><a href="<?php echo URLROOT;?>/orders/">View Orders</a></button>
+                        </div>
                     </div>
+
 
 
 
@@ -201,38 +205,57 @@
 
                         </div> -->
 
-                    
-                    <?php for ($i = 1; $i <= 3; $i++):?> 
-                        <div class="recomended_order">
+                        
+                        <?php
+                        $itemCount = 0; // Initialize counter variable
+                        if ($data['reco'] && is_array($data['reco'])) :
+                            foreach ($data['reco'] as $items) :
+                                if (is_array($items)) :
+                                    foreach ($items as $item) :
+                                        // Check if item count is less than 3
+                                        if ($itemCount < 3) :
+                                            ?>
+                                            <div class="recomended_order">
+                                                <div class="rec_odr_img">
+                                                    <img class="item_img" src="<?php echo URLROOT . '/store/items/' . $item->item_img; ?>">
+                                                </div>
+                                                <div class="rec_odr_details_withBtn">
+                                                    <div class="rec_odr_details">
+                                                        <div class="rec_odr_h"><?php echo $item->item_name; ?></div>
+                                                        <div class="rec_odr_txt">From: <?php echo $item->seller_address; ?></div>
+                                                        <div class="rec_odr_txt">To: <?php echo $item->buyer_address; ?></div>
+                                                    </div>
+                                                    <div class="view_more_btn"><a href="<?php echo URLROOT ?>/orders/info/<?php echo $item->order_id ?>/<?php echo $item->order_item_id ?>/<?php echo $item->order_type ?>"><button class="btn">View More</button></a></div>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            $itemCount++; // Increment counter variable
+                                        else:
+                                            break; // Exit the loop once item count reaches 3
+                                        endif;
+                                    endforeach;
+                                endif;
+                            endforeach;
+                        else:
+                            // If $data['reco'] is empty, display "No recommended orders"
+                            echo "No recommended orders";
+                        endif;
+                        ?>
 
-                        <div class="rec_odr_img">
-                                <img class="item_img" src="<?php echo URLROOT.'/store/items/pine.jpg';?>">
-                            </div>
 
-                            <div class="rec_odr_details_withBtn">
-                                <div class="rec_odr_details">
-                                    <div class="rec_odr_h">Pineapple</div>
-                                    <div class="rec_odr_txt">From: Galle</div>
-                                    <div class="rec_odr_txt">To: Ratnapura</div>
-                                </div>
-
-                                <div class="view_more_btn"><a href="#"> <button class="btn">View More</button></a></div>    
-                               
-                            </div>
-
-
-                        </div>
-                            <?php endfor ?>
+                            
 
                     </div>
+                        <?php if($data['reco'] && is_array($data['reco'])): ?>
 
                     <div class="see_all_btn">
 
                             <div class="view_more_btn"><a href="<?php echo URLROOT.'/orders'?>"> <button class="btn">View All Available Orders</button></a></div>  
                   
                     </div>
-
-
+<?php
+                endif;
+                        ?>
 
             </div>
 
