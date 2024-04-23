@@ -33,6 +33,40 @@
   <div class="profile">
     <div class="auction_page">
 
+    <?php if($data['hasVehicle']==0){ ?>
+
+        <div class="cardNo">
+
+    <div class="noVehicleCard">
+             
+             <div class="heading">
+             Welcome to <span class="govi">Govisaviya</span> Delivering! 
+             </div>
+             <div class="details ">
+             To continue with <span class="govi">Ongoing Orders,</span> and start delivering, please ensure you've added a vehicle to your account.
+             </div><div class="details details_two">
+             Let's begin!
+             </div>
+ 
+             <div class="addVehicleCard">
+                 <div class="image">
+                    <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                 </div>
+                 <div class="helo">
+                     <button class="buttonn addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
+                 </div>
+ 
+             </div>
+ 
+         </div>
+         </div>
+
+
+
+
+
+        <?php }else{ ?>
+
     <?php if($data['details']) {?>
 
 
@@ -111,15 +145,37 @@
         
         <?php }else{?>
 
-                <div class="nocard">
-                    <div class="no_title">No orders are currently selected. Please click below to choose an order.</div>
-                    <div class="button">
-                    <button><a href="<?php echo URLROOT; ?>/orders">View Orders</a></button>
-                    </div>
-                </div>
+            <div class="cardNo">
+
+<div class="noVehicleCard">
+         
+         <div class="heading">
+         No orders Selected
+         </div>
+         <div class="details ">
+         Please click below to choose an order and proceed with your delivery.
+         </div><div class="details details_two">
+         Let's begin!
+         </div>
+
+         <div class="addVehicleCard">
+             <div class="image">
+                <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+             </div>
+             <div class="helo">
+                 <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
+             </div>
+
+         </div>
+
+     </div>
+     </div>
+
+
 
               
 
+            <?php }?>
             <?php }?>
 
             

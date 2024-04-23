@@ -706,6 +706,7 @@ public function getOrderDetails($id){
     u_seller.city AS seller_city,
     u_buyer.name AS buyer_name,
     u_buyer.user_id AS buyer_user_id,
+    u_buyer.mobile AS buyer_mobile,
     u_buyer.address AS buyer_address,
     od.order_id AS order_id,
     od.order_city AS order_city,
@@ -715,6 +716,7 @@ public function getOrderDetails($id){
     b.prof_img AS buyer_img,
     COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
     COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+    COALESCE(u_deliver.address, 'No Deliver assigned') AS deliver_address,
     i.item_img,
     i.name AS item_name,
     i.unit AS item_unit
@@ -764,6 +766,7 @@ public function getAuctionOrderDetails($id){
     u_seller.city AS seller_city,
     u_buyer.name AS buyer_name,
     u_buyer.user_id AS buyer_user_id,
+    u_buyer.mobile AS buyer_mobile,
     u_buyer.address AS buyer_address,
     od.order_id AS order_id,
     od.order_city AS order_city,
@@ -773,6 +776,7 @@ public function getAuctionOrderDetails($id){
     b.prof_img AS buyer_img,
     COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
     COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+    COALESCE(u_deliver.address, 'No Deliver assigned') AS deliver_address,
     i.item_img,
     i.name AS item_name,
     i.unit AS item_unit
@@ -821,7 +825,9 @@ public function getRequestOrderDetails($id){
     u_seller.mobile AS seller_mobile,
     u_seller.city AS seller_city,
     u_buyer.name AS buyer_name,
+    u_buyer.address AS buyer_address,
     u_buyer.user_id AS buyer_user_id,
+    u_buyer.mobile AS buyer_mobile,
     od.order_id AS order_id,
     od.order_city AS order_city,
     od.order_address AS order_address,
@@ -830,6 +836,7 @@ public function getRequestOrderDetails($id){
     b.prof_img AS buyer_img,
     COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
     COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+    COALESCE(u_deliver.address, 'No Deliver assigned') AS deliver_address,
     -- r.item_img,
     r.name AS item_name,
     r.unit AS item_unit
@@ -2080,13 +2087,9 @@ public function getRecommendedOrders($deliver_id){
 
 }
 
+public function getDeliverReviewsById($deliver_id){
 
-
-public function getDeliverReviews($deliver_id){
-
-   
-
-    $query = "SELECT
+   $query = "SELECT
                     dr.review AS review,
                     dr.posted_date AS o_date,
                     o.quantity AS quantity,
@@ -2169,7 +2172,7 @@ public function getDeliverReviews($deliver_id){
         return false;
     }
 
-=======
+
 public function getAucID($id){
     $this->db->query('SELECT auction_id FROM order_items_ac WHERE order_id =:id');
     $this->db->bind(':id',$id);
@@ -2345,7 +2348,40 @@ public function getDetailsforInvoice($seller_id,$order_item_id,$order_id,$type){
 
 }
 
+public function getDeliverReviews($deliver_id){
+    $query = "SELECT
+                dr.review,
+                dr.posted_date AS p_date,
+                u.name AS buyer_name,
+                order_item_id AS item_id,
+                order_type
 
+                
+                FROM 
+                    delivery_review dr
+                JOIN
+                    buyers b ON b.buyer_id = dr.buyer_id
+                JOIN
+                    users u ON u.user_id = b.user_id
+                WHERE 
+                    deliver_id = :deliver_id
+                ORDER BY 
+                    p_date"
+                    
+                    ;
+                
+                $this->db->query($query);
+                $this->db->bind(':deliver_id',$deliver_id);
+                $row = $this->db->resultSet();
+
+                if($row){
+                    return $row;
+                }else{
+                    return false;
+                }
+
+                
+}
 
 
 }

@@ -13,11 +13,11 @@ class DeliveryRatings extends Controller{
     public function index(){
         $deliver_id = $_SESSION['deliver_id'];
         $reviews = $this->orderModel->getDeliverReviews($deliver_id);
-
+        
+        
 
         $data = ['reviews'=>$reviews];
-        var_dump($deliver_id);
-        var_dump($reviews);
+        
         $this -> view('deliveryRatings',$data);
     }
 

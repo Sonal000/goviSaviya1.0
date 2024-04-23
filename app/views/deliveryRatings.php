@@ -31,55 +31,50 @@
         
         
 <!-- 1st Card------------------------------------------------------------------------------------- -->
-<?php if (!empty($data['reviews'])) : ?>
-    <?php foreach ($data['reviews'] as $review) : ?>
-
+<?php if (!empty($data['reviews'])) { ?>
+    <?php foreach ($data['reviews'] as $review) { ?>
         <div class="mycardd">
-
             <div class="productimg">
-               
                 <div class="post_left">
-                <div class="pro_detail">
-                <div class="stars">
-                <i class ="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                    </div>    
-
-                    <div class="reviewer_name">
-                        Santhush Fernando
-                    </div>
-                    <div class="review_content">
+                    <div class="pro_detail">
+                        <!-- <div class="stars">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>     -->
+                        <div class="reviewer_name">
+                            <?php echo $review->buyer_name; ?>
+                        </div>
+                        <div class="review_content">
+                            <?php echo $review->review; ?>
+                        </div>
+                        <div class="addDate">
+                            Posted On: <?php echo $review->p_date; ?>
+                        </div>
+                        <div class="details_view">
                         
-                    I am delighted to share my positive experience with Sudesh Perera. The delivery was not only punctual but also carried out with the utmost professionalism and care. My package arrived in perfect condition, which was crucial for me as it contained fragile items. The straightforward online booking process, clear pricing, and excellent communication throughout the delivery were highly commendable. Furthermore, their competitive pricing and flexible delivery options make them stand out in the market. I am truly satisfied with their service and will certainly be a returning customer, as well as recommending them to others. 
-                    </div>
-                    <div class="addDate">
-                        Posted on: 19 Sep 2023
-                    </div>
-                    <div class="details_view">
-                    
+                        </div>
                     </div>
                 </div>
-                
             </div>
-            </div>
-             
-    </div>
-    <?php endforeach; ?>
-    <?php else : ?>
+                <div class="update_edit_bt">
+                    <button class="button"><a href="#">View More</a></button>
+                </div>
+        </div>
+    <?php } ?>
+<?php } else { ?>
     <p>No reviews found.</p>
-<?php endif; ?>
+<?php } ?>
+
             
         
         </div>
         
    <!-- 2nd Card------------------------------------------------------------------------------------- -->
 
-   <!-- <?php foreach($data['result'] as $result):?>
-    <?php endforeach; ?> -->
-  
+   
  
         <!-- 3rd Card------------------------------------------------------------------------------------- -->
 
