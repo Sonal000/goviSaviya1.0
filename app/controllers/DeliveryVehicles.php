@@ -15,14 +15,15 @@ class DeliveryVehicles extends Controller{
         $userId = $_SESSION['user_id'];       
         $vehicles = $this->VehicleModel->getVehicles($userId);
         $available = $this->VehicleModel->checkVehicleAdd($userId);
-        
+        $pending = $this->VehicleModel->hasPendingVehicle($userId); 
 
         $data = [
             'title'=>'welcome',
             'id' => $userId,
             'vehicles' => $vehicles,
-            'available' => $available
+            'pending' => $pending
         ];
+        
         $this -> view('deliveryVehicles',$data);
     }
 
@@ -175,6 +176,7 @@ class DeliveryVehicles extends Controller{
         $backImg = $this->uploadFile('back_img', $uploadDirectory);
         $revLicenseImgs = $this->uploadFile('rev_license_imgs', $uploadDirectory);
         $insuranceImgs = $this->uploadFile('insurance_imgs', $uploadDirectory);
+        $licenseImgs = $this->uploadFile('license_imgs', $uploadDirectory);
         
         $data = [
             'id' => $_SESSION['user_id'],
@@ -189,6 +191,7 @@ class DeliveryVehicles extends Controller{
             'vehicle_img' =>  $vehicleImg,
             'front_img' =>  $frontImg,
             'back_img' =>  $backImg,
+            'license_imgs' => $licenseImgs,
             'rev_expiry'=>trim($_POST['rev_expiry']),
             'rev_license_imgs'=>$revLicenseImgs,
             'insurance_status'=>trim($_POST['insurance_status']),
@@ -210,6 +213,7 @@ class DeliveryVehicles extends Controller{
             'front_img_error' =>'' ,
             'back_img_error' => '',
             'rev_expiry_error'=>'',
+            'license_imgs_error'=>'',
             'rev_license_imgs_error'=>'',
             'insurance_status_error'=>'',
             'insurance_imgs_error'=>'',
@@ -275,6 +279,10 @@ class DeliveryVehicles extends Controller{
                 $data['rev_license_imgs_error'] = 'Please upload photos of revenue license of the vehicle';
             }
 
+            if(empty($data['license_imgs'])){
+                $data['rev_license_imgs_error'] = 'Please upload photos of revenue license of the vehicle';
+            }
+
             if(empty($data['insurance_status'])){
                 $data['insurance_status_error'] = 'Please select the type of insurance the vehicle';
             }
@@ -304,6 +312,7 @@ class DeliveryVehicles extends Controller{
             && empty($data['insurance_status_error']) 
             && empty($data['insurance_imgs_error'])&& empty($data['max_vol_error'])
             && empty($data['ref_cap_error'])  && empty($data['ins_expiry_error'])){
+                
                 //Validated
                 if($this->VehicleModel->addVehicle($data)){
                 //Here it should show a pop up message saying the post is added successfully-----------            
@@ -315,6 +324,7 @@ class DeliveryVehicles extends Controller{
             }else{
                 //Load the view with errors
                 $this->view('vehicleAdd',$data);
+                
             }
         }else{
             $data = [
@@ -331,6 +341,7 @@ class DeliveryVehicles extends Controller{
             'back_img' => '',
             'rev_expiry'=>'',   
             'rev_license_imgs'=>'',
+            'license_imgs'=>'',
             'insurance_status'=>'',
             'ins_expiry'=>'',
             'insurance_imgs'=>'',
@@ -350,6 +361,7 @@ class DeliveryVehicles extends Controller{
             'back_img_error' => '',
             'rev_expiry_error'=>'',           
             'rev_license_imgs_error'=>'',
+            'license_imgs_error'=>'',
             'insurance_status_error'=>'',
             'ins_expiry_error'=>'',
             'insurance_imgs_error'=>'',

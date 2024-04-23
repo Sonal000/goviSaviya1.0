@@ -73,9 +73,11 @@
 
                     
                      </div>    
-        </div>     
-
-    </div>
+        </div>  
+         <div class="my_button"> 
+<button class="btn"><a href="<?php echo URLROOT.'/invoice/' . $data['order']->order_item_id .'/'.  $data['order']->order_id .'/'.  $data['type'] ?>">View Invoice</a></button>
+    
+</div> </div>
 
     
     <div class="hed"> Delivery Review Given by <?php echo $data['order']->buyer_name ?></div>

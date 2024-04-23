@@ -1,12 +1,12 @@
+console.log("Start:", startValue);
+console.log("End:", endValue);
 
-
-let map, infoWindow, directionsService, directionsRenderer,geocoder;
+let map, infoWindow, directionsService, directionsRenderer, geocoder;
 
 async function initMap() {
-
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
-    "marker",
+    "marker"
   );
   geocoder = new google.maps.Geocoder();
 
@@ -23,8 +23,8 @@ async function initMap() {
   directionsRenderer.setMap(map);
   const startValue = document.getElementById("start").value;
   const endValue = document.getElementById("end").value;
-  calculateAndDisplayRoute(startValue, endValue);
 
+  calculateAndDisplayRoute(startValue, endValue);
 
   async function getPositionData(address) {
     try {
@@ -33,11 +33,13 @@ async function initMap() {
           if (status === "OK" && results && results.length > 0) {
             resolve(results);
           } else {
-            reject("Geocode was not successful for the following reason: " + status);
+            reject(
+              "Geocode was not successful for the following reason: " + status
+            );
           }
         });
       });
-  
+
       const { location } = results[0].geometry;
       return location;
     } catch (error) {
@@ -45,23 +47,22 @@ async function initMap() {
     }
   }
 
-  async function CreateMarker(address,title) {
+  async function CreateMarker(address, title) {
     try {
       const position = await getPositionData(address);
       console.log("Position data:", position.lat(), ",", position.lng());
-      
-  const markerViewWithText = new AdvancedMarkerElement({
-    map,
-    position: position,
-    title: title,
-  });
+
+      const markerViewWithText = new AdvancedMarkerElement({
+        map,
+        position: position,
+        title: title,
+      });
     } catch (error) {
       console.error(error);
     }
   }
-  
+
   // main();
-  
 
   function calculateAndDisplayRoute(origin, destination) {
     directionsService.route(
@@ -78,55 +79,31 @@ async function initMap() {
         }
       }
     );
-  
-  
+  }
 
-}
+  const onChangeHandler = function () {
+    const startValue = document.getElementById("start").value;
+    const endValue = document.getElementById("end").value;
+    CreateMarker(startValue, "Start");
+    calculateAndDisplayRoute(startValue, endValue);
+  };
 
+  document.getElementById("start").addEventListener("change", onChangeHandler);
+  document.getElementById("end").addEventListener("change", onChangeHandler);
 
-
-
-
-
-
-
-
-const onChangeHandler = function () {
-  const startValue = document.getElementById("start").value;
-  const endValue = document.getElementById("end").value;
-  CreateMarker(startValue,"Start");
-  calculateAndDisplayRoute(startValue, endValue);
-};
-
-document.getElementById("start").addEventListener("change", onChangeHandler);
-document.getElementById("end").addEventListener("change", onChangeHandler);
-
-
-
-
-
-
-
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(
-    browserHasGeolocation
-      ? "Error: The Geolocation service failed."
-      : "Error: Your browser doesn't support geolocation."
-  );
-  infoWindow.open(map);
-}
-
-
-
-
-
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(
+      browserHasGeolocation
+        ? "Error: The Geolocation service failed."
+        : "Error: Your browser doesn't support geolocation."
+    );
+    infoWindow.open(map);
+  }
 }
 
 window.initMap = initMap;
 // initMap(); // Call initMap to initialize the map
-
-
 
 // const current = document.getElementById("current");
 // current.addEventListener("click", () => {

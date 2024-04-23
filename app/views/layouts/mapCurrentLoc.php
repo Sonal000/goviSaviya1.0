@@ -12,7 +12,7 @@
   <body>
     <div id="map"></div>
 
-    <div class="dir_container">
+    <!-- <div class="dir_container">
     <div>
 <strong>Start: </strong>
 <select id="start">
@@ -29,7 +29,7 @@
 
 <button id="current">Get current address</button>
 </div>
-</div>
+</div> -->
 
     <script
       src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLEAPI ?>&callback=initMap&v=weekly&libraries=advanced-markers"

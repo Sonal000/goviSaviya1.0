@@ -196,10 +196,37 @@
     justify-content: space-between;
     align-items: center;
     flex: 0.2;
-    margin-right: 2rem;
+    justify-content: center;
+    
     width: 100%;
     
     
+}
+
+
+.button{
+  padding: 0.7rem 1.5rem;
+  border-radius: 2rem;
+  background-color: #449C47;
+  border: none;
+  letter-spacing: var(--spacing-low);
+  transition: 0.3s;
+}
+.button a{
+  color: white;
+  transition: 0.3s;
+  
+}
+
+.button a:hover{
+  color: white;
+  color: #38803A;
+}
+
+.button:hover{
+  color: #38803A;
+  background-color: #8ECD90;
+  
 }
 
   .onion{

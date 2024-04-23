@@ -33,16 +33,65 @@
             <h3>Home</h3>
         </div> -->
 
+
+        <div class="main-container">
+
+        <?php if($data['hasVehicle']==0){ ?>
+
+
+<!-- This is the card if the Delivery agent has no vehicles added -->
+<div class="cardNo">
+        <div class="noVehicleCard">
+             
+            <div class="heading">
+            Welcome to <span class="govi">Govisaviya</span> Delivering! 
+            </div>
+            <div class="details ">
+            We're thrilled to have you here. To get started with deliveries, 
+            ensure you've added a vehicle to your account.
+            </div><div class="details details_two">
+            Let's begin!
+            </div>
+
+            <div class="addVehicleCard">
+                <div class="image">
+                   <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                </div>
+                <div class="helo">
+                    <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
+                </div>
+
+            </div>
+
+        </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- <div class="main-container"> -->
+
            
-        
+        <?php }else{ ?>
+
 
 
             <div class="greeting_card">
 
             <?php
-                    // Fetching weather forecast (You need to implement this part)
-                    $weather_forecast = "Sunny"; // Example weather forecast
+                    
 
                     // Set the time zone to Sri Lanka
                     date_default_timezone_set('Asia/Colombo');
@@ -66,7 +115,7 @@
                     <div class="greeting-card">
                         <div class="greeting"><?php echo $greeting_message; ?></div>
                         <div class="date"><?php echo $current_date; ?></div>
-                        <div class="weather">Weather: <?php echo $weather_forecast; ?></div>
+                        
                     </div>    
                                 
             </div>
@@ -75,7 +124,22 @@
             <h3>Ongoing Order</h3>
         </div>
 
+        <?php
+            if($data['details']){ 
+                ?>
+           
 
+
+            <div id="map_cont" data-start='gampaha' data-end='matara'> 
+                <input id="start" type="hidden" value="<?php echo $data['details']->seller_address  ?>" name="start">
+                <input id="end" type="hidden" value="<?php echo $data['details']->order_address  ?>" name="end">
+                <?php       
+                require APPROOT. '/views/layouts/mapCurrentLoc.php'; 
+             ?>
+                </div>
+            <?php
+            }
+            ?>
                     
             <div class="first_col">
 
@@ -141,10 +205,17 @@
                     <div class="card_details">
                         
                             <div class="card_heading_oos">Ongoing Order Status</div>
+                            
+             <div class="progress_bar">
+             <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Order Confirmed</div>
+             <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Picked from Seller</div>
+             <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Quality confirmed: Pickup</div>
+             <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Order Delivered</div>
+             <div class="more_info"><i class="fa-regular fa-circle-check"></i> </i> Quality Confirmed: Drop-off</div>
                 
-                            <div class="big_circle">
-                                
-                            </div>
+             </div>
+                
+                            
                         
                         
                     
@@ -159,6 +230,8 @@
 
 
             </div>
+
+
 
             <!-- This is the Second Col --------------------------------->
 
@@ -264,8 +337,8 @@
             </div>
 
 
-
-
+<?php }?>
+<!-- --------------------------------------------- -->
 
 
             </div>
@@ -284,6 +357,7 @@
     <!-- </div> -->
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
     <script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
+    <script src="<?php echo URLROOT ?>/assets/js/deliveryHomeMap.js"></script>
 
 </body>
 </html>

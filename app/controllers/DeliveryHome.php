@@ -23,10 +23,7 @@ class DeliveryHome extends Controller{
 
 
 
-
-
         $this -> view('deliveryHome',$data);
     }
-
-   
+  
 }

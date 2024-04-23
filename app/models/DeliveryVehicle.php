@@ -52,13 +52,13 @@
                             vehicle_number,max_capacity
                             ,vehicle_brand,vehicle_model,vehicle_year,
                             fuel_type,milage,vehicle_img,front_img
-                            ,back_img,rev_expiry,rev_license_imgs,insurance_status,ins_expiry
+                            ,back_img,rev_expiry,rev_license_imgs,license_imgs,insurance_status,ins_expiry
                             ,insurance_imgs,max_vol,ref_cap) 
                             VALUES
                             (:user_id,:type,
                             :vehicleNo,:capacity,:brand,:model,:year,:fuel_type
                             ,:milage,:vehicle_img,:front_img,:back_img,:rev_expiry
-                            ,:rev_license_imgs,:insurance_status,:ins_expiry,:insurance_imgs
+                            ,:rev_license_imgs,:license_imgs,:insurance_status,:ins_expiry,:insurance_imgs
                             ,:max_vol,:ref_cap)');
 
         //Bind Values
@@ -76,6 +76,7 @@
         $this->db->bind(':back_img', $data['back_img']);
         $this->db->bind(':rev_expiry', $data['rev_expiry']);
         $this->db->bind(':rev_license_imgs', $data['rev_license_imgs']);
+        $this->db->bind(':license_imgs', $data['license_imgs']);
         $this->db->bind(':insurance_status', $data['insurance_status']);
         $this->db->bind(':ins_expiry', $data['ins_expiry']);
         $this->db->bind(':insurance_imgs', $data['insurance_imgs']);
@@ -210,7 +211,7 @@
 
     public function countVehicles($id){
     
-        $query = "SELECT COUNT(*) as vehicle_count FROM vehicle WHERE user_id = :user_id AND is_deleted=0";
+        $query = "SELECT COUNT(*) as vehicle_count FROM vehicle WHERE user_id = :user_id AND is_deleted=0 AND approval='approved'";
         $this->db->query($query);
         $this->db->bind(':user_id',$id);
         $row = $this->db->single();
@@ -270,6 +271,44 @@
         }
     }
 
+    public function hasVehicle($id){
+    
+        $query = "SELECT COUNT(*) as vehicle_count FROM vehicle WHERE user_id = :user_id AND is_deleted=0 AND approval='approved'";
+        $this->db->query($query);
+        $this->db->bind(':user_id',$id);
+        $row = $this->db->single();
+        if($row->vehicle_count==0){
+        return 0;
+        }else{
+            return 1;
+        }
+
+    }
+
+    public function hasPendingVehicle($id){
+    
+        $query = "SELECT approval FROM vehicle WHERE user_id = :user_id AND is_deleted=0";
+        $this->db->query($query);
+        $this->db->bind(':user_id',$id);
+        $row = $this->db->single();
+       
+        if($row){
+
+        if($row->approval=="pending"){
+        return 1;
+        }elseif($row->approval=="approved"){
+            return 2;
+        }elseif($row->approval=="not_approved"){
+            return 3;
+        }
+        }else{
+            
+            return 4;
+        }
+
+    }
+
+    
     
 
 
