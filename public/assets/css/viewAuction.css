@@ -2,18 +2,41 @@
 
 
 /* viewAuction=========================== */
+.auc_title{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 2rem;
+}
+.win_count{
+  margin-left:1rem ;
+  /* padding: 0.5rem 1rem; */
+  height: 2.2rem;
+  width: 2.2rem;
+  border-radius: 50%;
+  background-color: var(--clr-red-2);
+  color: var(--clr-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-5px);
+}
+.win_count>p{
+  color: var(--clr-white);
 
+}
 .auc_title>h3{
- margin-top: 2rem;
  letter-spacing: var(--spacing-low);
+color: var(--clr-grey-1);
 }
 .bid_items_cont{
  padding: 1rem;
  border: 1px solid var(--clr-grey-8);
  border-radius: var(--radius-low);
- min-height: 40vh;
+ /* min-height: 40vh; */
  max-height: 70vh;
  overflow-Y: scroll;
+ margin-bottom: 1rem;
 }
 .bid_item_img{
  height: 120px;

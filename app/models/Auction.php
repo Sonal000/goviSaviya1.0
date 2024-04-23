@@ -257,6 +257,8 @@ public function getItems($page=1,$perPage=10,$sort=null,$order='ASC',$filter){
     }
    }
 
+ 
+
 
    public function getAuctionInfo($id){
     $this->db->query("SELECT * FROM auction WHERE auction_ID = :auction_ID");
@@ -448,7 +450,15 @@ public function getBidUsersInfo($id){
     if($this->db->execute()){
       $bid_id = $this->db->lastInsertId();
 
-      $this->db->query('UPDATE auction SET bid_Count = bid_Count + 1 WHERE auction_ID = :auction_id');
+      // $this->db->query('UPDATE auction SET bid_Count = bid_Count + 1 WHERE auction_ID = :auction_id');
+      $this->db->query('UPDATE auction 
+                  SET bid_Count = (
+                      SELECT COUNT(*)
+                      FROM bids
+                      WHERE auction_id = :auction_id
+                  )
+                  WHERE auction_ID = :auction_id');
+
       $this->db->bind(':auction_id',$data['auction_id']);
       if($this->db->execute()){
         
@@ -519,13 +529,15 @@ public function getBuyerBids($buyer_id){
     sl.seller_id,
     au.name,
     us.name AS seller_name,
+    us.user_id AS seller_user_id,
     au.bid_Count,
     au.item_img,
     au.exp_date,
     bd.auction_id  
     FROM bids bd
     JOIN auction au ON bd.auction_id = au.auction_ID
-    JOIN sellers sl ON au.seller_ID = sl.seller_id  JOIN users us ON sl.user_id = us.user_id
+    JOIN sellers sl ON au.seller_ID = sl.seller_id  
+    JOIN users us ON sl.user_id = us.user_id
     WHERE buyer_id = :buyer_id
     ORDER BY bd.bid_time DESC
     
@@ -538,7 +550,122 @@ public function getBuyerBids($buyer_id){
     return false;
   }
 }
+public function getBuyerPaymentBids($buyer_id){
+  $this->db->query(
+  " SELECT 
+    DISTINCT bd.auction_id,
+    sl.seller_id,
+    au.name,
+    us.name AS seller_name,
+    us.user_id AS seller_user_id,
+    au.bid_Count,
+    au.item_img,
+    au.exp_date,
+    bd.auction_id  
+    FROM bids bd
+    JOIN auction au ON bd.auction_id = au.auction_ID
+    JOIN sellers sl ON au.seller_ID = sl.seller_id  
+    JOIN users us ON sl.user_id = us.user_id
+    LEFT JOIN order_items_ac o_items ON au.auction_ID = o_items.auction_id
+    LEFT JOIN orders o ON o_items.order_id = o.order_id
+    WHERE bd.buyer_id = :buyer_id AND au.highest_buyer_id = :buyer_id AND COALESCE(o.payment_status, FALSE) = FALSE 
+    ORDER BY bd.bid_time DESC
+    
+    ");
+    $this->db->bind(':buyer_id',$buyer_id);
+  $row=$this->db->resultSet();
+  if($row){
+    return $row;
+  }else{
+    return false;
+  }
+}
+public function getBuyerActiveBids($buyer_id){
+  $this->db->query(
+  " SELECT 
+    DISTINCT bd.auction_id,
+    sl.seller_id,
+    au.name,
+    us.name AS seller_name,
+    us.user_id AS seller_user_id,
+    au.bid_Count,
+    au.item_img,
+    au.exp_date,
+    bd.auction_id  
+    FROM bids bd
+    JOIN auction au ON bd.auction_id = au.auction_ID
+    JOIN sellers sl ON au.seller_ID = sl.seller_id  JOIN 
+    users us ON sl.user_id = us.user_id
+    WHERE buyer_id = :buyer_id AND  (au.highest_buyer_id = 0 )
+    ORDER BY bd.bid_time DESC
+    
+    ");
+    $this->db->bind(':buyer_id',$buyer_id);
+  $row=$this->db->resultSet();
+  if($row){
+    return $row;
+  }else{
+    return false;
+  }
+}
 
+public function getBuyerBidHistory($buyer_id){
+
+  $this->db->query(
+    " SELECT 
+      DISTINCT bd.auction_id,
+      sl.seller_id,
+      au.name,
+      au.highest_buyer_id,
+      au.highest_bid,
+      au.bid_count,
+      us.name AS seller_name,
+      us.user_id AS seller_user_id,
+      o.order_id,
+       COALESCE(o.payment_status, false) AS payment_status,
+      au.bid_Count,
+      au.item_img,
+      au.exp_date,
+      COALESCE(o_items.order_date, NOW()) AS sorted_date ,
+      bd.auction_id  
+      FROM bids bd
+      JOIN auction au ON bd.auction_id = au.auction_ID
+      JOIN sellers sl ON au.seller_ID = sl.seller_id  
+      JOIN users us ON sl.user_id = us.user_id
+      LEFT JOIN order_items_ac o_items ON au.auction_ID = o_items.auction_id
+      LEFT JOIN orders o ON o_items.order_id = o.order_id
+      WHERE bd.buyer_id = :buyer_id AND  (
+        (au.highest_buyer_id != 0 AND au.highest_buyer_id != :buyer_id)
+            OR 
+            (au.highest_buyer_id = :buyer_id AND COALESCE(o.payment_status,FALSE) = TRUE) 
+            )
+      ORDER BY sorted_date DESC
+      
+      ");
+      $this->db->bind(':buyer_id',$buyer_id);
+    $row=$this->db->resultSet();
+    if($row){
+      return $row;
+    }else{
+      return false;
+    }
+}
+
+public function getAuctionpaymentStatus($auction_id){
+  $this->db->query("SELECT 
+                    COALESCE(orders.payment_status,FALSE) AS payment_status
+                    FROM auction 
+                    LEFT JOIN order_items_ac ON auction.auction_ID = order_items_ac.auction_id
+                    LEFT JOIN orders ON order_items_ac.order_id = orders.order_id
+                    WHERE auction.auction_ID= :auction_id ");
+  $this->db->bind(':auction_id',$auction_id);
+  $row=$this->db->Single();
+  if($row){
+    return $row;
+  }else{
+    return false;
+  }
+}
 
 public function changeStatus($id){
 

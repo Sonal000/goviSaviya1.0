@@ -946,7 +946,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d9fccb",endCo
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  border: 1px solid var(--clr-primary-8);
+  /* border: 1px solid var(--clr-primary-8); */
   z-index: 101;
   position: relative;
   /* background: var(--clr-primary-10); */

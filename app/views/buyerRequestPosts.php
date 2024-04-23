@@ -199,7 +199,7 @@
 <!-- bid item ===========-->
 <div class="bid_item_cont  ">
    <div class="bid_item_img_cont">
-     <img  class="bid_item_img" src="<?php echo URLROOT."/store/profiles/".$quotations->seller_img; ?>">
+     <img  class="bid_item_img" src="<?php echo URLROOT."/store/items/".$quotations->req_img; ?>">
   </div> 
   <div class="item_description">
      <div class="item_title_cont">
@@ -262,7 +262,7 @@
                   ?>
             <div class="bid_item_cont">
              <div class="bid_item_img_cont">
-               <img  class="bid_item_img" src="<?php echo URLROOT."/store/profiles/".$pendreq->buyer_img; ?>">
+               <img  class="bid_item_img" src="<?php echo URLROOT."/store/items/".$pendreq->req_img; ?>">
             </div> 
             <div class="pending_req_cont">
             <div class="item_description" id="requests_cont_view">
