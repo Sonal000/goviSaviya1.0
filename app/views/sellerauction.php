@@ -30,11 +30,15 @@
   <div class="container_content">
 <!-- content============================ -->
 
+<div class="container_title_cont">
+  <p class="container_title">Auction</p>
+  </div>
+
 <div class="profile_1">
     <div class="auction_page">
-        <div class="hed">
+        <!-- <div class="hed">
             Auction
-        </div>
+        </div> -->
         <!-- <div class="createbt">
             <a href="<?php echo URLROOT; ?>/CreateAuction"><button class="btn">Create Auction</button></a>
         </div> -->

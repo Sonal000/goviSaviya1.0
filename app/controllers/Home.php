@@ -52,20 +52,41 @@ if(!$availability){
       }elseif($current->current_order_type=="REQUEST"){
       $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
       }
+
+      
       
       $data = [
-        'details' => $order  
+        'details' => $order, 
+        'reco' => false   
       ];
+ 
+      
     }else{
+      $reco = $this->orderModel->getRecommendedOrders($_SESSION['deliver_id']);
+      // var_dump($reco);
+      
       $data = [
+        'reco' => $reco, 
         'details' =>false 
       ];
+     
     }
     // $view;
     $this->view('deliveryHome', $data);
        } 
        else{
         
+
+
+
+
+
+
+
+
+
+
+
     $data =[
       'logged'=>isset($_SESSION['user_id']),
       'username'=>isset($_SESSION['user_id'])?($_SESSION['user_name']):null,
