@@ -2691,6 +2691,7 @@ public function getDeliverReviewsById($deliver_id){
     }
 }
 
+
 public function getAucID($id){
     $this->db->query('SELECT auction_id FROM order_items_ac WHERE order_id =:id');
     $this->db->bind(':id',$id);
