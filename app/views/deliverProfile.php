@@ -266,7 +266,7 @@
     </div>
 </section>
 
-<section class="details_section" >
+<!-- <section class="details_section" >
   <div class="details">
     <div class="vehicle_title">
       <h4>Vehicle info</h4>
@@ -353,7 +353,7 @@
     </div>
 
   </div>
-</section>
+</section> -->
 
 
 

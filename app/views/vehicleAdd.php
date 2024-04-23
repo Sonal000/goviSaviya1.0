@@ -38,13 +38,10 @@
                     <label for="brand">Vehicle Type: <sup>*</sup></label>
                     <select name="type" class="form_details_dropdown <?php echo (!empty($data['type_error'])) ? 'is-invalid' : ''; ?>">
                         <option value="">Select Vehicle Type</option>
-                        <option value="Container Truck" <?php echo ($data['type'] === 'Container Truck') ? 'selected' : ''; ?>>Container Truck</option>
                         <option value="Delivery Truck" <?php echo ($data['type'] === 'Delivery Truck') ? 'selected' : ''; ?>>Delivery Truck</option>
                         <option value="Van" <?php echo ($data['type'] === 'Van') ? 'selected' : ''; ?>>Delivery Van</option>
                         <option value="Pickup Truck" <?php echo ($data['type'] === 'PickupTruck') ? 'selected' : ''; ?>>Pick-up Truck</option>
-                        <option value="Car" <?php echo ($data['type'] === 'Car') ? 'selected' : ''; ?>>Car</option>
-                        <option value="Three Wheeler" <?php echo ($data['type'] === 'Three-Wheeler') ? 'selected' : ''; ?>>Three-Wheeler</option>  
-                        <option value="Bike" <?php echo ($data['type'] === 'Bike') ? 'selected' : ''; ?>>Delivery Bike</option>      
+                        <option value="Three Wheeler" <?php echo ($data['type'] === 'Three-Wheeler') ? 'selected' : ''; ?>>Three-Wheeler</option>
                     </select>
 
                       <!-- <span class="invalid-feedback"><?php echo $data['type_error']; ?></span> -->
@@ -144,9 +141,17 @@
         <!--------------------------------------------This is Card 3------------------------------------------>
 
         <div class="card">
-    <h4>Section 2: Registration and Insurance</h4>  
+    <h4>Section 2: License, Registration and Insurance</h4>  
     <div class="container">
             <div class="column">
+
+            <div class="form-group">
+                    <label for="license_imgs">Driving License images: <br></label>
+                    <input class="form_details <?php echo (!empty($data['license_imgs_error'])) ? 'is-invalid' : ''; ?>" type="file" name="license_imgs" id="license_imgs" accept="image/*" required>
+                    <br><small class="form-text text-muted">Upload images of your Driving license.<br>Accepted formats: JPG, JPEG, PNG, GIF.</small>
+                    <!-- <span class="invalid-feedback"><?php echo $data['license_imgs_error']; ?></span> -->
+                </div>
+
                 <div class="form-group">
                     <label for="vehicleNo">Vehicle License plate number: (ex- WP AAA-0000)</label>
                     <input class="form_details <?php echo (!empty($data['vehicleNo_error'])) ? 'is-invalid' : ''; ?>" type="text" name="vehicleNo" id="vehicleNo" required>

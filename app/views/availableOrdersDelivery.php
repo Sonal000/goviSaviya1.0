@@ -55,7 +55,7 @@
                     <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
                  </div>
                  <div class="helo">
-                     <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles/add'?>">Add Vehicle</a></button>
+                     <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
                  </div>
  
              </div>

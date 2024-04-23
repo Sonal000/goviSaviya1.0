@@ -396,7 +396,7 @@ border: none;
   
 }
 
-.button button {
+.buttonn button {
   margin: 2rem;
   margin-bottom: 1rem;
   background-color: #4BAA4E;
@@ -409,11 +409,96 @@ border: none;
   transition: background-color 0.3s ease;
 }
 
-.button button a {
+.buttonn button a {
   text-decoration: none;
   color: white;
 }
 
-.button button:hover {
+.buttonn buttonn:hover {
   background-color: #3b8c3f; /* Darker shade when hovered */
+}
+
+.noVehicleCard{
+   
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--dark-shadow);
+  width: max-content;
+  
+  border-radius: 2rem;
+  padding: 1rem;
+}
+
+.heading{
+  font-size: 28px;
+  font-weight: 800;
+  
+  
+}
+
+.govi{
+  color: var(--clr-primary-4);
+  font-weight: 900;
+}
+
+.details{
+  font-size: 18px;
+}
+
+.image{
+  padding-top: 1rem;
+  border-top: #ccc solid 2px;
+ margin-top: 2rem;
+margin-bottom: 1rem;
+padding-left: 2rem;
+}
+
+.addVehicleCard{
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardNo{
+  margin: 2rem;
+  width: 100%;
+ 
+  display: flex;
+  justify-content: center;
+
+}
+
+.buttonn {
+  margin: 1rem;
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  transition: 0.3s;
+}
+
+.addVehicle{
+  padding: 1rem 2rem;
+  border-radius: 4rem;
+
+}
+
+/* Hover effect */
+.buttonn:hover {
+  background-color: #45a049;
+}
+
+.buttonn a{
+  color: white;
 }

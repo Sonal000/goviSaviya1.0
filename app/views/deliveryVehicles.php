@@ -26,10 +26,49 @@
 <div class="profile">
    
         <div class="hed">
-            <h3>Delivery Vehicles</h3>
+            <h3>Delivery Vehicle</h3>
         </div>
 
         <div class="main-container">
+        <?php if($data['pending'] == 1) { ?>
+            
+
+
+
+            <!-- Pendingggggggggggggggggggggggggggggggg------------------------------------------------------ -->
+            <div class="cardNo">
+
+    <div class="noVehicleCard">
+             
+             <div class="heading">
+             Thank you for choosing <span class="govi">Govisaviya</span> Delivering! 
+             </div>
+             <div class="details ">
+             We are currently reviewing your vehicle details and will notify you once they have been approved. Your patience is appreciated
+             </div><div class="details details_two">
+             and will notify you once they have been approved. Your patience is appreciated
+             </div>
+ 
+             <div class="addVehicleCard">
+                 <div class="image">
+                    <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                 </div>
+                 <div class="status">Status: <span class="govi">Pending</span></div>
+                
+ 
+             </div>
+ 
+         </div>
+         </div>
+
+         <!-- Pendingggggggggggggggggggggggggggggggg------------------------------------------------------ -->
+
+         <!-- Approveddddddddddddddddddddddddddddddd------------------------------------------------------ -->
+
+            <?php }elseif($data['pending'] == 2){ ?>
+
+
+
             <?php foreach($data['vehicles'] as $vehicle):?>
                 <div class="card card-body">
                     <div class="card-title"><?php echo $vehicle->vehicle_brand?></div>
@@ -47,15 +86,56 @@
 
 
                 </div>
-            <?php endforeach; ?>  
+            <?php endforeach; ?> 
             
-            <?php if(isset($data['available']) && $data['available']) { ?>
+            
+             <!-- Approveddddddddddddddddddddddddddddddd------------------------------------------------------ -->
+
+              <!-- Noooooooooooo Vehicleeeeeeeeeeeeeeeeeee------------------------------------------------------ -->
+            
+            <?php }elseif($data['pending'] == 4) { ?>
             <div class="card card-body subtitle_card">
             <div class="card-subtitle_plus">Add New Vehicle </div>
             <div class="add_logo"><a href="<?php echo URLROOT;?>/deliveryVehicles/add"><i class="fa-solid fa-circle-plus"></a></i></div>
             </div>
 
-            <?php } ?>
+            
+            <?php }elseif($data['pending'] == 3){ ?>
+                <div class="cardNo">
+
+                <!-- Noooooooooooo Vehicleeeeeeeeeeeeeeeeeee------------------------------------------------------ -->
+
+                <!-- Rejectedddddddddddddddddddddddddddddddddddd------------------------------------------------------ -->
+
+
+
+            <div class="noVehicleCard">
+                    
+                    <div class="heading">
+                    <span class="goviR">Sorry,</span> Your Vehicle is Rejected! 
+                    </div>
+                    <div class="details ">
+                    We apologize for any inconvenience this may cause. Review the data and
+                    </div><div class="details details_two">
+                    add again.
+                    </div>
+                    
+
+                    <div class="addVehicleCard">
+                        <div class="image">
+                            <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                        </div>
+                        <div class="helo">
+                     <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles/add'?>">Add Vehicle</a></button>
+                 </div>
+                
+
+                    </div>
+
+                </div>
+                </div>
+                <?php } ?>
+
         </div>
 
         <!-- Content -->

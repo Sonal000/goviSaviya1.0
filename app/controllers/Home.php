@@ -43,6 +43,7 @@
     $availability = $this->orderModel->getDeliverAvailability($deliver_id);
     $reco = $this->orderModel->getRecommendedOrders($_SESSION['deliver_id']);
     $hasVehicle = $this->VehicleModel->hasVehicle($_SESSION['user_id']);
+    
     // $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
     // $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
     // $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);

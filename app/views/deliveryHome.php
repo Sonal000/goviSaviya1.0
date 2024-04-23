@@ -53,7 +53,7 @@
                    <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
                 </div>
                 <div class="helo">
-                    <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles/add'?>">Add Vehicle</a></button>
+                    <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
                 </div>
 
             </div>
@@ -82,8 +82,7 @@
             <div class="greeting_card">
 
             <?php
-                    // Fetching weather forecast (You need to implement this part)
-                    $weather_forecast = "Sunny"; // Example weather forecast
+                    
 
                     // Set the time zone to Sri Lanka
                     date_default_timezone_set('Asia/Colombo');
@@ -107,7 +106,7 @@
                     <div class="greeting-card">
                         <div class="greeting"><?php echo $greeting_message; ?></div>
                         <div class="date"><?php echo $current_date; ?></div>
-                        <div class="weather">Weather: <?php echo $weather_forecast; ?></div>
+                        
                     </div>    
                                 
             </div>

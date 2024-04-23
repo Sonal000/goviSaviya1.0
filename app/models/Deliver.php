@@ -246,5 +246,26 @@ public function updateCoverImage($data){
        $this->db->query('SELECT * from orders'); 
     }
 
+    public function getTotalOrdersCompleted($deliver_id){
+        $query = "SELECT COUNT(*) AS total_completed_orders
+        FROM (
+            SELECT order_id FROM order_items WHERE order_status = 'completed'
+            UNION ALL
+            SELECT order_id FROM order_items_ac WHERE order_status = 'completed'
+            UNION ALL
+            SELECT order_id FROM order_items_rq WHERE order_status = 'completed'
+        ) AS completed_orders_combined;";
+    
+        // Prepare statement
+        $this->db->query($query);
+    
+        // Execute query
+        $this->db->execute();
+    
+        // Fetch single row (since COUNT(*) returns a single value)
+        return $this->db->single()->total_completed_orders;
+    }
+    
+
     
 }

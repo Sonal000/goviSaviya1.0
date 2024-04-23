@@ -143,7 +143,7 @@ public function acceptOrder_PR($order_item_id){
     public function ongoing() {
         if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'deliver') {
             $deliver_id = $_SESSION['deliver_id'];
-    
+            $hasVehicle = $this->VehicleModel->hasVehicle($_SESSION['user_id']);
             $current = $this->orderModel->getDeliverCurrentOrder($deliver_id);
     
             if ($current) {
@@ -158,7 +158,8 @@ public function acceptOrder_PR($order_item_id){
                 if ($order) {
                     // Define $data only if $order is valid
                     $data = [
-                        'details' => $order
+                        'details' => $order,
+                        'hasVehicle' => $hasVehicle  
                         // 'rowB' => $rowB,
                         // 'rowS' => $rowS       
                     ];
@@ -181,7 +182,8 @@ public function acceptOrder_PR($order_item_id){
                 }
             } else {
                 $data = [
-                    'details' => false
+                    'details' => false,
+                    'hasVehicle' => $hasVehicle  
                     // 'rowB' => $rowB,
                     // 'rowS' => $rowS       
                 ];
@@ -441,6 +443,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             $deliver_id = $_SESSION['deliver_id'];
             $id = $order_id;
             $type = $order_type;
+            $order_item_id = $order_item_id;
 
             if($type=="AUCTION"){
                 $order=$this->orderModel->getAuctionOrderDetails($order_item_id);
@@ -456,7 +459,9 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             $data = [
                 'title' => 'welcome',
                 'order' => $order,
-                'available' =>  $available
+                'available' =>  $available,
+                'type' => $type,
+                'order_item_id' => $order_item_id
             ];
 
            
@@ -496,7 +501,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $data = [
                     'title' => 'welcome',
                     'order' => $order,
-                    
+                    'type' => $type
                 ];
         
                 $this->view('deliveryCompletedOrderDetails',$data);

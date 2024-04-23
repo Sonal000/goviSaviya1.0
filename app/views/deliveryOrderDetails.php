@@ -86,7 +86,7 @@
 
             <div class="right_side">
 
-            <div class="error_msg">
+            <div class="error_msg"> 
 
             <?php if(!$data['available']){?>
             You cannot accept more than one orders at a time
@@ -97,13 +97,22 @@
             <div class="update_edit_btnn">
             <?php if(!$data['available']){?>
 
-                    <a class="ignore_order_btnnn" href=""><!<i class="fa-solid fa-ban"></i> Don't Show</a>
+                    
 
                     <?php  }else{ ?>
 
-                        <a class="accept_order_btnnn"  href="<?php echo URLROOT ?>/orders/acceptOrder/<?php echo $data['order']->order_item_id  ?>"><i class="fa-solid fa-circle-check"></i>  Accept Order</a>
+                        <a class="accept_order_btnnn"  href="<?php
+                            if($data['type'] == "AUCTION"){
+                                echo URLROOT."/orders/acceptOrder_AC/".$data['order_item_id'] ;
+                            }elseif($type == "REQUEST"){
+                                echo URLROOT."/orders/acceptOrder_PR/".$data['order_item_id'] ;
+                            }elseif($type == "PURCHASE"){
+                                echo URLROOT."/orders/acceptOrder/".$data['order_item_id'] ;
+                            }
 
-                         <a class="ignore_order_btnnn" href=""><i class="fa-solid fa-ban"></i>  Ignore Order</a>
+                                ?>"><i class="fa-solid fa-circle-check"></i>  Accept Order</a>
+
+                        
 
 
                   <?php  } ?>

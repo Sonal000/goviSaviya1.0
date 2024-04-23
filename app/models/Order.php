@@ -627,6 +627,7 @@ public function getOrderDetails($id){
     u_seller.city AS seller_city,
     u_buyer.name AS buyer_name,
     u_buyer.user_id AS buyer_user_id,
+    u_buyer.mobile AS buyer_mobile,
     u_buyer.address AS buyer_address,
     od.order_id AS order_id,
     od.order_city AS order_city,
@@ -636,6 +637,7 @@ public function getOrderDetails($id){
     b.prof_img AS buyer_img,
     COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
     COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+    COALESCE(u_deliver.address, 'No Deliver assigned') AS deliver_address,
     i.item_img,
     i.name AS item_name,
     i.unit AS item_unit
@@ -685,6 +687,7 @@ public function getAuctionOrderDetails($id){
     u_seller.city AS seller_city,
     u_buyer.name AS buyer_name,
     u_buyer.user_id AS buyer_user_id,
+    u_buyer.mobile AS buyer_mobile,
     u_buyer.address AS buyer_address,
     od.order_id AS order_id,
     od.order_city AS order_city,
@@ -694,6 +697,7 @@ public function getAuctionOrderDetails($id){
     b.prof_img AS buyer_img,
     COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
     COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+    COALESCE(u_deliver.address, 'No Deliver assigned') AS deliver_address,
     i.item_img,
     i.name AS item_name,
     i.unit AS item_unit
@@ -744,6 +748,7 @@ public function getRequestOrderDetails($id){
     u_buyer.name AS buyer_name,
     u_buyer.address AS buyer_address,
     u_buyer.user_id AS buyer_user_id,
+    u_buyer.mobile AS buyer_mobile,
     od.order_id AS order_id,
     od.order_city AS order_city,
     od.order_address AS order_address,
@@ -752,6 +757,7 @@ public function getRequestOrderDetails($id){
     b.prof_img AS buyer_img,
     COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
     COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+    COALESCE(u_deliver.address, 'No Deliver assigned') AS deliver_address,
     -- r.item_img,
     r.name AS item_name,
     r.unit AS item_unit
