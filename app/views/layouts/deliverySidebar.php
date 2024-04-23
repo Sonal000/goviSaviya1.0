@@ -77,6 +77,7 @@
               <li>
                 <a href="<?php echo URLROOT ?>/deliveryRatings">
                   <button class="sidebar_item link"  id="reviews_link">
+                  <i class="far fa-star  sidebar_icon" ></i>
                     <p>Reviews</p>
                   </button>
                 </a>
