@@ -154,6 +154,7 @@ $(document).ready(function () {
             
             $(".notification_count").text("0"); 
             $(".notification_count").fadeOut(); 
+            fetchData();
           } else {
             // Display error message
             $("#cont").html("<p>" + response.message + "</p>");
@@ -435,9 +436,13 @@ $(".sidebar_item").removeClass("sidebar_active");
 
 const sidebarMapping = [
   { path: "Home", ids: ["home_link", "home_link_m"] },
-  { path: "orders", ids: ["orders_link", "orders_link_m"], exclude: ["complete", "ongoing"] },
+  { path: "orders", ids: ["orders_link", "orders_link_m"], exclude: ["complete", "ongoing","pickedup","delivering","delivered","conclude"] },
   { path: "orders/complete", ids: ["orders_complete_link", "orders_complete_link_m"], exclude: [ "ongoing"] },
-  { path: "orders/ongoing", ids: ["orders_ongoing_link", "orders_ongoing_link_m"], exclude: ["complete"] },
+  { path: "orders/ongoing", ids: ["orders_ongoing_link", "orders_ongoing_link_m"], exclude:"" },
+  { path: "orders/pickedup", ids: ["orders_ongoing_link", "orders_ongoing_link_m"], exclude: ["ongoing"] },
+  { path: "orders/delivering", ids: ["orders_ongoing_link", "orders_ongoing_link_m"], exclude: ["ongoing"] },
+  { path: "orders/delivered", ids: ["orders_ongoing_link", "orders_ongoing_link_m"], exclude: ["ongoing"] },
+  { path: "orders/conclude", ids: ["orders_ongoing_link", "orders_ongoing_link_m"], exclude: ["ongoing"] },
   { path: "deliveryRatings", ids: ["reviews_ink", "reviews_link_m"], exclude:"" },
   { path: "deliveryinsight", ids: ["insight_link", "insight_link_m"], exclude:"" },
   { path: "deliveryVehicles", ids: ["vehicles_link", "vehicles_link_m"], exclude:"" },
@@ -454,7 +459,7 @@ sidebarMapping.forEach(item => {
   const { path, ids, exclude } = item;
   
   if (currentLocation.includes(path.toLowerCase())) {
-
+    // console.log(path.toLowerCase());
     if (exclude) {
       if (Array.isArray(exclude)) {
         if (exclude.some(excludedPath => currentLocation.includes(excludedPath.toLowerCase()))) {

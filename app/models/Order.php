@@ -407,7 +407,7 @@
             JOIN 
                 orders o ON o_items.order_id = o.order_id
             WHERE 
-                o_items.buyer_id = :buyer_id
+                o_items.buyer_id = :buyer_id AND o_items.order_status!='completed'
             
             UNION
             
@@ -420,15 +420,90 @@
             JOIN 
                 orders o ON o_items_ac.order_id = o.order_id
             WHERE 
-                o_items_ac.buyer_id = :buyer_id
+                o_items_ac.buyer_id = :buyer_id AND o_items_ac.order_status!='completed'
+            UNION
+            
+            SELECT 
+                o_items_rq.order_id,
+                o.order_type,
+                o.order_date
+            FROM 
+                order_items_rq AS o_items_rq
+            JOIN 
+                orders o ON o_items_rq.order_id = o.order_id
+            WHERE 
+                o_items_rq.buyer_id = :buyer_id AND o_items_rq.order_status!='completed'
             ORDER BY
-            order_date DESC    
+                order_date DESC    
                 "
             
             ;
                 $this->db->query($query);
                 $this->db->bind(':buyer_id',$buyer_id);
                 $row=$this->db->resultSet();
+                if($row){
+                    return $row;
+                }else{
+                    return false;
+                }
+            }
+            public function getBuyerCompletedOrderIDs($buyer_id){
+                $query ="SELECT 
+                o_items.order_id,
+                o_items.completed_date,
+                o.order_type,
+                o.order_date,
+                q.qc_id
+            FROM 
+                order_items o_items
+            JOIN 
+                orders o ON o_items.order_id = o.order_id
+            JOIN
+                quality_check q ON o_items.order_item_id = q.order_item_id
+            WHERE 
+                o_items.buyer_id = :buyer_id AND o_items.order_status='completed'
+            
+            UNION
+            
+            SELECT 
+                o_items_ac.order_id,
+                o_items_ac.completed_date,
+                o.order_type,
+                o.order_date,
+                q.qc_id
+            FROM 
+                order_items_ac AS o_items_ac
+            JOIN 
+                orders o ON o_items_ac.order_id = o.order_id
+            JOIN
+                quality_check q ON o_items_ac.order_item_id = q.order_item_id
+            WHERE 
+                o_items_ac.buyer_id = :buyer_id AND o_items_ac.order_status='completed'
+            UNION
+            
+            SELECT 
+                o_items_rq.order_id,
+                o_items_rq.completed_date,
+                o.order_type,
+                o.order_date,
+                q.qc_id
+            FROM 
+                order_items_rq AS o_items_rq
+            JOIN 
+                orders o ON o_items_rq.order_id = o.order_id
+            JOIN
+                quality_check q ON o_items_rq.order_item_id = q.order_item_id
+            WHERE 
+                o_items_rq.buyer_id = :buyer_id AND o_items_rq.order_status='completed'
+            ORDER BY
+                completed_date DESC    
+                "
+            
+            ;
+                $this->db->query($query);
+                $this->db->bind(':buyer_id',$buyer_id);
+                $row=$this->db->resultSet();
+        
                 if($row){
                     return $row;
                 }else{
@@ -467,7 +542,13 @@
                                 COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
                     COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
                     COALESCE(d.deliver_id, 'No Deliver assigned') AS deliver_id,
-                    COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img
+                    COALESCE(u_deliver.user_id, 'No Deliver assigned') AS deliver_user_id,
+                    COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img,
+                    v.vehicle_img,
+                    v.vehicle_model,
+                    v.vehicle_type,
+                    v.vehicle_brand,
+                    v.vehicle_number
                             FROM
                                 orders o
                             JOIN
@@ -486,6 +567,8 @@
                                 delivers d ON o_items_ac.deliver_id = d.deliver_id
                             LEFT JOIN
                                 users u_deliver ON d.user_id = u_deliver.user_id
+                            LEFT JOIN
+                                vehicle v ON u_deliver.user_id = v.user_id
                             WHERE
                                 o.order_id = :order_id AND o.payment_status=1
                             ";
@@ -501,6 +584,7 @@
                                 i.item_img AS item_img,
                                 u_seller.name AS seller_name,
                                 u_seller.address AS seller_address,
+                                u_seller.user_id AS seller_user_id,
                                 u_seller.city AS seller_city,
                                 u_seller.mobile AS seller_mobile,
                                 s.prof_img AS seller_img,
@@ -512,7 +596,13 @@
                                 COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
                     COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
                     COALESCE(d.deliver_id, 'No Deliver assigned') AS deliver_id,
-                    COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img
+                    COALESCE(u_deliver.user_id, 'No Deliver assigned') AS deliver_user_id,
+                    COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img,
+                    v.vehicle_img,
+                    v.vehicle_model,
+                    v.vehicle_type,
+                    v.vehicle_brand,
+                    v.vehicle_number
                         FROM
                             order_items o_items
                         JOIN
@@ -531,6 +621,8 @@
                             delivers d ON o_items.deliver_id = d.deliver_id
                         LEFT JOIN
                             users u_deliver ON d.user_id = u_deliver.user_id
+                        LEFT JOIN
+                                vehicle v ON u_deliver.user_id = v.user_id
                         WHERE
                             o_items.order_id = :order_id AND o.payment_status=1
                         ";
@@ -557,7 +649,13 @@
                                 COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
                                 COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
                                 COALESCE(d.deliver_id, 'No Deliver assigned') AS deliver_id,
-                                COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img
+                                COALESCE(u_deliver.user_id, 'No Deliver assigned') AS deliver_user_id,
+                                COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img,
+                                v.vehicle_img,
+                    v.vehicle_model,
+                    v.vehicle_type,
+                    v.vehicle_brand,
+                    v.vehicle_number
                             FROM
                                 order_items_rq o_items_rq
                             JOIN
@@ -576,6 +674,374 @@
                                 delivers d ON o_items_rq.deliver_id = d.deliver_id
                             LEFT JOIN
                                 users u_deliver ON d.user_id = u_deliver.user_id
+                            LEFT JOIN
+                                vehicle v ON u_deliver.user_id = v.user_id
+                            WHERE
+                                o_items_rq.order_id = :order_id AND o.payment_status=1 ";
+
+
+                        }
+                $this->db->query($query);
+                $this->db->bind(':order_id',$order_id);
+                $row=$this->db->resultSet();
+                
+                if($row){
+                    return $row;
+                }else{
+                    return false;
+                }
+            }
+            public function getBuyerOngoingOrderDetailsByOrderId($order_id,$order_type){
+    
+                if($order_type == 'AUCTION'){
+                  
+                    $query = "SELECT 
+                                o.*,
+                                o_items_ac.*,
+                                o_items_ac.order_status AS order_state,
+                                i.name AS item_name,
+                                i.unit AS item_unit,
+                                i.price AS item_price,
+                                i.item_img AS item_img,
+                                u_seller.user_id AS seller_user_id,
+                                u_seller.name AS seller_name,
+                                u_seller.address AS seller_address,
+                                u_seller.city AS seller_city,
+                                u_seller.mobile AS seller_mobile,
+                                s.prof_img AS seller_img,
+                                s.seller_id AS seller_id,
+                                b.buyer_id AS buyer_id,
+                                u_buyer.user_id AS buyer_user_id,
+                                u_buyer.name AS buyer_name,
+                                u_buyer.address AS buyer_address,
+                                u_buyer.city AS buyer_city,
+                                u_buyer.mobile AS buyer_mobile,
+                                b.prof_img AS buyer_img,
+                                COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
+                    COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+                    COALESCE(d.deliver_id, 'No Deliver assigned') AS deliver_id,
+                    COALESCE(u_deliver.user_id, 'No Deliver assigned') AS deliver_user_id,
+                    COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img,
+                    v.vehicle_img,
+                    v.vehicle_model,
+                    v.vehicle_type,
+                    v.vehicle_brand,
+                    v.vehicle_number
+                            FROM
+                                orders o
+                            JOIN
+                                order_items_ac o_items_ac ON o.order_id = o_items_ac.order_id
+                            JOIN
+                                auction i ON o_items_ac.auction_id = i.auction_id
+                            JOIN
+                                sellers s ON o_items_ac.seller_id = s.seller_id
+                            JOIN
+                                users u_seller ON s.user_id = u_seller.user_id
+                            JOIN 
+                                buyers b ON o_items_ac.buyer_id = b.buyer_id
+                            JOIN 
+                                users u_buyer ON b.user_id = u_buyer.user_id
+                            LEFT JOIN
+                                delivers d ON o_items_ac.deliver_id = d.deliver_id
+                            LEFT JOIN
+                                users u_deliver ON d.user_id = u_deliver.user_id
+                            LEFT JOIN
+                                vehicle v ON u_deliver.user_id = v.user_id
+                            WHERE
+                                o.order_id = :order_id AND o.payment_status=1 AND o_items_ac.order_status!='completed'
+                            ";
+                }elseif($order_type == 'PURCHASE'){
+                
+
+                $query = "SELECT 
+                                o.*,
+                                o_items.*,
+                                o_items.order_status AS order_state,
+                                i.name AS item_name,
+                                i.unit AS item_unit,
+                                i.price AS item_price,
+                                i.item_img AS item_img,
+                                u_seller.name AS seller_name,
+                                u_seller.address AS seller_address,
+                                u_seller.user_id AS seller_user_id,
+                                u_seller.city AS seller_city,
+                                u_seller.mobile AS seller_mobile,
+                                s.prof_img AS seller_img,
+                                u_buyer.name AS buyer_name,
+                                u_buyer.address AS buyer_address,
+                                u_buyer.city AS buyer_city,
+                                u_buyer.mobile AS buyer_mobile,
+                                b.prof_img AS buyer_img,
+                                COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
+                    COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+                    COALESCE(d.deliver_id, 'No Deliver assigned') AS deliver_id,
+                    COALESCE(u_deliver.user_id, 'No Deliver assigned') AS deliver_user_id,
+                    COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img,
+                    v.vehicle_img,
+                    v.vehicle_model,
+                    v.vehicle_type,
+                    v.vehicle_brand,
+                    v.vehicle_number
+                        FROM
+                            order_items o_items
+                        JOIN
+                            orders o ON o_items.order_id = o.order_id
+                        JOIN
+                            items_market  i ON o_items.item_id = i.item_id
+                        JOIN
+                            sellers  s ON o_items.seller_id = s.seller_id
+                        JOIN
+                            users  u_seller ON s.user_id = u_seller.user_id
+                        JOIN
+                            buyers  b ON o_items.buyer_id = b.buyer_id
+                        JOIN
+                            users  u_buyer ON b.user_id = u_buyer.user_id
+                        LEFT JOIN
+                            delivers d ON o_items.deliver_id = d.deliver_id
+                        LEFT JOIN
+                            users u_deliver ON d.user_id = u_deliver.user_id
+                        LEFT JOIN
+                                vehicle v ON u_deliver.user_id = v.user_id
+                        WHERE
+                            o_items.order_id = :order_id AND o.payment_status=1 AND o_items.order_status!='completed'
+                        ";
+                        }elseif($order_type=="REQUEST"){
+                          
+
+                $query = "SELECT 
+                                o.*,
+                                o_items_rq.*,
+                                o_items_rq.order_status AS order_state,
+                                r.name AS item_name,
+                                r.unit AS item_unit,
+                                r.acp_amount AS item_price,
+                                u_seller.name AS seller_name,
+                                u_seller.user_id AS seller_user_id,
+                                u_seller.address AS seller_address,
+                                u_seller.city AS seller_city,
+                                u_seller.mobile AS seller_mobile,
+                                s.prof_img AS seller_img,
+                                u_buyer.name AS buyer_name,
+                                u_buyer.address AS buyer_address,
+                                u_buyer.city AS buyer_city,
+                                u_buyer.mobile AS buyer_mobile,
+                                b.prof_img AS buyer_img,
+                                COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
+                                COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+                                COALESCE(d.deliver_id, 'No Deliver assigned') AS deliver_id,
+                                COALESCE(u_deliver.user_id, 'No Deliver assigned') AS deliver_user_id,
+                                COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img,
+                                v.vehicle_img,
+                    v.vehicle_model,
+                    v.vehicle_type,
+                    v.vehicle_brand,
+                    v.vehicle_number
+                            FROM
+                                order_items_rq o_items_rq
+                            JOIN
+                                orders o ON o_items_rq.order_id = o.order_id
+                            JOIN
+                                requests  r ON o_items_rq.req_id = r.request_ID
+                            JOIN
+                                sellers  s ON o_items_rq.seller_id = s.seller_id
+                            JOIN
+                                users  u_seller ON s.user_id = u_seller.user_id
+                            JOIN
+                                buyers  b ON o_items_rq.buyer_id = b.buyer_id
+                            JOIN
+                                users  u_buyer ON b.user_id = u_buyer.user_id
+                            LEFT JOIN
+                                delivers d ON o_items_rq.deliver_id = d.deliver_id
+                            LEFT JOIN
+                                users u_deliver ON d.user_id = u_deliver.user_id
+                            LEFT JOIN
+                                vehicle v ON u_deliver.user_id = v.user_id
+                            WHERE
+                                o_items_rq.order_id = :order_id AND o.payment_status=1 AND o_items_rq.order_status!='completed'";
+
+
+                        }
+                $this->db->query($query);
+                $this->db->bind(':order_id',$order_id);
+                $row=$this->db->resultSet();
+
+                if($row){
+                    return $row;
+                }else{
+                    return false;
+                }
+            }
+            public function getCompletedOrderDetailsByOrderId($order_id,$order_type){
+     
+                if($order_type == 'AUCTION'){
+                    $query = "SELECT 
+                                o.*,
+                                o_items_ac.*,
+                                o_items_ac.order_status AS order_state,
+                                i.name AS item_name,
+                                i.unit AS item_unit,
+                                i.price AS item_price,
+                                i.item_img AS item_img,
+                                u_seller.user_id AS seller_user_id,
+                                u_seller.name AS seller_name,
+                                u_seller.address AS seller_address,
+                                u_seller.city AS seller_city,
+                                u_seller.mobile AS seller_mobile,
+                                s.prof_img AS seller_img,
+                                s.seller_id AS seller_id,
+                                b.buyer_id AS buyer_id,
+                                u_buyer.user_id AS buyer_user_id,
+                                u_buyer.name AS buyer_name,
+                                u_buyer.address AS buyer_address,
+                                u_buyer.city AS buyer_city,
+                                u_buyer.mobile AS buyer_mobile,
+                                b.prof_img AS buyer_img,
+                                COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
+                    COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+                    COALESCE(d.deliver_id, 'No Deliver assigned') AS deliver_id,
+                    COALESCE(u_deliver.user_id, 'No Deliver assigned') AS deliver_user_id,
+                    COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img,
+                    v.vehicle_img,
+                    v.vehicle_model,
+                    v.vehicle_type,
+                    v.vehicle_brand,
+                    v.vehicle_number,
+                    q.qc_id
+                            FROM
+                                orders o
+                            JOIN
+                                order_items_ac o_items_ac ON o.order_id = o_items_ac.order_id
+                            JOIN
+                                auction i ON o_items_ac.auction_id = i.auction_id
+                            JOIN 
+                                quality_check q ON o_items_ac.order_item_id = q.order_item_id    
+                            JOIN
+                                sellers s ON o_items_ac.seller_id = s.seller_id
+                            JOIN
+                                users u_seller ON s.user_id = u_seller.user_id
+                            JOIN 
+                                buyers b ON o_items_ac.buyer_id = b.buyer_id
+                            JOIN 
+                                users u_buyer ON b.user_id = u_buyer.user_id
+                            LEFT JOIN
+                                delivers d ON o_items_ac.deliver_id = d.deliver_id
+                            LEFT JOIN
+                                users u_deliver ON d.user_id = u_deliver.user_id
+                            LEFT JOIN
+                                vehicle v ON u_deliver.user_id = v.user_id
+                            WHERE
+                                o.order_id = :order_id AND o.payment_status=1
+                            ";
+                }elseif($order_type == 'PURCHASE'){
+
+                $query = "SELECT 
+                                o.*,
+                                o_items.*,
+                                o_items.order_status AS order_state,
+                                i.name AS item_name,
+                                i.unit AS item_unit,
+                                i.price AS item_price,
+                                i.item_img AS item_img,
+                                u_seller.name AS seller_name,
+                                u_seller.address AS seller_address,
+                                u_seller.user_id AS seller_user_id,
+                                u_seller.city AS seller_city,
+                                u_seller.mobile AS seller_mobile,
+                                s.prof_img AS seller_img,
+                                u_buyer.name AS buyer_name,
+                                u_buyer.address AS buyer_address,
+                                u_buyer.city AS buyer_city,
+                                u_buyer.mobile AS buyer_mobile,
+                                b.prof_img AS buyer_img,
+                                COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
+                    COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+                    COALESCE(d.deliver_id, 'No Deliver assigned') AS deliver_id,
+                    COALESCE(u_deliver.user_id, 'No Deliver assigned') AS deliver_user_id,
+                    COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img,
+                    v.vehicle_img,
+                    v.vehicle_model,
+                    v.vehicle_type,
+                    v.vehicle_brand,
+                    v.vehicle_number,
+                    q.qc_id
+                        FROM
+                            order_items o_items
+                        JOIN
+                            orders o ON o_items.order_id = o.order_id
+                        JOIN
+                            items_market  i ON o_items.item_id = i.item_id
+                        JOIN 
+                            quality_check q ON o_items.order_item_id = q.order_item_id 
+                        JOIN
+                            sellers  s ON o_items.seller_id = s.seller_id
+                        JOIN
+                            users  u_seller ON s.user_id = u_seller.user_id
+                        JOIN
+                            buyers  b ON o_items.buyer_id = b.buyer_id
+                        JOIN
+                            users  u_buyer ON b.user_id = u_buyer.user_id
+                        LEFT JOIN
+                            delivers d ON o_items.deliver_id = d.deliver_id
+                        LEFT JOIN
+                            users u_deliver ON d.user_id = u_deliver.user_id
+                        LEFT JOIN
+                                vehicle v ON u_deliver.user_id = v.user_id
+                        WHERE
+                            o_items.order_id = :order_id AND o.payment_status=1
+                        ";
+                        }elseif($order_type=="REQUEST"){
+
+                $query = "SELECT 
+                                o.*,
+                                o_items_rq.*,
+                                o_items_rq.order_status AS order_state,
+                                r.name AS item_name,
+                                r.unit AS item_unit,
+                                r.acp_amount AS item_price,
+                                u_seller.name AS seller_name,
+                                u_seller.user_id AS seller_user_id,
+                                u_seller.address AS seller_address,
+                                u_seller.city AS seller_city,
+                                u_seller.mobile AS seller_mobile,
+                                s.prof_img AS seller_img,
+                                u_buyer.name AS buyer_name,
+                                u_buyer.address AS buyer_address,
+                                u_buyer.city AS buyer_city,
+                                u_buyer.mobile AS buyer_mobile,
+                                b.prof_img AS buyer_img,
+                                COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
+                                COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+                                COALESCE(d.deliver_id, 'No Deliver assigned') AS deliver_id,
+                                COALESCE(u_deliver.user_id, 'No Deliver assigned') AS deliver_user_id,
+                                COALESCE(d.prof_img, 'No Deliver assigned') AS deliver_img,
+                                v.vehicle_img,
+                    v.vehicle_model,
+                    v.vehicle_type,
+                    v.vehicle_brand,
+                    v.vehicle_number,
+                    q.qc_id
+                            FROM
+                                order_items_rq o_items_rq
+                            JOIN
+                                orders o ON o_items_rq.order_id = o.order_id
+                            JOIN
+                                requests  r ON o_items_rq.req_id = r.request_ID
+                            JOIN 
+                                quality_check q ON o_items_rq.order_item_id = q.order_item_id 
+                            JOIN
+                                sellers  s ON o_items_rq.seller_id = s.seller_id
+                            JOIN
+                                users  u_seller ON s.user_id = u_seller.user_id
+                            JOIN
+                                buyers  b ON o_items_rq.buyer_id = b.buyer_id
+                            JOIN
+                                users  u_buyer ON b.user_id = u_buyer.user_id
+                            LEFT JOIN
+                                delivers d ON o_items_rq.deliver_id = d.deliver_id
+                            LEFT JOIN
+                                users u_deliver ON d.user_id = u_deliver.user_id
+                            LEFT JOIN
+                                vehicle v ON u_deliver.user_id = v.user_id
                             WHERE
                                 o_items_rq.order_id = :order_id AND o.payment_status=1 ";
 
@@ -665,6 +1131,7 @@
 
             public function getBuyerOrders($buyer_id){
                 $orderIds   = $this->getBuyerOrderIDs($buyer_id);
+                var_dump($orderIds);
                 
                 if(!$orderIds){
                     return false;
@@ -674,7 +1141,45 @@
                     $orderDetails = $this->getOrderDetailsByOrderId($order->order_id,$order->order_type);
                     array_push($orders,$orderDetails);
                 }
+                var_dump($orders);
                     if($orders){
+                        return $orders;
+                    }else{
+                        return false;
+                    }
+        }
+            public function getBuyerOngoingOrders($buyer_id){
+                $orderIds   = $this->getBuyerOrderIDs($buyer_id);
+           
+                if(!$orderIds){
+                    return false;
+                }
+                $orders = [];
+                foreach($orderIds as $order){
+                    $orderDetails = $this->getBuyerOngoingOrderDetailsByOrderId($order->order_id,$order->order_type);
+                    array_push($orders,$orderDetails);
+                }
+                // var_dump($orders);
+        
+                    if($orders){
+                        return $orders;
+                    }else{
+                        return false;
+                    }
+        }
+            public function getBuyerCompletedOrders($buyer_id){
+                $orderIds   = $this->getBuyerCompletedOrderIDs($buyer_id);
+          
+                
+                if(!$orderIds){
+                    return false;
+                }
+                $orders = [];
+                foreach($orderIds as $order){
+                    $orderDetails = $this->getCompletedOrderDetailsByOrderId($order->order_id,$order->order_type);
+                    array_push($orders,$orderDetails);
+                }
+                if($orders){
                         return $orders;
                     }else{
                         return false;
@@ -1636,30 +2141,68 @@ public function assignDeliver($order_item_id ,$deliver_id,$order_type){
         }
 
 
-        public function uploadPickupImages($deliver_id,$pickupImg){
-
-            $itemID = $this->getItemID($deliver_id)->item_id;
-            $order_id = $this->getItemID($deliver_id)->order_id;
-        
-            $query = 'UPDATE quality_check 
-                    SET
-                    order_id = :order_id,
-                    deliver_id= :deliver_id,
-                    deliver_pickup_img= :deliver_pickup_img
-                    WHERE item_id = :item_id';
+        public function uploadPickupImages($data){
+            $query = 'INSERT INTO quality_check 
+                    (order_id,order_item_id,order_type,deliver_id,deliver_pickup_img,seller_id,seller_img)
+                    VALUES
+                    (:order_id,:item_id,:order_type,:deliver_id,:deliver_pickup_img,:seller_id,:seller_img)';
+                  ;
             
             $this->db->query($query);
-            $this->db->bind(':order_id',$order_id);
-            $this->db->bind(':item_id',$itemID);
-            $this->db->bind(':deliver_id',$deliver_id);
-            $this->db->bind(':deliver_pickup_img',$pickupImg);
-
+            $this->db->bind(':order_id',$data['order_id']);
+            $this->db->bind(':item_id',$data['order_item_id']);
+            $this->db->bind(':order_type',$data['order_type']);
+            $this->db->bind(':deliver_id',$data['deliver_id']);
+            $this->db->bind(':deliver_pickup_img',$data['deliver_pickup_img']);
+            $this->db->bind(':seller_id',$data['seller_id']);
+            $this->db->bind(':seller_img',$data['seller_img']);
             if($this->db->execute()){
                 return true;
             }else{
                 return false;
             }
                     
+        }
+
+        public function uploadDropOffImages($data){    
+            $query = 'UPDATE quality_check 
+                    SET
+                    deliver_dropoff_img= :deliver_dropoff_img
+                    WHERE order_item_id = :item_id AND order_id = :order_id AND order_type = :order_type AND deliver_id = :deliver_id';
+            
+            $this->db->query($query);
+            $this->db->bind(':order_id',$data['order_id']);
+            $this->db->bind(':item_id',$data['order_item_id']);
+            $this->db->bind(':order_type',$data['order_type']);
+            $this->db->bind(':deliver_id',$data['deliver_id']);
+            $this->db->bind(':deliver_dropoff_img',$data['deliver_dropoff_img']);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+
+        }
+
+
+
+        public function addBuyerComplain($data){
+            var_dump($data);
+            $query = "UPDATE  quality_check 
+                        SET buyer_id=:buyer_id ,buyer_message=:complain,complain_date=now(),qc_status='raised',buyer_img=:buyer_img
+                        WHERE qc_id = :qc_id
+            ";
+            $this->db->query($query);
+            $this->db->bind(':buyer_id',$data['buyer_id']);
+            $this->db->bind(':complain',$data['complain']);
+            $this->db->bind(':buyer_img',$data['complain_img']);
+            $this->db->bind(':qc_id',$data['qc_id']);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+
         }
 
 
@@ -1707,32 +2250,7 @@ public function assignDeliver($order_item_id ,$deliver_id,$order_type){
         }
 
 
-        public function uploadDropOffImages($deliver_id,$dropoffImg){
-            
-            $itemID = $this->getItemID($deliver_id)->item_id;
-            $order_id = $this->getItemID($deliver_id)->order_id;
-            
-            $query = 'UPDATE quality_check 
-                    SET
-                    order_id = :order_id,
-                    deliver_id= :deliver_id,
-                    deliver_dropoff_img= :deliver_dropoff_img
-                    WHERE item_id = :item_id';
-            
-            $this->db->query($query);
-            $this->db->bind(':order_id',$order_id);
-            $this->db->bind(':item_id',$itemID);
-            $this->db->bind(':deliver_id',$deliver_id);
-            $this->db->bind(':deliver_dropoff_img',$dropoffImg);
-
-            if($this->db->execute()){
-                return true;
-            }else{
-                return false;
-            }
-
-        }
-
+     
 
         public function getBuyerDetailsCompletedOrder($deliver_id){
 
