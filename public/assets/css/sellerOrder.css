@@ -431,3 +431,8 @@ input:focus{
 
 }
 
+.deliver_buyer_cont{
+  display: flex;
+  flex-direction: row;
+}
+

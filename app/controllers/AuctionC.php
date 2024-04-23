@@ -270,8 +270,10 @@ public  function checkout($id){
           }
           
           public function verifiedOrder($id){
-          
+                $AucID = $this->orderModel->getAucID($id);
+
             if($this->orderModel->updateOrderPaymentStatus($id)){
+                $this->auctionModel ->updatepaymentstatus($AucID);
               $rows=$this->orderModel->getOrderDetailsByOrderId($id,"AUCTION");
               foreach ($rows as $row) {
                   $this->notifiModel->notifyuser(0,$row->seller_user_id,"New order received from <span class='bg'>".$row->buyer_name."</span>",'orders',"ORDER");
@@ -525,84 +527,50 @@ public  function checkout($id){
 
 public function history(){
 
-    $row = $this->auctionModel->getpaymentsuccessAuctions();
-    $row2 = $this->auctionModel->getpaymentunsuccessAuctions();
+    $row = $this->auctionModel->getpaymentsuccessAuctions($_SESSION['seller_id']);
+    $row2 = $this->auctionModel->getpaymentunsuccessAuctions($_SESSION['seller_id']);
     $row3 = $this->auctionModel->getNobidAuctions($_SESSION['seller_id']);
     
-    // if($row3){
-    //     $row->nobidlist = $row3;
-    // }
-    // else{
-    //     $row->nobidlist = false;
-    // }
-    
-        
+
     if($row){
         
 
         foreach($row as $auc){
             
-            
-            $aucIds = $this->auctionModel ->getAuctionIDS($auc->order_id,$_SESSION['seller_id']);
-            // var_dump($aucIds);
-            $aucdetails = $this->auctionModel->getdetails($aucIds);
-
-            
-            if($aucdetails){
-                $auc->auctionDetails=$aucdetails;
-                
+            $bidInfo=$this->auctionModel->getAuctionBidInfo($auc->auction_ID);
+            $auc->bidlist=$bidInfo;
             }
-
-            
-        }
     }
 
-    if($row2){
+    // if($row2){
 
-        foreach($row2 as $auc2){
+    //     foreach($row2 as $auc2){
 
-            $aucIds = $this->auctionModel ->getAuctionIDS($auc2->order_id,$_SESSION['seller_id']);
+    //         $aucIds = $this->auctionModel ->getAuctionIDS($auc2->order_id,$_SESSION['seller_id']);
             
-            $aucdetails = $this->auctionModel->getdetails($aucIds);
-            if($aucdetails){
+    //         $aucdetails = $this->auctionModel->getdetails($aucIds);
+    //         if($aucdetails){
 
-                $auc2->auctionDetails =$aucdetails;
-            } 
+    //             $auc2->auctionDetails =$aucdetails;
+    //         } 
             
-        }
-    }
+    //     }
+    // }
 
     if($row){
 
-        
         foreach($row as $auc3){
             
             $auc3->nobidlist = $row3;
-     
-            
-        }
-        
-        
+     }
     }
-
- 
-
-    // var_dump($row);
-   
-        
-        
-    
 
         $data=[
             'items'=>$row,
             'items2'=>$row2,
         ];
 
-        
-        
-
-
-    $this->view('auctionhistory',$data);
+        $this->view('auctionhistory',$data);
 
 }
 

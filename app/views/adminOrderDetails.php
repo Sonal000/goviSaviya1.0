@@ -54,7 +54,7 @@
                         Customer Name
                     </div>
                     <div class="orderNumber_v">
-                    <?php echo $data['buyerdet'][0]->name; ?>
+                    <?php echo $data['details']->buyer_name; ?>
                     </div>
                 </div>
                 <div class="orderNumber_cont">
@@ -127,26 +127,27 @@
         
         <div class="history_container">
             <h4>Ordered Items</h4>
-
+        <?php if($data['items']):?>
+           <!-- <?php echo var_dump($data['items']); ?> -->
         <?php foreach($data['items'] as $items):?>
-           <!-- <?php var_dump($data['items']); ?> -->
+            
         <div class="mycard_ad">
         <div class="productimg">
             <img src="<?php echo URLROOT.'/store/items/'.$items->item_img ;?>" class="mango" alt="">
         </div>
         <div class="productdes_ad">
             <div class="order_num">
-                Order Number: <?php echo $items->order_id?>
+                Order Number: <?php echo $items->order_id;?>
             </div>
             <div class="ord_date">
                 Date : Sun,Oct 17,2023
             </div>
            <div class="productname_ad">
-                Product : <?php echo $items->name?>
+                Product : <?php echo $items->name;?>
            </div>
            
            <div class="productprice_ad">
-               Quantity <?php echo $items->stock?><?php echo 'KG'?> | Rs <?php echo $items->price?> /Kg
+               Quantity <?php echo $items->quantity;?><?php echo $items->unit ;?> | Rs <?php echo $items->total_price ;?> /Kg
            </div>
         </div>
         <div class="seller_det">
@@ -197,6 +198,9 @@
         </div>
     </div>
     <?php endforeach; ?>
+    <?php else: ?>
+        <p>No data available</p>
+        <?php endif; ?>
     
         </div>
     <!--<div class="mycard_ad">
@@ -278,6 +282,7 @@
     </div>
     <div class="third_card_set">
     <div class="history_container">
+            <?php if($data['deliverdet']):?>
         <?php foreach($data['deliverdet'] as $deliveryDet):?>
         <div class="delivery_stage">
             <div class="delivery_agent_det">
@@ -371,7 +376,11 @@
                 <a href="<?php echo URLROOT; ?>/Orders/CheckItemsImages/<?php echo $deliveryDet->item_id?>"><button class="btn placement">Check Order Images</button></a>
             </div>
             </div>
+
            <?php endforeach; ?>
+           <?php else: ?>
+        <p>NO Deliver Assigned Yet</p>
+        <?php endif; ?>
             
         </div>
         </div>

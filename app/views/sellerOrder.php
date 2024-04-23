@@ -49,6 +49,7 @@
 
     <?php 
         if($data['orders']){
+        
             foreach($data['orders'] as $orders){
                 if($orders){
                 foreach($orders as $order){
@@ -95,6 +96,7 @@
                 </div>
                 </div>
             </div>
+            <div class="deliver_buyer_cont">
             <div class="order_more">
                 <div class="buy_pro">
 
@@ -116,10 +118,34 @@
 
 
             </div>
+            <div class="order_more">
+                <div class="buy_pro">
+
+                    <div class="cont_buy_img">
+                        <?php if($order->deliver_img){   ?> 
+                            <img src="<?php echo URLROOT."/store/profiles/".$order->deliver_img; ?>" alt="" class="another_one prof_pic">
+                        <?php }else{ ?>
+                            <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="" class="another_one">
+                        <?php 
+                        }
+                         ?>
+                    </div>
+                    <div class="cont_buy">
+                        <p><?php echo $order->deliver_name ?></p>
+                        <p class="cont_buy_mobile"><?php echo $order->deliver_mobile ?></p>
+                        <p class="cont_buy_buyer">Deliver<span><i class="fas fa-check-circle"></i></span></p>
+                    </div>
+                </div>
+
+
+            </div>
+            </div>
         </div>
 
         <?php
                 }}}
+        }else{
+            
         }
     ?>
 

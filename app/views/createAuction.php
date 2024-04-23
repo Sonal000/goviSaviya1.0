@@ -129,7 +129,9 @@
         <div class="add_photo_list">
         <label class="custom-file-upload" for="photo"><i class="fa-regular fa-image"></i>     Add Photos of the Product</label>
         <input type="file" id="photo" name="photo">
+        <img id="photo_preview" src="#" alt="Photo Preview" style="display: none; max-width: 200px; max-height: 200px;">
                 </div>
+
                 <div class="email">
                       <p>Description</p>
                       <input type="text" class="email_box3" placeholder="Add your description">
@@ -140,5 +142,31 @@
     </div>
     </form>
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
+    <script>
+        // Function to preview image after selecting it
+        function previewPhoto(input) {
+            // Check if any file is selected
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Update the src attribute of the img tag with the selected image URL
+                    document.getElementById('photo_preview').src = e.target.result;
+                    // Display the img tag
+                    document.getElementById('photo_preview').style.display = 'block';
+                }
+
+                // Read the image file as a URL
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Add an event listener to the file input
+        document.getElementById('photo').addEventListener('change', function() {
+            // Call the previewPhoto function when a file is selected
+            previewPhoto(this);
+        });
+    </script>
 </body>
 </html>

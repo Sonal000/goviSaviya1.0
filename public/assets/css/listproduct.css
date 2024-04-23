@@ -125,7 +125,7 @@
   padding: 0.7rem;
   background: var(--clr-primary-10);
   color: var(--clr-grey-4);
-  width: 10rem;
+  width: 32rem;
 }
 .input_item:focus {
   border: 1px solid var(--clr-primary-7);
@@ -286,3 +286,11 @@
   width: 100%;
   padding: 1rem 0;
 }
+
+.list_item{
+  border: 2px solid var(--clr-primary-8);
+  
+
+}
+
+

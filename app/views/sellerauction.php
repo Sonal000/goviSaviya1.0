@@ -49,6 +49,10 @@
         if($data['items']){
             foreach($data['items'] as $items){
 
+                $exp_date = date('Y-m-d', strtotime($items->exp_date)); // use to get only the date from the column. column contains both time and date
+                $start_date = date('Y-m-d', strtotime($items->start_date));
+                $end_date = date('Y-m-d', strtotime($items->end_date));
+
            ?>
            <div class="auction_item_cont"> 
         <div class="mycard" id="blur">
@@ -67,12 +71,12 @@
                         <?php echo $items->district; ?>
                     </div>
                     <div class="pro_exp">
-                    <?php echo $items->exp_date; ?>
+                      Expire Date : <?php echo $exp_date; ?>
                     </div>
                 </div>
                 <div class="bid_detail">
                     <div class="bidder_name">
-                        <p><a href="" class="highest_bidder">current : <?php echo $items->current_buyer_name ?></a> </p>
+                        <p><a href="" class="highest_bidder">Highest Bidder : <?php echo $items->current_buyer_name ?></a> </p>
                     </div>
                     <div class="bidcount">
                         Bid count : <?php echo $items->bid_Count ;?>
@@ -125,11 +129,11 @@
                 </div>
                 <div class="info">
                     <p class="infor_title">Start Date</p>
-                    <p class="infor_title"><?php echo $items->start_date ?></p>
+                    <p class="infor_title"><?php echo $start_date ?></p>
                 </div>
                 <div class="info">
                     <p class="infor_title">End Date</p>
-                    <p class="infor_title"><?php echo $items->end_date ?></p>
+                    <p class="infor_title"><?php echo $end_date ?></p>
                 </div>
                 <div class="info">
                     <p class="infor_title">Time remaining</p>
