@@ -537,10 +537,20 @@ public function history(){
     $row3 = $this->auctionModel->getNobidAuctions($_SESSION['seller_id']);
     
 
+   
     if($row){
         
 
         foreach($row as $auc){
+            
+            $bidInfo=$this->auctionModel->getAuctionBidInfo($auc->auction_ID);
+            $auc->bidlist=$bidInfo;
+            }
+    }
+    if($row2){
+        
+
+        foreach($row2 as $auc){
             
             $bidInfo=$this->auctionModel->getAuctionBidInfo($auc->auction_ID);
             $auc->bidlist=$bidInfo;
