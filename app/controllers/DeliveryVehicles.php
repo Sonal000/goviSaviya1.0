@@ -12,19 +12,23 @@ class DeliveryVehicles extends Controller{
     public function index(){
         //Get Vehicles
 
-        $userId = $_SESSION['user_id'];
+        $userId = $_SESSION['user_id'];       
         $vehicles = $this->VehicleModel->getVehicles($userId);
+        $available = $this->VehicleModel->checkVehicleAdd($userId);
+        
 
         $data = [
             'title'=>'welcome',
             'id' => $userId,
             'vehicles' => $vehicles,
+            'available' => $available
         ];
         $this -> view('deliveryVehicles',$data);
     }
 
     public function show($id){
         $vehicle = $this->VehicleModel->getVehicleById($id);
+        
 
         $data = [
             'vehicle' => $vehicle  

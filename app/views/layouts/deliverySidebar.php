@@ -1,5 +1,22 @@
 <div class="main_sidebar_container">
+
+
+
         <div class="sidebar_conatainer">
+
+        <div class="nav_img_cont_d">
+   <a href="<?php echo URLROOT ?>/Home">
+    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
+        </a>
+    <!-- <button class="bars_btn" id="bars_btn">
+  <i class="fas fa-bars bars"></i>
+  </button> -->
+
+  <div class="welcome_user">
+    <p>Hii Welcome <span> <?php echo $_SESSION['user_name'] ?></span></p>
+  </div>
+   </div>
+
           <div class="sidebar_toggle">
             <button class="sidebar_toggle_btn" id="sidebar_toggle_btn" >
             <i class="fas fa-arrow-left"></i>
@@ -18,7 +35,7 @@
 
               <li>
                 <a href="<?php echo URLROOT ?>/home">
-                  <button class="sidebar_item link"  id="reviews_link">
+                  <button class="sidebar_item link"  id="home_link">
                   <i class="fa-solid fa-house sidebar_icon"></i>
                     <p>Home</p>
                   </button>
@@ -30,25 +47,25 @@
                 <button class="expand_btn exp_bt_op" id="auction_expand">
                 <i class="fas fa-gavel sidebar_icon"></i>
                   <p>Orders</p>
-                  <i class="fas fa-sort-down expand_icon"></i>
+                  <i class="fas fa-chevron-right  expand_icon"></i>
                 </button>
                 <div class="expand hide_expand">
                 <a href=" <?php echo URLROOT ?>/orders">
-                    <button class="sidebar_item expand_item link" id="add_item_auction">
+                    <button class="sidebar_item expand_item link" id="orders_link">
                     <i class="fas fa-plus sidebar_icon" ></i>
                       <p>Available Orders</p>
                     </button>
                 </a>
 
                 <a href="<?php echo URLROOT ?>/orders/complete">
-                    <button class="sidebar_item expand_item link" id="view_item_auction">
+                    <button class="sidebar_item expand_item link" id="orders_complete_link">
                     <i class="fas fa-poll-h sidebar_icon"></i>
                       <p>Completed Orders</p>
                     </button>
                     </a>
 
                     <a href="<?php echo URLROOT ?>/orders/ongoing">
-                    <button class="sidebar_item expand_item link" id="view_item_auction">
+                    <button class="sidebar_item expand_item link" id="orders_ongoing_link">
                     <i class="fas fa-poll-h sidebar_icon"></i>
                       <p>Ongoing Orders</p>
                     </button>
@@ -60,7 +77,6 @@
               <li>
                 <a href="<?php echo URLROOT ?>/deliveryRatings">
                   <button class="sidebar_item link"  id="reviews_link">
-                    <i class="far fa-star  sidebar_icon" ></i>
                     <p>Reviews</p>
                   </button>
                 </a>
@@ -68,7 +84,7 @@
 
               <li>
                 <a href="<?php echo URLROOT ?>/deliveryInsight">
-                  <button class="sidebar_item link"  id="reviews_link">
+                  <button class="sidebar_item link"  id="insight_link">
                   <i class="fa-solid fa-chart-line" style="margin-right:15.2px;"></i>
                     <p>Insight</p>
                   </button>
@@ -77,7 +93,7 @@
 
               <li>
                 <a href="<?php echo URLROOT ?>/deliveryVehicles">
-                  <button class="sidebar_item link"  id="reviews_link">
+                  <button class="sidebar_item link"  id="vehicles_link">
                   <i class="fa-solid fa-truck" style="margin-right:12px;"></i>
                     <p>Vehicles</p>
                   </button>

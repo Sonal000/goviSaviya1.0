@@ -434,18 +434,20 @@ $(document).ready(function () {
 $(".sidebar_item").removeClass("sidebar_active");
 
 const sidebarMapping = [
-  { path: "marketplace", ids: ["marketplace_link", "marketplace_link_m"] },
-  { path: "auc", ids: ["marketplace_link", "marketplace_link_m"], exclude: ["items", "add","history"] },
-  { path: "auctionC/items", ids: ["view_item_auction", "view_item_auction_m"], exclude:"" },
-  { path: "auctionC/add", ids: ["add_item_auction", "add_item_auction_m"], exclude:"" },
-  { path: "auctionC/history", ids: ["view_history_auction", "view_history_auction_m"], exclude:"" },
-  { path: "orderrequests", ids: ["available_requests", "available_requests_m"] ,exclude:"accepted" },
-  { path: "orderrequests/accepted", ids: ["accepted_requests", "accepted_requests_m"] },
-  { path: "orders", ids: ["orders_current", "orders_current_m"], exclude: "/complete" },
-  { path: "orders/complete", ids: ["orders_complete", "orders_complete_m"] },
-  { path: "reviews", ids: ["reviews_link", "reviews_link_m"] },
-  { path: "listproduct", ids: ["add_item", "add_item_m"] },
-  { path: "myproducts", ids: ["view_item", "view_item_m"] }
+  { path: "Home", ids: ["home_link", "home_link_m"] },
+  { path: "orders", ids: ["orders_link", "orders_link_m"], exclude: ["complete", "ongoing"] },
+  { path: "orders/complete", ids: ["orders_complete_link", "orders_complete_link_m"], exclude: [ "ongoing"] },
+  { path: "orders/ongoing", ids: ["orders_ongoing_link", "orders_ongoing_link_m"], exclude: ["complete"] },
+  { path: "deliveryRatings", ids: ["reviews_ink", "reviews_link_m"], exclude:"" },
+  { path: "deliveryinsight", ids: ["insight_link", "insight_link_m"], exclude:"" },
+  { path: "deliveryVehicles", ids: ["vehicles_link", "vehicles_link_m"], exclude:"" },
+//   { path: "orderrequests", ids: ["available_requests", "available_requests_m"] ,exclude:"accepted" },
+//   { path: "orderrequests/accepted", ids: ["accepted_requests", "accepted_requests_m"] },
+//   { path: "orders", ids: ["orders_current", "orders_current_m"], exclude: "/complete" },
+//   { path: "orders/complete", ids: ["orders_complete", "orders_complete_m"] },
+//   { path: "reviews", ids: ["reviews_link", "reviews_link_m"] },
+//   { path: "listproduct", ids: ["add_item", "add_item_m"] },
+//   { path: "myproducts", ids: ["view_item", "view_item_m"] }
 ];
 
 sidebarMapping.forEach(item => {
@@ -465,7 +467,6 @@ sidebarMapping.forEach(item => {
       }
     }
 
-
     $(`#${ids[0]}, #${ids[1]}`).addClass("sidebar_active");
     $(`#${ids[0]}`).closest("li").find(".expand").removeClass("hide_expand");
     $(`#${ids[1]}`).closest("li").find(".expand_m").removeClass("hide_expand");
@@ -477,58 +478,5 @@ sidebarMapping.forEach(item => {
 });
 
 
-  // Set Active Sidebar Item
-  // function setActive() {
-  //   const currentLocation = window.location.href.toLowerCase();
-  //   $(".sidebar_item").removeClass("sidebar_active");
 
-  //   if (currentLocation.includes("marketplace") || (currentLocation.includes("auc") && !currentLocation.includes("auction"))) {
-  //     $("#marketplace_link, #marketplace_link_m").addClass("sidebar_active");
-  //   }
-  //   if (currentLocation.includes("auction") && !currentLocation.includes("/add")) {
-  //     $("#view_item_auction, #view_item_auction_m").addClass("sidebar_active");
-  //     $("#view_item_auction").closest("li").find(".expand").removeClass("hide_expand");
-  //     $("#view_item_auction_m").closest("li").find(".expand_m").removeClass("hide_expand");
-  //   }
-  //   if (currentLocation.includes("auction/add")) {
-  //     $("#add_item_auction, #add_item_auction_m").addClass("sidebar_active");
-  //     $("#add_item_auction").closest("li").find(".expand").removeClass("hide_expand");
-  //     $("#add_item_auction_m").closest("li").find(".expand_m").removeClass("hide_expand");
-  //   }
-  //   if (currentLocation.includes("requests/available")) {
-  //     $("#available_requests, #available_requests_m").addClass("sidebar_active");
-  //     $("#available_requests").closest("li").find(".expand").removeClass("hide_expand");
-  //     $("#available_requests_m").closest("li").find(".expand_m").removeClass("hide_expand");
-  //   }
-  //   if (currentLocation.includes("requests/accepted")) {
-  //     $("#accepted_requests, #accepted_requests_m").addClass("sidebar_active");
-  //     $("#accepted_requests").closest("li").find(".expand").removeClass("hide_expand");
-  //     $("#accepted_requests_m").closest("li").find(".expand_m").removeClass("hide_expand");
-  //   }
-  //   if (currentLocation.includes("orders") && !currentLocation.includes("/complete")) {
-  //     $("#orders_current, #orders_current_m").addClass("sidebar_active");
-  //     $("#orders_current").closest("li").find(".expand").removeClass("hide_expand");
-  //     $("#orders_current_m").closest("li").find(".expand_m").removeClass("hide_expand");
-  //   }
-  //   if (currentLocation.includes("orders/complete")) {
-  //     $("#orders_complete, #orders_complete_m").addClass("sidebar_active");
-  //     $("#orders_complete").closest("li").find(".expand").removeClass("hide_expand");
-  //     $("#orders_complete_m").closest("li").find(".expand_m").removeClass("hide_expand");
-  //   }
-  //   if (currentLocation.includes("reviews")) {
-  //     $("#reviews_link, #reviews_link_m").addClass("sidebar_active");
-  //   }
-  //   if (currentLocation.includes("listproduct")) {
-  //     $("#add_item, #add_item_m").addClass("sidebar_active");
-  //     $("#add_item").closest("li").find(".expand").removeClass("hide_expand");
-  //     $("#add_item_m").closest("li").find(".expand_m").removeClass("hide_expand");
-  //   }
-  //   if (currentLocation.includes("myproducts")) {
-  //     $("#view_item, #view_item_m").addClass("sidebar_active");
-  //     $("#view_item").closest("li").find(".expand").removeClass("hide_expand");
-  //     $("#view_item_m").closest("li").find(".expand_m").removeClass("hide_expand");
-  //   }
-  // }
-
-  // setActive();
 });

@@ -69,7 +69,7 @@
                 $this->db->query('SELECT auction_id FROM order_items_ac WHERE order_id=:order_id');
                 $this->db->bind(':order_id',$order_id);
                 $row=$this->db->single();
-                var_dump($row);
+                // var_dump($row);
                 if($row){
                     return $row->auction_id;
                 }else{
@@ -368,6 +368,21 @@
                 orders o ON o_items_ac.order_id = o.order_id
             WHERE 
                 o_items_ac.order_status = 'pending'
+
+                UNION
+            
+            SELECT 
+                o_items_rq.order_id,
+                o.order_type,
+                o.order_date,
+                o_items_rq.order_status
+            FROM 
+                order_items_rq o_items_rq
+            JOIN 
+                orders o ON o_items_rq.order_id = o.order_id
+            WHERE 
+                o_items_rq.order_status = 'pending'
+
             ORDER BY 
             order_date DESC"
             
@@ -628,8 +643,7 @@
 
             public function getDeliverOrders($deliver_id){
                 $orderIds   = $this->getDeliverOrderIDs($deliver_id);
-            
-                
+               
                 if(!$orderIds){
                     return false;
                 }
@@ -816,9 +830,9 @@ public function getRequestOrderDetails($id){
     b.prof_img AS buyer_img,
     COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
     COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
-    i.item_img,
-    i.name AS item_name,
-    i.unit AS item_unit
+    -- r.item_img,
+    r.name AS item_name,
+    r.unit AS item_unit
 FROM
     -- order_items
     order_items_rq o_items_rq
@@ -837,10 +851,11 @@ LEFT JOIN
 LEFT JOIN 
     users u_deliver ON d.user_id = u_deliver.user_id
 JOIN
-    auction i ON o_items_rq.auction_id = i.auction_ID
+    requests r ON o_items_rq.req_id = r.request_ID
 WHERE
-    o_items_ac.order_item_id = :order_item_id
-ORDER BY o_items.order_date DESC
+    o_items_rq.order_item_id = :order_item_id
+
+ORDER BY o_items_rq.order_date DESC
 ";
 
         $this->db->query($query);
@@ -848,10 +863,12 @@ ORDER BY o_items.order_date DESC
 
 $row=$this->db->single();
 if($row){
+    
 return $row;
 }else{
 return false;
 }
+
 }
 
 
@@ -912,7 +929,7 @@ public function assignDeliver($order_item_id ,$deliver_id,$order_type){
     
     $status=$this->orderStatus($order_item_id,$order_type);
     $availability=$this->getDeliverAvailability($deliver_id);
-    var_dump($status,$availability);
+    // var_dump($status,$availability);
     if($order_item_id && $status == 'pending' && $availability){
 
                 if($order_type == 'AUCTION'){
@@ -1812,6 +1829,20 @@ JOIN
     orders o ON o_items_ac.order_id = o.order_id
 WHERE 
     o_items_ac.order_status = 'completed'  AND o_items_ac.deliver_id = :deliver_id
+
+    UNION
+
+SELECT 
+    o_items_rq.order_id,
+    o.order_type,
+    o.order_date,
+    o_items_rq.order_status
+FROM 
+    order_items_rq o_items_rq
+JOIN 
+    orders o ON o_items_rq.order_id = o.order_id
+WHERE 
+    o_items_rq.order_status = 'completed'  AND o_items_rq.deliver_id = :deliver_id
 ORDER BY 
 order_date DESC"
 
@@ -1854,108 +1885,167 @@ public function getCompletedOrders($deliver_id){
 
 
 
-public function getDeliveryCompletedOrders($order_id,$order_type,$order_item_id){
-    $query ="SELECT  
-    o_items.*,
-    o_items.order_item_id AS order_item_id,
-    u_seller.name AS seller_name,
-    o_items_.deliver_fee AS deliver_fee,
-    u_seller.user_id AS seller_user_id,
-    u_seller.address AS seller_address,
-    u_seller.mobile AS seller_mobile,
-    u_seller.city AS seller_city,
-    u_buyer.name AS buyer_name,
-    u_buyer.user_id AS buyer_user_id,
-    od.order_id AS order_id,
-    od.order_city AS order_city,
-    od.order_address AS order_address,
-    od.order_mobile AS order_mobile,
-    s.prof_img AS seller_img,
-    b.prof_img AS buyer_img,
-    COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
-    COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
-    i.item_img,
-    i.name AS item_name,
-    i.unit AS item_unit
-FROM
-    -- order_items
-    order_items o_items
-JOIN
-    orders od ON o_items.order_id = od.order_id    
-JOIN 
-    sellers s ON o_items.seller_id = s.seller_id
-JOIN 
-    users u_seller ON s.user_id = u_seller.user_id
-JOIN 
-    buyers b ON o_items.buyer_id = b.buyer_id
-JOIN 
-    users u_buyer ON b.user_id = u_buyer.user_id
-LEFT JOIN 
-    delivers d ON o_items.deliver_id = d.deliver_id
-LEFT JOIN 
-    users u_deliver ON d.user_id = u_deliver.user_id
-JOIN
-    items_market i ON o_items.item_id = i.item_id
-WHERE
-    od.order_id = :order_id
-        AND
-    od_order_type = :order_type
-        AND
-    o_items.order_item_id = :order_item_id
+// public function getDeliveryCompletedOrders($order_id,$order_type,$order_item_id){
+//     $query ="SELECT  
+//     o_items.*,
+//     o_items.order_item_id AS order_item_id,
+//     u_seller.name AS seller_name,
+//     o_items_.deliver_fee AS deliver_fee,
+//     u_seller.user_id AS seller_user_id,
+//     u_seller.address AS seller_address,
+//     u_seller.mobile AS seller_mobile,
+//     u_seller.city AS seller_city,
+//     u_buyer.name AS buyer_name,
+//     u_buyer.user_id AS buyer_user_id,
+//     od.order_id AS order_id,
+//     od.order_city AS order_city,
+//     od.order_address AS order_address,
+//     od.order_mobile AS order_mobile,
+//     s.prof_img AS seller_img,
+//     b.prof_img AS buyer_img,
+//     COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
+//     COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
+//     i.item_img,
+//     i.name AS item_name,
+//     i.unit AS item_unit
+// FROM
+//     -- order_items
+//     order_items o_items
+// JOIN
+//     orders od ON o_items.order_id = od.order_id    
+// JOIN 
+//     sellers s ON o_items.seller_id = s.seller_id
+// JOIN 
+//     users u_seller ON s.user_id = u_seller.user_id
+// JOIN 
+//     buyers b ON o_items.buyer_id = b.buyer_id
+// JOIN 
+//     users u_buyer ON b.user_id = u_buyer.user_id
+// LEFT JOIN 
+//     delivers d ON o_items.deliver_id = d.deliver_id
+// LEFT JOIN 
+//     users u_deliver ON d.user_id = u_deliver.user_id
+// JOIN
+//     items_market i ON o_items.item_id = i.item_id
+// WHERE
+//     od.order_id = :order_id
+//         AND
+//     od_order_type = :order_type
+//         AND
+//     o_items.order_item_id = :order_item_id
         
 
-ORDER BY o_items.order_date DESC
-";
+// ORDER BY o_items.order_date DESC
+// ";
 
-$this->db->query($query);
-$this ->db ->bind(':order_item_id',$order_item_id);
-$this ->db ->bind(':order_type',$order_type);
-$this ->db ->bind(':order_id',$order_id);
+// $this->db->query($query);
+// $this ->db ->bind(':order_item_id',$order_item_id);
+// $this ->db ->bind(':order_type',$order_type);
+// $this ->db ->bind(':order_id',$order_id);
 
-$row=$this->db->single();
-if($row){
-return $row;
-}else{
-return false;
+// $row=$this->db->single();
+// if($row){
+// return $row;
+// }else{
+// return false;
+// }
+// }
+
+
+
+
+// Recommended Order-----------------------------------------
+
+public function getDeliveryCity($deliver_id){
+
+    $query = "SELECT 
+                u.city 
+              FROM
+                users u
+              JOIN
+                delivers d ON u.user_id = d.user_id
+              WHERE
+                deliver_id =:deliver_id
+                ";
+    $this->db->query($query);
+    $this->db->bind(':deliver_id',$deliver_id);
+    $row = $this->db->single();
+    // var_dump($row);
+    if($row){
+        return $row;
+    }else{
+        return false;
+    }
 }
-}
-
 
 
 
 public function getRecommendedOrderIDs($deliver_id){
+
+    
+    $row = $this->getDeliveryCity($deliver_id);
+    $city = $row->city;
+    // var_dump($city);
+
     $query ="SELECT 
     o_items.order_id,
+    o_items.order_item_id,
     o.order_type,
     o.order_date,
-    o_items.order_status
+    o_items.order_status,
+    i.district
 FROM 
     order_items o_items
 JOIN 
     orders AS o ON o_items.order_id = o.order_id
+JOIN
+    items_market AS i ON o_items.item_id = i.item_id
 WHERE 
-    o_items.order_status = 'pending'
-    AND
-
+    o_items.order_status = 'pending' AND
+    i.district = :district
 
 UNION
 
 SELECT 
     o_items_ac.order_id,
+    o_items_ac.order_item_id,
     o.order_type,
     o.order_date,
-    o_items_ac.order_status
+    o_items_ac.order_status,
+    a.district
 FROM 
     order_items_ac o_items_ac
 JOIN 
     orders o ON o_items_ac.order_id = o.order_id
+JOIN
+    auction AS a ON o_items_ac.auction_id = a.auction_ID
 WHERE 
-    o_items_ac.order_status = 'pending'
-ORDER BY 
-order_date DESC"
+    o_items_ac.order_status = 'pending' AND a.district = :district
+
+UNION
+
+SELECT 
+    o_items_rq.order_id,
+    o_items_rq.order_item_id,
+    o.order_type,
+    o.order_date,
+    o_items_rq.order_status,
+    r.district
+FROM 
+    order_items_rq o_items_rq
+JOIN 
+    orders o ON o_items_rq.order_id = o.order_id
+JOIN
+    requests AS r ON o_items_rq.req_id = r.request_ID 
+WHERE 
+    o_items_rq.order_status = 'pending' AND r.district = :district
+
+ORDER BY order_date DESC;
+"
 
 ;
     $this->db->query($query);
+    $this->db->bind(':district',$city);
     // $this->db->bind(':seller_id',$seller_id);
     $row=$this->db->resultSet();
     if($row){
@@ -1970,7 +2060,7 @@ order_date DESC"
 
 
 public function getRecommendedOrders($deliver_id){
-    $orderIds   = $this->getCompletedOrderIDs($deliver_id);
+    $orderIds   = $this->getRecommendedOrderIDs($deliver_id);
   
     
     if(!$orderIds){
@@ -1991,6 +2081,95 @@ public function getRecommendedOrders($deliver_id){
 }
 
 
+
+public function getDeliverReviews($deliver_id){
+
+   
+
+    $query = "SELECT
+                    dr.review AS review,
+                    dr.posted_date AS o_date,
+                    o.quantity AS quantity,
+                    i.name AS item_name,
+                   
+                    u.name AS buyer_name,
+                    u.address AS buyer_address
+                FROM 
+                    delivery_review dr
+                JOIN
+                    order_items o ON dr.item_id = o.item_id
+                JOIN
+                    items_market i ON i.item_id = o.item_id
+                JOIN
+                    buyers b ON o.buyer_id = b.buyer_id
+                JOIN
+                    users u ON u.user_id = b.user_id
+                WHERE
+                    dr.deliver_id = :deliver_id
+
+                UNION
+
+                SELECT
+                    dr.review,
+                    dr.posted_date,
+                    oac.quantity,
+                    a.name AS item_name,
+                 
+                    u.name AS buyer_name,
+                    u.address AS buyer_address
+                FROM 
+                    delivery_review dr
+                JOIN
+                    order_items_ac oac ON dr.auction_ID = oac.auction_id
+                JOIN
+                    auction a ON a.auction_ID = oac.auction_id
+                JOIN
+                    buyers b ON oac.buyer_id = b.buyer_id
+                JOIN
+                    users u ON u.user_id = b.user_id
+                WHERE
+                    dr.deliver_id = :deliver_id
+
+                UNION
+
+                SELECT
+                    dr.review,
+                    dr.posted_date,
+                    orq.quantity,
+                    r.name AS item_name,
+                    
+                    u.name AS buyer_name,
+                    u.address AS buyer_address
+                FROM 
+                    delivery_review dr
+                JOIN
+                    order_items_rq orq ON dr.request_ID = orq.req_id
+                JOIN
+                    requests r ON r.request_ID = orq.req_id
+                JOIN
+                    buyers b ON orq.buyer_id = b.buyer_id
+                JOIN
+                    users u ON u.user_id = b.user_id
+                WHERE
+                    dr.deliver_id = :deliver_id
+
+                ORDER BY
+                   o_date DESC;
+                ";
+
+       $this->db->query($query);
+       $this->db->bind(':deliver_id',$deliver_id);
+       var_dump($deliver_id);
+       $row = $this->db->resultSet();
+       var_dump($row);
+
+       if($row){
+        return $row;
+    }else{
+        return false;
+    }
+
+=======
 public function getAucID($id){
     $this->db->query('SELECT auction_id FROM order_items_ac WHERE order_id =:id');
     $this->db->bind(':id',$id);
@@ -2163,6 +2342,7 @@ public function getDetailsforInvoice($seller_id,$order_item_id,$order_id,$type){
         }
     }
     
+
 }
 
 

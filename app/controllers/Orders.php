@@ -103,7 +103,7 @@ public function acceptOrder_AC($order_item_id){
 public function acceptOrder_PR($order_item_id){
     var_dump('request');
     $deliver_id= $_SESSION['deliver_id'];
-    $assign=$this->orderModel->assignDeliver($order_item_id,$deliver_id,"PURCHASE");
+    $assign=$this->orderModel->assignDeliver($order_item_id,$deliver_id,"REQUEST");
     if($assign){
         $order=$this->orderModel->getRequestOrderDetails($order_item_id);
 
@@ -114,6 +114,9 @@ public function acceptOrder_PR($order_item_id){
         redirect('orders');
     }
 }
+
+
+
 
     public function complete(){
         $data = ['title'=>'welcome'];
@@ -248,7 +251,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
             }
 
-        var_dump($order);
+        
         $data =[
             'order' => $order,
             'id' => $deliver_id,
@@ -485,9 +488,6 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             $deliver_id = $_SESSION['deliver_id'];
             $id = $order_id;
             $type = $order_type;
-            
-
-            
 
             if($type=="AUCTION"){
                 $order=$this->orderModel->getAuctionOrderDetails($order_item_id);
@@ -496,7 +496,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 }elseif($type == "REQUEST"){
                 $order=$this->orderModel->getRequestOrderDetails($order_item_id);
                 }
-
+               
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
 
                 
@@ -505,6 +505,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 'order' => $order,
                 'available' =>  $available
             ];
+
+           
     
             $this->view('deliveryOrderDetails',$data);
         }
