@@ -374,11 +374,13 @@ public function getBidUsersInfo($id){
     // try {
         // Update auction status to 'inactive'
      
+        $currentDateTime = date('Y-m-d H:i:s');;
 
-        $this->db->query("UPDATE auction SET status='inactive',highest_buyer_id=:buyer_id,highest_bid=:highest_bid  WHERE auction_ID=:auction_ID");
+        $this->db->query("UPDATE auction SET status='inactive',highest_buyer_id=:buyer_id,highest_bid=:highest_bid,Ended_date=:ended_date  WHERE auction_ID=:auction_ID");
         $this->db->bind(':buyer_id', $buyer_id);
         $this->db->bind(':highest_bid', $highest_bid);
         $this->db->bind(':auction_ID', $id);
+        $this->db->bind(':ended_date',$currentDateTime);
         if($this->db->execute()){
           return true;
         }else{
@@ -533,6 +535,195 @@ public function getBuyerBids($buyer_id){
   if($row){
     return $row;
   }else{
+    return false;
+  }
+}
+
+
+public function changeStatus($id){
+
+  $currentDateTime = date('Y-m-d H:i:s');
+
+  $query = 'UPDATE
+            auction
+            SET status ="inactive",Ended_date =:ended_date
+            WHERE auction_ID=:id';
+
+  $this->db->query($query);
+  $this->db->bind(':id',$id);
+  $this->db->bind(':ended_date',$currentDateTime);
+
+  if($this->db->execute()){
+    return true;
+  }
+  else{
+    return false;
+  }
+
+}
+
+
+
+public function getpaymentsuccessAuctions($id){
+
+  $query = 'SELECT 
+             auction.*,
+             auction.name As product_name,
+             buyers.prof_img as buyer_img,
+             users.name as buyer_name,
+             users.* 
+             FROM auction 
+             JOIN
+             buyers ON
+             auction.highest_buyer_id = buyers.buyer_id
+             JOIN
+             users ON
+             buyers.user_id = users.user_id
+             WHERE auction.status="inactive" AND auction.bid_Count > 0 AND auction.seller_ID=:id AND auction.payment_status = "successful" ORDER BY Ended_date DESC';
+
+  $this->db->query($query);
+  $this->db->bind(':id',$id);
+
+  $row= $this->db->resultSet();
+
+  if($row){
+    return $row;
+  }
+  else{
+    return false;
+  }
+}
+
+public function getpaymentunsuccessAuctions($id){
+
+  $query = 'SELECT 
+           auction.*,
+           auction.name As product_name,
+          buyers.prof_img as buyer_img,
+          users.name as buyer_name,
+          users.* 
+          FROM auction 
+          JOIN
+          buyers ON
+          auction.highest_buyer_id = buyers.buyer_id
+          JOIN
+          users ON
+          buyers.user_id = users.user_id
+          WHERE auction.status="inactive" AND auction.bid_Count > 0 AND auction.seller_ID=:id AND auction.payment_status = "unsuccessful" ORDER BY Ended_date DESC';
+
+  $this->db->query($query);
+  $this->db->bind(':id',$id);
+
+  $row= $this->db->resultSet();
+
+  if($row){
+    return $row;
+  }
+  else{
+    return false;
+  }
+
+}
+
+public function getNobidAuctions($id){
+  $query = 'SELECT 
+             auction.*,
+             auction.name As product_name,
+             buyers.prof_img as buyer_img,
+             users.name as buyer_name,
+             users.* 
+             FROM auction 
+             JOIN
+             buyers ON
+             auction.highest_buyer_id = buyers.buyer_id
+             JOIN
+             users ON
+             buyers.user_id = users.user_id
+             WHERE auction.status="inactive" AND auction.bid_Count=0 AND auction.seller_ID=:id AND auction.payment_status = "unsuccessful" ORDER BY Ended_date DESC';
+
+  $this->db->query($query);
+  $this->db->bind(':id',$id);
+
+  $row= $this->db->resultSet();
+
+  if($row){
+    return $row;
+  }
+  else{
+    return false;
+  }
+}
+
+
+public function getAuctionIDS($id,$seller_id){
+
+  $query ='SELECT 
+          auction_id
+          FROM
+          order_items_ac
+          WHERE
+          order_id=:id AND seller_id =:seller_id';
+
+  $this->db->query($query);
+  $this->db->bind(':id',$id);
+  $this->db->bind(':seller_id',$seller_id);
+
+  $row = $this->db->single();
+
+  if($row){
+    return $row->auction_id;
+  }
+  else{
+    return false;
+  }
+}
+
+public function getdetails($id){
+  
+  $query = 'SELECT
+            auction.*,
+            auction.name AS product_name,
+            users.name AS buyer_name,
+            buyers.prof_img AS buyer_img,
+            users.*
+            FROM
+            auction
+            JOIN
+            buyers ON
+            auction.highest_buyer_id = buyers.buyer_id 
+            JOIN 
+            users ON
+            buyers.user_id = users.user_id
+            WHERE auction_ID=:auction_id
+            ORDER BY Ended_date DESC';
+
+  $this->db->query($query);
+  $this->db->bind(':auction_id',$id);
+  $row = $this->db->Single();
+
+  if($row){
+    return $row;
+  }
+  else{
+    return false;
+  }
+}
+
+public function updatepaymentstatus($id){
+  $query = 'UPDATE
+            auction
+            SET
+            payment_status = "successful"
+            WHERE 
+            auction_ID = :id';
+
+  $this->db->query($query);
+  $this->db->bind(':id',$id);
+
+  if($this->db->execute()){
+    return true;
+  }
+  else{
     return false;
   }
 }

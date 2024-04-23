@@ -191,6 +191,9 @@
             }
 
             public function updateOrderPaymentStatus($id){
+
+
+
                 $this->db->query('UPDATE orders SET payment_status=1 WHERE order_id=:order_id');
                 $this->db->bind(':order_id',$id);
                 if($this->db->execute()){
@@ -272,6 +275,59 @@
                 orders o ON o_items_rq.order_id = o.order_id
             WHERE 
                 o_items_rq.seller_id = :seller_id
+            ORDER BY 
+            order_date DESC "
+            ;
+                $this->db->query($query);
+                $this->db->bind(':seller_id',$seller_id);
+                $row=$this->db->resultSet();
+                if($row){
+                    return $row;
+                }else{
+                    return false;
+                }
+            }
+            
+            public function getsellerCompleteOrderIDs($seller_id){
+                $query ="SELECT 
+                o_items.order_id,
+                o.order_type,
+                o.order_date
+            FROM 
+                order_items o_items
+            JOIN 
+                orders AS o ON o_items.order_id = o.order_id
+            WHERE 
+                o_items.seller_id = :seller_id AND
+                o_items.order_status = 'completed'
+            
+            UNION
+            
+            SELECT 
+                o_items_ac.order_id,
+                o.order_type,
+                o.order_date
+            FROM 
+                order_items_ac o_items_ac
+            JOIN 
+                orders o ON o_items_ac.order_id = o.order_id
+            WHERE 
+                o_items_ac.seller_id = :seller_id AND
+                o_items_ac.order_status = 'completed'
+
+            UNION
+            
+            SELECT 
+                o_items_rq.order_id,
+                o.order_type,
+                o.order_date
+            FROM 
+                order_items_rq o_items_rq
+            JOIN 
+                orders o ON o_items_rq.order_id = o.order_id
+            WHERE 
+                o_items_rq.seller_id = :seller_id AND
+                o_items_rq.order_status = 'completed'
             ORDER BY 
             order_date DESC "
             ;
@@ -559,6 +615,29 @@
                         return false;
                     }
                     
+            }
+
+            //get seller complete orders
+            public function getSellerCompleteOrders($seller_id){
+
+                $orderIds = $this->getsellerCompleteOrderIDs($seller_id);
+                
+
+                if(!$orderIds){
+                    return false;
+                }
+
+                $orders = [];
+                foreach($orderIds as $order){
+                    $orderDetails = $this->getOrderDetailsByOrderId($order->order_id,$order->order_type);
+                    array_push($orders,$orderDetails);
+                }
+
+                if($orders){
+                    return $orders;
+                }else{
+                    return false;
+                }
             }
 
 
@@ -911,6 +990,7 @@ public function assignDeliver($order_item_id ,$deliver_id,$order_type){
 
 
         public function OrdersAdminView($id){
+
             $this->db->query('SELECT * FROM orders WHERE order_id=:order_id');
             $this->db->bind(':order_id',$id);
 
@@ -923,8 +1003,13 @@ public function assignDeliver($order_item_id ,$deliver_id,$order_type){
             }
         }
 
-        public function OrderItemsView($id){
-            $this->db->query('SELECT 
+        public function OrderItemsView($id,$type){
+
+            
+
+            if($type =='PURCHASE'){
+
+                $this->db->query('SELECT 
                             order_items.*,
                             items_market.*,
                             users.*,
@@ -941,45 +1026,171 @@ public function assignDeliver($order_item_id ,$deliver_id,$order_type){
                             JOIN
                             users ON
                             sellers.user_id=users.user_id
-                            WHERE order_id=:order_id');
+                            WHERE order_items.order_id=:order_id');
 
             $this->db->bind(':order_id',$id);
 
             $row= $this->db->resultSet();
+            
             if($row){
                 return $row;
             }
             else{
                 return false;
             }
+
+            }elseif($type == 'AUCTION'){
+
+                $this->db->query('SELECT 
+                            order_items_ac.*,
+                            auction.*,
+                            users.*,
+                            users.name As seller_name,
+                            users.address As seller_address
+                            FROM
+                            order_items_ac
+                            JOIN 
+                            auction ON 
+                            order_items_ac.auction_id = auction.auction_ID
+                            JOIN
+                            sellers ON
+                            auction.seller_ID = sellers.seller_id
+                            JOIN
+                            users ON
+                            sellers.user_id=users.user_id
+                            WHERE order_items_ac.order_id=:order_id');
+
+            $this->db->bind(':order_id',$id);
+
+            $row= $this->db->resultSet();
+            
+            if($row){
+                return $row;
+            }
+            else{
+                return false;
+            }
+
+            }
+            elseif($type == 'REQUESTS'){
+
+                $this->db->query('SELECT 
+                            order_items_rc.*,
+                            requests.*,
+                            users.*,
+                            users.name As seller_name,
+                            users.address As seller_address
+                            FROM
+                            order_items_rq
+                            JOIN 
+                            requests ON 
+                            order_items_rq.req_id = requests.request_ID
+                            JOIN
+                            sellers ON
+                            requests.acp_seller_ID = sellers.seller_id
+                            JOIN
+                            users ON
+                            sellers.user_id=users.user_id
+                            WHERE order_items_rq.order_id=:order_id');
+
+            $this->db->bind(':order_id',$id);
+
+            $row= $this->db->resultSet();
+            // var_dump($row);
+            if($row){
+                return $row;
+            }
+            else{
+                return false;
+            }
+            }
+            
 
         }
 
-        public function sellersInOrder($id){
-            $query = 'SELECT 
-                    order_items.seller_id,
-                    users.*
-                    FROM
-                    order_items
-                    JOIN
-                    sellers ON
-                    order_items.seller_id=sellers.seller_id
-                    JOIN 
-                    users ON
-                    sellers.user_id = users.user_id
-                    WHERE order_items.order_id = :order_id';
-            
-            $this->db->query($query);
-            $this->db->bind(':order_id',$id);
-            
-            $row = $this->db->resultSet();
+        public function sellersInOrder($id,$type){
 
-            if($row){
-                return $row;
+            if($type == 'PURCHASE'){
+                $query = 'SELECT 
+                order_items.seller_id,
+                users.*
+                FROM
+                order_items
+                JOIN
+                sellers ON
+                order_items.seller_id=sellers.seller_id
+                JOIN 
+                users ON
+                sellers.user_id = users.user_id
+                WHERE order_items.order_id = :order_id';
+        
+        $this->db->query($query);
+        $this->db->bind(':order_id',$id);
+        
+        $row = $this->db->resultSet();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
             }
-            else{
-                return false;
+            elseif($type == 'AUCTION'){
+                
+                $query = 'SELECT 
+                order_items_ac.seller_id,
+                users.*
+                FROM
+                order_items_ac
+                JOIN
+                sellers ON
+                order_items_ac.seller_id=sellers.seller_id
+                JOIN 
+                users ON
+                sellers.user_id = users.user_id
+                WHERE order_items_ac.order_id = :order_id';
+        
+        $this->db->query($query);
+        $this->db->bind(':order_id',$id);
+        
+        $row = $this->db->resultSet();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
             }
+            elseif($type == 'REQUESTS'){
+                
+                $query = 'SELECT 
+                order_items_ac.seller_id,
+                users.*
+                FROM
+                order_items_rq
+                JOIN
+                sellers ON
+                order_items_rq.seller_id=sellers.seller_id
+                JOIN 
+                users ON
+                sellers.user_id = users.user_id
+                WHERE order_items_rq.order_id = :order_id';
+        
+        $this->db->query($query);
+        $this->db->bind(':order_id',$id);
+        
+        $row = $this->db->resultSet();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+            }
+           
         }
 
 
@@ -1010,8 +1221,11 @@ public function assignDeliver($order_item_id ,$deliver_id,$order_type){
             }
         }
 
-        public function OrderDeliverers($id){
-            $query = 'SELECT 
+        public function OrderDeliverers($id,$type){
+            
+            if($type == 'PURCHASE'){
+
+                $query = 'SELECT 
                     order_items.*,
                     users.*
                     FROM 
@@ -1035,6 +1249,62 @@ public function assignDeliver($order_item_id ,$deliver_id,$order_type){
             else{
                 return false;
             }
+            }
+            elseif($type == 'AUCTION'){
+
+                $query = 'SELECT 
+                    order_items_ac.*,
+                    users.*
+                    FROM 
+                    order_items_ac
+                    JOIN
+                    delivers ON
+                    order_items_ac.deliver_id = delivers.deliver_id
+                    JOIN
+                    users ON
+                    delivers.user_id = users.user_id
+                    WHERE
+                    order_items_ac.order_id = :order_id';
+            
+            $this->db->query($query);
+            $this->db->bind(':order_id',$id);
+            $row =$this->db->resultSet();
+
+            if($row){
+                return $row;
+            }
+            else{
+                return false;
+            }
+            }
+            elseif($type == 'REQUEST'){
+
+                $query = 'SELECT 
+                    order_items_rq.*,
+                    users.*
+                    FROM 
+                    order_items_rq
+                    JOIN
+                    delivers ON
+                    order_items_rq.deliver_id = delivers.deliver_id
+                    JOIN
+                    users ON
+                    delivers.user_id = users.user_id
+                    WHERE
+                    order_items_rq.order_id = :order_id';
+            
+            $this->db->query($query);
+            $this->db->bind(':order_id',$id);
+            $row =$this->db->resultSet();
+
+            if($row){
+                return $row;
+            }
+            else{
+                return false;
+            }
+            }
+            
 
         }
 
@@ -1817,12 +2087,9 @@ public function getRecommendedOrders($deliver_id){
 
 }
 
-
 public function getDeliverReviewsById($deliver_id){
 
-   
-
-    $query = "SELECT
+   $query = "SELECT
                     dr.review AS review,
                     dr.posted_date AS o_date,
                     o.quantity AS quantity,
@@ -1905,6 +2172,180 @@ public function getDeliverReviewsById($deliver_id){
         return false;
     }
 
+
+public function getAucID($id){
+    $this->db->query('SELECT auction_id FROM order_items_ac WHERE order_id =:id');
+    $this->db->bind(':id',$id);
+
+    $row = $this->db->Single();
+
+    if($row){
+        return $row->auction_id;
+    }
+    else{
+        return false;
+    }
+}
+
+
+public function getOrderTypebyID($id){
+
+    $this->db->query('SELECT * FROM orders WHERE order_id=:id');
+    $this->db->bind(':id',$id);
+
+    $row = $this->db->Single();
+
+    if($row){
+        return $row->order_type;
+    }
+    else{
+        return false;
+    }
+}
+
+public function getDetailsforInvoice($seller_id,$order_item_id,$order_id,$type){
+
+    
+    if($type == 'PURCHASE'){
+        $query = 'SELECT 
+                    order_items.*,
+                    orders.*,
+                    buyers.prof_img AS buyer_img,
+                    u_buyer.name AS buyer_name,
+                    u_buyer.address AS buyer_address,
+                    u_deliver.name AS deliver_name,
+                    items_market.*
+                    FROM
+                    order_items
+                    JOIN
+                    orders ON
+                    order_items.order_id = orders.order_id
+                    JOIN
+                    buyers ON
+                    orders.buyer_id = buyers.buyer_id
+                    JOIN
+                    users u_buyer ON
+                    buyers.user_id = u_buyer.user_id
+                    JOIN
+                    delivers ON
+                    order_items.deliver_id = delivers.deliver_id
+                    JOIN
+                    users u_deliver ON
+                    delivers.user_id = u_deliver.user_id
+                    JOIN
+                    items_market ON
+                    order_items.item_id = items_market_item.id
+                    WHERE
+                    order_items.order_item_id = :order_item_id AND
+                    order_items.order_id = :order_id AND
+                    order_items.seller_id = :seller_id';
+     
+        $this->db->query($query);
+        $this->db->bind(':order_item_id', $order_item_id);
+        $this->db->bind(':order_id', $order_id);
+        $this->db->bind(':seller_id', $seller_id);
+    
+        $row = $this->db->Single();
+        if($row){
+            return $row;
+        } else {
+            return false;
+        }
+    }
+    elseif($type == 'AUCTION'){
+        $query = 'SELECT 
+                    order_items_ac.*,
+                    orders.*,
+                    buyers.prof_img AS buyer_img,
+                    u_buyer.name AS buyer_name,
+                    u_buyer.address AS buyer_address,
+                    u_deliver.name AS deliver_name,
+                    auction.*
+                    FROM
+                    order_items_ac
+                    JOIN
+                    orders ON
+                    order_items_ac.order_id = orders.order_id
+                    JOIN
+                    buyers ON
+                    orders.buyer_id = buyers.buyer_id
+                    JOIN
+                    users u_buyer ON
+                    buyers.user_id = u_buyer.user_id
+                    JOIN
+                    delivers ON
+                    order_items_ac.deliver_id = delivers.deliver_id
+                    JOIN
+                    users u_deliver ON
+                    delivers.user_id = u_deliver.user_id
+                    JOIN
+                    auction ON
+                    order_items_ac.auction_id = auction.auction_ID
+                    WHERE
+                    order_items_ac.order_item_id = :order_item_id AND
+                    order_items_ac.order_id = :order_id AND
+                    order_items_ac.seller_id = :seller_id';
+    
+        $this->db->query($query);
+        $this->db->bind(':order_item_id', $order_item_id);
+        $this->db->bind(':order_id', $order_id);
+        $this->db->bind(':seller_id', $seller_id);
+    
+        $row = $this->db->Single();
+        if($row){
+            return $row;
+        } else {
+            return false;
+        }
+    }
+    elseif($type =='REQUEST'){
+        $query = 'SELECT 
+                    order_items_rq.*,
+                    orders.*,
+                    buyers.prof_img AS buyer_img,
+                    u_buyer.name AS buyer_name,
+                    u_buyer.address AS buyer_address,
+                    u_deliver.name AS deliver_name,
+                    requests.*
+                    FROM
+                    order_items_rq
+                    JOIN
+                    orders ON
+                    order_items_rq.order_id = orders.order_id
+                    JOIN
+                    buyers ON
+                    orders.buyer_id = buyers.buyer_id
+                    JOIN
+                    users u_buyer ON
+                    buyers.user_id = u_buyer.user_id
+                    JOIN
+                    delivers ON
+                    order_items_rq.deliver_id = delivers.deliver_id
+                    JOIN
+                    users u_deliver ON
+                    delivers.user_id = u_deliver.user_id
+                    JOIN
+                    requests ON
+                    order_items_rq.req_id = requests.request_ID
+                    WHERE
+                    order_items_rq.order_item_id = :order_item_id AND
+                    order_items_rq.order_id = :order_id AND
+                    order_items_rq.seller_id = :seller_id';
+    
+        $this->db->query($query);
+        $this->db->bind(':order_item_id', $order_item_id);
+        $this->db->bind(':order_id', $order_id);
+        $this->db->bind(':seller_id', $seller_id);
+    
+        $row = $this->db->Single();
+        if($row){
+            return $row;
+        } else {
+            return false;
+        }
+    }
+    
+
 }
 
 public function getDeliverReviews($deliver_id){
@@ -1941,10 +2382,6 @@ public function getDeliverReviews($deliver_id){
 
                 
 }
-
-
-
-
 
 
 }

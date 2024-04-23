@@ -24,6 +24,7 @@ class Invoice extends Controller{
 
         $this->view('invoice',$data);
 
+
     } elseif(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
 
         if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'deliver'){
@@ -65,3 +66,15 @@ class Invoice extends Controller{
 }
 
 ?>
+=======
+    }
+
+        
+        
+
+    }
+       
+}
+
+?>
+

@@ -100,12 +100,15 @@
 
 
     $data=[
+      'Qrequests'=>$Qrequests,
       'requests'=>$requests,
     ];
     $this->view('sellerAdaccept',$data);
 
 
    }
+
+   
 
    public function decline($id){
 
@@ -122,9 +125,12 @@
    public function accepted(){
 
     $requests=$this->RequestsModel->getAcceptRequests();
+    $Qrequests =$this->RequestsModel->getQorderRequests();
+
 
     $data=[
       'requests'=>$requests,
+      'Qrequests'=>$Qrequests,
     
     ];
     $this->view('sellerAdaccept',$data);

@@ -14,12 +14,12 @@
 </head>
 <body>
 <?php
- require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
 
 <div class="main_container">
-
-<?php 
+    
+    <?php 
+    require APPROOT. '/views/layouts/navbar2.php'; 
    require APPROOT. '/views/layouts/deliverySidebar.php';  ?>
 
 <div class="container_content">
@@ -135,6 +135,6 @@
         </div>
     </div>
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
-    <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+    <script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
 </body>
 </html>

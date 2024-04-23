@@ -41,13 +41,16 @@
 
 <div class="container_content">
         <!-- =============== Container ====================== -->
-        
+        <div class="container_title_cont">
+  <p class="container_title">Product Listing</p>
+  </div>
+    
    
   <!-- <h4 class="H4center">List Product</h4> -->
   <div class="listing_container">
-  <div class="title_container">
+  <!-- <div class="title_container">
       <h4>Product Listing</h1>
-  </div>
+  </div> -->
 
   <div class="form_container">
 
@@ -143,7 +146,8 @@
 
       <div class="input_cont">
       <label for="item_img" class="input_label">Upload Image</label>
-            <input type="file" class="upload_item"  name="item_img">
+            <input type="file" class="upload_item"  name="item_img" id="item_img_input">
+            <img id="image_preview" src="#" alt="Preview" style="display: none; max-width: 300px; max-height: 250px;" class="list_item">
       </div>
             
 
@@ -195,4 +199,29 @@
 
       document.getElementById('expiration_date').setAttribute("min",formatDate);
 
+</script>
+<script>
+    // Function to preview image after selecting it
+    function previewImage(input) {
+        // Check if any file is selected
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                // Update the src attribute of the img tag with the selected image URL
+                document.getElementById('image_preview').src = e.target.result;
+                // Display the img tag
+                document.getElementById('image_preview').style.display = 'block';
+            }
+
+            // Read the image file as a URL
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Add an event listener to the file input
+    document.getElementById('item_img_input').addEventListener('change', function() {
+        // Call the previewImage function when a file is selected
+        previewImage(this);
+    });
 </script>

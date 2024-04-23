@@ -76,27 +76,21 @@
    {
 
       $row=$this->itemModel->getItemInfo($id);
+      $reviews = $this->itemModel->getReviews($id);
+
+     
+
      
       if($row){
          $seller=$this->itemModel->getSellerInfo($row->seller_id);
-        
-         $data=[
-            'name'=>$row->name,
-            'item_id'=>$id,
-            'seller_name'=>$seller->name,
-            'seller_id'=>$seller->seller_id,
-            'seller_user_id'=>$seller->user_id,
-            'seller_city'=>$seller->city,
-            'category'=>$row->category,
-            'description'=>$row->description,
-            'price'=>$row->price,
-            'unit'=>$row->unit,
-            'district'=>$row->district,
-            'exp_date'=>$row->exp_date,
-            'created_at'=>$row->created_at,
-            'item_img'=>$row->item_img,
-            'stock'=>$row->stock,
-         ];
+         
+             $data =[
+            'row'=>$row,
+            'seller'=>$seller,
+            'reviews'=>$reviews,
+           ];
+
+         
          
 
          if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -144,8 +138,7 @@
 
 
 
-
-
+      
 
 
       

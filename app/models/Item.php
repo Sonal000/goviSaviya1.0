@@ -425,6 +425,116 @@ else{
 
 }
 
+public function getReviews($id){
+ 
+  $query = 'SELECT 
+            reviews.*,
+            users.*,
+            buyers.prof_img AS buyer_img
+            FROM
+            reviews
+            JOIN
+            buyers ON
+            reviews.buyer_id = buyers.buyer_id
+            JOIN 
+            users ON 
+            buyers.user_id = users.user_id
+            WHERE
+            reviews.item_id = :id';
+
+        $this->db->query($query);
+        $this->db->bind(':id',$id);
+
+        $row = $this->db->Resultset();
+
+        if($row){
+          return $row;
+        }
+        else{
+          return false;
+        }
+}
+
+public function getSellerReviews($id){
+
+  $query ='SELECT
+            reviews.*,
+            users.*,
+            buyers.prof_img AS buyer_img
+            FROM
+            reviews
+            JOIN
+            buyers ON
+            reviews.buyer_id = buyers.buyer_id
+            JOIN
+            users ON
+            buyers.user_id = users.user_id
+            WHERE
+            reviews.seller_id =:id
+            ORDER BY posted_date DESC';
+          
+    $this->db->query($query);
+    $this->db->bind(':id',$id);
+    $row = $this->db->resultset();
+
+    if($row){
+      return $row;
+    }
+    else{
+      return false;
+    }
+
+}
+
+public function getReviewsSeller($id){
+
+  $query = 'SELECT
+            reviews.*,
+            buyers.prof_img AS buyer_img,
+            users.name  AS buyer_name,
+            users.*
+            FROM
+            reviews
+            JOIN
+            buyers ON
+            reviews.buyer_id = buyers.buyer_id
+            JOIN
+            users ON
+            buyers.user_id = users.user_id
+            WHERE
+            reviews.item_id =:id
+            ORDER BY posted_date DESC';
+
+$this->db->query($query);
+$this->db->bind(':id',$id);
+$row = $this->db->resultSet();
+
+if($row){
+  return $row;
+}
+else{
+  return false;
+}
+
+}
+
+public function getreviewcount($id){
+
+  $this->db->query('SELECT COUNT(*) AS count FROM reviews WHERE item_id=:id');
+  $this->db->bind(':id',$id);
+  $result = $this->db->Single();
+
+  if($result){
+    return $result->count;
+  }
+  else{
+    return false;
+  }
+
+}
+
+
+
 
 
 

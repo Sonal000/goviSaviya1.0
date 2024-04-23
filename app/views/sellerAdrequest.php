@@ -46,7 +46,6 @@
     </div>  -->
 
 
-    <div class="bid_items_cont">
     <?php 
     if($data['requests']){
         foreach($data['requests'] as $requests){
@@ -55,11 +54,12 @@
             $req_date = date('Y-m-d', strtotime($requests->req_date));
 
             ?>
+            
         <div class="adcard_cont">
             <div class="adcard">
             <div class="reqbuyerdetails">
                 <div class="buyproimg">
-                    <img src="<?php echo URLROOT.'/store/profiles/'.$requests->buyer_img ;?>" alt="" class="buypro">
+                    <img src="<?php echo URLROOT.'/store/items/'.$requests->buyer_img ;?>" alt="" class="buypro">
                 </div>
                 <div class="name_date">
                     <div class="bna">
@@ -118,23 +118,22 @@
 
         </div>
         
+
         <?php
         
-    }
-}else{
-    ?>
+        }
+    }else{
+        ?>
         <div class="nothing">
             <p>Nothing to show</p>
         </div>
         <?php
         }
-        ?> 
-        </div>
-    </br>
+    ?> 
+    <!-- </br>
     <h4>
         Quoted Order Requests
     </h4>
-    <div class="bid_items_cont">
      <?php 
      if($data['Qrequests'] ){
         foreach($data['Qrequests'] as $Qrequests){
@@ -142,11 +141,12 @@
             $post_date = date('Y-m-d', strtotime($Qrequests->posted_date)); // use to get only the date from the column. column contains both time and date
             $req_date = date('Y-m-d', strtotime($Qrequests->req_date));
             ?>
+            <div class="bid_items_cont">
             <div class="adcard_cont">
             <div class="adcard">
             <div class="reqbuyerdetails">
                 <div class="buyproimg">
-                    <img src="<?php echo URLROOT.'/store/profiles/'.$Qrequests->buyer_img;?>" alt="" class="buypro">
+                    <img src="<?php echo URLROOT.'/store/items/'.$requests->buyer_img ;?>" alt="" class="buypro">
                 </div>
                 <div class="name_date">
                     <div class="bna">
@@ -186,14 +186,14 @@
                    <div class="acceptbt">
                         <button class="btn acceptbtn">Change Quotation</button>
                     </div> 
-                    <!-- <div class="discardbt">
-                        <a href="<?php echo URLROOT ;?>/OrderRequests/decline/<?php echo $Qrequests->request_ID ?>"><button class="discardbtn">Dicline</button></a>
-                    </div> -->
+                    <div class="discardbt">
+                        <a href="<?php echo URLROOT ;?>/OrderRequests/decline/<?php echo $requests->request_ID ?>"><button class="discardbtn">Dicline</button></a>
+                    </div> 
     
                 </div>
             </div>
             <div class="price_decide_cont">
-            <form action="<?php echo URLROOT;?>/OrderRequests/setQuotation/<?php echo $Qrequests->request_ID ?>" method="post">
+            <form action="<?php echo URLROOT;?>/OrderRequests/setQuotation/<?php echo $requests->request_ID ?>" method="post">
             <div class="price_cont">
                 <label for="amount">Enter your Price:</label>
                 <input type="text" name="amount" class="input_item">
@@ -210,16 +210,17 @@
             
 
         </div>
-        <?php
+            </div>
+            <?php
         }
-    }else{
+     }else{
         ?>
+        <div class="bid_items_cont">
             <h3>No quoted Items</h3>
-
+        </div>
         <?php
      }
-     ?>
-     </div>
+     ?> -->
 </div>
   
   
