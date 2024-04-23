@@ -86,10 +86,10 @@
                 <p>Customer</p>
             </div>
             <div class="table_cell column3">
-                <p>Order status</p>
+                <p>Order Type</p>
             </div>
             <div class="table_cell column4">
-                <p>Location</p>
+                <p>Order Status</p>
             </div>
             <div class="table_cell column5">
                 <p></p>
@@ -109,10 +109,11 @@
                 <p><?php echo $Orders->buyer_name ?></p>
             </div>
             <div class="table_cell column3">
-                <div class="ordersta"><p class="orderstatus_complete"><?php echo $Orders->order_status?></p></div>
+            <p><?php echo $Orders->order_type?></p>
+                
             </div>
             <div class="table_cell column4">
-                <p><?php echo $Orders->order_address?></p>
+            <div class="ordersta"><p class="orderstatus_complete"><?php echo $Orders->order_history?></p></div>
             </div>
             <div class="table_cell column6">
                 <a href="<?php echo URLROOT; ?>/Orders/details/<?php echo $Orders->order_id?>"><img src="<?php echo URLROOT; ?>/assets/images/view.png" alt="" class="vieweye" alt=""></a>

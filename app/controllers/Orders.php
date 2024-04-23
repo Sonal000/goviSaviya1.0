@@ -261,7 +261,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             //Sanitize POST array
             $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
-            $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/items/';
+            $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/items/'; 
             $pickupImg = $this->uploadFile('pickup_img', $uploadDirectory);
            
             
@@ -392,24 +392,75 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
     //admin functions
 
+
+    
     public function details($id){
 
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
 
-        $OrderDet = $this->orderModel->OrdersAdminView($id);
-        $OrderItems = $this->orderModel->OrderItemsView($id);
-        $sellerDet=$this->orderModel ->sellersInOrder($id);
-        $buyerDet = $this->orderModel ->OrderBuyer($id);
-        $deliverDet = $this->orderModel->OrderDeliverers($id);
+            $type = $this->orderModel->getOrderTypebyID($id);
+            
 
-        $data = [
-            'details'=>$OrderDet,
-            'items'=>$OrderItems,
-            'sellerdet'=>$sellerDet,
-            'buyerdet'=>$buyerDet,
-            'deliverdet'=>$deliverDet,
-        ];
-        $this->view('adminOrderDetails',$data);
+            
+
+                $OrderDet = $this->orderModel->OrdersAdminView($id);
+                $OrderItems = $this->orderModel->OrderItemsView($id,$type);
+                $sellerDet=$this->orderModel ->sellersInOrder($id,$type);
+                // $buyerDet = $this->orderModel ->OrderBuyer($id,$type->order_type);
+                $deliverDet = $this->orderModel->OrderDeliverers($id,$type);
+
+                $data = [
+                    'details'=>$OrderDet,
+                    'items'=>$OrderItems,
+                    'sellerdet'=>$sellerDet,
+                    // 'buyerdet'=>$buyerDet,
+                    'deliverdet'=>$deliverDet,
+                ];
+                $this->view('adminOrderDetails',$data);
+
+
+            // }
+            // elseif($type->order_type = 'AUCTION'){
+
+            //     $OrderDet = $this->orderModel->OrdersAdminView($id);
+            //     $OrderItems = $this->orderModel->OrderItemsView($id,$type->order_type);
+            //     $sellerDet=$this->orderModel ->sellersInOrder($id,$type->order_type);
+            //     // $buyerDet = $this->orderModel ->OrderBuyer($id,$type->order_type);
+            //     $deliverDet = $this->orderModel->OrderDeliverers($id,$type->order_type);
+
+            //     $data = [
+            //         'details'=>$OrderDet,
+            //         'items'=>$OrderItems,
+            //         'sellerdet'=>$sellerDet,
+            //         // 'buyerdet'=>$buyerDet,
+            //         'deliverdet'=>$deliverDet,
+            //     ];
+            //     var_dump($data);
+            //     $this->view('adminOrderDetails',$data);
+
+            // }elseif($type->order_type='REQUEST'){
+
+
+            //     $OrderDet = $this->orderModel->OrdersAdminView($id);
+            //     $OrderItems = $this->orderModel->OrderItemsView($id,$type->order_type);
+            //     $sellerDet=$this->orderModel ->sellersInOrder($id,$type->order_type);
+            //     // $buyerDet = $this->orderModel ->OrderBuyer($id,$type->order_type);
+            //     $deliverDet = $this->orderModel->OrderDeliverers($id,$type->order_type);
+
+            //     $data = [
+            //         'details'=>$OrderDet,
+            //         'items'=>$OrderItems,
+            //         'sellerdet'=>$sellerDet,
+            //         // 'buyerdet'=>$buyerDet,
+            //         'deliverdet'=>$deliverDet,
+            //     ];
+            //     $this->view('adminOrderDetails',$data);
+
+            // }
+
+        
+
+        
     }
 
     if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
@@ -497,8 +548,20 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
 
         }
+        
     }
 
+    public function Completedd(){
+        $orders = $this->orderModel->getSellerCompleteOrders($_SESSION['seller_id']);
+        $data=[
+            "orders"=>$orders,
+        ];
+        
+        $this -> view('sellerOrderComplete',$data);
+    }
+
+
+   
 
    
 }

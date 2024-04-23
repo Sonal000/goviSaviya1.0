@@ -436,6 +436,18 @@ input:focus{
     margin-right: 1rem;
 }
 
+.auction_item_cont{
+ 
+  border-bottom: 1px solid var(--clr-grey-9);
+}
+.pending_auctions{
+  margin-top: 3rem;
+  border-top: 1px solid var(--clr-grey-7);
+  
+}
+.pending_hed{
+  margin-top: 2rem;
+}
 .createbt{
    display: flex; 
    justify-content: right;

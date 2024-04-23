@@ -104,7 +104,7 @@
                       <p>Current Orders</p>
                     </button>
                     </a>
-                    <a href="<?php echo URLROOT ?>/orders/complete">
+                    <a href="<?php echo URLROOT ?>/orders/completedd">
                     <button class="sidebar_item expand_item link" id="orders_complete">
                     <i class="fas fa-poll-h sidebar_icon"></i>
                       <p>Complete Orders</p>
@@ -225,7 +225,7 @@
                         <p>Current Orders</p>
                       </button>
                     </a>
-                    <a href="<?php echo URLROOT ?>/orders/commplete">
+                    <a href="<?php echo URLROOT ?>/orders/commpletedd">
                       <button class="sidebar_icon_btn link" id="orders_complete_m">
                         <i class="fas fa-poll-h sidebar_icon"></i>
                         <p>Complete Orders</p>
