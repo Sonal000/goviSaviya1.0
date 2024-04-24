@@ -124,7 +124,7 @@
             <h3>Ongoing Order</h3>
         </div>
 
-        <!-- <?php
+        <?php
             if($data['details']){ 
                 ?>
            
@@ -139,7 +139,7 @@
                 </div>
             <?php
             }
-            ?> -->
+            ?>
                     
             <div class="first_col">
 
