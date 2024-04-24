@@ -19,9 +19,25 @@ class Orders extends Controller{
         }
 
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='buyer'){
-            $orders = $this->orderModel->getBuyerOrders($_SESSION['buyer_id']); 
+            $orders = $this->orderModel->getBuyerOngoingOrders($_SESSION['buyer_id']); 
+            $completedOrders = $this->orderModel->getBuyerCompletedOrders($_SESSION['buyer_id']); 
+            if($completedOrders){
+
+                foreach($completedOrders as $item){
+                    if($item){
+                        foreach($item as $order){
+                            $currentDateTime = new DateTime(); 
+                            $completeDateTime = new DateTime($order->completed_date); 
+                            $interval = $currentDateTime->diff($completeDateTime);
+                            $order->completed_date_time = $completeDateTime->format('Y-m-d H:i:s');
+                        }
+                        
+                    }
+                }
+            }
         $data=[
             "orders"=>$orders,
+            "completedOrders"=>$completedOrders,
         ];
         $this -> view('buyerOrders',$data);
     }
@@ -59,6 +75,43 @@ class Orders extends Controller{
     }
 }
 
+
+
+public function raiseBuyerComplain($qc_id){
+
+if($_SESSION['user_type']=='buyer' && isset($_SESSION['buyer_id'])){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+        if(isset($_FILES['complain_img'])){
+            //Sanitize POST array
+            $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/items/';
+            $complainImg = $this->uploadFile('complain_img', $uploadDirectory);
+        }
+        $data = [
+            'qc_id' => $qc_id,
+            'buyer_id' => $_SESSION['buyer_id'],
+            'complain' => $_POST['description'],
+            'complain_img' => $complainImg,
+        ];
+        $seller_user_id = $_POST['seller_user_id'];
+        $order_item_id = $_POST['order_item_id'];
+        $order_id = $_POST['order_id'];
+        $buyer_user_id = $_SESSION['user_id'];
+       if( $this->orderModel->addBuyerComplain($data)){
+        $this->notifiModel->notifYUser(0,$seller_user_id,"Buyer has raised a complain for the order".$order_item_id."/".$order_id." ","orders","OTHER");
+        $this->notifiModel->notifYUser(0,$buyer_user_id,"Successfuly raised a complain for the order".$order_item_id."/".$order_id." ","orders","OTHER");
+        redirect('orders');
+       }
+
+
+}else{
+    $this->view('_404');
+}
+}else{
+    $this->view('_404');
+
+}
+}
 
 public function orderDetails($id){
 
@@ -99,6 +152,7 @@ public function acceptOrder_AC($order_item_id){
         redirect('orders');
     }
 }
+
 
 public function acceptOrder_PR($order_item_id){
     var_dump('request');
@@ -191,31 +245,45 @@ public function acceptOrder_PR($order_item_id){
     public function pickedup(){
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
         $deliver_id= $_SESSION['deliver_id'];
-        $pickedUp = $this->orderModel->editToPickedUp($deliver_id);
-        $data = [
-            'title'=>'welcome',
-        ];
-        
-        
-
-    if($pickedUp){
         $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
         if($current->current_order_type=="AUCTION"){
             $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
-            }elseif($current->current_order_type=="PURCHASE"){
+        }elseif($current->current_order_type=="PURCHASE"){
             $order=$this->orderModel->getOrderDetails($current->current_order_item_id);
-            }elseif($current->current_order_type=="REQUEST"){
+        }elseif($current->current_order_type=="REQUEST"){
             $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
-            }
-        $this->notifiModel->notifYUser(0,$order->seller_user_id,"Delivery agent has arrived for your order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
-        $this->notifiModel->notifYUser(0,$order->buyer_user_id,"Delivery agent has arrived for your order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
+        }
+        
+        if($order->order_status == 'deliver_assigned') {
+            $pickedUp = $this->orderModel->editToPickedUp($deliver_id);
+            $data = [
+                'title'=>'welcome',
+            ];
+        if($pickedUp){
+            $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
+            if($current->current_order_type=="AUCTION"){
+                $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
+                }elseif($current->current_order_type=="PURCHASE"){
+                $order=$this->orderModel->getOrderDetails($current->current_order_item_id);
+                }elseif($current->current_order_type=="REQUEST"){
+                $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
+                }
+            $this->notifiModel->notifYUser(0,$order->seller_user_id,"Delivery agent has arrived for your order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
+            $this->notifiModel->notifYUser(0,$order->buyer_user_id,"Delivery agent has arrived for your order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
+    
+    
+    
+            $this -> view('deliveryConfirmQualityPickup',$data);
+        }else{
+            $this -> view('_404');;
+        }
+
+        }else{
+            $this -> view('deliveryConfirmQualityPickup');
+        }
 
 
-
-        $this -> view('deliveryConfirmQualityPickup',$data);
-    }else{
-        $this -> view('_404');;
-    }
+       
 
     }
 }
@@ -262,13 +330,23 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         ];
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
             //Sanitize POST array
             $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
             $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/items/';
             $pickupImg = $this->uploadFile('pickup_img', $uploadDirectory);
-           
-            
-          if ( $this->orderModel->uploadPickupImages($deliver_id,$pickupImg)){
+            $data=[
+                'order_id' => $order->order_id,
+                'order_item_id' => $order->order_item_id,
+                'seller_id' => $order->seller_id,
+                'deliver_pickup_img' => $pickupImg,
+                'deliver_id' => $_SESSION['deliver_id'],
+                'seller_img' => $order->item_img,
+                'order_type' => $current->current_order_type
+            ];
+
+          if ( $this->orderModel->uploadPickupImages($data)){
+            if($order->order_status == 'pickedup'){
               $delivered = $this->orderModel->editToDelivering($deliver_id);
               if($delivered){
 
@@ -282,6 +360,14 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                     }
                 $this->notifiModel->notifYUser(0,$order->seller_user_id,"Delivery agent has picked up your order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
                 $this->notifiModel->notifYUser(0,$order->buyer_user_id,"Delivery agent has picked up order <span class='bg'>".$order->item_name."</span> (order_id:".$order->order_item_id."/".$order->order_id .")","orders","DELIVERY");
+                $data =[
+                    'order' => $order,
+                    'id' => $deliver_id,
+                    // 'pickup_img' =>  $pickupImg,
+                    'details' => $details,
+                    'rowB' => $rowB,
+                    'rowS' => $rowS 
+                ];
 
             $this -> view('deliveringOrder',$data);
             }else{
@@ -290,6 +376,9 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         }else{
             redirect('orders/pickedup');
         }
+    }else{
+        $this -> view('deliveringOrder',$data);
+    }
 
           }else{
             
@@ -328,11 +417,22 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
 
         $deliver_id = $_SESSION['deliver_id'];
-        $delivered = $this->orderModel->editToDelivered($deliver_id);
         $data = ['title'=>'welcome'];
-
-    
-
+        
+        $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
+        if($current->current_order_type=="AUCTION"){
+            $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
+            }elseif($current->current_order_type=="PURCHASE"){
+                $order=$this->orderModel->getOrderDetails($current->current_order_item_id);
+            }elseif($current->current_order_type=="REQUEST"){
+                $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
+            }
+            
+            
+            if($order->order_status == 'delivering') {
+                
+                $delivered = $this->orderModel->editToDelivered($deliver_id);
+       
             if($delivered){
 
                 $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
@@ -349,6 +449,12 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             }else{
                 $this->view('_404');
             }
+
+        }else{
+            $this -> view('deliveryConfirmQualityDropoff');
+        }
+    }else{
+        $this->view('_404');
     }
 
 
@@ -361,13 +467,37 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
     public function conclude(){
 
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             //Sanitize POST array
         $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
         $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/items/';
         $dropoffImg = $this->uploadFile('dropoff_img', $uploadDirectory);
+
+        
         $deliver_id = $_SESSION['deliver_id'];
         $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
+        if($current->current_order_type=="AUCTION"){
+            $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
+            }elseif($current->current_order_type=="PURCHASE"){
+            $order=$this->orderModel->getOrderDetails($current->current_order_item_id);
+            }elseif($current->current_order_type=="REQUEST"){
+            $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
+            }
+
+        $data=[
+            'order_id' => $order->order_id,
+            'order_item_id' => $order->order_item_id,
+            'seller_id' => $order->seller_id,
+            'deliver_dropoff_img' => $dropoffImg,
+            'deliver_id' => $_SESSION['deliver_id'],
+            'seller_img' => $order->item_img,
+            'order_type' => $current->current_order_type
+        ];
+
+      if ( $this->orderModel->uploadDropoffImages($data)){
+
+        if($order->order_status=="delivered"){
         $completed = $this->orderModel->editToCompleted($deliver_id);
 
         if($completed){
@@ -386,8 +516,18 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
         
         $this -> view('deliveryComplete',$data);
-    
+        
+    }else{
+        $this -> view('deliveryComplete');
     }
+
+    }else{
+        $this -> view('deliveryComplete');
+    }
+
+
+}}else{
+    $this->view('_404');}
 }
 
 

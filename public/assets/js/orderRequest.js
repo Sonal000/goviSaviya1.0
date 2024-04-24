@@ -13,9 +13,13 @@ const ReqUpdateBtn = document.getElementById('req_update_btn');
 const ReqViewCont = document.getElementById('requests_cont_view');
 const ReqEditCont = document.getElementById('requests_cont_edit');
 
-ReqUpdateBtn.addEventListener('click', (e) => {
-   
-    ReqViewCont.classList.toggle('hide');
-    ReqEditCont.classList.toggle('show');
-});
+if(ReqUpdateBtn){
+
+    
+    ReqUpdateBtn.addEventListener('click', (e) => {
+        
+        ReqViewCont.classList.toggle('hide');
+        ReqEditCont.classList.toggle('show');
+    });
+}
 

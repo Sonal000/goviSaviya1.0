@@ -18,8 +18,8 @@ class Requests{
         $row2 = $this->db->single();
         
         $this->db->query
-        ("INSERT INTO requests(name,category,req_stock,unit,req_date,req_address,district,buyer_id,buyer_name,buyer_img)
-        VALUES(:name,:category,:req_stock,:unit,:req_date,:req_address,:district,:buyer_id,:buyer_name,:buyer_img)");
+        ("INSERT INTO requests(name,category,req_stock,unit,req_date,req_address,req_img,district,buyer_id,buyer_name,buyer_img)
+        VALUES(:name,:category,:req_stock,:unit,:req_date,:req_address,:req_img,:district,:buyer_id,:buyer_name,:buyer_img)");
 
         $this->db->bind(':name',$data['name']);
         $this->db->bind(':category',$data['category']);
@@ -27,6 +27,7 @@ class Requests{
         $this->db->bind(':unit',$data['unit']);
         $this->db->bind(':req_date',$data['req_date']);
         $this->db->bind(':req_address',$data['req_address']);
+        $this->db->bind(':req_img',$data['req_img']);
         $this->db->bind(':district',$data['district']);
         $this->db->bind(':buyer_id',$data['buyer_id']);
         $this->db->bind(':buyer_name',$row2->name);
