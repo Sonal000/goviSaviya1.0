@@ -87,6 +87,7 @@
         <?php }else{ ?>
 
 
+
             <div class="greeting_card">
 
             <?php
@@ -123,7 +124,22 @@
             <h3>Ongoing Order</h3>
         </div>
 
+        <!-- <?php
+            if($data['details']){ 
+                ?>
+           
 
+
+            <div id="map_cont" data-start='gampaha' data-end='matara'> 
+                <input id="start" type="hidden" value="<?php echo $data['details']->seller_address  ?>" name="start">
+                <input id="end" type="hidden" value="<?php echo $data['details']->order_address  ?>" name="end">
+                <?php       
+                require APPROOT. '/views/layouts/mapCurrentLoc.php'; 
+             ?>
+                </div>
+            <?php
+            }
+            ?> -->
                     
             <div class="first_col">
 
@@ -214,6 +230,8 @@
 
 
             </div>
+
+
 
             <!-- This is the Second Col --------------------------------->
 
@@ -339,6 +357,7 @@
     <!-- </div> -->
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
     <script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
+    <script src="<?php echo URLROOT ?>/assets/js/deliveryHomeMap.js"></script>
 
 </body>
 </html>

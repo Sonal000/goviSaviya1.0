@@ -21,6 +21,7 @@
       $request = $this->RequestsModel->BuyerAcceptRequests($_SESSION['buyer_id']);
       $pendreq = $this->RequestsModel->BuyerPendingRequests($_SESSION['buyer_id']);
       $quotation=$this->RequestsModel->BuyerQuotations($_SESSION['buyer_id']);
+
       
       $data =[
           'requests'=> $request,
@@ -51,8 +52,8 @@
 
       //sanitize POST data
       $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
-
       
+      $req_img = trim($_POST['category'])=='spices' ? 'spices_request_img.jpg' : (trim($_POST['category'])=='vegetables' ? 'vegitable_request_img.jpg' : 'fruits_request_img.jpg');
                   $data=[
                   'name'=>trim($_POST['name']),
                   'category' =>trim($_POST['category']),
@@ -60,6 +61,7 @@
                   'unit'=>trim($_POST['unit']),
                   'req_date' =>trim($_POST['req_date']),
                   'req_address' =>trim($_POST['req_address']),
+                  'req_img' =>$req_img,
                   'district' =>trim($_POST['district']),
                   'buyer_id'=>$_SESSION['buyer_id'],
                   
@@ -100,7 +102,7 @@
 
 
     $data=[
-      'Qrequests'=>$Qrequests,
+      // 'Qrequests'=>$Qrequests,
       'requests'=>$requests,
     ];
     $this->view('sellerAdaccept',$data);
@@ -245,6 +247,7 @@ public  function checkout($id){
                   ],
               ];
 
+              
           \Stripe\Stripe::setApiKey(STRIPESECRETKEY);
           $checkout_session = \Stripe\Checkout\Session::create([
             "mode" => "payment",

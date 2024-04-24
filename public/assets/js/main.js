@@ -226,6 +226,7 @@ $(document).ready(function () {
             
             $(".notification_count").text("0"); 
             $(".notification_count").fadeOut(); 
+            fetchData();
           } else {
             // Display error message
             $("#cont").html("<p>" + response.message + "</p>");
