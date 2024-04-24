@@ -49,9 +49,9 @@
                     Seller: <a href="#" style="color:var(--clr-grey-4)" class="link_to_seller">  <?php echo $data['order']->seller_name ?> </a>
                 </div>
                 
-                <div class="order_seller_rating">
+                <!-- <div class="order_seller_rating">
                     Rating: 4.5
-                </div>
+                </div> -->
 
 
 
@@ -102,12 +102,12 @@
                     <?php  }else{ ?>
 
                         <a class="accept_order_btnnn"  href="<?php
-                            if($data['type'] == "AUCTION"){
-                                echo URLROOT."/orders/acceptOrder_AC/".$data['order_item_id'] ;
-                            }elseif($type == "REQUEST"){
-                                echo URLROOT."/orders/acceptOrder_PR/".$data['order_item_id'] ;
-                            }elseif($type == "PURCHASE"){
-                                echo URLROOT."/orders/acceptOrder/".$data['order_item_id'] ;
+                            if ($data['type'] == "AUCTION") {
+                                echo URLROOT . "/orders/acceptOrder_AC/" . $data['order_item_id'];
+                            } elseif ($data['type'] == "REQUEST") {
+                                echo URLROOT . "/orders/acceptOrder_PR/" . $data['order_item_id'];
+                            } elseif ($data['type'] == "PURCHASE") {
+                                echo URLROOT . "/orders/acceptOrder/" . $data['order_item_id'];
                             }
 
                                 ?>"><i class="fa-solid fa-circle-check"></i>  Accept Order</a>

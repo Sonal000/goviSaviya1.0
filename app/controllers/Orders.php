@@ -258,6 +258,7 @@ public function acceptOrder_PR($order_item_id){
 
     public function pickedup(){
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+            
         $deliver_id= $_SESSION['deliver_id'];
         $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
         if($current->current_order_type=="AUCTION"){
@@ -268,11 +269,14 @@ public function acceptOrder_PR($order_item_id){
             $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
         }
         
+        $data = [
+            'title'=>'welcome',
+            'order'=>$order
+        ];
+        
         if($order->order_status == 'deliver_assigned') {
             $pickedUp = $this->orderModel->editToPickedUp($deliver_id);
-            $data = [
-                'title'=>'welcome',
-            ];
+            
         if($pickedUp){
             $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
             if($current->current_order_type=="AUCTION"){
@@ -293,7 +297,7 @@ public function acceptOrder_PR($order_item_id){
         }
 
         }else{
-            $this -> view('deliveryConfirmQualityPickup');
+            $this -> view('deliveryConfirmQualityPickup',$data);
         }
 
 
@@ -431,8 +435,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
 
         $deliver_id = $_SESSION['deliver_id'];
-        $data = ['title'=>'welcome'];
-        
+       
         $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
         if($current->current_order_type=="AUCTION"){
             $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
@@ -442,6 +445,10 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
             }
             
+            $data = ['title'=>'welcome',
+            'order'=>$order
+        ];
+
             
             if($order->order_status == 'delivering') {
                 
@@ -465,7 +472,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             }
 
         }else{
-            $this -> view('deliveryConfirmQualityDropoff');
+            $this -> view('deliveryConfirmQualityDropoff',$data);
         }
     }else{
         $this->view('_404');
@@ -654,6 +661,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
 
+           
                 
             $data = [
                 'title' => 'welcome',
