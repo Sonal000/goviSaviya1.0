@@ -132,6 +132,8 @@ public function orderDetails($id){
 }
 
 public function acceptOrder($order_item_id){
+
+
     $deliver_id= $_SESSION['deliver_id'];
     $assign=$this->orderModel->assignDeliver($order_item_id,$deliver_id,"PURCHASE");
     if($assign){
@@ -231,8 +233,14 @@ public function acceptOrder_PR($order_item_id){
                         redirect('orders/complete');
                     }
                 } else {
+                    $data = [
+                        'details' => false,
+                        'hasVehicle' => $hasVehicle  
+                        // 'rowB' => $rowB,
+                        // 'rowS' => $rowS       
+                    ];
                     // Handle case where $order is null
-                    echo "Order details not found";
+                    $this->view('OngoingOrder',$data);
                 }
             } else {
                 $data = [

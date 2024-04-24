@@ -269,7 +269,7 @@ foreach($items->bidlist as $bid){
                    </div>
                    <div class="bid_detail">
                        <div class="bidder_name">
-                           <p><a href="" class="highest_bidder">highest bidder : <?php echo $items->auctionDetails->buyer_name; ?></a> </p>
+                           <p><a href="" class="highest_bidder">highest bidder : <?php echo $items->buyer_name; ?></a> </p>
                        </div>
                        <div class="bidcount">
                            Bid count : <?php echo $items->bid_Count; ;?>
@@ -330,7 +330,7 @@ foreach($items->bidlist as $bid){
                 </div>
                <div class="info">
                     <p class="infor_title">Highest Bid</p>
-                    <p class="infor_title"><?php echo $items->current_bid ?></p>
+                    <p class="infor_title"><?php echo $items->highest_bid ?></p>
                 </div>
                 <div class="info">
                     <p class="infor_title">Bid Count</p>
