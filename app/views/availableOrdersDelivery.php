@@ -74,6 +74,8 @@
                 if($orders){
                 foreach($orders as $order){
 
+                  
+
                     
                 ?>
 <!-- 1st Card------------------------------------------------------------------------------------- -->
@@ -116,7 +118,7 @@
                     </div>
             
                     <div class="update_edit_bt">
-                            <button class="accept_order_btn"><a href="<?php
+                            <a class="accept_order_btn" href="<?php
                             if($order->order_type == "AUCTION"){
                                 echo URLROOT."/orders/acceptOrder_AC/".$order->order_item_id ;
                             }elseif($order->order_type == "REQUEST"){
@@ -125,7 +127,7 @@
                                 echo URLROOT."/orders/acceptOrder/".$order->order_item_id ;
                             }
 
-                                ?>">Accept Order</a></button>
+                                ?>">Accept Order</a>
                                      
                     </div>
             </div> 

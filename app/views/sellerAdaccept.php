@@ -124,7 +124,7 @@
             <div class="adcard">
             <div class="reqbuyerdetails">
                 <div class="buyproimg">
-                    <img src="<?php echo URLROOT.'/store/items/'.$requests->buyer_img ;?>" alt="" class="buypro">
+                    <img src="<?php echo URLROOT.'/store/profiles/'.$Qrequests->buyer_img ;?>" alt="" class="buypro">
                 </div>
                 <div class="name_date">
                     <div class="bna">
@@ -165,7 +165,7 @@
                         <button class="btn acceptbtn">Change Quotation</button>
                     </div> 
                     <div class="discardbt">
-                        <a href="<?php echo URLROOT ;?>/OrderRequests/decline/<?php echo $requests->request_ID ?>"><button class="discardbtn">Dicline</button></a>
+                        <a href="<?php echo URLROOT ;?>/OrderRequests/decline/<?php echo $Qrequests->request_ID ?>"><button class="discardbtn">Dicline</button></a>
                     </div> 
     
                 </div>

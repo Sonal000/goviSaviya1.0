@@ -30,15 +30,15 @@ function getDistancefee($origin, $destination) {
     }
     // fclose($connected);
 
-
+ 
 
     // Google Maps Distance Matrix API endpoint
     $endpoint = "https://maps.googleapis.com/maps/api/distancematrix/json";
     
     // Parameters for the API request
     $params = array(
-        'origins' => urlencode($origin),
-        'destinations' => urlencode($destination),
+        'origins' => $origin,
+        'destinations' => $destination,
         'key' => GOOGLEAPI 
     );
 

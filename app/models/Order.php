@@ -39,12 +39,14 @@
             
             foreach($items as $item){
                 $total = ($item->price * $item->qty);
-                $this->db->query("INSERT INTO order_items (order_id,item_id,quantity, total_price,buyer_id,seller_id)
-                        VALUES (:order_id,:item_id,:quantity,:total_price,:buyer_id,:seller_id);
+            $deliverFee=getDistancefee($item->address,$details['order_address']);
+                $this->db->query("INSERT INTO order_items (order_id,item_id,quantity,deliver_fee,total_price,buyer_id,seller_id)
+                        VALUES (:order_id,:item_id,:quantity,:deliver_fee,:total_price,:buyer_id,:seller_id);
                         ");
                                 $this ->db ->bind(':order_id',$order_id);
                                 $this ->db ->bind(':item_id',$item->item_id);
                                 $this ->db ->bind(':quantity',$item->qty);
+                                $this ->db ->bind(':deliver_fee',$deliverFee);
                                 $this ->db ->bind(':total_price',$total);
                                 $this ->db ->bind(':buyer_id',$buyer_id);
                                 $this ->db ->bind(':seller_id',$item->seller_id);
@@ -635,6 +637,7 @@
                                 r.name AS item_name,
                                 r.unit AS item_unit,
                                 r.acp_amount AS item_price,
+                                r.req_img AS item_img,
                                 u_seller.name AS seller_name,
                                 u_seller.user_id AS seller_user_id,
                                 u_seller.address AS seller_address,
@@ -1342,7 +1345,7 @@ public function getRequestOrderDetails($id){
     COALESCE(u_deliver.name, 'No Deliver assigned') AS deliver_name,
     COALESCE(u_deliver.mobile, 'No Deliver assigned') AS deliver_mobile,
     COALESCE(u_deliver.address, 'No Deliver assigned') AS deliver_address,
-    -- r.item_img,
+    r.req_img AS item_img,
     r.name AS item_name,
     r.unit AS item_unit
 FROM
@@ -2691,6 +2694,7 @@ public function getDeliverReviewsById($deliver_id){
     }
 }
 
+
 public function getAucID($id){
     $this->db->query('SELECT auction_id FROM order_items_ac WHERE order_id =:id');
     $this->db->bind(':id',$id);
@@ -2752,7 +2756,7 @@ public function getDetailsforInvoice($seller_id,$order_item_id,$order_id,$type){
                     delivers.user_id = u_deliver.user_id
                     JOIN
                     items_market ON
-                    order_items.item_id = items_market_item.id
+                    order_items.item_id = items_market.item_id
                     WHERE
                     order_items.order_item_id = :order_item_id AND
                     order_items.order_id = :order_id AND

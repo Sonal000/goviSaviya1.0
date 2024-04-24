@@ -38,9 +38,18 @@ class Cart extends Controller {
   $buyerInfo = $this->buyerModel->getProfileInfo($_SESSION["user_id"]);
 
   $totalDeliveryfee = 0;
-  foreach ($items as $item) {
+  if($items){
+    foreach ($items as $item) {
+      // var_dump($item->address);
+      // var_dump($buyerInfo->address);
+      // var_dump(getDistancefee($item->address,$buyerInfo->address));
       $totalDeliveryfee +=( getDistancefee($item->address,$buyerInfo->address));
+    }
   }
+
+  // foreach ($items as $item) {
+  //     $totalDeliveryfee +=( getDistancefee($items->address,$buyerInfo->address));
+  // }
 
 
   $data=[
