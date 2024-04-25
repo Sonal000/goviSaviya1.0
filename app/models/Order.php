@@ -2947,7 +2947,6 @@ public function getDeliverReviews($deliver_id){
                 order_item_id AS item_id,
                 order_type
 
-                
                 FROM 
                     delivery_review dr
                 JOIN
@@ -2958,8 +2957,7 @@ public function getDeliverReviews($deliver_id){
                     deliver_id = :deliver_id
                 ORDER BY 
                     p_date"
-                    
-                    ;
+                         ;
                 
                 $this->db->query($query);
                 $this->db->bind(':deliver_id',$deliver_id);
@@ -2971,7 +2969,6 @@ public function getDeliverReviews($deliver_id){
                     return false;
                 }
 
-                
 }
 
 

@@ -137,34 +137,14 @@
               </p>
             </div>
           </div>
-          <a class="become_seller" href="<?php echo URLROOT ?>/buyerRegister"> 
-            Become a Buyer
-            <span><i class="fas fa-user"></i></span>
-          </a>
+         
       </div>
 
         <div class="text_cont">
 
           <div class="status_cont">
 
-            <div class="stat_cont">
-        <div class="stat">
-          <p>Rating</p>
-          <span>4.5</span>
-          <i class="fas fa-star rating-icon"></i>
-        </div>
-
-        <div class="stat">
-          <p>Buy</p>
-          <span>300</span>
-          <i class="far fa-check-square"></i>
-        </div>
-
-        <div class="stat">
-          <p>Positive reviews </p>
-          <span>90%</span>
-        </div>
-      </div>
+            
           </div>
         </div>
       </div>

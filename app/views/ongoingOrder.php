@@ -81,26 +81,27 @@
 
             <div class="productimg">
                 <div class="order_details_head">
-                    <?php echo $data['details']->item_name;?>
+                    <?php echo $data['details']->item_name;?> <?php echo $data['details']->quantity;?>kg
                 </div>
                 
 
                 <div class="order_weight">
-                     <?php echo $data['details']->quantity;?>kg
+                     
                    
                 </div>
 
                 <div class="order_details_sub">
                     Seller: <a href="#" class="link_to_seller"><?php echo $data['details']->seller_name?></a>
                 </div>
-                
+<!--                 
                 <div class="order_seller_rating">
                     Rating: 4.5
-                </div>
+                </div> -->
 
 
 
                 <div class="image_product">
+
                 <img src="<?php echo URLROOT . '/store/items/'.$data['details']->item_img ?>" class="onion" alt="">
 
                 <div class="delivery_details">
@@ -109,11 +110,30 @@
                <div class="more_info"><i class="fa-solid fa-thumbtack"></i> End Location: <?php echo $data['details']->buyer_address?></div>
                <div class="more_info"><i class="fa-solid fa-user"></i> Seller: <?php echo $data['details']->seller_name?></div>
                <div class="more_info"><i class="fa-solid fa-truck"></i> Buyer: <?php echo $data['details']->buyer_name?></div>
-               <div class="update_edit_btn">
-                    <botton class="accept_order_btnn"><a href=""><i class="fa-solid fa-phone"></i>  Contact Seller</a></botton>
-                    <botton class="ignore_order_btnn"><a href=""><i class="fa-solid fa-map-pin"></i>  Get Location</a></botton>
+               <div class="button_section">
+
+                    <button class="btn" id="showContactBtn"><i class="fa-solid fa-phone"></i>  Contact Seller</button>
+                    </div>
+
+                    <div id="contactInfo" class="contact-info">
+                    <div class="more_info"><?php echo $data['details']->seller_mobile?></div>
+    </div>
+
+    <script>
+        // Get the button element
+        const showContactBtn = document.getElementById('showContactBtn');
+        // Get the contact info div
+        const contactInfo = document.getElementById('contactInfo');
+
+        // Add click event listener to the button
+        showContactBtn.addEventListener('click', function() {
+            // Toggle the visibility of the contact info div
+            contactInfo.style.display = contactInfo.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+                   
                 
-            </div>
+            
             </div>   
                 </div>
 
@@ -125,11 +145,13 @@
             <div class="right_side">
              
             <div class="update_edit_btnn">
-                    <botton class="accept_order_btnnn"><a href="<?php echo URLROOT; ?>/Orders/pickedup"><i class="fa-solid fa-circle-check"></i>  Picked-up</a></botton>
+                <div class="price">Revenue: Rs. <?php echo $data['details']->deliver_fee?>/=</div>
+                    <button class="btn"><a href="<?php echo URLROOT; ?>/Orders/pickedup"><i class="fa-solid fa-circle-check"></i>  Picked-up</a></button>
                     <!-- <botton class="ignore_order_btnnn"><a href="<?php echo URLROOT; ?>/DeliveryConfirmQualityPickup"><i class="fa-solid fa-ban"></i>  Confirm Quality</a></botton> -->
              
             </div>
              <div class="progress_bar">
+                <div class="p_title">Current Order Status</div>
              <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Order Confirmed</div>
              <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Picked from Seller</div>
              <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Quality confirmed: Pickup</div>
@@ -163,7 +185,7 @@
                 <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
              </div>
              <div class="helo">
-                 <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
+                <a class="btn" href="<?php echo URLROOT.'/orders'?>">View Available Orders</a>
              </div>
 
          </div>
