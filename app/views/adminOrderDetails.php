@@ -283,6 +283,7 @@
     <div class="third_card_set">
     <div class="history_container">
             <?php if($data['deliverdet']):?>
+                <!-- <?php var_dump($data['deliverdet']) ?> -->
         <?php foreach($data['deliverdet'] as $deliveryDet):?>
         <div class="delivery_stage">
             <div class="delivery_agent_det">
@@ -373,7 +374,7 @@
             </div>
             </div>
             <div class="check_btn">
-                <a href="<?php echo URLROOT; ?>/Orders/CheckItemsImages/<?php echo $deliveryDet->item_id?>"><button class="btn placement">Check Order Images</button></a>
+                <a href="<?php echo URLROOT; ?>/Orders/CheckItemsImages/<?php echo $deliveryDet->order_item_id?>/<?php echo $deliveryDet->order_id?>"><button class="btn placement">Check Order Images</button></a>
             </div>
             </div>
 
