@@ -36,7 +36,7 @@
       'deliverycount'=>$deliveryCount,
 
   ];
-  $this -> view('adminDash',$data);
+  $this -> view('adminDashboard',$data);
   }
    elseif(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'deliver') {
     $deliver_id = $_SESSION['deliver_id'];

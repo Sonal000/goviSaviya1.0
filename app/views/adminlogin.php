@@ -75,6 +75,6 @@
 </div>   
 
 <script src="<?php echo URLROOT ?>/assets/js/adminlogin.js"></script>
-<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+<!-- <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script> -->
 </body>
 </html>

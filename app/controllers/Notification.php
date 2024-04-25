@@ -34,6 +34,24 @@
       }
     }
   }
+   public function notifyadmin($reciever_id,$message,$link,$type='OTHER]'){
+    if(isset($_SESSION['user_id'])){
+      $sender_id = $_SESSION['user_id'];
+      if($this->notifiModel->notifyadmin($sender_id,$reciever_id,$message,$link)){
+        $data = [
+          'status' => 'success',
+          'message' => 'Notification sent'
+        ];
+        echo json_encode($data);
+      }else{
+        $data = [
+          'status' => 'error',
+          'message' => 'Notification not sent'
+        ];
+        echo json_encode($data);
+      }
+    }
+  }
 
    
 public function getNotification(){
@@ -41,6 +59,18 @@ public function getNotification(){
     
   if(isset($_SESSION['user_id'])){
       $notifications = $this->notifiModel->getNotification($_SESSION['user_id']);
+      $data = [
+        'status' => 'success',
+        'data' => $notifications
+      ];
+      echo json_encode($data);
+    }
+  }
+public function getAdminNotification(){
+
+    
+  if(isset($_SESSION['admin_id'])){
+      $notifications = $this->notifiModel->getAdminNotification($_SESSION['admin_id']);
       $data = [
         'status' => 'success',
         'data' => $notifications
@@ -66,7 +96,41 @@ public function getNotification(){
     }
   }
   }  
+  public function markAdminNotificationAsRead($notification_id){
+    if(isset($_SESSION['admin_id'])){ 
+      
+      if($this->notifiModel->markAdminNotificationAsRead($notification_id)){
+        $link = $this->notifiModel->getAdminNotificationLink($notification_id);
+        var_dump($link);
+        if($link){
+          redirect($link);
+      }else{
+        if(isset($_SERVER['HTTP_REFERER'])) {
+          header("Location: " . $_SERVER['HTTP_REFERER']);
+          exit(); 
+        }
+      };
+    }
+  }
+  }  
 
+  public function markAdminAllNotificationAsRead(){
+    if(isset($_SESSION['admin_id'])){
+      if($this->notifiModel->markAdminAllNotificationAsRead($_SESSION['admin_id'])){
+        $data = [
+          'status' => 'success',
+          'message' => 'All notifications marked as read'
+        ];
+        echo json_encode($data);
+      }else{
+        $data = [
+          'status' => 'error',
+          'message' => 'Notifications not marked as read'
+        ];
+        echo json_encode($data);
+      }
+    }
+  }
   public function markAllNotificationAsRead(){
     if(isset($_SESSION['user_id'])){
       if($this->notifiModel->markAllNotificationAsRead($_SESSION['user_id'])){
@@ -89,6 +153,19 @@ public function getNotification(){
   public function getNotificationCount(){
     if(isset($_SESSION['user_id'])){
       $count = $this->notifiModel->getNotificationCount($_SESSION['user_id']);
+    
+        $data = [
+          'status' => 'success',
+          'data' => $count
+        ];
+        echo json_encode($data);
+    
+
+    }
+  }
+  public function getAdminNotificationCount(){
+    if(isset($_SESSION['admin_id'])){
+      $count = $this->notifiModel->getAdminNotificationCount($_SESSION['admin_id']);
     
         $data = [
           'status' => 'success',

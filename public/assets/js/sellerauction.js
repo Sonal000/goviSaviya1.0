@@ -20,7 +20,6 @@ trackOrder.forEach((el) => {
     if (bidCont) {
       const overlay = bidCont.nextElementSibling;
       if (overlay) {
-        console.log(overlay.classList);
         overlay.classList.toggle("hidden_overlay");
         backdrop.classList.toggle("hidden_backdrop");
       }

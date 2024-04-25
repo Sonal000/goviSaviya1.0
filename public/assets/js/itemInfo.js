@@ -34,3 +34,16 @@ btnRemove.addEventListener("click", (e) => {
     qty.value = parseInt(qty.value) - 1;
   }
 });
+
+const max = $("#quantity").data("available");
+$("#item_add").submit(function (e) {
+  e.preventDefault();
+  if ($("#quantity").val() > max) {
+    e.preventDefault();
+    $(".qty_message").text(
+      "Quantity must be less than or equal to available stock"
+    );
+  } else {
+    $(this).off("submit").submit();
+  }
+});
