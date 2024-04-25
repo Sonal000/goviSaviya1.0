@@ -48,33 +48,63 @@
     
 // }
 
-public function containertrucks(){
+public function deliverytrucks(){
 
-    $vehicleDet = $this->vehicleModel->getContainertrucks();
-    $count = $this->vehicleModel->countContainerTruck();
+    $vehicleDet = $this->vehicleModel->getdeliverytrucks();
+    $count = $this->vehicleModel->countdeliveryTruck();
 
         $data =[
             'Vdetails'=>$vehicleDet,
             'count'=>$count,
         ]; 
         
-    $this->view('adminContainertrucks',$data);
+    $this->view('adminDeliverytrucks',$data);
     
 }
 
 
-public function Cars(){
+public function Deliveryvan(){
 
-    $vehicleDet = $this->vehicleModel->getCars();
-    $count = $this->vehicleModel->countCars();
+    $vehicleDet = $this->vehicleModel->getDeliveryvan();
+    $count = $this->vehicleModel->countDeliveryVan();
 
         $data =[
             'Vdetails'=>$vehicleDet,
             'count'=>$count,
         ]; 
         
-    $this->view('adminCars',$data);
+    $this->view('adminDeliveryVan',$data);
     
+}
+
+public function Three_Wheeler(){
+
+    $vehicleDet = $this->vehicleModel->get3wheeler();
+    $count = $this->vehicleModel->count3Wheel();
+
+        $data =[
+            'Vdetails'=>$vehicleDet,
+            'count'=>$count,
+        ]; 
+        
+    $this->view('admin3wheeler',$data);
+    
+}
+
+public function approve($id){
+
+    if($this->vehicleModel->approveVehicle($id)){
+        
+        redirect('Vehicle');
+    }
+}
+
+public function Refuse($id){
+
+    if($this->vehicleModel->RefuseVehicle($id)){
+
+        redirect('Vehicle');
+    }
 }
 
 

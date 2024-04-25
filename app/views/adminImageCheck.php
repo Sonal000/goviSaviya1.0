@@ -26,20 +26,20 @@
  <div class="container_content">
  <div class="adminprofile">
     <h4>Item Stock Images</h4>
-
+       
     <div class="card image_card">
         <h4>Deliverer added Images</h4>
         <div class="deliver_img_cont">
         <div class="deliver_pickup_img_container">
            <h4 align="center">Picked up</h4> 
            <div class="pick_up_img_container">
-                <img class="img_check_size"src="<?php echo URLROOT.'/assets/images/sell.jpg' ?>" alt="">
+                <img class="img_check_size"src="<?php echo URLROOT.'/store/items/'.$data['images']->deliver_pickup_img ;?>" alt="">
            </div>
         </div>
         <div class="deliver_handover_img_container">
          <h4 align="center">Drop-Off</h4> 
          <div class="drop_off_img_container">
-            <img class="img_check_size" src="<?php echo URLROOT.'/assets/images/sell.jpg' ?>" alt="">
+            <img class="img_check_size" src="<?php echo URLROOT.'/store/items/'.$data['images']->deliver_dropoff_img ;?>" alt="">
          </div>
         </div>
         </div>
@@ -51,21 +51,21 @@
         <div class="deliver_pickup_img_container">
            <h4 align="center">Seller Uploaded Images</h4> 
            <div class="pick_up_img_container">
-                <img class="img_check_size"src="<?php echo URLROOT.'/assets/images/sell.jpg' ?>" alt="">
+                <img class="img_check_size"src="<?php echo URLROOT.'/store/items/'.$data['images']->seller_img ;?>" alt="">
            </div>
         </div>
         <div class="deliver_handover_img_container">
          <h4 align="center">Buyer Uploaded Images at Drop-off</h4> 
          <div class="drop_off_img_container">
-            <img class="img_check_size" src="<?php echo URLROOT.'/assets/images/sell.jpg' ?>" alt="">
+            <img class="img_check_size" src="<?php echo URLROOT.'/store/items/'.$data['images']->buyer_img ;?>" alt="">
          </div>
         </div>
         </div>
     </div>
 
     <div class="Quality_approve_btn_container">
-        <button class="btn">Arrove Quality</button>
-        <button class="btn btn_no">Complaint Quality</button>
+        <a href="<?php echo URLROOT; ?>/Orders/ApproveQuality/<?php echo $data['images']->order_item_id?>/<?php echo $data['images']->order_id?>/<?php echo $data['images']->order_type?>"><button class="btn">Approve Quality</button></a>
+        <a href="<?php echo URLROOT; ?>/Orders/ComplaintQuality/<?php echo $data['images']->order_item_id?>/<?php echo $data['images']->order_id?>/<?php echo $data['images']->order_type?>"><button class="btn btn_no">Complaint Quality</button></a>
     </div>
 
             

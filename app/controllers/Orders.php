@@ -677,9 +677,36 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         
     }
    
-    public function CheckItemsImages($id){
-        $data = ['title'=>'welcome'];
+    public function CheckItemsImages($order_item_id,$order_id){
+
+        $result = $this->orderModel->getImagestoCheck($order_item_id,$order_id);
+
+        $data = [
+            'images'=>$result,
+        ];
         $this -> view('adminImageCheck',$data);
+    }
+
+    public function ApproveQuality($order_item_id,$order_id,$type){
+
+        
+
+        if($this->orderModel->ApproveQuality($order_item_id,$order_id,$type)){
+
+              redirect('Orders/details/'.$order_id.'');
+
+        }
+
+    }
+
+    public function ComplaintQuality($order_item_id,$order_id,$type){
+
+        if($this->orderModel->ComplaintQuality($order_item_id,$order_id,$type)){
+
+              redirect('Orders/details/'.$order_id.'');
+
+        }
+
     }
 
 

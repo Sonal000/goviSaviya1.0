@@ -99,7 +99,7 @@
                     <a href="<?php echo URLROOT ?>/OrderRequests/accepted">
                     <button class="sidebar_item expand_item link" id="accepted_requests">
                     <i class="fas fa-poll-h sidebar_icon"></i>
-                      <p>Accepted Requests</p>
+                      <p>Requests History</p>
                     </button>
                     </a>
                     <!-- <a href="<?php echo URLROOT ?>/OrderRequests/quoted">
@@ -220,7 +220,7 @@
                     <a href="<?php echo URLROOT ?>/myproducts">
                       <button class="sidebar_icon_btn link" id="accepted_requests_m">
                         <i class="fas fa-poll-h sidebar_icon"></i>
-                        <p>Accepted Requests</p>
+                        <p>Requests History</p>
                       </button>
                     </a>
                     <!-- <a href="<?php echo URLROOT ?>/OrderRequests/quoted">

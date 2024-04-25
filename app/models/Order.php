@@ -213,7 +213,8 @@
                             JOIN
                             buyers ON orders.buyer_id=buyers.buyer_id
                             JOIN
-                            users ON buyers.user_id=users.user_id ";
+                            users ON buyers.user_id=users.user_id
+                            ORDER BY order_date DESC";
                 
                 
                 
@@ -225,6 +226,74 @@
                 }else{
                     return false;
                 }
+            }
+
+            public function getImagestoCheck($order_item_id,$order_id){
+
+                $query = 'SELECT * FROM quality_check WHERE order_item_id=:order_item_id AND order_id =:order_id';
+
+                $this->db->query($query);
+                $this->db->bind(':order_item_id',$order_item_id);
+                $this->db->bind(':order_id',$order_id);
+                $row = $this->db->Single();
+
+                if($row){
+                    return $row;
+                }
+                else{
+                    return false;
+                }
+            }
+
+            public function ApproveQuality($order_item_id,$order_id,$type){
+
+                $query = 'UPDATE
+                          quality_check 
+                          SET
+                          qc_status="approved"
+                          WHERE order_item_id=:order_item_id AND
+                          order_id =:order_id AND
+                          order_type =:type ';
+
+                $this->db->query($query);
+                $this->db->bind(':order_item_id',$order_item_id);
+                $this->db->bind(':order_id',$order_id);
+                $this->db->bind(':type',$type);
+
+                if($this->db->execute()){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+
+            }
+
+            public function ComplaintQuality($order_item_id,$order_id,$type){
+
+                $query = 'UPDATE
+                          quality_check 
+                          SET
+                          qc_status="declined"
+                          WHERE order_item_id=:order_item_id AND
+                          order_id =:order_id AND
+                          order_type =:type ';
+    
+                $this->db->query($query);
+                $this->db->bind(':order_item_id',$order_item_id);
+                $this->db->bind(':order_id',$order_id);
+                $this->db->bind(':type',$type);
+
+                if($this->db->execute()){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+
+
+
+
             }
 
 
