@@ -818,7 +818,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         if($type =='PURCHASE'){
             $result = $this->orderModel->getinfoIM($order_item_id,$order_id);
 
-            if($this->orderModel->PenaltyDeliver($result)){
+            if($this->orderModel->PenaltyDeliver($result,$type)){
                 
                 redirect('Orders/details/'.$order_id.'');
             }
@@ -829,7 +829,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         elseif($type =='AUCTION'){
             $result = $this->orderModel->getinfoAC($order_item_id,$order_id);
                 
-            if($this->orderModel->PenaltyDeliver($result)){
+            if($this->orderModel->PenaltyDeliver($result,$type)){
               
                 redirect('Orders/details/'.$order_id.'');
             }
@@ -840,7 +840,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         elseif($type=='REQUEST'){
             $result = $this->orderModel->getinfoRQ($order_item_id,$order_id);
 
-            if($this->orderModel->PenaltyDeliver($result)){
+            if($this->orderModel->PenaltyDeliver($result,$type)){
               
                 redirect('Orders/details/'.$order_id.'');
             }
