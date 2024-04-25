@@ -128,11 +128,13 @@
 
     $requests=$this->RequestsModel->getAcceptRequests();
     $Qrequests =$this->RequestsModel->getQorderRequests();
+    $PQrequests = $this->RequestsModel->getPQorderRequests();
 
 
     $data=[
       'requests'=>$requests,
       'Qrequests'=>$Qrequests,
+      'PQrequests'=>$PQrequests,
     
     ];
     $this->view('sellerAdaccept',$data);
@@ -157,9 +159,7 @@
         $request=$this->RequestsModel->getRequestDetails($data['request_ID']);
         $buyer = $this->buyerModel->getBuyerInfo($request->buyer_id);
 
-        var_dump($request->buyer_id);
-        var_dump($buyer->user_id);
-        var_dump($_SESSION['user_name']);
+        
         $this->notifiModel->notifyuser(0,$buyer->user_id,"New Quotation received from <span class='bg'>".$_SESSION['user_name']."</span>",'quotations',"REQUEST");
         $data=[
           'amount'=>'',
@@ -175,6 +175,36 @@
       echo 'error';
     }
 
+   }
+
+   public function changeQuotation($id){
+
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+
+      //sanitize POST data
+      $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+
+      $data =[
+        'amount'=>trim($_POST['amount']),
+        'request_ID'=>$id,
+        'seller_id'=>$_SESSION['seller_id'],
+        
+      ];
+
+      
+
+      if($this->RequestsModel->changeQuotation($data)){
+          
+           redirect('OrderRequests/accepted');
+      }else{
+        return false;
+      }
+    }else{
+      echo 'error';
+    }
+      
+
+      
    }
 
    public function viewQuotations($id){

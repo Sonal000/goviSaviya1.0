@@ -107,9 +107,9 @@
         }
     ?> 
     </div>
-    </br>
+    </br></br>
     <h4>
-        Quoted Order Requests
+        Pending Quoted Order Requests
     </h4>
     <div class="bid_items_cont">
      <?php 
@@ -171,7 +171,7 @@
                 </div>
             </div>
             <div class="price_decide_cont">
-            <form action="<?php echo URLROOT;?>/OrderRequests/setQuotation/<?php echo $requests->request_ID ?>" method="post">
+            <form action="<?php echo URLROOT;?>/OrderRequests/changeQuotation/<?php echo $Qrequests->request_ID ?>" method="post">
             <div class="price_cont">
                 <label for="amount">Enter your Price:</label>
                 <input type="text" name="amount" class="input_item">
@@ -193,13 +193,99 @@
         }
      }else{
         ?>
-        <div class="bid_items_cont">
-            <h3>No quoted Items</h3>
+        <div class="nothing">
+            <p>No Pending Requests</p>
         </div>
         <?php
      }
      ?> 
       </div>
+    </br></br>
+      <h4>
+        Quoted Order Requests History
+    </h4>
+    <div class="bid_items_cont">
+     <?php 
+     if($data['PQrequests'] ){
+        foreach($data['PQrequests'] as $PQrequests){
+            
+            $post_date = date('Y-m-d', strtotime($PQrequests->posted_date)); // use to get only the date from the column. column contains both time and date
+            $req_date = date('Y-m-d', strtotime($PQrequests->req_date));
+            ?>
+            
+            <div class="adcard_cont">
+            <div class="adcard">
+            <div class="reqbuyerdetails">
+                <div class="buyproimg">
+                    <img src="<?php echo URLROOT.'/store/profiles/'.$PQrequests->buyer_img ;?>" alt="" class="buypro">
+                </div>
+                <div class="name_date">
+                    <div class="bna">
+                        <?php echo $PQrequests->buyer_name; ?>
+                    </div>
+                    <div class="reqdate">
+                        <?php echo $post_date; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="requestdet">
+                <div class="stockdet">
+                    <div class="req_des">
+                        <?php echo $PQrequests->buyer_name; ?> requests <?php echo $PQrequests->req_stock;?> <?php echo $PQrequests->unit;?> of <?php echo $PQrequests->name;?>
+                    </div>
+                    <div class="req_item">
+                        Item : <?php echo $PQrequests->name; ?>
+                    </div>
+                    <div class="req_quantity">
+                        Amount : <?php echo $PQrequests->req_stock; ?> <?php echo $PQrequests->unit; ?>
+                    </div>
+                    <div class="req_deadline">
+                        Request before : <?php echo $req_date; ?>
+                    </div>
+                    <div class="req_location">
+                        Location : <?php echo $PQrequests->req_address; ?>
+                    </div>
+                    <div class="req_qutation">
+                        Your Quotation : <?php echo $PQrequests->amount; ?>
+                    </div>
+                    <div class="req_location">
+                        Number of Quotations : <?php echo $PQrequests->quotation_count; ?>
+                    </div>
+    
+                </div>
+               
+            </div>
+            <!-- <div class="price_decide_cont">
+            <form action="<?php echo URLROOT;?>/OrderRequests/setQuotation/<?php echo $requests->request_ID ?>" method="post">
+            <div class="price_cont">
+                <label for="amount">Enter your Price:</label>
+                <input type="text" name="amount" class="input_item">
+            </div>
+            <div class="price_btn_cont">
+                <button class="btn sub" type="submit">submit</button>
+                <a href="<?php echo URLROOT ;?>/OrderRequests"><button class="btn sub discardbtn">Cancel</button></a>
+            </div>
+                
+            </form>
+            </div> -->
+            
+        </div>
+            
+
+        </div>
+           
+            <?php
+        }
+     }else{
+        ?>
+        <div class="nothing">
+            <p>No Quoted Requests</p>
+        </div>
+        <?php
+     }
+     ?> 
+      </div>
+
 </div>
   
   
