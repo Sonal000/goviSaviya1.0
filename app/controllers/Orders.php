@@ -437,6 +437,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         $deliver_id = $_SESSION['deliver_id'];
        
         $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
+        if($current){
         if($current->current_order_type=="AUCTION"){
             $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
             }elseif($current->current_order_type=="PURCHASE"){
@@ -472,8 +473,14 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             }
 
         }else{
+            
             $this -> view('deliveryConfirmQualityDropoff',$data);
         }
+
+    }else{
+        $this->view('_404');
+    }
+
     }else{
         $this->view('_404');
     }
@@ -498,6 +505,10 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         
         $deliver_id = $_SESSION['deliver_id'];
         $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
+       
+        if($current){
+
+      
         if($current->current_order_type=="AUCTION"){
             $order=$this->orderModel->getAuctionOrderDetails($current->current_order_item_id);
             }elseif($current->current_order_type=="PURCHASE"){
@@ -547,7 +558,14 @@ private function uploadFile($fileInputName, $uploadDirectory) {
     }
 
 
-}}else{
+}else{
+    $this->view('_404');
+} 
+
+        }else{
+            $this->view('_404');
+        }
+}else{
     $this->view('_404');}
 }
 
