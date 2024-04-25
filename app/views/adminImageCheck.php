@@ -65,9 +65,12 @@
 
     <div class="Quality_approve_btn_container">
         <a href="<?php echo URLROOT; ?>/Orders/ApproveQuality/<?php echo $data['images']->order_item_id?>/<?php echo $data['images']->order_id?>/<?php echo $data['images']->order_type?>"><button class="btn">Approve Quality</button></a>
-        <a href="<?php echo URLROOT; ?>/Orders/ComplaintQuality/<?php echo $data['images']->order_item_id?>/<?php echo $data['images']->order_id?>/<?php echo $data['images']->order_type?>"><button class="btn btn_no">Complaint Quality</button></a>
     </div>
 
+    <div class="panalty_container">
+       <a href="<?php echo URLROOT; ?>/Orders/PenaltySeller/<?php echo $data['images']->order_item_id?>/<?php echo $data['images']->order_id?>/<?php echo $data['images']->order_type?>"><button class="btn btn_no">Add Penalty to seller</button></a>
+       <a href="<?php echo URLROOT; ?>/Orders/PenaltyDeliver/<?php echo $data['images']->order_item_id?>/<?php echo $data['images']->order_id?>/<?php echo $data['images']->order_type?>"><button class="btn btn_no">Add Penalty to Deliver</button></a> 
+    </div>
             
         </div>
         </div>
