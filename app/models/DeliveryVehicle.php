@@ -138,7 +138,7 @@
                 JOIN
                 users ON vehicle.user_id=users.user_id
                 WHERE 
-                vehicle.vehicle_type= "Pickup Truck"';
+                vehicle.vehicle_type= "Pick-up Truck"';
         $this->db->query($query);
         
         $row = $this->db->resultSet();
@@ -151,7 +151,7 @@
 
     }
 
-    public function getContainertrucks(){
+    public function getdeliverytrucks(){
         $this->db->query(
             'SELECT
              vehicle.*,
@@ -161,7 +161,7 @@
              JOIN
              users ON vehicle.user_id=users.user_id
              WHERE 
-             vehicle_type= "Container Truck" ');
+             vehicle_type= "Delivery Truck" ');
         
         $row = $this->db->resultSet();
         if($row){
@@ -173,7 +173,7 @@
 
     }
 
-    public function getCars(){
+    public function getDeliveryvan(){
         $this->db->query(
             'SELECT
              vehicle.*,
@@ -183,7 +183,7 @@
              JOIN
              users ON vehicle.user_id=users.user_id
              WHERE 
-             vehicle_type= "Car" ');
+             vehicle_type= "Delivery Van" ');
         
         $row = $this->db->resultSet();
         if($row){
@@ -194,6 +194,29 @@
         }
 
     }
+
+    public function get3wheeler(){
+        $this->db->query(
+            'SELECT
+             vehicle.*,
+             users.name AS owner_name
+             FROM
+             vehicle
+             JOIN
+             users ON vehicle.user_id=users.user_id
+             WHERE 
+             vehicle_type= "Three-Wheeler" ');
+        
+        $row = $this->db->resultSet();
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+
+    }
+
 
     public function getVehicleinfo($id){
         $this->db->query('SELECT * FROM vehicle WHERE vehicle_id=:vehicle_id');
@@ -236,7 +259,7 @@
 
 
     public function countPickupTruck(){
-        $this->db->query('SELECT COUNT(*) AS vehicle_count FROM vehicle WHERE vehicle_type="Pickup Truck"');
+        $this->db->query('SELECT COUNT(*) AS vehicle_count FROM vehicle WHERE vehicle_type="Pick-up Truck"');
         $row = $this->db->Single();
 
         if($row){
@@ -247,8 +270,8 @@
         }
     }
 
-    public function countContainerTruck(){
-        $this->db->query('SELECT COUNT(*) AS vehicle_count FROM vehicle WHERE vehicle_type="Container Truck"');
+    public function countDeliveryTruck(){
+        $this->db->query('SELECT COUNT(*) AS vehicle_count FROM vehicle WHERE vehicle_type="Delivery Truck"');
         $row = $this->db->Single();
 
         if($row){
@@ -259,8 +282,20 @@
         }
     }
 
-    public function countCars(){
-        $this->db->query('SELECT COUNT(*) AS vehicle_count FROM vehicle WHERE vehicle_type="Car"');
+    public function countDeliveryVan(){
+        $this->db->query('SELECT COUNT(*) AS vehicle_count FROM vehicle WHERE vehicle_type="Delivery Van"');
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function count3Wheel(){
+        $this->db->query('SELECT COUNT(*) AS vehicle_count FROM vehicle WHERE vehicle_type="Three-Wheeler"');
         $row = $this->db->Single();
 
         if($row){
@@ -306,6 +341,44 @@
             return 4;
         }
 
+    }
+
+    public function approveVehicle($id){
+
+        $query = 'UPDATE
+                  vehicle
+                  SET
+                  approval ="approved"
+                  WHERE vehicle_id=:id';
+
+        $this->db->query($query);
+        $this->db->bind(':id',$id);
+
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function RefuseVehicle($id){
+
+        $query = 'UPDATE
+                  vehicle
+                  SET
+                  approval ="not_approved"
+                  WHERE vehicle_id=:id';
+
+        $this->db->query($query);
+        $this->db->bind(':id',$id);
+
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     

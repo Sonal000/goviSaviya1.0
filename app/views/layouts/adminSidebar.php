@@ -105,13 +105,13 @@
                     <a href="<?php echo URLROOT ?>/Vehicle/containertrucks">
                     <button class="sidebar_item expand_item link" id="containertrucks_link">
                     <i class="fas fa-poll-h sidebar_icon"></i>
-                      <p>Container Trucks</p>
+                      <p>Delivery Vans</p>
                     </button>
                     </a>
                     <a href="<?php echo URLROOT ?>/Vehicle/Cars">
                     <button class="sidebar_item expand_item link" id="cars_link">
                     <i class="fas fa-poll-h sidebar_icon"></i>
-                      <p>Cars</p>
+                      <p>Three-Wheelers</p>
                     </button>
                     </a>
                   </div>

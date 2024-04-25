@@ -59,7 +59,7 @@
             <div class="adcard">
             <div class="reqbuyerdetails">
                 <div class="buyproimg">
-                    <img src="<?php echo URLROOT.'/store/items/'.$requests->buyer_img ;?>" alt="" class="buypro">
+                    <img src="<?php echo URLROOT.'/store/profiles/'.$requests->buyer_img ;?>" alt="" class="buypro">
                 </div>
                 <div class="name_date">
                     <div class="bna">

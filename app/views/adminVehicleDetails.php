@@ -43,7 +43,8 @@
 
     <!--------------------------------------------This is Card 1------------------------------------------>
 <div class="card">
-    <h4>Section 1: General Infomation</h4>  
+    <h4>Section 1: General Infomation</h4>
+   
     <div class="container">
             <div class="column">
 
@@ -235,8 +236,8 @@
         <!--------------------------------------------This is Card 5------------------------------------------>
 
         <div class="buttons">
-            <button class="btn btn_ok">Approve</button>
-            <button class="btn btn_no">Refuse</button>
+            <a href="<?php echo URLROOT; ?>/Vehicle/Approve/<?php echo $data['details']->vehicle_id ?>"><button class="btn btn_ok">Approve</button></a>
+            <a href="<?php echo URLROOT; ?>/Vehicle/Refuse/<?php echo $data['details']->vehicle_id ?>"><button class="btn btn_no">Refuse</button></a>
         </div>
 
 </div>

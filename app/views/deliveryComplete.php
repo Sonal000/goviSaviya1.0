@@ -47,7 +47,7 @@
               
 
                 
-                <botton class="addphoto_button"><a href="<?php echo URLROOT; ?>/Orders/complete">  View Completed Orders</a></botton>
+                <botton class="btn"><a href="<?php echo URLROOT; ?>/Orders/complete">  View Completed Orders</a></botton>
             </div>  
              
                 </div>

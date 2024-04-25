@@ -252,7 +252,8 @@ class Requests{
         $this->db->query('SELECT rq.request_ID,rq.amount,rq.seller_ID, r.* 
                           FROM req_quotation rq 
                           JOIN requests r ON rq.request_ID = r.request_ID 
-                          WHERE rq.seller_ID = :seller_ID');
+                          WHERE rq.seller_ID = :seller_ID AND
+                          r.acp_seller_ID = 0');
         
        
         $this->db->bind(':seller_ID', $_SESSION['seller_id']);
@@ -267,6 +268,31 @@ class Requests{
             return false; 
         }
     }
+
+    public function getPQorderRequests(){
+
+        $this->db->query('SELECT rq.request_ID,rq.amount,rq.seller_ID, r.* 
+                          FROM req_quotation rq 
+                          JOIN requests r ON rq.request_ID = r.request_ID 
+                          WHERE rq.seller_ID = :seller_ID AND
+                          r.acp_seller_ID != 0 AND r.acp_seller_ID !=:seller_ID');
+        
+        $this->db->bind(':seller_ID', $_SESSION['seller_id']);
+       
+        $row = $this->db->resultset();
+     
+        
+         if($row){
+             return $row; 
+             
+         } else {
+             return false; 
+         }
+
+
+    }
+
+    
 
     public function viewQuotations($id){
 
@@ -363,6 +389,29 @@ class Requests{
         return false;
      }
 
+    }
+
+
+    public function changeQuotation($data){
+
+        
+
+        $query = 'UPDATE req_quotation
+                  SET
+                  amount =:amount
+                  WHERE request_ID=:id AND seller_ID=:seller_id';
+
+        $this->db->query($query);
+        $this->db->bind(':amount',$data->amount);
+        $this->db->bind(':id',$data->request_ID);
+        $this->db->bind(':seller_id',$data->seller_id);
+
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
     
 

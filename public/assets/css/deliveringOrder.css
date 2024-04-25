@@ -412,3 +412,68 @@
       font-size: 1.6rem;
       font-weight: bold;
     }
+
+    .details{
+      margin: 0.5rem;
+    }
+
+    .btn a{
+      color: white;
+    }
+
+    .btn a:hover{
+      color: var(--clr-primary-3);
+    }
+
+    .order_details_head{
+      margin-bottom: 1rem;
+    }
+
+    .button_class{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .imgss{
+      border-radius: 5px;
+    object-fit: cover;
+    width: 22rem;
+    height: 14rem;
+    margin-top: 0.3rem;
+    
+  }
+
+  .middle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+  }
+
+  .details{
+    margin: 2rem;
+  }
+
+ 
+
+  .price_of_order{
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem; 
+    font-weight: bold;
+    padding: 5px 10px; /* Padding around the price */
+    background-color: #f9f9f9; /* Background color for the price */
+    border: 2px solid var(--clr-primary-2); /* Border around the price */
+    border-radius: 20px; /* Border radius for rounded corners */
+    
+  }
+
+  .heading{
+    font-size: 26px;
+    padding-top: 1rem;
+    display: flex;
+    text-align: left;
+    font-weight: 600;
+    border-top: #ccc solid 2px;
+  }

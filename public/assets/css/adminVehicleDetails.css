@@ -275,11 +275,13 @@ color: var(--clr-primary-4);
     color: white;
     padding: 14px 20px;
     margin: 20px 0;
+    
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    width: 10%;
+    width: 150px;
     transition: 0.4s;
+    
 }
 
 
@@ -291,7 +293,7 @@ color: var(--clr-primary-4);
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    width: 10%;
+    width: 150px;
     transition: 0.4s;
 }
 

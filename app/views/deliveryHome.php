@@ -188,7 +188,7 @@
                     <div class="no_order">
                         No ongoing orders currently
                         <div class="buttons">
-                        <button class="button"><a href="<?php echo URLROOT;?>/orders/">View Orders</a></button>
+                        <a style="margin-top:1rem;"class="btn"href="<?php echo URLROOT;?>/orders/">View Orders</a>
                         </div>
                     </div>
 
