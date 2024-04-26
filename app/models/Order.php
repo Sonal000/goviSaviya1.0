@@ -2971,6 +2971,105 @@ public function getDeliverReviews($deliver_id){
 
 }
 
+public function getinfoIM($order_item_id,$order_id){
+
+    $this->db->query('SELECT * FROM order_items WHERE order_item_id=:order_item_id AND order_id=:order_id');
+
+    $this->db->bind('order_item_id',$order_item_id);
+    $this->db->bind('order_id',$order_id);
+    $row = $this->db->single();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+public function getinfoAC($order_item_id,$order_id){
+
+    $this->db->query('SELECT * FROM order_items_ac WHERE order_item_id=:order_item_id AND order_id=:order_id');
+
+    $this->db->bind('order_item_id',$order_item_id);
+    $this->db->bind('order_id',$order_id);
+    $row = $this->db->single();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+public function getinfoRQ($order_item_id,$order_id){
+
+    $this->db->query('SELECT * FROM order_items_rc WHERE order_item_id=:order_item_id AND order_id=:order_id');
+
+    $this->db->bind('order_item_id',$order_item_id);
+    $this->db->bind('order_id',$order_id);
+    $row = $this->db->single();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+public function PenaltySeller($data,$type){
+
+    var_dump($data);
+    $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
+    VALUES (:order_item_id,:order_id,:order_type,:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
+
+    $this->db->query($query);
+    $this->db->bind(':order_item_id',$data->order_item_id);
+    $this->db->bind(':order_id',$data->order_id);
+    $this->db->bind(':order_type',$type);
+    $this->db->bind(':seller_id',$data->seller_id);
+    $this->db->bind(':buyer_id',$data->buyer_id);
+    $this->db->bind(':deliver_id',$data->deliver_id);
+    $this->db->bind(':penalty_amount',$data->deliver_fee);
+    $this->db->bind(':user_type',"seller");
+
+    if($this->db->execute()){
+        return true;
+    }
+    else{
+        return false;
+    }
+
+    
+}
+
+public function PenaltyDeliver($data,$type){
+
+    $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
+    VALUES (:order_item_id,:order_id,:order_type,:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
+
+    $this->db->query($query);
+    $this->db->bind(':order_item_id',$data->order_item_id);
+    $this->db->bind(':order_id',$data->order_id);
+    $this->db->bind(':order_type',$type);
+    $this->db->bind(':seller_id',$data->seller_id);
+    $this->db->bind(':buyer_id',$data->buyer_id);
+    $this->db->bind(':deliver_id',$data->deliver_id);
+    $this->db->bind(':penalty_amount',$data->deliver_fee);
+    $this->db->bind(':user_type',"deliver");
+
+    if($this->db->execute()){
+        return true;
+    }
+    else{
+        return false;
+    }
+
+    
+}
+
 
 }
 

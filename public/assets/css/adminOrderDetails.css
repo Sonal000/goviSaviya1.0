@@ -315,7 +315,7 @@
     align-self: center;
     justify-content: space-between;
     
-    width: 500px;
+    
   }
 
   .btn_no{
@@ -328,3 +328,11 @@
     background-color: #ffa3a3;
     color: rgb(255, 9, 9);
 }
+
+.panalty_container{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
