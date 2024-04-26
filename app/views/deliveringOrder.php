@@ -79,6 +79,23 @@
              
                 </div>
 
+                <div id="contactInfo" class="contact-info">
+                    <div class="more_info"><?php echo $data['order']->buyer_mobile?></div>
+
+                    <script>
+        // Get the button element
+        const showContactBtn = document.getElementById('showContactBtn');
+        // Get the contact info div
+        const contactInfo = document.getElementById('contactInfo');
+
+        // Add click event listener to the button
+        showContactBtn.addEventListener('click', function() {
+            // Toggle the visibility of the contact info div
+            contactInfo.style.display = contactInfo.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+    </div>
+
             </div>
 
             <div class="right_side">

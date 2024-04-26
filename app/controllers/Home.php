@@ -56,6 +56,7 @@ if(!$availability){
       }elseif($current->current_order_type=="REQUEST"){
       $order=$this->orderModel->getRequestOrderDetails($current->current_order_item_id);
     }
+    
 
       
       
@@ -72,13 +73,15 @@ if(!$availability){
       
       $data = [
         'reco' => $reco,
-        'details' =>false ,
+        'details' =>false,
         'hasVehicle' => $hasVehicle 
       ];
      
     }
     // $view;
     $this->view('deliveryHome', $data);
+
+    
        } 
        else{
         
