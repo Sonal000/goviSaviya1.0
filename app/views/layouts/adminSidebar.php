@@ -99,17 +99,23 @@
                     <a href="<?php echo URLROOT ?>/Vehicle">
                     <button class="sidebar_item expand_item link" id="pickuptrucks_link">
                     <i class="fas fa-poll-h sidebar_icon" ></i>
-                      <p>Pick up Trucks</p>
+                      <p>Pickup Trucks</p>
                     </button>
                     </a>
-                    <a href="<?php echo URLROOT ?>/Vehicle/containertrucks">
-                    <button class="sidebar_item expand_item link" id="containertrucks_link">
+                    <a href="<?php echo URLROOT ?>/Vehicle/deliveryTrucks">
+                    <button class="sidebar_item expand_item link" id="deliverytrucks_link">
+                    <i class="fas fa-poll-h sidebar_icon" ></i>
+                      <p>Delivery Trucks</p>
+                    </button>
+                    </a>
+                    <a href="<?php echo URLROOT ?>/Vehicle/Deliveryvan">
+                    <button class="sidebar_item expand_item link" id="deliveryvans_link">
                     <i class="fas fa-poll-h sidebar_icon"></i>
                       <p>Delivery Vans</p>
                     </button>
                     </a>
-                    <a href="<?php echo URLROOT ?>/Vehicle/Cars">
-                    <button class="sidebar_item expand_item link" id="cars_link">
+                    <a href="<?php echo URLROOT ?>/Vehicle/Three_Wheeler">
+                    <button class="sidebar_item expand_item link" id="threeWheeler_link">
                     <i class="fas fa-poll-h sidebar_icon"></i>
                       <p>Three-Wheelers</p>
                     </button>

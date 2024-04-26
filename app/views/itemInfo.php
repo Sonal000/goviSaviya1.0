@@ -52,7 +52,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
     <div class="main_img_cont">
       <img class="main_img" src="<?php echo URLROOT.'/store/items/'.$data['row']->item_img ;?>"> 
     </div>
-    <div class="img_slider_cont">
+    <!-- <div class="img_slider_cont">
       <button class="slider_btn">
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-1.png"/> 
       </button>
@@ -66,7 +66,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-3.png"/> 
       </button>
 
-    </div>
+    </div> -->
 </div>
 
 
@@ -76,13 +76,13 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
     <p class="item_name"><?php echo $data['row']->name; ?></p>
     <a href="<?php echo URLROOT ?>/profile/<?php echo $data['seller']->user_id; ?>" class="item_seller" target="_blank"> seller: <?php echo $data['seller']->name ?> <span><i class="fas fa-check-circle"></i></span></a>
     <p class="item_address"><?php echo $data['seller']->city; ?></p>
-    <div class="item_rating">
+    <!-- <div class="item_rating">
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
-         </div>
+         </div> -->
   </div>
   <div class="item_price_cont">
     <p class="item_price">RS <?php echo $data['row']->price; ?> / <span><?php echo $data['row']->unit; ?></span></p>
@@ -129,7 +129,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
     </div> -->
     <div class="reviews_container">
       <div class="reviews_title_cont">
-        <p class="reviews_title">All Reviews <span>(19)</span> </p>
+        <!-- <p class="reviews_title">All Reviews <span>(19)</span> </p> -->
       </div>
 
       <div class="reviews_cont">

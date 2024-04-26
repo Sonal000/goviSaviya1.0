@@ -79,6 +79,23 @@
              
                 </div>
 
+                <div id="contactInfo" class="contact-info">
+                    <div class="more_info"><?php echo $data['order']->buyer_mobile?></div>
+
+                    <script>
+        // Get the button element
+        const showContactBtn = document.getElementById('showContactBtn');
+        // Get the contact info div
+        const contactInfo = document.getElementById('contactInfo');
+
+        // Add click event listener to the button
+        showContactBtn.addEventListener('click', function() {
+            // Toggle the visibility of the contact info div
+            contactInfo.style.display = contactInfo.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+    </div>
+
             </div>
 
             <div class="right_side">
@@ -107,6 +124,27 @@
 
 
         </div>
+
+    
+        <?php
+            if($data['order']){ 
+
+            
+                ?>
+ 
+
+ 
+
+          <div class="card" id="map_cont" data-start='gampaha' data-end='matara'> 
+                <input id="start" type="hidden" value="<?php echo $data['details']->seller_address  ?>" name="start">
+                <input id="end" type="hidden" value="<?php echo $data['details']->order_address  ?>" name="end">
+                <?php       
+                require APPROOT. '/views/layouts/mapCurrentLoc.php'; 
+             ?>
+                </div> 
+            <?php
+            }
+            ?>
         
 
 

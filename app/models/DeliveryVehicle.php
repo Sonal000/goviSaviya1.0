@@ -47,7 +47,7 @@
 
         public function addVehicle($data){
 
-            var_dump($data);
+            
             $this->db->query('INSERT INTO vehicle (user_id,vehicle_type,
                             vehicle_number,max_capacity
                             ,vehicle_brand,vehicle_model,vehicle_year,

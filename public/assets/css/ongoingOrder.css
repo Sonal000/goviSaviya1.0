@@ -556,4 +556,5 @@ padding-left: 2rem;
   border: var(--clr-primary-3) 1px solid;
   border-radius: 20px;
   margin-top: 1rem;
+  display: none;
 }

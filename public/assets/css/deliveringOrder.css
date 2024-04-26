@@ -455,6 +455,15 @@
     margin: 2rem;
   }
 
+  .contact-info{
+   
+    font-size: 16px;
+    border: var(--clr-primary-3) 2px solid;
+    border-radius: 20px;
+    margin-top: 1rem;
+    display: none;
+  }
+
  
 
   .price_of_order{

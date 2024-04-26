@@ -14,7 +14,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-<button id="backdrop" class="backdrop hidden_backdrop"></button>
+
 
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
@@ -166,96 +166,27 @@
 
         </div>
 
+        <?php
+            if($data['details']){ 
+                ?>
+ 
 
+ 
 
-        <!-- =========================overlay -->
-     
-        <div class="location overlay hidden_overlay">       
-        <div class="container_info">
-                   <div class="sec_title">Auction : <?php echo $items->auction_ID; ?></div>
-                   <div class="info_cont">
-                       
-                       <div class="text_container">
-                <div class="info">
-                    <!-- <p class="infor_title">Item :</p> -->
-                    <a href="<?php echo URLROOT."/marketplace/iteminfo/".$items->item_id; ?>" class="infor_title item_title"><?php echo $items->name; ?></a>
-                </div>
-                <div class="info">
-                    <p class="infor_title">Base Price</p>
-                    <p class="infor_title"><?php echo $items->price ?></p>
-                </div>
-                <div class="info">
-                    <p class="infor_title">Quantity</p>
-                    <p class="infor_title"><?php echo $items->stock ?>  <?php echo $items->unit ?></p>
-                </div>
-                <div class="info">
-                    <p class="infor_title">Start Date</p>
-                    <p class="infor_title"><?php echo $items->start_date ?></p>
-                </div>
-                <div class="info">
-                    <p class="infor_title">End Date</p>
-                    <p class="infor_title"><?php echo $items->Ended_date ?></p>
-                </div>
-               <div class="info">
-                    <p class="infor_title">Highest Bid</p>
-                    <p class="infor_title"><?php echo $items->highest_bid ?></p>
-                </div>
-                <div class="info">
-                    <p class="infor_title">Bid Count</p>
-                    <p class="infor_title"><?php echo $items->bid_Count ?></p>
-                </div>
-
-                
-           
-                
-            </div>
-            <div class="image_container">
-                <img  src="<?php echo URLROOT."/store/items/".$items->item_img; ?>" alt="img"/>
-            </div>
-
-                </div>
-
-                <div class="sec_title">Bidding List</div>
-
-                <?php if($items->bidlist){
-
-foreach($items->bidlist as $bid){
-    ?>
-
-                <div class="info_cont">  
-                <div class="info_bidders ">       
-                <div class="info">
-                    <p class="infor_title">Bid ID :</p>
-                    <p class="infor_title"><?php echo $bid->bid_id ?></p>
-                </div>
-                <div class="info">
-                    <p class="infor_title">Bidder :</p>
-                
-                    <a href="<?php echo URLROOT."/profile/".$bid->buyer_user_id; ?>" class="infor_title buyer_name"><?php echo $bid->buyer_name ?></a>
-                </div>
-                <div class="info">
-                    <p class="infor_title">Bid Price :</p>
-                    <p class="infor_title"><?php echo $bid->bid_price?></p>
-                </div>
-                <div class="info">
-                    <p class="infor_title">Bid Date :</p>
-                    <p class="infor_title"><?php echo $bid->bid_date ?></p>
-                </div>
-         
-            </div>
-            </div>
+          <div class="card" id="map_cont" data-start='gampaha' data-end='matara'> 
+                <input id="start" type="hidden" value="<?php echo $data['details']->deliver_address  ?>" name="start">
+                <input id="end" type="hidden" value="<?php echo $data['details']->seller_address  ?>" name="end">
+                <?php       
+                require APPROOT. '/views/layouts/mapCurrentLoc.php'; 
+             ?>
+                </div> 
             <?php
-                }}else{
-                    echo "<p>No bidders for this auction .</p>";
-                } ?>
+            }
+            ?>
 
 
-            </div>
 
-</div>
-
-
-   <!-- =========================overlay -->
+      
 
 
         
