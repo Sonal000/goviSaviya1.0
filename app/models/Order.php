@@ -3091,7 +3091,7 @@ public function test_get_reviews_orders($deliver_id){
         }else{
             return false;
         }
-        
+    }
 
 public function sellerPurchaseOrderDetails($seller_id){
 
@@ -3186,8 +3186,9 @@ public function countmypenalty($id){
     }
 }
 
+        
 
-}
+
 
 public function test_get_reviews_OrderIDs($deliver_id){
     $query ="SELECT 
@@ -3435,6 +3436,7 @@ public function test_get_review_OrderDetailsByOrderId($order_id,$order_type){
         return false;
     }
 }
+        
 
 
 public function getReviewsInsideOrder($order_id,$order_item_id,$type){
