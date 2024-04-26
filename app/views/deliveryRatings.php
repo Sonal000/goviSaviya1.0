@@ -51,7 +51,8 @@
                             <?php echo $review->review; ?>
                         </div>
                         <div class="addDate">
-                            Posted On: <?php echo $review->p_date; ?>
+                            Posted On: <?php echo date('Y-m-d', strtotime($review->p_date));?> <span class="black">at</span>  <?php echo date('H:i:s', strtotime($review->p_date)); ?>
+
                         </div>
                         <div class="details_view">
                         

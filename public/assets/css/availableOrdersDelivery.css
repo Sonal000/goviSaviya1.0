@@ -228,18 +228,20 @@
 }
 
 .update_edit_bt{
-  gap: 1.5rem;
+
   display: flex;
 
   flex-direction: row;
-  justify-content: center;
+  
+  text-align: right;
   
   
-  margin-top: 3rem;
+  /* margin-top: 3rem; */
   /* margin-right: 1rem; */
   /* width: 100%;  */
 
 }
+
 
 .accept_order_btn{
   letter-spacing: var(--spacing-low);
@@ -255,14 +257,11 @@
  
 }
 
-.accept_order_btn:hover{  
-  
-  background-color: var(--clr-primary-8);
-  color: var(--clr-primary-2);
-  font-weight: 600;
-  
-
+.a{
+  color: white
 }
+
+
 
 .noVehicleCard{
    

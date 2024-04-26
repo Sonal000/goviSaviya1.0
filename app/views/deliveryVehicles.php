@@ -44,9 +44,9 @@
              Thank you for choosing <span class="govi">Govisaviya</span> Delivering! 
              </div>
              <div class="details ">
-             We are currently reviewing your vehicle details and will notify you once they have been approved. Your patience is appreciated
+             We are currently reviewing your vehicle details and will notify you once they have been approved. 
              </div><div class="details details_two">
-             and will notify you once they have been approved. Your patience is appreciated
+             Your patience is appreciated!
              </div>
  
              <div class="addVehicleCard">
@@ -71,21 +71,31 @@
 
             <?php foreach($data['vehicles'] as $vehicle):?>
                 <div class="card card-body">
-                    <div class="card-title"><?php echo $vehicle->vehicle_brand?></div>
-                    <div class="card-title"><?php echo ' '. $vehicle->vehicle_model?></div>
-                    <img class="vehicle_img" src="<?php echo URLROOT.'/store/vehicles/'.$vehicle->vehicle_img ;?>">
-                    <!-- <div class="image"><img src="<?php echo URLROOT ?>/assets/images/car.jpg" class="img_vehicle"></div> -->
-                    <div class="card-subtitle_1"><span class="info_heading">Vehicle Type:</span> <?php echo $vehicle->vehicle_type?> </div>
-                    <div class="card-subtitle_2"><span class="info_heading">Brand: </span><?php echo $vehicle->vehicle_brand?> </div>
-                    <div class="card-subtitle_3"><span class="info_heading">Model: </span><?php echo $vehicle->vehicle_model?> </div>
-                    <div class="card-subtitle_4"><span class="info_heading">Vehicle Number:</span> <?php echo $vehicle->vehicle_number?> </div>
-                    
-
-                    <div class="more_details"><a href="<?php echo URLROOT;?>/deliveryVehicles/show/<?php echo $vehicle->vehicle_id; ?>"><button class="more_details_btn">More</button></a></div>
 
 
+                    <div class="left_side">
+                        <div class="card-title"><?php echo $vehicle->vehicle_brand?> </div>
+                        <div class="card-title"><?php echo ' '. $vehicle->vehicle_model?></div>
+                        <img class="vehicle_img" src="<?php echo URLROOT.'/store/vehicles/'.$vehicle->vehicle_img ;?>">
 
-                </div>
+                    </div>
+
+                    <div class="right_side">
+                         <div class="subtitle_ss">Status: <span class="green">Approved <i class="fa-solid fa-circle-check"></i></span> </div>
+                        <div class="card-subtitle_1"><span class="info_heading">Vehicle Type:</span> <?php echo $vehicle->vehicle_type?> </div>
+                        <div class="card-subtitle_2"><span class="info_heading">Brand: </span><?php echo $vehicle->vehicle_brand?> </div>
+                        <div class="card-subtitle_3"><span class="info_heading">Model: </span><?php echo $vehicle->vehicle_model?> </div>
+                        <div class="card-subtitle_4"><span class="info_heading">Vehicle Number:</span> <?php echo $vehicle->vehicle_number?> </div>
+
+                        <div class="moree_details"><a href="<?php echo URLROOT;?>/deliveryVehicles/show/<?php echo $vehicle->vehicle_id; ?>"><button class="btn">More</button></a></div>
+
+                    </div>  
+
+                        
+
+
+
+                    </div>
             <?php endforeach; ?> 
             
             

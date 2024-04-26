@@ -171,6 +171,7 @@
                 </div>
             </div>
             <div class="price_decide_cont">
+               
             <form action="<?php echo URLROOT;?>/OrderRequests/changeQuotation/<?php echo $Qrequests->request_ID ?>" method="post">
             <div class="price_cont">
                 <label for="amount">Enter your Price:</label>

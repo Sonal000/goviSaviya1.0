@@ -96,7 +96,7 @@
                 <a href="<?php echo URLROOT ?>/deliveryVehicles">
                   <button class="sidebar_item link"  id="vehicles_link">
                   <i class="fa-solid fa-truck" style="margin-right:12px;"></i>
-                    <p>Vehicles</p>
+                    <p>Vehicle</p>
                   </button>
                 </a>
               </li>
@@ -163,7 +163,7 @@
                 <a href="<?php echo URLROOT ?>/deliveryVehicles" id="reviews_link_m">
                   <button class="sidebar_icon_btn link" >
                     <i class="fa-solid fa-truck  sidebar_icon" ></i>
-                    <p>Vehicles</p>
+                    <p>Vehicle</p>
                   </button>
                 </a>
               </li>

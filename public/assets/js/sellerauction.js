@@ -1,7 +1,6 @@
 const endAucBtn = document.getElementById("end_auc_btn");
 const aucCont = document.getElementById("blur");
 const aucCancleCont = document.getElementById("window_up");
-
 if(endAucBtn){
 
   endAucBtn.addEventListener("click", (e) => {
@@ -20,7 +19,6 @@ trackOrder.forEach((el) => {
     if (bidCont) {
       const overlay = bidCont.nextElementSibling;
       if (overlay) {
-        console.log(overlay.classList);
         overlay.classList.toggle("hidden_overlay");
         backdrop.classList.toggle("hidden_backdrop");
       }

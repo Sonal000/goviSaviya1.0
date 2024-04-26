@@ -855,6 +855,31 @@ public function updatepaymentstatus($id){
   }
 }
 
+public function countSellerauctions($seller_id){
+
+  $this->db->query(
+    'SELECT
+     COUNT(*) AS auction_count
+     FROM auction
+     WHERE seller_id =:seller_id AND status="inactive" AND payment_status="successful"'
+ );
+ 
+ $this->db->bind(':seller_id',$seller_id);
+ 
+ $row = $this->db->Single();
+ 
+ 
+ 
+ if($row){
+   return $row;
+ }
+ else{
+   return false;
+ }
+ 
+
+}
+
 
 
  }

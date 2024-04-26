@@ -2947,7 +2947,6 @@ public function getDeliverReviews($deliver_id){
                 order_item_id AS item_id,
                 order_type
 
-                
                 FROM 
                     delivery_review dr
                 JOIN
@@ -2958,8 +2957,7 @@ public function getDeliverReviews($deliver_id){
                     deliver_id = :deliver_id
                 ORDER BY 
                     p_date"
-                    
-                    ;
+                         ;
                 
                 $this->db->query($query);
                 $this->db->bind(':deliver_id',$deliver_id);
@@ -2971,7 +2969,6 @@ public function getDeliverReviews($deliver_id){
                     return false;
                 }
 
-                
 }
 
 public function getinfoIM($order_item_id,$order_id){
@@ -3071,6 +3068,100 @@ public function PenaltyDeliver($data,$type){
     }
 
     
+}
+
+
+public function sellerPurchaseOrderDetails($seller_id){
+
+    $query = 'SELECT
+              COUNT(*) AS order_count,
+              SUM(total_price) AS Prevenue
+              FROM 
+              order_items
+              WHERE
+              seller_id = :seller_id';
+
+    $this->db->query($query);
+    $this->db->bind(':seller_id', $seller_id);
+
+    $row = $this->db->Single();
+
+    if($row){
+       return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+
+public function sellerAuctionOrderDetails($seller_id){
+
+    $query = 'SELECT
+              COUNT(*) AS order_count,
+              SUM(total_price) AS Arevenue
+              FROM 
+              order_items_ac
+              WHERE
+              seller_id =:seller_id';
+
+    $this->db->query($query);
+    $this->db->bind(':seller_id',$seller_id);
+
+    $row = $this->db->Single();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+public function sellerRequestOrderDetails($seller_id){
+
+    $query = 'SELECT
+              COUNT(*) AS order_count,
+              SUM(total_price) AS Rrevenue
+              FROM 
+              order_items_rq
+              WHERE
+              seller_id =:seller_id';
+
+    $this->db->query($query);
+    $this->db->bind(':seller_id',$seller_id);
+
+    $row = $this->db->Single();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+public function countmypenalty($id){
+
+    $this->db->Query(
+        'SELECT
+        COUNT(*) AS penalty_count
+        FROM
+        penalty
+        WHERE
+        seller_id =:id AND user_type = "seller"'
+    );
+
+    $this->db->bind(':id',$id);
+
+    $row = $this->db->Single();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
 }
 
 

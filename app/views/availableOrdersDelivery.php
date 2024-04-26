@@ -113,12 +113,12 @@
             
             <div class="right-side"> 
                     
-                    <div class="price_details">
+                    <!-- <div class="price_details">
                         <?php echo "Delivery Fee: Rs." .  $order->deliver_fee ."/="?>
-                    </div>
+                    </div> -->
             
                     <div class="update_edit_bt">
-                            <a class="accept_order_btn" href="<?php
+                            <a class="btn" href="<?php
                             if($order->order_type == "AUCTION"){
                                 echo URLROOT."/orders/acceptOrder_AC/".$order->order_item_id ;
                             }elseif($order->order_type == "REQUEST"){

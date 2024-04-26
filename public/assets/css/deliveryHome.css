@@ -412,4 +412,24 @@
   
   }
 
+  .no_accept{
+    font-weight: 400;
+  }
+
+
+  .map{
+    box-shadow: var(--dark-shadow);
+    padding:2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: var(--radius-low);
+    margin-bottom: 1rem;
+  }
+
+  .g{
+    color: var(--clr-primary-4);
+    font-weight: 600;
+  }
+
+  
 
