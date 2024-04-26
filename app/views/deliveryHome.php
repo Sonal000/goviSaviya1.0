@@ -135,8 +135,8 @@
 <div class="map">
 
 
-                                    <!-- // var_dump(getDistance($data['details']->seller_address,$data['details']->order_address)); -->
-                            
+                                   <?php var_dump(getDistance($data['details']->deliver_address,$data['details']->seller_address));
+                            ?>
 
 
                                 <div id="map_cont" data-start='gampaha' data-end='matara'> 

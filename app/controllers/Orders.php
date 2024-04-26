@@ -4,9 +4,11 @@ class Orders extends Controller{
     private $orderModel;
     private $notifiModel;
     private $VehicleModel;
+    private $deliverModel;
     public function __construct(){
         $this->orderModel=$this->model("Order");
-        $this->VehicleModel =$this->model('DeliveryVehicle'); 
+        $this->VehicleModel =$this->model('DeliveryVehicle');
+        $this->deliverModel =$this->model('Deliver');  
         $this->notifiModel=$this->model("Notifi"); 
         if(!isset($_SESSION['user_id'])){
             $this -> view('_404');
@@ -68,10 +70,15 @@ class Orders extends Controller{
             $deliver_id = $_SESSION['deliver_id'];
             $orders = $this->orderModel->getDeliverOrders($_SESSION['deliver_id']);
             $hasVehicle = $this->VehicleModel->hasVehicle($_SESSION['user_id']);
+            $available = $this->orderModel->getDeliverAvailability($deliver_id);
+            $deliver_adr = $this->deliverModel->getProfileInfo($_SESSION['user_id'])->address;
+            
             
         $data=[
             "orders"=>$orders,
-            "hasVehicle"=>$hasVehicle
+            "hasVehicle"=>$hasVehicle,
+            "available"=>$available,
+            "address"=>$deliver_adr
         ];
         $this -> view('availableOrdersDelivery',$data);
 
@@ -188,8 +195,10 @@ public function acceptOrder_PR($order_item_id){
         $deliver_id = $_SESSION['deliver_id'];
             $orders = $this->orderModel->getCompletedOrders($_SESSION['deliver_id']);
             $order_id = $this->orderModel->getCompletedOrderIDs($deliver_id);
+            
         $data=[
             "orders"=>$orders,
+
         ];
         
         $this -> view('deliveryCompletedOrder',$data);
@@ -454,7 +463,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             if($order->order_status == 'delivering') {
                 
                 $delivered = $this->orderModel->editToDelivered($deliver_id);
-       
+                
+
             if($delivered){
 
                 $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
@@ -741,6 +751,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             $deliver_id = $_SESSION['deliver_id'];
             $id = $order_id;
             $type = $order_type;
+            $review = $this->orderModel->getReviewsInsideOrder($order_id,$order_item_id,$type);
 
         if($type=="AUCTION"){
                 $order=$this->orderModel->getAuctionOrderDetails($order_item_id);
@@ -753,7 +764,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $data = [
                     'title' => 'welcome',
                     'order' => $order,
-                    'type' => $type
+                    'type' => $type,
+                    'review' => $review
                 ];
         
                 $this->view('deliveryCompletedOrderDetails',$data);

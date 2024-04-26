@@ -348,6 +348,20 @@ padding-left: 2rem;
   color: white;
 }
 
+.distance{
+  font-size: 16px;
+  
+ 
+  /* border: var(--clr-primary-7) solid 1px; */
+  margin: 0.5rem;
+  padding: 0.4rem;
+  display: flex;
+  justify-content: center;
+  letter-spacing: var(--spacing-low);
+  font-weight: 600;
+}
+
+
 
 
 

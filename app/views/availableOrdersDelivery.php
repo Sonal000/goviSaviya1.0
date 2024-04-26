@@ -113,10 +113,19 @@
             
             <div class="right-side"> 
                     
-                    <!-- <div class="price_details">
-                        <?php echo "Delivery Fee: Rs." .  $order->deliver_fee ."/="?>
-                    </div> -->
+            <div class="distance"> 
+                
+                <?php echo(getDistance($data['address'],$order->seller_address));
+                            ?>km away from you
+
+                </div>
             
+                    <?php if($data['available']){ ?>
+
+
+
+                   
+
                     <div class="update_edit_bt">
                             <a class="btn" href="<?php
                             if($order->order_type == "AUCTION"){
@@ -130,6 +139,8 @@
                                 ?>">Accept Order</a>
                                      
                     </div>
+
+                    <?php }?>
             </div> 
             
         

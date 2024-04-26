@@ -82,11 +82,19 @@
     
     <div class="hed"> Delivery Review Given by <?php echo $data['order']->buyer_name ?></div>
 
+    <?php if($data['review']){ ?>
+
     <div class="mycardd">
+
+        <div class="review_sec">
+            <div class="review">
+                <?php echo $data['review']->review?>
+            </div>
+        </div>
 
     </div>
 
-
+   <?php } ?>
 
         </div>
         

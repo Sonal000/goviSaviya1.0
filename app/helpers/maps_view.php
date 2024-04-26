@@ -88,8 +88,8 @@ function getDistance($origin, $destination) {
     
     // Parameters for the API request
     $params = array(
-        'origins' => urlencode($origin),
-        'destinations' => urlencode($destination),
+        'origins' => $origin,
+        'destinations' =>$destination,
         'key' => GOOGLEAPI // Replace GOOGLEAPI with your actual API key
     );
 
@@ -112,9 +112,9 @@ function getDistance($origin, $destination) {
         $distance = $data['rows'][0]['elements'][0]['distance']['value'];
 
         // Convert distance from meters to kilometers
-        $distance_in_km = $distance / 1000;
+        $distance_in_km = $distance/1000;
 
-        return round($distance_in_km*80);
+        return round($distance_in_km);
     } else {
         return false; // Distance could not be calculated
     }
