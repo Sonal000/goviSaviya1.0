@@ -3093,6 +3093,100 @@ public function test_get_reviews_orders($deliver_id){
         }
         
 
+public function sellerPurchaseOrderDetails($seller_id){
+
+    $query = 'SELECT
+              COUNT(*) AS order_count,
+              SUM(total_price) AS Prevenue
+              FROM 
+              order_items
+              WHERE
+              seller_id = :seller_id';
+
+    $this->db->query($query);
+    $this->db->bind(':seller_id', $seller_id);
+
+    $row = $this->db->Single();
+
+    if($row){
+       return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+
+public function sellerAuctionOrderDetails($seller_id){
+
+    $query = 'SELECT
+              COUNT(*) AS order_count,
+              SUM(total_price) AS Arevenue
+              FROM 
+              order_items_ac
+              WHERE
+              seller_id =:seller_id';
+
+    $this->db->query($query);
+    $this->db->bind(':seller_id',$seller_id);
+
+    $row = $this->db->Single();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+public function sellerRequestOrderDetails($seller_id){
+
+    $query = 'SELECT
+              COUNT(*) AS order_count,
+              SUM(total_price) AS Rrevenue
+              FROM 
+              order_items_rq
+              WHERE
+              seller_id =:seller_id';
+
+    $this->db->query($query);
+    $this->db->bind(':seller_id',$seller_id);
+
+    $row = $this->db->Single();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+public function countmypenalty($id){
+
+    $this->db->Query(
+        'SELECT
+        COUNT(*) AS penalty_count
+        FROM
+        penalty
+        WHERE
+        seller_id =:id AND user_type = "seller"'
+    );
+
+    $this->db->bind(':id',$id);
+
+    $row = $this->db->Single();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+
 }
 
 public function test_get_reviews_OrderIDs($deliver_id){
