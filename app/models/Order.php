@@ -763,6 +763,7 @@
                     return false;
                 }
             }
+           
             public function getBuyerOngoingOrderDetailsByOrderId($order_id,$order_type){
     
                 if($order_type == 'AUCTION'){
@@ -943,6 +944,11 @@
                     return false;
                 }
             }
+
+        
+
+
+
             public function getCompletedOrderDetailsByOrderId($order_id,$order_type){
      
                 if($order_type == 'AUCTION'){
@@ -1137,16 +1143,7 @@
 
             // get seller orders
             public function getSellerOrders($seller_id){
-                $orderIds   = $this->getSellerOrderIDs($seller_id);
-                
-                if(!$orderIds){
-                    return false;
-                }
-                $orders = [];
-                foreach($orderIds as $order){
-                    $orderDetails = $this->getOrderDetailsByOrderId($order->order_id,$order->order_type);
-                    array_push($orders,$orderDetails);
-                }
+                $orders=$this->getSellerCurrentOrders($seller_id);
                     if($orders){
                         return $orders;
                     }else{
@@ -1158,18 +1155,10 @@
             //get seller complete orders
             public function getSellerCompleteOrders($seller_id){
 
-                $orderIds = $this->getsellerCompleteOrderIDs($seller_id);
-                
+            
 
-                if(!$orderIds){
-                    return false;
-                }
-
-                $orders = [];
-                foreach($orderIds as $order){
-                    $orderDetails = $this->getOrderDetailsByOrderId($order->order_id,$order->order_type);
-                    array_push($orders,$orderDetails);
-                }
+                $orders = $this->getSellerCompletedOrders($seller_id);
+              
 
                 if($orders){
                     return $orders;
@@ -1179,17 +1168,8 @@
             }
 
 
-            public function getDeliverOrders($deliver_id){
-                $orderIds   = $this->getDeliverOrderIDs($deliver_id);
-               
-                if(!$orderIds){
-                    return false;
-                }
-                $orders = [];
-                foreach($orderIds as $order){
-                    $orderDetails = $this->getOrderDetailsByOrderId($order->order_id,$order->order_type);
-                    array_push($orders,$orderDetails);
-                }
+            public function getDeliverOrders(){
+                $orders=$this->getDeliverAvailableOrders();
                     if($orders){
                         return $orders;
                     }else{
@@ -2455,6 +2435,632 @@ order_date DESC"
 }
 
 
+public function getDeliverAvailableOrders(){
+    $query ="SELECT 
+                 o_items.order_status AS order_state,
+                 o_items.order_date AS order_date,
+                 o_items.quantity AS quantity,
+                 o_items.deliver_fee AS deliver_fee,
+                 o_items.order_item_id AS order_item_id,
+                 o_items.order_id AS order_id,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 i.name AS item_name,
+                 i.unit AS item_unit,
+                 i.item_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile
+                
+FROM 
+    order_items o_items
+JOIN
+    sellers s  ON o_items.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN 
+    orders o ON o_items.order_id = o.order_id
+JOIN 
+    items_market i ON o_items.item_id = i.item_id
+WHERE 
+    o_items.order_status = 'pending' AND o.payment_status = 1
+
+UNION
+
+SELECT 
+                o_items_ac.order_status AS order_state,
+                 o_items_ac.order_date AS order_date,
+                 o_items_ac.quantity AS quantity,
+                 o_items_ac.deliver_fee AS deliver_fee,
+                 o_items_ac.order_item_id AS order_item_id,
+                 o_items_ac.order_id AS order_id,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 a.name AS item_name,
+                 a.unit AS item_unit,
+                 a.item_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile
+FROM 
+    order_items_ac o_items_ac
+JOIN
+    sellers s  ON o_items_ac.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items_ac.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN 
+    orders o ON o_items_ac.order_id = o.order_id
+JOIN
+    auction a ON o_items_ac.auction_id = a.auction_ID
+WHERE 
+    o_items_ac.order_status = 'pending' AND o.payment_status = 1
+
+    UNION
+
+SELECT 
+                o_items_rq.order_status AS order_state,
+                 o_items_rq.order_date AS order_date,
+                 o_items_rq.quantity AS quantity,
+                 o_items_rq.deliver_fee AS deliver_fee,
+                 o_items_rq.order_item_id AS order_item_id,
+                 o_items_rq.order_id AS order_id,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 r.name AS item_name,
+                 r.unit AS item_unit,
+                 r.req_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile
+FROM 
+    order_items_rq o_items_rq
+JOIN
+    sellers s  ON o_items_rq.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items_rq.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN 
+    orders o ON o_items_rq.order_id = o.order_id
+JOIN 
+    requests r ON o_items_rq.req_id = r.request_ID
+WHERE 
+    o_items_rq.order_status = 'pending' AND o.payment_status = 1
+ORDER BY order_date DESC
+"
+
+;
+    $this->db->query($query);
+
+    $row=$this->db->resultSet();
+    if($row){
+        return $row;
+    }else{
+        return false;
+    }               
+}
+
+public function getDeliverCompletedOrders($deliver_id){
+    $query ="SELECT 
+                 o_items.order_status AS order_state,
+                 o_items.order_date AS order_date,
+                 o_items.quantity AS quantity,
+                 o_items.deliver_fee AS deliver_fee,
+                 o_items.order_item_id AS order_item_id,
+                 o_items.completed_date AS completed_date,
+                 o_items.order_id AS order_id,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 i.name AS item_name,
+                 i.unit AS item_unit,
+                 i.item_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile
+                
+FROM 
+    order_items o_items
+JOIN
+    sellers s  ON o_items.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN 
+    orders o ON o_items.order_id = o.order_id
+JOIN 
+    items_market i ON o_items.item_id = i.item_id
+WHERE 
+    o_items.order_status = 'completed' AND o.payment_status = 1 AND o_items.deliver_id = :deliver_id
+
+UNION
+
+SELECT 
+                o_items_ac.order_status AS order_state,
+                 o_items_ac.order_date AS order_date,
+                 o_items_ac.quantity AS quantity,
+                 o_items_ac.deliver_fee AS deliver_fee,
+                 o_items_ac.order_item_id AS order_item_id,
+                 o_items_ac.completed_date AS completed_date,
+                 o_items_ac.order_id AS order_id,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 a.name AS item_name,
+                 a.unit AS item_unit,
+                 a.item_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile
+FROM 
+    order_items_ac o_items_ac
+JOIN
+    sellers s  ON o_items_ac.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items_ac.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN 
+    orders o ON o_items_ac.order_id = o.order_id
+JOIN
+    auction a ON o_items_ac.auction_id = a.auction_ID
+WHERE 
+    o_items_ac.order_status = 'pending' AND o.payment_status = 1 AND o_items_ac.deliver_id = :deliver_id
+
+    UNION
+
+SELECT 
+                o_items_rq.order_status AS order_state,
+                 o_items_rq.order_date AS order_date,
+                 o_items_rq.quantity AS quantity,
+                 o_items_rq.deliver_fee AS deliver_fee,
+                 o_items_rq.completed_date AS completed_date,
+                 o_items_rq.order_item_id AS order_item_id,
+                 o_items_rq.order_id AS order_id,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 r.name AS item_name,
+                 r.unit AS item_unit,
+                 r.req_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile
+FROM 
+    order_items_rq o_items_rq
+JOIN
+    sellers s  ON o_items_rq.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items_rq.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN 
+    orders o ON o_items_rq.order_id = o.order_id
+JOIN 
+    requests r ON o_items_rq.req_id = r.request_ID
+WHERE 
+    o_items_rq.order_status = 'pending' AND o.payment_status = 1 AND o_items_rq.deliver_id = :deliver_id
+ORDER BY order_date DESC
+"
+
+;
+    $this->db->query($query);
+    $this->db->bind(":deliver_id",$deliver_id);
+
+    $row=$this->db->resultSet();
+    if($row){
+        return $row;
+    }else{
+        return false;
+    }               
+}
+public function getSellerCurrentOrders($seller_id){
+    $query ="SELECT 
+                 o_items.order_status AS order_state,
+                 o_items.order_date AS order_date,
+                 o_items.quantity AS quantity,
+                 o_items.deliver_fee AS deliver_fee,
+                 o_items.order_item_id AS order_item_id,
+                 o_items.completed_date AS completed_date,
+                 o_items.order_id AS order_id,
+                 o_items.order_status AS order_status,
+                 o_items.total_price AS total_price,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 i.name AS item_name,
+                 i.unit AS item_unit,
+                 i.item_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile,
+                 b.prof_img AS buyer_img,
+                 u_deliver.mobile AS deliver_mobile,
+                 u_deliver.name AS deliver_name,
+                 d.prof_img AS deliver_img
+                
+FROM 
+    order_items o_items
+JOIN
+    sellers s  ON o_items.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN
+    delivers d ON o_items.deliver_id = d.deliver_id
+JOIN
+    users u_deliver ON d.user_id = u_deliver.user_id
+JOIN 
+    orders o ON o_items.order_id = o.order_id
+JOIN 
+    items_market i ON o_items.item_id = i.item_id
+WHERE 
+    o_items.order_status != 'completed' AND o.payment_status = 1 AND o_items.seller_id = :seller_id
+
+UNION
+
+SELECT 
+                o_items_ac.order_status AS order_state,
+                 o_items_ac.order_date AS order_date,
+                 o_items_ac.quantity AS quantity,
+                 o_items_ac.deliver_fee AS deliver_fee,
+                 o_items_ac.order_item_id AS order_item_id,
+                 o_items_ac.completed_date AS completed_date,
+                 o_items_ac.order_status AS order_status,
+                 o_items_ac.order_id AS order_id,
+                 o_items_ac.total_price AS total_price,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 a.name AS item_name,
+                 a.unit AS item_unit,
+                 a.item_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile,
+                 b.prof_img AS buyer_img,
+                 u_deliver.mobile AS deliver_mobile,
+                 u_deliver.name AS deliver_name,
+                 d.prof_img AS deliver_img
+FROM 
+    order_items_ac o_items_ac
+JOIN
+    sellers s  ON o_items_ac.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items_ac.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN
+    delivers d ON o_items_ac.deliver_id = d.deliver_id
+JOIN
+    users u_deliver ON d.user_id = u_deliver.user_id
+JOIN 
+    orders o ON o_items_ac.order_id = o.order_id
+JOIN
+    auction a ON o_items_ac.auction_id = a.auction_ID
+WHERE 
+    o_items_ac.order_status != 'completed' AND o.payment_status = 1 AND o_items_ac.seller_id = :seller_id
+
+    UNION
+
+SELECT 
+                o_items_rq.order_status AS order_state,
+                 o_items_rq.order_date AS order_date,
+                 o_items_rq.quantity AS quantity,
+                 o_items_rq.deliver_fee AS deliver_fee,
+                 o_items_rq.completed_date AS completed_date,
+                 o_items_rq.order_item_id AS order_item_id,
+                 o_items_rq.order_status AS order_status,
+                 o_items_rq.total_price AS total_price,
+                 o_items_rq.order_id AS order_id,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 r.name AS item_name,
+                 r.unit AS item_unit,
+                 r.req_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile,
+                 b.prof_img AS buyer_img,
+                 u_deliver.mobile AS deliver_mobile,
+                 u_deliver.name AS deliver_name,
+                 d.prof_img AS deliver_img
+FROM 
+    order_items_rq o_items_rq
+JOIN
+    sellers s  ON o_items_rq.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items_rq.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN
+    delivers d ON o_items_rq.deliver_id = d.deliver_id
+JOIN
+    users u_deliver ON d.user_id = u_deliver.user_id
+JOIN 
+    orders o ON o_items_rq.order_id = o.order_id
+JOIN 
+    requests r ON o_items_rq.req_id = r.request_ID
+WHERE 
+    o_items_rq.order_status != 'completed' AND o.payment_status = 1 AND o_items_rq.seller_id = :seller_id
+ORDER BY order_date DESC
+"
+
+;
+    $this->db->query($query);
+    $this->db->bind(":seller_id",$seller_id);
+
+    $row=$this->db->resultSet();
+    if($row){
+        return $row;
+    }else{
+        return false;
+    }               
+}
+public function getSellerCompletedOrders($seller_id){
+    $query ="SELECT 
+                 o_items.order_status AS order_state,
+                 o_items.order_date AS order_date,
+                 o_items.quantity AS quantity,
+                 o_items.deliver_fee AS deliver_fee,
+                 o_items.order_item_id AS order_item_id,
+                 o_items.completed_date AS completed_date,
+                 o_items.order_id AS order_id,
+                 o_items.order_status AS order_status,
+                 o_items.total_price AS total_price,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 i.name AS item_name,
+                 i.unit AS item_unit,
+                 i.item_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile,
+                 b.prof_img AS buyer_img,
+                 u_deliver.mobile AS deliver_mobile,
+                 u_deliver.name AS deliver_name,
+                 d.prof_img AS deliver_img
+                
+FROM 
+    order_items o_items
+JOIN
+    sellers s  ON o_items.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN
+    delivers d ON o_items.deliver_id = d.deliver_id
+JOIN
+    users u_deliver ON d.user_id = u_deliver.user_id
+JOIN 
+    orders o ON o_items.order_id = o.order_id
+JOIN 
+    items_market i ON o_items.item_id = i.item_id
+WHERE 
+    o_items.order_status = 'completed' AND o.payment_status = 1 AND o_items.seller_id = :seller_id
+
+UNION
+
+SELECT 
+                o_items_ac.order_status AS order_state,
+                 o_items_ac.order_date AS order_date,
+                 o_items_ac.quantity AS quantity,
+                 o_items_ac.deliver_fee AS deliver_fee,
+                 o_items_ac.order_item_id AS order_item_id,
+                 o_items_ac.completed_date AS completed_date,
+                 o_items_ac.order_status AS order_status,
+                 o_items_ac.order_id AS order_id,
+                 o_items_ac.total_price AS total_price,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 a.name AS item_name,
+                 a.unit AS item_unit,
+                 a.item_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile,
+                 b.prof_img AS buyer_img,
+                 u_deliver.mobile AS deliver_mobile,
+                 u_deliver.name AS deliver_name,
+                 d.prof_img AS deliver_img
+FROM 
+    order_items_ac o_items_ac
+JOIN
+    sellers s  ON o_items_ac.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items_ac.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN
+    delivers d ON o_items_ac.deliver_id = d.deliver_id
+JOIN
+    users u_deliver ON d.user_id = u_deliver.user_id
+JOIN 
+    orders o ON o_items_ac.order_id = o.order_id
+JOIN
+    auction a ON o_items_ac.auction_id = a.auction_ID
+WHERE 
+    o_items_ac.order_status = 'completed' AND o.payment_status = 1 AND o_items_ac.seller_id = :seller_id
+
+    UNION
+
+SELECT 
+                o_items_rq.order_status AS order_state,
+                 o_items_rq.order_date AS order_date,
+                 o_items_rq.quantity AS quantity,
+                 o_items_rq.deliver_fee AS deliver_fee,
+                 o_items_rq.completed_date AS completed_date,
+                 o_items_rq.order_item_id AS order_item_id,
+                 o_items_rq.order_status AS order_status,
+                 o_items_rq.total_price AS total_price,
+                 o_items_rq.order_id AS order_id,
+                 o.order_address AS order_address,
+                 o.order_city AS order_city,
+                 o.order_type AS order_type,
+                 r.name AS item_name,
+                 r.unit AS item_unit,
+                 r.req_img AS item_img,
+                 u_seller.name AS seller_name,
+                 u_seller.user_id AS seller_user_id,
+                 u_seller.address AS seller_address,
+                 u_seller.city AS seller_city,
+                 u_seller.mobile AS seller_mobile,
+                 s.prof_img AS seller_img,
+                 u_buyer.name AS buyer_name,
+                 u_buyer.address AS buyer_address,
+                 u_buyer.city AS buyer_city,
+                 u_buyer.mobile AS buyer_mobile,
+                 b.prof_img AS buyer_img,
+                 u_deliver.mobile AS deliver_mobile,
+                 u_deliver.name AS deliver_name,
+                 d.prof_img AS deliver_img
+FROM 
+    order_items_rq o_items_rq
+JOIN
+    sellers s  ON o_items_rq.seller_id = s.seller_id
+JOIN
+    users u_seller ON s.user_id = u_seller.user_id
+JOIN 
+    buyers b ON o_items_rq.buyer_id = b.buyer_id
+JOIN
+    users u_buyer ON b.user_id = u_buyer.user_id
+JOIN
+    delivers d ON o_items_rq.deliver_id = d.deliver_id
+JOIN
+    users u_deliver ON d.user_id = u_deliver.user_id
+JOIN 
+    orders o ON o_items_rq.order_id = o.order_id
+JOIN 
+    requests r ON o_items_rq.req_id = r.request_ID
+WHERE 
+    o_items_rq.order_status = 'completed' AND o.payment_status = 1 AND o_items_rq.seller_id = :seller_id
+ORDER BY order_date DESC
+"
+
+;
+    $this->db->query($query);
+    $this->db->bind(":seller_id",$seller_id);
+
+    $row=$this->db->resultSet();
+    if($row){
+        return $row;
+    }else{
+        return false;
+    }               
+}
+
 
 
 
@@ -2971,9 +3577,60 @@ public function getDeliverReviews($deliver_id){
 
 }
 
+public function getOrderComplainStatus($qc_id){
+        $query = 'SELECT qc_status,buyer_message,buyer_img FROM quality_check WHERE qc_id = :qc_id';
+
+    $this->db->query($query);
+    $this->db->bind(':qc_id',$qc_id);
+
+    $row = $this->db->single();
+
+    if($row){
+        return $row;
+    }else{
+        return false;
+    }
+}
+
+public function GetOrderQualityCheckInfo($order_type,$order_item_id,$order_id){
+    $this->db->query(
+        'SELECT * FROM quality_check WHERE order_item_id=:order_item_id AND order_id=:order_id AND order_type=:order_type');
+
+    $this->db->bind('order_item_id',$order_item_id);
+    $this->db->bind('order_id',$order_id);
+    $this->db->bind('order_type',$order_type);
+    $row = $this->db->single();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+
+}
+
+public function getQualityCheckOrders(){
+    $query = "SELECT *
+                FROM quality_check
+                WHERE qc_status != 'not_raised'
+                ORDER BY complain_date  DESC";
+                ;
+
+    $this->db->query($query);
+    $row = $this->db->resultSet();
+
+    if($row){
+        return $row;
+    }else{
+        return false;
+    }
+
+}
+
 public function getinfoIM($order_item_id,$order_id){
 
-    $this->db->query('SELECT * FROM order_items WHERE order_item_id=:order_item_id AND order_id=:order_id');
+    $this->db->query('SELECT order_items.*,quality_check.qc_id FROM order_items JOIN quality_check ON quality_check.order_item_id = order_items.order_item_id WHERE order_items.order_item_id=:order_item_id AND order_items.order_id=:order_id');
 
     $this->db->bind('order_item_id',$order_item_id);
     $this->db->bind('order_id',$order_id);
@@ -2989,7 +3646,7 @@ public function getinfoIM($order_item_id,$order_id){
 
 public function getinfoAC($order_item_id,$order_id){
 
-    $this->db->query('SELECT * FROM order_items_ac WHERE order_item_id=:order_item_id AND order_id=:order_id');
+    $this->db->query('SELECT order_items_ac.*,quality_check.qc_id FROM order_items_ac JOIN quality_check ON quality_check.order_item_id = order_items_ac.order_item_id WHERE order_items_ac.order_item_id=:order_item_id AND order_items_ac.order_id=:order_id');
 
     $this->db->bind('order_item_id',$order_item_id);
     $this->db->bind('order_id',$order_id);
@@ -3005,7 +3662,8 @@ public function getinfoAC($order_item_id,$order_id){
 
 public function getinfoRQ($order_item_id,$order_id){
 
-    $this->db->query('SELECT * FROM order_items_rc WHERE order_item_id=:order_item_id AND order_id=:order_id');
+    $this->db->query('SELECT  order_items_rq.*,quality_check.qc_id FROM order_items_rq
+    JOIN quality_check ON quality_check.order_item_id = order_items_rq.order_item_id WHERE order_items_rq.order_item_id=:order_item_id AND order_items_rq.order_id=:order_id');
 
     $this->db->bind('order_item_id',$order_item_id);
     $this->db->bind('order_id',$order_id);
@@ -3019,16 +3677,19 @@ public function getinfoRQ($order_item_id,$order_id){
     }
 }
 
+
+
 public function PenaltySeller($data,$type){
 
     var_dump($data);
-    $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
-    VALUES (:order_item_id,:order_id,:order_type,:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
+    $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,qc_id,penalty_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
+    VALUES (:order_item_id,:order_id,:order_type,:qc_id,"SELLER_RETURN",:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
 
     $this->db->query($query);
     $this->db->bind(':order_item_id',$data->order_item_id);
     $this->db->bind(':order_id',$data->order_id);
     $this->db->bind(':order_type',$type);
+    $this->db->bind(':qc_id',$data->qc_id);
     $this->db->bind(':seller_id',$data->seller_id);
     $this->db->bind(':buyer_id',$data->buyer_id);
     $this->db->bind(':deliver_id',$data->deliver_id);
@@ -3036,7 +3697,12 @@ public function PenaltySeller($data,$type){
     $this->db->bind(':user_type',"seller");
 
     if($this->db->execute()){
-        return true;
+        if($this->ComplaintQuality($data->order_item_id,$data->order_id,$type)){
+
+            return true;
+        }else{
+            return false;
+        }
     }
     else{
         return false;
@@ -3047,8 +3713,8 @@ public function PenaltySeller($data,$type){
 
 public function PenaltyDeliver($data,$type){
 
-    $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
-    VALUES (:order_item_id,:order_id,:order_type,:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
+    $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,penalty_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
+    VALUES (:order_item_id,:order_id,:order_type,"DELIVERY_RETURN",:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
 
     $this->db->query($query);
     $this->db->bind(':order_item_id',$data->order_item_id);
@@ -3061,7 +3727,12 @@ public function PenaltyDeliver($data,$type){
     $this->db->bind(':user_type',"deliver");
 
     if($this->db->execute()){
-        return true;
+        if($this->ComplaintQuality($data->order_item_id,$data->order_id,$type)){
+
+            return true;
+        }else{
+            return false;
+        }
     }
     else{
         return false;

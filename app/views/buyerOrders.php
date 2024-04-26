@@ -357,23 +357,26 @@ foreach($data['completedOrders'] as $completedOrder){
                <div class="container_info">
                    <div class="sec_title">Complains</div>
                    <div class="info_cont ">
-
-                   <?php 
+                       <div class="text_container_q">
+                       
+                       <?php 
                    
                    $currentDateTime = new DateTime(); 
-                  $completeDateTime = new DateTime($order->completed_date); 
-                  $interval = $currentDateTime->diff($completeDateTime);
-                     if ($interval->days < 1 || $interval->h <= 24) { ?>
+                   $completeDateTime = new DateTime($order->completed_date); 
+                   $interval = $currentDateTime->diff($completeDateTime);
+                   if ($order->is_able_to_complain && $order->qc_status=='not_raised') { ?>
 
 
- 
-                       <div class="text_container">
+
                 <div class="info complain_btn_cont">
                     <p class="infor_title">Do you have any complains about  the order ?</p>
                     <button class="complain_btn" id="complain_btn">Raise a Complain</button>
                 </div>  
                 
                 <div class="complain_form_cont hidden">
+                <div class="closed">
+        <button class="closed_btn" id="cform_close_btn">  <i class="fas fa-times"></i></button>
+    </div>
                   <div class="complain_form ">
                            <form action="<?php echo URLROOT ?>/orders/raiseBuyerComplain/<?php echo $order->qc_id; ?>" method="POST" enctype="multipart/form-data" >
 
@@ -397,7 +400,7 @@ foreach($data['completedOrders'] as $completedOrder){
 
                                     <div class="input_cont">
                                     <label for="item_img" class="input_label">Upload Image</label>
-                                          <input type="file" class="upload_item"  name="complain_img">
+                                          <input type="file" class="upload_item"  name="complain_img" require>
                                     </div>
                                           
 
@@ -422,13 +425,91 @@ foreach($data['completedOrders'] as $completedOrder){
                      </form>
                 </div>
             </div>
-            
-            <?php    }else{
-                  echo "<p> No complains  .Complain can be raised within the first 24 hours after completion</p>";
+            <?php }elseif( $order->qc_status!='not_raised'){ ?>
 
-               }?>
-         </div>
+
+
+                <div class="info complain_btn_cont">
+                    <p class="infor_title">Your Complain Status : </p>
+                    <?php 
+                    
+                    if($order->qc_status=='pending'){
+                        echo "<p style='color:orange;'>".$order->qc_status."</p>";  
+                    }elseif($order->qc_status=='approved'){
+                        echo "<p style='color:green;'>".$order->qc_status."</p>";
+                    }elseif($order->qc_status=='declined'){
+                        echo "<p style='color:red;'>".$order->qc_status."</p>";
+                    }else{
+                        echo "<p>".$order->qc_status."</p>";
+                    }
+                    ?> 
+                <button class="view_complain" id="complain_btn">View Complain</button>
+                </div>  
+                
+                <div class="complain_form_cont hidden">
+                                    <div class="closed">
+        <button class="closed_btn cform_close" id="cform_close_btn">  <i class="fas fa-times"></i></button>
+    </div>
+           
+                  <div class="complain_form ">
+                           <form  >
+
+                                    <div class="input_items">
+                                    <div class="input_cont">
+                                          <label for="dropdown" class="input_label">Product Name</label>
+                                          <input type="text" id="dropdown" class="input_item" name="name"  value="<?php echo $order->item_name; ?>" readonly>
+                                          <input type="hidden"  name="seller_user_id"  value="<?php echo $order->seller_user_id; ?>">
+                                          <input type="hidden"  name="order_item_id"  value="<?php echo $order->order_item_id; ?>">
+                                          <input type="hidden"  name="order_id"  value="<?php echo $order->order_id; ?>">
+                                          <input type="hidden"  name="order_type"  value="<?php echo $order->order_type; ?>">
+                                    </div>    
+                                    <div class="input_cont">
+                                    <label for="stock" class="input_label">Stock</label>
+                                             <input type="text" class="input_item"  name="req_stock" value="<?php echo $order->quantity." ".$order->item_unit; ?>" readonly>
+                                    </div>
+                                    <div class="input_cont">
+                                       <label for="req_date" class="input_label">Completed Date</label>
+                                          <input type="date_format" class="input_item"  name="req_date" id="complete_date" value="<?php echo $order->completed_date_time; ?>" readonly>
+                                    </div>
+
+                                    <div class="input_cont">
+                                    <label for="description" class="input_label">Description</label>
+                                                   <input type="text" class="input_item" placeholder="Add your description" name="description" 
+                                                   value="<?php echo $order->qc_message; ?>"
+                                                   readonly>
+                                    </div>  
+                                    <div class="input_cont">
+                                    <label for="item_img" class="input_label">Complain Image</label>
+                                          <img class="complain_image" src="<?php echo URLROOT."/store/items/".$order->qc_img; ?>"/>
+                                    </div>
+                                          
+
+                                 
+                                 
+
+                                 
+                            
+                 
+                              </div>
+
+                     </form>
+                </div>
             </div>
+
+
+
+
+            
+           
+            <?php  }elseif(!$order->is_able_to_complain && $order->qc_status=='not_raised'){
+                echo "<p> No complains  .Complain only can be raised within the first 3 hours after completion</p>";
+                
+            }?>
+            </div>
+       
+            </div>
+        </div>
+            <div>
                <div class="container_info">
                    <div class="sec_title">ORDER ID : <?php echo $order->order_item_id."/".$order->order_id; ?></div>
                    <div class="info_cont">
