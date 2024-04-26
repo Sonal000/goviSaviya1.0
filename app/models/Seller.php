@@ -177,6 +177,29 @@ public function updateCoverImage($data){
             return false;
         }
     }
+
+    public function sellerInfo($id){
+
+        $this->db->query(
+            'SELECT 
+            sellers.prof_img AS seller_img,
+            users.name AS seller_name
+            FROM 
+            sellers JOIN
+            users ON
+            sellers.user_id = users.user_id
+            WHERE
+            sellers.seller_id =:id');
+
+    $this->db->bind(':id',$id);
+    $row = $this->db->Single();
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+    }
     
     
     

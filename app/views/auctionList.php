@@ -56,7 +56,7 @@
   <div class="form_container">
 
 
-  <form method="post" action="<?php echo URLROOT ?>/auctionC/add" enctype="multipart/form-data">
+  <form method="post"  id="auc_list_form" action="<?php echo URLROOT ?>/auctionC/add" enctype="multipart/form-data">
  
   <div class="input_items">
 
@@ -65,7 +65,8 @@
 
             <div class="input_cont">
                   <label for="dropdown" class="input_label">Product Name</label>
-                  <input type="text" id="dropdown" class="input_item" name="name" />
+                  <input type="text" id="product_name" class="input_item" name="name" />
+                  <p class="invalid_msg"></p>
             </div>
             
             <div class="input_cont">
@@ -90,12 +91,14 @@
 
             <div class="input_cont">
             <label for="price" class="input_label">Unit Price</label>
-                      <input type="text" class="input_item"  name="price">
+                      <input type="text" class="input_item"  name="price" id="unit_price">
+                      <p class="invalid_msg"></p>
             </div>
       
             <div class="input_cont">
             <label for="stock" class="input_label">Stock</label>
-                      <input type="text" class="input_item"  name="stock">
+                      <input type="text" class="input_item"  name="stock" id="stock">
+                      <p class="invalid_msg"></p>
             </div>
 
                 
@@ -111,12 +114,14 @@
                 <div class="input_cont">
                 <label for="exp_date" class="input_label">Expiary Date</label>
                       <input type="date" class="input_item"  name="exp_date" id="expiration_date">
+                      <p class="invalid_msg"></p>
                 </div>
 
             
                   <div class="input_cont">
                   <label for="exp_date" class="input_label">Pick up Address</label>
-                      <input type="text" class="input_item"  name="address">
+                      <input type="text" class="input_item"  name="address" id="pickup_address">
+                      <p class="invalid_msg"></p>
                   </div>
  
           
@@ -134,11 +139,13 @@
                   <div class="input_cont">
                 <label for="start_date" class="input_label">Starting Date</label>
                       <input type="date" class="input_item"  name="start_date" id="auction_start_date">
+                      <p class="invalid_msg"></p>
                 </div>
 
                 <div class="input_cont">
                 <label for="end_date" class="input_label">Ending Date</label>
                       <input type="date" class="input_item"  name="end_date" id="auction_end_date">
+                      <p class="invalid_msg"></p>
                 </div>
         
             <!-- <div class="formline5">
@@ -160,6 +167,7 @@
       <label for="item_img" class="input_label">Upload Image</label>
             <input type="file" class="upload_item"  name="item_img" id="item_img_input">
             <img id="image_preview" src="#" alt="Preview" style="display: none; max-width: 300px; max-height: 250px;" class="list_item">
+            <p class="invalid_msg"></p>
       </div>
             
 
@@ -171,12 +179,15 @@
 
                 <div class="submit_container">
 
-                      <button name="add_item" type="submit" class="btn">Create Auction</button>
+                      <button name="add_item" type="submit" class="btn" id="create_auction_btn">Create Auction</button>
                   </div>
                       
       </div>
    
     </form>
+    <div class="loader_cont">
+        <div class="loader"></div>
+      </div>
 
 
   </div>
@@ -195,6 +206,8 @@
 <!-- js === -->
 <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/createAuction.js"></script>
+
 <!-- <script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script> -->
 
 
@@ -205,55 +218,37 @@
 
 
 <script>
-      // Get references to the input fields
-    const expirationDateInput = document.getElementById('expiration_date');
-    const auctionEndDateInput = document.getElementById('auction_end_date');
-    const auctionStartDateInput = document.getElementById('auction_start_date');
+const expirationDateInput = document.getElementById('expiration_date');
+const auctionEndDateInput = document.getElementById('auction_end_date');
+const auctionStartDateInput = document.getElementById('auction_start_date');
 
+// Set the minimum value of the expiration date input to 3 days from the current date
+const currentDate = new Date();
+const minExpirationDate = new Date(currentDate);
+minExpirationDate.setDate(currentDate.getDate() + 3);
+expirationDateInput.min = minExpirationDate.toISOString().split('T')[0];
 
-    //when we slipt them into a array there are two elements in that array 1) date 2) time. we only need date so we access [0] index.
+// Set the minimum value of the auction end date input to the current date
+auctionEndDateInput.min = new Date().toISOString().split("T")[0];
 
-    //set the min attribute of expire date input tag to current day.since we cant enter a previous day from today as a expire date.
-     const currentDate = new Date();
+// Set the auction start date input value to the current date
+auctionStartDateInput.value = new Date().toISOString().split("T")[0];
+auctionStartDateInput.min = new Date().toISOString().split("T")[0];
 
-      // Calculate the minimum date (3 days from today)
-      const minExpirationDate = new Date(currentDate);
-      minExpirationDate.setDate(currentDate.getDate() + 3);
+// Add event listener to expiration date input
+expirationDateInput.addEventListener('change', function() {
+    // Get the value of expiration date
+    const expirationDate = new Date(expirationDateInput.value);
 
-      // Format the minimum date to 'YYYY-MM-DD'
-      const formattedMinExpirationDate = minExpirationDate.toISOString().split('T')[0];
+    // Set the maximum allowed date for the auction end date input to 1 day before the expiration date
+    const maxAuctionEndDate = new Date(expirationDate);
+    maxAuctionEndDate.setDate(expirationDate.getDate() - 1);
+    auctionEndDateInput.max = maxAuctionEndDate.toISOString().split('T')[0];
 
-      // Set the minimum value for the expiration date input field
-      expirationDateInput.min = formattedMinExpirationDate;
+    // Set the maximum allowed date for the auction start date input to the current date
+    auctionStartDateInput.max = new Date().toISOString().split("T")[0];
+});
 
-      // Set the minimum value attribute directly to the HTML element as well
-      document.getElementById("expiration_date").setAttribute("min", formattedMinExpirationDate);
-   
- //set the min attribute of  input tag auction start date to current day.since we cant enter a previous day from today as a auction start date.
-    auctionStartDateInput.min= new Date().toISOString().split("T")[0]; 
-    document.getElementById("auction_start_date").setAttribute("min", auctionStartDateInput.min);
-    //set the min attribute of auction end date input tag to current day.since we cant enter a previous day from today as a auction end date.
-    auctionEndDateInput.min= new Date().toISOString().split("T")[0];
-    document.getElementById("auction_end_date").setAttribute("min", auctionEndDateInput.min);
-
-    // Add event listener to expiration date input
-    expirationDateInput.addEventListener('change', function() {
-        // Get the value of expiration date
-        const expirationDate = new Date(expirationDateInput.value);
-
-        const maxAuctionEndDate = new Date(expirationDate);
-        maxAuctionEndDate.setDate(expirationDate.getDate() - 1);
-
-      // Set the maximum allowed date for the auction end date input
-      auctionEndDateInput.max = maxAuctionEndDate.toISOString().split('T')[0];
-
-      const maxAuctionStartDate = new Date(expirationDate);
-      maxAuctionStartDate.setDate(expirationDate.getDate() - 1);
-
-      auctionStartDateInput.max = maxAuctionStartDate.toISOString().split('T')[0];
-        
-        
-    });
 
 
 

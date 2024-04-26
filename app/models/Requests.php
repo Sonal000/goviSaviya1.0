@@ -394,7 +394,7 @@ class Requests{
 
     public function changeQuotation($data){
 
-        
+       
 
         $query = 'UPDATE req_quotation
                   SET
@@ -402,9 +402,9 @@ class Requests{
                   WHERE request_ID=:id AND seller_ID=:seller_id';
 
         $this->db->query($query);
-        $this->db->bind(':amount',$data->amount);
-        $this->db->bind(':id',$data->request_ID);
-        $this->db->bind(':seller_id',$data->seller_id);
+        $this->db->bind(':amount',$data['amount']);
+        $this->db->bind(':id',$data['request_ID']);
+        $this->db->bind(':seller_id',$data['seller_id']);
 
       if($this->db->execute()){
         return true;
@@ -412,6 +412,27 @@ class Requests{
       else{
         return false;
       }
+    }
+
+    public function countavailablerequests(){
+
+        $this->db->query(
+            'SELECT
+            COUNT(*) AS request_count
+            FROM
+            requests
+            WHERE
+            acp_seller_ID = 0'
+        );
+
+        $row = $this->db->single();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
     }
     
 
