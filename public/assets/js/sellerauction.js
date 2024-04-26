@@ -1,7 +1,6 @@
 const endAucBtn = document.getElementById("end_auc_btn");
 const aucCont = document.getElementById("blur");
 const aucCancleCont = document.getElementById("window_up");
-
 if(endAucBtn){
 
   endAucBtn.addEventListener("click", (e) => {
