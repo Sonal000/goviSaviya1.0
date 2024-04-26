@@ -71,12 +71,7 @@
 
                             <div style="display:flex; align-items:center; " class="more_info"><i class="fa-solid fa-truck"></i> Buyer:   <?php echo $data['order']->buyer_name ?> </p></div>
 
-                            <div class="update_edit_btn">
-                                    <botton class="accept_order_btnn"><a href=""><i class="fa-solid fa-phone"></i>  Contact Seller</a></botton>
-                                    <botton class="ignore_order_btnn"><a href=""><i class="fa-solid fa-map-pin"></i>  Get Location</a></botton>
-                                
-                            </div>
-
+                           
                         </div>   
                 </div>
 
@@ -86,10 +81,18 @@
 
             <div class="right_side">
 
-            <div class="error_msg"> 
+            
 
+             <div class="distance"> 
+                Pickup Location is
+                <?php echo(getDistance($data['order']->deliver_address,$data['order']->seller_address));
+                            ?>km away from you
+
+                </div>  
+
+        <div class="error_msg"> 
             <?php if(!$data['available']){?>
-            You cannot accept more than one orders at a time
+            You already have an ongoing order
            <?php  } ?>
            
            </div>

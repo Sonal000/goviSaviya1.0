@@ -311,15 +311,16 @@
   transition: 0.1s;
 }
 
-.ignore_order_btnnn:hover{
-  color: red;
-  background-color: rgb(245, 171, 171);
-  border: none;
-}
+
 
 .error_msg{
-  font-size: 1.2rem;
+  font-size: 16px;
   color: red;
+  display: flex;
+  justify-content: center;
+  box-shadow: var(--light-shadow);
+  border: var(--clr-red-3) 1px solid;
+  border-radius: 10px;
 }
 
 .hed{
@@ -337,5 +338,16 @@
 
 .image_p img{
   object-fit: cover;
+}
+
+.distance{
+  font-size: 16px;
+  border-radius: 10px;
+  box-shadow: var(--dark-shadow);
+  border: var(--clr-primary-7) solid 2px;
+  margin: 0.5rem;
+  padding: 0.4rem;
+  display: flex;
+  justify-content: center;
 }
 

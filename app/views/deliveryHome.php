@@ -120,30 +120,41 @@
                                 
             </div>
 
-            <div class="subHed">
+            
+
+
+        
+                            <?php
+                                if($data['details']){ 
+                                    ?>
+
+<div class="subHed">
+            <h3>Map</h3>
+        </div>
+
+<div class="map">
+
+
+                                   <?php var_dump(getDistance($data['details']->deliver_address,$data['details']->seller_address));
+                            ?>
+
+
+                                <div id="map_cont" data-start='gampaha' data-end='matara'> 
+                                    <input id="start" type="hidden" value="<?php echo $data['details']->seller_address  ?>" name="start">
+                                    <input id="end" type="hidden" value="<?php echo $data['details']->order_address  ?>" name="end">
+                                    <?php       
+                                    require APPROOT. '/views/layouts/mapCurrentLoc.php'; 
+                                ?>
+                                    </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+
+<div class="subHed">
             <h3>Ongoing Order</h3>
         </div>
 
-        <?php
-            if($data['details']){ 
-
-
-
-                // var_dump(getDistance($data['details']->seller_address,$data['details']->order_address));
-                // ?>
-           
-
-
-            <div id="map_cont" data-start='gampaha' data-end='matara'> 
-                <input id="start" type="hidden" value="<?php echo $data['details']->seller_address  ?>" name="start">
-                <input id="end" type="hidden" value="<?php echo $data['details']->order_address  ?>" name="end">
-                <?php       
-                require APPROOT. '/views/layouts/mapCurrentLoc.php'; 
-             ?>
-                </div>
-            <?php
-            }
-            ?>
                     
             <div class="first_col">
 
@@ -209,16 +220,65 @@
                     <div class="card_details">
                         
                             <div class="card_heading_oos">Ongoing Order Status</div>
-                            
-             <div class="progress_bar">
-             <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Order Confirmed</div>
-             <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Picked from Seller</div>
-             <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Quality confirmed: Pickup</div>
-             <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Order Delivered</div>
-             <div class="more_info"><i class="fa-regular fa-circle-check"></i> </i> Quality Confirmed: Drop-off</div>
-                
-             </div>
-                
+
+                        <?php if(!$data['details']){ ?>
+
+                            <div class="progress_bar">
+                            <div class="image">
+                   <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img" style="width:3rem">
+                </div>                  
+                            <div class="card_heading_oos no_accept">Please accept an order to see the Order Status</div>
+                        </div>
+
+                        <?php }elseif($data['details']->order_status=="deliver_assigned"){ ?>    
+                                                            
+                                        <div class="progress_bar">
+                                            
+                                            <div class="more_info"><span class="g"><i class="fa-solid fa-circle-check"></i></span></i> Order Confirmed</div>
+                                            <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Picked from Seller</div>
+                                            <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Quality confirmed: Pickup</div>
+                                            <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Order Delivered</div>
+                                            <div class="more_info"><i class="fa-regular fa-circle-check"></i> </i> Quality Confirmed: Drop-off</div>
+                                
+                                         </div>
+
+                            <?php }elseif($data['details']->order_status=="pickedup"){ ?>
+
+                                <div class="progress_bar">
+                                    
+                                <div class="more_info"><span class="g"><i class="fa-solid fa-circle-check"></i></span></i> Order Confirmed</div>
+                                <div class="more_info"><span class="g"><i class="fa-solid fa-circle-check"></i></span></i> Picked from Seller</div>
+                                            <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Quality confirmed: Pickup</div>
+                                            <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Order Delivered</div>
+                                            <div class="more_info"><i class="fa-regular fa-circle-check"></i> </i> Quality Confirmed: Drop-off</div>
+                                
+                                         </div>
+
+
+                                <?php }elseif($data['details']->order_status=="delivering"){ ?>
+
+                                    <div class="progress_bar">
+                                    <div class="more_info"><span class="g"><i class="fa-solid fa-circle-check"></i></span></i> Order Confirmed</div>
+                                    <div class="more_info"><span class="g"><i class="fa-solid fa-circle-check"></i></span></i> Picked from Seller</div>
+                                    <div class="more_info"><span class="g"><i class="fa-solid fa-circle-check"></i></span></i> Quality confirmed: Pickup</div>
+                                            <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Order Delivered</div>
+                                            <div class="more_info"><i class="fa-regular fa-circle-check"></i> </i> Quality Confirmed: Drop-off</div>
+                                
+                                         </div>
+
+                                    <?php }elseif($data['details']->order_status=="delivered"){ ?>
+
+                                        <div class="progress_bar">
+                                        <div class="more_info"><span class="g"><i class="fa-solid fa-circle-check"></i></span></i> Order Confirmed</div>
+                                        <div class="more_info"><span class="g"><i class="fa-solid fa-circle-check"></i></span></i> Picked from Seller</div>
+                                        <div class="more_info"><span class="g"><i class="fa-solid fa-circle-check"></i></span></i> Quality confirmed: Pickup</div>
+                                        <div class="more_info"><span class="g"><i class="fa-solid fa-circle-check"></i></span></i> Order Delivered</div>
+                                            <div class="more_info"><i class="fa-regular fa-circle-check"></i> </i> Quality Confirmed: Drop-off</div>
+                                
+                                         </div>
+
+                                        <?php }?>
+                                
                             
                         
                         

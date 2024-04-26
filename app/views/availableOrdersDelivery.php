@@ -70,9 +70,9 @@
     <?php }else{ ?>
         <?php 
         if($data['orders']){
-            foreach($data['orders'] as $orders){
-                if($orders){
-                foreach($orders as $order){
+            foreach($data['orders'] as $order){
+                // if($orders){
+                // foreach($orders as $order){
 
                   
 
@@ -81,7 +81,6 @@
 <!-- 1st Card------------------------------------------------------------------------------------- -->
 
         <div class="mycardd">
-
             <div class="left_side">
                 <img src="<?php echo URLROOT; ?>/store/items/<?php echo $order->item_img ?>" class="onion" alt="">
                 <div class="post_left">
@@ -113,12 +112,21 @@
             
             <div class="right-side"> 
                     
-                    <div class="price_details">
-                        <?php echo "Delivery Fee: Rs." .  $order->deliver_fee ."/="?>
-                    </div>
+            <div class="distance"> 
+                
+                <?php echo(getDistance($data['address'],$order->seller_address));
+                            ?>km away from you
+
+                </div>
             
+                    <?php if($data['available']){ ?>
+
+
+
+                   
+
                     <div class="update_edit_bt">
-                            <a class="accept_order_btn" href="<?php
+                            <a class="btn" href="<?php
                             if($order->order_type == "AUCTION"){
                                 echo URLROOT."/orders/acceptOrder_AC/".$order->order_item_id ;
                             }elseif($order->order_type == "REQUEST"){
@@ -130,6 +138,8 @@
                                 ?>">Accept Order</a>
                                      
                     </div>
+
+                    <?php }?>
             </div> 
             
         
@@ -137,7 +147,8 @@
         
    <!-- 2nd Card------------------------------------------------------------------------------------- -->
    <?php
-                 }} }
+                //  }} }
+                        }
         }else{ ?>
         
         <div> <p> no available orders </p></div>        

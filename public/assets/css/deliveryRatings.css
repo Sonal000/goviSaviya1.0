@@ -63,17 +63,7 @@
   */
   
 
-  .mycardd{
-    box-shadow: var(--dark-shadow);
-    padding:0.5rem;
-    border-radius: var(--radius-low);
-    display: flex;
-    flex-direction: row;
-    margin-top: 1rem;
-    transition: box-shadow 0.3s ease-in-out;
-    justify-content: space-between;  
-  }
-
+  
   .filters{  
         box-shadow: var(--dark-shadow);
         padding:0.5rem;
@@ -266,3 +256,101 @@ font-size: small;
 .black{
   color:black
 }
+
+/* Styles for the popup container */
+.popup-container {
+  display: none; /* Hide popup by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 9999; /* Ensure popup appears on top of other content */
+}
+
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ccc;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.close-btn:hover {
+  background-color: #aaa;
+}
+
+
+.mycardd{
+  box-shadow: var(--dark-shadow);
+  padding:0.5rem;
+  border-radius: var(--radius-low);
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  transition: box-shadow 0.3s ease-in-out;
+  justify-content: space-between;  
+ 
+  width: 49%;
+}
+
+.out_card{
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  
+  
+}
+
+
+.order_name{
+  font-size: 16px;
+  font-weight: 500;
+
+}
+
+.name_img{
+  display: flex;
+  flex-direction: row;
+}
+
+.proimg{
+  object-fit: cover;
+  width: 70px;
+  border-radius: 50%;
+  
+}
+
+.spanimg{
+  margin: 0rem 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.item{
+  font-weight: 600;
+}
+
+.review_content{
+  margin-top: 1rem;
+  border: var(--clr-primary-7) 2px solid;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+

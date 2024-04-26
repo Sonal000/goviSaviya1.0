@@ -246,5 +246,6 @@
 
     
 </body>
-<script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
+<script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
+<script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/adminSidebar.js"></script>
 </html>

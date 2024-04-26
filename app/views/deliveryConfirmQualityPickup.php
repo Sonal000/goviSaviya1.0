@@ -114,6 +114,8 @@
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
     <script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
     <script>
+
+        
     // Get the form element
     const form = document.getElementById('uploadForm');
 

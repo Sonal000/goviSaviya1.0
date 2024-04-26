@@ -533,6 +533,57 @@ public function getreviewcount($id){
 
 }
 
+public function countSellerMPosts($seller_id){
+
+$this->db->query(
+   'SELECT
+    COUNT(*) AS post_count
+    from items_market
+    WHERE seller_id =:seller_id'
+);
+
+$this->db->bind(':seller_id',$seller_id);
+
+$row = $this->db->Single();
+
+
+
+if($row){
+  return $row;
+}
+else{
+  return false;
+}
+
+
+
+}
+
+
+public function countmyreviews($id){
+
+  $this->db->Query(
+    'SELECT
+    COUNT(*) AS review_count
+    FROM
+    reviews
+    WHERE
+    seller_id =:id'
+);
+
+$this->db->bind(':id',$id);
+
+$row = $this->db->Single();
+
+if($row){
+    return $row;
+}
+else{
+    return false;
+}
+
+}
+
 
 
 

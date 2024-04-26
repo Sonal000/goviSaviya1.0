@@ -57,6 +57,26 @@ class Deliver{
         return $this->db->single();
     }
 
+    public function getDeliverInfo($id) {
+        // Corrected SQL query and parameter binding
+        $this->db->query("SELECT delivers.*, users.* 
+                         FROM delivers 
+                         RIGHT JOIN users ON delivers.user_id = users.user_id 
+                         WHERE delivers.deliver_id = :deliver_id");
+        
+        $this->db->bind(':deliver_id', $id);
+        
+        $this->db->execute(); // Execute the query
+        $row = $this->db->single();
+        
+        
+        if ($row) {
+            return $row;
+        } else {
+            return false;
+        }
+      }
+
     public function getVehicleInfo($user_id){
         $this->db->query(
                 'SELECT vehicle_brand,vehicle_model,vehicle_number,vehicle_id

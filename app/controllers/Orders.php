@@ -4,10 +4,17 @@ class Orders extends Controller{
     private $orderModel;
     private $notifiModel;
     private $VehicleModel;
+    private $buyerModel;
+    private $sellerModel;
+    private $deliverModel;
     public function __construct(){
         $this->orderModel=$this->model("Order");
-        $this->VehicleModel =$this->model('DeliveryVehicle'); 
+        $this->VehicleModel =$this->model('DeliveryVehicle');
+        $this->deliverModel =$this->model('Deliver');  
         $this->notifiModel=$this->model("Notifi"); 
+        $this->buyerModel=$this->model("Buyer"); 
+        $this->sellerModel=$this->model("Seller"); 
+        $this->deliverModel=$this->model("Deliver"); 
         if(!isset($_SESSION['user_id'])){
             $this -> view('_404');
             exit;
@@ -32,6 +39,21 @@ class Orders extends Controller{
                             $completeDateTime = new DateTime($order->completed_date); 
                             $interval = $currentDateTime->diff($completeDateTime);
                             $order->completed_date_time = $completeDateTime->format('Y-m-d H:i:s');
+                            if($interval->format('%h') < 14){
+                                $order->is_able_to_complain = true;
+                            }else{
+                                $order->is_able_to_complain = false;
+                            }
+                            $qc=$this->orderModel->getOrderComplainStatus($order->qc_id);
+
+                            
+                            if($qc->qc_status=='raised'){
+                                $order->qc_status = 'pending';
+                            }else{
+                                $order->qc_status = $qc->qc_status;
+                            }
+                                $order->qc_message = $qc->buyer_message;
+                                $order->qc_img = $qc->buyer_img;
                         }
                         
                     }
@@ -57,7 +79,19 @@ class Orders extends Controller{
     }
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
             $orders = $this->orderModel->getALLOrders();
-           
+           if($orders){
+            foreach($orders as $order){
+               
+                // $qc=$this->orderModel->getOrderQualityCheckInfo($order->order_type,$order->order_item_id,$order->order_id);
+                // if($qc){
+                //     $order->qc_id = $qc->qc_id;
+                //     $order->qc_status = $qc->qc_status;
+                //     $order->qc_message = $qc->buyer_message;
+                //     $order->qc_img = $qc->buyer_img;
+                // }
+                // var_dump($order->qc_id);
+            }
+           }
         $data=[
             "orders"=>$orders,
         ];
@@ -68,16 +102,22 @@ class Orders extends Controller{
             $deliver_id = $_SESSION['deliver_id'];
             $orders = $this->orderModel->getDeliverOrders($_SESSION['deliver_id']);
             $hasVehicle = $this->VehicleModel->hasVehicle($_SESSION['user_id']);
+            $available = $this->orderModel->getDeliverAvailability($deliver_id);
+            $deliver_adr = $this->deliverModel->getProfileInfo($_SESSION['user_id'])->address;
+            
             
         $data=[
             "orders"=>$orders,
-            "hasVehicle"=>$hasVehicle
+            "hasVehicle"=>$hasVehicle,
+            "available"=>$available,
+            "address"=>$deliver_adr
         ];
         $this -> view('availableOrdersDelivery',$data);
 
 
     }
 }
+
 
 
 
@@ -161,7 +201,7 @@ public function acceptOrder_AC($order_item_id){
 
 
 public function acceptOrder_PR($order_item_id){
-    var_dump('request');
+  
     $deliver_id= $_SESSION['deliver_id'];
     $assign=$this->orderModel->assignDeliver($order_item_id,$deliver_id,"REQUEST");
     if($assign){
@@ -186,10 +226,11 @@ public function acceptOrder_PR($order_item_id){
     if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
         
         $deliver_id = $_SESSION['deliver_id'];
-            $orders = $this->orderModel->getCompletedOrders($_SESSION['deliver_id']);
-            $order_id = $this->orderModel->getCompletedOrderIDs($deliver_id);
+            $orders = $this->orderModel->getDeliverCompletedOrders($_SESSION['deliver_id']);
+            // $order_id = $this->orderModel->getCompletedOrderIDs($deliver_id);
         $data=[
             "orders"=>$orders,
+
         ];
         
         $this -> view('deliveryCompletedOrder',$data);
@@ -454,7 +495,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             if($order->order_status == 'delivering') {
                 
                 $delivered = $this->orderModel->editToDelivered($deliver_id);
-       
+                
+
             if($delivered){
 
                 $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
@@ -703,14 +745,19 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         
     }
    
-    public function CheckItemsImages($order_item_id,$order_id){
+    public function CheckItemsImages($order_item_id,$order_id,$order_type){
 
-        $result = $this->orderModel->getImagestoCheck($order_item_id,$order_id);
+        $result = $this->orderModel->getImagestoCheck($order_type,$order_item_id,$order_id);
+        if($result){
 
-        $data = [
-            'images'=>$result,
-        ];
-        $this -> view('adminImageCheck',$data);
+            $data = [
+                'images'=>$result,
+            ];
+            $this -> view('adminImageCheck',$data);
+        }else{
+            $this -> view('_404');
+
+        }
     }
 
     public function ApproveQuality($order_item_id,$order_id,$type){
@@ -741,6 +788,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             $deliver_id = $_SESSION['deliver_id'];
             $id = $order_id;
             $type = $order_type;
+            $review = $this->orderModel->getReviewsInsideOrder($order_id,$order_item_id,$type);
 
         if($type=="AUCTION"){
                 $order=$this->orderModel->getAuctionOrderDetails($order_item_id);
@@ -753,7 +801,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $data = [
                     'title' => 'welcome',
                     'order' => $order,
-                    'type' => $type
+                    'type' => $type,
+                    'review' => $review
                 ];
         
                 $this->view('deliveryCompletedOrderDetails',$data);
@@ -771,6 +820,123 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         
         $this -> view('sellerOrderComplete',$data);
     }
+
+
+    public function PenaltySeller($order_item_id,$order_id,$type){
+
+        if($type =='PURCHASE'){
+            $result = $this->orderModel->getinfoIM($order_item_id,$order_id);
+            $buyer=$this->buyerModel->getBuyerInfo($result->buyer_id);
+            $seller=$this->sellerModel->getSellerInfo($result->seller_id);
+            // $deliver=$this->deliverModel->getDeliverInfo($result->deliver_id);
+            if($this->orderModel->PenaltySeller($result,$type)){
+
+                $this->notifiModel->notifYUser(0,$buyer->user_id,"Seller has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
+                $this->notifiModel->notifYUser(0,$seller->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
+
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+        }
+        elseif($type =='AUCTION'){
+            $result = $this->orderModel->getinfoAC($order_item_id,$order_id);
+            $buyer=$this->buyerModel->getBuyerInfo($result->buyer_id);
+            $seller=$this->sellerModel->getSellerInfo($result->seller_id);
+
+            if($this->orderModel->PenaltySeller($result,$type)){
+                $this->notifiModel->notifYUser(0,$buyer->user_id,"Seller has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
+                $this->notifiModel->notifYUser(0,$seller->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
+               
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+        }
+        elseif($type=='REQUEST'){
+            $result = $this->orderModel->getinfoRQ($order_item_id,$order_id);
+            $buyer=$this->buyerModel->getBuyerInfo($result->buyer_id);
+            $seller=$this->sellerModel->getSellerInfo($result->seller_id);
+
+            if($this->orderModel->PenaltySeller($result,$type)){
+                $this->notifiModel->notifYUser(0,$buyer->user_id,"Seller has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
+                $this->notifiModel->notifYUser(0,$seller->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
+               
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+
+        }
+
+       
+    }
+
+    public function PenaltyDeliver($order_item_id,$order_id,$type){
+
+        if($type =='PURCHASE'){
+            $result = $this->orderModel->getinfoIM($order_item_id,$order_id);
+            $buyer=$this->buyerModel->getBuyerInfo($result->buyer_id);
+            $seller=$this->sellerModel->getSellerInfo($result->seller_id);
+            $deliver=$this->deliverModel->getDeliverInfo($result->deliver_id);
+
+            if($this->orderModel->PenaltyDeliver($result,$type)){
+
+                $this->notifiModel->notifYUser(0,$buyer->user_id,"Deliver has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
+                $this->notifiModel->notifYUser(0,$seller->user_id,"Deliver has been  been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span> your order will be returned and refunded","orders","OTHER");
+                $this->notifiModel->notifYUser(0,$deliver->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
+                
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+        }
+        elseif($type =='AUCTION'){
+            $result = $this->orderModel->getinfoAC($order_item_id,$order_id);
+            $buyer=$this->buyerModel->getBuyerInfo($result->buyer_id);
+            $seller=$this->sellerModel->getSellerInfo($result->seller_id);
+            $deliver=$this->deliverModel->getDeliverInfo($result->deliver_id);
+                
+            if($this->orderModel->PenaltyDeliver($result,$type)){
+
+                $this->notifiModel->notifYUser(0,$buyer->user_id,"Deliver has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
+                $this->notifiModel->notifYUser(0,$seller->user_id,"Deliver has been  been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span> your order will be returned and refunded","orders","OTHER");
+                $this->notifiModel->notifYUser(0,$deliver->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
+              
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+        }
+        elseif($type=='REQUEST'){
+            $result = $this->orderModel->getinfoRQ($order_item_id,$order_id);
+            $buyer=$this->buyerModel->getBuyerInfo($result->buyer_id);
+            $seller=$this->sellerModel->getSellerInfo($result->seller_id);
+            $deliver=$this->deliverModel->getDeliverInfo($result->deliver_id);
+
+            if($this->orderModel->PenaltyDeliver($result,$type)){
+
+                $this->notifiModel->notifYUser(0,$buyer->user_id,"Deliver has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
+                $this->notifiModel->notifYUser(0,$seller->user_id,"Deliver has been  been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span> your order will be returned and refunded","orders","OTHER");
+                $this->notifiModel->notifYUser(0,$deliver->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
+              
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+
+        }
+
+       
+    }
+
+    
 
 
    

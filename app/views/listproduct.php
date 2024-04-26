@@ -55,7 +55,7 @@
   <div class="form_container">
 
 
-  <form method="post" action="<?php echo URLROOT ?>/listProduct" enctype="multipart/form-data">
+  <form method="post" id="item_list_form" action="<?php echo URLROOT ?>/listProduct" enctype="multipart/form-data">
  
   <div class="input_items">
 
@@ -64,7 +64,8 @@
 
             <div class="input_cont">
                   <label for="dropdown" class="input_label">Product Name</label>
-                  <input type="text" id="dropdown" class="input_item" name="name" />
+                  <input type="text" id="product_name" class="input_item" name="name" />
+                  <p class="invalid_msg"></p>
             </div>
             
             <div class="input_cont">
@@ -89,12 +90,14 @@
 
             <div class="input_cont">
             <label for="price" class="input_label">Unit Price</label>
-                      <input type="text" class="input_item"  name="price">
+                      <input type="text" class="input_item" id="unit_price" name="price">
+                      <p class="invalid_msg"></p>
             </div>
       
             <div class="input_cont">
             <label for="stock" class="input_label">Stock</label>
-                      <input type="text" class="input_item"  name="stock">
+                      <input type="text" class="input_item" id="stock" name="stock">
+                      <p class="invalid_msg"></p>
             </div>
 
                 
@@ -110,12 +113,14 @@
                 <div class="input_cont">
                 <label for="exp_date" class="input_label">Expiary Date</label>
                       <input type="date" class="input_item"  name="exp_date" id="expiration_date">
+                      <p class="invalid_msg"></p>
                 </div>
 
             
                   <div class="input_cont">
                   <label for="exp_date" class="input_label">Pick up Address</label>
-                      <input type="text" class="input_item"  name="address">
+                      <input type="text" class="input_item"  name="address" id="pickup_address">
+                      <p class="invalid_msg"></p>
                   </div>
  
           
@@ -148,6 +153,8 @@
       <label for="item_img" class="input_label">Upload Image</label>
             <input type="file" class="upload_item"  name="item_img" id="item_img_input">
             <img id="image_preview" src="#" alt="Preview" style="display: none; max-width: 300px; max-height: 250px;" class="list_item">
+      <p class="invalid_msg"></p>
+
       </div>
             
 
@@ -159,12 +166,15 @@
 
                 <div class="submit_container">
 
-                      <button name="add_item" type="submit" class="btn">List Item</button>
+                      <button name="add_item" type="submit" class="btn" id="list_item_btn">List Item</button>
                   </div>
                       
       </div>
    
     </form>
+    <div class="loader_cont">
+        <div class="loader"></div>
+      </div>
 
 
   </div>
@@ -184,6 +194,8 @@
 <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/listProduct.js"></script>
+
 
 
 
@@ -192,12 +204,24 @@
 </html>
 
 <script>
-      const expireDateinput = document.getElementById('expiration_date');
+      
+      const expireDateInput = document.getElementById('expiration_date');
 
-      const minExpireDateinput = new Date();
-      const formatDate = minExpireDateinput.toISOString().split('T')[0];
+// Get today's date
+const today = new Date();
 
-      document.getElementById('expiration_date').setAttribute("min",formatDate);
+// Add 3 days to today's date
+const minExpireDate = new Date(today);
+minExpireDate.setDate(minExpireDate.getDate() + 3);
+
+// Format the minimum expiration date in YYYY-MM-DD format
+const minExpireDateFormatted = minExpireDate.toISOString().split('T')[0];
+
+// Set the minimum attribute of the expiration date input field
+expireDateInput.setAttribute("min", minExpireDateFormatted);
+
+
+      
 
 </script>
 <script>

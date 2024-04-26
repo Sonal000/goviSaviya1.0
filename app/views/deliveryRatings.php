@@ -29,12 +29,17 @@
             Delivery Reviews & Ratings
         </div>
         
-        
+        <div class="out_card">
 <!-- 1st Card------------------------------------------------------------------------------------- -->
 <?php if (!empty($data['reviews'])) { ?>
-    <?php foreach ($data['reviews'] as $review) { ?>
+    <?php foreach ($data['reviews'] as $reviews) { 
+        if($reviews){
+            foreach($reviews as $review){
+                ?>
+       
+        
         <div class="mycardd">
-            <div class="productimg">
+           
                 <div class="post_left">
                     <div class="pro_detail">
                         <!-- <div class="stars">
@@ -44,9 +49,23 @@
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                         </div>     -->
+
+<div class="name_img">
+
+                        <div class="spanimg">
+                            <img src="<?php echo URLROOT . '/store/profiles/'.$review->buyer_img ?>" class="proimg" alt="">
+
+                        </div>
                         <div class="reviewer_name">
                             <?php echo $review->buyer_name; ?>
+                            <div class="order_name">
+                            Review for <span class="item"><?php echo $review->item_name; ?> <?php echo $review->quantity; ?><?php echo $review->item_unit; ?></span>
                         </div>
+                        </div>
+                        </div>
+
+
+                        
                         <div class="review_content">
                             <?php echo $review->review; ?>
                         </div>
@@ -59,17 +78,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
-                <div class="update_edit_bt">
-                    <button class="button"><a href="#">View More</a></button>
-                </div>
+           
+               
         </div>
+        
     <?php } ?>
-<?php } else { ?>
+
+<?php }}} else { ?>
     <p>No reviews found.</p>
 <?php } ?>
 
-            
+</div> 
         
         </div>
         

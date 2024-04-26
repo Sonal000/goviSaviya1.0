@@ -1,158 +1,98 @@
+const form = document.getElementById('item_list_form');
+const productNameInput = document.getElementById('product_name');
+const unitPriceInput = document.getElementById('unit_price');
+const stockInput = document.getElementById('stock');
+const expDateInput = document.getElementById('expiration_date');
+const pickAddressInput = document.getElementById('pickup_address');
+const itemImgInput = document.getElementById('item_img_input');
+const listItemBtn = document.getElementById('list_item_btn');
+const loader = document.querySelector('.loader_cont');
 
+let isListingItem = false;
 
-
-const form = document.getElementById('seller_reg_form');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const mobileInput = document.getElementById('mobile');
-const addressInput = document.getElementById('address');
-const cityInput = document.getElementById('city');
-const passwordInput = document.getElementById('password');
-const password_reInput = document.getElementById('password_re');
-const signUpBtn=document.getElementById('signup_btn');
-const loader=document.querySelector('.loader_cont');
-
-let isLoggingIn=false;
-const toggleLogingState=(state)=>{
-  if(state){
-    signUpBtn.disable =true;
-    signUpBtn.innerHTML="Signing...";
-    console.log(isLoggingIn);
+const toggleListingState = (state) => {
+  if (state) {
+    listItemBtn.disabled = true;
+    listItemBtn.innerHTML = "Listing...";
     loader.classList.toggle('loader_show');
-  }else{
-    signUpBtn.disable =false;
-    signUpBtn.innerHTML="Sign up";
+  } else {
+    listItemBtn.disabled = false;
+    listItemBtn.innerHTML = "List Item";
   }
 };
 
-
-
-
-
-form.addEventListener('submit',(e)=>{
- e.preventDefault();
- // nameInput.classList.add('invalid');
- if (isLoggingIn) {
-  return;
-}
-
-
-
- inputValidation();
-
-
- if (
-  !(nameInput.classList.contains('invalid') ||
-  emailInput.classList.contains('invalid') ||
-  mobileInput.classList.contains('invalid') ||
-  addressInput.classList.contains('invalid') ||
-  cityInput.classList.contains('invalid') ||
-  passwordInput.classList.contains('invalid') ||
-  password_reInput.classList.contains('invalid'))
-) {
-  isLoggingIn = true;
-  toggleLogingState(isLoggingIn);
-  form.submit();
- }
-
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (isListingItem) {
+    return;
+  }
+  inputValidation();
+  if (!(
+    productNameInput.classList.contains('invalid') ||
+    unitPriceInput.classList.contains('invalid') ||
+    stockInput.classList.contains('invalid') ||
+    expDateInput.classList.contains('invalid') ||
+    pickAddressInput.classList.contains('invalid') ||
+    itemImgInput.classList.contains('invalid')
+  )) {
+    isListingItem = true;
+    toggleListingState(isListingItem);
+    form.submit();
+  }
 });
 
+const setError = (element, message) => {
+  element.classList.add('invalid');
+  const messageCont = element.nextElementSibling;
+  messageCont.innerHTML = message;
+};
 
+const setValid = (element) => {
+  element.classList.remove('invalid');
+  const messageCont = element.nextElementSibling;
+  messageCont.innerHTML = null;
+};
 
-
-
-
-
-
-
-
-const setError=(element,message)=>{
- element.classList.add('invalid')
-   messageCont = element.nextElementSibling;
-   messageCont.innerHTML=message;
-}
-const setValid=(element)=>{
- element.classList.remove('invalid')
-   messageCont = element.nextElementSibling;
-   messageCont.innerHTML=null;
-}
-
-
-const inputValidation =()=>{
-
- const nameValue = nameInput.value.trim();
- const addressValue = addressInput.value.trim();
- const cityValue = cityInput.value.trim();
- const emailValue = emailInput.value.trim();
- const mobileValue = mobileInput.value.trim();
- const passwordValue = passwordInput.value.trim();
- const password_reValue = password_reInput.value.trim();
-
- if(nameValue===''){
-  setError(nameInput,"Name is required.");
- }else{
- setValid(nameInput);
- ;}
- if(addressValue===''){
-  setError(addressInput,"Address is required.");
- }else{
- setValid(addressInput);
- ;}
- if(cityValue===''){
-  setError(cityInput,"City is required.");
- }else{
- setValid(cityInput);
- ;}
- if(emailValue===''){
-  setError(emailInput,"Email is required.");
- }else{
- setValid(emailInput);
- ;}
-
- const isValidEmail = email => {
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-}
-if(!isValidEmail(emailValue)){
- setError(emailInput,"Email is not valid.");
-}else{
- setValid(emailInput);
-}
-
-const isValidMobileNumber = /^\d{10}$/;
-
-if(mobileValue===''){
- setError(mobileInput,"Mobile number is required.");
-}else if (mobileValue.length !== 10) {
-  setError(mobileInput, "Mobile number must be exactly 10 digits.");
-}else if(!isValidMobileNumber.test(mobileValue)){
-  setError(mobileInput, "Mobile number is not valid.");
-}else{
- setValid(mobileInput);
-}
-
-if(passwordValue===''){
- setError(passwordInput,"Password is required.");
-}else{
-  if(password_reValue!==passwordValue){
-    setError(passwordInput,"Passwords not matching.");
-   }else{
-     setValid(passwordInput);
+const inputValidation = () => {
+  if (productNameInput.value.trim() === '') {
+    setError(productNameInput, "Product name is required.");
+  } else {
+    setValid(productNameInput);
   }
-}
-if(password_reValue===''){
- setError(password_reInput,"Re-enter your password.");
-}else{
-   if(password_reValue!==passwordValue){
-      setError(password_reInput,"Passwords not matching.");
-    }else{
-       setValid(password_reInput);
-    }
-}
 
+  if (unitPriceInput.value.trim() === '') {
+    setError(unitPriceInput, "Unit price is required.");
+  } else if (parseFloat(unitPriceInput.value) <= 0) {
+    setError(unitPriceInput, "Unit price must be greater than 0.");
+  } else {
+    setValid(unitPriceInput);
+  }
 
+  if (stockInput.value.trim() === '') {
+    setError(stockInput, "Stock is required.");
+  } else if (parseInt(stockInput.value) <= 0) {
+    setError(stockInput, "Stock must be greater than 0.");
+  } else {
+    setValid(stockInput);
+  }
 
+  const currentDate = new Date();
+  const expDate = new Date(expDateInput.value);
+  if (expDate <= currentDate) {
+    setError(expDateInput, "Expiration date must be in the future.");
+  } else {
+    setValid(expDateInput);
+  }
 
+  if (pickAddressInput.value.trim() === '') {
+    setError(pickAddressInput, "Pickup address is required.");
+  } else {
+    setValid(pickAddressInput);
+  }
 
-
-}
+  if (itemImgInput.value.trim() === '') {
+    setError(itemImgInput, "Please upload an image.");
+  } else {
+    setValid(itemImgInput);
+  }
+};

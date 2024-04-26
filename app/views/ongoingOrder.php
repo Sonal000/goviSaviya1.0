@@ -15,6 +15,7 @@
 </head>
 <body>
 
+
 <?php
  require APPROOT. '/views/layouts/navbar2.php'; 
  ?>
@@ -164,6 +165,32 @@
 
 
         </div>
+
+        <?php
+            if($data['details']){ 
+                ?>
+ 
+
+ <div class="hed maphead">
+            <h3>Map</h3>
+        </div>
+<div class="map">
+          <div class="card" id="map_cont"> 
+                <input id="start" type="hidden" value="<?php echo $data['details']->deliver_address  ?>" name="start">
+                <input id="end" type="hidden" value="<?php echo $data['details']->seller_address  ?>" name="end">
+                <?php       
+                require APPROOT. '/views/layouts/mapCurrentLoc.php'; 
+             ?>
+                </div> 
+            <?php
+            }
+            ?>
+</div>
+
+
+      
+
+
         
         <?php }else{?>
 

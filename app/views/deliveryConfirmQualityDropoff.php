@@ -52,6 +52,29 @@ any issues or defects reguarding to the qualtiy <br> after the delivery</div> --
                         
                     </div>
             </div>
+
+            <script>
+    // Wait for the DOM to fully load before executing the JavaScript code
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the form element
+        const form = document.getElementById('uploadForm');
+
+        // Add event listener for form submission
+        form.addEventListener('submit', function(event) {
+            // Get the file input element
+            const fileInput = document.getElementById('photo');
+
+            // Check if a file has been selected
+            if (!fileInput.files || fileInput.files.length === 0) {
+                // Prevent form submission if no file is selected
+                event.preventDefault();
+                // Optionally, you can provide feedback to the user to indicate that a file is required
+                alert('Please select a file before proceeding.');
+            }
+        });
+    });
+</script>
+
                 
                 <div class="image_product">
              
@@ -64,7 +87,7 @@ any issues or defects reguarding to the qualtiy <br> after the delivery</div> --
 
                     <div class="instructions_two">Provide some of the photos of the product to confirm the quality of the product. </div>
 
-                <form action="<?php echo URLROOT; ?>/Orders/conclude" method="post" enctype="multipart/form-data">
+                <form id="uploadForm" action="<?php echo URLROOT; ?>/Orders/conclude" method="post" enctype="multipart/form-data">
 
                 <label class="custom-file-upload" for="photo">Add Photos to delivery</label>
 
@@ -74,6 +97,7 @@ any issues or defects reguarding to the qualtiy <br> after the delivery</div> --
                      <div id="imagePreview"></div> 
                     
 </div>
+
             </div>  
              
                 </div>
@@ -82,6 +106,8 @@ any issues or defects reguarding to the qualtiy <br> after the delivery</div> --
                 
             </div>
 
+
+           
             <div class="right_side">
             <div class=done_button> <button type = "submit" class="btn btn_done"> Done</button></div> 
             </form>
@@ -116,25 +142,7 @@ any issues or defects reguarding to the qualtiy <br> after the delivery</div> --
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
     <script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
 
-    <script>
-    // Get the form element
-    const form = document.getElementById('uploadForm');
-
-    // Add event listener for form submission
-    form.addEventListener('submit', function(event) {
-        // Get the file input element
-        const fileInput = document.getElementById('photo');
-
-        // Check if a file has been selected
-        if (!fileInput.files || fileInput.files.length === 0) {
-            // Prevent form submission if no file is selected
-            event.preventDefault();
-            // Optionally, you can provide feedback to the user to indicate that a file is required
-            alert('Please select a file before proceeding.');
-        }
-    });
-</script>
-
+    
 <script>
 // Function to display image preview
 function previewImage(event) {

@@ -409,23 +409,23 @@ class DeliveryVehicles extends Controller{
     
             // Validation
             if(empty($data['rev_expiry'])){
-                $data['rev_expiry_error'] = 'Please enter the maximum weight';
+                $data['rev_expiry_error'] = 'Please enter the revenue license expire date';
             }
     
             if(empty($data['rev_license_imgs'])){
-                $data['rev_license_imgs_error'] = 'Please enter the milage of the vehicle';
+                $data['rev_license_imgs_error'] = 'Please select revenue license image';
             }
     
             if(empty($data['insurance_status'])){
-                $data['insurance_status_error'] = 'Please enter the maximum volume';
+                $data['insurance_status_error'] = 'Please select status of insurance';
             }
     
             if(empty($data['insurance_imgs'])){
-                $data['insurance_imgs_error'] = 'Please select the refregiration capability';
+                $data['insurance_imgs_error'] = 'Please select image of insurance';
             }
 
             if(empty($data['ins_expiry'])){
-                $data['ins_expiry_error'] = 'Please select the refregiration capability';
+                $data['ins_expiry_error'] = 'Please select the insurance expire date';
             }
         
             // Make sure there are no errors
