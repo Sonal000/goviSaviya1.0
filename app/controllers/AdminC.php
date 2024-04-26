@@ -67,15 +67,15 @@ class AdminC extends Controller{
         
 
     public function createSession($user){
-
         $_SESSION['user_id']=$user->admin_ID;
-        $_SESSION['user_name']=$user->name;
-        $_SESSION['user_email']=$user->email;
+        $_SESSION['admin_id']=$user->admin_ID;
+        $_SESSION['admin_name']=$user->name;
+        $_SESSION['admin_email']=$user->email;
         $_SESSION['user_type']=$user->user_type;
         $image=$this ->adminModel->getProfileImage($user->admin_ID,$user->user_type);
         $_SESSION['user_image']=strlen($image->prof_img)>0?$image->prof_img:"green.png";
     
-        redirect('/AdminC/adminDash');
+        // redirect('/AdminC/Home');
        /* var_dump($_SESSION['user_image']);*/
       }
     

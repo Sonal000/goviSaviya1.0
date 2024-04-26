@@ -52,7 +52,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
     <div class="main_img_cont">
       <img class="main_img" src="<?php echo URLROOT.'/store/items/'.$data['row']->item_img ;?>"> 
     </div>
-    <div class="img_slider_cont">
+    <!-- <div class="img_slider_cont">
       <button class="slider_btn">
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-1.png"/> 
       </button>
@@ -66,7 +66,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
         <img class="slider_img" src="<?php echo URLROOT ?>/assets/images/item-3.png"/> 
       </button>
 
-    </div>
+    </div> -->
 </div>
 
 
@@ -76,29 +76,30 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
     <p class="item_name"><?php echo $data['row']->name; ?></p>
     <a href="<?php echo URLROOT ?>/profile/<?php echo $data['seller']->user_id; ?>" class="item_seller" target="_blank"> seller: <?php echo $data['seller']->name ?> <span><i class="fas fa-check-circle"></i></span></a>
     <p class="item_address"><?php echo $data['seller']->city; ?></p>
-    <div class="item_rating">
+    <!-- <div class="item_rating">
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
-         </div>
+         </div> -->
   </div>
   <div class="item_price_cont">
     <p class="item_price">RS <?php echo $data['row']->price; ?> / <span><?php echo $data['row']->unit; ?></span></p>
-    <p class="item_available"><?php echo $data['row']->stock; ?>/ <span><?php echo $data['row']->unit; ?> available</span>  </p>
+    <p class="item_available" ><?php echo $data['row']->stock; ?>/ <span><?php echo $data['row']->unit; ?> available</span>  </p>
   </div>
   <div class="item_desc_cont">
     <p class="item_desc"><?php echo $data['row']->description; ?></p>
   </div>
-
-
-  <form action="<?php echo URLROOT.'/marketplace/iteminfo/'.$data['row']->item_id; ?>" method="post">
+  
+  
+  <form action="<?php echo URLROOT.'/marketplace/iteminfo/'.$data['row']->item_id; ?>" method="post" id="item_add">
+    <p class="qty_message" style="color:red;"></p>
   <div class="item_btns_cont">
     <div class="qty_btn_cont">
       <button class="btn_remove">-</button>
       <!-- <p class="qty">0</p> -->
-        <input class="qty" type="number" value="1" name="qty" id="quantity">
+        <input class="qty" type="number" value="1" name="qty" id="quantity"  data-available =<?php echo $data['row']->stock; ?>>
       
       <button class="btn_add">+</button>
     </div>
@@ -128,7 +129,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
     </div> -->
     <div class="reviews_container">
       <div class="reviews_title_cont">
-        <p class="reviews_title">All Reviews <span>(19)</span> </p>
+        <!-- <p class="reviews_title">All Reviews <span>(19)</span> </p> -->
       </div>
 
       <div class="reviews_cont">

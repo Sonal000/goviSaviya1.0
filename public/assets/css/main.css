@@ -449,6 +449,10 @@ input:focus {
   position: relative;
 }
 
+.admin_navlink{
+  margin-right: 2rem;
+}
+
 .sidelinks > .signin_link {
   margin-bottom: 1rem;
 }

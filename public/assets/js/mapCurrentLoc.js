@@ -1,5 +1,4 @@
-console.log("Start:", startValue);
-console.log("End:", endValue);
+
 
 let map, infoWindow, directionsService, directionsRenderer, geocoder;
 
@@ -12,7 +11,17 @@ async function initMap() {
 
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 7.55, lng: 80.41 },
-    zoom: 8,
+    zoom: 5,
+    restriction: {
+      latLngBounds: {
+        north: 10.5, 
+        south: 5.0, 
+        west: 78.5, 
+        east: 83.5,
+      },
+      
+      strictBounds: true,
+    },
     mapId: "f3e3e3e3e3e3e3e3",
   });
 

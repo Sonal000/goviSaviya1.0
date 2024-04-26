@@ -773,6 +773,89 @@ private function uploadFile($fileInputName, $uploadDirectory) {
     }
 
 
+    public function PenaltySeller($order_item_id,$order_id,$type){
+
+        if($type =='PURCHASE'){
+            $result = $this->orderModel->getinfoIM($order_item_id,$order_id);
+
+            if($this->orderModel->PenaltySeller($result,$type)){
+
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+        }
+        elseif($type =='AUCTION'){
+            $result = $this->orderModel->getinfoAC($order_item_id,$order_id);
+
+            if($this->orderModel->PenaltySeller($result,$type)){
+               
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+        }
+        elseif($type=='REQUEST'){
+            $result = $this->orderModel->getinfoRQ($order_item_id,$order_id);
+
+            if($this->orderModel->PenaltySeller($result,$type)){
+               
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+
+        }
+
+       
+    }
+
+    public function PenaltyDeliver($order_item_id,$order_id,$type){
+
+        if($type =='PURCHASE'){
+            $result = $this->orderModel->getinfoIM($order_item_id,$order_id);
+
+            if($this->orderModel->PenaltyDeliver($result,$type)){
+                
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+        }
+        elseif($type =='AUCTION'){
+            $result = $this->orderModel->getinfoAC($order_item_id,$order_id);
+                
+            if($this->orderModel->PenaltyDeliver($result,$type)){
+              
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+        }
+        elseif($type=='REQUEST'){
+            $result = $this->orderModel->getinfoRQ($order_item_id,$order_id);
+
+            if($this->orderModel->PenaltyDeliver($result,$type)){
+              
+                redirect('Orders/details/'.$order_id.'');
+            }
+            else{
+                return false;
+            }
+
+        }
+
+       
+    }
+
+    
+
+
    
 
    

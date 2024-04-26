@@ -124,6 +124,27 @@
 
 
         </div>
+
+    
+        <?php
+            if($data['order']){ 
+
+            
+                ?>
+ 
+
+ 
+
+          <div class="card" id="map_cont" data-start='gampaha' data-end='matara'> 
+                <input id="start" type="hidden" value="<?php echo $data['details']->seller_address  ?>" name="start">
+                <input id="end" type="hidden" value="<?php echo $data['details']->order_address  ?>" name="end">
+                <?php       
+                require APPROOT. '/views/layouts/mapCurrentLoc.php'; 
+             ?>
+                </div> 
+            <?php
+            }
+            ?>
         
 
 
