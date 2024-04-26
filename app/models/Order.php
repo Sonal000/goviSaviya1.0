@@ -3628,6 +3628,24 @@ public function getQualityCheckOrders(){
 
 }
 
+public function getQualityCheckDetails($qc_id){
+    $query = "SELECT *
+                FROM quality_check
+                WHERE qc_id = :qc_id";
+                ;
+
+    $this->db->query($query);
+    $this->db->bind(':qc_id',$qc_id);
+    $row = $this->db->single();
+
+    if($row){
+        return $row;
+    }else{
+        return false;
+    }
+
+}
+
 public function getinfoIM($order_item_id,$order_id){
 
     $this->db->query('SELECT order_items.*,quality_check.qc_id FROM order_items JOIN quality_check ON quality_check.order_item_id = order_items.order_item_id WHERE order_items.order_item_id=:order_item_id AND order_items.order_id=:order_id');

@@ -90,7 +90,7 @@
                 <p>Order Type</p>
             </div>
             <div class="table_cell column4">
-                <p>Status</p>
+                <p>Order Date</p>
             </div>
             <div class="table_cell column5">
                 <p></p>
@@ -114,10 +114,11 @@
                 
             </div>
             <div class="table_cell column4">
-            <div class="ordersta"><p class="orderstatus_complete  <?php echo "qcstatus_".$Orders->qc_status.""; ?>"><?php echo $Orders->qc_status?></p></div>
+            <div class="ordersta"><p class="orderstatus_complete  <?php echo "qcstatus_".$Orders->qc_status.""; ?>"><?php echo $Orders->qc_status; ?></p></div>
             </div>
+         
             <div class="table_cell column6">
-                <a href="<?php echo URLROOT; ?>/Orders/details/<?php echo $Orders->order_id?>"><img src="<?php echo URLROOT; ?>/assets/images/view.png" alt="" class="vieweye" alt=""></a>
+                <a href="<?php echo URLROOT; ?>/qualityCheck/details/<?php echo $Orders->qc_id?>"><img src="<?php echo URLROOT; ?>/assets/images/view.png" alt="" class="vieweye" alt=""></a>
             </div>
             <div class="table_cell column6">
                 <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>

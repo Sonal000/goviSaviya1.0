@@ -14,6 +14,7 @@ class QualityCheck extends Controller{
            
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
             $orders = $this->orderModel->getQualityCheckOrders();
+            var_dump($orders);
             $data = [
                 'orders' => $orders
             ];
@@ -24,11 +25,49 @@ class QualityCheck extends Controller{
         }
     }
 
+public function details($qc_id){
+    if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
+        $order = $this->orderModel->getQualityCheckdetails($qc_id);
+        $data = [
+            'order' => $order
+        ];
+        $this -> view('adminQualityCheckDetails',$data);
+    }else{
+        $this -> view('_404');
+    }
+}
+
+    public function approve($qc_id){
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
+            $result = $this->orderModel->approveQualityCheck($qc_id);
+            if($result){
+                header('location:'.URLROOT.'/QualityCheck');
+            }else{
+                die('Something went wrong');
+            }
+        }else{
+            $this -> view('_404');
+        }
+    }
+
+    public function reject($qc_id){
+        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
+            $result = $this->orderModel->rejectQualityCheck($qc_id);
+            if($result){
+                header('location:'.URLROOT.'/QualityCheck');
+            }else{
+                die('Something went wrong');
+            }
+        }else{
+            $this -> view('_404');
+        }
+}
 
 
     public function penalty(){
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
             $orders = $this->orderModel->getQualityCheckOrders();
+           
             $data = [
                 'orders' => $orders
             ];

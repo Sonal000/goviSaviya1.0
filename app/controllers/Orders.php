@@ -745,9 +745,9 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         
     }
    
-    public function CheckItemsImages($order_item_id,$order_id,$order_type){
+    public function CheckItemsImages($order_item_id,$order_id){
 
-        $result = $this->orderModel->getImagestoCheck($order_type,$order_item_id,$order_id);
+        $result = $this->orderModel->getImagestoCheck($order_item_id,$order_id);
         if($result){
 
             $data = [
