@@ -70,9 +70,9 @@
     <?php }else{ ?>
         <?php 
         if($data['orders']){
-            foreach($data['orders'] as $orders){
-                if($orders){
-                foreach($orders as $order){
+            foreach($data['orders'] as $order){
+                // if($orders){
+                // foreach($orders as $order){
 
                   
 
@@ -81,7 +81,6 @@
 <!-- 1st Card------------------------------------------------------------------------------------- -->
 
         <div class="mycardd">
-
             <div class="left_side">
                 <img src="<?php echo URLROOT; ?>/store/items/<?php echo $order->item_img ?>" class="onion" alt="">
                 <div class="post_left">
@@ -148,7 +147,8 @@
         
    <!-- 2nd Card------------------------------------------------------------------------------------- -->
    <?php
-                 }} }
+                //  }} }
+                        }
         }else{ ?>
         
         <div> <p> no available orders </p></div>        

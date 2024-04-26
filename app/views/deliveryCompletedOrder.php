@@ -35,9 +35,9 @@
 <!-- 1st Card------------------------------------------------------------------------------------- -->
 <?php 
         if($data['orders']){
-            foreach($data['orders'] as $orders){
-                if($orders){
-                foreach($orders as $order){
+            foreach($data['orders'] as $order){
+                // if($orders){
+                // foreach($orders as $order){
 
                    
                 ?>
@@ -89,7 +89,7 @@
 
     
         <?php
-                 }} }
+                  }
         }else{ ?>
         
         <div> <p> There are no Completed Orders </p></div>        

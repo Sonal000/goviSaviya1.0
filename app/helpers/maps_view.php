@@ -114,6 +114,7 @@ function getDistance($origin, $destination) {
         // Convert distance from meters to kilometers
         $distance_in_km = $distance/1000;
 
+    
         return round($distance_in_km);
     } else {
         return false; // Distance could not be calculated

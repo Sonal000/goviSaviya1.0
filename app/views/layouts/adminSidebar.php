@@ -54,12 +54,35 @@
                 </a>
               </li>
               <li>
+    
                 <a href="<?php echo URLROOT ?>/Orders">
                   <button class="sidebar_item link" id="orders_link" >
-                    <i class="fas fa-store sidebar_icon"></i>
+                  <i class="fas fa-book-reader sidebar_icon"></i>
                     <p>Orders</p>
                   </button>
                 </a>
+               
+              </li>
+              <li>
+              <button class="expand_btn exp_bt_op" id="products_expand">
+                <i class="fas fa-check-double sidebar_icon"></i>
+                  <p>Quality Check</p>
+                  <i class="fas fa-sort-down expand_icon"></i>
+                </button>
+                  <div class="expand hide_expand ">
+                <a href="<?php echo URLROOT ?>/qualityCheck">
+                  <button class="sidebar_item link" id="qc_link" >
+                  <i class="far fa-building sidebar_icon"></i>
+                    <p>Complained QC</p>
+                  </button>
+                </a>
+                <a href="<?php echo URLROOT ?>/qualitycheck/penalty">
+                  <button class="sidebar_item link" id="penalty_link" >
+                    <i class="fas fa-coins sidebar_icon"></i>
+                    <p>Penalty QC</p>
+                  </button>
+                </a>
+                </div>
               </li>
               
               <li>

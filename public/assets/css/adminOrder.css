@@ -45,6 +45,42 @@
     cursor: pointer;
     
 }
+  .qcstatus_raised{
+    background:var(--clr-secondary-3);
+    border-radius: var(--radius-low);
+    width: 150px;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color:var(--clr-grey-10);
+    cursor: pointer;
+    
+}
+  .qcstatus_approved{
+    background:var(--clr-primary-6);
+    border-radius: var(--radius-low);
+    width: 150px;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color:var(--clr-grey-10);
+    cursor: pointer;
+    
+}
+  .qcstatus_declined{
+    background:var(--clr-red-3);
+    border-radius: var(--radius-low);
+    width: 150px;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color:var(--clr-grey-10);
+    cursor: pointer;
+    
+}
 
 .orderstatus_ongoing{
     background:#ffd700;
