@@ -2718,7 +2718,6 @@ ORDER BY order_date DESC
 }
 public function getSellerCurrentOrders($seller_id){
     $query ="SELECT 
-                 o_items.order_status AS order_state,
                  o_items.order_date AS order_date,
                  o_items.quantity AS quantity,
                  o_items.deliver_fee AS deliver_fee,
@@ -2758,9 +2757,9 @@ JOIN
     buyers b ON o_items.buyer_id = b.buyer_id
 JOIN
     users u_buyer ON b.user_id = u_buyer.user_id
-JOIN
+LEFT JOIN
     delivers d ON o_items.deliver_id = d.deliver_id
-JOIN
+LEFT JOIN
     users u_deliver ON d.user_id = u_deliver.user_id
 JOIN 
     orders o ON o_items.order_id = o.order_id
@@ -2772,14 +2771,14 @@ WHERE
 UNION
 
 SELECT 
-                o_items_ac.order_status AS order_state,
-                 o_items_ac.order_date AS order_date,
+               
+                o_items_ac.order_date AS order_date,
                  o_items_ac.quantity AS quantity,
                  o_items_ac.deliver_fee AS deliver_fee,
                  o_items_ac.order_item_id AS order_item_id,
                  o_items_ac.completed_date AS completed_date,
-                 o_items_ac.order_status AS order_status,
                  o_items_ac.order_id AS order_id,
+                 o_items_ac.order_status AS order_status,
                  o_items_ac.total_price AS total_price,
                  o.order_address AS order_address,
                  o.order_city AS order_city,
@@ -2811,9 +2810,9 @@ JOIN
     buyers b ON o_items_ac.buyer_id = b.buyer_id
 JOIN
     users u_buyer ON b.user_id = u_buyer.user_id
-JOIN
+LEFT JOIN
     delivers d ON o_items_ac.deliver_id = d.deliver_id
-JOIN
+LEFT JOIN
     users u_deliver ON d.user_id = u_deliver.user_id
 JOIN 
     orders o ON o_items_ac.order_id = o.order_id
@@ -2825,15 +2824,15 @@ WHERE
     UNION
 
 SELECT 
-                o_items_rq.order_status AS order_state,
-                 o_items_rq.order_date AS order_date,
+                
+o_items_rq.order_date AS order_date,
                  o_items_rq.quantity AS quantity,
                  o_items_rq.deliver_fee AS deliver_fee,
-                 o_items_rq.completed_date AS completed_date,
                  o_items_rq.order_item_id AS order_item_id,
+                 o_items_rq.completed_date AS completed_date,
+                 o_items_rq.order_id AS order_id,
                  o_items_rq.order_status AS order_status,
                  o_items_rq.total_price AS total_price,
-                 o_items_rq.order_id AS order_id,
                  o.order_address AS order_address,
                  o.order_city AS order_city,
                  o.order_type AS order_type,
@@ -2944,14 +2943,14 @@ WHERE
 UNION
 
 SELECT 
-                o_items_ac.order_status AS order_state,
+o_items_ac.order_status AS order_state,
                  o_items_ac.order_date AS order_date,
                  o_items_ac.quantity AS quantity,
                  o_items_ac.deliver_fee AS deliver_fee,
                  o_items_ac.order_item_id AS order_item_id,
                  o_items_ac.completed_date AS completed_date,
-                 o_items_ac.order_status AS order_status,
                  o_items_ac.order_id AS order_id,
+                 o_items_ac.order_status AS order_status,
                  o_items_ac.total_price AS total_price,
                  o.order_address AS order_address,
                  o.order_city AS order_city,
@@ -2997,15 +2996,15 @@ WHERE
     UNION
 
 SELECT 
-                o_items_rq.order_status AS order_state,
+o_items_rq.order_status AS order_state,
                  o_items_rq.order_date AS order_date,
                  o_items_rq.quantity AS quantity,
                  o_items_rq.deliver_fee AS deliver_fee,
-                 o_items_rq.completed_date AS completed_date,
                  o_items_rq.order_item_id AS order_item_id,
+                 o_items_rq.completed_date AS completed_date,
+                 o_items_rq.order_id AS order_id,
                  o_items_rq.order_status AS order_status,
                  o_items_rq.total_price AS total_price,
-                 o_items_rq.order_id AS order_id,
                  o.order_address AS order_address,
                  o.order_city AS order_city,
                  o.order_type AS order_type,
