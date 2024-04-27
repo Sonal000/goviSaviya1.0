@@ -7,6 +7,7 @@ class DeliveryVehicles extends Controller{
             }
 
             $this->VehicleModel = $this->model('DeliveryVehicle');
+            $this->orderModel= $this->model('Order');
     }
 
     public function index(){
@@ -29,10 +30,13 @@ class DeliveryVehicles extends Controller{
 
     public function show($id){
         $vehicle = $this->VehicleModel->getVehicleById($id);
+        $available = $this->orderModel->getDeliverAvailability($_SESSION['deliver_id']);
+
         
 
         $data = [
-            'vehicle' => $vehicle  
+            'vehicle' => $vehicle,
+            'available'=>$available  
         ];
 
         $this->view('deliveryVehicleShow',$data);
