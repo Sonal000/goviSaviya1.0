@@ -12,9 +12,9 @@ class DeliveryRatings extends Controller{
 
     public function index(){
         $deliver_id = $_SESSION['deliver_id'];
-        $reviews = $this->orderModel->test_get_reviews_orders($deliver_id);
+        $reviews = $this->orderModel->getReviewOrders($deliver_id);
         
-        var_dump($reviews);
+        
 
         $data = ['reviews'=>$reviews];
         

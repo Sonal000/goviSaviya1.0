@@ -59,6 +59,14 @@ class Dashboard extends Controller{
              'review_count'=>$reviews->review_count,
         ];
         $this -> view('sellerDashboard',$data);
+    }if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+
+
+
+
+
+
+
     }
         
 

@@ -266,26 +266,532 @@ public function updateCoverImage($data){
        $this->db->query('SELECT * from orders'); 
     }
 
-    public function getTotalOrdersCompleted($deliver_id){
-        $query = "SELECT COUNT(*) AS total_completed_orders
-        FROM (
-            SELECT order_id FROM order_items WHERE order_status = 'completed'
-            UNION ALL
-            SELECT order_id FROM order_items_ac WHERE order_status = 'completed'
-            UNION ALL
-            SELECT order_id FROM order_items_rq WHERE order_status = 'completed'
-        ) AS completed_orders_combined;";
-    
-        // Prepare statement
+    public function getTotalPurchaseOrdersCompleted($deliver_id){
+        $query = "SELECT COUNT(*) AS total_purchase_orders
+                    FROM order_items WHERE deliver_id=:deliver_id AND order_status='completed'";
+
         $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row->total_purchase_orders;
+        }else{
+            return false;
+        }
+    }
+
+    public function getTotalAuctionOrdersCompleted($deliver_id){
+        $query = "SELECT COUNT(*) AS total_purchase_orders
+                    FROM order_items_ac WHERE deliver_id=:deliver_id AND order_status='completed'";
+
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row->total_purchase_orders;
+        }else{
+            return false;
+        }
+    }
+
+    public function getTotalRequestOrdersCompleted($deliver_id){
+        $query = "SELECT COUNT(*) AS total_purchase_orders
+                    FROM order_items_rq WHERE deliver_id=:deliver_id AND order_status='completed'";
+
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row->total_purchase_orders;
+        }else{
+            return false;
+        }
+    }
+        
+    //Revenue
+
+    public function getTotalPurchaseRevenue($deliver_id){
+        $query = "SELECT 
+        SUM(deliver_fee) AS total_revenue
+    FROM 
+        order_items
+    WHERE 
+        deliver_id = :deliver_id AND order_status = 'completed'
+    ";
+
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+    public function getTotalAuctionRevenue($deliver_id){
+        $query = "SELECT 
+        SUM(deliver_fee) AS total_revenue
+    FROM 
+        order_items_ac
+    WHERE 
+        deliver_id = :deliver_id AND order_status = 'completed'
+    ";
+
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+    public function getTotalRequestRevenue($deliver_id){
+        $query = "SELECT 
+        SUM(deliver_fee) AS total_revenue
+    FROM 
+        order_items_rq
+    WHERE 
+        deliver_id = :deliver_id AND order_status = 'completed'
+    ";
+
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+
+    public function getThisPurchase($deliver_id){
+        $query = "SELECT COUNT(*) AS month_orders_count
+        FROM order_items
+        WHERE 
+            order_status = 'completed'
+            AND deliver_id = :deliver_id
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE())
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE())
+        ";
+
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+    public function getThisAuction($deliver_id){
+        $query = "SELECT COUNT(*) AS month_orders_count
+        FROM order_items_ac
+        WHERE 
+            order_status = 'completed'
+            AND deliver_id = :deliver_id
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE())
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE())
+        ";
+
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+    public function getThisRequest($deliver_id){
+        $query = "SELECT COUNT(*) AS month_orders_count
+        FROM order_items_rq
+        WHERE 
+            order_status = 'completed'
+            AND deliver_id = :deliver_id
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE())
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE())
+        ";
+
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+
+
+    public function getPrevPurchase($deliver_id){
+        $query = "SELECT COUNT(*) AS month_orders_count
+        FROM order_items
+        WHERE 
+            order_status = 'completed'
+            AND deliver_id = :deliver_id
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH)
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH)
+        ";
+
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+    public function getPrevAuction($deliver_id){
+        $query = "SELECT COUNT(*) AS month_orders_count
+        FROM order_items_ac
+        WHERE 
+            order_status = 'completed'
+            AND deliver_id = :deliver_id
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH)
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH)
+        ";
+
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+    public function getPrevRequest($deliver_id){
+        $query = "SELECT COUNT(*) AS month_orders_count
+        FROM order_items_rq
+        WHERE 
+            order_status = 'completed'
+            AND deliver_id = :deliver_id
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH)
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH)
+        ";
+
+        $this->db->query($query);
+        $this->db->bind(':deliver_id',$deliver_id);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+    public function getPrevPrevPurchase($deliver_id){
+        $query = "SELECT COUNT(*) AS month_orders_count
+        FROM order_items
+        WHERE 
+            order_status = 'completed'
+            AND deliver_id = :deliver_id
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 2 MONTH)
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 2 MONTH)
+        ";
     
-        // Execute query
-        $this->db->execute();
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
     
-        // Fetch single row (since COUNT(*) returns a single value)
-        return $this->db->single()->total_completed_orders;
+        if($row){
+            return $row;
+        } else {
+            return false;
+        }
+    }
+    
+    public function getPrevPrevAuction($deliver_id){
+        $query = "SELECT COUNT(*) AS month_orders_count
+        FROM order_items_ac
+        WHERE 
+            order_status = 'completed'
+            AND deliver_id = :deliver_id
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 2 MONTH)
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 2 MONTH)
+        ";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        } else {
+            return false;
+        }
+    }
+    
+    public function getPrevPrevRequest($deliver_id){
+        $query = "SELECT COUNT(*) AS month_orders_count
+        FROM order_items_rq
+        WHERE 
+            order_status = 'completed'
+            AND deliver_id = :deliver_id
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 2 MONTH)
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 2 MONTH)
+        ";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    //This month Revenue
+
+    public function getCurrentMonthPurchaseRevenue($deliver_id){
+        $query = "SELECT 
+            SUM(deliver_fee) AS total_revenue
+        FROM 
+            order_items
+        WHERE 
+            deliver_id = :deliver_id 
+            AND order_status = 'completed' 
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE()) 
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE())";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+    
+    public function getCurrentMonthAuctionRevenue($deliver_id){
+        $query = "SELECT 
+            SUM(deliver_fee) AS total_revenue
+        FROM 
+            order_items_ac
+        WHERE 
+            deliver_id = :deliver_id 
+            AND order_status = 'completed' 
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE()) 
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE())";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+    
+    public function getCurrentMonthRequestRevenue($deliver_id){
+        $query = "SELECT 
+            SUM(deliver_fee) AS total_revenue
+        FROM 
+            order_items_rq
+        WHERE 
+            deliver_id = :deliver_id 
+            AND order_status = 'completed' 
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE()) 
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE())";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
     }
     
 
+    //Prev Month Revenue
+
+    public function getPrevMonthPurchaseRevenue($deliver_id){
+        $query = "SELECT 
+            SUM(deliver_fee) AS total_revenue
+        FROM 
+            order_items
+        WHERE 
+            deliver_id = :deliver_id 
+            AND order_status = 'completed' 
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH) 
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH)";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+    
+    public function getPrevMonthAuctionRevenue($deliver_id){
+        $query = "SELECT 
+            SUM(deliver_fee) AS total_revenue
+        FROM 
+            order_items_ac
+        WHERE 
+            deliver_id = :deliver_id 
+            AND order_status = 'completed' 
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH) 
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH)";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+    
+    public function getPrevMonthRequestRevenue($deliver_id){
+        $query = "SELECT 
+            SUM(deliver_fee) AS total_revenue
+        FROM 
+            order_items_rq
+        WHERE 
+            deliver_id = :deliver_id 
+            AND order_status = 'completed' 
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH) 
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH)";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+    //Prev prev month revenue
+
+    public function getPrevPrevMonthPurchaseRevenue($deliver_id){
+        $query = "SELECT 
+            SUM(deliver_fee) AS total_revenue
+        FROM 
+            order_items
+        WHERE 
+            deliver_id = :deliver_id 
+            AND order_status = 'completed' 
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 2 MONTH) 
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 2 MONTH)";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+    
+    public function getPrevPrevMonthAuctionRevenue($deliver_id){
+        $query = "SELECT 
+            SUM(deliver_fee) AS total_revenue
+        FROM 
+            order_items_ac
+        WHERE 
+            deliver_id = :deliver_id 
+            AND order_status = 'completed' 
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 2 MONTH) 
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 2 MONTH)";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+    
+    public function getPrevPrevMonthRequestRevenue($deliver_id){
+        $query = "SELECT 
+            SUM(deliver_fee) AS total_revenue
+        FROM 
+            order_items_rq
+        WHERE 
+            deliver_id = :deliver_id 
+            AND order_status = 'completed' 
+            AND YEAR(completed_date) = YEAR(CURRENT_DATE() - INTERVAL 2 MONTH) 
+            AND MONTH(completed_date) = MONTH(CURRENT_DATE() - INTERVAL 2 MONTH)";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+    //Reviews
+
+    public function getNumberofReviews($deliver_id){
+
+        $query = "SELECT COUNT(*) AS reviews_count
+        FROM delivery_review
+        WHERE 
+            deliver_id=:deliver_id
+        ";
+    
+        $this->db->query($query);
+        $this->db->bind(':deliver_id', $deliver_id);
+        $row = $this->db->Single();
+    
+        if($row){
+            return $row;
+        } else {
+            return false;
+        } 
+    }
+    
+    
+    
     
 }

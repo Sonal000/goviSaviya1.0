@@ -105,7 +105,7 @@ class Orders extends Controller{
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
             $deliver_adr = $this->deliverModel->getProfileInfo($_SESSION['user_id'])->address;
             
-            
+            var_dump($orders);
         $data=[
             "orders"=>$orders,
             "hasVehicle"=>$hasVehicle,
@@ -720,6 +720,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 }
                
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
+            $deliver_address = $this->deliverModel->getDeliverInfo($deliver_id)->address;
 
            
                 
@@ -728,7 +729,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 'order' => $order,
                 'available' =>  $available,
                 'type' => $type,
-                'order_item_id' => $order_item_id
+                'order_item_id' => $order_item_id,
+                'deliver_address' => $deliver_address
             ];
 
            
@@ -797,6 +799,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 }elseif($type == "REQUEST"){
                 $order=$this->orderModel->getRequestOrderDetails($order_item_id);
                 }
+               
+                
 
                 $data = [
                     'title' => 'welcome',

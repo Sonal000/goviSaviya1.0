@@ -92,7 +92,26 @@
                   }
         }else{ ?>
         
-        <div> <p> There are no Completed Orders </p></div>        
+        <div class="cardNo">
+
+<div class="noVehicleCard">
+         
+         <div class="heading">
+         There are no <span class="govi">Completed Orders</span>
+         </div>
+        
+         <div class="addVehicleCard">
+             <div class="image">
+                <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+             </div>
+             <div class="helo">
+                 <button class="buttonn addVehicle"><a href="<?php echo URLROOT.'/orders'?>">View Orders</a></button>
+             </div>
+
+         </div>
+
+     </div>
+     </div>       
         <?php
 
         } ?>

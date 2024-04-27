@@ -573,3 +573,12 @@ padding-left: 2rem;
 .maphead{
   margin-top: 1rem;
 }
+
+.distance_details{
+  font-size: 18px;
+
+}
+
+.bold{
+  font-weight: 600;
+}

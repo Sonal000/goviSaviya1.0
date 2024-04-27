@@ -107,8 +107,8 @@
 
                 <div class="delivery_details">
                     
-               <div class="more_info"><i class="fa-solid fa-location-dot"></i></i> Pickup Location:  <?php echo $data['details']->seller_address?></div>
-               <div class="more_info"><i class="fa-solid fa-thumbtack"></i> End Location: <?php echo $data['details']->buyer_address?></div>
+               <div class="more_info"><i class="fa-solid fa-location-dot"></i></i> Pickup Location:  <?php echo $data['details']->pickup_address?></div>
+               <div class="more_info"><i class="fa-solid fa-thumbtack"></i> End Location: <?php echo $data['details']->order_address?></div>
                <div class="more_info"><i class="fa-solid fa-user"></i> Seller: <?php echo $data['details']->seller_name?></div>
                <div class="more_info"><i class="fa-solid fa-truck"></i> Buyer: <?php echo $data['details']->buyer_name?></div>
                <div class="button_section">
@@ -175,9 +175,13 @@
             <h3>Map</h3>
         </div>
 <div class="map">
+    <div class="distance_details">
+        Distance From <span class="bold"><?php echo $data['details']->deliver_address  ?></span> to  <span class="bold"><?php echo $data['details']->pickup_address ?></span> : <span class="bold"> <?php echo getDistance($data['details']->deliver_address,$data['details']->pickup_address);
+                            ?>Km</span>
+    </div>
           <div class="card" id="map_cont"> 
                 <input id="start" type="hidden" value="<?php echo $data['details']->deliver_address  ?>" name="start">
-                <input id="end" type="hidden" value="<?php echo $data['details']->seller_address  ?>" name="end">
+                <input id="end" type="hidden" value="<?php echo $data['details']->pickup_address  ?>" name="end">
                 <?php       
                 require APPROOT. '/views/layouts/mapCurrentLoc.php'; 
              ?>
@@ -185,6 +189,7 @@
             <?php
             }
             ?>
+
 </div>
 
 

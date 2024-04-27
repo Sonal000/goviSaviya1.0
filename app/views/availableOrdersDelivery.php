@@ -114,7 +114,7 @@
                     
             <div class="distance"> 
                 
-                <?php echo(getDistance($data['address'],$order->seller_address));
+                <?php echo(getDistance($data['address'],$order->pickup_address));
                             ?>km away from you
 
                 </div>
@@ -151,7 +151,27 @@
                         }
         }else{ ?>
         
-        <div> <p> no available orders </p></div>        
+        <div class="cardNo">
+
+<div class="noVehicleCard">
+         
+         <div class="heading">
+         There are no <span class="govi">Available Orders</span>
+         </div>
+         <div class="details ">
+             at the moment. Please check back later or contact support for assistance.
+             </div>
+        
+         <div class="addVehicleCard">
+             <div class="image">
+                <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+             </div>
+           
+
+         </div>
+
+     </div>
+     </div>           
         <?php
 
         } ?>
