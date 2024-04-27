@@ -37,7 +37,10 @@
    <a href="<?php echo URLROOT ?>/Home">
     <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
         </a>
-  </div>
+      </div>
+      <button class="bars_btn" id="bars_btn">
+<i class="fas fa-bars bars"></i>
+</button>
    </div>
   </div>
    <div class="navlinks_cont_d">

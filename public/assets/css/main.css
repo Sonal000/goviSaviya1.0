@@ -1208,6 +1208,10 @@ input:focus {
     margin-top: 3.5rem;
     width: 100vw;
   }
+  .toggle_navbar_cont{
+    display: flex;
+    width: 100%;
+  }
   .navbar_cont_d {
     background: var(--clr-primary-10);
     min-height: 3.5rem;
