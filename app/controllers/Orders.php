@@ -75,6 +75,7 @@ class Orders extends Controller{
         $data=[
             "orders"=>$orders,
         ];
+    
         $this -> view('sellerOrder',$data);
     }
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
