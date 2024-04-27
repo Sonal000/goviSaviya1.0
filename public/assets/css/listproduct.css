@@ -294,3 +294,49 @@
 }
 
 
+@media screen and (max-width: 500px) {
+  .form_cont {
+    width: 250px;
+    overflow-y: scroll;
+  }
+
+  .input_items {
+   
+    width: 250px;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    /* gap: 0.5rem 2rem; */
+    /* border: 2px solid red; */
+  }
+
+  .listing_container {
+    padding: 2rem;
+    
+  }
+  
+  .upload_item {
+    margin: 0.3rem;
+    border-radius: var(--radius-low);
+    border: 1px solid var(--clr-primary-8);
+    padding: 0.7rem;
+    background: var(--clr-primary-10);
+    color: var(--clr-grey-4);
+    width: 235px;
+  }
+
+  .submit_container{
+    margin: 0 auto;
+    width:85%;
+    display: flex;
+    justify-content:center;
+    margin-top: 1rem;
+  }
+}
+
+
+
+
+
+
+

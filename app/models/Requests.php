@@ -108,11 +108,21 @@ class Requests{
 
     public function getOrderRequests(){
 
-        $this->db->query('SELECT * FROM requests 
-                  WHERE status = "pending" 
-                  AND decline_seller_ID != :seller_ID 
-                  AND request_ID NOT IN (SELECT request_ID FROM req_quotation WHERE seller_ID = :seller_ID)
-                  ORDER BY posted_date DESC');
+        $this->db->query('SELECT 
+                         requests.*,
+                         users.address AS buyer_address
+                         FROM 
+                         requests
+                         JOIN
+                         buyers ON
+                         requests.buyer_id = buyers.buyer_id
+                         JOIN 
+                         users ON
+                         buyers.user_id = users.user_id 
+                        WHERE status = "pending" 
+                        AND decline_seller_ID != :seller_ID 
+                        AND request_ID NOT IN (SELECT request_ID FROM req_quotation WHERE seller_ID = :seller_ID)
+                        ORDER BY posted_date DESC');
 
     $this->db->bind(':seller_ID', $_SESSION['seller_id']);
     $row = $this->db->resultSet();
@@ -161,7 +171,20 @@ class Requests{
 
     public function getAcceptRequests(){
 
-        $this->db->query('SELECT * FROM requests WHERE status="accepted" AND acp_seller_ID=:seller_ID ORDER BY posted_date DESC');
+        $this->db->query(
+            'SELECT 
+            requests.*,
+            users.address AS buyer_address
+            FROM 
+            requests
+            JOIN
+            buyers ON
+            requests.buyer_id = buyers.buyer_id
+            JOIN 
+            users ON
+            buyers.user_id = users.user_id 
+            WHERE status="accepted" AND acp_seller_ID=:seller_ID ORDER BY posted_date DESC');
+
         $this->db->bind(':seller_ID',$_SESSION['seller_id']);
         $row = $this->db->resultSet();
 
@@ -249,11 +272,16 @@ class Requests{
 
     public function getQorderRequests(){
        
-        $this->db->query('SELECT rq.request_ID,rq.amount,rq.seller_ID, r.* 
+        $this->db->query('SELECT rq.request_ID,rq.amount,rq.seller_ID, r.*,users.address AS buyer_address 
                           FROM req_quotation rq 
                           JOIN requests r ON rq.request_ID = r.request_ID 
-                          WHERE rq.seller_ID = :seller_ID AND
-                          r.acp_seller_ID = 0');
+                          JOIN buyers ON
+                          r.buyer_id = buyers.buyer_id
+                          JOIN 
+                        users ON
+                        buyers.user_id = users.user_id 
+                        WHERE rq.seller_ID = :seller_ID AND
+                        r.acp_seller_ID = 0');
         
        
         $this->db->bind(':seller_ID', $_SESSION['seller_id']);
@@ -271,9 +299,14 @@ class Requests{
 
     public function getPQorderRequests(){
 
-        $this->db->query('SELECT rq.request_ID,rq.amount,rq.seller_ID, r.* 
+        $this->db->query('SELECT rq.request_ID,rq.amount,rq.seller_ID, r.*,users.address AS buyer_address  
                           FROM req_quotation rq 
-                          JOIN requests r ON rq.request_ID = r.request_ID 
+                          JOIN requests r ON rq.request_ID = r.request_ID
+                          JOIN buyers ON
+                          r.buyer_id = buyers.buyer_id
+                          JOIN 
+                          users ON
+                          buyers.user_id = users.user_id
                           WHERE rq.seller_ID = :seller_ID AND
                           r.acp_seller_ID != 0 AND r.acp_seller_ID !=:seller_ID');
         

@@ -101,7 +101,7 @@
                     <button class="btn auc_cards">
                      view biddings
                     </button>
-                   <a href="<?php echo URLROOT;?>/auctionC/endAuction/<?php echo $items->auction_ID ?>"><botton class="aucbt_post btn" type="submit" id="end_auc_btn">End Auction</botton></a>
+                   <a href="<?php echo URLROOT;?>/auctionC/endAuction/<?php echo $items->auction_ID ?>"><button class="aucbt_post btn" type="submit" id="end_auc_btn">End Auction</button></a>
                 </div>
             </div>
          </div>

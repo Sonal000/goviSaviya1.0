@@ -1150,7 +1150,9 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d9fccb",endCo
   background: var(--clr-primary-9);
 }
 
+
 @media screen and (max-width: 500px) {
+
   .sidebar_toggle {
     display: none;
   }
