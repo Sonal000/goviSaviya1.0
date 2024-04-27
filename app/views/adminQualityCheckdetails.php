@@ -9,10 +9,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
-    <link rel="stylesheet" href="<?php echo URLROOT ;?>/assets/css/sellermarketplace.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/myproducts.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminDash.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminOrder.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminOrderDetails.css">
 </head>
 <body>
@@ -25,52 +22,60 @@
  ?>
  <div class="container_content">
  <div class="adminprofile">
-    <h4>Item Stock Images</h4>
+    <p class="container_title">Quality Check Images</p>
        
     <div class="card image_card">
-        <h4>Deliverer added Images</h4>
+    <div class="qc_title_container">
+        <p class="qc_title">Delivery Quality Check</p>
+        <div class="pan-btn_cont">
+        <a href="<?php echo URLROOT; ?>/Orders/PenaltyDeliver/<?php echo $data['order']->order_item_id?>/<?php echo $data['order']->order_id?>/<?php echo $data['order']->order_type?>" class="btn btn_no">Deliver Panalty</a>
+        </div>
+    </div>
         <div class="deliver_img_cont">
-        <div class="deliver_pickup_img_container">
-           <h4 align="center">Picked up</h4> 
+        <div class="qc_img_container">
+           <p  class="img_title">Images at Pick up</p> 
            <div class="pick_up_img_container">
-                <img class="img_check_size"src="<?php echo URLROOT.'/store/items/'.$data['images']->deliver_pickup_img ;?>" alt="">
+                <img class="img_check_size"src="<?php echo URLROOT.'/store/items/'.$data['order']->deliver_pickup_img ;?>" alt="">
            </div>
         </div>
-        <div class="deliver_handover_img_container">
-         <h4 align="center">Drop-Off</h4> 
+        <div class="qc_img_container">
+         <p class="img_title">Images at Drop-Off</p> 
          <div class="drop_off_img_container">
-            <img class="img_check_size" src="<?php echo URLROOT.'/store/items/'.$data['images']->deliver_dropoff_img ;?>" alt="">
+            <img class="img_check_size" src="<?php echo URLROOT.'/store/items/'.$data['order']->deliver_dropoff_img ;?>" alt="">
          </div>
         </div>
         </div>
     </div>
 
     <div class="card image_card">
-        <h4>Seller and Buyer added Images</h4>
+        <div class="qc_title_container">
+        <p class="qc_title">Seller Quality Check</p>
+        <div class="pan-btn_cont">
+        <a href="<?php echo URLROOT; ?>/Orders/PenaltySeller/<?php echo $data['order']->order_item_id?>/<?php echo $data['order']->order_id?>/<?php echo $data['order']->order_type?>"class="btn btn_no">Seller panalty</a>  
+        </div>
+        </div>
+       
         <div class="deliver_img_cont">
-        <div class="deliver_pickup_img_container">
-           <h4 align="center">Seller Uploaded Images</h4> 
+        <div class="qc_img_container">
+           <p class="img_title" >Seller Item Images</p> 
            <div class="pick_up_img_container">
-                <img class="img_check_size"src="<?php echo URLROOT.'/store/items/'.$data['images']->seller_img ;?>" alt="">
+                <img class="img_check_size"src="<?php echo URLROOT.'/store/items/'.$data['order']->seller_img ;?>" alt="">
            </div>
         </div>
-        <div class="deliver_handover_img_container">
-         <h4 align="center">Buyer Uploaded Images at Drop-off</h4> 
+        <div class="qc_img_container">
+         <p class="img_title" >Buyer Complain Images</p> 
          <div class="drop_off_img_container">
-            <img class="img_check_size" src="<?php echo URLROOT.'/store/items/'.$data['images']->buyer_img ;?>" alt="">
+            <img class="img_check_size" src="<?php echo URLROOT.'/store/items/'.$data['order']->buyer_img ;?>" alt="">
          </div>
         </div>
         </div>
     </div>
 
     <div class="Quality_approve_btn_container">
-        <a href="<?php echo URLROOT; ?>/Orders/ApproveQuality/<?php echo $data['images']->order_item_id?>/<?php echo $data['images']->order_id?>/<?php echo $data['images']->order_type?>"><button class="btn">Approve Quality</button></a>
+        <a href="<?php echo URLROOT; ?>/Orders/ApproveQuality/<?php echo $data['order']->order_item_id?>/<?php echo $data['order']->order_id?>/<?php echo $data['order']->order_type?>"><button class="btn">Approve Quality</button></a>
     </div>
 
-    <div class="panalty_container">
-       <a href="<?php echo URLROOT; ?>/Orders/PenaltySeller/<?php echo $data['images']->order_item_id?>/<?php echo $data['images']->order_id?>/<?php echo $data['images']->order_type?>"><button class="btn btn_no">Add Penalty to seller</button></a>
-       <a href="<?php echo URLROOT; ?>/Orders/PenaltyDeliver/<?php echo $data['images']->order_item_id?>/<?php echo $data['images']->order_id?>/<?php echo $data['images']->order_type?>"><button class="btn btn_no">Add Penalty to Deliver</button></a> 
-    </div>
+
             
         </div>
         </div>

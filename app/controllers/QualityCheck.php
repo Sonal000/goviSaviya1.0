@@ -14,7 +14,6 @@ class QualityCheck extends Controller{
            
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
             $orders = $this->orderModel->getQualityCheckOrders();
-            var_dump($orders);
             $data = [
                 'orders' => $orders
             ];
@@ -28,10 +27,15 @@ class QualityCheck extends Controller{
 public function details($qc_id){
     if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
         $order = $this->orderModel->getQualityCheckdetails($qc_id);
-        $data = [
-            'order' => $order
-        ];
-        $this -> view('adminQualityCheckDetails',$data);
+        if($order){
+
+            $data = [
+                'order' => $order
+            ];
+            $this -> view('adminQualityCheckDetails',$data);
+        }else{
+            $this -> view('_404');
+        }
     }else{
         $this -> view('_404');
     }
@@ -66,12 +70,10 @@ public function details($qc_id){
 
     public function penalty(){
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
-            $orders = $this->orderModel->getQualityCheckOrders();
-           
+            $orders = $this->orderModel->getPenaltyOrders();
             $data = [
                 'orders' => $orders
             ];
-        
         $this -> view('adminPenalty',$data);
         }else{
             $this -> view('_404');

@@ -9,9 +9,8 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
-    <link rel="stylesheet" href="<?php echo URLROOT ;?>/assets/css/sellermarketplace.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminDash.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminOrder.css">
+    <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminOrder.css"> -->
 </head>
 <body>
 <?php
@@ -116,7 +115,7 @@
             <div class="ordersta"><p class="orderstatus_complete"><?php echo $Orders->order_history?></p></div>
             </div>
             <div class="table_cell column6">
-                <a href="<?php echo URLROOT; ?>/Orders/details/<?php echo $Orders->order_id?>"><img src="<?php echo URLROOT; ?>/assets/images/view.png" alt="" class="vieweye" alt=""></a>
+                <a href="<?php echo URLROOT; ?>/Orders/details/<?php echo $Orders->order_id?>">view</a>
             </div>
             <div class="table_cell column6">
                 <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>

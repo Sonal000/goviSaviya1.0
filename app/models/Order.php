@@ -3628,6 +3628,21 @@ public function getQualityCheckOrders(){
 
 }
 
+public function getPenaltyOrders(){
+    $query = "SELECT *
+    FROM penalty
+    ORDER BY penalty_date  DESC";
+$this->db->query($query);
+$row = $this->db->resultSet();
+
+if($row){
+return $row;
+}else{
+return false;
+}
+    
+}
+
 public function getQualityCheckDetails($qc_id){
     $query = "SELECT *
                 FROM quality_check
@@ -3698,8 +3713,6 @@ public function getinfoRQ($order_item_id,$order_id){
 
 
 public function PenaltySeller($data,$type){
-
-    var_dump($data);
     $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,qc_id,penalty_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
     VALUES (:order_item_id,:order_id,:order_type,:qc_id,"SELLER_RETURN",:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
 
@@ -3731,13 +3744,14 @@ public function PenaltySeller($data,$type){
 
 public function PenaltyDeliver($data,$type){
 
-    $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,penalty_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
-    VALUES (:order_item_id,:order_id,:order_type,"DELIVERY_RETURN",:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
+    $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,qc_id,penalty_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
+    VALUES (:order_item_id,:order_id,:order_type,:qc_id,"DELIVERY_RETURN",:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
 
     $this->db->query($query);
     $this->db->bind(':order_item_id',$data->order_item_id);
     $this->db->bind(':order_id',$data->order_id);
     $this->db->bind(':order_type',$type);
+    $this->db->bind(':qc_id',$data->qc_id);
     $this->db->bind(':seller_id',$data->seller_id);
     $this->db->bind(':buyer_id',$data->buyer_id);
     $this->db->bind(':deliver_id',$data->deliver_id);
@@ -3851,6 +3865,8 @@ public function sellerRequestOrderDetails($seller_id){
         return false;
     }
 }
+
+
 
 public function countmypenalty($id){
 

@@ -79,19 +79,7 @@ class Orders extends Controller{
     }
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
             $orders = $this->orderModel->getALLOrders();
-           if($orders){
-            foreach($orders as $order){
-               
-                // $qc=$this->orderModel->getOrderQualityCheckInfo($order->order_type,$order->order_item_id,$order->order_id);
-                // if($qc){
-                //     $order->qc_id = $qc->qc_id;
-                //     $order->qc_status = $qc->qc_status;
-                //     $order->qc_message = $qc->buyer_message;
-                //     $order->qc_img = $qc->buyer_img;
-                // }
-                // var_dump($order->qc_id);
-            }
-           }
+
         $data=[
             "orders"=>$orders,
         ];
@@ -766,7 +754,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
         if($this->orderModel->ApproveQuality($order_item_id,$order_id,$type)){
 
-              redirect('Orders/details/'.$order_id.'');
+              redirect('QualityCheck');
 
         }
 
@@ -776,7 +764,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
         if($this->orderModel->ComplaintQuality($order_item_id,$order_id,$type)){
 
-              redirect('Orders/details/'.$order_id.'');
+              redirect('QualityCheck');
 
         }
 
@@ -834,7 +822,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$buyer->user_id,"Seller has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$seller->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
 
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;
@@ -849,7 +837,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$buyer->user_id,"Seller has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$seller->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
                
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;
@@ -864,7 +852,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$buyer->user_id,"Seller has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$seller->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
                
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;
@@ -889,7 +877,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$seller->user_id,"Deliver has been  been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span> your order will be returned and refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$deliver->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
                 
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;
@@ -907,7 +895,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$seller->user_id,"Deliver has been  been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span> your order will be returned and refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$deliver->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
               
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;
@@ -925,7 +913,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$seller->user_id,"Deliver has been  been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span> your order will be returned and refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$deliver->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
               
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;
