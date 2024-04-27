@@ -486,3 +486,17 @@
     font-weight: 600;
     border-top: #ccc solid 2px;
   }
+
+  .map{
+    margin-top: 1rem;
+    box-shadow: var(--dark-shadow);
+    padding:2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: var(--radius-low);
+    margin-bottom: 1rem;
+  }
+  
+  .maphead{
+    margin-top: 1rem;
+  }

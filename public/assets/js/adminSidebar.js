@@ -207,7 +207,9 @@ $(".sidebar_item").removeClass("sidebar_active");
 
 const sidebarMapping = [
   { path: "Home", ids: ["dashboard_link", "dashboard_link_m"] },
-  { path: "orders", ids: ["orders_link", "orders_link_m"], exclude: ["complete", "ongoing","pickedup","delivering","delivered","conclude"] },
+  { path: "orders", ids: ["orders_link", "orders_link_m"], exclude: ["qualitycheck"] },
+  { path: "qualityCheck", ids: ["qc_link", "qc_link_m"], exclude: ["penalty"] },
+  { path: "qualityCheck/penalty", ids: ["penalty_link", "penalty_link_m"], exclude: [] },
   { path: "posts/marketplace", ids: ["marketplace_post_link", "marketplace_post_link_m"], exclude: [ "ongoing"] },
   { path: "posts/auction", ids: ["auction_post_link", "auction_post_link_m"], exclude: [ "ongoing"] },
   { path: "posts/request", ids: ["request_post_link", "request_post_link_m"], exclude: [ "ongoing"] },
@@ -229,7 +231,6 @@ sidebarMapping.forEach(item => {
   const { path, ids, exclude } = item;
   
   if (currentLocation.includes(path.toLowerCase())) {
-    console.log(path.toLowerCase());
     if (exclude) {
       if (Array.isArray(exclude)) {
         if (exclude.some(excludedPath => currentLocation.includes(excludedPath.toLowerCase()))) {

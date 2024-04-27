@@ -30,9 +30,18 @@
 
             <!-- navbar========================== -->
  <div class="navbar_cont_d">
+   
   <div class="navbar_d">
-
-   <div class="navlinks_cont">
+    <div class="toggle_navbar_cont">
+    <div class="nav_img_cont_d">
+   <a href="<?php echo URLROOT ?>/Home">
+    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
+        </a>
+  </div>
+   </div>
+  </div>
+   <div class="navlinks_cont_d">
+  
     <ul class="navlinks" id="navlinks" >
      <!-- <li class="navlink">
       <a href="<?php echo URLROOT ?>/Home">Home</a>
@@ -190,8 +199,14 @@
             <!-- navbar========================== -->
             <div class="navbar_cont_d">
   <div class="navbar_d">
-
-   <div class="navlinks_cont">
+  <div class="toggle_navbar_cont">
+    <div class="nav_img_cont_d">
+   <a href="<?php echo URLROOT ?>/Home">
+    <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
+        </a>
+  </div>
+   </div>
+   <div class="navlinks_cont_d">
     <ul class="navlinks" id="navlinks" >
      <!-- <li class="navlink">
       <a href="<?php echo URLROOT ?>/Home">Home</a>

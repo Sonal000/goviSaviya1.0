@@ -21,6 +21,8 @@ backdrop.addEventListener("click", () => {
   overlayAll.forEach((el) => {
     el.classList.add("hidden_overlay");
   });
+  $(".complain_form_cont").addClass("hidden");
+  $(".complain_btn_cont").show();
 });
 const historyOrder = document.querySelectorAll(".view_history");
 // const orderProgressBar = document.querySelector("order_progress");
@@ -39,10 +41,12 @@ historyOrder.forEach((el) => {
 });
 
 $(document).ready(function () {
-  $("#close_btn").click(function () {
-    backdrop.classList.toggle("hidden_backdrop");
-    overlayAll.forEach((el) => {
-      el.classList.add("hidden_overlay");
+
+
+  $('.closed_btn').each(function() {
+    $(this).on('click', function() {
+      $(this).closest('.overlay').addClass('hidden_overlay');
+      backdrop.classList.toggle('hidden_backdrop');
     });
   });
 
@@ -92,8 +96,8 @@ $(document).ready(function () {
 });
 
 $("#complain_btn").click(function () {
-  console.log("clicked");
   $(".complain_form_cont").removeClass("hidden");
+  $(".complain_btn_cont").fadeOut();
   $(".complain_btn_cont").hide();
 });
 
@@ -101,4 +105,18 @@ $("#cancel_complain").click(function (e) {
   e.peventDefault();
   $(".complain_form_cont").addClass("hidden");
   $(".complain_btn_cont").show();
+});
+
+
+$(".cform_close").each(function() {
+  $(this).on("click", function() {
+    $(this).closest(".complain_form_cont").addClass("hidden");
+    $(this).closest(".complain_form_cont").siblings(".complain_btn_cont").show();
+  });
+});
+$(".view_complain").each(function() {
+  $(this).on("click", function() {
+    $(this).closest(".complain_btn_cont").siblings(".complain_form_cont").removeClass("hidden");
+    $(this).closest(".complain_btn_cont").hide();
+  });
 });
