@@ -322,6 +322,8 @@ input:focus{
     display: flex;
     flex-direction: row;
     background-color: var(--clr-primary-8);
+    border-radius: 7px;
+
     
   }
   .buyproimg{
@@ -332,13 +334,14 @@ input:focus{
   .buypro{
     width: 35px;
     height: 35px;
-    margin-left: 2rem;
+    margin-left: 1rem;
+    border-radius: 50%;
    
   }
   .name_date{
     display: flex;
     flex-direction: column;
-    margin-left: 1.5rem;
+    margin-left: 0.7rem;
   }
   .bna{
     font-weight: bold;
@@ -350,7 +353,8 @@ input:focus{
   .requestdet{
     display: flex;
     flex-direction: row;
-    margin-left: 2.2rem;
+    /* margin-left: 2.2rem; */
+    padding: 1rem;
     margin-top: 1rem;
     
 
@@ -358,19 +362,21 @@ input:focus{
   .stockdet{
     display: flex;
     flex-direction: column;
-    width: 500px;
-
+    flex: 0.7;
   }
+
   .req_des{
     font-weight: bold;
     font-size: large;
   }
+
 .accept_discard_bt{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 680px;
-    align-items: end;
+    /* width: 680px; */
+    flex:0.3;
+    align-items: flex-end;
 }
 .discardbtn{
   background: var(--clr-red-2);
@@ -380,6 +386,25 @@ input:focus{
   display: inline-block;
   font-family:var(--font-primary);
   /* font-weight: 700; */
+  width: 143px;
+  transition: var(--transition);
+  font-size: 0.875rem;
+  border: 2px solid transparent;
+  border-radius:var(--radius-high);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  
+}
+
+.discardbtn_p{
+  background: var(--clr-red-2);
+  color: var(--clr-white);
+  padding: 0.45rem 0.75rem;
+  letter-spacing: var(--spacing);
+  display: inline-block;
+  font-family:var(--font-primary);
+  /* font-weight: 700; */
+  
   transition: var(--transition);
   font-size: 0.875rem;
   border: 2px solid transparent;
@@ -475,6 +500,57 @@ input:focus{
   max-height: 70vh;
   overflow-y: scroll;
   margin-top: 1rem;
+}
+
+
+@media screen and (max-width: 500px) {
+
+  .accept_discard_bt{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    /* width: 100%; */
+    align-items: center;
+    
+    margin-top: 1rem;
+}
+
+.requestdet{
+  display: flex;
+  flex-direction:column;
+  /* margin-left: 2.2rem; */
+  margin-top: 1rem;
+}
+
+.stockdet{
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  
+  border: 2px solid red;
+
+}
+
+.discardbtn{
+  background: var(--clr-red-2);
+  color: var(--clr-white);
+  /* padding: 0.45rem 0.75rem; */
+  letter-spacing: var(--spacing);
+  /* display: inline-block; */
+  font-family:var(--font-primary);
+  transition: var(--transition);
+  /* font-size: 0.875rem; */
+  border: 2px solid transparent;
+  border-radius:var(--radius-high);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  
+}
+
+
+
+
+
 }
 
 

@@ -145,7 +145,7 @@
                 </div> -->
                 <div class="comp_word_cont">
                     <div class="comp_word">
-                        <a href="<?php echo URLROOT; ?>/Invoice/<?php echo $order->order_item_id ?>/<?php echo $order->order_id ?>/<?php echo $order->order_type?>"><button class="btn">View Payment Invoice</button></a>
+                        <a href="<?php echo URLROOT; ?>/Invoice/<?php echo $order->order_item_id ?>/<?php echo $order->order_id ?>/<?php echo $order->order_type?>"><button class="btn">View Bil</button></a>
                     </div>
                 </div>
             </div>

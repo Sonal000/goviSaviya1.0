@@ -54,6 +54,7 @@
             if($data['items']){
 
             foreach ($data['items'] as $item) {
+                $exp_date = date('Y-m-d', strtotime($item->exp_date));
             ?>
     <div class="mycard">
         <div class="product_des_cont">
@@ -86,20 +87,27 @@
            
            </div>
            <div class="productavailability">
-                <div class="sold">
+                <!-- <div class="sold">
                 <p class="amount_sold">Amount Sold :</p>
                 <p class="p_det">50Kg</p>   
-                </div>
+                </div> -->
                 <div class="available">
                 <p class="available_stock">Available Stock :</p>
                 <p class="p_det"><?php echo $item->stock ?> <?php echo $item->unit ?></p>
-                
                 </div>
+           </div>
+           <div class="prodes">
+           <p class="product_des">Expiration Date :</p>
+           <p class="p_det" id="old_exp_date"><?php echo $exp_date ?></p>
+           <input type="hidden" id="old_exp_date" name="old_exp_date" value="<?php echo $exp_date; ?>">
+
            </div>
            <div class="prodes">
            <p class="product_des">Product Description :</p>
            <p class="p_det"><?php echo $item->description; ?></p>
            </div>
+                
+
            </div>
            <div class="btn_cont">
            
@@ -139,15 +147,21 @@
            
            </div>
            <div class="productavailability">
-                <div class="sold">
+                <!-- <div class="sold">
                 <p class="amount_sold edit_one">Amount Sold :</p>
                 <p class="p_det edit_one">50Kg</p>   
-                </div>
+                </div> -->
                 <div class="available">
                 <p class="available_stock edit_one">Available Stock :</p>
                 <input class="field_size_small" type="text" name="stock" value="<?php echo $item ->stock?>">
                 <input class="field_size_small" type="text" name="unit" value="<?php echo $item ->unit ?>">
                 </div>
+           </div>
+           <div class="prodes">
+           <p class="product_des edit_two">Expiration Date :</p>
+           <input class="field_size_large edit_one" type="date" id="exp_date" name="exp_date" value="<?php echo $exp_date; ?>">
+
+           
            </div>
            <div class="prodes">
            <p class="product_des edit_two">Product Description :</p>
@@ -158,7 +172,7 @@
            <div class="btn_cont_edit">
            
            <div class="edit_but">
-               <button class="edit_details_btn" id="edit_details_btn" type="submit">Save</button>
+               <button class="edit_details_btn" id="edit_details_btn" type="submit" onclick="validateAndUpdate()">Save</button>
            </div>
            <div class="del_btn">
            <button class="delete_btn">Cancel</button>
@@ -232,80 +246,7 @@
 
     
     ?>
-<!-- 
-    <div class="mycard">
-        <div class="productimg">
-            <img src="<?php echo URLROOT; ?>/assets/images/banana.webp" class="mango" alt="">
-        </div>
-        <div class="productdes">
-           <div class="productname">
-                Fresh Banana
-           </div>
-           <div class="productrating">
-                <div class="stars">
-                    <i class="fas fa-star star_img"></i>
-                    <i class="fas fa-star star_img"></i>
-                    <i class="fas fa-star star_img"></i>
-                    <i class="fas fa-star star_img"></i>
-                 </div>
-                 <div class="rate">
-                    3.5/5
-                </div>
-            </div>
-           <div class="productprice">
-                Rs 1500 /Kg
-           </div>
-           <div class="productavailability">
-                <div class="sold">
-                    Sold 15Kg
-                </div>
-                <div class="available">
-                    Available 10Kg
-                </div>
-           </div>
-           <div class="prodes">
-                Delight in the flavor of our ripe, hand-picked bananas - naturally grown, pesticide-free, and bursting with irresistible sweetness.
-           </div>
-
-        </div>
-    </div>
-
-    <div class="mycard">
-        <div class="productimg">
-            <img src="<?php echo URLROOT; ?>/assets/images/guava.png" class="mango" alt="">
-        </div>
-        <div class="productdes">
-           <div class="productname">
-                Fresh Mango
-           </div>
-           <div class="productrating">
-                <div class="stars">
-                    <i class="fas fa-star star_img"></i>
-                    <i class="fas fa-star star_img"></i>
-                    <i class="fas fa-star star_img"></i>
-                    <i class="fas fa-star star_img"></i>
-                 </div>
-                 <div class="rate">
-                    3.5/5
-                </div>
-            </div>
-           <div class="productprice">
-                Rs 1500 /Kg
-           </div>
-           <div class="productavailability">
-                <div class="sold">
-                    Sold 20Kg
-                </div>
-                <div class="available">
-                    Available 15Kg
-                </div>
-           </div>
-           <div class="prodes">
-           Discover the tropical goodness of our sun-kissed guavas - pure, organic, and tantalizingly sweet, straight from our orchards to your plate.
-           </div>
-
-        </div>
-    </div> -->
+<
 
 </div>
 
@@ -325,3 +266,21 @@
 
 </body>
 </html>
+
+<script>
+    function validateAndUpdate() {
+        // Get the current expiration date value
+        var currentExpDate = document.getElementById('old_exp_date').value;
+
+        // Get the selected expiration date value
+        var selectedExpDate = document.getElementById('exp_date').value; // Assuming you have an input field with id 'new_exp_date' for the user to select a new expiration date
+
+        // Compare the current and selected expiration dates
+        if (selectedExpDate === currentExpDate) {
+            alert("Please select a new expiration date.");
+        } else {
+            // If a new expiration date is selected, submit the form
+            document.getElementById('updateForm').submit();
+        }
+    }
+</script>
