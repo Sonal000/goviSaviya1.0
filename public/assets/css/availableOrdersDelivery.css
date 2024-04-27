@@ -317,7 +317,7 @@ padding-left: 2rem;
 
 }
 
-.button {
+/* .button {
   margin: 1rem;
   display: inline-block;
   padding: 8px 12px;
@@ -329,9 +329,7 @@ padding-left: 2rem;
   border: none;
   border-radius: 5px;
   background-color: #4CAF50; /* Green */
-  color: white;
-  transition: 0.3s;
-}
+ 
 
 .addVehicle{
   padding: 1rem 2rem;
@@ -359,6 +357,138 @@ padding-left: 2rem;
   justify-content: center;
   letter-spacing: var(--spacing-low);
   font-weight: 600;
+}
+
+@media screen and (max-width:500px){
+
+
+  
+  .auction_page{
+    /* border: #3E8E41 solid 2px; */
+    width: 100%;
+  }
+
+  .outercard{
+    /* border: #38803A solid 2px; */
+    display: flex;
+    justify-content: center;
+  }
+
+  
+
+  .heading{
+    font-size: 16px;
+  }
+
+  .details{
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .image{
+    width: max-content;
+  
+    padding-right: 1.4rem;
+  }
+
+  .del_img{
+    width: 120px;
+  }
+
+  .btn{
+    font-size: 12px;
+  }
+
+  .pro_name{
+    font-size: 16px;
+  }
+
+
+  .pro_location{
+    font-size: 10px;
+  }
+
+  .onion{
+   
+    height: 90px;
+    width:120px;
+  }
+
+  .details_view_btn{
+    padding: 5px;
+    font-size: 10px;
+    scale: 70%;
+    border: none;
+    border-bottom: 1px solid var(--clr-primary-5);
+    border-radius: 0px
+    
+    ;
+   
+  }
+
+  .details_view{
+    scale: 80%;
+    margin-top: -1px;
+    margin-left: -1.1rem;
+  }
+
+  .mycardd{
+    display: flex;
+    justify-content: space-around;
+
+  }
+
+
+.left_side{
+  
+  width: 300px;
+}
+
+
+.right-side{
+  
+  
+  padding: 0px;
+ margin-left: -19px;
+  
+  width: 120px;
+  
+
+}
+  .distance{
+    font-size: 10px;
+  }
+
+  .btn{
+    font-size: 12px;
+    padding: 4px;
+
+  }
+
+  .update_edit_bt{
+    font-size: 12px;
+    padding: 0px;
+    scale: 60%;
+  }
+
+.pro_detail{
+  
+  margin-left: -1.6rem;
+  margin-top: -0.5rem;
+}
+
+.post_left{
+  scale: 80%;
+  text-align: left;
+  justify-content: left;
+  
+  
+}
+
+.update_edit_bt{
+  margin-left: -5.7rem;
+}
+
 }
 
 

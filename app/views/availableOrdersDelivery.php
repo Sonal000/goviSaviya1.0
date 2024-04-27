@@ -15,7 +15,7 @@
 </head>
 <body>
 <?php
- require APPROOT. '/views/layouts/navbar2.php'; 
+ 
  ?>
 
 <div class="main_container">
@@ -36,8 +36,9 @@
   
  <?php if($data['hasVehicle']==0){ ?> 
 
+<div class="outercard">
 
-<div class="cardNo">
+    <div class="cardNo">
 
     <div class="noVehicleCard">
              
@@ -55,13 +56,15 @@
                     <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
                  </div>
                  <div class="helo">
-                     <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
+                     <button class="btn addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
                  </div>
  
              </div>
  
          </div>
          </div>
+
+ </div>
 
 
 

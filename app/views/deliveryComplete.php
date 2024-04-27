@@ -35,22 +35,19 @@
 
             <div class="productimg">
                 <div class="order_details_head">
+                    
                     Order has been delivered <i class="fa-solid fa-circle-check"></i>
                 </div>
               
-                <div class="image_product">
+                
              
 
                 <div class="delivery_details">
-                    
-             
-              
-
                 
                 <botton class="btn"><a href="<?php echo URLROOT; ?>/Orders/complete">  View Completed Orders</a></botton>
             </div>  
              
-                </div>
+                
 
 
                 

@@ -113,7 +113,6 @@
     flex-direction: column;
     align-items: center;
     width: 50%;
-    border-left: #bbbbbb 2px solid;
     padding-left: 5rem;
 }
 
@@ -154,3 +153,68 @@
   color: var(--clr-primary-3);
 }
 
+@media screen and (max-width:500px){
+
+
+
+.mycardd{
+  display: flex;
+  flex-direction: column;
+}
+
+.order_details_head{
+  font-size: 20px;
+}
+
+
+.order_details_sub{
+  font-size: 14px;
+}
+
+.picture{
+  width: 280px;
+  height: 170px;
+}
+.more_info{
+  font-size: small;
+  margin: 0.4rem;
+}
+
+.delivery_details{
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  justify-content: center;
+  margin:5px;
+  gap:0;
+  flex: 0.75;
+}
+.order_details_price{
+  font-size: 14px;
+}
+
+.right{
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+
+
+.btn{margin-top: 6px;
+  padding: 6px;
+  font-size: 12px;
+}
+
+.my_button{
+  text-align: center;
+}
+
+
+
+
+
+
+}

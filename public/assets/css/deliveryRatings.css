@@ -253,6 +253,11 @@ font-size: small;
 
 }
 
+.nameName{
+  font-size: 24px;
+
+}
+
 .black{
   color:black
 }
@@ -327,6 +332,7 @@ font-size: small;
   object-fit: cover;
   width: 70px;
   border-radius: 50%;
+  margin-top: 1.2rem;
   
 }
 
@@ -357,9 +363,51 @@ font-size: small;
 }
 
 
+
+
+.pro_detail{
+  width: 100%;
+}
+
+.review_content{
+  height: 120px;
+  margin-left: 4px;
+}
+
 @media screen and (max-width:500px){
 
+  .out_card{
 
-  
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+  }
+
+  .mycardd{
+   width: 100%;
+  }
+
+  .compDate{
+    font-size: 12px;
+  }
+
+  .name_img{
+    width: 100%;
+   
+  }
+
+  .order_name{
+    font-size: 14px;
+  }
+
+  .pro_detail{
+    width: 100%;
+  }
+
+  .review_content{
+    height: max-content;
+  }
+
 }
 

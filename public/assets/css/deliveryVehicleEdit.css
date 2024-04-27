@@ -228,8 +228,30 @@ label {
 }
 
 
+@media screen and (max-width:500px){
+
+  .card-body{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hed{
+    font-size: 16px;
+    font-weight: 800;
+
+}
+
+.card-subtitle{
+  font-size: 14px;
+}
+
+.btn{
+  margin-top: 20px;
+}
 
 
+
+}
 
  
   

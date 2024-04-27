@@ -41,7 +41,9 @@
                 </div>
                 
               <div class="instructions">
-                <img class="imgss"src="<?php echo URLROOT; ?>/store/items/<?php echo $data['order']->item_img ?>" alt="">
+                <div class="imageI">
+                  <img class="imgss"src="<?php echo URLROOT; ?>/store/items/<?php echo $data['order']->item_img ?>" alt="">
+                </div>
                      <div class="order_details">   
                         <div class="details"><i class="fa-solid fa-user"></i> Seller: <?php echo $data['order']->seller_name;?> </div>
                         <div class="details"><i class="fa-solid fa-truck"></i> Buyer: <?php echo $data['order']->buyer_name;?> </div>

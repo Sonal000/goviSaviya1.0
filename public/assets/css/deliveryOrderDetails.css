@@ -319,7 +319,7 @@
   display: flex;
   justify-content: center;
   box-shadow: var(--light-shadow);
-  border: var(--clr-red-3) 1px solid;
+  
   border-radius: 10px;
 }
 
@@ -349,5 +349,66 @@
   padding: 0.4rem;
   display: flex;
   justify-content: center;
+}
+
+@media screen and (max-width:500px){
+
+.mycardd{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.order_details_head{
+  font-size: 20px;
+}
+
+.order_weight{
+  font-size: 12px;
+}
+
+.order_details_sub{
+  font-size: 14px;
+}
+
+.picture{
+  width: 280px;
+  height: 170px;
+}
+
+.image_product{
+  
+  margin-top: 20px;
+  border: #3E8E41 solid 2px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.more_info{
+  font-size: small;
+  margin: 0.4rem;
+}
+
+.delivery_details{
+  margin-top: 8px;
+}
+
+.distance{
+  font-size: small;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
