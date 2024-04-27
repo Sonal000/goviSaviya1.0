@@ -75,23 +75,12 @@ class Orders extends Controller{
         $data=[
             "orders"=>$orders,
         ];
+    
         $this -> view('sellerOrder',$data);
     }
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
             $orders = $this->orderModel->getALLOrders();
-           if($orders){
-            foreach($orders as $order){
-               
-                // $qc=$this->orderModel->getOrderQualityCheckInfo($order->order_type,$order->order_item_id,$order->order_id);
-                // if($qc){
-                //     $order->qc_id = $qc->qc_id;
-                //     $order->qc_status = $qc->qc_status;
-                //     $order->qc_message = $qc->buyer_message;
-                //     $order->qc_img = $qc->buyer_img;
-                // }
-                // var_dump($order->qc_id);
-            }
-           }
+
         $data=[
             "orders"=>$orders,
         ];
@@ -105,7 +94,7 @@ class Orders extends Controller{
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
             $deliver_adr = $this->deliverModel->getProfileInfo($_SESSION['user_id'])->address;
             
-            
+            var_dump($orders);
         $data=[
             "orders"=>$orders,
             "hasVehicle"=>$hasVehicle,
@@ -368,6 +357,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
         $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
         $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);
+       
             
         $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
         if($current->current_order_type=="AUCTION"){
@@ -385,7 +375,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             // 'pickup_img' =>  $pickupImg,
             'details' => $details,
             'rowB' => $rowB,
-            'rowS' => $rowS 
+            'rowS' => $rowS,
+            
         ];
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -720,6 +711,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 }
                
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
+            $deliver_address = $this->deliverModel->getDeliverInfo($deliver_id)->address;
 
            
                 
@@ -728,7 +720,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 'order' => $order,
                 'available' =>  $available,
                 'type' => $type,
-                'order_item_id' => $order_item_id
+                'order_item_id' => $order_item_id,
+                'deliver_address' => $deliver_address
             ];
 
            
@@ -745,9 +738,9 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         
     }
    
-    public function CheckItemsImages($order_item_id,$order_id,$order_type){
+    public function CheckItemsImages($order_item_id,$order_id){
 
-        $result = $this->orderModel->getImagestoCheck($order_type,$order_item_id,$order_id);
+        $result = $this->orderModel->getImagestoCheck($order_item_id,$order_id);
         if($result){
 
             $data = [
@@ -766,7 +759,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
         if($this->orderModel->ApproveQuality($order_item_id,$order_id,$type)){
 
-              redirect('Orders/details/'.$order_id.'');
+              redirect('QualityCheck');
 
         }
 
@@ -776,7 +769,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
         if($this->orderModel->ComplaintQuality($order_item_id,$order_id,$type)){
 
-              redirect('Orders/details/'.$order_id.'');
+              redirect('QualityCheck');
 
         }
 
@@ -797,6 +790,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 }elseif($type == "REQUEST"){
                 $order=$this->orderModel->getRequestOrderDetails($order_item_id);
                 }
+               
+                
 
                 $data = [
                     'title' => 'welcome',
@@ -834,7 +829,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$buyer->user_id,"Seller has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$seller->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
 
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;
@@ -849,7 +844,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$buyer->user_id,"Seller has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$seller->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
                
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;
@@ -864,7 +859,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$buyer->user_id,"Seller has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$seller->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
                
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;
@@ -889,7 +884,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$seller->user_id,"Deliver has been  been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span> your order will be returned and refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$deliver->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
                 
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;
@@ -907,7 +902,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$seller->user_id,"Deliver has been  been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span> your order will be returned and refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$deliver->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
               
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;
@@ -925,7 +920,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 $this->notifiModel->notifYUser(0,$seller->user_id,"Deliver has been  been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span> your order will be returned and refunded","orders","OTHER");
                 $this->notifiModel->notifYUser(0,$deliver->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
               
-                redirect('Orders/details/'.$order_id.'');
+                redirect('QualityCheck');
             }
             else{
                 return false;

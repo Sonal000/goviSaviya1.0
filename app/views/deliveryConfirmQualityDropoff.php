@@ -47,7 +47,7 @@ any issues or defects reguarding to the qualtiy <br> after the delivery</div> --
                      <div class="order_details">   
                         <div class="details"><i class="fa-solid fa-user"></i> Seller: <?php echo $data['order']->seller_name;?> </div>
                         <div class="details"><i class="fa-solid fa-truck"></i> Buyer: <?php echo $data['order']->buyer_name;?> </div>
-                        <div class="details"><i class="fa-solid fa-location-dot"></i> Pickup Location: <?php echo $data['order']->seller_address;?> </div>
+                        <div class="details"><i class="fa-solid fa-location-dot"></i> Pickup Location: <?php echo $data['order']->pickup_address;?> </div>
                         <div class="details"><i class="fa-solid fa-thumbtack"></i> Drop off Location: <?php echo $data['order']->order_address;?> </div>
                         
                     </div>

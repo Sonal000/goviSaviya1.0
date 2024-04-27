@@ -63,7 +63,7 @@
 
                         <div class="delivery_details">
                                     
-                            <div class="more_info" style="display:flex; align-items:center; " ><i class="fa-solid fa-location-dot"></i>  Pickup Location: <?php echo $data['order']->seller_address ?> </p> </div>
+                            <div class="more_info" style="display:flex; align-items:center; " ><i class="fa-solid fa-location-dot"></i>  Pickup Location: <?php echo $data['order']->pickup_address ?> </p> </div>
 
                             <div style="display:flex; align-items:center; " class="more_info"><i class="fa-solid fa-thumbtack"></i> End Location:  <?php echo $data['order']->order_address ?> </p> </div>
 
@@ -83,12 +83,14 @@
 
             
 
-             <div class="distance"> 
-                Pickup Location is
-                <?php echo(getDistance($data['order']->deliver_address,$data['order']->seller_address));
-                            ?>km away from you
+            <div class="distance"> 
+    Pickup Location is <span>: </span>    
+    <span class="bold" style="font-weight:600;">
+        <?php echo getDistance($data['deliver_address'], $data['order']->pickup_address); ?>
+    </span>
+    km away
+</div>  
 
-                </div>  
 
         <div class="error_msg"> 
             <?php if(!$data['available']){?>

@@ -19,8 +19,9 @@
     $validCities =["colombo","kaluthara","gampaha","galle","anuradhapura","matara","hambanthota","polonnaruwa","nuwaraeliya","badulla","rathnapura"];
 
     // query
-    $query="SELECT * FROM items_market WHERE 1"; 
-    $countQuery="SELECT COUNT(*) as total FROM items_market WHERE 1"; 
+    $currentDateTime = date('Y-m-d H:i:s');
+    $query="SELECT * FROM items_market WHERE 1 AND exp_date > '$currentDateTime' "; 
+    $countQuery="SELECT COUNT(*) as total FROM items_market WHERE 1 AND exp_date > '$currentDateTime'"; 
 
     // filtering
     foreach($filter as $key=> $value){
@@ -306,6 +307,7 @@ public function updateItem($data){
     price=:price,
     unit =:unit,
     stock=:stock,
+    exp_date =:exp_date,
     description=:description
     WHERE item_id =:item_id');
 
@@ -314,6 +316,7 @@ $this->db->bind(':name', $data['name']);
 $this->db->bind(':price', $data['price']);
 $this->db->bind(':unit', $data['unit']);
 $this->db->bind(':stock', $data['stock']);
+$this->db->bind(':exp_date',$data['exp_date']);
 $this->db->bind(':description', $data['description']);
 
 if($this->db->execute()){

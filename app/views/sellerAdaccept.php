@@ -58,14 +58,14 @@
            <div class="adcard">
         <div class="reqbuyerdetails">
             <div class="buyproimg">
-                <img src="<?php echo URLROOT; ?>/assets/images/profile.png" alt="" class="buypro">
+                <img src="<?php echo URLROOT.'/store/profiles/'.$requests->buyer_img ;?>" alt="" class="buypro">
             </div>
             <div class="name_date">
                 <div class="bna">
                     <?php echo $requests->buyer_name; ?>
                 </div>
                 <div class="reqdate">
-                    <?php echo $post_date;?>
+                    Requested Date :<?php echo $post_date;?>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
                     Request before : <?php echo $req_date;?>
                 </div>
                 <div class="req_location">
-                    Location : <?php echo $requests->req_address;?>
+                    Location : <?php echo $requests->buyer_address;?>
                 </div>
 
             </div>
@@ -131,7 +131,7 @@
                         <?php echo $Qrequests->buyer_name; ?>
                     </div>
                     <div class="reqdate">
-                        <?php echo $post_date; ?>
+                        Requested Date :<?php echo $post_date; ?>
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                         Request before : <?php echo $req_date; ?>
                     </div>
                     <div class="req_location">
-                        Location : <?php echo $Qrequests->req_address; ?>
+                        Location : <?php echo $Qrequests->buyer_address; ?>
                     </div>
                     <div class="req_qutation">
                         Your Quotation : <?php echo $Qrequests->amount; ?>
@@ -162,10 +162,10 @@
                 </div>
                 <div class="accept_discard_bt">
                    <div class="acceptbt">
-                        <button class="btn acceptbtn">Change Quotation</button>
+                        <button class="btn acceptbtn">Change</button>
                     </div> 
                     <div class="discardbt">
-                        <a href="<?php echo URLROOT ;?>/OrderRequests/decline/<?php echo $Qrequests->request_ID ?>"><button class="discardbtn">Dicline</button></a>
+                        <a href="<?php echo URLROOT ;?>/OrderRequests/decline/<?php echo $Qrequests->request_ID ?>"><button class="discardbtn_p">Dicline</button></a>
                     </div> 
     
                 </div>
@@ -244,7 +244,7 @@
                         Request before : <?php echo $req_date; ?>
                     </div>
                     <div class="req_location">
-                        Location : <?php echo $PQrequests->req_address; ?>
+                        Location : <?php echo $PQrequests->buyer_address; ?>
                     </div>
                     <div class="req_qutation">
                         Your Quotation : <?php echo $PQrequests->amount; ?>

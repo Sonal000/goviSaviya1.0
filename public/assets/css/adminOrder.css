@@ -46,8 +46,9 @@
     
 }
   .qcstatus_raised{
-    background:var(--clr-secondary-3);
+    background:rgb(255, 201, 100);
     border-radius: var(--radius-low);
+    /* background:var(--clr-primary-6); */
     width: 150px;
     height: 40px;
     align-items: center;

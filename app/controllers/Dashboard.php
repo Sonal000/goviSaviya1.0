@@ -40,7 +40,7 @@ class Dashboard extends Controller{
              $total_count = $purchaseOrders->order_count + $AuctionOrders->order_count + $RequestsOrders->order_count ;
              $total_revenue = $purchaseOrders->Prevenue + $AuctionOrders->Arevenue + $RequestsOrders->Rrevenue;
 
-        $data=[
+        $data =[
              "Porders"=>$purchaseOrders->order_count,
              "Aorders"=>$AuctionOrders->order_count,
              "Rorders"=>$RequestsOrders->order_count,
@@ -58,7 +58,16 @@ class Dashboard extends Controller{
              'penalty_count'=>$penalty->penalty_count,
              'review_count'=>$reviews->review_count,
         ];
+        
         $this -> view('sellerDashboard',$data);
+    }if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+
+
+
+
+
+
+
     }
         
 
