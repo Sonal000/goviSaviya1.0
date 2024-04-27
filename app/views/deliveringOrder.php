@@ -137,7 +137,7 @@
         </div>
  <div class="map">
  <div class="distance_details">
-        Distance From <span class="bold"><?php echo $data['details']->deliver_address  ?></span> to  <span class="bold"><?php echo $data['details']->pickup_address ?></span> : <span class="bold"> <?php echo getDistance($data['details']->deliver_address,$data['details']->pickup_address);
+        Distance From <span class="bold"><?php echo $data['order']->pickup_address  ?></span> to  <span class="bold"><?php echo $data['order']->order_address ?></span> : <span class="bold"> <?php echo getDistance($data['order']->pickup_address,$data['order']->order_address);
                             ?>Km</span>
     </div>
 

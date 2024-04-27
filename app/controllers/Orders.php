@@ -357,6 +357,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
         $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
         $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);
+       
             
         $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
         if($current->current_order_type=="AUCTION"){
@@ -374,7 +375,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             // 'pickup_img' =>  $pickupImg,
             'details' => $details,
             'rowB' => $rowB,
-            'rowS' => $rowS 
+            'rowS' => $rowS,
+            
         ];
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){

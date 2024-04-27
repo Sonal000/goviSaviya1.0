@@ -2711,7 +2711,7 @@ JOIN
     requests r ON o_items_rq.req_id = r.request_ID
 WHERE 
     o_items_rq.order_status = 'pending' AND o.payment_status = 1 AND o_items_rq.deliver_id = :deliver_id
-ORDER BY order_date DESC
+ORDER BY completed_date DESC
 "
 
 ;
