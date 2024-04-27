@@ -2727,7 +2727,6 @@ ORDER BY order_date DESC
 }
 public function getSellerCurrentOrders($seller_id){
     $query ="SELECT 
-                 o_items.order_status AS order_state,
                  o_items.order_date AS order_date,
                  o_items.quantity AS quantity,
                  o_items.deliver_fee AS deliver_fee,
@@ -2767,9 +2766,9 @@ JOIN
     buyers b ON o_items.buyer_id = b.buyer_id
 JOIN
     users u_buyer ON b.user_id = u_buyer.user_id
-JOIN
+LEFT JOIN
     delivers d ON o_items.deliver_id = d.deliver_id
-JOIN
+LEFT JOIN
     users u_deliver ON d.user_id = u_deliver.user_id
 JOIN 
     orders o ON o_items.order_id = o.order_id
@@ -2781,14 +2780,14 @@ WHERE
 UNION
 
 SELECT 
-                o_items_ac.order_status AS order_state,
-                 o_items_ac.order_date AS order_date,
+               
+                o_items_ac.order_date AS order_date,
                  o_items_ac.quantity AS quantity,
                  o_items_ac.deliver_fee AS deliver_fee,
                  o_items_ac.order_item_id AS order_item_id,
                  o_items_ac.completed_date AS completed_date,
-                 o_items_ac.order_status AS order_status,
                  o_items_ac.order_id AS order_id,
+                 o_items_ac.order_status AS order_status,
                  o_items_ac.total_price AS total_price,
                  o.order_address AS order_address,
                  o.order_city AS order_city,
@@ -2820,9 +2819,9 @@ JOIN
     buyers b ON o_items_ac.buyer_id = b.buyer_id
 JOIN
     users u_buyer ON b.user_id = u_buyer.user_id
-JOIN
+LEFT JOIN
     delivers d ON o_items_ac.deliver_id = d.deliver_id
-JOIN
+LEFT JOIN
     users u_deliver ON d.user_id = u_deliver.user_id
 JOIN 
     orders o ON o_items_ac.order_id = o.order_id
@@ -2834,15 +2833,15 @@ WHERE
     UNION
 
 SELECT 
-                o_items_rq.order_status AS order_state,
-                 o_items_rq.order_date AS order_date,
+                
+o_items_rq.order_date AS order_date,
                  o_items_rq.quantity AS quantity,
                  o_items_rq.deliver_fee AS deliver_fee,
-                 o_items_rq.completed_date AS completed_date,
                  o_items_rq.order_item_id AS order_item_id,
+                 o_items_rq.completed_date AS completed_date,
+                 o_items_rq.order_id AS order_id,
                  o_items_rq.order_status AS order_status,
                  o_items_rq.total_price AS total_price,
-                 o_items_rq.order_id AS order_id,
                  o.order_address AS order_address,
                  o.order_city AS order_city,
                  o.order_type AS order_type,
@@ -2953,14 +2952,14 @@ WHERE
 UNION
 
 SELECT 
-                o_items_ac.order_status AS order_state,
+o_items_ac.order_status AS order_state,
                  o_items_ac.order_date AS order_date,
                  o_items_ac.quantity AS quantity,
                  o_items_ac.deliver_fee AS deliver_fee,
                  o_items_ac.order_item_id AS order_item_id,
                  o_items_ac.completed_date AS completed_date,
-                 o_items_ac.order_status AS order_status,
                  o_items_ac.order_id AS order_id,
+                 o_items_ac.order_status AS order_status,
                  o_items_ac.total_price AS total_price,
                  o.order_address AS order_address,
                  o.order_city AS order_city,
@@ -3006,15 +3005,15 @@ WHERE
     UNION
 
 SELECT 
-                o_items_rq.order_status AS order_state,
+o_items_rq.order_status AS order_state,
                  o_items_rq.order_date AS order_date,
                  o_items_rq.quantity AS quantity,
                  o_items_rq.deliver_fee AS deliver_fee,
-                 o_items_rq.completed_date AS completed_date,
                  o_items_rq.order_item_id AS order_item_id,
+                 o_items_rq.completed_date AS completed_date,
+                 o_items_rq.order_id AS order_id,
                  o_items_rq.order_status AS order_status,
                  o_items_rq.total_price AS total_price,
-                 o_items_rq.order_id AS order_id,
                  o.order_address AS order_address,
                  o.order_city AS order_city,
                  o.order_type AS order_type,
@@ -3637,6 +3636,39 @@ public function getQualityCheckOrders(){
 
 }
 
+public function getPenaltyOrders(){
+    $query = "SELECT *
+    FROM penalty
+    ORDER BY penalty_date  DESC";
+$this->db->query($query);
+$row = $this->db->resultSet();
+
+if($row){
+return $row;
+}else{
+return false;
+}
+    
+}
+
+public function getQualityCheckDetails($qc_id){
+    $query = "SELECT *
+                FROM quality_check
+                WHERE qc_id = :qc_id";
+                ;
+
+    $this->db->query($query);
+    $this->db->bind(':qc_id',$qc_id);
+    $row = $this->db->single();
+
+    if($row){
+        return $row;
+    }else{
+        return false;
+    }
+
+}
+
 public function getinfoIM($order_item_id,$order_id){
 
     $this->db->query('SELECT order_items.*,quality_check.qc_id FROM order_items JOIN quality_check ON quality_check.order_item_id = order_items.order_item_id WHERE order_items.order_item_id=:order_item_id AND order_items.order_id=:order_id');
@@ -3689,8 +3721,6 @@ public function getinfoRQ($order_item_id,$order_id){
 
 
 public function PenaltySeller($data,$type){
-
-    var_dump($data);
     $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,qc_id,penalty_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
     VALUES (:order_item_id,:order_id,:order_type,:qc_id,"SELLER_RETURN",:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
 
@@ -3722,13 +3752,14 @@ public function PenaltySeller($data,$type){
 
 public function PenaltyDeliver($data,$type){
 
-    $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,penalty_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
-    VALUES (:order_item_id,:order_id,:order_type,"DELIVERY_RETURN",:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
+    $query = 'INSERT INTO penalty(order_item_id,order_id,order_type,qc_id,penalty_type,seller_id,buyer_id,deliver_id,penalty_amount,user_type)
+    VALUES (:order_item_id,:order_id,:order_type,:qc_id,"DELIVERY_RETURN",:seller_id,:buyer_id,:deliver_id,:penalty_amount,:user_type)';
 
     $this->db->query($query);
     $this->db->bind(':order_item_id',$data->order_item_id);
     $this->db->bind(':order_id',$data->order_id);
     $this->db->bind(':order_type',$type);
+    $this->db->bind(':qc_id',$data->qc_id);
     $this->db->bind(':seller_id',$data->seller_id);
     $this->db->bind(':buyer_id',$data->buyer_id);
     $this->db->bind(':deliver_id',$data->deliver_id);
@@ -3842,6 +3873,8 @@ public function sellerRequestOrderDetails($seller_id){
         return false;
     }
 }
+
+
 
 public function countmypenalty($id){
 

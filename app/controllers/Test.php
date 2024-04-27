@@ -11,7 +11,7 @@
    public function index()
    {
 
-    $this->view('test');
+    $this->view('layouts/mapsPlaces');
    }
 
    public function show(){
