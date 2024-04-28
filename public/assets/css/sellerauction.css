@@ -437,7 +437,7 @@ input:focus{
 }
 
 .auction_item_cont{
- border: 2px solid green;
+ 
   border-bottom: 1px solid var(--clr-grey-9);
 }
 .pending_auctions{
@@ -469,8 +469,9 @@ input:focus{
   display:flex ;
   flex-direction: row;
   justify-content: space-between;
-  border: 2px solid red;
   flex: 1;
+ 
+  
   
   
  
@@ -483,21 +484,14 @@ input:focus{
     margin-left: 1rem;
     justify-content: space-between;
     
-    
-    
-    
 }
 
 .post_left_review{
   display: flex;
   flex-direction: column;
-  margin-top: 0.5rem;
   margin-left: 1rem;
-  
- 
-  
-  
-  
+  flex: 0.7;
+  /* gap: 0.5rem; */
   
 }
 .pro_name{
@@ -534,6 +528,7 @@ input:focus{
   flex-direction: column;
   justify-content: center;
   margin-right: 1rem;
+  flex: 0.3;
 
   
  
@@ -546,6 +541,7 @@ input:focus{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  height: 200px;
 }
 .bid_detail{
     display: flex;
@@ -762,8 +758,9 @@ text-align: center;
 
 .auction_item_cont{
   justify-content: center;
-  border: 2px solid red;
+  
   padding: 2.5rem;
+  
 }
 
 .post_left{
