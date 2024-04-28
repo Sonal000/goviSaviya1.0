@@ -53,13 +53,13 @@
                             ,vehicle_brand,vehicle_model,vehicle_year,
                             fuel_type,milage,vehicle_img,front_img
                             ,back_img,rev_expiry,rev_license_imgs,license_imgs,insurance_status,ins_expiry
-                            ,insurance_imgs,max_vol,ref_cap) 
+                            ,insurance_imgs,max_vol) 
                             VALUES
                             (:user_id,:type,
                             :vehicleNo,:capacity,:brand,:model,:year,:fuel_type
                             ,:milage,:vehicle_img,:front_img,:back_img,:rev_expiry
                             ,:rev_license_imgs,:license_imgs,:insurance_status,:ins_expiry,:insurance_imgs
-                            ,:max_vol,:ref_cap)');
+                            ,:max_vol)');
 
         //Bind Values
         $this->db->bind(':user_id', $data['id']);
@@ -81,7 +81,7 @@
         $this->db->bind(':ins_expiry', $data['ins_expiry']);
         $this->db->bind(':insurance_imgs', $data['insurance_imgs']);
         $this->db->bind(':max_vol', $data['max_vol']);
-        $this->db->bind(':ref_cap', $data['ref_cap']);
+        
 
         //Execute
         if($this->db->execute()){   
@@ -343,7 +343,22 @@
 
     }
 
+    public function getDeliverUserIdByVehicleId($id){
+            $query = "SELECT user_id FROM vehicle WHERE vehicle_id = :id";
+            $this->db->query($query);
+            $this->db->bind(':id',$id);
+
+            $row = $this->db->single();
+
+            if($row){
+                return $row->user_id;
+            }else{
+                return false;
+            }
+    }
+
     public function approveVehicle($id){
+
 
         $query = 'UPDATE
                   vehicle
@@ -355,6 +370,7 @@
         $this->db->bind(':id',$id);
 
         if($this->db->execute()){
+            
             return true;
         }
         else{

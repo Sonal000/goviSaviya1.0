@@ -135,8 +135,7 @@
 <div class="map">
 
 
-                                   <?php var_dump(getDistance($data['details']->deliver_address,$data['details']->seller_address));
-                            ?>
+                                  
 
 
                                 <div id="map_cont" data-start='gampaha' data-end='matara'> 
@@ -203,7 +202,7 @@
                     <div class="no_order">
                         No ongoing orders currently
                         <div class="buttons">
-                        <a style="margin-top:1rem;"class="btn"href="<?php echo URLROOT;?>/orders/">View Orders</a>
+                        <a style="margin-top:1rem;"class="btn btnNo"href="<?php echo URLROOT;?>/orders/">View Orders</a>
                         </div>
                     </div>
 
@@ -350,9 +349,8 @@
                         <?php
                         $itemCount = 0; // Initialize counter variable
                         if ($data['reco'] && is_array($data['reco'])) :
-                            foreach ($data['reco'] as $items) :
-                                if (is_array($items)) :
-                                    foreach ($items as $item) :
+                            foreach ($data['reco'] as $item) :
+                                
                                         // Check if item count is less than 3
                                         if ($itemCount < 3) :
                                             ?>
@@ -374,8 +372,7 @@
                                         else:
                                             break; // Exit the loop once item count reaches 3
                                         endif;
-                                    endforeach;
-                                endif;
+                                  
                             endforeach;
                         else:
                             // If $data['reco'] is empty, display "No recommended orders"
