@@ -114,12 +114,11 @@ class AuctionC extends Controller{
 
 
          public function itemInfo($id){
-            
+        
 
                 $row=$this->auctionModel->getAuctionInfo($id);
-                
                 if($row){
-                    
+                  
 
 
                    $seller=$this->sellerModel->getSellerInfo($row->seller_ID);
@@ -147,16 +146,16 @@ class AuctionC extends Controller{
                     }
 
                     $currentDateTime = new DateTime();
-                    $expDateTime = new DateTime($row->exp_date);
+                    $expDateTime = new DateTime($row->end_date);
                     $timeDifference = $currentDateTime->diff($expDateTime);
                     $remains = $timeDifference->format('%a days %H hours');
                
-
+                    
 
 
 // echo "Remaining days: " . $timeDifference->d . " days<br>";
 // echo "Remaining hours: " . $timeDifference->h . " hours";    
-$userIds = $this->auctionModel->getAuctionBidUserIds($id);
+// $userIds = $this->auctionModel->getAuctionBidUserIds($id);
 
     
 if(($row->highest_buyer_id) && (!isset($_SESSION['user_id'])) && (!$activebidder)){
@@ -165,12 +164,6 @@ if(($row->highest_buyer_id) && (!isset($_SESSION['user_id'])) && (!$activebidder
     exit();
 
 }
-
-
-    
-
-                  
-
                       $data=[
                           'name'=>$row->name,
                           'item_id'=>$id,
@@ -197,6 +190,7 @@ if(($row->highest_buyer_id) && (!isset($_SESSION['user_id'])) && (!$activebidder
                           'payment_status'=>$payment_status?$payment_status->payment_status:false,
                       ]
                           ;
+            
             
                           $this->view('auctionItemInfo',$data);
                     }
