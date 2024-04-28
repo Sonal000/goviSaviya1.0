@@ -103,13 +103,13 @@
          <p class="item_title"><?php echo $item->name; ?></p>
          <p class="item_bids"><?php echo $item->bid_Count; ?> Bids</p>
         </div>
-        <div class="item_rating">
+        <!-- <div class="item_rating">
         <i class="fas fa-star star_img"></i>
         <i class="fas fa-star star_img"></i>
         <i class="fas fa-star star_img"></i>
         <i class="fas fa-star star_img"></i>
         <i class="fas fa-star star_img"></i>
-        </div>
+        </div> -->
          <div class="item_price_cont">
            <p class="item_price"><?php echo $item->price; ?> / <span><?php echo $item->unit; ?><span></span></p>
            <p class="item_time">24h / <span>left<span></span></p>

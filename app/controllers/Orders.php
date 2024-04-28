@@ -932,6 +932,37 @@ private function uploadFile($fileInputName, $uploadDirectory) {
        
     }
 
+public function Addreview($order_item_id,$order_id,$order_type,$deliver_id){
+
+    $order_item_id = intval($order_item_id);
+    $order_id = intval($order_id);
+    $deliver_id = intval($deliver_id);
+     
+      if($_SERVER['REQUEST_METHOD']=='POST'){
+         $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+
+         $data=[
+            'review' =>trim($_POST['review']),
+            'buyer_id' =>$_SESSION['buyer_id'],
+            'order_item_id'=>$order_item_id,
+            'order_id' =>$order_id,
+            
+            'order_type'=>$order_type,
+            'deliver_id'=>$deliver_id,
+
+         ];
+
+         $this->deliverModel->Addreview($data);
+
+         
+         redirect('Orders');
+        
+   }
+
+   
+    
+}
+
     
 
 

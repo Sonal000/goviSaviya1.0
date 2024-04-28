@@ -241,7 +241,7 @@
           <div class="feature_img_cont">
             <img class="feature_img" src="<?php echo URLROOT ?>/assets/images/user1.png"  />
           </div>
-          <p class="feature_text">User profiles & Listings</p>
+          <p class="feature_text">Seller and Buyer profiles & Listings</p>
       </div>
 
       <div class="feature">
@@ -258,12 +258,12 @@
           <p class="feature_text">Fair pricing & Negotiation</p>
       </div>
       
-      <div class="feature">
+      <!-- <div class="feature">
           <div class="feature_img_cont">
             <img class="feature_img" src="<?php echo URLROOT ?>/assets/images/communication.png"  />
           </div>
           <p class="feature_text">Direct Communication</p>
-      </div>
+      </div> -->
 
 
   

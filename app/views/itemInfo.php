@@ -144,13 +144,13 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
 
           <div class="review_cont">
             <div class="review_options_cont">
-              <div class="item_rating">
+              <!-- <div class="item_rating">
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
-            </div>
+            </div> -->
             <!-- <button class="review_option_btn"></button> -->
           </div>
           <a href="#" class="reviewer_name"> <?php echo $reviews->name; ?> <span><i class="fas fa-check-circle"></i></span></a>
@@ -310,13 +310,13 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
   </div>
   <div class="item_desc">
     <p class="item_title">Fresh Mango</p>
-    <div class="item_rating">
+    <!-- <div class="item_rating">
     <i class="fas fa-star star_img"></i>
     <i class="fas fa-star star_img"></i>
     <i class="fas fa-star star_img"></i>
     <i class="fas fa-star star_img"></i>
     <i class="fas fa-star star_img"></i>
-    </div>
+    </div> -->
     <p class="item_price">2000 / <span>kg<span></span></p>
   </div>
   
