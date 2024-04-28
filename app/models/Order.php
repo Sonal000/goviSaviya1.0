@@ -118,12 +118,15 @@
             
             $order_id = $this->db->lastInsertId();
                 // $total = ($item->price * $item->qty);
-                $this->db->query("INSERT INTO order_items_ac (order_id,auction_id,quantity, total_price,buyer_id,seller_id)
-                        VALUES (:order_id,:auction_id,:quantity,:total_price,:buyer_id,:seller_id);
+                
+                        $deliverFee=getDistancefee($items->address,$details['order_address']);
+                $this->db->query("INSERT INTO order_items_ac (order_id,auction_id,quantity,deliver_fee ,total_price,buyer_id,seller_id)
+                        VALUES (:order_id,:auction_id,:quantity,:deliver_fee,:total_price,:buyer_id,:seller_id);
                         ");
                                 $this ->db ->bind(':order_id',$order_id);
                                 $this ->db ->bind(':auction_id',$items->auction_ID);
                                 $this ->db ->bind(':quantity',$items->stock);
+                                $this ->db ->bind(':deliver_fee',$deliverFee);
                                 $this ->db ->bind(':total_price',$total);
                                 $this ->db ->bind(':buyer_id',$buyer_id);
                                 $this ->db ->bind(':seller_id',$items->seller_ID);
@@ -168,12 +171,14 @@
             
             $order_id = $this->db->lastInsertId();
                 // $total = ($item->price * $item->qty);
-                $this->db->query("INSERT INTO order_items_rq (order_id,req_id,quantity, total_price,buyer_id,seller_id)
-                        VALUES (:order_id,:req_id,:quantity,:total_price,:buyer_id,:seller_id);
+                $deliverFee=getDistancefee($details["seller_address"],$details['order_address']);
+                $this->db->query("INSERT INTO order_items_rq (order_id,req_id,quantity,deliver_fee, total_price,buyer_id,seller_id)
+                        VALUES (:order_id,:req_id,:quantity,:deliver_fee,:total_price,:buyer_id,:seller_id);
                         ");
                                 $this ->db ->bind(':order_id',$order_id);
                                 $this ->db ->bind(':req_id',$items->request_ID);
                                 $this ->db ->bind(':quantity',$items->req_stock);
+                                $this ->db ->bind(':deliver_fee',$deliverFee);
                                 $this ->db ->bind(':total_price',$items->acp_amount);
                                 $this ->db ->bind(':buyer_id',$buyer_id);
                                 $this ->db ->bind(':seller_id',$items->acp_seller_ID);
@@ -642,8 +647,6 @@
                                 vehicle v ON u_deliver.user_id = v.user_id
                             WHERE
                                 o.order_id = :order_id AND o.payment_status=1
-                            ORDER BY
-                                o_items_ac.order_date ASC
                             ";
                 }elseif($order_type == 'PURCHASE'){
 
@@ -698,8 +701,6 @@
                                 vehicle v ON u_deliver.user_id = v.user_id
                         WHERE
                             o_items.order_id = :order_id AND o.payment_status=1
-                        ORDER BY
-                                o_items_ac.order_date ASC
                         ";
                         }elseif($order_type=="REQUEST"){
 
@@ -753,9 +754,7 @@
                             LEFT JOIN
                                 vehicle v ON u_deliver.user_id = v.user_id
                             WHERE
-                                o_items_rq.order_id = :order_id AND o.payment_status=1 
-                            ORDER BY
-                            o_items_ac.order_date ASC ";
+                                o_items_rq.order_id = :order_id AND o.payment_status=1  ";
 
                         }
                 $this->db->query($query);

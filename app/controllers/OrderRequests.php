@@ -21,7 +21,8 @@
       $request = $this->RequestsModel->BuyerAcceptRequests($_SESSION['buyer_id']);
       $pendreq = $this->RequestsModel->BuyerPendingRequests($_SESSION['buyer_id']);
       $quotation=$this->RequestsModel->BuyerQuotations($_SESSION['buyer_id']);
-
+      
+      
       
       $data =[
           'requests'=> $request,
@@ -320,6 +321,8 @@ public  function checkout($id){
           
         
           $items = $this->RequestsModel->getrequestDetails($id);
+     
+          $seller = $this->sellerModel->getsellerInfo($items->acp_seller_ID);
           if($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
               $details=[
@@ -328,10 +331,13 @@ public  function checkout($id){
                 "order_address"=>trim($_POST['address']),
                 "order_company"=>trim($_POST['company']),
                 "order_city"=>trim($_POST['city']),
-                "order_postal_code"=>trim($_POST['postalCode'])
+                "order_postal_code"=>trim($_POST['postalCode']),
+                "seller_address"=> $seller->address
               ];
              
               $order_id= $this->orderModel->placeRequestOrder($items,$details,$_SESSION["buyer_id"]);
+              
+
               if($order_id){
                           header("Location: " . URLROOT . "/orderRequests/payments/".$order_id); 
                           exit();  
