@@ -25,14 +25,14 @@
       </a>
     </li>
     <li class="navlink">
-      <a href="<?php echo URLROOT ?>/viewAuction">
+      <a href="<?php echo URLROOT ?>/AuctionC">
       Bidding
         <!-- <i class="fas fa-coins nav_icon"></i> -->
       </a>
     </li>
     <li class="navlink">
       <a href="<?php echo URLROOT ?>/OrderRequests">
-      Posts
+      Requests
         <!-- <i class="fas fa-plus-square nav_icon"></i> -->
       </a>
     </li>
@@ -87,9 +87,9 @@
                 <li>
                   <a  href="<?php echo URLROOT ?>/myprofile/<?php echo $_SESSION['user_id'] ?>"  class="profile_link">View Profile</a>
                 </li>
-                <li>
+                <!-- <li>
                   <a href="" class="profile_link">Wish list</a>
-                </li>
+                </li> -->
                 <li>
                   <a href="<?php echo URLROOT ?>/login/logout" class="profile_link">Log out</a>
                 </li>
@@ -132,14 +132,14 @@
     </li>
     <li class="sidelink">
       <i class="fas fa-coins nav_icon"></i>
-      <a href="<?php echo URLROOT ?>/viewAuction">
+      <a href="<?php echo URLROOT ?>/AuctionC">
       Bidding
       </a>
     </li>
     <li class="sidelink">
       <i class="fas fa-plus-square nav_icon"></i>
-      <a href="<?php echo URLROOT ?>/posts">
-      Posts
+      <a href="<?php echo URLROOT ?>/OrderRequests">
+      Requests
       </a>
     </li>
     <li class="sidelink">
@@ -270,14 +270,14 @@
     </li>
     <li class="sidelink">
       <i class="fas fa-coins nav_icon"></i>
-      <a href="<?php echo URLROOT ?>/viewAuction">
+      <a href="<?php echo URLROOT ?>/AuctionC">
       Bidding
       </a>
     </li>
     <li class="sidelink">
       <i class="fas fa-plus-square nav_icon"></i>
-      <a href="<?php echo URLROOT ?>/posts">
-      Posts
+      <a href="<?php echo URLROOT ?>/OrderRequests">
+      Requests
       </a>
     </li>
     <li class="sidelink">
@@ -587,18 +587,18 @@
      <!-- <li class="navlink">
       <a href="<?php echo URLROOT ?>/Home">Home</a>
      </li> -->
-     <li class="navlink">
+     <!-- <li class="navlink">
      <a href="<?php echo URLROOT ?>/categories">Categories</a>
-     </li>
+     </li> -->
      <li class="navlink">
      <a href="<?php echo URLROOT ?>/marketplace">Marketplace</a>
      </li>
      <li class="navlink">
       <a href="<?php echo URLROOT ?>/auc">Auction</a>
      </li>
-     <li class="navlink">
+     <!-- <li class="navlink">
      <a href="<?php echo URLROOT ?>/help">Help</a>
-     </li>
+     </li> -->
      <button class="navlink signin_link " id="signin_btn">
      Sign in
     </button>

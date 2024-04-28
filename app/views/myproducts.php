@@ -99,7 +99,7 @@
            <div class="prodes">
            <p class="product_des">Expiration Date :</p>
            <p class="p_det" id="old_exp_date"><?php echo $exp_date ?></p>
-           <input type="hidden" id="old_exp_date" name="old_exp_date" value="<?php echo $exp_date; ?>">
+           <input type="hidden" id="expiration_date" name="old_exp_date" value="<?php echo $exp_date; ?>">
 
            </div>
            <div class="prodes">
@@ -283,4 +283,12 @@
             document.getElementById('updateForm').submit();
         }
     }
+</script>
+
+<script>
+    // Get the expiration date input field
+    const expDateInput = document.getElementById('exp_date');
+    
+    // Set the minimum date to today's date
+    expDateInput.min = new Date().toISOString().split('T')[0];
 </script>

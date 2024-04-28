@@ -244,7 +244,7 @@
       
     </div>
 
-    <div class="add_req">
+    <!-- <div class="add_req">
       <div class="card">
         Add Your bank account
       <button class="edit_details_btn" id="request_btn"><i class="fas fa-pen"></i></button>
@@ -338,7 +338,7 @@
 
       </div>
 
-</div>
+</div> -->
 
 
 

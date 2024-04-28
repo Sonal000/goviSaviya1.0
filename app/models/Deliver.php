@@ -790,6 +790,30 @@ public function updateCoverImage($data){
             return false;
         } 
     }
+
+public function Addreview($data){
+
+    
+  
+  $this->db->query('INSERT INTO delivery_review(order_item_id,order_id,order_type,buyer_id,deliver_id,review) VALUES(:order_item_id,:order_id,:order_type,:buyer_id,:deliver_id,:review)');
+  
+  $this->db->bind(':order_item_id',$data['order_item_id']);
+  $this->db->bind(':order_id',$data['order_id']);
+  $this->db->bind(':order_type',$data['order_type']);
+  $this->db->bind(':buyer_id',$data['buyer_id']);
+  $this->db->bind(':deliver_id',$data['deliver_id']);
+  
+  $this->db->bind(':review',$data['review']);
+  
+  if($this->db->execute()){
+    return true;
+  }
+  else{
+    return true;
+  }
+  
+  
+  }
     
     
     

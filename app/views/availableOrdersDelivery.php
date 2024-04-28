@@ -14,9 +14,11 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-<?php
- 
- ?>
+
+   <?php
+   require APPROOT. '/views/layouts/navbar2.php'; 
+   ?>
+
 
 <div class="main_container">
 
@@ -189,6 +191,7 @@
     </div>
 
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
+   
 <script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
 
 </body>
