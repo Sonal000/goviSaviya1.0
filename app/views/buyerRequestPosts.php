@@ -286,7 +286,7 @@
                <div class="bid_action_cont">
                   <div class="item_btns_cont">
                      
-                     <a href="<?php echo URLROOT?>/OrderRequests/remove/<?php echo $pendreq->request_ID ?>"><buttton id="req_remove_btn" class="buy_btn btn track_order remove">Remove</buttton></a>
+                    
                   </div>
                </div>
         </div>

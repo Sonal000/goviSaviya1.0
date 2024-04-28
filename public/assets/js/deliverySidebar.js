@@ -7,17 +7,22 @@ const navBtn = document.getElementById("bars_btn");
 const overlay = document.getElementById("navSidebar_overlay");
 const minisidebar = document.getElementById("main_sidebar_container_mini");
 
-navBtn.addEventListener("click", () => {
-  minisidebar.classList.add("mini_show");
-  overlay.classList.add("show_overlay");
-  navBtn.classList.toggle("rotate_btn");
-});
+if(navBtn){
 
-overlay.addEventListener("click", () => {
-  minisidebar.classList.remove("mini_show");
-  overlay.classList.remove("show_overlay");
-  navBtn.classList.toggle("rotate_btn");
-});
+  navBtn.addEventListener("click", () => {
+    minisidebar.classList.add("mini_show");
+    overlay.classList.add("show_overlay");
+    navBtn.classList.toggle("rotate_btn");
+  });
+}
+
+if(overlay){
+  overlay.addEventListener("click", () => {
+    minisidebar.classList.remove("mini_show");
+    overlay.classList.remove("show_overlay");
+    navBtn.classList.toggle("rotate_btn");
+  });
+}
 
 
 // =======notificatins=====

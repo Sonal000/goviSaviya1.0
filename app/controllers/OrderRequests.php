@@ -160,7 +160,7 @@
         $buyer = $this->buyerModel->getBuyerInfo($request->buyer_id);
 
         
-        $this->notifiModel->notifyuser(0,$buyer->user_id,"New Quotation received from <span class='bg'>".$_SESSION['user_name']."</span>",'quotations',"REQUEST");
+        $this->notifiModel->notifyuser(0,$buyer->user_id,"New Quotation received from <span class='bg'>".$_SESSION['user_name']."</span>",'OrderRequests',"REQUEST");
         $data=[
           'amount'=>'',
           'request_ID'=>'',

@@ -470,16 +470,16 @@
 
             public function getBuyerOrderIDs($buyer_id){
                 $query ="SELECT 
-                o_items.order_id,
+                o_items_rq.order_id,
                 o.order_type,
                 o.order_date
             FROM 
-                order_items o_items
+                order_items_rq AS o_items_rq
             JOIN 
-                orders o ON o_items.order_id = o.order_id
+                orders o ON o_items_rq.order_id = o.order_id
             WHERE 
-                o_items.buyer_id = :buyer_id AND o_items.order_status!='completed'
-            
+                o_items_rq.buyer_id = :buyer_id AND o_items_rq.order_status!='completed'
+                
             UNION
             
             SELECT 
@@ -492,20 +492,20 @@
                 orders o ON o_items_ac.order_id = o.order_id
             WHERE 
                 o_items_ac.buyer_id = :buyer_id AND o_items_ac.order_status!='completed'
+        
             UNION
-            
-            SELECT 
-                o_items_rq.order_id,
+                SELECT 
+                o_items.order_id,
                 o.order_type,
                 o.order_date
             FROM 
-                order_items_rq AS o_items_rq
+                order_items o_items
             JOIN 
-                orders o ON o_items_rq.order_id = o.order_id
+                orders o ON o_items.order_id = o.order_id
             WHERE 
-                o_items_rq.buyer_id = :buyer_id AND o_items_rq.order_status!='completed'
-            ORDER BY
-                order_date DESC    
+                o_items.buyer_id = :buyer_id AND o_items.order_status!='completed'
+            -- ORDER BY
+            --     order_date ASC 
                 "
             
             ;
@@ -567,7 +567,7 @@
             WHERE 
                 o_items_rq.buyer_id = :buyer_id AND o_items_rq.order_status='completed'
             ORDER BY
-                completed_date DESC    
+                completed_date ASC    
                 "
             
             ;
@@ -642,6 +642,8 @@
                                 vehicle v ON u_deliver.user_id = v.user_id
                             WHERE
                                 o.order_id = :order_id AND o.payment_status=1
+                            ORDER BY
+                                o_items_ac.order_date ASC
                             ";
                 }elseif($order_type == 'PURCHASE'){
 
@@ -696,6 +698,8 @@
                                 vehicle v ON u_deliver.user_id = v.user_id
                         WHERE
                             o_items.order_id = :order_id AND o.payment_status=1
+                        ORDER BY
+                                o_items_ac.order_date ASC
                         ";
                         }elseif($order_type=="REQUEST"){
 
@@ -749,8 +753,9 @@
                             LEFT JOIN
                                 vehicle v ON u_deliver.user_id = v.user_id
                             WHERE
-                                o_items_rq.order_id = :order_id AND o.payment_status=1 ";
-
+                                o_items_rq.order_id = :order_id AND o.payment_status=1 
+                            ORDER BY
+                            o_items_ac.order_date ASC ";
 
                         }
                 $this->db->query($query);
@@ -822,6 +827,8 @@
                                 vehicle v ON u_deliver.user_id = v.user_id
                             WHERE
                                 o.order_id = :order_id AND o.payment_status=1 AND o_items_ac.order_status!='completed'
+                            ORDER BY
+                                o_items_ac.order_date ASC
                             ";
                 }elseif($order_type == 'PURCHASE'){
                 
@@ -877,6 +884,8 @@
                                 vehicle v ON u_deliver.user_id = v.user_id
                         WHERE
                             o_items.order_id = :order_id AND o.payment_status=1 AND o_items.order_status!='completed'
+                        ORDER BY
+                                o_items.order_date ASC
                         ";
                         }elseif($order_type=="REQUEST"){
                           
@@ -930,7 +939,11 @@
                             LEFT JOIN
                                 vehicle v ON u_deliver.user_id = v.user_id
                             WHERE
-                                o_items_rq.order_id = :order_id AND o.payment_status=1 AND o_items_rq.order_status!='completed'";
+                                o_items_rq.order_id = :order_id AND o.payment_status=1 AND o_items_rq.order_status!='completed'
+                            ORDER BY
+                                o_items_rq.order_date ASC
+                                
+                                ";
 
 
                         }
@@ -1183,7 +1196,7 @@
 
             public function getBuyerOrders($buyer_id){
                 $orderIds   = $this->getBuyerOrderIDs($buyer_id);
-                var_dump($orderIds);
+                // var_dump($orderIds);
                 
                 if(!$orderIds){
                     return false;
@@ -1193,7 +1206,7 @@
                     $orderDetails = $this->getOrderDetailsByOrderId($order->order_id,$order->order_type);
                     array_push($orders,$orderDetails);
                 }
-                var_dump($orders);
+                // var_dump($orders);
                     if($orders){
                         return $orders;
                     }else{
@@ -2569,7 +2582,7 @@ JOIN
     requests r ON o_items_rq.req_id = r.request_ID
 WHERE 
     o_items_rq.order_status = 'pending' AND o.payment_status = 1
-ORDER BY order_date DESC
+ORDER BY order_date ASC
 "
 
 ;
@@ -2872,9 +2885,9 @@ JOIN
     buyers b ON o_items_rq.buyer_id = b.buyer_id
 JOIN
     users u_buyer ON b.user_id = u_buyer.user_id
-JOIN
+LEFT JOIN
     delivers d ON o_items_rq.deliver_id = d.deliver_id
-JOIN
+LEFT JOIN
     users u_deliver ON d.user_id = u_deliver.user_id
 JOIN 
     orders o ON o_items_rq.order_id = o.order_id
@@ -2882,7 +2895,7 @@ JOIN
     requests r ON o_items_rq.req_id = r.request_ID
 WHERE 
     o_items_rq.order_status != 'completed' AND o.payment_status = 1 AND o_items_rq.seller_id = :seller_id
-ORDER BY order_date DESC
+ORDER BY order_date ASC
 "
 
 ;
@@ -4201,7 +4214,7 @@ public function getpenaltyAmount($seller_id){
 
        $this->db->query($query);
        $this->db->bind(':seller_id',$seller_id);
-       if($this->db-execute()){
+       if($this->db->execute()){
         return true;
        }
        else{
