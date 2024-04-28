@@ -2777,6 +2777,7 @@ JOIN
 WHERE 
     o_items.order_status != 'completed' AND o.payment_status = 1 AND o_items.seller_id = :seller_id
 
+
 UNION
 
 SELECT 
@@ -2829,6 +2830,7 @@ JOIN
     auction a ON o_items_ac.auction_id = a.auction_ID
 WHERE 
     o_items_ac.order_status != 'completed' AND o.payment_status = 1 AND o_items_ac.seller_id = :seller_id
+
 
     UNION
 
@@ -2949,6 +2951,7 @@ JOIN
 WHERE 
     o_items.order_status = 'completed' AND o.payment_status = 1 AND o_items.seller_id = :seller_id
 
+
 UNION
 
 SELECT 
@@ -3001,6 +3004,7 @@ JOIN
     auction a ON o_items_ac.auction_id = a.auction_ID
 WHERE 
     o_items_ac.order_status = 'completed' AND o.payment_status = 1 AND o_items_ac.seller_id = :seller_id
+
 
     UNION
 
