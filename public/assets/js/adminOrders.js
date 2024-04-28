@@ -3,21 +3,19 @@ $(document).ready(function() {
     
 
 function generatePdf(data_table) {
-    // Get orders data
+   
    
     const orders = data_table;
-    if (!Array.isArray(data_table) || data_table.length === 0) {
-        console.error('Data is missing or invalid.');
-        return;
-    }
-    // Create a new jsPDF instance
+    let temp=orders.map(order =>(order.order_id, order.buyer_id, order.order_type, order.order_history));
+    console.log(orders);
+    console.log(temp);
+
     const doc = new jsPDF();
 
-    // Define table headers
     const headers = [['Order ID', 'Customer', 'Order Type', 'Order Status']];
     const data = orders.map(order => [order.order_id, order.buyer_id, order.order_type, order.order_history]);
 
-    // Add table headers and data to the PDF
+   
     doc.autoTable({ head: headers, body: data });
 
     // Save the PDF file
