@@ -85,7 +85,9 @@
 
         <div class="mycardd">
             <div class="left_side">
+                <div class="image_class">
                 <img src="<?php echo URLROOT; ?>/store/items/<?php echo $order->item_img ?>" class="onion" alt="">
+                </div>
                 <div class="post_left">
                 <div class="pro_detail">
                     <div class="pro_name">

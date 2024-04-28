@@ -408,10 +408,15 @@ padding-left: 2rem;
     font-size: 10px;
   }
 
+.image_class{
+  width: 110px;
+}
+
   .onion{
-   
+    border: var(--clr-secondry-3) 2px solid;
     height: 90px;
-    width:120px;
+    width: 110px;
+    
   }
 
   .details_view_btn{
