@@ -76,55 +76,37 @@
        
 
     </div>
-    <div class="table_box">
-        <div class="table_row table_hed">
-            <div class="table_cell column1">
-                <p>Order ID</p>
-            </div>
-            <div class="table_cell column2">
-                <p>Customer</p>
-            </div>
-            <div class="table_cell column3">
-                <p>Order Type</p>
-            </div>
-            <div class="table_cell column4">
-                <p>Order Status</p>
-            </div>
-            <div class="table_cell column5">
-                <p></p>
-            </div>
-            <div class="table_cell column6">
-                <p></p>
-            </div>
-        </div>
-       
-        <?php if(!empty($data['orders'])): ?>
-        <?php foreach($data['orders'] as $Orders): ?>
-        <div class="table_row">
-            <div class="table_cell column1">
-                <p><?php echo $Orders->order_id ?></p>
-            </div>
-            <div class="table_cell column2">
-                <p><?php echo $Orders->buyer_name ?></p>
-            </div>
-            <div class="table_cell column3">
-            <p><?php echo $Orders->order_type?></p>
-                
-            </div>
-            <div class="table_cell column4">
-            <div class="ordersta"><p class="orderstatus_complete"><?php echo $Orders->order_history?></p></div>
-            </div>
-            <div class="table_cell column6">
-                <a href="<?php echo URLROOT; ?>/Orders/details/<?php echo $Orders->order_id?>">view</a>
-            </div>
-            <div class="table_cell column6">
-                <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
-            </div>
-        </div>
-        <?php endforeach; ?>
-        <?php else: ?>
-        <p>No data available</p>
-        <?php endif; ?>
+
+
+
+
+
+
+    <div class="table_cont">
+    <table id="" class="tables">
+  <tr>
+    <th>Order ID</th>
+    <th>Customer</th>
+    <th>Order Type</th>
+    <th>Order Status</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <?php if(!empty($data['orders'])){ ?>
+        <?php foreach($data['orders'] as $Orders){?>
+    <tr>
+    <td> <?php echo $Orders->order_id ?></td>
+    <td><?php echo $Orders->buyer_name; ?></td>
+    <td><?php echo $Orders->order_type; ?></td>
+    <td><?php echo $Orders->order_history; ?></td>
+    <td> <a href="<?php echo URLROOT; ?>/Orders/details/<?php echo $Orders->order_id?>">view</a></td>
+    <td><a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a></td>
+  </tr>
+  <?php
+    }
+}
+  ?>
+</table>
       
         
        

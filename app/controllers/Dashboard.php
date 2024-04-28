@@ -4,6 +4,11 @@
 class Dashboard extends Controller{
 
     private $orderModel;
+    private $auctionModel;
+    private $itemModel;
+    private $sellerModel;
+    private $requestModel;
+    private $adminModel;
 
     public function __construct(){
         $this->orderModel=$this->model("Order");
@@ -11,6 +16,7 @@ class Dashboard extends Controller{
         $this->auctionModel=$this->model("Auction");
         $this->sellerModel=$this->model("Seller");
         $this->requestModel=$this->model("Requests");
+        $this->adminModel=$this->model("Admin");
         
         
         
@@ -59,6 +65,44 @@ class Dashboard extends Controller{
              'review_count'=>$reviews->review_count,
         ];
         $this -> view('sellerDashboard',$data);
+
+
+
+
+
+    }elseif(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
+
+
+$usersCount = $this->adminModel->countUsers();
+$sellersCount = $this->adminModel->countSellers();
+$buyersCount = $this->adminModel->countBuyers();
+$agentsCount = $this->adminModel->countAgents();
+$ordersCount = $this->adminModel->getTotalOrdersCount();
+$ordersCountAuction = $this->adminModel->getAuctionOrdersCount();
+$ordersCountPurchase = $this->adminModel->getPurchaseOrdersCount();
+$ordersCountRequest = $this->adminModel->getRequestOrdersCount();
+
+
+
+
+        $data=[
+            "users_count"=>$usersCount,
+            "buyers_count"=>$buyersCount,
+            "sellers_count"=>$sellersCount,
+            "agents_count"=>$agentsCount,
+            "orders_count"=>$ordersCount,
+            "orders_countAuction"=>$ordersCountAuction,
+            "orders_countPurchase"=>$ordersCountPurchase,
+            "orders_countRequest"=>$ordersCountRequest,
+       ];
+       $this -> view('adminDashboard',$data);
+
+
+
+
+
+    }else{
+        $this -> view('_404');
     }
         
 

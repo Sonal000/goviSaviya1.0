@@ -65,8 +65,8 @@
         </header>
         <!------------------content-------------->
         <div class="content">
-            <div class="cards">
-                <div class="card">
+            <div class="cards ">
+                <div class="card" >
                     <div class="card-left">
                         <div class="card-icon icon-one">
                             <i class="fas fa-chart-line"></i>
@@ -75,17 +75,27 @@
                     <div class="card-right">
                         <div class="card-top-info">
                             <h2>Total orders</h2>
-                            <h3>345,678</h3>
+                            <h3><?php echo $data['orders_count'] ;?></h3>
                         </div>
-                        <small>
+                        <!-- <small>
                             Feb 1 - Apr 1,
                             <i class="fas fa-globe-europe"></i>
                             Base on district
-                        </small>
+                        </small> -->
                         <div class="card-bottom-info">
                             <i class="fas fa-angle-up text-success"></i>
-                            <span class="text-success">18.2%</span>
-                            Since last month
+                            <span class="text-success"><?php echo $data['orders_countPurchase'] ;?></span>
+                            Purchase
+                        </div>
+                        <div class="card-bottom-info">
+                            <i class="fas fa-angle-up text-success"></i>
+                            <span class="text-success"><?php echo $data['orders_countAuction'] ;?></span>
+                            Auction
+                        </div>
+                        <div class="card-bottom-info">
+                            <i class="fas fa-angle-up text-success"></i>
+                            <span class="text-success"><?php echo $data['orders_countRequest'] ;?></span>
+                            Request
                         </div>
                     </div>
                 </div>
@@ -97,18 +107,28 @@
                     </div>
                     <div class="card-right">
                         <div class="card-top-info">
-                            <h2>New Users</h2>
-                            <h3>5,342</h3>
+                            <h2>Users</h2>
+                            <h3><?php echo $data['users_count'];?></h3>
                         </div>
-                        <small>
+                        <!-- <small>
                             Feb 1 - Apr 1,
                             <i class="fas fa-globe-europe"></i>
                             Revenue
-                        </small>
+                        </small> -->
                         <div class="card-bottom-info">
                             <i class="fas fa-angle-up text-success"></i>
-                            <span class="text-success">28.2%</span>
-                            Since last month
+                            <span class="text-success"><?php echo $data['sellers_count'] ?></span>
+                            Sellers
+                        </div>
+                        <div class="card-bottom-info">
+                            <i class="fas fa-angle-up text-success"></i>
+                            <span class="text-success"><?php echo $data['buyers_count'] ?></span>
+                            Buyers
+                        </div>
+                        <div class="card-bottom-info">
+                            <i class="fas fa-angle-up text-success"></i>
+                            <span class="text-success"><?php echo $data['agents_count'] ?></span>
+                            Deliver Agents
                         </div>
                     </div>
                 </div>
@@ -153,7 +173,11 @@
                         </div>
                     </div>
                 </div>
-                <!------------------first row graph-------------->
+            </div>
+
+            <!------------------first row graph-------------->
+            <div class="cards-2" 
+            >
                 <!-- <div class="card card-graph">
                     <div class="text">
                         <div class="gray-text">App Ranking</div>
@@ -166,22 +190,22 @@
                         </div>
                     </div>
                     <div class="graph">
-                        <div id="chart_div1" style="width:100%; height: 100%;" class="chart"></div>
+                        <div id="chart_div1" style="width:100%; height: 100%;" class="chart" ></div>
                     </div>
-                </div>
+                </div> -->
                 <div class="card card-graph">
                     <div class="text">
-                        <div class="gray-text">Traffic by Source</div>
+                        <div class="gray-text">Order type</div>
                         <div class="card-top-info">
-                            <h3>Google</h3>
+                            <h3>Orders</h3>
                         </div>
-                        <div class="card-bottom-info">
+                        <!-- <div class="card-bottom-info">
                             <i class="fas fa-angle-up text-success"></i>
                             <span class="text-success">10.57%</span>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="graph">
-                        <div id="chart_div2" style="width:100%; height: 100%;" class="chart"></div>
+                        <div id="chart_div2" style="width:100%; height: 100%;" class="chart" data-purchase="<?php echo $data['orders_countPurchase'] ?>" data-request="<?php echo $data['orders_countRequest'] ?>" data-auction="<?php echo $data['orders_countAuction'] ?>"></div>
                     </div>
                 </div>
                 <div class="card card-graph">
@@ -487,7 +511,7 @@
                 </div>
             </div>
         </div>
-    </main> -->
+    </main>
     <footer>
         <!-- <div class="content">
             <div class="footer-copyright">

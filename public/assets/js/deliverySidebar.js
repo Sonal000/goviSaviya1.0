@@ -1,6 +1,25 @@
 // URL ROOT
 const URLROOT = "http://localhost/goviSaviya1.0";
 
+
+
+const navBtn = document.getElementById("bars_btn");
+const overlay = document.getElementById("navSidebar_overlay");
+const minisidebar = document.getElementById("main_sidebar_container_mini");
+
+navBtn.addEventListener("click", () => {
+  minisidebar.classList.add("mini_show");
+  overlay.classList.add("show_overlay");
+  navBtn.classList.toggle("rotate_btn");
+});
+
+overlay.addEventListener("click", () => {
+  minisidebar.classList.remove("mini_show");
+  overlay.classList.remove("show_overlay");
+  navBtn.classList.toggle("rotate_btn");
+});
+
+
 // =======notificatins=====
 
 $("#notification_btn").click(function (event) {

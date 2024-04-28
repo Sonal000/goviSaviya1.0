@@ -87,63 +87,7 @@ class Admin{
             return false;
         }
     }
-    public function getUsers($id){
 
-        $this->db->query('SELECT user_id,name,email,mobile,address,city FROM users WHERE user_id =:user_id');
-        $this ->db ->bind(':user_id',$id);
-        $data = $this ->db -> single();
-       
-        if($this->db->rowcount()>0){
-            return $data;
-        }
-        else{
-            return false;
-        }
-    }
-    public function countUsers(){
-        $this->db->query('SELECT COUNT(*) AS count FROM users');
-        $row = $this->db->single();
-         if($this->db->rowcount()>0){
-            return $row->count;
-         }
-         else{
-            return false;
-         }
-       
-    }
-    public function countBuyers(){
-        $this->db->query('SELECT COUNT(*) AS count FROM users WHERE user_type="buyer"');
-        $row = $this->db->single();
-         if($this->db->rowcount()>0){
-            return $row->count;
-         }
-         else{
-            return false;
-         }
-       
-    }
-    public function countSellers(){
-        $this->db->query('SELECT COUNT(*) AS count FROM users WHERE user_type="seller"');
-        $row = $this->db->single();
-         if($this->db->rowcount()>0){
-            return $row->count;
-         }
-         else{
-            return false;
-         }
-       
-    }
-    public function countAgents(){
-        $this->db->query('SELECT COUNT(*) AS count FROM users WHERE user_type="deliver"');
-        $row = $this->db->single();
-         if($this->db->rowcount()>0){
-            return $row->count;
-         }
-         else{
-            return false;
-         }
-       
-    }
 
     public function verifyEmail($email,$name,$id){
 try{
@@ -390,6 +334,137 @@ public function userdelete($data){
       return false;
     }
 }
+
+
+public function getTotalOrdersCount(){
+    $query =" SELECT COUNT(*) AS count 
+                FROM orders WHERE payment_status =1
+                ";
+
+    $this->db->query($query);
+    $row = $this->db->single();
+    if($row){
+        return $row->count;
+    }else{
+            return false;
+        }
+}
+public function getAuctionOrdersCount(){
+    $query =" SELECT COUNT(*) AS count 
+                FROM orders WHERE payment_status =1 AND order_type='AUCTION'
+                ";
+
+    $this->db->query($query);
+    $row = $this->db->single();
+    if($row){
+        return $row->count;
+    }else{
+            return false;
+        }
+}
+public function getRequestOrdersCount(){
+    $query =" SELECT COUNT(*) AS count 
+                FROM orders WHERE payment_status =1 AND order_type='REQUEST'
+                ";
+
+    $this->db->query($query);
+    $row = $this->db->single();
+    if($row){
+        return $row->count;
+    }else{
+            return false;
+        }
+}
+public function getPurchaseOrdersCount(){
+    $query =" SELECT COUNT(*) AS count 
+                FROM orders WHERE payment_status =1 AND order_type='PURCHASE'
+                ";
+
+    $this->db->query($query);
+    $row = $this->db->single();
+    if($row){
+        return $row->count;
+    }else{
+            return false;
+        }
+}
+
+
+
+public function getUsers($id){
+
+    $this->db->query('SELECT user_id,name,email,mobile,address,city FROM users WHERE user_id =:user_id');
+    $this ->db ->bind(':user_id',$id);
+    $data = $this ->db -> single();
+   
+    if($this->db->rowcount()>0){
+        return $data;
+    }
+    else{
+        return false;
+    }
+}
+public function countUsers(){
+    $this->db->query('SELECT COUNT(*) AS count FROM users');
+    $row = $this->db->single();
+     if($this->db->rowcount()>0){
+        return $row->count;
+     }
+     else{
+        return false;
+     }
+   
+}
+public function countBuyers(){
+    $this->db->query('SELECT COUNT(*) AS count FROM users WHERE user_type="buyer"');
+    $row = $this->db->single();
+     if($this->db->rowcount()>0){
+        return $row->count;
+     }
+     else{
+        return false;
+     }
+   
+}
+public function countSellers(){
+    $this->db->query('SELECT COUNT(*) AS count FROM users WHERE user_type="seller"');
+    $row = $this->db->single();
+     if($this->db->rowcount()>0){
+        return $row->count;
+     }
+     else{
+        return false;
+     }
+   
+}
+public function countAgents(){
+    $this->db->query('SELECT COUNT(*) AS count FROM users WHERE user_type="deliver"');
+    $row = $this->db->single();
+     if($this->db->rowcount()>0){
+        return $row->count;
+     }
+     else{
+        return false;
+     }
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
