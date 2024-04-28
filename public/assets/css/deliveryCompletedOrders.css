@@ -172,3 +172,116 @@ Global Styles
   }
 
 } */
+.cardNo{
+  margin: 2rem;
+  width: 100%;
+ 
+  display: flex;
+  justify-content: center;
+
+}
+
+.buttonn {
+  margin: 1rem;
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  transition: 0.3s;
+}
+
+.addVehicle{
+  padding: 1rem 2rem;
+  border-radius: 4rem;
+
+}
+
+/* Hover effect */
+
+
+.btn{
+  width: max-content;
+  
+}
+
+.btn a{
+  color: white;
+}
+
+.btn a:hover{
+  color: #3b8c3f;
+}
+
+.price{
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.button_section{
+  
+  display: flex;
+  
+  margin-top: 1rem;
+  margin-left: 0.7rem;
+}
+
+.p_title{
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.contact-info{
+  font-size: 18px;
+  border: var(--clr-primary-3) 1px solid;
+  border-radius: 20px;
+  margin-top: 1rem;
+  display: none;
+}
+
+.noVehicleCard{
+   
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--dark-shadow);
+  width: max-content;
+  
+  border-radius: 2rem;
+  padding: 1rem;
+}
+
+.heading{
+  font-size: 28px;
+  font-weight: 800;
+  
+  
+}
+
+.govi{
+  color: var(--clr-primary-4);
+  font-weight: 900;
+}
+
+.nocard{
+  box-shadow: var(--dark-shadow);
+  padding:2rem;
+  
+  border-radius: var(--radius-low);
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  transition: box-shadow 0.3s ease-in-out;
+  justify-content: center;
+  align-items: center;
+  
+}

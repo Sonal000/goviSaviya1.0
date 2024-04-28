@@ -60,6 +60,14 @@ class Dashboard extends Controller{
         ];
         
         $this -> view('sellerDashboard',$data);
+    }if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+
+
+
+
+
+
+
     }
         
 
