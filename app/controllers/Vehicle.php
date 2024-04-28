@@ -2,10 +2,12 @@
  class Vehicle extends Controller{
 
   private $vehicleModel;
+  private $notifyModel;
     
    public function __construct(){
     
      $this->vehicleModel =$this->model('DeliveryVehicle');
+     $this->notifyModel =$this->model('Notifi');
 
    }
 
@@ -93,15 +95,23 @@ public function Three_Wheeler(){
 
 public function approve($id){
 
+    $user_id = $this->vehicleModel->getDeliverUserIdByVehicleId($id);
+
     if($this->vehicleModel->approveVehicle($id)){
-        
+
+        $this->notifyModel->notifyuser('OTHER',$user_id,'Your vehicle has been approved. You are ready for delivery.','deliveryVehicles','OTHER');
         redirect('Vehicle');
+
     }
 }
 
 public function Refuse($id){
 
+    $user_id = $this->vehicleModel->getDeliverUserIdByVehicleId($id);
+
     if($this->vehicleModel->RefuseVehicle($id)){
+
+        $this->notifyModel->notifyuser('OTHER',$user_id,'Your vehicle has been refused. You are not ready for delivery.','deliveryVehicles','OTHER');
 
         redirect('Vehicle');
     }

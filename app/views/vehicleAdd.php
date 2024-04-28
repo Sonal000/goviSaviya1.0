@@ -248,15 +248,7 @@
             </div>
             <div class="column">
 
-            <div class="form-group">
-                <label for="ref_cap">Refrigeration Capability:<br></label>
-                <select class="form_details <?php echo (!empty($data['ref_cap_error'])) ? 'is-invalid' : ''; ?>" name="ref_cap" id="ref_cap" required>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    
-                </select>
-                <!-- <span class="invalid-feedback"><?php echo $data['doe_error']; ?></span> -->
-            </div>
+           
 
                
                 
