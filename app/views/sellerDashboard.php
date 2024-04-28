@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Seller Dashboard</title>
     <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -224,123 +224,30 @@
                             </thead>
                             <tbody>
                             <?php 
-                        if($data['orders']){
-        
-                        foreach($data['orders'] as $orders){
-                            if($orders){
-                            foreach($orders as $order){
+                            if($data['orders']){
+                            foreach($data['orders'] as $order){
                             ?>
-                                <tr>
-                                    <th>
-                                        <?php echo $order->buyer_name ;?>
-                                    </th>
-                                    <td>
-                                    <?php echo $order->order_type ;?>
-                                    </td>
-                                    <td>
-                                    <?php echo $order->item_name ;?> <?php echo $order->quantity ;?> KG
-                                    </td>
-                                    <td>
-                                        <div class="rate">
-                                            <!-- <span class="fas fa-arrow-up text-danger"></span> -->
-                                            <?php echo $order->order_status ;?>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!-- <tr>
-                                    <th>
+                            <tr>
+                            <th><?php echo $order->buyer_name;?></th>
+                            <td><?php echo $order->order_type;?></td>
+                            <td><?php echo $order->item_name;?> <?php echo $order->quantity;?> KG</td>
+                            <td>
+                            <div class="rate">
+                            <?php echo $order->order_status;?>
+                            </div>
+                            </td>
+                            </tr>
+                            <?php
+                            }
+                            } else {
+                            ?>
+                            <tr>
+                            <th>No ongoing orders</th>
+                            </tr>
+                            <?php
+                            }
+                            ?>
 
-                                        /demo/admin/forms.html
-
-                                    </th>
-                                    <td>
-                                        2,987
-                                    </td>
-                                    <td>
-                                        0
-                                    </td>
-                                    <td>
-                                        <div class="rate">
-                                            <span class="fas fa-arrow-down text-arrow-down"></span>
-                                            43,52%
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-
-                                    <th>/demo/admin/util.html</th>
-
-                                    </td>
-                                    <td>
-                                        2,844
-                                    </td>
-                                    <td>
-                                        294
-                                    </td>
-                                    <td>
-                                        <div class="rate">
-                                            <span class="fas fa-arrow-down text-arrow-down"></span>
-                                            32,35%
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-
-                                    <th>/demo/admin/validation.html</th>
-
-                                    </td>
-                                    <td>
-                                        2,050
-                                    </td>
-                                    <td>
-                                        $147
-                                    </td>
-                                    <td>
-                                        <div class="rate">
-                                            <span class="fas fa-arrow-up text-danger"></span>
-                                            50,87%
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>/demo/admin/modals.html</th>
-                                    </td>
-                                    <td>
-                                        1,483
-                                    </td>
-                                    <td>
-                                        $19
-                                    </td>
-                                    <td>
-                                        <div class="rate">
-                                            <span class="fas fa-arrow-down text-arrow-down"></span>
-                                            32,24%
-                                        </div>
-                                    </td>
-                                </tr> -->
-                                <?php
-                }}}
-        }else{
-            ?>
-            <tr>
-                                    <th>
-                                        No ongoing orders
-                                    </th>
-                                    <!-- <td>
-                                        3171
-                                    </td>
-                                    <td>
-                                        $205
-                                    </td>
-                                    <td>
-                                        <div class="rate">
-                                            <span class="fas fa-arrow-up text-danger"></span>
-                                            42,55%
-                                        </div>
-                                    </td> -->
-                                </tr> <?php
-        }
-    ?>
                             </tbody>
                         </table>
                     </div>

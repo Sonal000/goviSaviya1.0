@@ -28,6 +28,7 @@ class Dashboard extends Controller{
             $auctions = $this->auctionModel ->countSellerauctions($_SESSION['seller_id']);
 
             $orders = $this->orderModel->getSellerOrders($_SESSION['seller_id']);
+            $orders = $this->orderModel->getSellerOrders($_SESSION['seller_id']);
             $details = $this->sellerModel->sellerInfo($_SESSION['seller_id']);
 
             $requests = $this->requestModel->countavailablerequests();
