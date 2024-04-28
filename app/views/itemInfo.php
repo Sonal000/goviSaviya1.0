@@ -86,7 +86,7 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
   </div>
   <div class="item_price_cont">
     <p class="item_price">RS <?php echo $data['row']->price; ?> / <span><?php echo $data['row']->unit; ?></span></p>
-    <p class="item_available" ><?php echo $data['row']->stock; ?>/ <span><?php echo $data['row']->unit; ?> available</span>  </p>
+    <p class="item_available" ><?php echo $data['row']->stock; ?> <span><?php echo $data['row']->unit; ?> available</span>  </p>
   </div>
   <div class="item_desc_cont">
     <p class="item_desc"><?php echo $data['row']->description; ?></p>

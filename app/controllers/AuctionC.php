@@ -383,8 +383,11 @@ public  function checkout($id){
         if($row){
 
             foreach ($row as $item) {
+      
                 $currentDateTime = new DateTime();
-                $expDateTime = new DateTime($item->exp_date);
+                $expDateTime = new DateTime($item->end_date);
+                var_dump($expDateTime);
+                var_dump($currentDateTime);
                 $timeDifference = $currentDateTime->diff($expDateTime);
                 $remains = $timeDifference->format('%a days %H hours');
                 $currentBid = $this->auctionModel->getCurrentBid($item->auction_ID);

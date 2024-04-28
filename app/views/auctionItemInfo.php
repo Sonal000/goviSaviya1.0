@@ -35,7 +35,7 @@
 
  <section class="item_information section-center">
 
-
+<?php var_dump($data['exp_date']) ?>
 <div class="image_container">
     <div class="main_img_cont">
       <img class="main_img" src="<?php echo URLROOT ?>/store/items/<?php echo $data['item_img'] ?>"/> 
