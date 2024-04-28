@@ -60,7 +60,11 @@ class AuctionC extends Controller{
         foreach ($row['items'] as $item) {
             $activebidder=$this->auctionModel->isActiveBidder($item->auction_ID,$_SESSION['buyer_id']);
             $currentBid = $this->auctionModel->getCurrentBid($item->auction_ID);
-            // var_dump($currentBid);
+            $currentDateTime = new DateTime();
+            $expDateTime = new DateTime($item->end_date);
+                    $timeDifference = $currentDateTime->diff($expDateTime);
+                    $remains = $timeDifference->format('%a days %H hours');
+            $item->remain_time =$remains;
             $item->active_bidder=$activebidder;
             $item->leading_bidder=(($currentBid?$currentBid->buyer_id:0) == $_SESSION['buyer_id'])?true:false;
         }
@@ -117,6 +121,7 @@ class AuctionC extends Controller{
             
 
                 $row=$this->auctionModel->getAuctionInfo($id);
+                var_dump($row);
                 
                 if($row){
                     
@@ -147,7 +152,8 @@ class AuctionC extends Controller{
                     }
 
                     $currentDateTime = new DateTime();
-                    $expDateTime = new DateTime($row->exp_date);
+                    
+                    $expDateTime = new DateTime($row->end_date);
                     $timeDifference = $currentDateTime->diff($expDateTime);
                     $remains = $timeDifference->format('%a days %H hours');
                
@@ -384,7 +390,7 @@ public  function checkout($id){
 
             foreach ($row as $item) {
                 $currentDateTime = new DateTime();
-                $expDateTime = new DateTime($item->exp_date);
+                $expDateTime = new DateTime($item->end_date);
                 $timeDifference = $currentDateTime->diff($expDateTime);
                 $remains = $timeDifference->format('%a days %H hours');
                 $currentBid = $this->auctionModel->getCurrentBid($item->auction_ID);

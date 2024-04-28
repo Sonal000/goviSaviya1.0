@@ -215,6 +215,12 @@ color: var(--clr-primary-4);
    
 }
 
+.adminprofile{
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
 .img{
     border-radius: 10px;
     width: 30%;

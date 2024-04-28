@@ -357,7 +357,7 @@ public function getBidUsersInfo($id){
 
 
   public function myAuctionInfo($id){
-    $this->db->query("SELECT * FROM auction WHERE seller_ID=:seller_ID AND status='active'");
+    $this->db->query("SELECT * FROM auction WHERE seller_ID=:seller_ID AND status='active' ORDER BY created_at DESC");
     $this->db->bind(':seller_ID',$id);
     $row=$this->db->resultSet();
     if($row){
