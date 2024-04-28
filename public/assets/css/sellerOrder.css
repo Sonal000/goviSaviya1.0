@@ -436,3 +436,47 @@ input:focus{
   flex-direction: row;
 }
 
+@media  screen and (max-width:500px) {
+  .order_card_cont{
+    display: grid;
+    grid-template-columns: repeat(1,25rem);
+    gap: 2rem;
+    /* display: flex;
+    flex-direction: row; */
+    justify-content: center;
+    
+}
+
+.order_card{
+  box-shadow: var(--light-shadow);
+  padding:0.5rem;
+  border-radius: var(--radius-low);
+  margin-top: 1rem;
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  
+  
+}
+
+.ord_img{
+  width: 170px;
+  height: 180px;
+  border-radius: var(--radius-low);
+}
+
+.buy_pro{
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0.5rem 0.5rem;
+  padding: 0.5rem 0.5rem;
+  border-radius: var(--radius-low);
+  border: 1px solid var(--clr-grey-8);
+  width: 160px;
+  overflow-x: hidden;
+}
+
+}

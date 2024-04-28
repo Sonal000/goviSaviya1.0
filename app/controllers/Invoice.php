@@ -17,6 +17,11 @@ class Invoice extends Controller{
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
 
             $details = $this->orderModel->getDetailsforInvoice($_SESSION['seller_id'],$order_item_id,$order_id,$type);
+            $penalty_amount = $this->orderModel->getPenaltyAmount($_SESSION['seller_id']);
+
+            if($penalty_amount){
+                $details->total_price = $details->total_price - $penalty_amount->penalty_amount; 
+            }
 
         $data=[
             "details"=>$details,

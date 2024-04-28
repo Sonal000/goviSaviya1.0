@@ -4169,6 +4169,92 @@ public function getReviewsInsideOrder($order_id,$order_item_id,$type){
         }
 
 }
+
+
+public function getpenaltyAmount($seller_id){
+
+    $query = 'SELECT penalty_amount FROM penalty WHERE user_type ="seller" AND peenalized_status="NO" AND seller_id =:seller_id';
+
+    $this->db->query($query);
+    $this->db->bind(':seller_id',$seller_id);
+    
+    $row = $this->db->Single();
+    return $row;
+
+    if($row){
+        $this->db->query('UPDATE
+                         penalty
+                         SET
+                        peenalized_status="YES"
+                        WHERE user_type ="seller" AND
+                        seller_id =:seller_id');
+
+       $this->db->query($query);
+       $this->db->bind(':seller_id',$seller_id);
+       if($this->db-execute()){
+        return true;
+       }
+       else{
+        return false;
+       }
+
+       return $row;
+    }
+    else{
+        return false;
+    }
+
+}
+
+
+// public function getPenaltyAmount($seller_id) {
+//     // var_dump($seller_id);
+
+//     $orders = $this->getSellerCompletedOrders($seller_id);
+//     var_dump($orders);
+//     // Initialize variables to store the sum of penalty amounts and closest order date
+//     $total_penalty_amount = 0;
+//     $closest_order_date = null;
+
+//     // Construct the SQL query to get penalty amount and closest order date
+//     $query = 'SELECT 
+//                 penalty.penalty_amount, 
+//                 MIN(ABS(UNIX_TIMESTAMP(penalty.penalty_date) - UNIX_TIMESTAMP(orders.order_date))) AS closest_order_diff
+//               FROM 
+//                 penalty
+//               LEFT JOIN 
+//                 orders ON penalty.seller_id = orders.seller_id
+//               WHERE 
+//                 penalty.user_type = "seller" 
+//                 AND penalty.peenalized_status = "NO" 
+//                 AND penalty.seller_id = :seller_id
+//               GROUP BY 
+//                 penalty.penalty_amount';
+
+//     // Prepare and execute the query
+//     $this->db->query($query);
+//     $this->db->bind(':seller_id', $seller_id);
+//     $rows = $this->db->resultset();
+
+//     // Iterate through the resultset to calculate sum of penalty amounts and find closest order date
+//     foreach ($rows as $row) {
+//         $total_penalty_amount += $row['penalty_amount'];
+//         // Check if the closest order date is null or if the current order date is closer than the previously found closest order date
+//         if ($closest_order_date === null || $row['closest_order_diff'] < $closest_order_date) {
+//             $closest_order_date = $row['closest_order_diff'];
+//         }
+//     }
+
+//     // Return the total penalty amount and closest order date
+//     $result=array('total_penalty_amount' => $total_penalty_amount, 'closest_order_date' => $closest_order_date);
+//    die (var_dump($result));
+    
+// }
+
+
+
+
+
 }
 
 ?>
