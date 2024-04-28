@@ -6,15 +6,16 @@ function generatePdf(data_table) {
     // Get orders data
    
     const orders = data_table;
-
+    if (!Array.isArray(data_table) || data_table.length === 0) {
+        console.error('Data is missing or invalid.');
+        return;
+    }
     // Create a new jsPDF instance
     const doc = new jsPDF();
 
     // Define table headers
     const headers = [['Order ID', 'Customer', 'Order Type', 'Order Status']];
-
-    // Define table data
-    const data = orders.map(order => [order.order_id, order.buyer_name, order.order_type, order.order_history]);
+    const data = orders.map(order => [order.order_id, order.buyer_id, order.order_type, order.order_history]);
 
     // Add table headers and data to the PDF
     doc.autoTable({ head: headers, body: data });
@@ -28,6 +29,9 @@ function generatePdf(data_table) {
 // const tabledata = $('#download-btn').data('orders');
 // console.log(tabledata);
 const tabledata = [{"order_id":122,"order_type":"REQUEST","buyer_id":24,"total_price":40000,"total_delivery_fee":0,"order_history":"pending","order_date":"2024-04-26"}];
+
+//  tabledata.map(order => [order.order_id, order.order_type, order.order_date]);
+// console.log(tabledata.map(order => [order.order_id, order.order_type, order.order_date]));
 
 $('#download-btn').on('click', function() {
 
