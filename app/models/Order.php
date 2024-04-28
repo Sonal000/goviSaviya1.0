@@ -2451,6 +2451,7 @@ public function getDeliverAvailableOrders(){
                  o.order_type AS order_type,
                  i.name AS item_name,
                  i.unit AS item_unit,
+                 i.district AS district,
                  
                  i.item_img AS item_img,
                  u_seller.name AS seller_name,
@@ -2496,6 +2497,7 @@ SELECT
                  o.order_type AS order_type,
                  a.name AS item_name,
                  a.unit AS item_unit,
+                 a.district AS district,
                  a.item_img AS item_img,
                  
                  u_seller.name AS seller_name,
@@ -2540,6 +2542,7 @@ SELECT
                  o.order_type AS order_type,
                  r.name AS item_name,
                  r.unit AS item_unit,
+                 r.district AS district,
                  r.req_img AS item_img,
                  u_seller.name AS seller_name,
                  u_seller.user_id AS seller_user_id,
@@ -2598,6 +2601,7 @@ public function getDeliverCompletedOrders($deliver_id){
                  i.name AS item_name,
                  i.unit AS item_unit,
                  i.item_img AS item_img,
+                 
                  u_seller.name AS seller_name,
                  u_seller.user_id AS seller_user_id,
                  u_seller.address AS seller_address,
@@ -2607,7 +2611,8 @@ public function getDeliverCompletedOrders($deliver_id){
                  u_buyer.name AS buyer_name,
                  u_buyer.address AS buyer_address,
                  u_buyer.city AS buyer_city,
-                 u_buyer.mobile AS buyer_mobile
+                 u_buyer.mobile AS buyer_mobile,
+                 i.address AS pickup_address
                 
 FROM 
     order_items o_items
@@ -2642,6 +2647,7 @@ SELECT
                  a.name AS item_name,
                  a.unit AS item_unit,
                  a.item_img AS item_img,
+                
                  u_seller.name AS seller_name,
                  u_seller.user_id AS seller_user_id,
                  u_seller.address AS seller_address,
@@ -2651,7 +2657,8 @@ SELECT
                  u_buyer.name AS buyer_name,
                  u_buyer.address AS buyer_address,
                  u_buyer.city AS buyer_city,
-                 u_buyer.mobile AS buyer_mobile
+                 u_buyer.mobile AS buyer_mobile,
+                 a.address AS pickup_address
 FROM 
     order_items_ac o_items_ac
 JOIN
@@ -2685,6 +2692,7 @@ SELECT
                  r.name AS item_name,
                  r.unit AS item_unit,
                  r.req_img AS item_img,
+                
                  u_seller.name AS seller_name,
                  u_seller.user_id AS seller_user_id,
                  u_seller.address AS seller_address,
@@ -2694,7 +2702,8 @@ SELECT
                  u_buyer.name AS buyer_name,
                  u_buyer.address AS buyer_address,
                  u_buyer.city AS buyer_city,
-                 u_buyer.mobile AS buyer_mobile
+                 u_buyer.mobile AS buyer_mobile,
+                 u_seller.address AS pickup_address
 FROM 
     order_items_rq o_items_rq
 JOIN

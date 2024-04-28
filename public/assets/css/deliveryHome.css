@@ -240,8 +240,8 @@
 }
 
 .recomended_order{
-    max-width: 30%;
-    
+    max-width: 33%;
+   
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -252,7 +252,7 @@
     margin-top: 1rem;
    
     border-radius: 8px;
-    width: 350px; /* Adjust the width as per your requirement */
+    width: 340px; /* Adjust the width as per your requirement */
     height: 200px; /* Adjust the height as per your requirement */
     object-fit: cover;
 }
@@ -269,7 +269,7 @@
 }
 
 .rec_odr_img{
-    
+   
     display: flex;
     justify-content: center;
     width: fit-content;
@@ -289,10 +289,22 @@
     
 }
 
+.see_all_btn{
+   
+    display: flex;
+ 
+    text-align: center;
+}
+
+.second_col{
+    display: flex;
+    flex-direction: row;
+}
+
 .big_circle{
     background-color: white;
     border-radius: 100%;
-    border: #4BAA4E solid 5px;
+   
     height: 6rem;
     width: 6rem;
     display: flex;
@@ -412,6 +424,10 @@
   
   }
 
+  .view_more_btn{
+    width: 100%;
+  }
+
   .no_accept{
     font-weight: 400;
   }
@@ -426,10 +442,22 @@
     margin-bottom: 1rem;
   }
 
+  .recomended_order{
+    
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: var(--dark-shadow);
+    display: flex;
+    justify-content: center;
+
+  }
+
   .g{
     color: var(--clr-primary-4);
     font-weight: 600;
   }
+
+ 
 
   
   @media screen and (max-width:500px){
@@ -472,6 +500,7 @@
     font-size: 8px;
     width: fit-content;
     text-align: center;
+    padding: 5px;
 }
 
 .greeting{
@@ -506,16 +535,15 @@
     
 }
 
-.second_col{
-    
-    border: #c62256 solid 2px;
-}
+
 
 .recomended_orders{
     justify-content: left;
    
     border: #45a049 solid 2px;
     gap: 0rem;
+
+    
 }
 
 /* .card-recomendedOrder{
@@ -551,9 +579,6 @@
     font-size: 10px;
 }
 
-.rec_odr_details{
-    
-}
 
 .rec_odr_details_withBtn{
     display: flex;
@@ -572,7 +597,44 @@
 }
 
 
+.image_details{
+    
+    display: flex;
+    flex-direction: column;
+}
 
+.card_2{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+.image_2{
+    width: 190px;
+    height: 100px;
+}
+
+.item_img_2{
+    width: 190px;
+    height: 100px;
+}
+
+.card_heading{
+    font-size: 16px;
+}
+
+.card_detailss{
+    font-size: 14px;
+}
+
+.rate_details{
+    font-size: 14px;
+}
+.details{
+    font-size: 12px;
+}
 
 
 

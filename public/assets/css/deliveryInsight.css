@@ -224,6 +224,30 @@
   
 }
 
+.abc{
+  margin-top: 24px;
+  
+}
+
+@media screen and (max-width:500px){
+
+
+.name_cont{
+  font-size: 16px;
+}
+
+.prof_img_cont{
+  width: 80px;
+  height: 80px;
+}
+
+.prof_img{
+  width: 80px;
+  height: 80px;
+}
+
+}
+
 
 
 

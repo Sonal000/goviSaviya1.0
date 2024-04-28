@@ -87,9 +87,14 @@ class DeliveryInsight extends Controller{
         $revenueGrowth = $thisRevenue - $prevRevenue;
 
         //Average Revenue
+        
+        if($totalOrdersCompleted>0){
 
         $averageRevenue = $totalRevenue / $totalOrdersCompleted;
-       
+
+        }else{
+            $averageRevenue = 0;
+        }
 
 
         $data = [

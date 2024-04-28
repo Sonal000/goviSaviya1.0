@@ -24,7 +24,7 @@
 <div class="container_content">
 
 <div class="container_title_cont">
-  <p class="container_title">Home</p>
+  <!-- <p class="container_title">Home</p> -->
   </div>
 
 <div class="profile">
@@ -55,10 +55,10 @@
 
             <div class="addVehicleCard">
                 <div class="image">
-                   <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                   <img src="<?php echo URLROOT ?>/assets/images/hehe.png" alt="img" class="del_img">
                 </div>
                 <div class="helo">
-                    <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
+                <a href="<?php echo URLROOT.'/deliveryVehicles'?>"><button class="btn btn_two">Add Vehicle</button></a>
                 </div>
 
             </div>
@@ -157,7 +157,7 @@
                     
             <div class="first_col">
 
-                <div class="card card-ongoingOrder">
+                <div class="card card-ongoingOrder card_2">
 
                 <?php if($data['details']){
 ?>
@@ -179,8 +179,8 @@
                     </div>
 
                     <div class="image_details">
-                        <div class="image">
-                            <img class="item_img" src="<?php echo URLROOT . '/store/items/'.$data['details']->item_img ?>">
+                        <div class="image image_2">
+                            <img class="item_img item_img_2" src="<?php echo URLROOT . '/store/items/'.$data['details']->item_img ?>">
                         </div>
 
                         <div class="order_details">

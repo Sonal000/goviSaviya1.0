@@ -293,11 +293,10 @@
 }
 
 .image{
-  padding-top: 1rem;
-  border-top: #ccc solid 2px;
- margin-top: 2rem;
-margin-bottom: 1rem;
-padding-left: 2rem;
+  margin-top: -2rem;
+  
+ 
+padding-left: 1rem;
 }
 
 .addVehicleCard{
@@ -385,12 +384,7 @@ padding-left: 2rem;
     text-align: center;
   }
 
-  .image{
-    width: max-content;
   
-    padding-right: 1.4rem;
-  }
-
   .del_img{
     width: 120px;
   }
