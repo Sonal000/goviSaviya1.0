@@ -23,17 +23,36 @@
 
 <div class="container_content">
 <div class="profile">
+    
     <div class="auction_page">
-        <div class="hed">
+
+   
+
+
+
+    
+
+        
+        
+        
+
+        
+        <?php if($data['order']){ ?> 
+
+            <div class="back">
+        <button class="back_btn" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+</div>
+
+<div class="hed">
             Order Details
         </div>
-        
-     
-        <?php if($data['order']){ ?> 
 
 <!-- 1st Card------------------------------------------------------------------------------------- -->
 
+
+
         <div class="mycardd">
+            
 
             <div class="productimg">
                 <div class="order_details_head">
@@ -128,6 +147,15 @@
 
 
         </div>
+
+        
+       
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
         
 <!-- 1st Card------------------------------------------------------------------------------------- -->
 <?php
@@ -144,5 +172,10 @@
 </div>
 <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
+<script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
 </html>

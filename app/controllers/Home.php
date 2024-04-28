@@ -41,8 +41,10 @@
    elseif(isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'deliver') {
     $deliver_id = $_SESSION['deliver_id'];
     $availability = $this->orderModel->getDeliverAvailability($deliver_id);
-    $reco = $this->orderModel->getRecommendedOrders($_SESSION['deliver_id']);
+    $reco = $this->orderModel->getRecoDeliverOrders($_SESSION['deliver_id']);
     $hasVehicle = $this->VehicleModel->hasVehicle($_SESSION['user_id']);
+
+    
     
     // $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
     // $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);

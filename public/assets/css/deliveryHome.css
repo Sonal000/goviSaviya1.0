@@ -446,14 +446,21 @@
     width: 100%;
 }
 
-.card{
+.card-ongoingOrder{
     width: max-content;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    
 }
 
 .no_order{
     display: flex;
-    width: 100%;
+    justify-content: center;
+    width: max-content;
     font-size: 12px;
+    
+    
 }
 
 .buttons{
@@ -461,9 +468,113 @@
 }
 
 .btn{
-    font-size: 12px;
-    width: 130px;
+    width: 100%;
+    font-size: 8px;
+    width: fit-content;
     text-align: center;
 }
+
+.greeting{
+    font-size: 14px;
+}
+
+.date{
+    font-size: 12px;
+}
+
+.subHed h3{
+    font-size: 14px;
+}
+
+
+.image{
+    margin: 0px
+}
+
+.card_heading_oos{
+    font-size: 14px;
+    margin: 5px;
+}
+
+.no_accept{
+    font-size: 12px;
+}
+
+.card-recomendedOrder{
+    
+    border: #d0d313 solid 2px;
+    
+}
+
+.second_col{
+    
+    border: #c62256 solid 2px;
+}
+
+.recomended_orders{
+    justify-content: left;
+   
+    border: #45a049 solid 2px;
+    gap: 0rem;
+}
+
+/* .card-recomendedOrder{
+    display: flex;
+    flex-direction: column;
+}
+
+.recomended_order{
+  
+    border: #d0d313 solid 2px;
+    display: flex;
+    
+    
+    
+} */
+
+.rec_odr_img{
+
+    
+   
+}
+
+.item_img{
+   
+   
+}
+
+.rec_odr_h{
+    font-size: 14px
+}
+
+.rec_odr_txt{
+    font-size: 10px;
+}
+
+.rec_odr_details{
+    
+}
+
+.rec_odr_details_withBtn{
+    display: flex;
+    flex-direction: column; 
+    border: #c62256 4px solid;
+}
+
+.view_more_btn{
+    display: flex;
+    justify-content: center;
+    width: max-content;
+    margin: 0;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 10px;
+}
+
+
+
+
+
+
 
   }
