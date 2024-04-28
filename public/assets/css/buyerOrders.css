@@ -830,7 +830,8 @@ margin-top: 2.5rem;
 
 .input_items{
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 

@@ -4180,7 +4180,44 @@ public function getReviewsInsideOrder($order_id,$order_item_id,$type){
 }
 
 
-// -------------------------------------------------------------------------------------
+
+public function getpenaltyAmount($seller_id){
+
+    $query = 'SELECT penalty_amount FROM penalty WHERE user_type ="seller" AND peenalized_status="NO" AND seller_id =:seller_id';
+
+    $this->db->query($query);
+    $this->db->bind(':seller_id',$seller_id);
+    
+    $row = $this->db->Single();
+    return $row;
+
+    if($row){
+        $this->db->query('UPDATE
+                         penalty
+                         SET
+                        peenalized_status="YES"
+                        WHERE user_type ="seller" AND
+                        seller_id =:seller_id');
+
+       $this->db->query($query);
+       $this->db->bind(':seller_id',$seller_id);
+       if($this->db-execute()){
+        return true;
+       }
+       else{
+        return false;
+       }
+
+       return $row;
+    }
+    else{
+        return false;
+    }
+
+}
+
+
+
 
 public function getReviewOrders($deliver_id){
     $orders=$this->getDeliverReviewOrders($deliver_id);
@@ -4351,6 +4388,7 @@ ORDER BY order_date DESC
         return false;
     }               
 }
+
 
 
 
