@@ -19,7 +19,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem 2rem;
-   border: 2px solid red; 
+  
 }
 .submit_container{
   margin: 0 auto;
