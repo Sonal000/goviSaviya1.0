@@ -78,10 +78,6 @@
     </div>
 
 
-
-
-
-
     <div class="table_cont">
     <table id="" class="tables">
   <tr>
@@ -104,16 +100,12 @@
   </tr>
   <?php
     }
+}else{
+    echo "<tr><td colspan='6'>No Orders Found</td></tr>";
 }
   ?>
 </table>
-      
-        
-       
-        
-        
-       
-        
+         
     </div>
     
 </div>
