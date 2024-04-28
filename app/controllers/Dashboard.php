@@ -107,6 +107,71 @@ $ordersCountRequest = $this->adminModel->getRequestOrdersCount();
         
 
     }
+
+    public function generatePdf(){
+        // Get orders data
+        $orders = $this->orderModel->getALLOrders();
+        
+        // Start output buffering
+        ob_start();
+    
+        // Create a new PDF instance
+        $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+    
+        // Set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('Admin');
+        $pdf->SetTitle('Orders Report');
+        $pdf->SetSubject('Orders Report');
+        $pdf->SetKeywords('Orders, Report, PDF');
+    
+        // Set default header and footer fonts
+        $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+    
+        // Set margins
+        $pdf->SetMargins(15, 15, 15);
+        $pdf->SetHeaderMargin(5);
+        $pdf->SetFooterMargin(10);
+    
+        // Add a page
+        $pdf->AddPage();
+    
+        // Set content
+        $html = '<h1>Orders Report</h1>';
+        $html .= '<table border="1">';
+        $html .= '<tr><th>Order ID</th><th>Customer</th><th>Order Type</th><th>Order Status</th></tr>';
+    
+        // Fetch data from database and loop through each order
+        if (!empty($orders)) {
+            foreach ($orders as $order) {
+                $html .= '<tr>';
+                $html .= '<td>' . $order->order_id . '</td>';
+                $html .= '<td>' . $order->buyer_name . '</td>';
+                $html .= '<td>' . $order->order_type . '</td>';
+                $html .= '<td>' . $order->order_history . '</td>';
+                $html .= '</tr>';
+            }
+        } else {
+            $html .= '<tr><td colspan="4">No Orders Found</td></tr>';
+        }
+    
+        $html .= '</table>';
+    
+        // Write HTML content to PDF
+        $pdf->writeHTML($html, true, false, true, false, '');
+    
+        // Close and output PDF
+        $pdf->Output('orders_report.pdf', 'D'); 
+    
+        // Clean the output buffer
+        ob_end_clean();
+    }
+    
+    
+
+
+
        
 }
 

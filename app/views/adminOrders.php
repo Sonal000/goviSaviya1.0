@@ -76,9 +76,9 @@
        
 
     </div>
+<button id="download-btn"  data-orders=<?php echo json_encode($data['orders']) ;?>>Download Report</button>
 
-
-    <div class="table_cont">
+    <div class="table_cont" >
     <table id="" class="tables">
   <tr>
     <th>Order ID</th>
@@ -108,12 +108,17 @@
          
     </div>
     
+<a href="<?php echo URLROOT; ?>/dashboard/generatePdf" target="_blank">Download PDF</a>
+    
 </div>
             </div>
             </div>
 
 </body>
 <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+
 <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/adminSidebar.js"></script>
-<script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
+
+<script src="<?php echo URLROOT ?>/assets/js/adminOrders.js"></script>
 </html>
