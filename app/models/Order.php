@@ -2667,7 +2667,7 @@ JOIN
 JOIN
     auction a ON o_items_ac.auction_id = a.auction_ID
 WHERE 
-    o_items_ac.order_status = 'pending' AND o.payment_status = 1 AND o_items_ac.deliver_id = :deliver_id
+    o_items_ac.order_status = 'completed' AND o.payment_status = 1 AND o_items_ac.deliver_id = :deliver_id
 
     UNION
 
@@ -2676,8 +2676,8 @@ SELECT
                  o_items_rq.order_date AS order_date,
                  o_items_rq.quantity AS quantity,
                  o_items_rq.deliver_fee AS deliver_fee,
-                 o_items_rq.completed_date AS completed_date,
                  o_items_rq.order_item_id AS order_item_id,
+                 o_items_rq.completed_date AS completed_date,
                  o_items_rq.order_id AS order_id,
                  o.order_address AS order_address,
                  o.order_city AS order_city,
@@ -2710,7 +2710,7 @@ JOIN
 JOIN 
     requests r ON o_items_rq.req_id = r.request_ID
 WHERE 
-    o_items_rq.order_status = 'pending' AND o.payment_status = 1 AND o_items_rq.deliver_id = :deliver_id
+    o_items_rq.order_status = 'completed' AND o.payment_status = 1 AND o_items_rq.deliver_id = :deliver_id
 ORDER BY completed_date DESC
 "
 
