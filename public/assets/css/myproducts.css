@@ -589,11 +589,12 @@ input:focus{
   border-radius: var(--radius-low);
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-top: 1rem;
   transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
+  
 }
 .H4center{
   margin-top: 2rem;
@@ -639,6 +640,7 @@ a{
 
 .productimg{
     display: flex;
+   
 }
 
 .productimg img :hover{
