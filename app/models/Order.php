@@ -4205,7 +4205,7 @@ public function getpenaltyAmount($seller_id){
 
        $this->db->query($query);
        $this->db->bind(':seller_id',$seller_id);
-       if($this->db-execute()){
+       if($this->db->execute()){
         return true;
        }
        else{
