@@ -201,7 +201,6 @@ class DeliveryVehicles extends Controller{
             'insurance_status'=>trim($_POST['insurance_status']),
             'insurance_imgs'=> $insuranceImgs,
             'max_vol'=>trim($_POST['max_vol']),
-            'ref_cap'=>trim($_POST['ref_cap']),
             'ins_expiry'=>trim($_POST['ins_expiry']),
 
             //'user_id' => $_SESSION['user_id'],
@@ -222,8 +221,7 @@ class DeliveryVehicles extends Controller{
             'insurance_status_error'=>'',
             'insurance_imgs_error'=>'',
             'max_vol_error'=>'',
-            'ins_expiry_error'=>'',
-            'ref_cap_error'=>'',
+            'ins_expiry_error'=>''
         ];
 
         //Validation
@@ -299,9 +297,7 @@ class DeliveryVehicles extends Controller{
                 $data['max_vol_error'] = 'Please enter the maximum volume';
             }
 
-            if(empty($data['ref_cap'])){
-                $data['ref_cap_error'] = 'Please select the refregiration capability';
-            }
+           
 
             //Make sure there are no errors
 
@@ -315,7 +311,7 @@ class DeliveryVehicles extends Controller{
             && empty($data['rev_license_imgs_error'])
             && empty($data['insurance_status_error']) 
             && empty($data['insurance_imgs_error'])&& empty($data['max_vol_error'])
-            && empty($data['ref_cap_error'])  && empty($data['ins_expiry_error'])){
+            && empty($data['ins_expiry_error'])){
                 
                 //Validated
                 if($this->VehicleModel->addVehicle($data)){
@@ -350,7 +346,7 @@ class DeliveryVehicles extends Controller{
             'ins_expiry'=>'',
             'insurance_imgs'=>'',
             'max_vol'=>'',
-            'ref_cap'=>'',
+            
 
             'type_error' => '',
             'vehicleNo_error' =>'',
@@ -370,7 +366,7 @@ class DeliveryVehicles extends Controller{
             'ins_expiry_error'=>'',
             'insurance_imgs_error'=>'',
             'max_vol_error'=>'',
-            'ref_cap_error'=>'',
+           
             ];
 
             $this->view('vehicleAdd',$data);

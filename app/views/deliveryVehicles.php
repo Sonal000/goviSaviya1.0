@@ -103,11 +103,39 @@
 
               <!-- Noooooooooooo Vehicleeeeeeeeeeeeeeeeeee------------------------------------------------------ -->
             
-            <?php }elseif($data['pending'] == 4) { ?>
-            <div class="card card-body subtitle_card">
-            <div class="card-subtitle_plus">Add New Vehicle </div>
-            <div class="add_logo"><a href="<?php echo URLROOT;?>/deliveryVehicles/add"><i class="fa-solid fa-circle-plus"></a></i></div>
+            <?php }elseif($data['pending'] == 4)
+             { ?>
+            
+            
+            <div class="cardNo">
+        <div class="noVehicleCard">
+             
+            <div class="heading">
+            Let's start Delivering with<span class="govi"> Govisaviya!</span>  
             </div>
+            <div class="details ">
+            We're thrilled to have you here. To get started with deliveries, 
+            ensure you've added a vehicle to your account.
+            </div><div class="details details_two">
+            Let's begin!
+            </div>
+
+            <div class="addVehicleCard">
+                <div class="image">
+                   <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                </div>
+                <div class="helo">
+                    <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles/add'?>">Add Vehicle</a></button>
+                </div>
+
+            </div>
+
+        </div>
+
+        </div>
+
+
+
 
             
             <?php }elseif($data['pending'] == 3){ ?>
