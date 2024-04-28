@@ -94,7 +94,7 @@ class Orders extends Controller{
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
             $deliver_adr = $this->deliverModel->getProfileInfo($_SESSION['user_id'])->address;
             
-            
+           
         $data=[
             "orders"=>$orders,
             "hasVehicle"=>$hasVehicle,
@@ -357,6 +357,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
         $details = $this->orderModel->getOngoingOrderDetails($deliver_id);
         $rowB = $this->orderModel->getBuyerDetailsOngoingOrder($deliver_id);
         $rowS = $this->orderModel->getSellerDetailsOngoingOrder($deliver_id);
+       
             
         $current =$this->orderModel->getDeliverCurrentOrder($deliver_id);
         if($current->current_order_type=="AUCTION"){
@@ -374,7 +375,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             // 'pickup_img' =>  $pickupImg,
             'details' => $details,
             'rowB' => $rowB,
-            'rowS' => $rowS 
+            'rowS' => $rowS,
+            
         ];
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -709,6 +711,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 }
                
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
+            $deliver_address = $this->deliverModel->getDeliverInfo($deliver_id)->address;
 
            
                 
@@ -717,7 +720,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 'order' => $order,
                 'available' =>  $available,
                 'type' => $type,
-                'order_item_id' => $order_item_id
+                'order_item_id' => $order_item_id,
+                'deliver_address' => $deliver_address
             ];
 
            
@@ -786,6 +790,8 @@ private function uploadFile($fileInputName, $uploadDirectory) {
                 }elseif($type == "REQUEST"){
                 $order=$this->orderModel->getRequestOrderDetails($order_item_id);
                 }
+               
+                
 
                 $data = [
                     'title' => 'welcome',
@@ -803,6 +809,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
     public function Completedd(){
         $orders = $this->orderModel->getSellerCompleteOrders($_SESSION['seller_id']);
+        
         $data=[
             "orders"=>$orders,
         ];

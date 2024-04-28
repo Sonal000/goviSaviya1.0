@@ -385,8 +385,11 @@ border: none;
 }
 
 .progress_bar{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: max-content;
   box-shadow: var(--dark-shadow);
-  padding:4rem;
+  padding:4rem 2rem;
   border-radius: var(--radius-low);
 }
 
@@ -572,4 +575,190 @@ padding-left: 2rem;
 
 .maphead{
   margin-top: 1rem;
+}
+
+.distance_details{
+  font-size: 18px;
+
+}
+
+.bold{
+  font-weight: 600;
+}
+
+.in{
+  font-size: 18px;
+  font-weight: 500;
+}
+
+
+
+
+
+@media screen and (max-width:500px){
+
+  .mycardd{
+    display: flex;
+    flex-direction: column;
+  } 
+  
+ 
+
+    .image_product{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .onion{
+      width: 250px;
+      height: 170px;
+      margin-top: -12px;
+    }
+
+    .order_details_head{
+      font-size: 20px;
+    }
+    
+    .order_weight{
+      font-size: 12px;
+    }
+    
+    .order_details_sub{
+      font-size: 14px;
+    }
+
+    .more_info{
+      font-size: small;
+      margin: 0.4rem;
+    }
+    
+    .delivery_details{
+      margin-top: 8px;
+     
+      display: flex;
+      justify-content: center;
+    }
+    
+    .distance{
+      font-size: small;
+    }
+
+    .btn{
+      font-size: 10px;
+      padding: 6px;
+    }
+
+    .button_section{
+     
+      display: flex;
+      justify-content: center;
+    }
+
+    .price{
+      font-size: 18px;
+    }
+
+    
+
+    .in{
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .update_edit_btnn{
+     
+      display: flex;
+      flex-direction: column;
+    }
+    .a_btn{
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+
+    .progress_bar{
+      padding: 10px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      
+      
+    }
+
+    .more_info .in{
+      text-align: center;
+    }
+
+    .p_title{
+      font-size: 16px;
+      margin-bottom: 0.5rem;
+    }
+
+    .more_info{
+      font-size: 10px;
+    
+      text-align: center;
+    }
+
+    .details_all{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .distance_details{
+      font-size: 14px;
+    }
+
+    .image_two{
+      width: 120px;
+      margin-left: -3rem;
+    }
+
+    .del_img_2{
+      width: 120px;
+    }
+    
+    .heading{
+      font-size: 16px;
+    }
+
+    .details{
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .details_two{
+      font-size: 12px;
+
+    }
+
+    .noVehicleCard{
+   
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: var(--dark-shadow);
+      width: fit-content;
+      
+      border-radius: 2rem;
+      padding: 0.4rem;
+    }
+
+    .cardNo{
+     
+      margin-left: -0.2rem;
+    }
+
+    .btn_two{
+      font-size: 10px;
+    }
+
+    
+    
+
+    
+    
+
 }

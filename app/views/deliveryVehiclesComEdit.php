@@ -113,7 +113,7 @@
 
         </div>
             <div class="submit_btn_class">   
-                <input type="submit" class="submit_btn" value="Done">
+                <input type="submit" class="btn" value="Done">
                 </form>
             </div>
                 

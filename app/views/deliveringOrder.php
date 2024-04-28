@@ -57,11 +57,13 @@
 
             <div class="middle">
 
+
             <div class="instructions"><div class="details"><i class="fa-solid fa-user"></i> Seller: <?php echo $data['order']->seller_name;?> </div>
                         <div class="details"><i class="fa-solid fa-truck"></i> Buyer: <?php echo $data['order']->buyer_name;?> </div>
-                        <div class="details"><i class="fa-solid fa-location-dot"></i> Pickup Location: <?php echo $data['order']->seller_address;?> </div>
+                        <div class="details"><i class="fa-solid fa-location-dot"></i> Pickup Location: <?php echo $data['order']->pickup_address;?> </div>
                         <div class="details"><i class="fa-solid fa-thumbtack"></i> Drop off Location: <?php echo $data['order']->order_address;?> </div>
-                                        <div class="price_of_order">Delivery Fee: Rs. <?php echo $data['order']->deliver_fee; ?>/=  </div></div>
+                                        <div class="price_of_order">Delivery Fee: Rs. <?php echo $data['order']->deliver_fee; ?>/=  </div>
+                                    </div>
                 
                 <div class="image_product">
              
@@ -108,6 +110,7 @@
                 </div>
 
              <div class="progress_bar">
+             <div class="p_title"> Current Order Status</div>
              <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Order Confirmed</div>
              <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Picked from Seller</div>
              <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Quality confirmed: Pickup</div>
@@ -136,9 +139,13 @@
             <h3>Map</h3>
         </div>
  <div class="map">
+ <div class="distance_details">
+        Distance From <span class="bold"><?php echo $data['order']->pickup_address  ?></span> to  <span class="bold"><?php echo $data['order']->order_address ?></span> : <span class="bold"> <?php echo getDistance($data['order']->pickup_address,$data['order']->order_address);
+                            ?>Km</span>
+    </div>
 
           <div class="card" id="map_cont" data-start='gampaha' data-end='matara'> 
-                <input id="start" type="hidden" value="<?php echo $data['order']->seller_address  ?>" name="start">
+                <input id="start" type="hidden" value="<?php echo $data['order']->pickup_address  ?>" name="start">
                 <input id="end" type="hidden" value="<?php echo $data['order']->order_address  ?>" name="end">
                 <?php       
                 require APPROOT. '/views/layouts/mapCurrentLoc.php'; 

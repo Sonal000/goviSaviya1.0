@@ -19,6 +19,7 @@
         <link rel="icon" href="<?php echo URLROOT ?>/assets/images/govisaviya-bg.ico" type="image/x-icon">
         <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/main.css">
         <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/login.css">
+        <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/listproduct.css">
         <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/sellerProfile.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -113,13 +114,13 @@
               </p>
             </div>
           </div>
-          <a class="become_seller" href="<?php echo URLROOT ?>/buyerRegister"> 
+          <!-- <a class="become_seller" href="<?php echo URLROOT ?>/buyerRegister"> 
             Become a Buyer
             <span><i class="fas fa-user"></i></span>
-          </a>
+          </a> -->
       </div>
 
-        <div class="text_cont">
+        <!-- <div class="text_cont">
 
           <div class="status_cont">
 
@@ -142,7 +143,7 @@
         </div>
       </div>
           </div>
-        </div>
+        </div> -->
       </div>
 
     </div>
@@ -242,7 +243,197 @@
       
       
     </div>
+
+    <div class="add_req">
+      <div class="card">
+        Add Your bank account
+      <button class="edit_details_btn" id="request_btn"><i class="fas fa-pen"></i></button>
+      </div>
+        </div>
+<div class="request_item" id="accept_order_add_cont">
+   <div class="form_hed">
+      <h4>Enter Bank Account Details</h4>
+   </div>
+   <div class="req_add_form_cont">
+            
+   <div class="form_container">
+
+
+   <form method="post" action="<?php echo URLROOT ?>/OrderRequests/add" enctype="multipart/form-data">
+
+   <div class="input_items">
+
+
+     
+          <div class="input_row">
+          <div class="input_cont">
+                <label for="dropdown" class="input_label">Account Number</label>
+                <input type="text" id="dropdown" class="input_item" name="name" />
+          </div>
+          
+          <div class="input_cont">
+         <label for="stock" class="input_label">Account Name</label>
+                    <input type="text" class="input_item"  name="req_stock">
+          </div>
+          </div>
+          
+          <div class="input_row">
+          <div class="input_cont">
+                <label for="dropdown" class="input_label">Bank</label>
+                    <select id="dropdown" name="category" class="dropdown_item " >
+                    <option value="vegetables">Vegetables</option>
+                    <option value="fruits">Fruits</option>
+                    <option value="spices">Spices</option>
+                    </select>
+          </div>
+
+          <div class="input_cont">
+            <label for="dropdown"class="input_label">Branch</label>
+               <select id="dropdown" name="unit" class="dropdown_item">
+                            <option value="Kg">Kg</option>
+                            <option value="g">g</option>
+                            
+               </select>
+         </div>
+          </div>
+
+          <div class="input_row">
+         <div class="input_cont">
+              <label for="req_date" class="input_label">Required Date</label>
+               <input type="date" class="input_item"  name="req_date" id="expiration_date">
+         </div>
+
+          
+         <div class="input_cont">
+            <label for="req_address" class="input_label">Requested Address</label>
+            <input type="text" class="input_item"  name="req_address">
+            </div>
+          
+                </div>
+        
+          <div class="input_row">
+         <div class="input_cont">
+            <label for="dropdown"class="input_label">District</label>
+               <select id="dropdown" name="district" class="dropdown_item">
+                            <option value="Colombo">Colombo</option>
+                            <option value="Kaluthara">Kaluthara</option>
+                            <option value="Gampaha">Gampaha</option>
+               </select>
+                </div>
+                </div>
+      
+         <div class="submit_container">
+            <a href="<?php echo URLROOT ?>/OrderRequests/add"><button type="submit" class="btn">Request Item</button></a>
+            <div class="can_btn">
+            <a href="<?php echo URLROOT ?>/OrderRequests"><button type ="button" class="btn cancel_bt">Cancel</button></a>
+            </div>
+         </div>
+                    
+    </div>
+ 
+  </form>
+
+
+</div>
+
+      </div>
+
+</div>
+
+
+
+
+
+
 </section>
+
+<!-- <div class="add_req">
+            <button class="btn" id="request_btn">Add Bank Account</button>
+         </div>
+<div class="request_item" id="accept_order_add_cont">
+   <div class="form_hed">
+      <h3>Request Items</h3>
+   </div>
+   <div class="req_add_form_cont">
+            
+   <div class="form_container">
+
+
+   <form method="post" action="<?php echo URLROOT ?>/OrderRequests/add" enctype="multipart/form-data">
+
+   <div class="input_items">
+
+
+     
+
+          <div class="input_cont">
+                <label for="dropdown" class="input_label">Product Name</label>
+                <input type="text" id="dropdown" class="input_item" name="name" />
+          </div>
+          
+          <div class="input_cont">
+                <label for="dropdown" class="input_label">Product category</label>
+                    <select id="dropdown" name="category" class="dropdown_item " >
+                    <option value="vegetables">Vegetables</option>
+                    <option value="fruits">Fruits</option>
+                    <option value="spices">Spices</option>
+                    </select>
+          </div>
+
+              
+         <div class="input_cont">
+          <label for="stock" class="input_label">Required Stock</label>
+                    <input type="text" class="input_item"  name="req_stock">
+          </div>
+
+          <div class="input_cont">
+            <label for="dropdown"><p class="input_label">Unit</p></label>
+               <select id="dropdown" name="unit" class="dropdown_item">
+                            <option value="Kg">Kg</option>
+                            <option value="g">g</option>
+                            
+               </select>
+         </div>
+          
+
+         <div class="input_cont">
+              <label for="req_date" class="input_label">Required Date</label>
+               <input type="date" class="input_item"  name="req_date" id="expiration_date">
+         </div>
+
+          
+         <div class="input_cont">
+            <label for="req_address" class="input_label">Requested Address</label>
+            <input type="text" class="input_item"  name="req_address">
+            </div>
+
+        
+         <div class="input_cont">
+            <label for="dropdown"><p class="input_label">District</p></label>
+               <select id="dropdown" name="district" class="dropdown_item">
+                            <option value="Colombo">Colombo</option>
+                            <option value="Kaluthara">Kaluthara</option>
+                            <option value="Gampaha">Gampaha</option>
+               </select>
+                </div>
+      
+         <div class="submit_container">
+            <a href="<?php echo URLROOT ?>/OrderRequests/add"><button type="submit" class="btn">Request Item</button></a>
+            <div class="can_btn">
+            <a href="<?php echo URLROOT ?>/OrderRequests"><button type ="button" class="btn cancel_bt">Cancel</button></a>
+            </div>
+         </div>
+                    
+    </div>
+ 
+  </form>
+
+
+</div>
+
+      </div>
+
+</div> -->
 
 
    
@@ -259,9 +450,38 @@
 <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/sellerSidebar.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/sellerProfile.js"></script>
+<script src="<?php echo URLROOT ?>/assets/js/orderRequests.js"></script>
+
 
 
 
 
     <!-- ========================================================= -->
 </body>
+
+</html>
+
+<script>
+  
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get the button and the div to toggle
+    var addButton = document.getElementById("request_btn");
+    var requestItem = document.getElementById("accept_order_add_cont");
+
+    // Hide the request item div initially
+    requestItem.style.display = "none";
+
+    // Add click event listener to the button
+    addButton.addEventListener("click", function() {
+        // Toggle the visibility of the request item div
+        if (requestItem.style.display === "none" || requestItem.style.display === "") {
+            requestItem.style.display = "block";
+        } else {
+            requestItem.style.display = "none";
+        }
+    });
+});
+
+
+</script>

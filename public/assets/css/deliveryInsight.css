@@ -1,158 +1,229 @@
-:root {
-    /* dark shades of primary color*/
-    --clr-primary-1: #38803A;
-    --clr-primary-2:#3E8E41;
-    --clr-primary-3:#449C47;
-    --clr-primary-4: #4BAA4E;
-    /* primary/main color */
-    /* --clr-primary-5: #D7FCDB; */
-    --clr-primary-5: #4CAF4F;
-    /* lighter shades of primary color */
-    --clr-primary-6: #71C174;
-    --clr-primary-7: #8ECD90;
-    --clr-primary-8: #C6FBCB;
-    --clr-primary-9: #D7FCDB;
-    --clr-primary-10: #ECFEEE;
-  
-  
-  /* Secondry color */
-    --clr-secondry-1: #FFC933;
-    --clr-secondry-2: #FFC31F;
-    --clr-secondry-3: #FFBE0A;
-    --clr-secondry-4: #F5B400;
-    --clr-secondry-5: #E0A500;
-  
-  /* red color */
-    --clr-red-1: #E42535;
-    --clr-red-2: #E63946;
-    --clr-red-3: #E94957;
-  
-    /* white color */
-    --clr-white: #fff;
-  
-  
-  
-    /* darkest grey - used for headings */
-    --clr-grey-1: hsl(209, 31%, 19%);
-    --clr-grey-2: hsl(211, 28%, 26%);
-    --clr-grey-3: hsl(209, 34%, 30%);
-    --clr-grey-4: hsl(209, 28%, 39%);
-    /* grey used for paragraphs */
-    --clr-grey-5: hsl(210, 22%, 49%);
-    --clr-grey-6: hsl(209, 23%, 60%);
-    --clr-grey-7: hsl(211, 27%, 70%);
-    --clr-grey-8: hsl(210, 31%, 80%);
-    --clr-grey-9: hsl(212, 33%, 89%);
-    --clr-grey-10: hsl(210, 36%, 96%);
-  
-  
-  
-    --font-primary:  'Nunito', sans-serif;;
-    --transition: all 0.3s linear;
-    --spacing: 0.25rem;
-    --spacing-low: 0.15rem;
-    --radius-high: 1rem;
-    --radius-low: 0.5rem;
-    --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-  /*
-  ===============
-  Global Styles
-  ===============
-  */
-  
-  
-  .mycardd{
-    box-shadow: var(--dark-shadow);
-    padding: 2rem 1rem;
-    border-radius: var(--radius-low);
-    display: flex;
-    flex-direction: row;
-    transition: box-shadow 0.3s ease-in-out;
-    justify-content: space-around;
-
-  }
 
 
-  .left_side{
+
+.admincard_cont{
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  
-  }
-  
-  .image_product{
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 90%;
+}
+
+.admincard{
+  box-shadow: var(--light-shadow);
+  padding:0.5rem;
+  border-radius: var(--radius-low);
+  margin-top: 3rem;
+  /*width: 500px;*/
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  border: 2px solid var(--clr-primary-7);
+  min-width: 10rem;
+}
+
+.searchbarplace{
   display: flex;
   justify-content: center;
-  align-items: center;
-  
-  }
-  
-  .delivery_details{
-  
-   display: flex;
-   flex-direction: column;
-   font-size: medium;
-   justify-content: center;
-   margin: 1.5rem;
-  }
-    
-  /* This is right side buttons--------------------------------- */
-  
-  .right_side{
-    text-align: center;
-  }
-
-      .card_h{
-        font-size: medium;
-        font-weight: bold;
-      }
-
-      .num_complete{
-        font-size: x-large;
-        margin: 0.6rem;
-        font-weight: bold;
-      }
-
-      .number_of_growth{
-        color: var(--clr-primary-4);
-        font-weight: bold;
-        margin-bottom: 1rem ;
-      }
-
-      .square_card{
-    box-shadow: var(--dark-shadow);
-    padding:2rem 8rem;
-    border-radius: var(--radius-low);
-    display: flex;
-    flex-direction: column;
-  
-    
-      }
-
-      .more_details_button{
-        margin-top: 4rem;
-        font-weight: bold;
-          border: 2px solid #4BAA4E;
-          border-radius: var(--radius-low);
-          padding: 5px 18px;
-          transition: 0.5s;
-          
-        
-        
-        }
-
-        .more_details_button:hover{
-  
-          background-color: var(--clr-primary-7);
-          border: none;
-
-          
-          }
-
-.number_of_growth_red{
-  color: var(--clr-red-2);
-  font-weight: bold;
-        margin-bottom: 1rem ;
+  margin-top: 1rem;
 }
+
+.cardicon{
+  width: 50px;
+  height: 50px;
+}
+.cardicon_cont{
+  display: flex;
+  align-items: center;
+}
+.admincard_det_cont{
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
+.adminprofile{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+ 
+  /* align-content: center;
+  justify-content: center; */
+  /* margin-top: 5rem; */
+ 
+}
+.newsignups{
+  font-size: larger;
+  color:#4BAA4E;
+  font-weight: bold;
+}
+.signupcount{
+  color: var(--clr-grey-4);
+  font-weight: bold;
+  font-size: large;
+}
+.table_box{
+  /*margin:50px auto;*/
+  margin-top: 2rem;
+  width: 90%;
+}
+
+.table_row{
+  display: table;
+  width:93%;
+  margin: 10px auto;
+  background: transparent;
+  padding:12px 0;
+  color:#71C174;
+  box-shadow: var(--light-shadow);
+  
+}
+
+
+.table_cell{
+  display: table-cell;
+  text-align: center;
+  padding: 4px 0;
+  border-right: 1px var(--clr-primary-1);
+  vertical-align: middle;
+
+}
+.table_hed{
+  box-shadow: none;
+  background:var(--clr-primary-8);
+  font-weight: bold;
+}
+.column1 {
+  width: 5%; /* 1st column width */
+  
+}
+
+.column2 {
+  width: 15%; /* 2nd column width */
+  
+}
+.column3{
+  width: 15%;
+  
+}
+
+.column4 {
+  width: 40%; /* 3rd column width */
+  
+}
+
+.column5 {
+  width: 15%; /* 4th column width */
+  
+}
+
+.column6 {
+  width: 10%; /* 5th column width */
+  
+}
+
+
+
+.adduserbtn{
+  display:flex;
+  margin-left: 3rem;
+  margin-top: 2rem;
+}
+
+.review_icon{
+  height: 80px;
+  width: 80px;
+}
+
+.dec{
+  font-weight: bold;
+}
+
+.getmiddle{
+  
+  margin-left: 6.5rem;
+}
+
+.prof_img {
+ 
+  border-radius: 50%;
+  height: 130px;
+  width: 130px;
+  margin-left: 1rem;
+  border:4px solid rgb(87, 157, 90);
+   object-fit: cover;
+}
+
+.card {
+  box-shadow: var(--light-shadow);
+  padding: 0.5rem;
+  background: white;
+  border-radius: var(--radius-low);
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+  
+  
+}
+
+.text_cont{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  
+  margin-left: 2rem;
+  
+
+}
+
+.name_cont{
+  font-size: xx-large;
+  color: var(--clr-grey-5);
+  font-weight: bold;
+ 
+  margin-right: 4.8rem;
+  
+}
+
+.happy_selling{
+  color:var(--clr-grey-5);
+  font-size: larger;
+  font-weight: bold;
+  
+  margin-right: 11rem;
+}
+
+.welcome{
+  color:var(--clr-grey-5);
+  font-size: larger;
+  font-weight: bold;
+ 
+  align-self:flex-end;
+ 
+}
+
+.welcome_saviya{
+  display: flex;
+  flex-direction: row;
+  
+  margin-right: 5.5rem;
+ 
+}
+
+.govi_img{
+  margin-left: 2rem;
+  align-self: center;
+}
+
+.normal_img{
+  height: 50px;
+  width: 50px;
+}
+
+.small_img{
+  height: 25px;
+  width: 25px;
+  
+}
+
+
+
+

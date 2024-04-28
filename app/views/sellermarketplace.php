@@ -212,6 +212,7 @@ function paramString($validParams){
         
 			</div> <!-- card-body.// -->
       <div class="filter_btn_cont">
+        <!--apply  button for categorus-->
         <input type="submit" class="btn apply_btn" value="Apply" id="apply_category">
       </div>
     </div>

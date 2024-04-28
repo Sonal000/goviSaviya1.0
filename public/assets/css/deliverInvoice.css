@@ -179,3 +179,13 @@ body{
 .invoice_wrapper .footer .terms .tc{
 	font-size: 16px;
 }
+
+@media screen and (max-width:500px){
+
+
+.wrapper{
+    margin-left: -2.7rem;
+    scale: 45%;
+}
+
+}

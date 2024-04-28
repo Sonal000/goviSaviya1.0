@@ -26,21 +26,20 @@
 <div class="profile">
     <div class="auction_page">
         <div class="hed">
-            Delivery Reviews & Ratings
+            Delivery Reviews
         </div>
         
         <div class="out_card">
 <!-- 1st Card------------------------------------------------------------------------------------- -->
 <?php if (!empty($data['reviews'])) { ?>
     <?php foreach ($data['reviews'] as $reviews) { 
-        if($reviews){
-            foreach($reviews as $review){
+       
                 ?>
        
         
         <div class="mycardd">
            
-                <div class="post_left">
+                
                     <div class="pro_detail">
                         <!-- <div class="stars">
                             <i class="fa-regular fa-star"></i>
@@ -53,38 +52,44 @@
 <div class="name_img">
 
                         <div class="spanimg">
-                            <img src="<?php echo URLROOT . '/store/profiles/'.$review->buyer_img ?>" class="proimg" alt="">
+                            <img src="<?php echo URLROOT . '/store/profiles/'.$reviews->buyer_img ?>" class="proimg" alt="">
 
                         </div>
                         <div class="reviewer_name">
-                            <?php echo $review->buyer_name; ?>
+                            <div class="nameName">
+                            <?php echo $reviews->buyer_name; ?>
+                            </div>
                             <div class="order_name">
-                            Review for <span class="item"><?php echo $review->item_name; ?> <?php echo $review->quantity; ?><?php echo $review->item_unit; ?></span>
+                            Review for <span class="item"><?php echo $reviews->item_name; ?> <?php echo $reviews->quantity; ?><?php echo $reviews->item_unit; ?></span>
+                        </div>
+                        <div class="compDate">
+                            Completed Date: <?php echo date('Y-m-d', strtotime($reviews->completed_date));?>  
                         </div>
                         </div>
-                        </div>
+                </div>
 
 
-                        
-                        <div class="review_content">
-                            <?php echo $review->review; ?>
+                        <div class="outerbox">
+                            <div class="review_content">
+                                <?php echo $reviews->review; ?>
+                            </div>
                         </div>
                         <div class="addDate">
-                            Posted On: <?php echo date('Y-m-d', strtotime($review->p_date));?> <span class="black">at</span>  <?php echo date('H:i:s', strtotime($review->p_date)); ?>
+                            Posted On: <?php echo date('Y-m-d', strtotime($reviews->p_date));?> <span class="black">at</span>  <?php echo date('H:i:s', strtotime($reviews->p_date)); ?>
 
                         </div>
                         <div class="details_view">
                         
                         </div>
                     </div>
-                </div>
+                
            
                
         </div>
         
     <?php } ?>
 
-<?php }}} else { ?>
+<?php } else { ?>
     <p>No reviews found.</p>
 <?php } ?>
 

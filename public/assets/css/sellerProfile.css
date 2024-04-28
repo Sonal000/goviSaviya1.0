@@ -363,6 +363,7 @@ min-width: 150px;
  box-shadow: var(--light-shadow);
  border-radius: var(--radius-high);
  border: 1px solid transparent;
+
 }
 .about_title{
 
@@ -378,6 +379,8 @@ min-width: 150px;
 .about_title>h3{
  font-size: 1rem;
 }
+
+
 .descp{
  font-size: 0.9rem;
  /* transition: var(--transition); */
@@ -449,6 +452,9 @@ min-width: 150px;
  letter-spacing: 1px;
  min-width: 80px;
 }
+
+
+
 
 
 
@@ -789,3 +795,18 @@ min-width: 150px;
   height: auto;
  } 
  
+ .input_items{
+  display: flex;
+  flex-direction:column;
+  /* flex-wrap: wrap; */
+  /* gap: 0.5rem; */
+   border: 2px solid red;
+}
+
+
+.input_row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+}

@@ -589,11 +589,12 @@ input:focus{
   border-radius: var(--radius-low);
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-top: 1rem;
   transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
+  
 }
 .H4center{
   margin-top: 2rem;
@@ -639,6 +640,7 @@ a{
 
 .productimg{
     display: flex;
+   
 }
 
 .productimg img :hover{
@@ -758,7 +760,8 @@ a{
 }
 .productavailability{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 0.4rem;
     
     
 }
@@ -773,7 +776,7 @@ a{
     font-weight: bold;
     color: var(--clr-red-1);
     font-size: medium;
-    margin-left: 7rem;
+    /* margin-left: 7rem; */
 }
 .prodes{
     display: flex;
@@ -814,5 +817,100 @@ a{
 
  .field_margin{
   margin-left: 0.5rem;
+ }
+
+ @media screen and (max-width: 500px) {
+ 
+
+  .mycard{
+    box-shadow: var(--dark-shadow);
+    /* padding:0.5rem; */
+    border-radius: var(--radius-low);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* justify-content: space-between; */
+    margin-top: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    /* width: 230px; */
+  }
+
+  .product_des_cont{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: space-between;
+    
+  }
+
+  .btn_cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .des_cont{
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 1.5rem; */
+    /* justify-content: space-evenly; */
+    margin-top: 1rem;
+    width:100%;
+   
+    
+    
+    
+  }
+  .productavailability{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0rem;
+  }
+
+.p_det{
+  font-size: small;
+  /* margin-left: 0.5rem; */
+  margin-right: 3rem;
+
+}
+.available{
+  display: flex;
+  font-weight: bold;
+  color: var(--clr-red-1);
+  font-size: medium;
+ 
+  width: 100%;
+  
+  justify-content: flex-start;
+  
+}
+
+.product_des_view_cont{
+  display: flex;
+  flex-direction: column;
+  
+  
+  width: 100%;
+}
+
+.available_stock{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.mango{
+  height: 210px;
+  width:210px;
+  border-radius: var(--radius-low);
+}
+
+
+
  }
 

@@ -56,10 +56,10 @@
                                 
                                 </div>
                             <div class="pro_location">
-                            <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
+                                <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
                                 From:
                                 <?php echo $order->seller_address?>
-                                <div class="pro_location">
+                            <div class="pro_location">
                                 <i class="fa-solid fa-truck" style="color: #0f0f0f;"></i>
                                 
                                 To:  <?php echo  $order->buyer_address?>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="addDate">
                             <i class="fa-solid fa-calendar-days"></i>
-                                Date Delivered:  <?php echo date('Y-m-d H:i:s', strtotime($order->completed_date)); ?>
+                                Date Delivered:  <?php echo date('Y-m-d', strtotime($order->completed_date)); ?>
                             </div>
                             <div class="details_view">
                             
@@ -92,7 +92,26 @@
                   }
         }else{ ?>
         
-        <div> <p> There are no Completed Orders </p></div>        
+        <div class="cardNo">
+
+<div class="noVehicleCard">
+         
+         <div class="heading">
+         There are no <span class="govi">Completed Orders</span>
+         </div>
+        
+         <div class="addVehicleCard">
+             <div class="image">
+                <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+             </div>
+             <div class="helo">
+                 <button class="buttonn addVehicle"><a href="<?php echo URLROOT.'/orders'?>">View Orders</a></button>
+             </div>
+
+         </div>
+
+     </div>
+     </div>       
         <?php
 
         } ?>

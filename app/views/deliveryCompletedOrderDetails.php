@@ -69,7 +69,9 @@
 
                         <div style="display:flex; align-items:center; " class="more_info"><i class="fa-solid fa-user"></i> Seller:  <?php echo $data['order']->seller_name ?> </p></div>
 
-                        <div style="display:flex; align-items:center; " class="more_info"><i class="fa-solid fa-truck"></i> Buyer:   <?php echo $data['order']->buyer_name ?> </p></div>                         
+                        <div style="display:flex; align-items:center; " class="more_info"><i class="fa-solid fa-truck"></i> Buyer:   <?php echo $data['order']->buyer_name ?> </p></div> 
+                        
+                        
 
                     
                      </div>    

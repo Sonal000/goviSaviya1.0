@@ -253,6 +253,11 @@ font-size: small;
 
 }
 
+.nameName{
+  font-size: 24px;
+
+}
+
 .black{
   color:black
 }
@@ -281,16 +286,6 @@ font-size: small;
 }
 
 /* Styles for close button */
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #ccc;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 3px;
-}
 
 .close-btn:hover {
   background-color: #aaa;
@@ -306,6 +301,7 @@ font-size: small;
   margin-top: 1rem;
   transition: box-shadow 0.3s ease-in-out;
   justify-content: space-between;  
+  padding-right: 1rem;
  
   width: 49%;
 }
@@ -317,6 +313,8 @@ font-size: small;
   
   
 }
+
+
 
 
 .order_name{
@@ -334,6 +332,7 @@ font-size: small;
   object-fit: cover;
   width: 70px;
   border-radius: 50%;
+  margin-top: 1.2rem;
   
 }
 
@@ -353,4 +352,62 @@ font-size: small;
   padding: 1rem;
 }
 
+.hed{
+  font-weight: 600;
+  letter-spacing: var(--spacing-low);
+  font-size: 20px;
+}
+
+.compDate{
+  font-size: 14px;
+}
+
+
+
+
+.pro_detail{
+  width: 100%;
+}
+
+.review_content{
+  height: 120px;
+  margin-left: 4px;
+}
+
+@media screen and (max-width:500px){
+
+  .out_card{
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+  }
+
+  .mycardd{
+   width: 100%;
+  }
+
+  .compDate{
+    font-size: 12px;
+  }
+
+  .name_img{
+    width: 100%;
+   
+  }
+
+  .order_name{
+    font-size: 14px;
+  }
+
+  .pro_detail{
+    width: 100%;
+  }
+
+  .review_content{
+    height: max-content;
+  }
+
+}
 

@@ -469,9 +469,11 @@ input:focus{
   display:flex ;
   flex-direction: row;
   justify-content: space-between;
-  width: 1000px;
+  flex: 1;
+ 
   
-  height: 200px;
+  
+  
  
 }
 
@@ -482,21 +484,14 @@ input:focus{
     margin-left: 1rem;
     justify-content: space-between;
     
-    
-    
-    
 }
 
 .post_left_review{
   display: flex;
   flex-direction: column;
-  margin-top: 0.5rem;
   margin-left: 1rem;
-  justify-content: space-evenly;
- 
-  
-  
-  
+  flex: 0.7;
+  /* gap: 0.5rem; */
   
 }
 .pro_name{
@@ -533,6 +528,7 @@ input:focus{
   flex-direction: column;
   justify-content: center;
   margin-right: 1rem;
+  flex: 0.3;
 
   
  
@@ -544,7 +540,8 @@ input:focus{
 .pro_detail_review{
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  justify-content: space-evenly;
+  height: 200px;
 }
 .bid_detail{
     display: flex;
@@ -634,3 +631,231 @@ text-align: center;
   background-color: #fb8e97;
   color: whitesmoke;
 }
+
+@media screen and (max-width: 430px) {
+
+  .mycard{
+    box-shadow: var(--dark-shadow);
+    padding:0.5rem;
+    border-radius: var(--radius-low);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-between; */
+    margin-top: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    width: 200px;
+  }
+
+  .left_right_container{
+    display:flex ;
+    flex-direction:column;
+    
+    width: 200px;
+    
+    /* justify-content: space-between; */
+    /* width: 1000px; */
+   
+   
+}
+
+.post_left{
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  /* margin-left: 1rem; */
+  /* justify-content: space-between; */
+
+}
+
+.post_right{
+  display: flex;
+  width: 200px;
+  flex-direction: column;
+  /* justify-content: space-between;
+  margin-right: 1rem; */
+}
+
+.update_edit_bt{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  width: 180px;
+  justify-content: center;
+  gap:0.2rem;
+  align-self: center;
+
+  
+}
+
+.aucbt_post{
+  color: var(--clr-white);
+  width: 180px;
+  font-size: small;
+  text-align: center;
+  }
+
+  .high_bid{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-left: 0.1rem;
+  }
+
+  .base_price{
+    font-weight: bold;
+    opacity: 50%;
+    text-align: left;
+    margin-left: 1rem;
+}
+.current_highest{
+    font-weight: bold;
+    font-size: large;
+    text-align: left;
+    margin-left: 1rem;
+}
+.remaining_time{
+    color: var(--clr-red-1);
+    font-weight: bold;
+    text-align:left;
+    margin-left: 1rem;
+}
+
+
+
+ }
+
+
+ @media screen and (max-width: 500px) {
+
+  .mycard{
+    box-shadow: var(--dark-shadow);
+    padding:0.5rem;
+    border-radius: var(--radius-low);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-between; */
+    margin-top: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    width: 280px;
+  }
+
+  .left_right_container{
+    display:flex ;
+    flex-direction:column;
+    
+    width: 280px;
+    
+    /* justify-content: space-between; */
+    /* width: 1000px; */
+   
+   
+}
+
+.auction_item_cont{
+  justify-content: center;
+  
+  padding: 2.5rem;
+  
+}
+
+.post_left{
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  /* margin-left: 1rem; */
+  /* justify-content: space-between; */
+
+}
+
+.post_right{
+  display: flex;
+  width: 280px;
+  flex-direction: column;
+  /* justify-content: space-between;
+  margin-right: 1rem; */
+}
+
+.update_edit_bt{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  width: 250px;
+  justify-content: center;
+  gap:0.2rem;
+  align-self: center;
+
+  
+}
+
+.aucbt_post{
+  color: var(--clr-white);
+  width: 250px;
+  font-size: small;
+  text-align: center;
+  }
+
+  .high_bid{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-left: 0.1rem;
+  }
+
+  .base_price{
+    font-weight: bold;
+    opacity: 50%;
+    text-align: left;
+    margin-left: 1rem;
+}
+.current_highest{
+    font-weight: bold;
+    font-size: large;
+    text-align: left;
+    margin-left: 1rem;
+}
+.remaining_time{
+    color: var(--clr-red-1);
+    font-weight: bold;
+    text-align:left;
+    margin-left: 1rem;
+}
+.mango{
+  height: 250px;
+  width:250px;
+  border-radius: var(--radius-low);
+}
+
+.left_right_container_review{
+  display:flex ;
+  flex-direction: column;
+  justify-content: space-between;
+  /* width: 1000px;
+  
+  height: 200px; */
+ 
+}
+
+.post_right_review{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auc_cards{
+  align-self: center;
+}
+
+
+
+
+ }
+
+
+
+ 

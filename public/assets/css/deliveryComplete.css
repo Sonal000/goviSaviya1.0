@@ -401,3 +401,37 @@
     border: none;
     
     }
+
+
+    @media screen and (max-width:500px){
+
+
+      .progress_bar{
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin:  0rem;
+        margin-top: -1rem;
+        
+        
+      }
+
+      .mycardd{
+        display: flex;
+        flex-direction: column;
+      } 
+    
+
+      .order_details_head{
+        font-size: 20px;
+        margin-bottom: 1rem;
+        
+        text-align: center;
+        justify-content: center;
+      }
+
+
+
+    }

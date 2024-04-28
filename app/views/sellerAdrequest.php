@@ -66,7 +66,7 @@
                         <?php echo $requests->buyer_name; ?>
                     </div>
                     <div class="reqdate">
-                        <?php echo $post_date; ?>
+                        Requested Date :<?php echo $post_date; ?>
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                         <?php echo $requests->buyer_name; ?> requests <?php echo $requests->req_stock;?> <?php echo $requests->unit;?> of <?php echo $requests->name;?>
                     </div>
                     <div class="req_item">
-                        Item : <?php echo $requests->name; ?>
+                        Product : <?php echo $requests->name; ?>
                     </div>
                     <div class="req_quantity">
                         Amount : <?php echo $requests->req_stock; ?> <?php echo $requests->unit; ?>
@@ -85,7 +85,7 @@
                         Request before : <?php echo $req_date; ?>
                     </div>
                     <div class="req_location">
-                        Location : <?php echo $requests->req_address; ?>
+                        Location : <?php echo $requests->buyer_address; ?>
                     </div>
     
                 </div>
