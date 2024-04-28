@@ -423,16 +423,10 @@ function paramString($validParams){
          <p class="item_title"><?php echo $item->name; ?></p>
          <p class="item_bids"> <?php echo $item->bid_Count; ?> bids</p>
         </div>
-        <div class="item_rating">
-        <i class="fas fa-star star_img"></i>
-        <i class="fas fa-star star_img"></i>
-        <i class="fas fa-star star_img"></i>
-        <i class="fas fa-star star_img"></i>
-        <i class="fas fa-star star_img"></i>
-        </div>
+        
          <div class="item_price_cont">
            <p class="item_price">Rs <?php echo $item->price; ?>/<span>kg<span></span></p>
-           <p class="item_time">24h / <span>left<span></span></p>
+           <p class="item_time"><?php echo $item->remain_time; ?> <span>left<span></span></p>
          </div>
        </div>
        
