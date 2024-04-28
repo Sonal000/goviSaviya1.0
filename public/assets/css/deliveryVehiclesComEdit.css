@@ -311,6 +311,47 @@ small{
     justify-content: center;
 }
 
+@media screen and (max-width:500px){
+  .card-body{
+    display: flex;
+    flex-direction: column;
+    
+    
+  }
+
+.left{
+  
+  width: max-content;
+  margin-bottom: 10px;
+}
+
+.right{
+  
+  width: max-content;
+}
+
+.hed{
+  font-size: 16px;
+  font-weight: 800;
+
+}
+
+.card-heading{
+  font-size: 14px;
+}
+
+.form_details{
+  font-size: 14px;
+}
+
+
+
+
+
+
+
+}
+
 
 
 

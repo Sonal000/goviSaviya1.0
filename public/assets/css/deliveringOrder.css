@@ -373,8 +373,10 @@
   
   .progress_bar{
     box-shadow: var(--dark-shadow);
-    padding:4rem;
+    padding:2rem;
     border-radius: var(--radius-low);
+    width: max-content;
+
   }
 
   .instructions{
@@ -427,6 +429,7 @@
 
     .order_details_head{
       margin-bottom: 1rem;
+      font-size: 18px;
     }
 
     .button_class{
@@ -467,6 +470,7 @@
  
 
   .price_of_order{
+    margin: 2rem;
     display: flex;
     justify-content: center;
     font-size: 1.2rem; 
@@ -509,3 +513,97 @@
   .bold{
     font-weight: 600;
   }
+
+  .p_title{
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+
+  @media screen and (max-width:500px){
+
+    .mycardd{
+      display: flex;
+      flex-direction: column;
+    } 
+
+    .imgss{
+      width: 250px;
+      height: 170px;
+      margin-top: -7px;
+    }
+
+    .progress_bar{
+      padding: 10px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin:  0rem;
+      margin-top: -1rem;
+      
+      
+    }
+
+    
+  .p_title{
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+  }
+
+  .more_info{
+    font-size: 14px;
+    margin: 0.6rem;
+    }
+
+    .btn{
+      font-size: 12px;
+      padding: 6px;
+    }
+  
+    .details{
+      font-size: 15px;
+      margin: 0.2rem;
+    }
+
+    .heading{
+      margin-bottom: 1rem;
+      
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+    .instructions{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow:none;
+      text-align: center;
+      padding: 0.5rem;
+    }
+
+    .delivery_details{   
+      margin: 0.4rem;
+     }
+
+     .update_edit_btn{
+      margin-top: 0;
+      
+      align-items: center;
+      justify-content: center;
+      height: 3.5rem;
+  }
+
+  .distance_details{
+    font-size: 14px;
+  }
+  
+  
+
+  }
+

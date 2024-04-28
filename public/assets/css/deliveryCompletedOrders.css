@@ -7,7 +7,7 @@ Global Styles
 
 
 .mycard{
-  width: 300px; /* Adjust the width as needed */
+  width: 285px; /* Adjust the width as needed */
   height: auto; /* Adjust the height as needed */
   border: 1px solid #ccc; /* Optional: Add border for visual separation */
   box-shadow: var(--dark-shadow);
@@ -284,4 +284,82 @@ Global Styles
   justify-content: center;
   align-items: center;
   
+}
+
+
+
+@media screen and (max-width:500px){
+
+
+
+  .mycard{
+    width: 170px; /* Adjust the width as needed */
+    height: auto; /* Adjust the height as needed */
+    border: 1px solid #ccc; /* Optional: Add border for visual separation */
+    box-shadow: var(--dark-shadow);
+    padding: 10px;
+    border-radius: var(--radius-low);
+    margin-top: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+    justify-content: space-between;  
+    display: flex;
+    flex-direction: column;
+    border: #bbbbbb 1px solid;
+    text-align: center;
+  }
+
+.full_container{
+  border: #4BAA4E solid 2px;
+  display: flex;
+}
+
+.image{
+  width: 140px;
+  height: 100px;
+  border: #3b8c3f solid 2px;
+}
+
+.picture{
+  width: 140px;
+  height: 90px;
+}
+
+.pro_detail{
+  border: #3b8c3f 2px solid;
+}
+
+.item_name{
+  font-size: 16px;
+}
+
+.price{
+  font-size: 12px;
+}
+
+.pro_location{
+  font-size: 12px;
+}
+
+.addDate{
+  font-size: 12px;
+}
+
+.update_edit_bt{
+  font-size: 10px;
+}
+
+.accept_order_btn{
+  font-size: 10px;
+  padding: 5px;
+}
+
+
+
+
+
+
+
+
+
+
 }

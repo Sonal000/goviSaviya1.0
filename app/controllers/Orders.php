@@ -94,7 +94,7 @@ class Orders extends Controller{
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
             $deliver_adr = $this->deliverModel->getProfileInfo($_SESSION['user_id'])->address;
             
-            var_dump($orders);
+           
         $data=[
             "orders"=>$orders,
             "hasVehicle"=>$hasVehicle,

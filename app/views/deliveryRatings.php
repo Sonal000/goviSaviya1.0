@@ -26,7 +26,7 @@
 <div class="profile">
     <div class="auction_page">
         <div class="hed">
-            Delivery Reviews & Ratings
+            Delivery Reviews
         </div>
         
         <div class="out_card">
@@ -39,7 +39,7 @@
         
         <div class="mycardd">
            
-                <div class="post_left">
+                
                     <div class="pro_detail">
                         <!-- <div class="stars">
                             <i class="fa-regular fa-star"></i>
@@ -56,15 +56,17 @@
 
                         </div>
                         <div class="reviewer_name">
+                            <div class="nameName">
                             <?php echo $reviews->buyer_name; ?>
+                            </div>
                             <div class="order_name">
                             Review for <span class="item"><?php echo $reviews->item_name; ?> <?php echo $reviews->quantity; ?><?php echo $reviews->item_unit; ?></span>
                         </div>
                         <div class="compDate">
-                            Completed Date: <?php echo date('Y-m-d', strtotime($reviews->completed_date));?> <span class="black">at</span>  <?php echo date('H:i:s', strtotime($reviews->completed_date)); ?>
+                            Completed Date: <?php echo date('Y-m-d', strtotime($reviews->completed_date));?>  
                         </div>
                         </div>
-                        </div>
+                </div>
 
 
                         <div class="outerbox">
@@ -80,7 +82,7 @@
                         
                         </div>
                     </div>
-                </div>
+                
            
                
         </div>

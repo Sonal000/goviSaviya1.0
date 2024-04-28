@@ -205,6 +205,64 @@ input {
   margin-top: 0.5rem;
 }
 
+
+@media screen and (max-width:500px){
+
+  .card-body{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-title{
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .card-subtitle_2{
+    font-size: 12px;
+  }
+  .card-subtitle_1{
+font-size: 12px;
+  }
+  .card-subtitle_3{
+font-size: 12px;
+  }
+  .card-subtitle_4{
+font-size: 12px;
+  }
+  .card-subtitle_5{
+font-size: 12px;
+  }
+  .card-subtitle_6{
+font-size: 12px;
+  }
+
+  .info_heading{
+    font-size: 10px;
+  }
+
+  .btn{
+    font-size: 10px;
+    padding: 5px;
+  }
+
+  .btn_left{
+    margin-right: 8px;
+    width: max-content;
+  }
+
+  .btn_right{
+    margin-right: 8px;
+    width: max-content;
+  }
+
+  .buttons{
+    
+    width: max-content;
+  }
+
+}
  
   
   

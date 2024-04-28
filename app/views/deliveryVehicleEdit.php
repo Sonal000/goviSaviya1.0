@@ -86,7 +86,7 @@
                     <!-- <span class="invalid-feedback"><?php echo $data['vehicle_img_error']; ?></span> -->
                 </div>
              
-                <div class="submit_button"><input type="submit" class="submit_btnn" value="Submit"></div>
+                <div class="submit_button"><input type="submit" class="btn" value="Submit"></div>
                     
                         
                     </div>

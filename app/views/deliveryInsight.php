@@ -251,7 +251,7 @@ require APPROOT. '/views/layouts/navbar2.php';
                 
                 <div class="card-left">
                     <div class="card-icon icon-one">
-                    <i class="fa-solid fa-chart-line"></i>
+                    <i class="fa-solid fa-money-bill-trend-up"></i>
                     </div>
                 </div>
                 <div class="card-right">
@@ -260,11 +260,11 @@ require APPROOT. '/views/layouts/navbar2.php';
                         <h2>Revenue Growth</h2>
 
                         <h2><?php if($data['revenueGrowth']<=0){ ?>
-                        <span class="text-desktop" style="font-size:18px; font: weight 600px;"><?php echo $data['revenueGrowth'] ?> </span><span style="font-size:16px">than last month</span>
+                        <span class="text-desktop" style="font-size:18px; font: weight 600px;">Rs.<?php echo $data['revenueGrowth'] ?>/= </span><span style="font-size:16px">than last month</span>
                         <?php }else{?>
 
                        
-                        <span class="text-desktop" style="font-size:18px; font: weight 600px;">+<?php echo $data['revenueGrowth'] ?> </span><span style="font-size:16px">than last month</span>
+                        <span class="text-desktop" style="font-size:18px; font: weight 600px;">+Rs.<?php echo $data['revenueGrowth'] ?>/= </span><span style="font-size:16px">than last month</span>
                         <?php }?></h2>
                     </div>
                     <!-- --------------------------------------------------------- -->
@@ -292,6 +292,47 @@ require APPROOT. '/views/layouts/navbar2.php';
                 </div>
             </div>
 
+
+            <!-- ----------------------------------------------------------- Average -->
+
+            <div class="card">
+                
+                <div class="card-left">
+                    <div class="card-icon icon-one">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                </div>
+                <div class="card-right">
+   
+                    <div class="card-top-info">
+                        <h2>Average Revenue per Order</h2>
+
+                        <h2>Rs.<?php echo $data['averageRevenue'] ?>/=</h2>
+                    </div>
+                    <!-- --------------------------------------------------------- -->
+                    <?php
+                        $currentMonth = date('F');
+
+
+                        $previousMonth = date('F', strtotime('-1 month'));
+
+
+                        $previousPreviousMonth = date('F', strtotime('-2 months'));
+
+                        ?>
+                    <!-- --------------------------------------------------------                        -->
+                    <!-- ---------------------------------------------------------------- -->
+                    <div class="last-card-text">
+                        
+
+                        
+
+
+                    </div>
+                   
+                    
+                </div>
+            </div>
                 
                 <!------------------first row graph-------------->
                
