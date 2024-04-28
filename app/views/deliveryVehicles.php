@@ -87,7 +87,7 @@
                         <div class="card-subtitle_3"><span class="info_heading">Model: </span><?php echo $vehicle->vehicle_model?> </div>
                         <div class="card-subtitle_4"><span class="info_heading">Vehicle Number:</span> <?php echo $vehicle->vehicle_number?> </div>
 
-                        <div class="moree_details"><a href="<?php echo URLROOT;?>/deliveryVehicles/show/<?php echo $vehicle->vehicle_id; ?>"><button class="btn">More</button></a></div>
+                        <div class="moree_details"><a href="<?php echo URLROOT;?>/deliveryVehicles/show/<?php echo $vehicle->vehicle_id; ?>"><button class="btn btn_more">More</button></a></div>
 
                     </div>  
 

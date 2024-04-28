@@ -56,10 +56,10 @@
                                 
                                 </div>
                             <div class="pro_location">
-                            <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
+                                <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
                                 From:
                                 <?php echo $order->seller_address?>
-                                <div class="pro_location">
+                            <div class="pro_location">
                                 <i class="fa-solid fa-truck" style="color: #0f0f0f;"></i>
                                 
                                 To:  <?php echo  $order->buyer_address?>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="addDate">
                             <i class="fa-solid fa-calendar-days"></i>
-                                Date Delivered:  <?php echo date('Y-m-d H:i:s', strtotime($order->completed_date)); ?>
+                                Date Delivered:  <?php echo date('Y-m-d', strtotime($order->completed_date)); ?>
                             </div>
                             <div class="details_view">
                             

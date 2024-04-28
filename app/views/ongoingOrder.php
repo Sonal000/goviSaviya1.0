@@ -107,10 +107,10 @@
 
                 <div class="delivery_details">
                     
-               <div class="more_info"><i class="fa-solid fa-location-dot"></i></i> Pickup Location:  <?php echo $data['details']->pickup_address?></div>
-               <div class="more_info"><i class="fa-solid fa-thumbtack"></i> End Location: <?php echo $data['details']->order_address?></div>
-               <div class="more_info"><i class="fa-solid fa-user"></i> Seller: <?php echo $data['details']->seller_name?></div>
-               <div class="more_info"><i class="fa-solid fa-truck"></i> Buyer: <?php echo $data['details']->buyer_name?></div>
+               <div class="more_info in"><i class="fa-solid fa-location-dot"></i></i> Pickup Location:  <?php echo $data['details']->pickup_address?></div>
+               <div class="more_info in"><i class="fa-solid fa-thumbtack"></i> End Location: <?php echo $data['details']->order_address?></div>
+               <div class="more_info in"><i class="fa-solid fa-user"></i> Seller: <?php echo $data['details']->seller_name?></div>
+               <div class="more_info in"><i class="fa-solid fa-truck"></i> Buyer: <?php echo $data['details']->buyer_name?></div>
                <div class="button_section">
 
                     <button class="btn" id="showContactBtn"><i class="fa-solid fa-phone"></i>  Contact Seller</button>
@@ -147,18 +147,19 @@
              
             <div class="update_edit_btnn">
                 <div class="price">Revenue: Rs. <?php echo $data['details']->deliver_fee?>/=</div>
-                    <button class="btn"><a href="<?php echo URLROOT; ?>/Orders/pickedup"><i class="fa-solid fa-circle-check"></i>  Picked-up</a></button>
+                    <button class="btn a_btn"><a href="<?php echo URLROOT; ?>/Orders/pickedup"><i class="fa-solid fa-circle-check"></i>  Picked-up</a></button>
                     <!-- <botton class="ignore_order_btnnn"><a href="<?php echo URLROOT; ?>/DeliveryConfirmQualityPickup"><i class="fa-solid fa-ban"></i>  Confirm Quality</a></botton> -->
              
             </div>
              <div class="progress_bar">
                 <div class="p_title">Current Order Status</div>
+                <div class="details_all">
              <div class="more_info"><i class="fa-solid fa-circle-check"></i></i> Order Confirmed</div>
              <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Picked from Seller</div>
              <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Quality confirmed: Pickup</div>
              <div class="more_info"><i class="fa-regular fa-circle-check"></i></i> Order Delivered</div>
              <div class="more_info"><i class="fa-regular fa-circle-check"></i> </i> Quality Confirmed: Drop-off</div>
-                
+             </div>
              </div>
             </div>
 
@@ -201,23 +202,21 @@
 
             <div class="cardNo">
 
-<div class="noVehicleCard">
+<div class="noVehicleCard noVehicleTwo">
          
-         <div class="heading">
+         <div class="heading ">
          No orders Selected
          </div>
          <div class="details ">
          Please click below to choose an order and proceed with your delivery.
-         </div><div class="details details_two">
-         Let's begin!
          </div>
 
          <div class="addVehicleCard">
-             <div class="image">
-                <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+             <div class="image image_two">
+                <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img del_img_2">
              </div>
              <div class="helo">
-                <a class="btn" href="<?php echo URLROOT.'/orders'?>">View Available Orders</a>
+                <a class="btn btn_two" href="<?php echo URLROOT.'/orders'?>">View Available Orders</a>
              </div>
 
          </div>

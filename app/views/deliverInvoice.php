@@ -30,9 +30,9 @@
 					</div>
 				</div>
 				<div class="invoice_sec">
-					<p class="invoice bold">INVOICE</p>
+					<p class="invoice bold">Bill</p>
 					<p class="invoice_no">
-						<span class="bold">Invoice</span>
+						<span class="bold">Bill ID</span>
 						<span>D-<?php echo $data['item_id'];?>/<?php echo $data['id'];?></span>
 					</p>
 					<p class="date">
@@ -54,8 +54,10 @@
 					<p>Buyer:</p>
 	          		<p class="bold price"> <?php echo $data['order']->buyer_name;?></p>
                     
+					  
+
                     <?php echo $data['order']->buyer_address;?><br/>
-			           <?php echo $data['order']->buyer_mobile;?>
+			           <?php echo $data['order']->buyer_mobile; ?>
 			        </span>
 				</div>
 			</div>
@@ -66,7 +68,7 @@
 					<div class="row">
 						<div class="col col_no">No.</div>
 						<div class="col col_des">ITEM DESCRIPTION</div>
-						<div class="col col_price">TYPE</div>
+						<div class="col col_price" style="font-size:13px; margin-top:6px">COMPLETED DATE</div>
 						<div class="col col_qty">DISTANCE</div>
 						<div class="col col_total">TOTAL</div>
 					</div>
@@ -82,10 +84,11 @@
 							<p><?php echo $data['order']->quantity;?><?php echo $data['order']->item_unit;?></p>
 						</div>
 						<div class="col col_price">
-							<p><?php echo $data['type'];?></p>
+							<p><?php echo date('Y-m-d', strtotime($data['order']->completed_date)); ?></p>
 						</div>
 						<div class="col col_qty">
-							<p>2</p>
+							<p><?php echo(getDistance($data['order']->pickup_address,$data['order']->order_address));
+                            ?>Km</p>
 						</div>
 						<div class="col col_total">
 							<p>Rs. <?php echo $data['order']->deliver_fee;?></p>
@@ -103,7 +106,7 @@
 			       
 			       	<p class="bold">
 			            <span>Sub Total</span>
-			            <span><?php echo $data['order']->deliver_fee;?></span>
+			            <span>Rs. <?php echo $data['order']->deliver_fee;?></span>
 			        </p>
 				</div>
 			</div>

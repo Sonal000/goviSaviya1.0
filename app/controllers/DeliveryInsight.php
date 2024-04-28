@@ -72,6 +72,7 @@ class DeliveryInsight extends Controller{
         //Reviews
 
         $reviews=$this->deliverModel->getNumberofReviews($deliver_id);
+
         //Deliver Profile Info
 
         $profile=$this->deliverModel->getProfileInfo($_SESSION['user_id']);
@@ -84,6 +85,10 @@ class DeliveryInsight extends Controller{
         //Revenue Growth
 
         $revenueGrowth = $thisRevenue - $prevRevenue;
+
+        //Average Revenue
+
+        $averageRevenue = $totalRevenue / $totalOrdersCompleted;
        
 
 
@@ -100,7 +105,8 @@ class DeliveryInsight extends Controller{
             'prevPrevRevenue'=>$prevPrevRevenue,
             'reviews'=>$reviews->reviews_count,
             'orderGrowth'=>$orderGrowth,
-            'revenueGrowth'=>$revenueGrowth
+            'revenueGrowth'=>$revenueGrowth,
+            'averageRevenue'=>$averageRevenue
 
 
         ];

@@ -221,6 +221,61 @@
     margin-bottom: 3rem;
   }
   
+
+  @media screen and (max-width:500px){
+
+.card-body{
+  display: flex;
+  flex-direction: column;
+}
+
+.vehicle_img{
+  width: 240px;
+
+}
+
+.left_side{
+  
+  width: 100%;
+}
+
+.right_side{
+ 
+  width: 100%;
+  gap: 0.3rem;
+}
+
+.card-title{
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.subtitle_ss{
+  font-size: 14px;
+  margin-bottom: 1rem;
+}
+
+.card-subtitle_1{
+  font-size: 14px;
+}
+.card-subtitle_2{
+  font-size: 14px;
+}
+.card-subtitle_3{
+  font-size: 14px;
+}
+.card-subtitle_4{
+  font-size: 14px;
+}
+
+.btn_more{
+  font-size: 10px;
+ 
+}
+
+
+
+  }
   
   
 

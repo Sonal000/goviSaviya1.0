@@ -193,7 +193,7 @@
 
                 <div class="form-group">
                     <label for="ins_expiry">Current vehicle insurance expires on: <br></label>
-                    <input class="form_details <?php echo (!empty($data['ins_expiry_error'])) ? 'is-invalid' : ''; ?>" type="month" name="ins_expiry" id="ins_expiry" required>
+                    <input class="form_details <?php echo (!empty($data['ins_expiry_error'])) ? 'is-invalid' : ''; ?>" type="date" name="ins_expiry" id="ins_expiry" required>
                     <!-- <span class="invalid-feedback"><?php echo $data['ins_expiry_error']; ?></span> -->
                 </div>
 
@@ -209,7 +209,7 @@
 
                 <div class="form-group">
                     <label for="rev_expiry">Current revenue license expires on: <br></label>
-                    <input class="form_details <?php echo (!empty($data['rev_expiry_error'])) ? 'is-invalid' : ''; ?>" type="month" name="rev_expiry" id="rev_expiry" >
+                    <input class="form_details <?php echo (!empty($data['rev_expiry_error'])) ? 'is-invalid' : ''; ?>" type="date" name="rev_expiry" id="rev_expiry" >
                     <!-- <span class="invalid-feedback"><?php echo $data['rev_expiry_error']; ?></span> -->
                 </div>
 
