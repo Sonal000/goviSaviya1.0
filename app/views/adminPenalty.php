@@ -38,7 +38,7 @@
     <div class="admincard_cont">
         <div class="admincard">
             <div class="cardicon_cont">
-                <img src="<?php echo URLROOT; ?>/assets/images/Complete.png" alt="" class="cardicon">
+                <img src="<?php echo URLROOT; ?>/assets/images/red-flag.png" alt="" class="cardicon">
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
@@ -51,7 +51,7 @@
         </div>
         <div class="admincard">
             <div class="cardicon_cont">
-                <img src="<?php echo URLROOT; ?>/assets/images/return2.png" alt="" class="cardicon">
+                <img src="<?php echo URLROOT; ?>/assets/images/ban-user.png" alt="" class="cardicon">
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
@@ -64,7 +64,7 @@
         </div>
         <div class="admincard">
             <div class="cardicon_cont">
-                <img src="<?php echo URLROOT; ?>/assets/images/ongoing.png" alt="" class="cardicon">
+                <img src="<?php echo URLROOT; ?>/assets/images/ban-user.png" alt="" class="cardicon">
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
@@ -78,7 +78,37 @@
        
 
     </div>
-    <div class="table_box">
+    
+    <div class="table_cont">
+    <table id="" class="tables">
+  <tr>
+    <th>QC ID</th>
+    <th>Buyer ID</th>
+    <th>Deliver ID</th>
+    <th>Capacity</th>
+    <th>Penalty Amount</th>
+    <th>Penalty Date</th>
+  </tr>
+  <?php if(!empty($data['orders'])){ ?>
+        <?php foreach($data['orders'] as $orders){?>
+    <tr>
+    <td><?php echo $orders->qc_id?></td>
+    <td><?php echo $orders->buyer_id?></td>
+    <td><?php echo $orders->deliver_id?></td>
+    <td><?php echo $orders->penalty_type ?></td>
+    <td><?php echo $orders->penalty_amount?></td>
+    <td><?php echo $orders->penalty_date?></td>
+  </tr>
+  <?php
+    }
+}else{
+    echo "<tr><td colspan='6'>No Penalties Yet</td></tr>";
+}
+  ?>
+        </table>
+         
+        </div>
+    <!-- <div class="table_box">
         <div class="table_row table_hed">
             <div class="table_cell column1">
                 <p>qc_id</p>
@@ -134,7 +164,7 @@
         
        
         
-    </div>
+    </div> -->
     
 </div>
             </div>

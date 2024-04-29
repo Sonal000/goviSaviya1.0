@@ -389,7 +389,7 @@ function paramString($validParams){
             ?>
             
 
-
+              
 
     <!-- item -->
     <a href="<?php echo URLROOT ?>/auctionC/itemInfo/<?php echo $item->auction_ID ?>" class="item_btn">

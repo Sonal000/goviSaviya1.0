@@ -59,13 +59,13 @@
     <p class="item_name"><?php echo $data['name'];?></p>
     <a href="<?php echo URLROOT ?>/profile/priyantha" target="_blank" class="item_seller"> seller:<?php echo $data['seller_name'];?> <span><i class="fas fa-check-circle"></i></span></a>
     <p class="item_address"><?php echo $data['seller_city'];?></p>
-    <div class="item_rating">
+    <!-- <div class="item_rating">
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
-         </div>
+         </div> -->
         </div>
         <div class="item_price_cont">
           <p class="item_price"><span>Starting bid :</span></p> <p>   Rs <?php echo $data['price'];?>/<span><?php echo $data['unit'];?></span></p>
@@ -164,11 +164,11 @@
 
  <!-- review section ========================================== -->
 
-  <section class="reviews_section section-center">
-    <!-- <div class="reviews_btn_cont">
+  <!-- <section class="reviews_section section-center">
+    <div class="reviews_btn_cont">
         <button  class="reviews">Ratings & Reviews</button>
         <button class="faq">FAQs</button>
-    </div> -->
+    </div>
     <div class="reviews_container">
       <div class="reviews_title_cont">
         <p class="reviews_title">All Reviews <span>(19)</span> </p>
@@ -176,7 +176,7 @@
 
       <div class="reviews_cont">
 
-        <!-- review==== -->
+        
         <div>
 
           <div class="review_cont">
@@ -188,7 +188,7 @@
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+            
           </div>
           <a href="#" class="reviewer_name"> Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi? 
@@ -198,8 +198,7 @@
         </div>
         
       </div>
-        <!-- review end==== -->
-        <!-- review==== -->
+        
         <div>
 
           <div class="review_cont">
@@ -211,7 +210,7 @@
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+           
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit Lorem ipsum dolor sit, amet consectetur adipisicing elit. At, error?</p>
@@ -220,8 +219,7 @@
         </div>
         
       </div>
-        <!-- review end==== -->
-        <!-- review==== -->
+       
         <div>
 
           <div class="review_cont">
@@ -233,7 +231,7 @@
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+           
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
@@ -242,8 +240,7 @@
         </div>
         
       </div>
-        <!-- review end==== -->
-        <!-- review==== -->
+       
         <div>
 
           <div class="review_cont">
@@ -255,7 +252,7 @@
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+           
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
@@ -264,8 +261,7 @@
         </div>
         
       </div>
-        <!-- review end==== -->
-        <!-- review==== -->
+        
         <div>
 
           <div class="review_cont">
@@ -277,7 +273,7 @@
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+           
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
@@ -286,8 +282,7 @@
         </div>
         
       </div>
-        <!-- review end==== -->
-        <!-- review==== -->
+        
         <div>
 
           <div class="review_cont">
@@ -299,7 +294,7 @@
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+           
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
@@ -308,8 +303,7 @@
         </div>
         
       </div>
-        <!-- review end==== -->
-
+        
 
 
 
@@ -321,7 +315,7 @@
 
 
 
-  </section>
+  </section> -->
 
  <!-- review section end   ==================================== -->
 
@@ -336,7 +330,7 @@
       <div class="interest_item_cont">
 
         
-    <!-- item -->
+    
     <a href="<?php echo URLROOT ?>/marketplace/itemInfo/10" class="item_btn">
 
 <div class="item">
@@ -358,9 +352,7 @@
  </div>
  
 </a>
-<!-- item end -->
 
-<!-- item -->
 <a class="item_btn">
 
 <div class="item">
@@ -382,9 +374,7 @@
  </div>
  
 </a>
-<!-- item end -->
 
-<!-- item -->
 <a class="item_btn">
 
 <div class="item">
@@ -406,9 +396,7 @@
  </div>
  
 </a>
-<!-- item end -->
 
-<!-- item -->
 <a class="item_btn">
 
 <div class="item">
@@ -430,10 +418,7 @@
  </div>
  
 </a>
-<!-- item end -->
 
-
-<!-- item -->
 <a class="item_btn">
 
 <div class="item">
@@ -455,7 +440,7 @@
  </div>
  
 </a>
-<!-- item end -->
+
 
 
 
@@ -467,7 +452,7 @@
   </section>
 
 
- <!-- interest end ========================== -->
+ 
  
 
 

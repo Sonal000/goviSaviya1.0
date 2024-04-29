@@ -34,6 +34,8 @@
     </div>
     <div class="admincard_cont">
     <div class="admincard">
+
+    <button id="download_btn">download</button>
             <div class="cardicon_cont">
                 <img src="<?php echo URLROOT; ?>/assets/images/auction.png" alt="" class="cardicon">
             </div>
@@ -75,7 +77,39 @@
        
 
     </div>
-    <div class="table_box">
+
+     <div class="table_cont">
+    <table id="" class="tables">
+  <tr>
+    <th>Post ID</th>
+    <th>Posted by</th>
+    <th>Started Date</th>
+    <th>End Date</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <?php if(!empty($data['Aposts'])){ ?>
+        <?php foreach($data['Aposts'] as $postA){?>
+    <tr>
+    <td><?php echo $postA->auction_ID?></td>
+    <td><?php echo $postA->seller_name?></td>
+    <td><?php echo $postA->start_date?></td>
+    <!-- <td><?php echo $postA->end_date; ?></td> -->
+    <td> <a href="<?php echo URLROOT; ?>/Posts/marketplaceView/<?php echo $postA->auction_ID?>">view</a></td>
+    <td><a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a></td>
+  </tr>
+  <?php
+    }
+}else{
+    echo "<tr><td colspan='6'>No Auctions Found</td></tr>";
+}
+  ?>
+        </table>
+         
+        </div>
+
+
+    <!-- <div class="table_box">
         <div class="table_row table_hed">
             <div class="table_cell column1">
                 <p>Post ID</p>
@@ -186,7 +220,7 @@
         
        
         
-    </div>
+    </div> 
     
 </div>
 
@@ -196,6 +230,55 @@
 
 </body>
 <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
+
+<!-- ================================================================================ -->
+
+<script src=
+ "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+    </script>
+    <script src=
+ "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+    </script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+function convertHTMLtoPDF() {
+    const { jsPDF } = window.jspdf;
+
+    let doc = new jsPDF('l', 'mm', [1500, 1400]);
+    let pdfjs = document.querySelector('.table_cont');
+    doc.html(pdfjs, {
+        callback: function(doc) {
+            doc.save("auction_orders.pdf");
+        },
+        x: 12,
+        y: 12
+    });                
+}            
+
+$('#download-btn').on('click', function() {
+
+// generatePdf(tabledata);  
+
+convertHTMLtoPDF();
+
+
+});
+});
+</script>
+
+
+<!-- ============================================================= -->
+
+
+
 <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/adminSidebar.js"></script>
+
 <script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
+
+
 </html>
