@@ -75,64 +75,36 @@
        
 
     </div>
-    <div class="table_box">
-        <div class="table_row table_hed">
-            <div class="table_cell column1">
-                <p>Vehicle number</p>
-            </div>
-            <div class="table_cell column2">
-                <p>Owner</p>
-            </div>
-            <div class="table_cell column3">
-                <p>Type</p>
-            </div>
-            <div class="table_cell column4">
-                <p>Capacity</p>
-            </div>
-            <div class="table_cell column5">
-                <p></p>
-            </div>
-            <div class="table_cell column6">
-                <p></p>
-            </div>
+   
+    <div class="table_cont">
+    <table id="" class="tables">
+  <tr>
+    <th>Vehicle number</th>
+    <th>Owner</th>
+    <th>Type</th>
+    <th>Capacity</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <?php if(!empty($data['Vdetails'])){ ?>
+        <?php foreach($data['Vdetails'] as $Det){?>
+    <tr>
+    <td><?php echo $Det->vehicle_number?></td>
+    <td><?php echo $Det->owner_name?></td>
+    <td><?php echo $Det->vehicle_type?></td>
+    <!-- <td><?php echo $Det->max_capacity; ?></td> -->
+    <td> <a href="<?php echo URLROOT ?>/Vehicle/details/<?php echo $Det->vehicle_id ?>">view</a></td>
+    <td><a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a></td>
+  </tr>
+  <?php
+    }
+}else{
+    echo "<tr><td colspan='6'>No Delivery Trucks Found</td></tr>";
+}
+  ?>
+        </table>
+         
         </div>
-        
-        <?php if(!empty($data['Vdetails'])):?>
-        <?php foreach($data['Vdetails'] as $Det): ?>
-        <div class="table_row">
-            <div class="table_cell column1">
-                <p><?php echo $Det->vehicle_number?></p>
-            </div>
-            <div class="table_cell column2">
-                <p><?php echo $Det->owner_name?></p>
-            </div>
-            <div class="table_cell column3">
-                <p><?php echo $Det->vehicle_type?></p>
-            </div>
-            <div class="table_cell column4">
-                <p><?php echo $Det->max_capacity?><?php echo 'KG'?></p>
-            </div>
-            <div class="table_cell column5">
-                <div class="ordersta">
-                    <a href="<?php echo URLROOT ?>/Vehicle/details/<?php echo $Det->vehicle_id ?>"><button class="orderpost_view">View</button></a>
-                </div>
-            </div>
-            <div class="table_cell column6">
-                <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
-            </div>
-        </div>
-        <?php endforeach; ?>
-        <?php else: ?>
-        <p>No data available</p>
-        <?php endif; ?>
-        
-       
-        
-        
-       
-        
-    </div>
-    
 </div>
 
             </div>

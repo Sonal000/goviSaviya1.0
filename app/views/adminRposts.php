@@ -75,7 +75,37 @@
        
 
     </div>
-    <div class="table_box">
+
+    <div class="table_cont">
+    <table id="" class="tables">
+  <tr>
+    <th>Post ID</th>
+    <th>Posted by</th>
+    <th>Requested before</th>
+    <th>Quotation Count</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <?php if(!empty($data['Rposts'])){ ?>
+        <?php foreach($data['Rposts'] as $postR){?>
+    <tr>
+    <td><?php echo $postR->request_ID?></td>
+    <td><?php echo $postR->buyer_name?></td>
+    <td><?php echo $postR->req_date?></td>
+    <td><?php echo $postR->quotation_count ?></td>
+    <td> <a href="<?php echo URLROOT; ?>/Posts/RequestsView/<?php echo $postR->request_ID?>">view</a></td>
+    <td><a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a></td>
+  </tr>
+  <?php
+    }
+}else{
+    echo "<tr><td colspan='6'>No Request Posts Found</td></tr>";
+}
+  ?>
+        </table>
+         
+        </div>
+    <!-- <div class="table_box">
         <div class="table_row table_hed">
             <div class="table_cell column1">
                 <p>Post ID</p>
@@ -186,7 +216,7 @@
         
        
         
-    </div>
+    </div> -->
     
 </div>
 

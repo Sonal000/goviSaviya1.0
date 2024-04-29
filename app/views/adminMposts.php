@@ -75,7 +75,38 @@
        
 
     </div>
-    <div class="table_box">
+
+    <div class="table_cont" >
+    <table id="" class="tables">
+  <tr>
+    <th>Post ID</th>
+    <th>Posted by</th>
+    <th>Posted Date</th>
+    <!-- <th>Order Status</th> -->
+    <th></th>
+    <th></th>
+  </tr>
+  <?php if(!empty($data['mposts'])){ ?>
+        <?php foreach($data['mposts'] as $postM){?>
+    <tr>
+    <td><?php echo $postM->item_id?></td>
+    <td><?php echo $postM->seller_name?></td>
+    <td><?php echo $postM->created_at?></td>
+    <!-- <td><?php echo $Orders->order_history; ?></td> -->
+    <td> <a href="<?php echo URLROOT; ?>/Posts/marketplaceView/<?php echo $postM->item_id?>">view</a></td>
+    <td><a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a></td>
+  </tr>
+  <?php
+    }
+}else{
+    echo "<tr><td colspan='6'>No Marketplace Posts Found</td></tr>";
+}
+  ?>
+        </table>
+         
+        </div>
+
+    <!-- <div class="table_box">
         <div class="table_row table_hed">
             <div class="table_cell column1">
                 <p>Post ID</p>
@@ -180,7 +211,7 @@
         
        
         
-    </div>
+    </div> 
     
 </div>
 
