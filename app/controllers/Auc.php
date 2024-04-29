@@ -15,7 +15,7 @@
       $this->view('sellerAuc',$data);
    }else{
 
-      $this->view('auction',$data);
+      $this->view('auctionC',$data);
    }
 
 

@@ -843,7 +843,6 @@ input:focus {
   position: relative;
   display: flex;
   justify-content: flex-end;
-  
 }
 .container_content {
   width: calc(100vw - 17rem);
@@ -1575,7 +1574,7 @@ visibility: hidden;
   display: none;
 }
 
-.main_container_loader {
+/* .main_container_loader {
   height: 100vh;
   width: 100vw;
   position: fixed;
@@ -1584,4 +1583,4 @@ visibility: hidden;
   display: flex;
   justify-content: flex-end;
   z-index: -1000;
-}
+} */

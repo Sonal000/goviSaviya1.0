@@ -52,6 +52,21 @@ class AuctionC extends Controller{
 
       $row=$this->auctionModel->getItems($page,$perPage,$sort,$order,$filter);
       $totalCount=$row['totalCount'];
+      if($row['items']){
+
+      
+        foreach ($row['items'] as $item) {
+            $currentDateTime = new DateTime();
+            $expDateTime = new DateTime($item->end_date);
+                    $timeDifference = $currentDateTime->diff($expDateTime);
+                    $remains = $timeDifference->format('%a days %H hours');
+            $item->remain_time =$remains;
+
+        }
+    }
+
+
+
       
     if(isset($_SESSION['buyer_id'])){
         if($row['items']){
@@ -60,13 +75,11 @@ class AuctionC extends Controller{
         foreach ($row['items'] as $item) {
             $activebidder=$this->auctionModel->isActiveBidder($item->auction_ID,$_SESSION['buyer_id']);
             $currentBid = $this->auctionModel->getCurrentBid($item->auction_ID);
-            $currentDateTime = new DateTime();
-            $expDateTime = new DateTime($item->end_date);
-                    $timeDifference = $currentDateTime->diff($expDateTime);
-                    $remains = $timeDifference->format('%a days %H hours');
-            $item->remain_time =$remains;
+            
             $item->active_bidder=$activebidder;
             $item->leading_bidder=(($currentBid?$currentBid->buyer_id:0) == $_SESSION['buyer_id'])?true:false;
+
+            // var_dump($item->remain_time);
         }
     }
         $data=[
@@ -244,7 +257,15 @@ public  function checkout($id){
         public function payments($id){
             $auction_id=$this->orderModel->getOrderAuctionId($id);
             $item = $this->auctionModel->getAuctionInfo($auction_id);
-            // var_dump($item);
+
+            $buyerInfo = $this->buyerModel->getProfileInfo($_SESSION["user_id"]);
+   
+    
+            $totalDeliveryfee = 0;
+
+            $totalDeliveryfee +=( getDistancefee($items->address,$buyerInfo->address));
+
+           
             try {
 
                 $lineItems[] = [
@@ -252,6 +273,7 @@ public  function checkout($id){
                     "price_data" => [
                         "currency" => "lkr", // Change currency according to your needs
                         "unit_amount" => $item->highest_bid * 100, // Stripe requires amount in cents
+                        "delivery_fee" =>$totalDeliveryfee,
                         "product_data" => [
                             "name" => $item->name, // Use item name from your database
                         ],

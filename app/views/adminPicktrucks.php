@@ -75,7 +75,40 @@
        
 
     </div>
-    <div class="table_box">
+
+
+
+    
+    <div class="table_cont">
+    <table id="" class="tables">
+  <tr>
+    <th>Vehicle number</th>
+    <th>Owner</th>
+    <th>Type</th>
+    <th>Capacity</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <?php if(!empty($data['Vdetails'])){ ?>
+        <?php foreach($data['Vdetails'] as $Det){?>
+    <tr>
+    <td><?php echo $Det->vehicle_number?></td>
+    <td><?php echo $Det->owner_name?></td>
+    <td><?php echo $Det->vehicle_type?></td>
+    <!-- <td><?php echo $Det->max_capacity; ?></td> -->
+    <td> <a href="<?php echo URLROOT ?>/Vehicle/details/<?php echo $Det->vehicle_id ?>">view</a></td>
+    <td><a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a></td>
+  </tr>
+  <?php
+    }
+}else{
+    echo "<tr><td colspan='6'>No Delivery Trucks Found</td></tr>";
+}
+  ?>
+        </table>
+         
+        </div>
+    <!-- <div class="table_box">
         <div class="table_row table_hed">
             <div class="table_cell column1">
                 <p>Vehicle number</p>
@@ -131,7 +164,7 @@
         
        
         
-    </div>
+    </div> -->
     
 </div>
 

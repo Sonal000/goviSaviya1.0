@@ -115,7 +115,7 @@
    <div class="form_container">
 
 
-   <form method="post" action="<?php echo URLROOT ?>/OrderRequests/add" enctype="multipart/form-data">
+   <form method="post" id="request_form" action="<?php echo URLROOT ?>/OrderRequests/add" enctype="multipart/form-data">
 
    <div class="input_items">
 
@@ -124,7 +124,8 @@
 
           <div class="input_cont">
                 <label for="dropdown" class="input_label">Product Name</label>
-                <input type="text" id="dropdown" class="input_item" name="name" />
+                <input type="text"  class="input_item" name="name" id="product_name" />
+                <p class="invalid_msg"></p>
           </div>
           
           <div class="input_cont">
@@ -139,7 +140,8 @@
               
          <div class="input_cont">
           <label for="stock" class="input_label">Required Stock</label>
-                    <input type="text" class="input_item"  name="req_stock">
+                    <input type="text" class="input_item"  name="req_stock" id="stock">
+                    <p class="invalid_msg"></p>
           </div>
 
           <div class="input_cont">
@@ -155,12 +157,14 @@
          <div class="input_cont">
               <label for="req_date" class="input_label">Required Date</label>
                <input type="date" class="input_item"  name="req_date" id="expiration_date">
+               <p class="invalid_msg"></p>
          </div>
 
           
          <div class="input_cont">
             <label for="req_address" class="input_label">Requested Address</label>
-            <input type="text" class="input_item"  name="req_address">
+            <input type="text" class="input_item"  name="req_address" id="req_address">
+            <p class="invalid_msg"></p>
             </div>
 
         
@@ -174,7 +178,7 @@
                 </div>
       
          <div class="submit_container">
-            <a href="<?php echo URLROOT ?>/OrderRequests/add"><button type="submit" class="btn">Request Item</button></a>
+            <button type="submit" class="btn">Request Item</button>
             <div class="can_btn">
             <a href="<?php echo URLROOT ?>/OrderRequests"><button type ="button" class="btn cancel_bt">Cancel</button></a>
             </div>
@@ -183,6 +187,9 @@
     </div>
  
   </form>
+  <div class="loader_cont">
+        <div class="loader"></div>
+      </div>
 
 
 </div>
@@ -373,7 +380,7 @@
    <!-- js === -->
    <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
    <script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
-   /<script src="<?php echo URLROOT ?>/assets/js/buyerOrders.js"></script>
+   <script src="<?php echo URLROOT ?>/assets/js/buyerOrders.js"></script>
    <script src="<?php echo URLROOT ?>/assets/js/orderRequest.js"></script>
 
 </body>
