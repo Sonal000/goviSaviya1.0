@@ -206,7 +206,7 @@
 
 
 .greeting-card {
-    background-color: #3e8e41;
+    background-color: var(--clr-primary-4);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(19, 139, 4, 0.1);
