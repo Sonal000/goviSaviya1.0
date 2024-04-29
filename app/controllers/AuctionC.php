@@ -263,7 +263,7 @@ public  function checkout($id){
     
             $totalDeliveryfee = 0;
 
-            $totalDeliveryfee +=( getDistancefee($items->address,$buyerInfo->address));
+            $totalDeliveryfee +=( getDistancefee($item->address,$buyerInfo->address));
 
            
             try {
