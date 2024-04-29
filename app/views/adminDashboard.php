@@ -226,7 +226,7 @@
                 </div>
             </div>
         </div>
-        <div class="row-box">
+        <!-- <div class="row-box">
             <div class="col-boxes-1">
                 <div class="col-graph">
                     <div class="card card-graph-2">
@@ -510,7 +510,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </main>
     <footer>
         <!-- <div class="content">

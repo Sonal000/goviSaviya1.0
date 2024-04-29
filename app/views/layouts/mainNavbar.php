@@ -524,7 +524,7 @@
      <a href="<?php echo URLROOT ?>/marketplace">Marketplace</a>
      </li>
      <li class="navlink">
-      <a href="<?php echo URLROOT ?>/auc">Auction</a>
+      <a href="<?php echo URLROOT ?>/auctionC">Auction</a>
      </li>
      <!-- <li class="navlink">
      <a href="<?php echo URLROOT ?>/help">Help</a>
