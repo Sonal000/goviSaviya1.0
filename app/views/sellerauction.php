@@ -54,7 +54,9 @@
                 $end_date = date('Y-m-d', strtotime($items->end_date));
 
            ?>
-           <div class="auction_item_cont"> 
+           <?php if($items->time_remain>0){
+            ?>
+                <div class="auction_item_cont"> 
         <div class="mycard" id="blur">
 
             <div class="productimg">
@@ -209,14 +211,178 @@ foreach($items->bidlist as $bid){
                 </div>
         </div>
             -->
+            </div>
+            <?php
+           }else{
+            ?>
+            <div class="auction_item_cont"> 
+        <div class="mycard" id="blur">
 
+            <div class="productimg">
+                <img src="<?php echo URLROOT."/store/items/".$items->item_img; ?>" class="mango" alt="">
+            </div>
+         <div class="left_right_container">
+            <div class="post_left">
+                <div class="pro_detail">
+                    <div class="pro_name">
+                        <?php echo $items->name; ?> -  <?php echo $items->stock; ?><?php echo $items->unit; ?>
+                    </div>
+                    <div class="pro_location">
+                        <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
+                        <?php echo $items->district; ?>
+                    </div>
+                    <div class="pro_exp">
+                      Expire Date : <?php echo $exp_date; ?>
+                    </div>
+                </div>
+                <div class="bid_detail">
+                    <div class="bidder_name">
+                        <p><a href="" class="highest_bidder">Highest Bidder : <?php echo $items->current_buyer_name ?></a> </p>
+                    </div>
+                    <div class="bidcount">
+                        Bid count : <?php echo $items->bid_Count ;?>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post_right">
+                <div class="high_bid">
+                    <div class="base_price">
+                        Rs <?php echo $items->price ;?>
+                    </div>
+                    <div class="current_highest">
+                        Highest Bid - Rs <?php echo $items->current_bid ?>
+                    </div>
+                    <div class="remaining_time">
+                    <!-- <?php echo $items->time_remain ;?> remaining -->
+                     Auction Time has Ended
+                    </div>
+                </div>
+                <div class="update_edit_bt">
+                    <button class="btn auc_cards">
+                     view biddings
+                    </button>
+                   <a href="<?php echo URLROOT;?>/auctionC/endAuction/<?php echo $items->auction_ID ?>"><button class="aucbt_post btn warning" type="submit" id="end_auc_btn">End Auction</button></a>
+                </div>
+            </div>
+         </div>
+
+
+        </div>
+        
+        <div class="bid_list overlay hidden_overlay">       
+        <div class="container_info">
+                   <div class="sec_title">Auction : <?php echo $items->auction_ID; ?></div>
+                   <div class="info_cont">
+                       
+                       <div class="text_container">
+                <div class="info">
+                    <!-- <p class="infor_title">Item :</p> -->
+                    <a href="<?php echo URLROOT."/marketplace/iteminfo/".$items->item_id; ?>" class="infor_title item_title"><?php echo $items->name; ?></a>
+                </div>
+                <div class="info">
+                    <p class="infor_title">Base Price</p>
+                    <p class="infor_title"><?php echo $items->price ?></p>
+                </div>
+                <div class="info">
+                    <p class="infor_title">Quantity</p>
+                    <p class="infor_title"><?php echo $items->stock ?>  <?php echo $items->unit ?></p>
+                </div>
+                <div class="info">
+                    <p class="infor_title">Start Date</p>
+                    <p class="infor_title"><?php echo $start_date ?></p>
+                </div>
+                <div class="info">
+                    <p class="infor_title">End Date</p>
+                    <p class="infor_title"><?php echo $end_date ?></p>
+                </div>
+                <div class="info">
+                    <p class="infor_title">Time remaining</p>
+                    <p class="infor_title"><?php echo $items->time_remain ;?></p>
+                </div>
+                <div class="info">
+                    <p class="infor_title">Current Bid</p>
+                    <p class="infor_title"><?php echo $items->current_bid ?></p>
+                </div>
+                <div class="info">
+                    <p class="infor_title">Bid Count</p>
+                    <p class="infor_title"><?php echo $items->bid_Count ?></p>
+                </div>
+
+                
+           
+                
+            </div>
+            <div class="image_container">
+                <img  src="<?php echo URLROOT."/store/items/".$items->item_img; ?>" alt="img"/>
+            </div>
+
+                </div>
+
+                <div class="sec_title">Bidding List</div>
+
+                <?php if($items->bidlist){
+
+foreach($items->bidlist as $bid){
+    ?>
+
+                <div class="info_cont">  
+                <div class="info_bidders ">       
+                <div class="info">
+                    <p class="infor_title">Bid ID :</p>
+                    <p class="infor_title"><?php echo $bid->bid_id ?></p>
+                </div>
+                <div class="info">
+                    <p class="infor_title">Bidder :</p>
+                
+                    <a href="<?php echo URLROOT."/profile/".$bid->buyer_user_id; ?>" class="infor_title buyer_name"><?php echo $bid->buyer_name ?></a>
+                </div>
+                <div class="info">
+                    <p class="infor_title">Bid Price :</p>
+                    <p class="infor_title"><?php echo $bid->bid_price?></p>
+                </div>
+                <div class="info">
+                    <p class="infor_title">Bid Date :</p>
+                    <p class="infor_title"><?php echo $bid->bid_date ?></p>
+                </div>
+         
+            </div>
+            </div>
+            <?php
+                }}else{
+                    echo "<p>No bidders for this auction .</p>";
+                } ?>
+
+
+            </div>
+
+</div>
+        <!---
+        <div class="pop_up" id="window_up">
+                <div class="window">
+                    <div class="sure">
+                        <p>Are you Sure ?</p>
+                    </div>
+                    <div class="button_hold">
+                        <button type="submit" class="yes_btn btn">Yes</button>
+                        <button type="submit" class="no_btn btn">No</button>
+                    </div>
+                </div>
+        </div>
+            -->
+            </div>
+
+            <?php
+           } ?>
+           
         <?php
     }
     }else{
         ?>  
             <div class="no_items" style="margin:1.5rem;" >
                 <p>No auction items to show</p>
-
+                </div>
         <?php
     }
 
@@ -226,8 +392,8 @@ foreach($items->bidlist as $bid){
        
 
         
-    </div>
-</div>
+    
+
 
 
 
