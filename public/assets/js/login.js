@@ -48,7 +48,7 @@ form.addEventListener('submit',(e)=>{
  inputValidation();
  if (
   !(emailInput.classList.contains('invalid') ||
-  passwordInput.classList.contains('invalid'))
+  !passwordInput.classList.contains('invalid'))
 ){
   isLoggingIn = true;
   toggleLogingState(isLoggingIn);
@@ -111,8 +111,10 @@ if(!isValidEmail(emailValue)){
 
 if(passwordValue===''){
  setError(passwordInput,"Password is required.");
+}else if(passwordValue.length<6){
+  setError(passwordInput,"Password length shoul be between 1 - 6 .");
 }else{
-     setValid(passwordInput);
+  setValid(passwordInput);
   }
 }
 

@@ -516,10 +516,16 @@ sidebarMapping.forEach(item => {
 
 
 
-// const o_link = document.getElementById('orders_link');
+const o_link = document.getElementById('orders_link');
+// $('#orders_link').click(function(){
+// this.addClass('sidebar_active');
 
-// o_link.addEventListener('click',function(e){
-// o_link.classList.add('sidebar_active');
-// })
+// });
+o_link.addEventListener('click',function(e){
+o_link.classList.add('sidebar_active');
+$('#orders_complete_link').removeClass('sidebar_active');
+$('#orders_ongoing_link').removeClass('sidebar_active');
+$('#loader_main').addClass('show_loader_main');
+});
 
 });

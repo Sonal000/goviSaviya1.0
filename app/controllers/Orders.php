@@ -98,8 +98,8 @@ class Orders extends Controller{
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
             $deliver_adr = $this->deliverModel->getProfileInfo($_SESSION['user_id'])->address;
 
+            $visible_count = 0;
             if($orders){
-                $visible_count = 0;
                 foreach($orders as $order){
                     $distance_pickup =getDistance($deliver_adr,$order->pickup_address);
                     $order->distance_pickup =$distance_pickup;

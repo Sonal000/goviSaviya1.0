@@ -1,3 +1,38 @@
+<!-- ================================================================================================ -->
+<div class="loader_main  " id="loader_main">
+  
+
+<div class="main_container">
+
+
+<div class="container_content">
+
+<div class="profile">
+
+
+    <div class="auction_page">
+        <div class="hed hed_title">
+          <p>  Available Orders</p>
+        </div>
+
+<div class="loader_cont_del">
+        <div class="loader_del"></div>
+      </div>
+
+</div>
+</div>
+
+
+</div>
+        </div>
+    </div>
+
+<!-- ================================================================================================ -->
+
+
+
+
+
 <div class="main_sidebar_container">
 
 
