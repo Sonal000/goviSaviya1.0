@@ -41,16 +41,16 @@ const form = document.getElementById('request_form');
 
 let isListingItem = false;
 
-const toggleListingState = (state) => {
-  if (state) {
-    listItemBtn.disabled = true;
-    listItemBtn.innerHTML = "Listing...";
-    loader.classList.toggle('loader_show');
-  } else {
-    listItemBtn.disabled = false;
-    listItemBtn.innerHTML = "List Item";
-  }
-};
+// const toggleListingState = (state) => {
+//   if (state) {
+//     listItemBtn.disabled = true;
+//     listItemBtn.innerHTML = "Listing...";
+//     loader.classList.toggle('loader_show');
+//   } else {
+//     listItemBtn.disabled = false;
+//     listItemBtn.innerHTML = "List Item";
+//   }
+// };
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -67,8 +67,8 @@ console.log("clicked");
     // pickAddressInput.classList.contains('invalid') ||
     // itemImgInput.classList.contains('invalid')
   )) {
-    isListingItem = true;
-    toggleListingState(isListingItem);
+    // isListingItem = true;
+    // toggleListingState(isListingItem);
     form.submit();
   }
 });

@@ -25,7 +25,7 @@
       </a>
     </li>
     <li class="navlink">
-      <a href="<?php echo URLROOT ?>/AuctionC">
+      <a href="<?php echo URLROOT ?>/viewAuction">
       Bidding
         <!-- <i class="fas fa-coins nav_icon"></i> -->
       </a>
