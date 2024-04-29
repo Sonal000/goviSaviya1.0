@@ -81,9 +81,11 @@ class Orders extends Controller{
     }
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='admin'){
             $orders = $this->orderModel->getALLOrders();
+            $getcounts = $this->orderModel ->getCounts3ordertypes();
 
         $data=[
             "orders"=>$orders,
+            "counts"=>$getcounts,
         ];
             $this -> view('adminOrders',$data);
         }

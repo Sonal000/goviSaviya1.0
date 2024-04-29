@@ -275,6 +275,10 @@ input:focus{
   height: 10rem;
 }
 
+.red_mark{
+  color: #E42535;
+}
+
 /*================================ Seller ad request css ========================================================================== */
 
 .req_approve_btn{
@@ -527,7 +531,7 @@ input:focus{
   flex-direction: column;
   padding: 0.5rem;
   
-  border: 2px solid red;
+ 
 
 }
 

@@ -436,8 +436,12 @@ input:focus{
     margin-right: 1rem;
 }
 
+.warning{
+  color: #E42535;
+}
+
 .auction_item_cont{
- 
+  
   border-bottom: 1px solid var(--clr-grey-9);
 }
 .pending_auctions{
