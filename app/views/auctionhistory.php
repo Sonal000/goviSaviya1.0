@@ -93,7 +93,7 @@
             <div class="post_right">
                 <div class="high_bid">
                     <div class="base_price">
-                        Started Price :Rs <?php echo $items->total_amount; ;?>
+                        Started Price :Rs <?php echo $items->price; ;?>
                     </div>
                     <div class="current_highest">
                         Highest Bid : Rs <?php echo $items->highest_bid; ?>
@@ -281,7 +281,7 @@ foreach($items->bidlist as $bid){
                <div class="post_right">
                    <div class="high_bid">
                        <div class="base_price">
-                           Started Price :Rs <?php echo $items->total_amount; ;?>
+                           Started Price :Rs <?php echo $items->price; ;?>
                        </div>
                        <div class="current_highest">
                            Highest Bid : Rs <?php echo $items->highest_bid; ?>

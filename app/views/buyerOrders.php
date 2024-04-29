@@ -40,6 +40,7 @@
          <div class="bid_items_cont">
 
          <?php if($data['orders']){
+           
             foreach($data['orders'] as $orders){
                if($orders){
                foreach($orders as $order){
@@ -558,6 +559,8 @@ foreach($data['completedOrders'] as $completedOrder){
             <div class="container_info">
                 <?php if($order->deliver_id) {?>
                 <div class="sec_title">Delivery Info</div>
+                <div class="info_before">
+                    <div class="info_before_after">
                 <div class="info_cont">
 
                      <div class="text_container">
@@ -588,10 +591,33 @@ foreach($data['completedOrders'] as $completedOrder){
                   <div class="deliver_image_container">
                       <img class="deliver_img" src="<?php echo URLROOT."/store/profiles/".$order->deliver_img; ?>" alt="img"/>
                   </div>
-            </div>
-
+                </div>
+                   
 
                 </div>
+
+                <div class="add_review_container">
+      <div class="add_review_hed">
+          <h4>Add Review</h4>
+        </div>
+        <form action="<?php echo URLROOT.'/orders/Addreview/'.$order->order_id.'/'.$order->order_item_id.'/'.$order->order_type.'/'.$order->deliver_id; ?>" method="POST">
+           <div class="review_Filed">
+            <input type="text" name="review" placeholder="Enter your Review">
+            <button type="submit" class="btn review_btn">
+                post
+        </button>
+            </div>
+            
+            
+        </form>
+    </div>
+                
+   
+  
+                <!-- <button b>hi</button> -->
+                </div>
+                </div>
+                
                 <?php }else{ ?> 
                     <div class="info_cont">
 
@@ -603,6 +629,8 @@ foreach($data['completedOrders'] as $completedOrder){
                     <?php } ?>
 
         </div>
+
+        
 
     </div>
 </div>

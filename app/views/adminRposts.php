@@ -96,8 +96,8 @@
                 <p></p>
             </div>
         </div>
-        <?php if(!empty($data['Rposts'])):?>
-        <?php foreach($data['Rposts'] as $postR): ?>
+        <?php if(!empty($data['Rposts'])){?>
+        <?php foreach($data['Rposts'] as $postR){?>
         <div class="table_row">
             <div class="table_cell column1">
                 <p><?php echo $postR->request_ID?></p>
@@ -120,10 +120,10 @@
                 <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
             </div>
         </div>
-        <?php endforeach; ?>
-        <?php else: ?>
+        <?php } ?>
+        <?php }else{ ?>
         <p>No data available</p>
-        <?php endif; ?>
+        <?php } ?>
         <!-- <div class="table_row">
             <div class="table_cell column1">
                 <p>01</p>

@@ -62,13 +62,13 @@ else{
                 <i class="fas fa-phone fa-rotate-270"></i>
             </button>
     
-            <button class="btn save_btn">Save 
+            <!-- <button class="btn save_btn">Save 
                       <?PHP if(false){
                          echo "<i class='fas fa-heart saved_icon'></i>";
                        }else{
                             echo "<i class='far fa-heart saved_icon'></i>";
                         } ?>
-            </button>
+            </button> -->
           </div>
         </div>
         </div>
@@ -107,14 +107,10 @@ else{
 
 <section class="featured_section">
 
-    <!-- <div class="featured_title_cont">
-      <h3>Featured items</h3>
-      <div class="cat_btn_cont">
-        <button class="cat_btn btn">Fruits</button>
-        <button class="cat_btn btn">Vegitables</button>
-        <button class="cat_btn btn">Coconut</button>
-      </div>
   
+  
+    </div> -->
+    
     </div> -->
     
 
@@ -170,26 +166,19 @@ else{
 
 
 </div>
-<!-- <div class="viewAll">
-  <button class="btn btn_viewall">View All</button>
-</div> -->
+
 
 </section>
 
 
-<!-- interest end ========================== -->
+
 
 </section>
 
 
 <section class="section_review">
 
-<div class="reviews_title_cont">
-      <h3>Reviews</h3>
-      <div class="add_review_cont">
-        <button class="add_review_btn" title="write a review" id="add_review_btn">
-          <!-- Add Review -->
-          <i class="fas fa-edit"></i>
+          <!-- <i class="fas fa-edit"></i>
         </button>
       </div>
   </div>
@@ -197,8 +186,19 @@ else{
     <input type="textarea" class="review_input" placeholder="Write a Review">
     <button class="btn_post btn">post</button>
   </div>
+   -->
   
+   <!-- <section class="reviews_section section-center">
 
+
+   <!-- review section ========================================== -->
+
+   <section class="reviews_section section-center">
+    <!-- <div class="reviews_btn_cont">
+        <button  class="reviews">Ratings & Reviews</button>
+        <button class="faq">FAQs</button>
+    </div> -->
+    
    <!-- review section ========================================== -->
 
    <section class="reviews_section section-center">
@@ -211,20 +211,11 @@ else{
 
       <div class="reviews_cont">
 
-        <!-- review==== -->
+       
         <div>
 
           <div class="review_cont">
-            <div class="review_options_cont">
-              <div class="item_rating">
-              <i class="fas fa-star star_img"></i>
-              <i class="fas fa-star star_img"></i>
-              <i class="fas fa-star star_img"></i>
-              <i class="fas fa-star star_img"></i>
-              <i class="fas fa-star star_img"></i>
-            </div>
-            <!-- <button class="review_option_btn"></button> -->
-          </div>
+            
           <a href="#" class="reviewer_name"> Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi? 
           </p>
@@ -233,8 +224,11 @@ else{
         </div>
         
       </div>
-        <!-- review end==== -->
-        <!-- review==== -->
+
+
+
+      
+       
         <div>
 
           <div class="review_cont">
@@ -246,7 +240,7 @@ else{
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+           
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit Lorem ipsum dolor sit, amet consectetur adipisicing elit. At, error?</p>
@@ -255,8 +249,7 @@ else{
         </div>
         
       </div>
-        <!-- review end==== -->
-        <!-- review==== -->
+       
         <div>
 
           <div class="review_cont">
@@ -268,7 +261,7 @@ else{
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+           
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
@@ -277,8 +270,7 @@ else{
         </div>
         
       </div>
-        <!-- review end==== -->
-        <!-- review==== -->
+        
         <div>
 
           <div class="review_cont">
@@ -290,7 +282,7 @@ else{
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+            
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
@@ -299,8 +291,7 @@ else{
         </div>
         
       </div>
-        <!-- review end==== -->
-        <!-- review==== -->
+      
         <div>
 
           <div class="review_cont">
@@ -312,7 +303,7 @@ else{
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+           
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
@@ -321,8 +312,7 @@ else{
         </div>
         
       </div>
-        <!-- review end==== -->
-        <!-- review==== -->
+       
         <div>
 
           <div class="review_cont">
@@ -334,7 +324,7 @@ else{
               <i class="fas fa-star star_img"></i>
               <i class="fas fa-star star_img"></i>
             </div>
-            <!-- <button class="review_option_btn"></button> -->
+            
           </div>
           <a href="#" class="reviewer_name">Priyantha Mahaulpathagama <span><i class="fas fa-check-circle"></i></span></a>
           <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere at saepe eius doloremque, voluptatem itaque repellendus aspernatur magnam adipisci excepturi?</p>
@@ -343,7 +333,7 @@ else{
         </div>
         
       </div>
-        <!-- review end==== -->
+        
 
         
         
@@ -358,7 +348,7 @@ else{
 
 
 
-  </section>
+  </section> -->
 
  <!-- review section end   ==================================== -->
 

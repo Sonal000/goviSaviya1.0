@@ -26,17 +26,20 @@ var chart = new google.visualization.ColumnChart(document.getElementById('chart_
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart2);
 
+const purchaseCount =$('#chart_div2').data('purchase');
+const requestCount =$('#chart_div2').data('request');
+const auctionCount =$('#chart_div2').data('auction');
 function drawChart2() {
 
   var data = google.visualization.arrayToDataTable([
-    ['Task', 'Hours per Day'],
-    ['Google',     70],
-    ['Yahoo',      20],
-    ['Yandex',  10]
+    ['Order Type', 'Orders'],
+    ['Purchase',     purchaseCount],
+    ['Auction',      requestCount],
+    ['Request',  auctionCount]
   ]);
 
   var options = {
-    colors: ["#ee5050" ,"#0948b3" , "#05a677"],
+    colors: ["#4caf4f","#ee5050" ,"#38803a" ],
     legend: {postion: "right",textStyle: {color: 'rgb(74, 80, 115)', fontSize:12}},
     chartArea:{left:100,top:0,width:'100%',height:'100%'},
 };

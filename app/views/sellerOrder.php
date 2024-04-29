@@ -88,9 +88,9 @@
                         Order Status - <?php echo $order->order_status ?>
                     </div>
                     <div class="viewmore">
-                    <div class="viewmorebt">
+                    <!-- <div class="viewmorebt">
                         <a href="<?php echo URLROOT; ?>/SellerAdaccept" class="viewmore_btn">View more</a>
-                     </div>
+                     </div> -->
 
                 </div>
                 </div>

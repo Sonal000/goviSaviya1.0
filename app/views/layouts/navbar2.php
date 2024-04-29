@@ -4,7 +4,7 @@
 
 
 <div class="navbar2">
-            
+           
            <!-- <div class="navimg">
             <img src="<?php echo URLROOT; ?>/assets/images/govisaviya_green.png" alt="">
             </div> -->
@@ -29,6 +29,7 @@
         ?>
 
             <!-- navbar========================== -->
+            <div class="navSidebar">
  <div class="navbar_cont_d">
    
   <div class="navbar_d">
@@ -114,85 +115,21 @@
  </div>
 </div>
 
+
+
+
+
+
    
 
 <!-- nav sidebar -->
 
-<div class="navSidebar_cont" id="navSidebar_cont">
-  <div class="navSidebar">
 
-  <!-- <div class="navSidebar_image_container">
-        <img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>"  class="profile_image">
-        <p class="navSidebar_name">sonalinduwara</p>
-
-</div> -->
-
-  <div class="sidelinks_cont">
-
-
-
-
-  <ul class="sidelinks" id="sidelinks" >
-    <!-- <button class="join_link" id="join_btn">
-    Join
-    </button>
-  <button class="navlink signin_link " id="signin_btn">
-     Sign in
-    </button>
-
-    <li class="sidelink">
-    <i class="fas fa-carrot"></i>
-      <a href="<?php echo URLROOT ?>/Categories">
-        Categories
-      </a>
-    </li>
-    <li class="sidelink">
-      <i class="fas fa-store nav_icon"></i>
-      <a href="<?php echo URLROOT ?>/marketplace">
-        Marketplace
-      </a>
-    </li>
-    <li class="sidelink">
-      <i class="fas fa-coins nav_icon"></i>
-      <a href="<?php echo URLROOT ?>/auction">
-      Auction
-      </a>
-    </li>
-    <li class="sidelink">
-    <i class="fas fa-hands-helping"></i>
-        <a href="<?php echo URLROOT ?>/help">
-        Help
-        </a>
-    </li> -->
-  </ul>
-  </div>
-  </div>
-</div>
 <div class="navSidebar_overlay" id="navSidebar_overlay"></div>
 
 <!-- navbar end========================= -->
 
 
-
-            <?php
-}else if(isset($_SESSION['user_id'])&& ($_SESSION['user_type']=='buyer')){
-       
-        ?>
-        <div class="navbar2">
-        
-        <a style="margin-left:40px;" href="<?php echo URLROOT ?>/Home">
-      <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
-    </a>
-        
-                    <div class="navbuttons2">
-                    <ul>
-                    <li><a href=""><img src="<?php echo URLROOT; ?>/assets/images/notification.png"  alt="" class="auction"></a></li>
-                    <li><a href=""><img src="<?php echo URLROOT; ?>/assets/images/chat.png"  alt="" class="auction"></a></li>
-                    <li><a href="<?php echo URLROOT ?>/Myprofile/<?php echo $_SESSION['user_id']; ?>"><img src="<?php echo URLROOT.'/store/profiles/'.$_SESSION['user_image'] ?>"  class="profile_image profile-logo-small"></a></li>
-                    <li><a href="<?php echo URLROOT ?>/login/logout"><img src="<?php echo URLROOT; ?>/assets/images/logout.png" alt="" class="profile-logo-small"></a></li>
-                    </ul>
-                    </div>
-            </div>
 
             <?php
 }else if(isset($_SESSION['user_id'])&& ($_SESSION['user_type']=='deliver')){
@@ -208,6 +145,9 @@
     <img class="nav_img"  src="<?php echo URLROOT ?>/assets/images/govisaviya-bg.png" />
         </a>
   </div>
+  <button class="bars_btn" id="bars_btn">
+<i class="fas fa-bars bars"></i>
+</button>
    </div>
    <div class="navlinks_cont_d">
     <ul class="navlinks" id="navlinks" >

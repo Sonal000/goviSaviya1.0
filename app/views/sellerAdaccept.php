@@ -165,7 +165,7 @@
                         <button class="btn acceptbtn">Change</button>
                     </div> 
                     <div class="discardbt">
-                        <a href="<?php echo URLROOT ;?>/OrderRequests/decline/<?php echo $Qrequests->request_ID ?>"><button class="discardbtn_p">Dicline</button></a>
+                        <a href="<?php echo URLROOT ;?>/OrderRequests/decline/<?php echo $Qrequests->request_ID ?>"><button class="discardbtn_p">Decline</button></a>
                     </div> 
     
                 </div>

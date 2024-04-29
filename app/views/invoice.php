@@ -74,7 +74,7 @@
 						</div>
 						<div class="col col_des">
 							<p class="bold"><?php echo $data['details']->name;?></p>
-							<p><?php echo $data['details']->description ;?></p>
+							
 						</div>
 						<div class="col col_price">
 							<p><?php echo $data['details']->order_type;?></p>

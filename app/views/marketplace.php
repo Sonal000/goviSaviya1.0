@@ -400,13 +400,13 @@ function paramString($validParams){
        </div>
        <div class="item_desc">
          <p class="item_title"><?php echo $item->name; ?></p>
-         <div class="item_rating">
+         <!-- <div class="item_rating">
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
-         </div>
+         </div> -->
          <p class="item_price"><?php echo $item->price; ?> / <span><?php echo $item->unit; ?><span></span></p>
        </div>
        
