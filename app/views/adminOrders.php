@@ -32,6 +32,9 @@
             <button type="submit"><i class="fas fa-search search_icon"></i></button>
             </form>
        </div>
+       <div>
+       <button id="download-btn"  >Download Report <i class="fas fa-file-download"></i></button>
+       </div>
     </div>
     <div class="admincard_cont">
         <div class="admincard">
@@ -76,7 +79,7 @@
        
 
     </div>
-<button id="download-btn"  data-orders=<?php echo json_encode($data['orders']) ;?>>Download Report</button>
+
 
     <div class="table_cont" >
     <table id="" class="tables">
@@ -108,7 +111,7 @@
          
     </div>
     
-<a href="<?php echo URLROOT; ?>/dashboard/generatePdf" target="_blank">Download PDF</a>
+<!-- <a href="<?php echo URLROOT; ?>/dashboard/generatePdf" target="_blank">Download PDF</a> -->
     
 </div>
             </div>

@@ -517,14 +517,14 @@
      <!-- <li class="navlink">
       <a href="<?php echo URLROOT ?>/Home">Home</a>
      </li> -->
-     <li class="navlink">
+     <!-- <li class="navlink">
      <a href="<?php echo URLROOT ?>/categories">Categories</a>
-     </li>
+     </li> -->
      <li class="navlink">
      <a href="<?php echo URLROOT ?>/marketplace">Marketplace</a>
      </li>
      <li class="navlink">
-      <a href="<?php echo URLROOT ?>/auc">Auction</a>
+      <a href="<?php echo URLROOT ?>/auctionC">Auction</a>
      </li>
      <li class="navlink">
      <a href="<?php echo URLROOT ?>/help">Help</a>
