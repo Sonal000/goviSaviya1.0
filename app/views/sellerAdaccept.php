@@ -225,7 +225,7 @@
                         <?php echo $PQrequests->buyer_name; ?>
                     </div>
                     <div class="reqdate">
-                        <?php echo $post_date; ?>
+                        Requested Date :<?php echo $post_date; ?>
                     </div>
                 </div>
             </div>
@@ -249,8 +249,8 @@
                     <div class="req_qutation">
                         Your Quotation : <?php echo $PQrequests->amount; ?>
                     </div>
-                    <div class="req_location">
-                        Number of Quotations : <?php echo $PQrequests->quotation_count; ?>
+                    <div class="req_location red_mark">
+                        Accepted Quotation : <?php echo $PQrequests->acp_amount; ?>
                     </div>
     
                 </div>

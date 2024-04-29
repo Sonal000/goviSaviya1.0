@@ -106,7 +106,7 @@ class Requests{
         
     }
 
-    public function getOrderRequests(){
+    public function getOrderRequests($current_date){
 
         $this->db->query('SELECT 
                          requests.*,
@@ -121,10 +121,12 @@ class Requests{
                          buyers.user_id = users.user_id 
                         WHERE status = "pending" 
                         AND decline_seller_ID != :seller_ID 
+                        AND req_date > :current_date
                         AND request_ID NOT IN (SELECT request_ID FROM req_quotation WHERE seller_ID = :seller_ID)
                         ORDER BY posted_date DESC');
 
     $this->db->bind(':seller_ID', $_SESSION['seller_id']);
+    $this->db->bind(':current_date',$current_date);
     $row = $this->db->resultSet();
 
     if ($row) {

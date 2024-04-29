@@ -37,7 +37,9 @@
     }
 
     if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
-      $request =$this->RequestsModel->getOrderRequests();
+
+      $current_date_time = date('Y-m-d H:i:s');
+      $request =$this->RequestsModel->getOrderRequests($current_date_time);
       $Qrequests =$this->RequestsModel->getQorderRequests();
       $data =[
         'requests'=>$request,
