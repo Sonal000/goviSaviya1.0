@@ -111,7 +111,7 @@ public function Refuse($id){
 
     if($this->vehicleModel->RefuseVehicle($id)){
 
-        $this->notifyModel->notifyuser('OTHER',$user_id,'Your vehicle has been refused. You are not ready for delivery.','deliveryVehicles','OTHER');
+        $this->notifyModel->notifyuser('OTHER',$user_id,'We regret to inform you that your vehicle delivery has been refused. The vehicle is not ready for delivery at this time.','deliveryVehicles','OTHER');
 
         redirect('Vehicle');
     }

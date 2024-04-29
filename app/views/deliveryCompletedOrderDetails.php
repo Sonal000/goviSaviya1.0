@@ -82,16 +82,21 @@
 </div> </div>
 
     
+
+<?php if($data['review']){ ?>
+    
     <div class="hed"> Delivery Review Given by <?php echo $data['order']->buyer_name ?></div>
 
-    <?php if($data['review']){ ?>
-
-    <div class="mycardd">
+    <div class="mycardd card_rev">
 
         <div class="review_sec">
             <div class="review">
                 <?php echo $data['review']->review?>
             </div>
+        </div>
+        <div class="date_time">
+        Posted on: <?php echo date('Y/m/d', strtotime($data['review']->posted_date)); ?>
+
         </div>
 
     </div>

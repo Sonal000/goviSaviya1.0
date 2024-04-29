@@ -51,10 +51,10 @@
  
              <div class="addVehicleCard">
                  <div class="image">
-                    <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                    <img src="<?php echo URLROOT ?>/assets/images/hehe.png" alt="img" class="del_img">
                  </div>
                  <div class="helo">
-                     <button class="buttonn addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
+                     <button class="btn btn_vehi"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
                  </div>
  
              </div>
@@ -213,7 +213,7 @@
 
          <div class="addVehicleCard">
              <div class="image image_two">
-                <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img del_img_2">
+                <img src="<?php echo URLROOT ?>/assets/images/hehe.png" alt="img" class="del_img del_img_2">
              </div>
              <div class="helo">
                 <a class="btn btn_two" href="<?php echo URLROOT.'/orders'?>">View Available Orders</a>

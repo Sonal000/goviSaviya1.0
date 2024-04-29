@@ -58,11 +58,11 @@
                             <div class="pro_location">
                                 <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
                                 From:
-                                <?php echo $order->seller_address?>
+                                <?php echo $order->pickup_address?>
                             <div class="pro_location">
                                 <i class="fa-solid fa-truck" style="color: #0f0f0f;"></i>
                                 
-                                To:  <?php echo  $order->buyer_address?>
+                                To:  <?php echo  $order->order_address?>
                                 </div> 
                             </div>
                             <div class="addDate">

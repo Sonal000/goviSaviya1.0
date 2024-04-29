@@ -94,7 +94,7 @@ class Orders extends Controller{
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
             $deliver_adr = $this->deliverModel->getProfileInfo($_SESSION['user_id'])->address;
             
-           
+          
         $data=[
             "orders"=>$orders,
             "hasVehicle"=>$hasVehicle,
@@ -217,6 +217,8 @@ public function acceptOrder_PR($order_item_id){
         $deliver_id = $_SESSION['deliver_id'];
             $orders = $this->orderModel->getDeliverCompletedOrders($_SESSION['deliver_id']);
             // $order_id = $this->orderModel->getCompletedOrderIDs($deliver_id);
+
+            
         $data=[
             "orders"=>$orders,
 

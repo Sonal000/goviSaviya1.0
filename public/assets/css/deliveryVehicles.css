@@ -120,11 +120,12 @@
     font-weight: 500;
   }
 
-  .hed{
+  .hed h3{
     margin-top: 1rem;
     margin-bottom: 1rem;
     margin-left: 1rem;
-    font-size: 24px;
+    font-weight: bolder;
+    font-size: 18px;
   }
 
   .noVehicleCard{
@@ -138,6 +139,14 @@
     
     border-radius: 2rem;
     padding: 1rem;
+  }
+
+  .btn a{
+    color: white;
+  }
+
+  .btn a:hover{
+    color: var(--clr-primary-4);
   }
   
   .heading{
@@ -163,11 +172,9 @@
   }
   
   .image{
-    padding-top: 1rem;
-    border-top: #ccc solid 2px;
-   margin-top: 2rem;
-  margin-bottom: 1rem;
-  padding-left: 2rem;
+  
+   
+  padding-left: 1rem;
   }
   
   .addVehicleCard{
@@ -241,6 +248,46 @@
     
 }
 
+.hed_new{
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: var(--spacing-low);
+  margin-bottom: 1rem;
+}
+.inner_card{
+    
+    font-weight: 900;
+}
+
+.new_card{
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  width: 50%;
+  box-shadow: var(--dark-shadow);
+  margin-top: 1rem;
+  border-radius: 10px;
+}
+
+.card-subtitle_8{
+  color: #4CAF50;
+}
+
+.new_outer_card{
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  
+}
+
+.more_v_details{
+  font-size: 16px;
+  margin: 0.5rem;
+}
+
 .govi{
     color: var(--clr-primary-4);
     font-weight: 900;
@@ -250,13 +297,6 @@
     font-size: 14px;
 }
 
-.image{
-    /* border: #45a049 2px solid; */
-    /* padding-top: 1rem;
-   margin-top: 2rem; */
-  margin-bottom: 1rem;
-  padding-left: 2rem;
-}
 
 /* .image_details{
     border: red 2px solid;
@@ -284,7 +324,7 @@
     font-weight: 400;
   }
 
-
+  
   .map{
     box-shadow: var(--dark-shadow);
     padding:2rem;
@@ -311,6 +351,7 @@
   width: 240px;
 
 }
+
 
 .left_side{
   
@@ -350,6 +391,28 @@
   font-size: 10px;
  
 }
+
+.del_img{
+  width: 70%;
+}
+
+
+.cardNo{
+  margin-left: 0.5rem;
+}
+
+.hed_new{
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: var(--spacing-low);
+  margin-bottom: 0.4rem;
+}
+
+.more_v_details{
+  font-size: 12px;
+}
+
+
 
 
 

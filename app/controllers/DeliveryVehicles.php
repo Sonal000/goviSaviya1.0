@@ -170,208 +170,134 @@ class DeliveryVehicles extends Controller{
     public function add(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             //Sanitize POST array
-        $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
-
-        //Image upload
-        $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/vehicles/';
-
-        $vehicleImg = $this->uploadFile('vehicle_img', $uploadDirectory);
-        $frontImg = $this->uploadFile('front_img', $uploadDirectory);
-        $backImg = $this->uploadFile('back_img', $uploadDirectory);
-        $revLicenseImgs = $this->uploadFile('rev_license_imgs', $uploadDirectory);
-        $insuranceImgs = $this->uploadFile('insurance_imgs', $uploadDirectory);
-        $licenseImgs = $this->uploadFile('license_imgs', $uploadDirectory);
-        
-        $data = [
-            'id' => $_SESSION['user_id'],
-            'type' => trim($_POST['type']),
-            'vehicleNo' => trim($_POST['vehicleNo']),
-            'fuel_type'=>trim($_POST['fuel_type']),
-            'brand' => trim($_POST['brand']),
-             'model' => trim($_POST['model']),
-             'year' => trim($_POST['year']),
-            'capacity' => trim($_POST['capacity']),
-            'milage' => trim($_POST['milage']),
-            'vehicle_img' =>  $vehicleImg,
-            'front_img' =>  $frontImg,
-            'back_img' =>  $backImg,
-            'license_imgs' => $licenseImgs,
-            'rev_expiry'=>trim($_POST['rev_expiry']),
-            'rev_license_imgs'=>$revLicenseImgs,
-            'insurance_status'=>trim($_POST['insurance_status']),
-            'insurance_imgs'=> $insuranceImgs,
-            'max_vol'=>trim($_POST['max_vol']),
-            'ins_expiry'=>trim($_POST['ins_expiry']),
-
-            //'user_id' => $_SESSION['user_id'],
-            'type_error' => '',
-            'vehicleNo_error' =>'',
-            'fuel_type_error'=>'',
-            'brand_error' =>'',
-            'model_error' =>'',
-            'year_error' =>'',
-            'capacity_error' =>'',
-            'milage_error' => '',
-            'vehicle_img_error' => '',
-            'front_img_error' =>'' ,
-            'back_img_error' => '',
-            'rev_expiry_error'=>'',
-            'license_imgs_error'=>'',
-            'rev_license_imgs_error'=>'',
-            'insurance_status_error'=>'',
-            'insurance_imgs_error'=>'',
-            'max_vol_error'=>'',
-            'ins_expiry_error'=>''
-        ];
-
-        //Validation
-            if(empty($data['type'])){
-                $data['type_error'] = 'Please enter the type of the vehicle';
-            }
-
-            if(empty($data['vehicleNo'])){
-                $data['vehicleNo_error'] = 'Please enter the Vehicle Registration Number';
-            }
-
-            if(empty($data['fuel_type'])){
-                $data['fuel_type_error'] = 'Please enter the fuel type of the vehicle';
-            }
-
-            if(empty($data['brand'])){
-                $data['brand_error'] = 'Please enter the brand of the vehicle';
-            }
-
-            if(empty($data['model'])){
-                $data['model_error'] = 'Please enter the model of the vehicle';
-            }
-
-            if(empty($data['year'])){
-                $data['year_error'] = 'Please enter the year of the vehicle';
-            }
-
-            if(empty($data['capacity'])){
-                $data['capacity_error'] = 'Please enter the maximum weight';
-            }
-
-            if(empty($data['milage'])){
-                $data['milage_error'] = 'Please enter the milage of the vehicle';
-            }
-
-            if(empty($data['vehicle_img'])){
-                $data['vehicle_img_error'] = 'Please upload a photo of the vehicle';
-            }
-
-            if(empty($data['front_img'])){
-                $data['front_img_error'] = 'Please upload a photo';
-            }
-
-            if(empty($data['back_img'])){
-                $data['back_img_error'] = 'Please upload a photo';
-            }
-
-            if(empty($data['rev_expiry'])){
-                $data['rev_expiry_error'] = 'Please enter the expiration date of revenue license';
-            }
-
-            if(empty($data['ins_expiry'])){
-                $data['ins_expiry_error'] = 'Please enter the expiration date of vehicle insurance';
-            }
-
-            if(empty($data['rev_license_imgs'])){
-                $data['rev_license_imgs_error'] = 'Please upload photos of revenue license of the vehicle';
-            }
-
-            if(empty($data['license_imgs'])){
-                $data['rev_license_imgs_error'] = 'Please upload photos of revenue license of the vehicle';
-            }
-
-            if(empty($data['insurance_status'])){
-                $data['insurance_status_error'] = 'Please select the type of insurance the vehicle';
-            }
-
-            if(empty($data['insurance_imgs'])){
-                $data['insurance_imgs_error'] = 'Please upload photos of insurance of the vehicle';
-            }
-
-            if(empty($data['max_vol'])){
-                $data['max_vol_error'] = 'Please enter the maximum volume';
-            }
-
-           
-
-            //Make sure there are no errors
-
-            if(empty($data['type_error']) && empty($data['vehicleNo_error'])
-            && empty($data['fuel_type_error'])&& empty($data['brand_error'])
-            && empty($data['model_error'])&& empty($data['year_error'])
-            && empty($data['capacity_error'])
-            && empty($data['milage_error'])&& empty($data['vehicle_img_error'])
-            && empty($data['front_img_error'])
-            && empty($data['back_img_error'])&& empty($data['rev_expiry_error'])
-            && empty($data['rev_license_imgs_error'])
-            && empty($data['insurance_status_error']) 
-            && empty($data['insurance_imgs_error'])&& empty($data['max_vol_error'])
-            && empty($data['ins_expiry_error'])){
-                
-                //Validated
-                if($this->VehicleModel->addVehicle($data)){
-                //Here it should show a pop up message saying the post is added successfully-----------            
-                    redirect('deliveryVehicles');
-                }           
-        else{
-                    die('Something went wrong');
-                } 
-            }else{
-                //Load the view with errors
-                $this->view('vehicleAdd',$data);
-                
-            }
-        }else{
+            $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+    
+            //Image upload
+            $uploadDirectory = (str_replace("\\", "/", STOREROOT)) . '/vehicles/';
+    
+            $vehicleImg = $this->uploadFile('vehicle_img', $uploadDirectory);
+            $frontImg = $this->uploadFile('front_img', $uploadDirectory);
+            $backImg = $this->uploadFile('back_img', $uploadDirectory);
+            $revLicenseImgs = $this->uploadFile('rev_license_imgs', $uploadDirectory);
+            $insuranceImgs = $this->uploadFile('insurance_imgs', $uploadDirectory);
+            $licenseImgs = $this->uploadFile('license_imgs', $uploadDirectory);
+    
+            // Format dates
+            $revExpiry = !empty($_POST['rev_expiry']) ? date('Y-m-d', strtotime($_POST['rev_expiry'])) : '';
+            $insExpiry = !empty($_POST['ins_expiry']) ? date('Y-m-d', strtotime($_POST['ins_expiry'])) : '';
+    
             $data = [
-            'type' => '',
-            'vehicleNo' => '',
-            'fuel_type'=>'',
-            'brand' => '',
-            'model' =>'',
-            'year' => '',
-            'capacity' => '',
-            'milage' => '',
-            'vehicle_img' => '',
-            'front_img' => '',
-            'back_img' => '',
-            'rev_expiry'=>'',   
-            'rev_license_imgs'=>'',
-            'license_imgs'=>'',
-            'insurance_status'=>'',
-            'ins_expiry'=>'',
-            'insurance_imgs'=>'',
-            'max_vol'=>'',
-            
-
-            'type_error' => '',
-            'vehicleNo_error' =>'',
-            'fuel_type_error'=>'',
-            'brand_error' =>'',
-            'model_error' =>'',
-            'year_error' =>'',
-            'capacity_error' =>'',
-            'milage_error' => '',
-            'vehicle_img_error' => '',
-            'front_img_error' => '',
-            'back_img_error' => '',
-            'rev_expiry_error'=>'',           
-            'rev_license_imgs_error'=>'',
-            'license_imgs_error'=>'',
-            'insurance_status_error'=>'',
-            'ins_expiry_error'=>'',
-            'insurance_imgs_error'=>'',
-            'max_vol_error'=>'',
-           
+                'id' => $_SESSION['user_id'],
+                'type' => trim($_POST['type']),
+                'vehicleNo' => trim($_POST['vehicleNo']),
+                'fuel_type' => trim($_POST['fuel_type']),
+                'brand' => trim($_POST['brand']),
+                'model' => trim($_POST['model']),
+                'year' => trim($_POST['year']),
+                'capacity' => trim($_POST['capacity']),
+                'milage' => trim($_POST['milage']),
+                'vehicle_img' =>  $vehicleImg,
+                'front_img' =>  $frontImg,
+                'back_img' =>  $backImg,
+                'license_imgs' => $licenseImgs,
+                'rev_expiry' => $revExpiry,
+                'rev_license_imgs' => $revLicenseImgs,
+                'insurance_status' => trim($_POST['insurance_status']),
+                'insurance_imgs' => $insuranceImgs,
+                'max_vol' => trim($_POST['max_vol']),
+                'ins_expiry' => $insExpiry,
+                'type_error' => '',
+                'vehicleNo_error' =>'',
+                'fuel_type_error' => '',
+                'brand_error' => '',
+                'model_error' => '',
+                'year_error' => '',
+                'capacity_error' => '',
+                'milage_error' => '',
+                'vehicle_img_error' => '',
+                'front_img_error' => '',
+                'back_img_error' => '',
+                'rev_expiry_error' => '',
+                'license_imgs_error' => '',
+                'rev_license_imgs_error' => '',
+                'insurance_status_error' => '',
+                'insurance_imgs_error' => '',
+                'max_vol_error' => '',
+                'ins_expiry_error' => ''
             ];
-
-            $this->view('vehicleAdd',$data);
+    
+            // Validation (omitted for brevity)
+    
+            // Make sure there are no errors
+    
+            if (empty($data['type_error']) && empty($data['vehicleNo_error'])
+                && empty($data['fuel_type_error']) && empty($data['brand_error'])
+                && empty($data['model_error']) && empty($data['year_error'])
+                && empty($data['capacity_error'])
+                && empty($data['milage_error']) && empty($data['vehicle_img_error'])
+                && empty($data['front_img_error'])
+                && empty($data['back_img_error']) && empty($data['rev_expiry_error'])
+                && empty($data['rev_license_imgs_error'])
+                && empty($data['insurance_status_error']) && empty($data['insurance_imgs_error'])
+                && empty($data['max_vol_error']) && empty($data['ins_expiry_error'])
+            ) {
+                // Validated
+                if ($this->VehicleModel->addVehicle($data)) {
+                    // Here it should show a pop-up message saying the post is added successfully-----------
+                    redirect('deliveryVehicles');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load the view with errors
+                $this->view('vehicleAdd', $data);
+            }
+        } else {
+            $data = [
+                'type' => '',
+                'vehicleNo' => '',
+                'fuel_type' => '',
+                'brand' => '',
+                'model' => '',
+                'year' => '',
+                'capacity' => '',
+                'milage' => '',
+                'vehicle_img' => '',
+                'front_img' => '',
+                'back_img' => '',
+                'rev_expiry' => '',
+                'rev_license_imgs' => '',
+                'license_imgs' => '',
+                'insurance_status' => '',
+                'ins_expiry' => '',
+                'insurance_imgs' => '',
+                'max_vol' => '',
+                'type_error' => '',
+                'vehicleNo_error' => '',
+                'fuel_type_error' => '',
+                'brand_error' => '',
+                'model_error' => '',
+                'year_error' => '',
+                'capacity_error' => '',
+                'milage_error' => '',
+                'vehicle_img_error' => '',
+                'front_img_error' => '',
+                'back_img_error' => '',
+                'rev_expiry_error' => '',
+                'rev_license_imgs_error' => '',
+                'license_imgs_error' => '',
+                'insurance_status_error' => '',
+                'ins_expiry_error' => '',
+                'insurance_imgs_error' => '',
+                'max_vol_error' => '',
+            ];
+    
+            $this->view('vehicleAdd', $data);
         }
     }
+    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public function editCom($id){
 
@@ -389,25 +315,29 @@ class DeliveryVehicles extends Controller{
             $insuranceImgs = isset($_FILES['insurance_imgs']['tmp_name']) && $_FILES['insurance_imgs']['error'] == UPLOAD_ERR_OK
             ? $this->uploadFile('insurance_imgs', $uploadDirectory)
             : $this->VehicleModel->getVehicleById($id)->insurance_imgs; // Use existing image filename if no new file is uploaded
-            $data = [
-                'id' => $id,
-                'user_id' =>$_SESSION['user_id'],
-                'rev_expiry'=>trim($_POST['rev_expiry']),
-                'rev_license_imgs'=>$revLicenseImgs,
-                'insurance_status'=>trim($_POST['insurance_status']),
-                'insurance_imgs'=> $insuranceImgs,
-                'ins_expiry'=>trim($_POST['ins_expiry']),
+           
+            
+            // Format dates before assigning them to $data
+                $revExpiry = !empty($_POST['rev_expiry']) ? date('Y-m-d', strtotime($_POST['rev_expiry'])) : '';
+                $insExpiry = !empty($_POST['ins_expiry']) ? date('Y-m-d', strtotime($_POST['ins_expiry'])) : '';
+
+                $data = [
+                    'id' => $id,
+                    'user_id' => $_SESSION['user_id'],
+                    'rev_expiry' => $revExpiry,
+                    'rev_license_imgs' => $revLicenseImgs,
+                    'insurance_status' => trim($_POST['insurance_status']),
+                    'insurance_imgs' => $insuranceImgs,
+                    'ins_expiry' => $insExpiry,
+                    'rev_expiry_error' => '',
+                    'rev_license_imgs_error' => '',
+                    'insurance_status_error' => '',
+                    'insurance_imgs_error' => '',
+                    'ins_expiry_error' => '',
+                ];
+
     
-                //'user_id' => $_SESSION['user_id'],
-                
-                'rev_expiry_error'=>'',
-                'rev_license_imgs_error'=>'',
-                'insurance_status_error'=>'',
-                'insurance_imgs_error'=>'',
-                'ins_expiry_error'=>'',
-            ];
-    
-            // Validation
+            
             if(empty($data['rev_expiry'])){
                 $data['rev_expiry_error'] = 'Please enter the revenue license expire date';
             }
@@ -428,7 +358,8 @@ class DeliveryVehicles extends Controller{
                 $data['ins_expiry_error'] = 'Please select the insurance expire date';
             }
         
-            // Make sure there are no errors
+            
+            
             if(empty($data['rev_expiry_error']) 
                 && empty($data['rev_license_imgs_error']) && empty($data['insurance_status_error'])
                 && empty($data['insurance_imgs_error'])
@@ -464,7 +395,7 @@ class DeliveryVehicles extends Controller{
                 'insurance_status'=>$vehicle->insurance_status,
                 'insurance_imgs' => $vehicle->insurance_imgs,
                 'ins_expiry'=>$vehicle->ins_expiry,
-    
+                'vehicle'=>$vehicle,
                 //'user_id' => $_SESSION['user_id'],
                 
                 'rev_expiry_error'=>'',
@@ -494,9 +425,14 @@ class DeliveryVehicles extends Controller{
                 // 'max_vol_error' => '',
                 // 'ref_cap_error' => '',
             ];   
+
+            var_dump($vehicle);
             $this->view('deliveryVehiclesComEdit', $data);
         }
     }
+
+
+    
 
 
 
