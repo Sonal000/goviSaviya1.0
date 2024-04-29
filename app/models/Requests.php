@@ -255,6 +255,58 @@ class Requests{
 
     }
 
+
+    public function getBuyerPaymentRequests($buyer_id){
+        $this->db->query(
+        " SELECT 
+          DISTINCT r.request_ID,
+          r.*,
+          rq.*,
+          sl.seller_id,
+          us.name AS seller_name,
+          us.user_id AS seller_user_id 
+          FROM requests r
+          JOIN req_quotation rq ON rq.request_ID = r.request_ID
+          JOIN sellers sl ON r.acp_seller_ID = sl.seller_id  
+          JOIN users us ON sl.user_id = us.user_id
+          LEFT JOIN order_items_rq o_items ON r.request_ID = o_items.req_id
+          LEFT JOIN orders o ON o_items.order_id = o.order_id
+          WHERE r.buyer_id = :buyer_id AND COALESCE(o.payment_status, FALSE) = FALSE 
+          ORDER BY r.acp_date DESC
+          
+          ");
+          $this->db->bind(':buyer_id',$buyer_id);
+        $row=$this->db->resultSet();
+        if($row){
+          return $row;
+        }else{
+          return false;
+        }
+      }
+
+    public function getBuyerPaymentRequestsCount($buyer_id){
+        $this->db->query(
+        " SELECT 
+          COUNT(DISTINCT r.request_ID) AS count
+          FROM requests r
+          JOIN req_quotation rq ON rq.request_ID = r.request_ID
+          JOIN sellers sl ON r.acp_seller_ID = sl.seller_id  
+          JOIN users us ON sl.user_id = us.user_id
+          LEFT JOIN order_items_rq o_items ON r.request_ID = o_items.req_id
+          LEFT JOIN orders o ON o_items.order_id = o.order_id
+          WHERE r.buyer_id = :buyer_id AND COALESCE(o.payment_status, FALSE) = FALSE 
+          ORDER BY r.acp_date DESC
+          
+          ");
+          $this->db->bind(':buyer_id',$buyer_id);
+        $row=$this->db->single();
+        if($row){
+          return $row->count;
+        }else{
+          return false;
+        }
+      }
+
     // public function getQorderRequests(){
     //     $this->db->query('SELECT * FROM req_quotation WHERE seller_ID=:seller_ID');
     //     $this->db->bind(':seller_ID',$_SESSION['seller_id']);

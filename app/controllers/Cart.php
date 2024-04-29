@@ -67,6 +67,7 @@ class Cart extends Controller {
 
  public function payments($id){
   $items = $this->itemModel->getCartItems($_SESSION["buyer_id"]);
+  try {
   $lineItems = [];
   foreach ($items as $item) {
       $lineItems[] = [
@@ -91,6 +92,18 @@ class Cart extends Controller {
 // Redirect the user to the Stripe Checkout page
 http_response_code(303);
 header("Location: " . $checkout_session->url);
+} catch (\Stripe\Exception\ApiErrorException $e) {
+  
+  $this->orderModel->deleteAllOrdersByOrderId($id);
+  echo "<script>alert('Failed to process payment: check your internet connection');</script>";
+  redirect("cart/checkout/?payment_failed=true");
+ 
+} catch (Exception $e) {
+
+  $this->orderModel->deleteAllOrdersByOrderId($id);
+  echo "<script>alert('Failed to process payment: check your internet connection');</script>";
+  redirect("cart/checkout/?payment_failed=true");
+}
     
 exit();
 }

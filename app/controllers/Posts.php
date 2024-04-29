@@ -43,6 +43,7 @@ class Posts extends Controller{
 
     public function Requests(){
         $posts=$this->postModel->selectRposts();
+        
         $count = $this->postModel->countRposts();
 
         $data=[

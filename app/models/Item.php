@@ -226,8 +226,8 @@
    } 
    public function addItems($data){
     $this->db->query('INSERT INTO 
-    items_market (name,seller_id,category,description,price,stock,address,unit,district,item_img) 
-    VALUES(:name,:seller_id,:category,:description,:price,:stock,:address,:unit,:district,:item_img)'
+    items_market (name,seller_id,category,description,price,stock,address,unit,district,item_img,exp_date) 
+    VALUES(:name,:seller_id,:category,:description,:price,:stock,:address,:unit,:district,:item_img,:exp_date)'
     );
 
     // $this->db->query('INSERT INTO
@@ -241,6 +241,7 @@ $this ->db ->bind(':category',$data['category']);
 $this ->db ->bind(':description',$data['description']);
 $this ->db ->bind(':price',$data['price']);
 $this ->db ->bind(':stock',$data['stock']);
+$this->db->bind(':exp_date',$data['exp_date']);
 $this ->db ->bind(':address',$data['address']);
 $this ->db ->bind(':unit',$data['unit']);
 $this ->db ->bind(':district',$data['district']);

@@ -1,3 +1,8 @@
+
+
+
+
+
 const form = document.getElementById("placeOrderForm");
 // const nameInput = document.getElementById('name');
 // const emailInput = document.getElementById('email');

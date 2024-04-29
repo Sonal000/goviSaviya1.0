@@ -9,7 +9,8 @@
 }
 
 :root {
-    --main-font: 'Nunito Sans', 'Karla', sans-serif;
+    /* --main-font: 'Nunito Sans', 'Karla', sans-serif; */
+    --main-font: "Poppins", sans-serif;
     --first-color: #4caf4f;
 }
 
@@ -44,7 +45,7 @@ ul {
     font-size: 12px;
     font-weight: 400;
     color: rgb(74, 80, 115);
-    margin-top: 8px;
+    margin-top: 5px;
 }
 
 .text-success {
@@ -340,6 +341,13 @@ main header .content .btn-sec:hover {
     margin-top: .5rem;
     margin-bottom: 2rem;
 }
+.content .cards-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+    margin-top: .5rem;
+    margin-bottom: 2rem;
+}
 
 .content .cards .card {
     background-color: #fff;
@@ -357,7 +365,34 @@ main header .content .btn-sec:hover {
     -o-border-radius: 8px;
 }
 
+.content .cards-2 .card {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding: 25px; */
+    background-clip: border-box;
+    border: .0625rem solid #eaedf2;
+    border-radius: 8px;
+    box-shadow: 0 2px 18px rgba(0, 0, 0, .02) !important;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    width: 100%;
+}
+
 .content .cards .card .card-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 41.66667%;
+    max-width: 41.66667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    position: relative;
+}
+.content .cards-2 .card .card-left {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -377,13 +412,30 @@ main header .content .btn-sec:hover {
     justify-content: center;
     border-radius: 8px;
 }
+.content .cards-2 .card .card-left .card-icon {
+    width: 4.5rem;
+    height: 4.5rem;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
 
 .content .cards .card .card-left .card-icon i {
     font-size: 2rem;
     font-weight: 900;
 }
-
+.content .cards-2 .card .card-left .card-icon i {
+    font-size: 2rem;
+    font-weight: 900;
+}
 .content .cards .card .card-left .icon-one {
+    background-color: rgba(9, 72, 179, .2);
+    color: var(--first-color);
+}
+.content .cards-2 .card .card-left .icon-one {
     background-color: rgba(9, 72, 179, .2);
     color: var(--first-color);
 }
@@ -392,8 +444,16 @@ main header .content .btn-sec:hover {
     color: #05a677;
     background-color: rgba(5, 166, 119, .2);
 }
+.content .cards-2 .card .card-left .icon-two {
+    color: #05a677;
+    background-color: rgba(5, 166, 119, .2);
+}
 
 .content .cards .card .card-right {
+    flex: 0 0 58.33333%;
+    max-width: 58.33333%;
+}
+.content .cards-2 .card .card-right {
     flex: 0 0 58.33333%;
     max-width: 58.33333%;
 }
@@ -404,14 +464,31 @@ main header .content .btn-sec:hover {
     margin-bottom: 8px;
     color: rgb(36, 38, 43);
 }
+.content .cards-2 .card .card-right .card-top-info h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: rgb(36, 38, 43);
+}
+
 
 .content .cards .card .card-right small {
     font-size: 12px;
     font-weight: 400;
     color: rgb(74, 80, 115);
 }
-
+.content .cards-2 .card .card-right small {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(74, 80, 115);
+}
 .content .cards .card .card-bottom-info {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(74, 80, 115);
+    margin-top: 8px;
+}
+.content .cards-2 .card .card-bottom-info {
     font-size: 12px;
     font-weight: 400;
     color: rgb(74, 80, 115);
@@ -843,7 +920,7 @@ footer ul li a:hover {
 }
 
 /* ------------------------------------------------- */
-@media (min-width: 767px) and (max-width: 991px) {
+@media (min-width: 500px) and (max-width: 800px) {
     .user-info {
         display: none;
     }
@@ -876,12 +953,15 @@ footer ul li a:hover {
         font-size: 28px;
     }
 
-    main {
+    /* main {
         margin-left: 100px !important;
-    }
+    } */
 
     .content .cards {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .content .cards-2 {
+        grid-template-columns: 100%;
     }
 
     .row-box {
@@ -893,8 +973,11 @@ footer ul li a:hover {
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 500px) {
     .content .cards {
+        grid-template-columns: 100%;
+    }
+    .content .cards-2 {
         grid-template-columns: 100%;
     }
 

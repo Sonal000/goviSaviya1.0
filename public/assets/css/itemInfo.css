@@ -125,11 +125,14 @@
 
 .item_price_cont{
  display: flex;
- justify-content: space-between;
+ flex-direction: column;
+ justify-content: center;
+ align-items: flex-start;
  max-width: 15rem;
  color: var(--clr-grey-1);
  font-size: 1.1rem;
-   padding-top: 0.5rem; 
+   /* padding-top: 0.5rem;  */
+   
  }
  .item_price_cont>p{
    color: var(--clr-grey-1);
@@ -502,7 +505,7 @@
  .item_price_cont{
    display: flex;
    justify-content: space-between;
-   align-items: center;
+   align-items: flex-start;
    width: 90%;
  }
 

@@ -1,6 +1,22 @@
 // URL ROOT
 const URLROOT = "http://localhost/goviSaviya1.0";
 
+
+const navBtn = document.getElementById("bars_btn");
+const overlay = document.getElementById("navSidebar_overlay");
+const minisidebar = document.getElementById("main_sidebar_container_mini");
+
+navBtn.addEventListener("click", () => {
+  minisidebar.classList.add("mini_show");
+  overlay.classList.add("show_overlay");
+  navBtn.classList.toggle("rotate_btn");
+});
+
+overlay.addEventListener("click", () => {
+  minisidebar.classList.remove("mini_show");
+  overlay.classList.remove("show_overlay");
+  navBtn.classList.toggle("rotate_btn");
+});
 // =======notificatins=====
 
 $("#notification_btn").click(function (event) {
@@ -206,7 +222,7 @@ $(document).ready(function () {
 $(".sidebar_item").removeClass("sidebar_active");
 
 const sidebarMapping = [
-  { path: "Home", ids: ["dashboard_link", "dashboard_link_m"] },
+  { path: "dashboard", ids: ["dashboard_link", "dashboard_link_m"] },
   { path: "orders", ids: ["orders_link", "orders_link_m"], exclude: ["qualitycheck"] },
   { path: "qualityCheck", ids: ["qc_link", "qc_link_m"], exclude: ["penalty"] },
   { path: "qualityCheck/penalty", ids: ["penalty_link", "penalty_link_m"], exclude: [] },
