@@ -22,6 +22,7 @@ class Orders extends Controller{
     }
 
     public function index($id = null){
+        // redirect('orders/loader');
         if(!$id==null){
             $this->orderDetails($id);
             exit;
@@ -88,18 +89,36 @@ class Orders extends Controller{
         }
 
        if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='deliver'){
+           
             $deliver_id = $_SESSION['deliver_id'];
             $orders = $this->orderModel->getDeliverOrders($_SESSION['deliver_id']);
             $hasVehicle = $this->VehicleModel->hasVehicle($_SESSION['user_id']);
             $available = $this->orderModel->getDeliverAvailability($deliver_id);
             $deliver_adr = $this->deliverModel->getProfileInfo($_SESSION['user_id'])->address;
+
+            if($orders){
+                $visible_count = 0;
+                foreach($orders as $order){
+                    $distance_pickup =getDistance($deliver_adr,$order->pickup_address);
+                    $order->distance_pickup =$distance_pickup;
+                    if(($distance_pickup==false)  || ($distance_pickup<20)){
+                        $visible_count =$visible_count +1;
+                        $order->visible =true;
+                    }else{
+                        $order->visible =false;
+                    }
+
+                }
+            }
             
+
           
         $data=[
             "orders"=>$orders,
             "hasVehicle"=>$hasVehicle,
             "available"=>$available,
-            "address"=>$deliver_adr
+            "address"=>$deliver_adr,
+            "count"=>$visible_count,
         ];
         $this -> view('availableOrdersDelivery',$data);
 
@@ -109,6 +128,11 @@ class Orders extends Controller{
 
 
 
+public function loader(){
+    // die();
+    // redirect('orders');
+    $this->view('loading');
+}
 
 public function raiseBuyerComplain($qc_id){
 

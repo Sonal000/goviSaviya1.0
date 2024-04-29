@@ -73,11 +73,13 @@
 
 
     <?php }else{ ?>
-        <?php 
-        if($data['orders']){
+         <?php 
+        if($data['orders'] && $data['count']> 0){
             foreach($data['orders'] as $order){
                 // if($orders){
                 // foreach($orders as $order){
+if($order->visible){
+                    
 
                   
 
@@ -121,9 +123,19 @@
                     
             <div class="distance"> 
                 
-                <?php echo(getDistance($data['address'],$order->pickup_address));
-                            ?>km away from you
+                <?php 
+                
+                if($order->distance_pickup){
+                
+                echo($order->distance_pickup) . 'km away from you';
 
+                           
+                }else{
+                    echo 'Unable to calculate distance';
+                }
+                           ?>
+
+                           
                 </div>
             
                     <?php if($data['available']){ ?>
@@ -151,11 +163,12 @@
             
         
         </div>
+       
         
    <!-- 2nd Card------------------------------------------------------------------------------------- -->
    <?php
                 //  }} }
-                        }
+                        }}
         }else{ ?>
         
         <div class="cardNo">
@@ -182,6 +195,7 @@
         <?php
 
         } ?>
+        
 
 <?php }?>
             

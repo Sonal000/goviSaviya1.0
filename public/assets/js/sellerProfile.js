@@ -79,6 +79,7 @@ coverImgInput.addEventListener('change',()=>{
 
 
 editCoverImgBtn.addEventListener('click',()=>{
+  console.log('clicked');
   coverImgInput.click();
 })
 
