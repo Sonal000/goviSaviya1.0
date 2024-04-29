@@ -142,7 +142,7 @@ require APPROOT. '/views/layouts/navbar2.php';
                     <div class="card-right">
                         <div class="card-top-info">
                             <h2>Total Revenue</h2>
-                            <h3>Rs.<?php echo $data['totalRevenue']?>/=</h3>
+                            <h4>Rs.<?php echo number_format($data['totalRevenue'], 2) ?>/=</h4>
                         </div>
                         <div class="last-card-text">
                             <span class="icon-desktop">
@@ -261,11 +261,11 @@ require APPROOT. '/views/layouts/navbar2.php';
                         <h2>Revenue Growth</h2>
 
                         <h2><?php if($data['revenueGrowth']<=0){ ?>
-                        <span class="text-desktop" style="font-size:18px; font: weight 600px;">Rs.<?php echo $data['revenueGrowth'] ?>/= </span><span style="font-size:16px">than last month</span>
+                        <span class="text-desktop" style="font-size:18px; font: weight 600px;">Rs.<?php echo number_format($data['revenueGrowth'], 2) ?>/= </span><span style="font-size:16px">than last month</span>
                         <?php }else{?>
 
                        
-                        <span class="text-desktop" style="font-size:18px; font: weight 600px;">+Rs.<?php echo $data['revenueGrowth'] ?>/= </span><span style="font-size:16px">than last month</span>
+                        <span class="text-desktop" style="font-size:18px; font: weight 600px;">+Rs.<?php echo number_format($data['revenueGrowth'], 2) ?>/= </span><span style="font-size:16px">than last month</span>
                         <?php }?></h2>
                     </div>
                     <!-- --------------------------------------------------------- -->
@@ -308,7 +308,7 @@ require APPROOT. '/views/layouts/navbar2.php';
                     <div class="card-top-info">
                         <h2>Average Revenue per Order</h2>
 
-                        <h2>Rs.<?php echo $data['averageRevenue'] ?>/=</h2>
+                        <h2>Rs.<?php echo number_format($data['averageRevenue'], 2) ?>/=</h2>
                     </div>
                     <!-- --------------------------------------------------------- -->
                     <?php

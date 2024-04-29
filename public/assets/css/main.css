@@ -843,7 +843,6 @@ input:focus {
   position: relative;
   display: flex;
   justify-content: flex-end;
-  /* z-index: 0; */
 }
 .container_content {
   width: calc(100vw - 17rem);
