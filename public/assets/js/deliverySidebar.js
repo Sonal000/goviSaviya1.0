@@ -1,11 +1,18 @@
 // URL ROOT
-const URLROOT = "http://localhost/goviSaviya1.0";
+
+if(typeof URLROOT === 'undefined'){
+
+  const URLROOT = "http://localhost/goviSaviya1.0";
+}
 
 
+// if(typeof navBtn === 'undefined'){
 
-const navBtn = document.getElementById("bars_btn");
-const overlay = document.getElementById("navSidebar_overlay");
-const minisidebar = document.getElementById("main_sidebar_container_mini");
+  const navBtn = document.getElementById("bars_btn");
+  const overlay = document.getElementById("navSidebar_overlay");
+  const minisidebar = document.getElementById("main_sidebar_container_mini");
+// }
+
 
 if(navBtn){
 
@@ -467,8 +474,8 @@ const sidebarMapping = [
   { path: "orders/delivering", ids: ["orders_ongoing_link", "orders_ongoing_link_m"], exclude: ["ongoing"] },
   { path: "orders/delivered", ids: ["orders_ongoing_link", "orders_ongoing_link_m"], exclude: ["ongoing"] },
   { path: "orders/conclude", ids: ["orders_ongoing_link", "orders_ongoing_link_m"], exclude: ["ongoing"] },
-  { path: "deliveryRatings", ids: ["reviews_ink", "reviews_link_m"], exclude:"" },
-  { path: "deliveryinsight", ids: ["insight_link", "insight_link_m"], exclude:"" },
+  { path: "deliveryRatings", ids: ["reviews_link", "reviews_link_m"], exclude:"" },
+  { path: "deliveryInsight", ids: ["insight_link", "insight_link_m"], exclude:"" },
   { path: "deliveryVehicles", ids: ["vehicles_link", "vehicles_link_m"], exclude:"" },
 //   { path: "orderrequests", ids: ["available_requests", "available_requests_m"] ,exclude:"accepted" },
 //   { path: "orderrequests/accepted", ids: ["accepted_requests", "accepted_requests_m"] },
@@ -507,5 +514,12 @@ sidebarMapping.forEach(item => {
 });
 
 
+
+
+// const o_link = document.getElementById('orders_link');
+
+// o_link.addEventListener('click',function(e){
+// o_link.classList.add('sidebar_active');
+// })
 
 });
