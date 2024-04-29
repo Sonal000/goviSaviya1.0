@@ -77,7 +77,7 @@ function getDistance($origin, $destination) {
 
     if (!$connected = @fsockopen("www.google.com", 80)) {
         // Handle the case when there's no internet connection
-        return "Unable to connect to the internet!";
+        return false;
     }
     // fclose($connected);
 

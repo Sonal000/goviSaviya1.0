@@ -532,8 +532,11 @@
 .card-recomendedOrder{
     
     border: #d0d313 solid 2px;
-    
+    width: 100%;
+    overflow-x: scroll;
+
 }
+
 
 
 
