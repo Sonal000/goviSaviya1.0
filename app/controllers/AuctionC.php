@@ -245,7 +245,7 @@ public  function checkout($id){
             $auction_id=$this->orderModel->getOrderAuctionId($id);
             $item = $this->auctionModel->getAuctionInfo($auction_id);
             // var_dump($item);
-            
+            try {
 
                 $lineItems[] = [
                     "quantity" => $item->stock, // Assuming quantity is always 1 for each item
@@ -269,7 +269,19 @@ public  function checkout($id){
           // Redirect the user to the Stripe Checkout page
           http_response_code(303);
           header("Location: " . $checkout_session->url);
-              
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+  
+            $this->orderModel->deleteAllOrdersByOrderId($id);
+            echo "<script>alert('Failed to process payment: check your internet connection');</script>";
+            redirect("auctionC/checkout/".$auction_id."/?payment_failed=true");
+           
+          } catch (Exception $e) {
+          
+            $this->orderModel->deleteAllOrdersByOrderId($id);
+            echo "<script>alert('Failed to process payment: check your internet connection');</script>";
+            redirect("auctionC/checkout/".$auction_id."/?payment_failed=true");
+          }
+               
           exit();
           }
           

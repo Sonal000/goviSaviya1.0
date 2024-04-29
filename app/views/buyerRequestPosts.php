@@ -28,30 +28,35 @@
 <section class="view_auction_section section-center">
 
    <div class="viewAuction_cont">
-      
-      <div class="current_biddings_cont" id="accept_order_cont">
+    
+   <?php if(isset($data['paymentsCount']) && $data['paymentsCount']>0 ){ ?>
+      <div class="current_biddings_cont" >
          
          <div class="hed_btn_cont">
          <div class="auc_title">
-            <h3>Accepted Order Requests</h3>
+            <h3>Payment Pending Requests</h3>
+            <div class="win_count"><p><?php echo $data['paymentsCount']; ?></p></div>
          </div>
-         <div class="add_req">
+         <!-- <div class="add_req">
             <button class="btn" id="request_btn">Add Order Requests</button>
-         </div>
+         </div> -->
          </div>
          
          
          <div class="bid_items_cont">
 
-          <?php if($data['requests']){
+          <?php 
+          
+          if($data['requests']){
              foreach($data['requests'] as $requests){
+              
            ?> 
 
       
          <!-- bid item ===========-->
          <div class="bid_item_cont  ">
              <div class="bid_item_img_cont">
-               <img  class="bid_item_img" src="<?php echo URLROOT."/store/profiles/".$requests->seller_img; ?>">
+               <img  class="bid_item_img" src="<?php echo URLROOT."/store/items/".$requests->req_img; ?>">
             </div> 
             <div class="item_description">
                <div class="item_title_cont">
@@ -97,7 +102,11 @@
 
 </div>
 </div>
+
+
+<?php }?>
 <div class="request_item" id="accept_order_add_cont">
+   
    <div class="form_hed">
       <h3>Request Items</h3>
    </div>
@@ -182,11 +191,14 @@
 
 </div>
 
+<div class="current_biddings_cont" id="accept_order_cont">
       <div class="hed_btn_cont">
          <div class="auc_title">
             <h3>Quotations for Order Requests</h3>
          </div>
-        
+         <div class="add_req">
+            <button class="btn" id="request_btn">Add Order Requests</button>
+         </div>
       </div>
 
 
@@ -246,7 +258,7 @@
 
 </div>
 
-
+</div>
 
 
 <div class="biddings_history__cont">

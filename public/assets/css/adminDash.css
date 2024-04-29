@@ -11,6 +11,9 @@
 
 }
 
+.pdf-table{
+width: 100%;
+}
 
 /* .tables tr:nth-child(even){background-color: #f2f2f2;} */
 
@@ -29,13 +32,23 @@ transition: var(--transition);
   margin-top: 2rem;
   display: flex;
   justify-content: center;
+  overflow-x: scroll;
 }
+
 .tables th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
   background-color: var(--clr-primary-8);
   color: var(--clr-grey-5);
+}
+
+@medis screen and (max-width: 600px){
+  .tables{
+    width: 20rem;
+    overflow:scroll;
+
+  }
 }
 
 .admincard_cont{
