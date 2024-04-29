@@ -594,6 +594,7 @@ input:focus{
   margin-top: 1rem;
   transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
+  
 }
 .H4center{
   margin-top: 2rem;
@@ -639,6 +640,7 @@ a{
 
 .productimg{
     display: flex;
+   
 }
 
 .productimg img :hover{
@@ -818,6 +820,7 @@ a{
  }
 
  @media screen and (max-width: 500px) {
+ 
 
   .mycard{
     box-shadow: var(--dark-shadow);

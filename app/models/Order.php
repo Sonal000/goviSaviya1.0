@@ -2786,6 +2786,7 @@ JOIN
 WHERE 
     o_items.order_status != 'completed' AND o.payment_status = 1 AND o_items.seller_id = :seller_id
 
+
 UNION
 
 SELECT 
@@ -2838,6 +2839,7 @@ JOIN
     auction a ON o_items_ac.auction_id = a.auction_ID
 WHERE 
     o_items_ac.order_status != 'completed' AND o.payment_status = 1 AND o_items_ac.seller_id = :seller_id
+
 
     UNION
 
@@ -2958,6 +2960,7 @@ JOIN
 WHERE 
     o_items.order_status = 'completed' AND o.payment_status = 1 AND o_items.seller_id = :seller_id
 
+
 UNION
 
 SELECT 
@@ -3010,6 +3013,7 @@ JOIN
     auction a ON o_items_ac.auction_id = a.auction_ID
 WHERE 
     o_items_ac.order_status = 'completed' AND o.payment_status = 1 AND o_items_ac.seller_id = :seller_id
+
 
     UNION
 
@@ -4189,7 +4193,44 @@ public function getReviewsInsideOrder($order_id,$order_item_id,$type){
 }
 
 
-// -------------------------------------------------------------------------------------
+
+public function getpenaltyAmount($seller_id){
+
+    $query = 'SELECT penalty_amount FROM penalty WHERE user_type ="seller" AND peenalized_status="NO" AND seller_id =:seller_id';
+
+    $this->db->query($query);
+    $this->db->bind(':seller_id',$seller_id);
+    
+    $row = $this->db->Single();
+    return $row;
+
+    if($row){
+        $this->db->query('UPDATE
+                         penalty
+                         SET
+                        peenalized_status="YES"
+                        WHERE user_type ="seller" AND
+                        seller_id =:seller_id');
+
+       $this->db->query($query);
+       $this->db->bind(':seller_id',$seller_id);
+       if($this->db-execute()){
+        return true;
+       }
+       else{
+        return false;
+       }
+
+       return $row;
+    }
+    else{
+        return false;
+    }
+
+}
+
+
+
 
 public function getReviewOrders($deliver_id){
     $orders=$this->getDeliverReviewOrders($deliver_id);
@@ -4363,6 +4404,7 @@ ORDER BY order_date DESC
 
 
 
+
 public function getRecoDeliverOrders($deliver_id){
     $orders=$this->getDeliverRecoOrders($deliver_id);
         if($orders){
@@ -4528,6 +4570,7 @@ ORDER BY order_date DESC
         return false;
     }               
 }
+
 
 
 }

@@ -30,7 +30,7 @@
 					</div>
 				</div>
 				<div class="invoice_sec">
-					<p class="invoice bold">INVOICE</p>
+					<p class="invoice bold">Order Bill</p>
 					<p class="invoice_no">
 						<span class="bold">Invoice ID</span>
 						<span> S - <?php echo $data['details']->order_item_id;?>/<?php echo $data['details']->order_id?></span>

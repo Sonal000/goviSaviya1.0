@@ -84,7 +84,7 @@ else{
         <h3>About</h3>
         <p class="descp"> <?php echo $data['about']; ?></p>
       </div>
-      <div class="stat_cont">
+      <!-- <div class="stat_cont">
         <div class="stat">
           <p>Rating</p>
           <span>4.5</span>
@@ -101,13 +101,13 @@ else{
           <p>Positive reviews </p>
           <span>90%</span>
         </div>
-      </div>
+      </div> -->
 
 </section>
 
 <section class="featured_section">
 
-    <div class="featured_title_cont">
+    <!-- <div class="featured_title_cont">
       <h3>Featured items</h3>
       <div class="cat_btn_cont">
         <button class="cat_btn btn">Fruits</button>
@@ -115,7 +115,7 @@ else{
         <button class="cat_btn btn">Coconut</button>
       </div>
   
-    </div>
+    </div> -->
     
 
                         
@@ -137,7 +137,7 @@ else{
 
 
 <!-- item -->
-<a href="<?php echo URLROOT ?>/marketplace/itemInfo/<?php echo $item->name ?>" class="item_id">
+<a href="<?php echo URLROOT ?>/marketplace/itemInfo/<?php echo $item->item_id?>" class="item_id">
 
 <div class="item">
 <div class="item_img_cont">
@@ -170,9 +170,9 @@ else{
 
 
 </div>
-<div class="viewAll">
+<!-- <div class="viewAll">
   <button class="btn btn_viewall">View All</button>
-</div>
+</div> -->
 
 </section>
 

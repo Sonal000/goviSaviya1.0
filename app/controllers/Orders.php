@@ -811,6 +811,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
 
     public function Completedd(){
         $orders = $this->orderModel->getSellerCompleteOrders($_SESSION['seller_id']);
+        
         $data=[
             "orders"=>$orders,
         ];
