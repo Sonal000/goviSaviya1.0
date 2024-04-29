@@ -28,30 +28,35 @@
 <section class="view_auction_section section-center">
 
    <div class="viewAuction_cont">
-      
-      <div class="current_biddings_cont" id="accept_order_cont">
+    
+   <?php if(isset($data['paymentsCount']) && $data['paymentsCount']>0 ){ ?>
+      <div class="current_biddings_cont" >
          
          <div class="hed_btn_cont">
          <div class="auc_title">
-            <h3>Accepted Order Requests</h3>
+            <h3>Payment Pending Requests</h3>
+            <div class="win_count"><p><?php echo $data['paymentsCount']; ?></p></div>
          </div>
-         <div class="add_req">
+         <!-- <div class="add_req">
             <button class="btn" id="request_btn">Add Order Requests</button>
-         </div>
+         </div> -->
          </div>
          
          
          <div class="bid_items_cont">
 
-          <?php if($data['requests']){
+          <?php 
+          
+          if($data['requests']){
              foreach($data['requests'] as $requests){
+              
            ?> 
 
       
          <!-- bid item ===========-->
          <div class="bid_item_cont  ">
              <div class="bid_item_img_cont">
-               <img  class="bid_item_img" src="<?php echo URLROOT."/store/profiles/".$requests->seller_img; ?>">
+               <img  class="bid_item_img" src="<?php echo URLROOT."/store/items/".$requests->req_img; ?>">
             </div> 
             <div class="item_description">
                <div class="item_title_cont">
@@ -97,7 +102,11 @@
 
 </div>
 </div>
+
+
+<?php }?>
 <div class="request_item" id="accept_order_add_cont">
+   
    <div class="form_hed">
       <h3>Request Items</h3>
    </div>
@@ -106,7 +115,7 @@
    <div class="form_container">
 
 
-   <form method="post" action="<?php echo URLROOT ?>/OrderRequests/add" enctype="multipart/form-data">
+   <form method="post" id="request_form" action="<?php echo URLROOT ?>/OrderRequests/add" enctype="multipart/form-data">
 
    <div class="input_items">
 
@@ -115,7 +124,8 @@
 
           <div class="input_cont">
                 <label for="dropdown" class="input_label">Product Name</label>
-                <input type="text" id="dropdown" class="input_item" name="name" />
+                <input type="text"  class="input_item" name="name" id="product_name" />
+                <p class="invalid_msg"></p>
           </div>
           
           <div class="input_cont">
@@ -130,7 +140,8 @@
               
          <div class="input_cont">
           <label for="stock" class="input_label">Required Stock</label>
-                    <input type="text" class="input_item"  name="req_stock">
+                    <input type="text" class="input_item"  name="req_stock" id="stock">
+                    <p class="invalid_msg"></p>
           </div>
 
           <div class="input_cont">
@@ -146,12 +157,14 @@
          <div class="input_cont">
               <label for="req_date" class="input_label">Required Date</label>
                <input type="date" class="input_item"  name="req_date" id="expiration_date">
+               <p class="invalid_msg"></p>
          </div>
 
           
          <div class="input_cont">
             <label for="req_address" class="input_label">Requested Address</label>
-            <input type="text" class="input_item"  name="req_address">
+            <input type="text" class="input_item"  name="req_address" id="req_address">
+            <p class="invalid_msg"></p>
             </div>
 
         
@@ -165,7 +178,7 @@
                 </div>
       
          <div class="submit_container">
-            <a href="<?php echo URLROOT ?>/OrderRequests/add"><button type="submit" class="btn">Request Item</button></a>
+            <button type="submit" class="btn">Request Item</button>
             <div class="can_btn">
             <a href="<?php echo URLROOT ?>/OrderRequests"><button type ="button" class="btn cancel_bt">Cancel</button></a>
             </div>
@@ -174,6 +187,9 @@
     </div>
  
   </form>
+  <div class="loader_cont">
+        <div class="loader"></div>
+      </div>
 
 
 </div>
@@ -182,11 +198,14 @@
 
 </div>
 
+<div class="current_biddings_cont" id="accept_order_cont">
       <div class="hed_btn_cont">
          <div class="auc_title">
             <h3>Quotations for Order Requests</h3>
          </div>
-        
+         <div class="add_req">
+            <button class="btn" id="request_btn">Add Order Requests</button>
+         </div>
       </div>
 
 
@@ -246,7 +265,7 @@
 
 </div>
 
-
+</div>
 
 
 <div class="biddings_history__cont">
@@ -286,7 +305,7 @@
                <div class="bid_action_cont">
                   <div class="item_btns_cont">
                      
-                     <a href="<?php echo URLROOT?>/OrderRequests/remove/<?php echo $pendreq->request_ID ?>"><buttton id="req_remove_btn" class="buy_btn btn track_order remove">Remove</buttton></a>
+                    
                   </div>
                </div>
         </div>

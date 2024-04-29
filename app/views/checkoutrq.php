@@ -213,6 +213,12 @@
  ?>
 
 <!-- footer end ======================= -->
+<script>
+    if (<?= isset($_GET['payment_failed']) && $_GET['payment_failed'] === 'true' ? 'true' : 'false' ?>) {
+  alert('Failed to process payment: check your internet connection');
+}
+
+</script>
 
 <!-- js === -->
 <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>

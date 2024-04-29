@@ -1,3 +1,21 @@
+.win_count{
+  margin-left:1rem ;
+  /* padding: 0.5rem 1rem; */
+  height: 2.2rem;
+  width: 2.2rem;
+  border-radius: 50%;
+  background-color: var(--clr-red-2);
+  color: var(--clr-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-5px);
+}
+.win_count>p{
+  color: var(--clr-white);
+
+}
+
 .order_progress_cont {
   flex: 0.4;
   height: 100%;
@@ -302,13 +320,17 @@ position: absolute;
 
 
 /* viewAuction=========================== */
-
-.auc_title > h3 {
-  margin-top: 2rem;
-  letter-spacing: var(--spacing-low);
+.auc_title{
   display: flex;
-  
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 2rem;
 }
+
+.auc_title>h3{
+  letter-spacing: var(--spacing-low);
+ color: var(--clr-grey-1);
+ }
 .bid_items_cont {
   padding: 1rem;
   

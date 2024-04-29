@@ -34,8 +34,6 @@
 
 
  <section class="item_information section-center">
-
-
 <div class="image_container">
     <div class="main_img_cont">
       <img class="main_img" src="<?php echo URLROOT ?>/store/items/<?php echo $data['item_img'] ?>"/> 
@@ -141,7 +139,16 @@
         <input class="qty" type="number" value="<?php echo $data['current_bid'] + 10;?>" class="qty"  name="bid_price" id="quantity" data-currentprice="<?php echo $data['current_bid'];?>">
       <!-- <button class="btn_add">+</button> -->
     </div>
+    <?php if(isset($_SESSION['user_type']) && $_SESSION['user_type']=="buyer"){ ?> 
+
     <button id="bid_btn" type="submit" class="addtocart_btn btn">Place Bid</button>
+
+    
+    <?php }else{
+?>
+    <a href="<?php echo URLROOT ?>/login" class="addtocart_btn btn">Add to cart</a>
+  <?php  } ?>
+
   </div>
 </form>
 <?php 

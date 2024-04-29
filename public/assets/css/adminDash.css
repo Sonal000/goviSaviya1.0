@@ -1,5 +1,83 @@
 
+#download-btn{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  border: none;
+  background: var(--clr-grey-10);
+  border-radius: var(--radius-low);
+  transition: var(--transition);
+  color:rgba(0, 0, 0, 0.6) !important;
+  cursor: pointer;
+}
+#download-btn>i{
+color: var(--clr-primary-5);
+}
+#download-btn:hover{
+  background: var(--clr-grey-9);
+  color: (var--clr-grey-10);
+}
 
+
+.tables {
+  border-collapse: collapse;
+  width: 90%;
+}
+
+.tables td, .tables th {
+  /* border: 1px solid #ddd; */
+  padding: 1rem;
+  margin-bottom: 0.3rem;
+
+}
+
+.pdf-table{
+width: 100%;
+}
+
+/* .tables tr:nth-child(even){background-color: #f2f2f2;} */
+
+.tables tr:hover {
+  box-shadow: var(--dark-shadow);
+}
+.tables tr{
+  box-shadow: var(--light-shadow);
+color: var(--clr-grey-5);
+border-radius: var(--radius-low);
+transition: var(--transition);
+}
+
+.table_cont{
+  width: 90%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  overflow-x: scroll;
+}
+@media screen and (max-width: 500px){
+  .table_cont{
+    justify-content: flex-start;
+
+  }
+}
+
+.tables th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--clr-primary-8);
+  color: var(--clr-grey-5);
+}
+
+@medis screen and (max-width: 600px){
+  .tables{
+    width: 20rem;
+    overflow:scroll;
+
+  }
+}
 
 .admincard_cont{
   display: flex;
@@ -23,8 +101,11 @@
 
 .searchbarplace{
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
   margin-top: 1rem;
+  
+  /* border: 2px solid red; */
 }
 
 .cardicon{

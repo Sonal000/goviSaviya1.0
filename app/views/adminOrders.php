@@ -32,6 +32,9 @@
             <button type="submit"><i class="fas fa-search search_icon"></i></button>
             </form>
        </div>
+       <div>
+       <button id="download-btn"  >Download Report <i class="fas fa-file-download"></i></button>
+       </div>
     </div>
     <div class="admincard_cont">
         <div class="admincard">
@@ -76,63 +79,39 @@
        
 
     </div>
-    <div class="table_box">
-        <div class="table_row table_hed">
-            <div class="table_cell column1">
-                <p>Order ID</p>
-            </div>
-            <div class="table_cell column2">
-                <p>Customer</p>
-            </div>
-            <div class="table_cell column3">
-                <p>Order Type</p>
-            </div>
-            <div class="table_cell column4">
-                <p>Order Status</p>
-            </div>
-            <div class="table_cell column5">
-                <p></p>
-            </div>
-            <div class="table_cell column6">
-                <p></p>
-            </div>
-        </div>
-       
-        <?php if(!empty($data['orders'])): ?>
-        <?php foreach($data['orders'] as $Orders): ?>
-        <div class="table_row">
-            <div class="table_cell column1">
-                <p><?php echo $Orders->order_id ?></p>
-            </div>
-            <div class="table_cell column2">
-                <p><?php echo $Orders->buyer_name ?></p>
-            </div>
-            <div class="table_cell column3">
-            <p><?php echo $Orders->order_type?></p>
-                
-            </div>
-            <div class="table_cell column4">
-            <div class="ordersta"><p class="orderstatus_complete"><?php echo $Orders->order_history?></p></div>
-            </div>
-            <div class="table_cell column6">
-                <a href="<?php echo URLROOT; ?>/Orders/details/<?php echo $Orders->order_id?>">view</a>
-            </div>
-            <div class="table_cell column6">
-                <a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a>
-            </div>
-        </div>
-        <?php endforeach; ?>
-        <?php else: ?>
-        <p>No data available</p>
-        <?php endif; ?>
-      
-        
-       
-        
-        
-       
-        
+
+
+    <div class="table_cont" >
+    <table id="" class="tables">
+  <tr>
+    <th>Order ID</th>
+    <th>Customer</th>
+    <th>Order Type</th>
+    <th>Order Status</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <?php if(!empty($data['orders'])){ ?>
+        <?php foreach($data['orders'] as $Orders){?>
+    <tr>
+    <td> <?php echo $Orders->order_id ?></td>
+    <td><?php echo $Orders->buyer_name; ?></td>
+    <td><?php echo $Orders->order_type; ?></td>
+    <td><?php echo $Orders->order_history; ?></td>
+    <td> <a href="<?php echo URLROOT; ?>/Orders/details/<?php echo $Orders->order_id?>">view</a></td>
+    <td><a href=""><img src="<?php echo URLROOT; ?>/assets/images/delete.png" alt="" class="auction" alt=""></a></td>
+  </tr>
+  <?php
+    }
+}else{
+    echo "<tr><td colspan='6'>No Orders Found</td></tr>";
+}
+  ?>
+</table>
+         
     </div>
+    
+<!-- <a href="<?php echo URLROOT; ?>/dashboard/generatePdf" target="_blank">Download PDF</a> -->
     
 </div>
             </div>
@@ -140,6 +119,23 @@
 
 </body>
 <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.js"></script> -->
+
 <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/adminSidebar.js"></script>
-<script src="<?php echo URLROOT ?>/assets/js/marketplace.js"></script>
+<script src=
+ "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+    </script>
+    <script src=
+ "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+    </script>
+
+
+<script src="<?php echo URLROOT ?>/assets/js/adminOrders.js"></script>
+
+
+
 </html>
