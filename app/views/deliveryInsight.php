@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT ;?>/assets/css/sellermarketplace.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/login.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/adminDash.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/deliveryInsight.css">
     
 </head>
 <body>
@@ -183,13 +184,13 @@ require APPROOT. '/views/layouts/navbar2.php';
                         </div>
                        
                         <div class="align-items-center first">
-                            <div>
+                            <div class="abc">
                                 <h6>
                                 <i class="fas fa-gavel sidebar_icon"></i>
                                         Reviews Received
                                 </h6>
                             </div>
-                            <div>
+                            <div class="abc">
                             <span class="text-desktop"> <?php echo $data['reviews'] ?></span>
                             </div>
                         </div>

@@ -21,10 +21,14 @@
       $request = $this->RequestsModel->BuyerAcceptRequests($_SESSION['buyer_id']);
       $pendreq = $this->RequestsModel->BuyerPendingRequests($_SESSION['buyer_id']);
       $quotation=$this->RequestsModel->BuyerQuotations($_SESSION['buyer_id']);
-
+      // $active =  $this->RequestsModel->getBuyerActiveRequests($_SESSION['buyer_id']);
+      $payment =  $this->RequestsModel->getBuyerPaymentRequests($_SESSION['buyer_id']);
+      $paymentsCount =  $this->RequestsModel->getBuyerPaymentRequestsCount($_SESSION['buyer_id']);
+     
       
       $data =[
-          'requests'=> $request,
+          'requests'=> $payment,
+          'paymentsCount'=>$paymentsCount,
           'pendreq'=>$pendreq,
           'quotations'=>$quotation,
       ];
@@ -160,7 +164,7 @@
         $buyer = $this->buyerModel->getBuyerInfo($request->buyer_id);
 
         
-        $this->notifiModel->notifyuser(0,$buyer->user_id,"New Quotation received from <span class='bg'>".$_SESSION['user_name']."</span>",'quotations',"REQUEST");
+        $this->notifiModel->notifyuser(0,$buyer->user_id,"New Quotation received from <span class='bg'>".$_SESSION['user_name']."</span>",'OrderRequests',"REQUEST");
         $data=[
           'amount'=>'',
           'request_ID'=>'',
@@ -261,40 +265,86 @@ public  function checkout($id){
       }
 
 
+      // public function payments($id){
+      //   $reqid = $this->orderModel->getOrderRequestId($id);
+      //   $item = $this->RequestsModel->getrequestDetails($reqid);
+    
+      //     // var_dump($item);
+      //     // var_dump( ($item->acp_amount / $item->req_stock) * 100);
+      
+
+      //         $lineItems[] = [
+      //             "quantity" => $item->req_stock, // Assuming quantity is always 1 for each item
+      //             "price_data" => [
+      //                 "currency" => "lkr", // Change currency according 
+      //                 "unit_amount" => ( intval($item->acp_amount / $item->req_stock) * 100), // Stripe requires 
+      //                 "product_data" => [
+      //                     "name" => $item->name, // Use item name from your database
+      //                 ],
+      //             ],
+      //         ];
+
+              
+      //     \Stripe\Stripe::setApiKey(STRIPESECRETKEY);
+      //     $checkout_session = \Stripe\Checkout\Session::create([
+      //       "mode" => "payment",
+      //       "success_url" => "http://localhost/goviSaviya1.0/orderRequests/verifiedOrder/".$id, // success page
+      //       "locale" => "auto",
+      //       "cancel_url" => "http://localhost/goviSaviya1.0/orderRequests/checkout/".$id, // cancel page
+      //       "locale" => "auto",
+      //       "line_items" => $lineItems,
+      //   ]);
+      //   // Redirect the user to the Stripe Checkout page
+      //   http_response_code(303);
+      //   header("Location: " . $checkout_session->url);
+            
+      //   exit();
+      //   }
       public function payments($id){
         $reqid = $this->orderModel->getOrderRequestId($id);
         $item = $this->RequestsModel->getrequestDetails($reqid);
-    
-          // var_dump($item);
-          
-
-              $lineItems[] = [
-                  "quantity" => $item->req_stock, // Assuming quantity is always 1 for each item
-                  "price_data" => [
-                      "currency" => "lkr", // Change currency according to your needs
-                      "unit_amount" => ($item->acp_amount / $item->req_stock) * 100, // Stripe requires amount in cents
-                      "product_data" => [
-                          "name" => $item->name, // Use item name from your database
-                      ],
+        try {
+          $lineItems[] = [
+              "quantity" => $item->req_stock, // Assuming quantity is always 1 for each item
+              "price_data" => [
+                  "currency" => "lkr", // Change currency according 
+                  "unit_amount" => (intval($item->acp_amount / $item->req_stock) * 100), // Stripe requires 
+                  "product_data" => [
+                      "name" => $item->name, // Use item name from your database
                   ],
-              ];
-
-              
+              ],
+          ];
+      
           \Stripe\Stripe::setApiKey(STRIPESECRETKEY);
           $checkout_session = \Stripe\Checkout\Session::create([
-            "mode" => "payment",
-            "success_url" => "http://localhost/goviSaviya1.0/orderRequests/verifiedOrder/".$id, // success page
-            "cancel_url" => "http://localhost/goviSaviya1.0/orderRequests/checkout/".$id, // cancel page
-            "locale" => "auto",
-            "line_items" => $lineItems,
-        ]);
-        // Redirect the user to the Stripe Checkout page
-        http_response_code(303);
-        header("Location: " . $checkout_session->url);
-            
-        exit();
-        }
-        
+              "mode" => "payment",
+              "success_url" => "http://localhost/goviSaviya1.0/orderRequests/verifiedOrder/".$id, // success page
+              "locale" => "auto",
+              "cancel_url" => "http://localhost/goviSaviya1.0/orderRequests/checkout/".$reqid, // cancel page
+              "locale" => "auto",
+              "line_items" => $lineItems,
+          ]);
+      
+         
+          http_response_code(303);
+          header("Location: " . $checkout_session->url);
+      } catch (\Stripe\Exception\ApiErrorException $e) {
+  
+          $this->orderModel->deleteAllOrdersByOrderId($id);
+          echo "<script>alert('Failed to process payment: check your internet connection');</script>";
+          redirect("orderRequests/checkout/".$reqid."?payment_failed=true");
+         
+      } catch (Exception $e) {
+       
+          $this->orderModel->deleteAllOrdersByOrderId($id);
+          echo "<script>alert('Failed to process payment: check your internet connection');</script>";
+          redirect("orderRequests/checkout/".$reqid."?payment_failed=true");
+      }
+      
+      }  
+
+
+
         public function verifiedOrder($id){
         
           if($this->orderModel->updateOrderPaymentStatus($id)){
@@ -320,6 +370,8 @@ public  function checkout($id){
           
         
           $items = $this->RequestsModel->getrequestDetails($id);
+     
+          $seller = $this->sellerModel->getsellerInfo($items->acp_seller_ID);
           if($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
               $details=[
@@ -328,10 +380,13 @@ public  function checkout($id){
                 "order_address"=>trim($_POST['address']),
                 "order_company"=>trim($_POST['company']),
                 "order_city"=>trim($_POST['city']),
-                "order_postal_code"=>trim($_POST['postalCode'])
+                "order_postal_code"=>trim($_POST['postalCode']),
+                "seller_address"=> $seller->address
               ];
              
               $order_id= $this->orderModel->placeRequestOrder($items,$details,$_SESSION["buyer_id"]);
+              
+
               if($order_id){
                           header("Location: " . URLROOT . "/orderRequests/payments/".$order_id); 
                           exit();  

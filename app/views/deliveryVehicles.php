@@ -51,7 +51,7 @@
  
              <div class="addVehicleCard">
                  <div class="image">
-                    <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                    <img src="<?php echo URLROOT ?>/assets/images/hehe.png" alt="img" class="del_img">
                  </div>
                  <div class="status">Status: <span class="govi">Pending</span></div>
                 
@@ -96,7 +96,87 @@
 
 
                     </div>
-            <?php endforeach; ?> 
+            <?php endforeach; ?>
+            
+
+                                <?php
+                    // Assuming $vehicle->rev_expiry contains the expiration date of the revenue license
+
+                            $expiry_date_r = new DateTime($vehicle->rev_expiry);
+                            $current_date = new DateTime(); // Current date
+
+                            // Calculate the difference between the current date and the expiration date
+                            $date_diff_r = date_diff($current_date, $expiry_date_r);
+
+                            // Get the remaining months
+                            $months_remaining_r = ($date_diff_r->y * 12) + $date_diff_r->m;
+
+                    ?>
+
+                    <?php 
+                    
+                    // Assuming $vehicle->insurance_expiry contains the expiration date of the insurance
+
+                            $expiry_date_i = new DateTime($vehicle->ins_expiry);
+                            $current_date = new DateTime(); // Current date
+
+                            // Calculate the difference between the current date and the expiration date
+                            $date_diff_i = date_diff($current_date, $expiry_date_i);
+
+                            // Get the remaining months
+                            $months_remaining_i = ($date_diff_i->y * 12) + $date_diff_i->m;
+                    
+                    
+                    ?>
+
+            <div class="new_outer_card">
+
+                    <div class="new_card">
+
+
+                    
+
+                            <div class="hed hed_new">Revenue License Details</div>
+
+                            <div class="details">
+                            <div class="more_v_details"><span class="info_heading">Expires on:</span> <?php echo $vehicle->rev_expiry?> </div>
+
+                            <div class="more_v_details">
+                       <?php     if ($current_date > $expiry_date_r) {
+                                        echo "<div class='card-subtitle_1' style='color: red;'><span class='info_heading'>Insurance Status:</span> Expired </div>";
+                                    } else {
+                                        echo "<div class='card-subtitle_8'><span class='info_heading'>Months Remaining for Insurance:</span> $months_remaining_r months</div>";
+                                    }
+                                    ?>
+                                    </div>
+                            </div>
+
+
+                    </div>
+
+                    <div class="new_card">
+
+                            <div class="hed hed_new">Vehicle Insurance Details</div>
+
+                            <div class="details">
+                           
+                            <div class="more_v_details"><span class="info_heading">Expires on:</span> <?php echo $vehicle->ins_expiry?> </div>
+                            
+                            <div class="more_v_details">
+                       <?php     if ($current_date > $expiry_date_i) {
+                                        echo "<div class='card-subtitle_1' style='color: red;'><span class='info_heading'>Insurance Status:</span> Expired </div>";
+                                    } else {
+                                        echo "<div class='card-subtitle_8'><span class='info_heading'>Months Remaining for Insurance:</span> $months_remaining_i months</div>";
+                                    }
+                                    ?>
+                                    </div>
+                            </div>
+
+
+                    </div>
+
+
+            </div>
             
             
              <!-- Approveddddddddddddddddddddddddddddddd------------------------------------------------------ -->
@@ -122,10 +202,10 @@
 
             <div class="addVehicleCard">
                 <div class="image">
-                   <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                   <img src="<?php echo URLROOT ?>/assets/images/hehe.png" alt="img" class="del_img">
                 </div>
                 <div class="helo">
-                    <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles/add'?>">Add Vehicle</a></button>
+                    <button class="btn"><a href="<?php echo URLROOT.'/deliveryVehicles/add'?>">Add Vehicle</a></button>
                 </div>
 
             </div>
@@ -161,7 +241,7 @@
 
                     <div class="addVehicleCard">
                         <div class="image">
-                            <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                            <img src="<?php echo URLROOT ?>/assets/images/hehe.png" alt="img" class="del_img">
                         </div>
                         <div class="helo">
                      <button class="button addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles/add'?>">Add Vehicle</a></button>

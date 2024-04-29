@@ -81,7 +81,7 @@ class Post{
             return $row;
         }
         else{
-            return true;
+            return false;
         }
     }
 

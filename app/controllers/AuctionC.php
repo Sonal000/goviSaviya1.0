@@ -118,13 +118,11 @@ class AuctionC extends Controller{
 
 
          public function itemInfo($id){
-            
+        
 
                 $row=$this->auctionModel->getAuctionInfo($id);
-                var_dump($row);
-                
                 if($row){
-                    
+                  
 
 
                    $seller=$this->sellerModel->getSellerInfo($row->seller_ID);
@@ -157,12 +155,12 @@ class AuctionC extends Controller{
                     $timeDifference = $currentDateTime->diff($expDateTime);
                     $remains = $timeDifference->format('%a days %H hours');
                
-
+                    
 
 
 // echo "Remaining days: " . $timeDifference->d . " days<br>";
 // echo "Remaining hours: " . $timeDifference->h . " hours";    
-$userIds = $this->auctionModel->getAuctionBidUserIds($id);
+// $userIds = $this->auctionModel->getAuctionBidUserIds($id);
 
     
 if(($row->highest_buyer_id) && (!isset($_SESSION['user_id'])) && (!$activebidder)){
@@ -171,12 +169,6 @@ if(($row->highest_buyer_id) && (!isset($_SESSION['user_id'])) && (!$activebidder
     exit();
 
 }
-
-
-    
-
-                  
-
                       $data=[
                           'name'=>$row->name,
                           'item_id'=>$id,
@@ -203,6 +195,7 @@ if(($row->highest_buyer_id) && (!isset($_SESSION['user_id'])) && (!$activebidder
                           'payment_status'=>$payment_status?$payment_status->payment_status:false,
                       ]
                           ;
+            
             
                           $this->view('auctionItemInfo',$data);
                     }
@@ -252,7 +245,7 @@ public  function checkout($id){
             $auction_id=$this->orderModel->getOrderAuctionId($id);
             $item = $this->auctionModel->getAuctionInfo($auction_id);
             // var_dump($item);
-            
+            try {
 
                 $lineItems[] = [
                     "quantity" => $item->stock, // Assuming quantity is always 1 for each item
@@ -276,7 +269,19 @@ public  function checkout($id){
           // Redirect the user to the Stripe Checkout page
           http_response_code(303);
           header("Location: " . $checkout_session->url);
-              
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+  
+            $this->orderModel->deleteAllOrdersByOrderId($id);
+            echo "<script>alert('Failed to process payment: check your internet connection');</script>";
+            redirect("auctionC/checkout/".$auction_id."/?payment_failed=true");
+           
+          } catch (Exception $e) {
+          
+            $this->orderModel->deleteAllOrdersByOrderId($id);
+            echo "<script>alert('Failed to process payment: check your internet connection');</script>";
+            redirect("auctionC/checkout/".$auction_id."/?payment_failed=true");
+          }
+               
           exit();
           }
           
@@ -389,6 +394,7 @@ public  function checkout($id){
         if($row){
 
             foreach ($row as $item) {
+      
                 $currentDateTime = new DateTime();
                 $expDateTime = new DateTime($item->end_date);
                 $timeDifference = $currentDateTime->diff($expDateTime);

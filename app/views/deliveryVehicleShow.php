@@ -35,39 +35,37 @@
                 <div class="img"><img class="card_img" src="<?php echo URLROOT.'/store/vehicles/'.$data['vehicle']->vehicle_img ;?>"></div>
                 <div class="card-title"><?php echo $data['vehicle']->vehicle_brand?><?php echo ' '. $data['vehicle']->vehicle_model?></div>
                 <div class="card-subtitle"><?php echo $data['vehicle']->vehicle_type?> </div>
-                    <div class="card_info">
-                        <div class="info_col_1">
-                                    
-                                    <div class="card-subtitle_2"><span class="info_heading">Brand:</span> <?php echo $data['vehicle']->vehicle_brand?> </div>
-                                    <div class="card-subtitle_3"><span class="info_heading">Model:</span> <?php echo $data['vehicle']->vehicle_model?> </div>
-                                    <div class="card-subtitle_4"><span class="info_heading">Vehicle Number:</span> <?php echo $data['vehicle']->vehicle_number?> </div>
-                                    
-                                    <div class="card-subtitle_2"><span class="info_heading">Fuel Type:</span> <?php echo $data['vehicle']->fuel_type?> </div>
-                                    <div class="card-subtitle_1"><span class="info_heading">Mileage:</span> <?php echo $data['vehicle']->milage?>Km </div>
-                                    <div class="card-subtitle_6"><span class="info_heading">Manufactured Year:</span> <?php echo $data['vehicle']->vehicle_year?> </div>
-                                    
-                        </div>
-                        <div class="info_col_2">
-                                    
-                                    <div class="card-subtitle_5"><span class="info_heading">Max Capacity:</span> <?php echo $data['vehicle']->max_capacity?>Kg</div>
-                                    <div class="card-subtitle_5"><span class="info_heading">Max Volume:</span> <?php echo $data['vehicle']->max_vol?> Liters</div>
-                                    <div class="card-subtitle_6"><span class="info_heading">Refregiration Capability:</span> <?php echo $data['vehicle']->ref_cap?> </div>
-                                    <div class="card-subtitle_3"><span class="info_heading">Revenue License Expiry date:</span> <?php echo $data['vehicle']->rev_expiry?> </div>
-                                    <div class="card-subtitle_4"><span class="info_heading">Insurance Status:</span> <?php echo $data['vehicle']->insurance_status?> </div>
-                                    <div class="card-subtitle_3"><span class="info_heading">Vehicle Insurance Expiry date:</span> <?php echo $data['vehicle']->ins_expiry?> </div>
-                                    
-                        </div>
-                    </div>
+                <div class="card_info">
+    <div class="info_col_1">
+        <div class="card-subtitle_2"><span class="info_heading">Brand:</span> <?php echo $data['vehicle']->vehicle_brand?> </div>
+        <div class="card-subtitle_3"><span class="info_heading">Model:</span> <?php echo $data['vehicle']->vehicle_model?> </div>
+        <div class="card-subtitle_4"><span class="info_heading">Vehicle Number:</span> <?php echo $data['vehicle']->vehicle_number?> </div>
+        <div class="card-subtitle_2"><span class="info_heading">Fuel Type:</span> <?php echo $data['vehicle']->fuel_type?> </div>
+        <div class="card-subtitle_1"><span class="info_heading">Mileage:</span> <?php echo $data['vehicle']->milage?>Km </div>
+        <div class="card-subtitle_6"><span class="info_heading">Manufactured Year:</span> <?php echo $data['vehicle']->vehicle_year?> </div>
+    </div>
+    <div class="info_col_2">
+        <div class="card-subtitle_5"><span class="info_heading">Max Capacity:</span> <?php echo $data['vehicle']->max_capacity?>Kg</div>
+        <div class="card-subtitle_5"><span class="info_heading">Max Volume:</span> <?php echo $data['vehicle']->max_vol?> Liters</div>
+        <div class="card-subtitle_6"><span class="info_heading">Refregiration Capability:</span> <?php echo $data['vehicle']->ref_cap?> </div>
+        <div class="card-subtitle_3"><span class="info_heading">Revenue License Expiry:</span> <?php echo date('Y-m', strtotime($data['vehicle']->rev_expiry))?> </div>
+        <div class="card-subtitle_4"><span class="info_heading">Insurance Status:</span> <?php echo $data['vehicle']->insurance_status?> </div>
+        <div class="card-subtitle_3"><span class="info_heading">Vehicle Insurance Expiry:</span> <?php echo date('Y-m', strtotime($data['vehicle']->ins_expiry))?> </div>
+    </div>
+</div>
+
                     <div class="buttons">
-                        <div class="more_details"><a href="<?php echo URLROOT;?>/deliveryVehicles/edit/<?php echo $data['vehicle']->vehicle_id; ?>"><button class="btn btn_left"><i class="fa-solid fa-pencil"></i> Edit General Details</button></a></div>
+                       
                         <div class="more_details"><a href="<?php echo URLROOT;?>/deliveryVehicles/editCom/<?php echo $data['vehicle']->vehicle_id; ?>"><button class="btn btn_right"><i class="fa-solid fa-truck"></i> Compliance Update</button></a></div>
+                        <?php if($data['available']){ ?>
+
+<form action="<?php echo URLROOT; ?>/deliveryVehicles/delete/<?php echo $data['vehicle']->vehicle_id;?>;" class="pull-right" method="post">
+ <div class="abc"><input type="submit" value="Delete This Vehicle " class="btn btn_red"></div>
+</form>
+
                     </div>
 
-                    <?php if($data['available']){ ?>
-
-                        <form action="<?php echo URLROOT; ?>/deliveryVehicles/delete/<?php echo $data['vehicle']->vehicle_id;?>;" class="pull-right" method="post">
-                         <div class="abc"><input type="submit" value="Delete This Vehicle " class="btn btn_red"></div>
-                    </form>
+                   
 
 <?php }else{?>
 

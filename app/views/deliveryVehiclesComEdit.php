@@ -31,7 +31,7 @@
 
         <div class="main-container main_cont">
             
-        <form action="<?php echo URLROOT; ?>/deliveryVehicles/editCom/<?php echo $data['id'];?>" method="post"  enctype="multipart/form-data" class="submit-container">       
+        <form action="<?php echo URLROOT; ?>/deliveryVehicles/editCom/<?php echo $data['id'];?>" method="post"  enctype="multipart/form-data" class="submit-container" id="vehicle_add_form">       
         <div class="card card-body">
 
             <div class="left">
@@ -47,7 +47,7 @@
 
                     <div class="form-group">
                         <label for="insurance_status">New Vehicle Insurance status: <br></label>
-                        <select class="form_details <?php echo (!empty($data['doe_error'])) ? 'is-invalid' : ''; ?>" name="insurance_status" id="insurance_status" required>
+                        <select class="form_details <?php echo (!empty($data['doe_error'])) ? 'is-invalid' : ''; ?>" name="insurance_status" id="insurance_status" >
                             <option value="Full Insurance">Full Insurance</option>
                             <option value="Third Party">Third-party</option>
                             <option value="No Insurance">No Insurance</option>
@@ -59,8 +59,9 @@
 
                         <div class="form-group">
                             <label for="ins_expiry">New Vehicle Insurance expires on: <br></label>
-                            <input class="form_details <?php echo (!empty($data['ins_expiry_error'])) ? 'is-invalid' : ''; ?>" type="month" name="ins_expiry" id="ins_expiry" value="<?php echo $data['ins_expiry']; ?>" required>
+                            <input class="form_details <?php echo (!empty($data['ins_expiry_error'])) ? 'is-invalid' : ''; ?>" type="month" name="ins_expiry" id="ins_expiry" value="<?php echo $data['vehicle']->vehicle_id;?>" >
                             <!-- <span class="invalid-feedback"><?php echo $data['ins_expiry_error']; ?></span> -->
+                            <p class="invalid_msg"></p>
                         </div>
 
                         <div class="form-group">
@@ -68,6 +69,7 @@
                             <input class="form_details <?php echo (!empty($data['insurance_imgs_error'])) ? 'is-invalid' : ''; ?>" type="file" name="insurance_imgs" id="insurance_imgs" accept="image/*" >
                             <br><small class="form-text text-muted">Upload images of your new vehicle insurance. <br>Accepted formats: JPG, JPEG, PNG, GIF.</small>
                             <!-- <span class="invalid-feedback"><?php echo $data['insurance_imgs_error']; ?></span> -->
+                            <p class="invalid_msg"></p>
                         </div>
 
              
@@ -86,6 +88,7 @@
                             <div class="card-heading">Section 2:<br>Revenue License Details</div>
                             <p class="add_info">If you have acquired new Revenue License, please ensure to promptly update that information in this section.</p>
                             <small>Note: Fill this section only if you have gotten new Revenue License</small>
+                            
                         </div>
                 </div>
 
@@ -95,7 +98,8 @@
                                 <label for="rev_expiry">New Revenue License expires on: <br></label>
                                 <input class="form_details <?php echo (!empty($data['rev_expiry_error'])) ? 'is-invalid' : ''; ?>" type="month" name="rev_expiry" id="rev_expiry" value="<?php echo $data['rev_expiry']; ?>" >
                                 <!-- <span class="invalid-feedback"><?php echo $data['rev_expiry_error']; ?></span> -->
-                        </div>
+                                <p class="invalid_msg"></p>
+                            </div>
 
                         
                         <div class="form-group rev_license_imgs">
@@ -103,17 +107,21 @@
                                 <input class="form_details <?php echo (!empty($data['rev_license_imgs_error'])) ? 'is-invalid' : ''; ?>" type="file" name="rev_license_imgs" id="rev_license_imgs" accept="image/*">
                                 <br><small class="form-text text-muted">Upload images of your new revenue license.<br>Accepted formats: JPG, JPEG, PNG, GIF.</small>
                                 <!-- <span class="invalid-feedback"><?php echo $data['rev_license_imgs_error']; ?></span> -->
-                        </div>
+                                <p class="invalid_msg"></p>
+                            </div>
                 
 
                 </div>
     
 
 
+                <div class="loader_cont">
+        <div class="loader"></div>
+      </div>
 
         </div>
             <div class="submit_btn_class">   
-                <input type="submit" class="btn" value="Done">
+                <input type="submit" class="btn" value="Done" id="list_item_btn">
                 </form>
             </div>
                 
@@ -131,7 +139,9 @@
         </div>
     </div>
     <script type="text/javascript" src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
+
     <script src="<?php echo URLROOT ?>/assets/js/deliverySidebar.js"></script>
+    <script src="<?php echo URLROOT ?>/assets/js/deliveryEdit.js"></script>
 
 </body>
 </html>

@@ -55,7 +55,7 @@
  
              <div class="addVehicleCard">
                  <div class="image">
-                    <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                    <img src="<?php echo URLROOT ?>/assets/images/hehe.png" alt="img" class="del_img">
                  </div>
                  <div class="helo">
                      <button class="btn addVehicle"><a href="<?php echo URLROOT.'/deliveryVehicles'?>">Add Vehicle</a></button>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="pro_location" style="text-transform:capitalize" >
                         <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
-                        <?php echo $order->seller_city." to ".$order->order_city ?>
+                        <?php echo $order->district." to ".$order->order_city ?>
                     </div>
                     <div class="addDate"  style="display:flex; flex-direction:column; color:var('--clr-primary-5')">
                             <?php
@@ -171,7 +171,7 @@
         
          <div class="addVehicleCard">
              <div class="image">
-                <img src="<?php echo URLROOT ?>/assets/images/delivery_reg.png" alt="img" class="del_img">
+                <img src="<?php echo URLROOT ?>/assets/images/hehe.png" alt="img" class="del_img">
              </div>
            
 
