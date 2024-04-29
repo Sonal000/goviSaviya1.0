@@ -244,43 +244,47 @@ public  function checkout($id){
         public function payments($id){
             $auction_id=$this->orderModel->getOrderAuctionId($id);
             $item = $this->auctionModel->getAuctionInfo($auction_id);
-            // var_dump($item);
-            try {
+            $order = $this->orderModel->getOrderDetailsByOrderId($id,"AUCTION");
+            // $totalDeliveryfee = getDistancefee($item->address,$order[0]->order_address);      
+            var_dump($id);      
+            var_dump($order);
+            die();
+        //     try {
 
-                $lineItems[] = [
-                    "quantity" => $item->stock, // Assuming quantity is always 1 for each item
-                    "price_data" => [
-                        "currency" => "lkr", // Change currency according to your needs
-                        "unit_amount" => $item->highest_bid * 100, // Stripe requires amount in cents
-                        "product_data" => [
-                            "name" => $item->name, // Use item name from your database
-                        ],
-                    ],
-                ];
+        //         $lineItems[] = [
+        //             "quantity" => $item->stock, // Assuming quantity is always 1 for each item
+        //             "price_data" => [
+        //                 "currency" => "lkr", // Change currency according to your needs
+        //                 "unit_amount" => $item->highest_bid * 100, // Stripe requires amount in cents
+        //                 "product_data" => [
+        //                     "name" => $item->name, // Use item name from your database
+        //                 ],
+        //             ],
+        //         ];
 
-            \Stripe\Stripe::setApiKey(STRIPESECRETKEY);
-            $checkout_session = \Stripe\Checkout\Session::create([
-              "mode" => "payment",
-              "success_url" => "http://localhost/goviSaviya1.0/auctionC/verifiedOrder/".$id, // success page
-              "cancel_url" => "http://localhost/goviSaviya1.0/auctionC/checkout/".$id, // cancel page
-              "locale" => "auto",
-              "line_items" => $lineItems,
-          ]);
-          // Redirect the user to the Stripe Checkout page
-          http_response_code(303);
-          header("Location: " . $checkout_session->url);
-        } catch (\Stripe\Exception\ApiErrorException $e) {
+        //     \Stripe\Stripe::setApiKey(STRIPESECRETKEY);
+        //     $checkout_session = \Stripe\Checkout\Session::create([
+        //       "mode" => "payment",
+        //       "success_url" => "http://localhost/goviSaviya1.0/auctionC/verifiedOrder/".$id, // success page
+        //       "cancel_url" => "http://localhost/goviSaviya1.0/auctionC/checkout/".$id, // cancel page
+        //       "locale" => "auto",
+        //       "line_items" => $lineItems,
+        //   ]);
+        //   // Redirect the user to the Stripe Checkout page
+        //   http_response_code(303);
+        //   header("Location: " . $checkout_session->url);
+        // } catch (\Stripe\Exception\ApiErrorException $e) {
   
-            $this->orderModel->deleteAllOrdersByOrderId($id);
-            echo "<script>alert('Failed to process payment: check your internet connection');</script>";
-            redirect("auctionC/checkout/".$auction_id."/?payment_failed=true");
+        //     $this->orderModel->deleteAllOrdersByOrderId($id);
+        //     echo "<script>alert('Failed to process payment: check your internet connection');</script>";
+        //     redirect("auctionC/checkout/".$auction_id."/?payment_failed=true");
            
-          } catch (Exception $e) {
+        //   } catch (Exception $e) {
           
-            $this->orderModel->deleteAllOrdersByOrderId($id);
-            echo "<script>alert('Failed to process payment: check your internet connection');</script>";
-            redirect("auctionC/checkout/".$auction_id."/?payment_failed=true");
-          }
+        //     $this->orderModel->deleteAllOrdersByOrderId($id);
+        //     echo "<script>alert('Failed to process payment: check your internet connection');</script>";
+        //     redirect("auctionC/checkout/".$auction_id."/?payment_failed=true");
+        //   }
                
           exit();
           }

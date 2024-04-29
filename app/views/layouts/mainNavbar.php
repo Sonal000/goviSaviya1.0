@@ -132,7 +132,7 @@
     </li>
     <li class="sidelink">
       <i class="fas fa-coins nav_icon"></i>
-      <a href="<?php echo URLROOT ?>/AuctionC">
+      <a href="<?php echo URLROOT ?>/viewAuction">
       Bidding
       </a>
     </li>
@@ -270,7 +270,7 @@
     </li>
     <li class="sidelink">
       <i class="fas fa-coins nav_icon"></i>
-      <a href="<?php echo URLROOT ?>/AuctionC">
+      <a href="<?php echo URLROOT ?>/viewAuction">
       Bidding
       </a>
     </li>

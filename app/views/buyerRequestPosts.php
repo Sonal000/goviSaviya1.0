@@ -11,7 +11,7 @@
  href="<?php echo URLROOT ?>/assets/fontawesome-free-5.15.4-web/css/all.min.css">
  <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/main.css">
  <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/listproduct.css">
- <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/buyerOrders.css">
+ <link rel="stylesheet" href="<?php echo URLROOT ?>/assets/css/buyerRequestPosts.css">
 </head>
 <body >
     <button id="backdrop" class="backdrop hidden_backdrop"></button>
@@ -235,6 +235,8 @@
            </div>
         </div>
         </div>
+
+
 
      </div>
      

@@ -16,11 +16,20 @@
 
 }
 
+
+
 .order_progress_cont {
   flex: 0.4;
   height: 100%;
   display: flex;
   align-items: flex-start;
+}
+
+@media  screen and (max-width: 768px){
+
+  .order_progress_cont {
+    display: none;
+  }
 }
 .order_progress {
   position: relative;
@@ -381,10 +390,10 @@ position: absolute;
 }
 
 .item_title_cont {
-  /*flex: 0.3;*/
+  flex: 0.3;
   display: flex;
   justify-content: space-between;
-  width: 500px;
+  /* width: 500px; */
 }
 
 .item_info {
@@ -406,6 +415,15 @@ position: absolute;
 .item_location {
   font-size: 0.8rem;
   color: var(--clr-grey-6);
+
+}
+
+.progress_action{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /* width: 100%; */
 
 }
 
@@ -449,7 +467,7 @@ position: absolute;
   color: var(--clr-grey-1);
 }
 .item_btns_cont {
-  /* flex: 0.4; */
+  flex: 0.4;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -539,9 +557,9 @@ position: absolute;
 }
 
 @media screen and (max-width: 480px) {
-  .item_btns_cont {
+  /* .item_btns_cont {
     display: none;
-  }
+  } */
   .bid_item_img {
     height: 60px;
     width: 60px;
@@ -685,9 +703,9 @@ position: absolute;
 }
 
 @media screen and (max-width: 480px) {
-  .item_btns_cont {
+  /* .item_btns_cont {
     display: none;
-  }
+  } */
   .bid_item_img {
     height: 60px;
     width: 60px;
