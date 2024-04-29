@@ -4562,6 +4562,86 @@ ORDER BY order_date DESC
     }               
 }
 
+public function getCounts3ordertypes(){
+
+    $query = 'SELECT
+            SUM(CASE WHEN order_type = "PURCHASE" THEN 1 ELSE 0 END) AS purchase_orders,
+            SUM(CASE WHEN order_type = "AUCTION" THEN 1 ELSE 0 END) AS auction_orders,
+            SUM(CASE WHEN order_type = "REQUEST" THEN 1 ELSE 0 END) AS request_orders
+            FROM
+            orders
+            WHERE
+            order_type IN ("PURCHASE", "AUCTION","REQUEST");';
+
+    $this->db->query($query);
+
+    $row = $this->db->Single();
+    
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+public function getcomplaintscount(){
+
+        $query = 'SELECT COUNT(*) AS complain_count
+                  FROM quality_check WHERE qc_status!="not_raised"';
+
+        $this->db->query($query);
+        $row = $this->db->Single();
+
+        if($row){
+            return $row;
+        }
+        else{
+            return false;
+        }
+}
+
+public function getcountpenaltyamounts(){
+
+    $query = 'SELECT
+            SUM(CASE WHEN penalty_type = "SELLER_RETURN" THEN penalty_amount ELSE 0 END) AS seller_penalty,
+            SUM(CASE WHEN penalty_type = "DELIVERY_RETURN" THEN penalty_amount ELSE 0 END) AS deliver_penalty
+            FROM
+            penalty
+            WHERE
+            penalty_type IN ("SELLER_RETURN", "DELIVERY_RETURN");';
+
+    $this->db->query($query);
+    $row = $this->db->Single();
+
+    if($row){
+        return $row;
+    }
+    else{
+        return false;
+    }
+}
+
+public function getTotalpenaltyamounts(){
+
+$query = 'SELECT
+          SUM(penalty_amount) AS total_penalty
+          FROM
+          penalty';
+
+$this->db->query($query);
+$row =$this->db->Single();
+
+if($row){
+    return $row;
+}
+else{
+    return false;
+}
+
+
+}
+
 
 
 }

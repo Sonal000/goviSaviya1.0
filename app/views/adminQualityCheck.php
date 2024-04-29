@@ -27,14 +27,14 @@
   
 <div class="adminprofile">
     <h4>Manage Orders</h4>
-    <div class="searchbarplace">
+    <!-- <div class="searchbarplace">
         <div class="searchbar2_cont">
             <form action="http://www.google/search" class="searchbar2" method="get">
             <input type="text" placeholder="Search Orders">
             <button type="submit"><i class="fas fa-search search_icon"></i></button>
             </form>
        </div>
-    </div>
+    </div> -->
     <div class="admincard_cont">
         <div class="admincard">
             <div class="cardicon_cont">
@@ -42,14 +42,14 @@
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
-                    Complete Orders
+                    Complaint Count
                 </div>
                 <div class="signupcount">
-                    27
+                    <?php echo $data['count'] ->complain_count ;?>
                 </div>
             </div>
         </div>
-        <div class="admincard">
+        <!-- <div class="admincard">
             <div class="cardicon_cont">
                 <img src="<?php echo URLROOT; ?>/assets/images/return2.png" alt="" class="cardicon">
             </div>
@@ -73,7 +73,7 @@
                 <div class="signupcount">
                     13
                 </div>
-            </div>
+            </div> -->
         </div>
        
 
@@ -90,7 +90,7 @@
                 <p>Order Type</p>
             </div>
             <div class="table_cell column4">
-                <p>Order Date</p>
+                <p>QC_Status</p>
             </div>
             <div class="table_cell column5">
                 <p></p>

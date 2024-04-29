@@ -42,10 +42,10 @@
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
-                    Complete Orders
+                    Total Penalty Collection
                 </div>
                 <div class="signupcount">
-                    27
+                <?php echo $data['total']->total_penalty ;?>
                 </div>
             </div>
         </div>
@@ -55,10 +55,10 @@
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
-                    Returns
+                    Seller Penalty Collection
                 </div>
                 <div class="signupcount">
-                    10
+                    <?php echo $data['count']->seller_penalty ;?>
                 </div>
             </div>
         </div>
@@ -68,10 +68,10 @@
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
-                    On-going Orders
+                Deliver Penalty Collection
                 </div>
                 <div class="signupcount">
-                    13
+                <?php echo $data['count']->deliver_penalty ;?>
                 </div>
             </div>
         </div>

@@ -39,7 +39,7 @@
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
-                    Advertistment Posts
+                    Order Requests
                 </div>
                 <div class="signupcount">
                 <?php echo $data['count']->post_count ;?>

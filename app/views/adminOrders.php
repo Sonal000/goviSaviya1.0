@@ -36,40 +36,41 @@
     <div class="admincard_cont">
         <div class="admincard">
             <div class="cardicon_cont">
-                <img src="<?php echo URLROOT; ?>/assets/images/Complete.png" alt="" class="cardicon">
+            <img src="<?php echo URLROOT; ?>/assets/images/store.png" alt="" class="cardicon">
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
-                    Complete Orders
+                    Purchase Orders
                 </div>
                 <div class="signupcount">
-                    27
+                    <?php echo $data['counts']->purchase_orders; ?>
                 </div>
             </div>
         </div>
         <div class="admincard">
             <div class="cardicon_cont">
-                <img src="<?php echo URLROOT; ?>/assets/images/return2.png" alt="" class="cardicon">
+                
+                <img src="<?php echo URLROOT; ?>/assets/images/auction.png" alt="" class="cardicon">
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
-                    Returns
+                    Auction Orders
                 </div>
                 <div class="signupcount">
-                    10
+                    <?php echo $data['counts']->auction_orders; ?>
                 </div>
             </div>
         </div>
         <div class="admincard">
             <div class="cardicon_cont">
-                <img src="<?php echo URLROOT; ?>/assets/images/ongoing.png" alt="" class="cardicon">
+            <img src="<?php echo URLROOT; ?>/assets/images/ads.png" alt="" class="cardicon">
             </div>
             <div class="admincard_det_cont">
                 <div class="newsignups">
-                    On-going Orders
+                     Requests Orders
                 </div>
                 <div class="signupcount">
-                    13
+                    <?php echo $data['counts']->request_orders; ?>
                 </div>
             </div>
         </div>
