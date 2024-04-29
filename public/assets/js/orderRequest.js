@@ -67,7 +67,8 @@ console.log("clicked");
     // pickAddressInput.classList.contains('invalid') ||
     // itemImgInput.classList.contains('invalid')
   )) {
-    // isListingItem = true;
+    // console.log("clicked");
+    isListingItem = true;
     // toggleListingState(isListingItem);
     form.submit();
   }
