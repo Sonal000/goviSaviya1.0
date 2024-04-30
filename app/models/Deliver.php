@@ -802,7 +802,6 @@ public function Addreview($data){
   $this->db->bind(':order_type',$data['order_type']);
   $this->db->bind(':buyer_id',$data['buyer_id']);
   $this->db->bind(':deliver_id',$data['deliver_id']);
-  
   $this->db->bind(':review',$data['review']);
   
   if($this->db->execute()){

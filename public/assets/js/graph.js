@@ -39,7 +39,7 @@ function drawChart2() {
   ]);
 
   var options = {
-    colors: ["#4caf4f","#ee5050" ,"#38803a" ],
+    colors: ["#4caf4f","rgb(142, 205, 144)" ,"#38803a" ],
     legend: {postion: "right",textStyle: {color: 'rgb(74, 80, 115)', fontSize:12}},
     chartArea:{left:100,top:0,width:'100%',height:'100%'},
 };
@@ -58,14 +58,14 @@ function drawChart3() {
 
   var data = google.visualization.arrayToDataTable([
     ['Task', 'Hours per Day'],
-    ['Organic', 50],
-    ['Direct', 20],
-    ['Paid', 30]
+    ['Purchase', 50],
+    ['Auction', 30],
+    ['Requests', 20]
   ]);
 
   var options = {
    pieHole: 0.5,
-     colors: ["#ee5050" ,"#0948b3" , "#05a677"],
+     colors: ["#4caf4f" ,"rgb(142, 205, 144)" , "#38803a"],
      legend: {postion: "right",textStyle: {color: 'rgb(74, 80, 115)', fontSize:12}},
      chartArea:{left:100,top:0,width:'100%',height:'100%'},
   };

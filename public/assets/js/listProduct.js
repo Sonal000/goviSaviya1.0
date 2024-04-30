@@ -76,10 +76,15 @@ const inputValidation = () => {
     setValid(stockInput);
   }
 
-  const currentDate = new Date();
-  const expDate = new Date(expDateInput.value);
-  if (expDate <= currentDate) {
-    setError(expDateInput, "Expiration date must be in the future.");
+  // const currentDate = new Date();
+  // const expDate = new Date(expDateInput.value);
+  // if (expDate <= currentDate) {
+  //   setError(expDateInput, "Expiration date must be in the future.");
+  // } else {
+  //   setValid(expDateInput);
+  // }
+  if (expDateInput.value.trim() === '') {
+    setError(expDateInput, "Expire Date is required.");
   } else {
     setValid(expDateInput);
   }

@@ -1,4 +1,4 @@
-<?php
+m<?php
 ?>
 
 
@@ -225,7 +225,7 @@ const auctionStartDateInput = document.getElementById('auction_start_date');
 // Set the minimum value of the expiration date input to 3 days from the current date
 const currentDate = new Date();
 const minExpirationDate = new Date(currentDate);
-minExpirationDate.setDate(currentDate.getDate() + 3);
+minExpirationDate.setDate(currentDate.getDate() + 2);
 expirationDateInput.min = minExpirationDate.toISOString().split('T')[0];
 
 // Set the minimum value of the auction end date input to the current date

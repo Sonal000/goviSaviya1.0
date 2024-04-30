@@ -110,11 +110,11 @@
                             <h2>Users</h2>
                             <h3><?php echo $data['users_count'];?></h3>
                         </div>
-                        <!-- <small>
+                        <small>
                             Feb 1 - Apr 1,
                             <i class="fas fa-globe-europe"></i>
                             Revenue
-                        </small> -->
+                        </small>
                         <div class="card-bottom-info">
                             <i class="fas fa-angle-up text-success"></i>
                             <span class="text-success"><?php echo $data['sellers_count'] ?></span>
@@ -135,19 +135,9 @@
                 <div class="card">
                     <div class="card-left">
                         <div class="icon-chart">
-                            <img src="images/pie-chart.png">
-                            <!-- <svg width="100%" height="100%">
-                                <g class="ct-series">
-                                    <path class="chart-a"
-                                        d="M74.602,69.32A33.375,33.375,0,0,0,87.667,16.922L72.346,29.778A13.375,13.375,0,0,1,67.11,50.776Z"
-                                        ct:value="30"></path>
-                                </g>
-                                <g class="ct-series">
-                                    <path class="chart-b"
-                                        d="M87.667,16.922A33.375,33.375,0,1,0,74.71,69.276L67.154,50.759A13.375,13.375,0,1,1,72.346,29.778Z"
-                                        ct:value="70"></path>
-                                </g>
-                            </svg> -->
+                        <div class="card-icon icon-two">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
                         </div>
                     </div>
                     <div class="card-right">
@@ -155,9 +145,9 @@
                             <h2>Revenue</h2>
                         </div>
                         <small>
-                            Feb 1 - Apr 1,
+                            <!-- Feb 1 - Apr 1, -->
                             <i class="fas fa-globe-europe"></i>
-                            Base on district
+                            Revenue
                         </small>
                         <div class="last-card-text">
                             <span class="icon-desktop">
@@ -210,14 +200,14 @@
                 </div>
                 <div class="card card-graph">
                     <div class="text">
-                        <div class="gray-text">Organic vs Paid Search</div>
+                        <div class="gray-text">Revenue by Order Typ</div>
                         <div class="card-top-info">
-                            <h3>Trafic Distibution</h3>
+                            <h3>Revenue Distibution</h3>
                         </div>
-                        <div class="card-bottom-info">
+                        <!-- <div class="card-bottom-info">
                             <i class="fas fa-angle-up text-success"></i>
                             <span class="text-success">10.57%</span>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="graph">
                         <div id="piechart" style="width:100%; height: 100%;" class="chart"></div>

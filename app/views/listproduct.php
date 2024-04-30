@@ -212,7 +212,7 @@ const today = new Date();
 
 // Add 3 days to today's date
 const minExpireDate = new Date(today);
-minExpireDate.setDate(minExpireDate.getDate() + 3);
+minExpireDate.setDate(minExpireDate.getDate() + 2);
 
 // Format the minimum expiration date in YYYY-MM-DD format
 const minExpireDateFormatted = minExpireDate.toISOString().split('T')[0];
