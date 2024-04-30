@@ -602,7 +602,7 @@ foreach($data['completedOrders'] as $completedOrder){
       <div class="add_review_hed">
           <h4>Add Review</h4>
         </div>
-        <form action="<?php echo URLROOT.'/orders/Addreview/'.$order->order_id.'/'.$order->order_item_id.'/'.$order->order_type.'/'.$order->deliver_id; ?>" method="POST">
+        <form action="<?php echo URLROOT.'/orders/Addreview/'.$order->order_item_id.'/'.$order->order_id.'/'.$order->order_type.'/'.$order->deliver_id; ?>" method="POST">
            <div class="review_Filed">
             <input type="text" name="review" placeholder="Enter your Review">
             <button type="submit" class="btn review_btn">

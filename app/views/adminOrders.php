@@ -26,12 +26,12 @@
 <div class="adminprofile">
     <h4>Manage Orders</h4>
     <div class="searchbarplace">
-        <div class="searchbar2_cont">
+        <!-- <div class="searchbar2_cont">
             <form action="http://www.google/search" class="searchbar2" method="get">
             <input type="text" placeholder="Search Orders">
             <button type="submit"><i class="fas fa-search search_icon"></i></button>
             </form>
-       </div>
+       </div> -->
        <div>
        <button id="download-btn"  >Download Report <i class="fas fa-file-download"></i></button>
        </div>

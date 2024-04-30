@@ -10,6 +10,11 @@
    public function __construct()
    {
 
+
+    // if(!(isset($_SESSION['user_type']))){
+    //   $this->view('_404');
+    // }
+
     $this->orderModel=$this->model("Order");
     $this->deliverModel =$this->model('Deliver');
     $this->adminModel =$this->model('Admin');
@@ -71,7 +76,10 @@ if(!$availability){
 
     
        } 
-       else{
+       elseif(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
+
+        redirect('dashboard');
+       }else{
         
 
 
@@ -95,6 +103,7 @@ if(!$availability){
   
     
   }
+
 
 
 

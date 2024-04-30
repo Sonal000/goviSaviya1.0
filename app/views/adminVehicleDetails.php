@@ -222,9 +222,9 @@
 
             <div class="column">
 
-             <div class="form-group">            
+             <!-- <div class="form-group">            
                 <div>Refregiration Capability:<div class="displayField"><?php echo $data['details']->ref_cap;?></div></div>               
-            </div>
+            </div> -->
 
                
                 

@@ -25,12 +25,12 @@
 <div class="adminprofile">
     <h4>Manage Vehicles</h4>
     <div class="searchbarplace">
-        <div class="searchbar2_cont">
+        <!-- <div class="searchbar2_cont">
             <form action="http://www.google/search" class="searchbar2" method="get">
             <input type="text" placeholder="Search Posts">
             <button type="submit"><i class="fas fa-search search_icon"></i></button>
             </form>
-       </div>
+       </div> -->
     </div>
     <div class="admincard_cont">
     <div class="admincard">

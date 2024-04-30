@@ -16,7 +16,7 @@
 </head>
 <body>
 <?php
- require APPROOT. '/views/layouts/mainNavbar.php'; 
+require APPROOT. '/views/layouts/mainNavbar.php'; 
  ?>
  <div class="main_container">
  <?php
@@ -27,12 +27,12 @@
     <h4 class="getdown">Manage Users</h4>
     
     <div class="searchbarplace">
-        <div class="searchbar2_cont">
+        <!-- <div class="searchbar2_cont">
             <form action="http://www.google/search" class="searchbar2" method="get">
             <input type="text" placeholder="Search users">
             <button type="submit"><i class="fas fa-search search_icon"></i></button>
             </form>
-       </div>
+       </div> -->
     </div>
     <div class="admincard_cont">
         <div class="admincard">
