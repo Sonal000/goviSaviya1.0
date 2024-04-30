@@ -68,6 +68,7 @@
                   </div>
 
                </div>
+               <!-- <div class="progress _actions"> -->
                <div class="order_progress_cont">
                         <div class="order_progress" data-progress=<?php echo $order->order_status; ?>>
                                 <div class="step ">
@@ -91,10 +92,11 @@
                </div>
                <div class="bid_action_cont">
                   <div class="item_btns_cont">
-                  <p class="item_time">Latest time :  24/<span>h left</span>  </p>
+                  <!-- <p class="item_time">Latest time :  24/<span>h left</span>  </p> -->
                      <buttton id="track_order_btn" class="buy_btn btn track_order">Track Order</buttton>
                   </div>
                </div>
+               <!-- </div> -->
         </div>
 </div>
 <!-- bid item end===== -->

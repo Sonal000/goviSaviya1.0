@@ -261,9 +261,14 @@ public  function checkout($id){
             $buyerInfo = $this->buyerModel->getProfileInfo($_SESSION["user_id"]);
    
     
-            $totalDeliveryfee = 0;
+        //     $totalDeliveryfee = 0;
+        //     $totalDeliveryfeeUnit = 0;
 
-            $totalDeliveryfee +=( getDistancefee($items->address,$buyerInfo->address));
+        //     $totalDeliveryfee +=( getDistancefee($item->address,$buyerInfo->address));
+        //     if($totalDeliveryfee>0){
+        //         // $totalDeliveryfeeUnit = $totalDeliveryfee/$item->stock/100;
+        //     }
+        //    ;
 
            
             try {
@@ -272,8 +277,8 @@ public  function checkout($id){
                     "quantity" => $item->stock, // Assuming quantity is always 1 for each item
                     "price_data" => [
                         "currency" => "lkr", // Change currency according to your needs
-                        "unit_amount" => $item->highest_bid * 100, // Stripe requires amount in cents
-                        "delivery_fee" =>$totalDeliveryfee,
+                        "unit_amount" =>( $item->highest_bid )* 100, // Stripe requires amount in cents
+                        // "delivery_fee" =>$totalDeliveryfee,
                         "product_data" => [
                             "name" => $item->name, // Use item name from your database
                         ],
