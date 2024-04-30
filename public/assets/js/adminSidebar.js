@@ -247,6 +247,7 @@ sidebarMapping.forEach(item => {
   const { path, ids, exclude } = item;
   
   if (currentLocation.includes(path.toLowerCase())) {
+    console.log(path);
     if (exclude) {
       if (Array.isArray(exclude)) {
         if (exclude.some(excludedPath => currentLocation.includes(excludedPath.toLowerCase()))) {
