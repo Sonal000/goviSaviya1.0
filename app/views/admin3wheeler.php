@@ -83,7 +83,7 @@
     <th>Vehicle number</th>
     <th>Owner</th>
     <th>Type</th>
-    <th>Capacity</th>
+    <!-- <th>Capacity</th> -->
     <th></th>
     <th></th>
   </tr>

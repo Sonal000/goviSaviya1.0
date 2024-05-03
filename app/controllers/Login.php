@@ -8,6 +8,9 @@
    }
 
    public function index(){
+    
+    
+
     $data=[];
         //we have to check if we are only load the view page or we submit the data as a registration in here. we check POST is for we have post method in our form
     if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -31,7 +34,7 @@
               redirect('home');
             }else{
               redirect('register/verifyEmail/'.$loggedInUser->user_id);
-echo '<script>toggleLoginState(false);</script>';
+// echo '<script>toggleLoginState(false);</script>';
             }
             
         }else{
@@ -41,7 +44,7 @@ echo '<script>toggleLoginState(false);</script>';
             'email' =>trim($_POST['email']),
             'password'=>trim($_POST['password']),
         ];
-        echo '<script>toggleLoginState(false);</script>';
+        // echo '<script>toggleLoginState(false);</script>';
         }
 
 
@@ -51,7 +54,7 @@ echo '<script>toggleLoginState(false);</script>';
           'email' =>trim($_POST['email']),
           'password'=>trim($_POST['password']),
       ];
-      echo '<script>toggleLoginState(false);</script>';
+      // echo '<script>toggleLoginState(false);</script>';
       }
  
       
@@ -65,7 +68,7 @@ echo '<script>toggleLoginState(false);</script>';
       'email' =>'',
       'password'=>'',
    ];
-   echo '<script>toggleLoginState(false);</script>';
+  //  echo '<script>toggleLoginState(false);</script>';
   }
   $this->view('login',$data);
 

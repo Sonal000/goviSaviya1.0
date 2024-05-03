@@ -120,3 +120,15 @@ $(".view_complain").each(function() {
     $(this).closest(".complain_btn_cont").hide();
   });
 });
+
+
+$("#complain_form").submit(function (e) {
+  e.preventDefault();
+  if($('#complain_img').val()==''){
+
+    $('#error_complain').text('complain image need to upload');
+  }else{
+    this.submit();
+  }
+
+});

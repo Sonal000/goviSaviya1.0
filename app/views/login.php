@@ -231,7 +231,7 @@
         <a href=""class="forgot_password">Forgot password?</a>
         </div>
     <div class="btn_cont">
-     <button class="signup_btn btn" id="signin_btn">Sign In</button>
+     <button type="submit" class="signup_btn btn" >Sign In</button>
      <!-- <button class="signup_btn btn">Reset</button> -->
     </div>
     <div class="input_cont">
@@ -270,6 +270,7 @@
 
     
 <!-- js === -->
+<script src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/login.js"></script>
 </body>

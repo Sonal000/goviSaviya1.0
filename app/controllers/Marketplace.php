@@ -59,7 +59,6 @@
           'search_term'=>isset($_GET['search']) ?join(" ",(array)explode('%a%',$_GET['search'] )):''
       ];
 
-
       if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
 
          $this->view('sellermarketplace',$data);

@@ -407,7 +407,8 @@ function paramString($validParams){
          <i class="fas fa-star star_img"></i>
          <i class="fas fa-star star_img"></i>
          </div> -->
-         <p class="item_price"><?php echo $item->price; ?> / <span><?php echo $item->unit; ?><span></span></p>
+         <p class="item_price">Rs :<?php echo $item->price; ?> / <span><?php echo $item->unit; ?><span></span></p>
+         <p class="item_price"><?php echo $item->stock; ?>  <span><?php echo $item->unit; ?> <span> available</span></p>
        </div>
        
       </div>

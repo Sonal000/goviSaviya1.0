@@ -856,7 +856,7 @@ private function uploadFile($fileInputName, $uploadDirectory) {
             if($this->orderModel->PenaltySeller($result,$type)){
 
                 $this->notifiModel->notifYUser(0,$buyer->user_id,"Seller has been penalized for the order  <span class='bg'>   (order_id:".$result->order_item_id."/".$result->order_id .") </span> ,order amount will be refunded","orders","OTHER");
-                $this->notifiModel->notifYUser(0,$seller->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders","OTHER");
+                $this->notifiModel->notifYUser(0,$seller->user_id,"You have been penalized for the order <span class='bg'>  ( order_id:".$result->order_item_id."/".$result->order_id .") </span>","orders/completedd","OTHER");
 
                 redirect('QualityCheck');
             }

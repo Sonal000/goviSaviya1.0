@@ -55,16 +55,25 @@
                                 <div class="price">Rs: <?php echo $order->deliver_fee?>/=</div>
                                 
                                 </div>
+                                <div class="address_details">
+
+                               
                             <div class="pro_location">
                                 <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i>
                                 From:
-                                <?php echo $order->pickup_address?>
+                             
+
+                                    <?php echo $order->pickup_address?>
+                           
+  
+                            </div>
                             <div class="pro_location">
                                 <i class="fa-solid fa-truck" style="color: #0f0f0f;"></i>
                                 
                                 To:  <?php echo  $order->order_address?>
                                 </div> 
-                            </div>
+
+                                </div>
                             <div class="addDate">
                             <i class="fa-solid fa-calendar-days"></i>
                                 Date Delivered:  <?php echo date('Y-m-d', strtotime($order->completed_date)); ?>

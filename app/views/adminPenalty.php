@@ -85,7 +85,7 @@
     <th>QC ID</th>
     <th>Buyer ID</th>
     <th>Deliver ID</th>
-    <th>Capacity</th>
+    <th>Type</th>
     <th>Penalty Amount</th>
     <th>Penalty Date</th>
   </tr>

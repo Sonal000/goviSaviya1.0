@@ -380,8 +380,11 @@ foreach($data['completedOrders'] as $completedOrder){
                 <div class="closed">
         <button class="closed_btn" id="cform_close_btn">  <i class="fas fa-times"></i></button>
     </div>
+
+   
                   <div class="complain_form ">
-                           <form action="<?php echo URLROOT ?>/orders/raiseBuyerComplain/<?php echo $order->qc_id; ?>" method="POST" enctype="multipart/form-data" >
+                           <form id="complain_form"  action="<?php echo URLROOT ?>/orders/raiseBuyerComplain/<?php echo $order->qc_id; ?>" method="POST" enctype="multipart/form-data" >
+                           <!-- <form id="complain_form"  action="<?php echo URLROOT ?>/order" method="POST" enctype="multipart/form-data" > -->
 
                                     <div class="input_items">
                                     <div class="input_cont">
@@ -403,24 +406,24 @@ foreach($data['completedOrders'] as $completedOrder){
 
                                     <div class="input_cont">
                                     <label for="item_img" class="input_label">Upload Image</label>
-                                          <input type="file" class="upload_item"  name="complain_img" require>
+                                          <input type="file" class="upload_item"  name="complain_img" require id="complain_img">
                                     </div>
-                                          
+                                    <p id="error_complain" style="color:red;"><p>  
 
                                     <div class="input_cont">
                                     <label for="description" class="input_label">Description</label>
                                     
                                                    <input type="text" class="input_item" placeholder="Add your description" name="description">
                                     </div>  
-                                 
+                              
                                  
 
                                  
                                     <div class="submit_container">
                                        <button type="submit" class="btn">Raise a Complain</button>
-                                       <div class="can_btn">
+                                       <!-- <div class="can_btn">
                                        <button  class="btn cancel_bt" id="cancel_complain">Cancel</button>
-                                       </div>
+                                       </div> -->
                                     </div>
                  
                               </div>
@@ -454,7 +457,7 @@ foreach($data['completedOrders'] as $completedOrder){
         <button class="closed_btn cform_close" id="cform_close_btn">  <i class="fas fa-times"></i></button>
     </div>
            
-                  <div class="complain_form ">
+                  <div class="complain_form " >
                            <form  >
 
                                     <div class="input_items">
@@ -483,7 +486,7 @@ foreach($data['completedOrders'] as $completedOrder){
                                     </div>  
                                     <div class="input_cont">
                                     <label for="item_img" class="input_label">Complain Image</label>
-                                          <img class="complain_image" src="<?php echo URLROOT."/store/items/".$order->qc_img; ?>"/>
+                                          <img class="complain_image" src="<?php echo URLROOT."/store/items/".$order->qc_img; ?>"  />
                                     </div>
                                           
 

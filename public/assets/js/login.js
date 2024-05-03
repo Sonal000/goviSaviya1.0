@@ -17,7 +17,7 @@ const passwordInput = document.getElementById('password');
 const signInBtn = document.getElementById('signin_btn');
 const loader=document.querySelector('.loader_cont');
 
-let isLoggingIn=false;
+// let isLoggingIn=false;
 const toggleLogingState=(state)=>{
   if(state){
     signInBtn.disable =true;
@@ -39,21 +39,22 @@ const toggleLogingState=(state)=>{
 
 form.addEventListener('submit',(e)=>{
  e.preventDefault();
- if(isLoggingIn){
-  return
- }
+//  if(isLoggingIn){
+//   return
+//  }
 
-
- // nameInput.classList.add('invalid');
- inputValidation();
- if (
-  !(emailInput.classList.contains('invalid') ||
-  !passwordInput.classList.contains('invalid'))
-){
-  isLoggingIn = true;
-  toggleLogingState(isLoggingIn);
+// nameInput.classList.add('invalid');
+// inputValidation();
+// if (
+//   !(emailInput.classList.contains('invalid') ||
+//   !passwordInput.classList.contains('invalid'))
+// ){
+//   console.log("valid");
+//   console.log("submit");
+  // isLoggingIn = true;
+  // toggleLogingState(isLoggingIn);
   form.submit();
- }
+//  }
 
 });
 
@@ -109,11 +110,11 @@ if(!isValidEmail(emailValue)){
  ;}
 
 
-if(passwordValue===''){
- setError(passwordInput,"Password is required.");
-}else{
-  setValid(passwordInput);
-  }
+// if(passwordValue===''){
+//  setError(passwordInput,"Password is required.");
+// }else{
+//   setValid(passwordInput);
+//   }
 }
 
 

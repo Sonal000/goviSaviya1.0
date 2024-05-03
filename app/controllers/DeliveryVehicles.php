@@ -426,7 +426,7 @@ class DeliveryVehicles extends Controller{
                 // 'ref_cap_error' => '',
             ];   
 
-            var_dump($vehicle);
+        
             $this->view('deliveryVehiclesComEdit', $data);
         }
     }
