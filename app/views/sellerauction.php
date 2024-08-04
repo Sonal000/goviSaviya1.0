@@ -90,10 +90,10 @@
             <div class="post_right">
                 <div class="high_bid">
                     <div class="base_price">
-                        Rs <?php echo $items->price ;?>
+                        Rs <?php echo $items->price ;?> / <?php echo $items->unit ;?>
                     </div>
                     <div class="current_highest">
-                        Highest Bid - Rs <?php echo $items->current_bid ?>
+                        Highest Bid - Rs <?php echo $items->current_bid ?> / <?php echo $items->unit ;?>
                     </div>
                     <div class="remaining_time">
                     <?php echo $items->time_remain ;?> remaining

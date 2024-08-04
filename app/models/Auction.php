@@ -522,6 +522,46 @@ public function isActiveBidder($auction_id,$buyer_id){
 
 }
 
+
+public function getcompletedCount($id){
+  $query= 'SELECT
+          SUM(highest_bid) AS bid_count
+          FROM
+          auction 
+          WHERE payment_status="successful" AND bid_Count>0 AND seller_ID=:id';
+
+$this->db->query($query);
+$this->db->bind(':id',$id);
+$row=$this->db->single();
+if($row){
+  return $row;
+}else{
+  return false;
+}
+
+
+}
+
+
+public function getpendingCount($id){
+  $query= 'SELECT
+          SUM(highest_bid) AS bid_count
+          FROM
+          auction 
+          WHERE payment_status="unsuccessful"AND bid_Count>0 AND seller_ID=:id';
+          
+$this->db->query($query);
+$this->db->bind(':id',$id);
+$row=$this->db->single();
+if($row){
+  return $row;
+}else{
+  return false;
+}
+
+
+}
+
 public function getBuyerBids($buyer_id){
   $this->db->query(
   " SELECT 

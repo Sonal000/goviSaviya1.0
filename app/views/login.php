@@ -52,6 +52,8 @@
 
 
 
+
+
 <!-- nav sidebar -->
 
 <div class="navSidebar_cont" id="navSidebar_cont">
@@ -272,7 +274,7 @@
 <!-- js === -->
 <script src="<?php echo URLROOT ?>/assets/js/jquery.js"></script>
 <script src="<?php echo URLROOT ?>/assets/js/main.js"></script>
-<script src="<?php echo URLROOT ?>/assets/js/login.js"></script>
+<!-- <script src="<?php echo URLROOT ?>/assets/js/login.js"></script> -->
 </body>
     
 

@@ -1,4 +1,4 @@
-m<?php
+<?php
 ?>
 
 
@@ -90,7 +90,7 @@ m<?php
             </div>
 
             <div class="input_cont">
-            <label for="price" class="input_label">Unit Price</label>
+            <label for="price" class="input_label">Base Price (for per unit)</label>
                       <input type="text" class="input_item"  name="price" id="unit_price">
                       <p class="invalid_msg"></p>
             </div>

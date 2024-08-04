@@ -15,7 +15,7 @@
    { 
       // pagination
       $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-      $perPage = 20;
+      $perPage = 16;
 
       // sortings
       $sort =isset($_GET['sort']) ? $_GET['sort'] : null;

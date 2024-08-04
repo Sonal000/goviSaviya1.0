@@ -417,6 +417,13 @@ foreach($items->bidlist as $bid){
        ?>
 
 </div>
+    <!-- </br></br>
+ <p>Completed Auction Highest Bid Count =<?php echo $data['count1'] ?> </p>
+ <p>Pending Auction Highest Bid Count =<?php echo $data['count2'] ?> </p>
+
+ <?php echo $data['count1'] ?>
+ <?php echo $data['count2'] ?>  -->
+
 
 
 

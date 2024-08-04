@@ -33,10 +33,10 @@ else if(isset($_SESSION['user_type'])&&($_SESSION['user_type']=='seller')){
  <!-- /* item info ==================================== */ -->
  
  <div class="back_btn_cont section-center">
-  <button class="back_btn btn">
+  <a href="<?php echo URLROOT ?>/marketplace"><button class="back_btn btn">
   <i class="fas fa-arrow-left"></i>
-    </button>
-    <p>Go Back</p>
+    </button></a>
+    <a href="<?php echo URLROOT ?>/marketplace"><p>Go Back</p></a>
  </div>
 
 

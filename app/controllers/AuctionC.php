@@ -56,6 +56,8 @@ class AuctionC extends Controller{
 
       
         foreach ($row['items'] as $item) {
+            
+            
             $currentDateTime = new DateTime();
             $expDateTime = new DateTime($item->end_date);
                     $timeDifference = $currentDateTime->diff($expDateTime);
@@ -574,6 +576,9 @@ public function history(){
     $row = $this->auctionModel->getpaymentsuccessAuctions($_SESSION['seller_id']);
     $row2 = $this->auctionModel->getpaymentunsuccessAuctions($_SESSION['seller_id']);
     $row3 = $this->auctionModel->getNobidAuctions($_SESSION['seller_id']);
+
+    $count1 = $this->auctionModel->getcompletedCount($_SESSION['seller_id']);
+    $count2 = $this->auctionModel->getpendingCount($_SESSION['seller_id']);
     
 
    
@@ -622,6 +627,8 @@ public function history(){
         $data=[
             'items'=>$row,
             'items2'=>$row2,
+            'count1'=>$count1->bid_count,
+            'count2'=>$count2->bid_count,
         ];
 
         $this->view('auctionhistory',$data);

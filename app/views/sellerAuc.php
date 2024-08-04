@@ -112,7 +112,7 @@
         </div> -->
          <div class="item_price_cont">
            <p class="item_price"><?php echo $item->price; ?> / <span><?php echo $item->unit; ?><span></span></p>
-           <p class="item_time">24h / <span>left<span></span></p>
+           <p class="item_time"><?php echo $item->remain_time; ?> <span>left<span></span></p>
          </div>
        </div>
        
