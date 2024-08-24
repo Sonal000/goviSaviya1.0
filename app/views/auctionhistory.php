@@ -257,7 +257,7 @@ foreach($items->bidlist as $bid){
                <div class="post_left">
                    <div class="pro_detail">
                        <div class="pro_name">
-                           <?php echo $items->name; ?> -  <?php echo $items->stock; ?><?php echo $items->unit; ?>
+                           <?php echo $items->product_name; ?> -  <?php echo $items->stock; ?><?php echo $items->unit; ?>
                        </div>
                        <div class="pro_location">
                            <!-- <i class="fa-solid fa-location-dot" style="color: #0f0f0f;"></i> -->

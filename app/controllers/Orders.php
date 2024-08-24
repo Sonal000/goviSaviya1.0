@@ -30,6 +30,9 @@ class Orders extends Controller{
 
         if(isset($_SESSION['user_type']) && $_SESSION['user_type']=='buyer'){
             $orders = $this->orderModel->getBuyerOngoingOrders($_SESSION['buyer_id']); 
+            // var_dump("huuu");
+            // var_dump($orders);
+            
             $completedOrders = $this->orderModel->getBuyerCompletedOrders($_SESSION['buyer_id']); 
             if($completedOrders){
 

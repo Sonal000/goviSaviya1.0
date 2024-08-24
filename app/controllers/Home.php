@@ -78,7 +78,7 @@ if(!$availability){
        } 
        elseif(isset($_SESSION['user_type']) && $_SESSION['user_type']=='seller'){
 
-        redirect('dashboard');
+        redirect('myproducts');
        }else{
         
 
